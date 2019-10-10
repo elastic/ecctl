@@ -22,7 +22,7 @@ jobs:
 
     - name: Set key
       run: |
-        git config --global url."https://${GH_TOKEN_EXTRA}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
+        git config --global url."https://$GH_TOKEN_EXTRA:x-oauth-basic@github.com/".insteadOf "https://github.com/"
       env:
         GH_TOKEN_EXTRA: ${{ secrets.GH_TOKEN_EXTRA }}
 
