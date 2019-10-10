@@ -43,7 +43,7 @@ _bindata:
 format: deps
 	@ echo "-> Formatting Go files..."
 	@ $(GOBIN)/go-licenser -license ASL2
-	@ $(GOBIN)/golangci-lint run --fix
+	@ $(GOBIN)/golangci-lint run --fix --deadline=5m
 	@ echo "-> Done."
 
 ## Generates the notice file
@@ -56,7 +56,7 @@ notice:
 lint: deps
 	@ echo "-> Running linters..."
 	@ $(GOBIN)/golint -set_exit_status ./...
-	@ $(GOBIN)/golangci-lint run
+	@ $(GOBIN)/golangci-lint run --deadline=5m
 	@ $(GOBIN)/go-licenser -d .
 	@ echo "-> Done."
 
