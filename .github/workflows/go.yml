@@ -33,3 +33,7 @@ jobs:
     - name: Check that docs are up to date
       run: make docs
       id: docs
+
+    - name: Run unit tests
+      run: make unit
+      id: unit
