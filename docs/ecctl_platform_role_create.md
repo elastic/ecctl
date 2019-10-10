@@ -13,7 +13,7 @@ ecctl platform role create --file <filename.json> [flags]
 ### Options
 
 ```
-      --file string   file name of the role to create
+      --file string   File name of the role to create
   -h, --help          help for create
 ```
 
