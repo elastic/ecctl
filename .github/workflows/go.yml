@@ -20,7 +20,7 @@ jobs:
     - name: Set key
       env:
         TOKEN: ${{ secrets.GH_TOKEN_EXTRA }}
-      run: git config --global url."https://marclop:${TOKEN}@github.com".insteadOf "https://github.com"
+      run: git config --global url."https://${TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
 
     - name: Get dependencies
       run: make vendor
