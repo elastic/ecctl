@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Redirect output to stderr.
+exec 1>&2
+
+echo "-> Running pre-commit hook..."
+
+make lint unit docs

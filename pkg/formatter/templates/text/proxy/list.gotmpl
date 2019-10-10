@@ -1,0 +1,8 @@
+{{- define "override" }}{{ range .Proxies }}{{executeTemplate .}}
+{{ end }}{{ end }}{{ define "default" }}
+{{- "PROXY ID" }}{{tab}}{{"HOST IP" }}{{tab}}{{ "PUBLIC HOSTNAME" }}{{tab}}{{ "HEALTHY" }}{{tab}}{{ "METADATA" }}
+{{- range .Proxies }}
+{{ .ProxyID }}{{tab}}{{ .HostIP }}{{tab}}{{ .PublicHostname }}{{tab}}{{ .Healthy }}
+{{- tab}}{{range $index, $element := .Metadata}}{{$index}}:{{$element}},{{end}}
+{{- end}}
+{{end}}

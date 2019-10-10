@@ -1,0 +1,7 @@
+{{- define "override" }}{{ range . }}{{executeTemplate .}}
+{{ end }}{{ end }}{{ define "default" }}
+{{- "KEY" }}{{tab}}{{ "VALUE" }}
+{{- range . }}
+{{ .Key }}{{tab}}{{ .Value }}
+{{- end }}
+{{ end }}

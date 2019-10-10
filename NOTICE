@@ -1,0 +1,30 @@
+ecctl
+Copyright 2019 Elasticsearch B.V.
+
+This product includes software developed at Elasticsearch B.V. and
+third-party software developed by the licenses listed below.
+
+=========================================================================
+
+github.com/davecgh/go-spew              0BSD
+github.com/elastic/cloud-sdk-go         Apache-2.0
+github.com/elastic/uptd                 Apache-2.0
+github.com/go-openapi/runtime           Apache-2.0
+github.com/go-openapi/strfmt            Apache-2.0
+github.com/marclop/elasticsearch-cli    Apache-2.0
+github.com/spf13/cobra                  Apache-2.0
+github.com/pkg/errors                   BSD-2-Clause
+github.com/pmezard/go-difflib           BSD-3-Clause
+golang.org/x/crypto                     BSD-3-Clause
+golang.org/x/oauth2                     BSD-3-Clause
+golang.org/x/sync                       BSD-3-Clause
+github.com/burntsushi/toml              MIT
+github.com/asaskevich/govalidator       MIT
+github.com/blang/semver                 MIT
+github.com/chzyer/test                  MIT
+github.com/spf13/viper                  MIT
+github.com/hashicorp/go-multierror      MPL-2.0
+github.com/chzyer/logex                 no license file was found
+github.com/ghodss/yaml                  no license file was found
+
+=========================================================================

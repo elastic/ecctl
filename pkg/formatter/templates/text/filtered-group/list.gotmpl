@@ -1,0 +1,7 @@
+{{- define "override" }}{{ range . }}{{executeTemplate .}}
+{{ end }}{{ end }}{{ define "default" }}
+{{-  "ID" }}{{tab}}{{  "EXPECTED COUNT" }}{{tab}}{{  "OBSERVED COUNT" }}{{tab}}{{  "STATUS" }}
+{{- range . }}
+{{ .Group.ID }}{{tab}}{{ .Group.ExpectedProxiesCount }}{{tab}}{{ .ObservedProxiesCount }}{{tab}}{{ .Status }}
+{{- end}}
+{{end}}

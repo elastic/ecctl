@@ -1,0 +1,8 @@
+{{- define "override" }}{{ range .Stacks }}{{executeTemplate .}}
+{{ end }}{{ end }}{{ define "default" }}
+{{- "VERSION"}}{{tab}}{{"DELETED" }}{{tab}}{{"ELASTICSEARCH IMAGE" }}{{tab}}{{"KIBANA IMAGE"}}{{tab}}{{"APM IMAGE"}}
+{{- range .Stacks }}
+{{.Version }}{{tab}}{{.Deleted }}{{tab}}{{.Elasticsearch.DockerImage }}{{tab}}{{.Kibana.DockerImage}}
+{{- tab}}{{ if .Apm }}{{ .Apm.DockerImage }}{{else}}-{{end}}
+{{- end}}
+{{end}}

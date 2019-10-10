@@ -1,0 +1,14 @@
+{{- define "override" }}{{ range .ElasticsearchClusters }}{{executeTemplate .}}
+{{ end }}{{ end }}{{ define "default" }}
+{{- "CLUSTER ID" }}{{tab}}{{ "NAME"}}{{tab}}{{"STATUS"}}{{tab}}{{"VERSION"}}{{tab}}{{"KIBANA"}}{{tab}}{{"APM"}}
+{{- tab}}{{"CAPACITY"}}{{tab}}{{ "ZONES" }}{{tab}}{{"SNAPSHOT INFO"}}{{tab}}{{"HEALTHY"}}{{tab}}{{"LOCKED"}}
+{{- range .ElasticsearchClusters }}
+{{ .ClusterID }}{{tab}}{{ getClusterName .}}{{tab}}{{ .Status }}{{tab}}{{ (getESCurrentOrPendingPlan .).Plan.Elasticsearch.Version}}
+{{- tab}}{{- if .AssociatedKibanaClusters }}{{"true"}}{{else}}{{"false"}}{{end}}
+{{- tab}}{{- if .AssociatedApmClusters }}{{"true"}}{{else}}{{"false"}}{{end}}
+{{- tab}}{{- formatTopologyInfo . }}
+{{- tab}}{{- with $snapshotFormat := printf "%t (%d)" (derefBool .Snapshots.Healthy) (derefInt .Snapshots.Count) }}{{ $snapshotFormat }}{{end}}
+{{- tab}}{{- if .Healthy}}{{  .Healthy }}{{else}}-{{end}}
+{{- tab}}{{- if .Locked}}{{ .Locked }}{{else}}-{{end}}
+{{- end}}
+{{end}}

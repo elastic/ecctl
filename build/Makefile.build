@@ -1,0 +1,57 @@
+BUILD_PLATFORMS ?= "darwin linux"
+BUILD_ARCHITECTURES ?= "386 amd64"
+BUILD_OUTPUT ?= "pkg/$(BINARY)_{{.OS}}_{{.Arch}}"
+
+CURRENT_ARCH := $(shell uname -s | tr '[:upper:]' '[:lower:]')
+export OWNER := elastic
+export REPO := ecctl
+
+DEFAULT_LDFLAGS ?= -X main.version=$(VERSION)-dev -X main.commit=$(shell git rev-parse HEAD) -X main.owner=$(OWNER) -X main.repo=$(REPO)
+
+REPORT_PATH ?= reports
+TEST_UNIT_FLAGS ?= -timeout 10s -p 4 -race -cover -coverprofile=$(REPORT_PATH)/c.out
+TEST_UNIT_PACKAGE ?= ./...
+
+#### Build targets
+
+## Compiles ecctl placing it in bin/ecctl. Use GOOS, GOARCH and EXTRA_BUILD_LDFLAGS to control the build.
+.PHONY: ecctl
+ecctl: _build
+
+_build: deps bindata unit
+	@ echo "-> Building $(BINARY) in bin/$(BINARY)..."
+	@ if [[ -f bin/$(BINARY) ]]; then rm -f bin/$(BINARY); fi
+	@ CGO_ENABLED=0 GOOS=$(GOOS) GOARCH=$(GOARCH) go build -o bin/$(BINARY) -ldflags="$(DEFAULT_LDFLAGS) $(EXTRA_BUILD_LDFLAGS)"
+
+tag:
+	@ git fetch
+ifeq ($(shell git tag -l $(VERSION)),$(VERSION))
+	@ echo "-> git tag $(VERSION) already exists, exiting..."
+	@ exit 1
+endif
+ifeq ($(shell git remote -v | grep $(OWNER)/$(REPO)),)
+	@ echo "-> git remote 'upstream' is not configured, exiting..."
+	@ exit 2
+endif
+	@ $(eval REMOTE = $(shell git remote -v | grep $(OWNER)/$(REPO)| head -1 | awk '{print $$1}'))
+	@ echo "Pushing git tag $(VERSION) to remote \"$(REMOTE)\"..."
+	@ git tag $(VERSION)
+	@ git push -u $(REMOTE) $(VERSION)
+
+## Releases a new version of ecctl, use SKIP_TAG=true to skip publishing a tag.
+release:
+	@ test -s notes/$(VERSION).md || (echo "-> changelog file is missing, please create it with 'make changelog'"; exit 2)
+ifneq ($(SKIP_TAG),true)
+	@ $(MAKE) tag
+endif
+	@ echo "-> Releasing $(BINARY) v$(VERSION)..."
+	@ ./scripts/goreleaser release --rm-dist --release-notes=notes/$(VERSION).md
+
+## Generates a changelog file in notes/$(VERSION) for the next release.
+changelog:
+	@ echo "-> Generating $(BINARY) changelog v$(VERSION)..."
+	@ ./scripts/generate-changelog.sh
+
+## Generates a snapshot of the potential release
+snapshot:
+	@ ./scripts/goreleaser release --rm-dist --snapshot --skip-validate

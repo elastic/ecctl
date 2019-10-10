@@ -1,0 +1,7 @@
+{{- define "override" }}{{ range .Notes }}{{ executeTemplate .}}
+{{ end }}{{ end }}{{ define "default" }}
+{{- "TIME" }}{{tab }}{{ "COMMENT ID" }}{{tab }}{{ "USER" }}{{tab }}{{ "MESSAGE" }}
+{{- range .Notes }}
+{{ .Timestamp }}{{tab}}{{ .ID }}{{ tab }}{{ .UserID }}{{ tab }}{{ .Message }}
+{{- end}}
+{{end}}

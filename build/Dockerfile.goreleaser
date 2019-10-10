@@ -1,0 +1,13 @@
+FROM golang:1.12-alpine
+
+RUN apk add --no-cache bash \
+    rpm \
+    git
+
+ENV GORELEASER_VERSION=v0.112.2
+
+RUN cd /tmp && wget https://github.com/goreleaser/goreleaser/releases/download/${GORELEASER_VERSION}/goreleaser_Linux_x86_64.tar.gz && \
+    tar x -f goreleaser_Linux_x86_64.tar.gz && \
+    cp goreleaser /usr/local/bin
+
+ENTRYPOINT [ "goreleaser" ]

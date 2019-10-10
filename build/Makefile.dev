@@ -1,0 +1,96 @@
+CHECK_CHANGES_FOLDER ?= "docs"
+
+#### Development targets
+
+.PHONY: _report_path
+_report_path:
+	@ mkdir -p $(REPORT_PATH)
+
+## Downloads the Go versioned dependencies using Go modules.
+.PHONY: vendor
+vendor: deps
+	@ echo "-> Downloading project imports..."
+	@ go mod download
+	@ go mod tidy
+	@ $(MAKE) notice
+
+## Runs unit tests. Use TEST_UNIT_FLAGS and TEST_UNIT_PACKAGE to control which flags and packages are used and tested.
+.PHONY: unit
+unit: _report_path
+	$(eval UNSET_VARS := $$(shell env | grep EC_ | cut -d '=' -f1))
+	@ echo "-> Running unit tests for $(BINARY)..."
+	@ for var in $(UNSET_VARS); do unset $$var; done;\
+	go test $(TEST_UNIT_FLAGS) $(TEST_UNIT_PACKAGE)
+
+## Bundles all of the formatter templates into a Go binary format.
+.PHONY: bindata
+bindata: deps _bindata format
+
+.PHONY: bindata-dev
+bindata-dev: _set-bindata-debug _bindata format
+
+.PHONY: _set-bindata-debug
+_set-bindata-debug: deps
+	@ $(eval BINDATA_FLAGS := -debug )
+
+.PHONY: _bindata
+_bindata:
+	@ echo "-> Bundling $(BINDATA_FLAGS)templates as bindata for $(BINARY)..."
+	@ cd pkg/formatter/templates && $(GOBIN)/go-bindata -nometadata -prefix templates -pkg templates $(BINDATA_FLAGS) ./...
+
+## Formats the all Go files to the desired format.
+.PHONY: format
+format: deps
+	@ echo "-> Formatting Go files..."
+	@ $(GOBIN)/go-licenser -license ASL2
+	@ $(GOBIN)/golangci-lint run --fix
+	@ echo "-> Done."
+
+## Generates the notice file
+.PHONY: notice
+notice:
+	@ $(GOBIN)/go-licenser -license ASL2 -notice -notice-year 2019 .
+
+## Checks if there's any format violations on the Go files.
+.PHONY: lint
+lint: deps
+	@ echo "-> Running linters..."
+	@ $(GOBIN)/golint -set_exit_status ./...
+	@ $(GOBIN)/golangci-lint run
+	@ $(GOBIN)/go-licenser -d .
+	@ echo "-> Done."
+
+.PHONY: check-changes
+check-changes:
+	$(eval CHANGES := $$(shell git ls-files -m $(CHECK_CHANGES_FOLDER) | wc -l | tr -d ' '))
+	@ if [[ $(CHANGES) -gt 0 ]]; then echo "-> Detected $(CHANGES) format changes, please add them to your commit";exit 1; fi
+
+## Re-generates the documentation.
+.PHONY: docs
+docs:
+	@ echo "-> Deleting docs"
+	@ rm -rf docs/*.md
+	@ echo "-> Regenerating docs"
+	@ go run main.go generate docs
+	@ echo "-> Checking for changes"
+	@ $(MAKE) check-changes
+
+## Removes all temporary files and artifacts.
+.PHONY: clean
+clean:
+	@ rm -rf vendor reports pkg dist pprof-* trace-*
+
+## Removes the versioned cloud-sdk-go and uses the local copy (assumed to be in ../cloud-sdk-go).
+.PHONY: fake-sdk
+fake-sdk:
+	@ go mod edit -replace=github.com/elastic/cloud-sdk-go=../cloud-sdk-go
+
+## Removes fake cloud-sdk-go.
+.PHONY: remove-fake-sdk
+remove-fake-sdk:
+	@ go mod edit -dropreplace=github.com/elastic/cloud-sdk-go
+
+## Moves the git-hooks to the git hooks directory
+.PHONY: git-hooks
+git-hooks:
+	@ cp scripts/hooks/* .git/hooks

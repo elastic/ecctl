@@ -1,0 +1,7 @@
+{{- define "override" }}{{executeTemplate .}}
+{{ end }}{{ define "default" }}
+{{- "CREATION DATE" }}{{tab}}{{ "ID" }}{{tab}}{{"KEY"}}{{tab}}{{"USER"}}{{tab}}{{"DESCRIPTION"}}
+{{ .CreationDate }}{{tab}}{{.ID}}
+{{- tab}}{{if .Key}}{{.Key}}{{else}}-{{end}}
+{{- tab}}{{if .UserID}}{{.UserID}}{{else}}-{{end}}{{tab}}{{.Description}}
+{{end}}

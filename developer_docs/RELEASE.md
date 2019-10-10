@@ -1,0 +1,35 @@
+# Releasing a new version
+
+This guide aims to provide guidance on how to release new versions of the `ecctl` binary as well as updating all the necessary parts to make it successful.
+
+## Prerequisites
+
+Releasing a new version of the binary implies that there have been changes in the source code which are meant to be released for wider consumption. Before releasing a new version there's some prerequisites that have to be checked.
+
+### Make sure the version is updated
+
+Since the source has changed, we need to update the current committed version to a higher version so that the release is published.
+
+The version is currently defined in the [Makefile](./Makefile) as an exported environment variable called `VERSION` in the [SEMVER](https://semver.org) format: `MAJOR.MINOR.BUG`
+
+```Makefile
+SHELL := /bin/bash
+export VERSION ?= 1.0.0
+```
+
+Say we want to perform a minor version release (i.e. no breaking changes and only new features and bug fixes are being included); in which case we'll update the _MINOR_ part of the version:
+
+```Makefile
+SHELL := /bin/bash
+export VERSION ?= 1.1.0
+```
+
+### Generating a changelog for the new version
+
+Once the version is updated, we can then generate the changelog by calling `make changelog`, you can see an example changelog in [`notes/EXAMPLE.md`](../notes/EXAMPLE.md). The idea is to fill all the applicable sections so that users can consume an orderly changelog.
+
+After a changelog has been manually curated, a new pull request can be opened with the changelog and version update changes.
+
+## Executing the release
+
+After the new changelog and version have been merged to master, the only thing remaining is to run `make release`. This is the makefile target which will do the release.

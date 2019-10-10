@@ -1,0 +1,10 @@
+## Installs all the required binaries for the makefile targets.
+.PHONY: deps
+deps:
+	@ echo "-> Installing project dependencies..."
+	@ GO111MODULE=off go get -u github.com/myitcv/gobin
+	@ $(GOBIN)/gobin github.com/elastic/go-licenser@v0.3.0
+	@ $(GOBIN)/gobin github.com/go-bindata/go-bindata/go-bindata@v0.0.0-20190711162640-ee3c2418e368
+	@ $(GOBIN)/gobin golang.org/x/lint/golint
+	@ curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh| sh -s -- -b $(GOBIN) v1.19.0
+	@ echo "-> Done."

@@ -1,0 +1,11 @@
+{{- define "override" }}{{ range .Zones }}{{ range .Allocators }}{{ executeTemplate .}}
+{{ end }}{{ end }}{{ end }}{{- define "default" }}
+{{- "ZONE" }}{{ tab }}{{ "ALLOCATOR ID" }}{{ tab }}{{ "HOST IP"}}{{ tab }}{{ "CAPACITY" }}
+{{- tab }}{{ "FREE" }}{{ tab }}{{ "INSTANCES" }}{{ tab }}{{ "CONNECTED" }}{{ tab }}{{ "MAINTENANCE" }}
+{{ range .Zones }}{{- range .Allocators }}
+{{- .ZoneID }}{{ tab }}{{ .AllocatorID }}{{ tab }}{{ .HostIP }}{{ tab }}{{ formatBytes .Capacity.Memory.Total true}}
+{{- tab }}{{ if $x := substr .Capacity.Memory.Total .Capacity.Memory.Used }}{{ formatBytes $x true }}{{else}}{{ "0"}}{{end }}
+{{- tab }}{{ len .Instances }}{{ tab }}{{ .Status.Connected }}
+{{- tab }}{{ if .Status.MaintenanceMode}}{{ .Status.MaintenanceMode }}{{else}}-{{end}}
+{{ end }}
+{{- end }}{{ end}}

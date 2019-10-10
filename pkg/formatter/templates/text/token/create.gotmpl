@@ -1,0 +1,6 @@
+{{- define "override" }}{{executeTemplate .}}
+{{ end }}{{ define "default" }}
+{{- "TOKEN ID" }}{{tab}}{{ "TOKEN" }}
+{{if .TokenID}}{{ .TokenID }}{{else}}{{"-"}}{{end}}{{tab}}
+{{- if .Token }}{{ .Token }}{{else}}{{"-"}}{{end}}
+{{end}}

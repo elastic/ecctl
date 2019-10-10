@@ -1,0 +1,8 @@
+{{- define "override" }}{{executeTemplate .}}
+{{ end }}{{ define "default" }}
+{{-  "USERNAME" }}{{ tab }}{{"FULL NAME"}}{{ tab }}{{"EMAIL"}}{{ tab }}{{"ROLES"}}{{ tab }}{{"ENABLED"}}
+{{ .UserName }}
+{{- tab }}{{if .FullName }}{{ .FullName }}{{else}}-{{end}}
+{{- tab }}{{if .Email }}{{ .Email }}{{else}}-{{end}}
+{{- tab }}{{  .Security.Roles }}{{ tab }}{{ .Security.Enabled }}
+{{end}}

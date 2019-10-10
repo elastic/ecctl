@@ -1,0 +1,7 @@
+{{- define "override" }}{{ range . }}{{executeTemplate .}}
+{{ end }}{{ end }}{{ define "default" }}
+{{-  "ID" }}{{tab}}{{  "NAME" }}{{tab}}{{ "SYSTEM"}}{{tab}}{{ "INSTANCE TYPE"}}{{tab}}{{ "STORAGE RATIO"}}{{tab}}{{ "DESCRIPTION" }}
+{{- range . }}
+{{ .ID }}{{tab}}{{ .Name }}{{tab}}{{  .SystemOwned}}{{tab}}{{ .InstanceType}}{{tab}}{{ .StorageMultiplier}}{{tab}}{{ .Description }}
+{{- end}}
+{{end}}

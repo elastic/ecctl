@@ -1,0 +1,8 @@
+{{- define "override" }}{{ range . }}{{ executeTemplate .}}
+{{ end }}{{ end }}{{ define "default" }}
+{{- "INSTANCES" }}{{ tab }}{{ "CAPACITY" }}
+{{- range . }}{{- $Capacity := .Capacity}}{{- range .Instances}}
+{{ . }}{{ tab }}{{ $Capacity }}
+{{- end}}
+{{- end}}
+{{end}}

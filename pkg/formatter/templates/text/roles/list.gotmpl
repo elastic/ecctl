@@ -1,0 +1,12 @@
+{{- define "override" }}{{ range .Values }}{{executeTemplate .}}
+{{ end }}{{ end }}{{ define "default" }}
+{{- "ROLE ID" }}{{tab}}{{ "BLESSED RUNNERS" }}{{tab}}{{ "CONTAINERSET:CONTAINER"}}
+{{- range .Values }}
+{{ .ID }}{{tab}}{{if .Blessings}}
+{{- len .Blessings.Value.RunnerIdsToBlessing }}{{else}}
+{{- if .Role.Value.AutoBlessed }}{{"All"}}{{end}}{{end}}
+{{- tab}}{{range $i, $element := .Role.Value.Containers}}
+{{- $element.ContainerSetName}}:{{$element.Name}}{{" "}}
+{{- end}}
+{{- end}}
+{{end}}

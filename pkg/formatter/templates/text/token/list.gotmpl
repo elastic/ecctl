@@ -1,0 +1,7 @@
+{{- define "override" }}{{ range .Tokens }}{{executeTemplate .}}
+{{ end }}{{ end }}{{ define "default" }}
+{{- "TOKEN ID" }}{{tab}}{{ "ROLES" }}
+{{- range .Tokens }}
+{{ .TokenID }}{{tab}}{{- range .Roles }}{{print . " "}}{{else}}{{"-"}}{{end}}
+{{- end }}
+{{end}}

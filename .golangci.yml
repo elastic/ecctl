@@ -1,0 +1,67 @@
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
+
+linters:
+  enable-all: true
+  disable:
+    - dupl
+    - lll
+    - gochecknoglobals
+    - gochecknoinits
+    - scopelint
+    - funlen
+
+linters-settings:
+  errcheck:
+    exclude: build/errcheck-exclusions.txt
+  govet:
+    check-shadowing: false
+
+  gofmt:
+    simplify: true
+  
+  golint:
+    min-confidence: 0
+
+  gocyclo:
+    # minimal code complexity to report, 30 by default (we should lower it to around 15-17)
+    min-complexity: 20
+
+  maligned:
+    # print struct with more effective memory layout or not, false by default
+    suggest-new: true
+
+  misspell:
+    locale: neutral
+
+  goimports:
+    local-prefixes: github.com/elastic/ecctl
+
+  gocritic:
+    enabled-tags:
+      - performance
+      - style
+      - experimental
+    disabled-checks:
+      - hugeParam
+
+issues:
+  # Excluding configuration per-path, per-linter, per-text and per-source
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - gocyclo
+        - errcheck
+        - dupl
+        - gosec
+    - path: cmd/platform/enrollment-token/command.go
+      linters:
+        - gosec
+    - path: cmd/version.go
+      linters:
+        - gosec
+
+
+output:
+  format: tab
