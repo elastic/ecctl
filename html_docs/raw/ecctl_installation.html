@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Installation
+        | Elastic Cloud Control Documentation
+      | Elastic
+    </title><link rel="home" href="index.html" title="Elastic Cloud Control Documentation" /><link rel="up" href="ecctl_elastic_cloud_control.html" title="Elastic Cloud Control" /><link rel="prev" href="ecctl_elastic_cloud_control.html" title="Elastic Cloud Control" /><link rel="next" href="ecctl_elastic_cloud_authentication.html" title="Elastic Cloud authentication" /><meta name="DC.type" content="Learn/Docs/" /><meta name="DC.subject" content="" /><meta name="DC.identifier" content="" /></head><body><div class="breadcrumbs"><span class="breadcrumb-link"><a href="index.html">Elastic Cloud Control Documentation</a></span> » <span class="breadcrumb-link"><a href="ecctl_elastic_cloud_control.html">Elastic Cloud Control</a></span> » <span class="breadcrumb-node">Installation</span></div><div class="navheader"><span class="prev"><a href="ecctl_elastic_cloud_control.html">
+              « 
+              Elastic Cloud Control</a>
+           
+        </span><span class="next">
+           
+          <a href="ecctl_elastic_cloud_authentication.html">Elastic Cloud authentication
+               »
+            </a></span></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="ecctl_installation"></a>Installation<a href="https://github.com/elastic/ecctl/edit/master/docs/ecctl-getting-started.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h2></div></div></div><p>The latest stable binaries can always be found on the
+<a class="ulink" href="https://github.com/elastic/ecctl/releases" target="_top">release page</a> or compiled from
+the latest on the master branch to leverage the most recently merged
+features. To find out more information about building from source view
+the steps from our <a class="ulink" href="./CONTRIBUTING.md" target="_top">contributing page</a>.</p><h4><a id="ecctl_macos"></a>macOS<a href="https://github.com/elastic/ecctl/edit/master/docs/ecctl-getting-started.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h4><p>The simplest installation for macOS users is to install <code class="literal">ecctl</code> with
+<code class="literal">brew</code>.</p><div class="pre_wrapper lang-console"><pre class="programlisting prettyprint lang-console">$ brew tap elastic/ecctl
+$ brew tap-pin elastic/ecctl
+$ brew install elastic/ecctl/ecctl
+Updating Homebrew...
+==&gt; Installing ecctl from elastic/ecctl
+...
+==&gt; Summary
+🍺  /usr/local/Cellar/ecctl/1.0.0: 6 files, 13MB, built in 7 seconds</pre></div><div class="console_widget" data-snippet="snippets/1.console"></div><div class="note admon"><div class="icon"><img alt="Note" src="images/icons/note.png" /></div><div class="admon_content"><p>To get autocompletions working, they must be sourced from your shell profile.</p></div></div><h3><a id="ecctl_linux_based_os"></a>Linux based OS<a href="https://github.com/elastic/ecctl/edit/master/docs/ecctl-getting-started.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h3><p>TBD</p><h3><a id="ecctl_configuration_settings_and_precedence"></a>Configuration Settings and Precedence<a href="https://github.com/elastic/ecctl/edit/master/docs/ecctl-getting-started.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h3><p>In order for <code class="literal">ecctl</code> to be able to communicate with the API, it needs
+to have a set of configuration parameters defined.
+These parameters can be set in a configuration file, through environment
+variables, or at runtime using the CLI’s global flags.</p><p>The hierarchy is as follows listed from higher precedence to lower:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">Command line flags <code class="literal">--region</code>, <code class="literal">--host</code>, <code class="literal">--user</code>, <code class="literal">--pass</code>.</li><li class="listitem">Environment variables.</li><li class="listitem">Shared configuration file
+<code class="literal">$HOME/.ecctl/config.&lt;json|toml|yaml|hcl&gt;</code></li></ol></div><h3><a id="ecctl_generating_a_configuration_file"></a>Generating a configuration file<a href="https://github.com/elastic/ecctl/edit/master/docs/ecctl-getting-started.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h3><p>If it’s your first time using <code class="literal">ecctl</code>, you might want to use the
+<code class="literal">init</code> command to assist you in generating a configuration file. The
+resulting configuration file will be saved under
+<code class="literal">~/.ecctl/config.json</code>:</p><div class="pre_wrapper lang-console"><pre class="programlisting prettyprint lang-console">$ ecctl init
+Welcome to the Elastic Cloud CLI! This command will guide you through authenticating and setting some default values.
+
+Missing configuration file, woud you like to initialise it? [y/n]: y
+Enter the URL of the Elastic Cloud API or your ECE installation: https://api.elastic-cloud.com
+
+What default output format would you like?
+  [1] text - Human-readable output format, commands with no output templates defined will fall back to JSON.
+  [2] json - JSON formatted output API responses.
+
+Please enter a choice: 1
+
+
+Which authentication mechanism would you like to use?
+  [1] API Keys (Recommended).
+  [2] Username and Password login.
+
+Please enter your choice: 1
+
+Paste your API Key and press enter: xxxxx
+
+Your credentials seem to be valid, and show you're authenticated as "user".
+
+You're all set! Here are some commands to try:
+  $ ecctl auth user key list
+  $ ecctl deployment elasticsearch list</pre></div><div class="console_widget" data-snippet="snippets/2.console"></div></div><div class="navfooter"><span class="prev"><a href="ecctl_elastic_cloud_control.html">
+              « 
+              Elastic Cloud Control</a>
+           
+        </span><span class="next">
+           
+          <a href="ecctl_elastic_cloud_authentication.html">Elastic Cloud authentication
+               »
+            </a></span></div></body></html>

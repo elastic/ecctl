@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Multiple configuration support
+        | Elastic Cloud Control Documentation
+      | Elastic
+    </title><link rel="home" href="index.html" title="Elastic Cloud Control Documentation" /><link rel="up" href="ecctl_elastic_cloud_control.html" title="Elastic Cloud Control" /><link rel="prev" href="ecctl_elastic_cloud_authentication.html" title="Elastic Cloud authentication" /><link rel="next" href="ecctl_output_format.html" title="Output format" /><meta name="DC.type" content="Learn/Docs/" /><meta name="DC.subject" content="" /><meta name="DC.identifier" content="" /></head><body><div class="breadcrumbs"><span class="breadcrumb-link"><a href="index.html">Elastic Cloud Control Documentation</a></span> » <span class="breadcrumb-link"><a href="ecctl_elastic_cloud_control.html">Elastic Cloud Control</a></span> » <span class="breadcrumb-node">Multiple configuration support</span></div><div class="navheader"><span class="prev"><a href="ecctl_elastic_cloud_authentication.html">
+              « 
+              Elastic Cloud authentication</a>
+           
+        </span><span class="next">
+           
+          <a href="ecctl_output_format.html">Output format
+               »
+            </a></span></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="ecctl_multiple_configuration_support"></a>Multiple configuration support<a href="https://github.com/elastic/ecctl/edit/master/docs/ecctl-getting-started.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h2></div></div></div><p><code class="literal">ecctl</code> supports having multiple configuration files out of the box.
+This allows for easy management of multiple environments or specialized
+targets. By default it will use
+<code class="literal">$HOME/.ecctl/config.&lt;json|toml|yaml|hcl&gt;</code>, but when the <code class="literal">--config</code>
+flag is specified, it will append the <code class="literal">--config</code> name to the file:</p><div class="pre_wrapper lang-console"><pre class="programlisting prettyprint lang-console"># Default behaviour
+$ ecctl version
+# will use ~/.ecctl/staging.yaml
+
+# When an environment is specified, the configuration file used will change
+$ ecctl version --config ece
+# will use ~/.ecctl/ece.yaml</pre></div><div class="console_widget" data-snippet="snippets/3.console"></div></div><div class="navfooter"><span class="prev"><a href="ecctl_elastic_cloud_authentication.html">
+              « 
+              Elastic Cloud authentication</a>
+           
+        </span><span class="next">
+           
+          <a href="ecctl_output_format.html">Output format
+               »
+            </a></span></div></body></html>

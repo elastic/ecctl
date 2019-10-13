@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Custom formatting
+        | Elastic Cloud Control Documentation
+      | Elastic
+    </title><link rel="home" href="index.html" title="Elastic Cloud Control Documentation" /><link rel="up" href="ecctl_elastic_cloud_control.html" title="Elastic Cloud Control" /><link rel="prev" href="ecctl_output_format.html" title="Output format" /><link rel="next" href="ecctl_contributing.html" title="Contributing" /><meta name="DC.type" content="Learn/Docs/" /><meta name="DC.subject" content="" /><meta name="DC.identifier" content="" /></head><body><div class="breadcrumbs"><span class="breadcrumb-link"><a href="index.html">Elastic Cloud Control Documentation</a></span> » <span class="breadcrumb-link"><a href="ecctl_elastic_cloud_control.html">Elastic Cloud Control</a></span> » <span class="breadcrumb-node">Custom formatting</span></div><div class="navheader"><span class="prev"><a href="ecctl_output_format.html">
+              « 
+              Output format</a>
+           
+        </span><span class="next">
+           
+          <a href="ecctl_contributing.html">Contributing
+               »
+            </a></span></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="ecctl_custom_formatting"></a>Custom formatting<a href="https://github.com/elastic/ecctl/edit/master/docs/ecctl-getting-started.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h2></div></div></div><p><code class="literal">ecctl</code> supports a global <code class="literal">--format</code> flag which can be passed to any
+existing command or subcommand. Using the <code class="literal">--format</code> flag allows you
+to obtain a specific part of a command response that might not have been
+shown before with the default <code class="literal">--output=text</code>. The <code class="literal">--format</code>
+internally uses Go templates which means that you can use the power of
+the Go built-in
+<a class="ulink" href="https://golang.org/pkg/text/template/" target="_top"><code class="literal">text/templates</code></a> on demmand.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="ecctl_examples"></a>Examples<a href="https://github.com/elastic/ecctl/edit/master/docs/ecctl-getting-started.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h3></div></div></div><p>Obtaining the ID, Version and health status</p><div class="pre_wrapper lang-console"><pre class="programlisting prettyprint lang-console">$ ecctl elasticsearch list --format '{{.ClusterID}} {{.PlanInfo.Current.Plan.Elasticsearch.Version}} {{.Healthy}}'
+a2c4f423c1014941b75a48292264dd25 6.7.0 true
+a4f29ff3ba554e69a1e1b40c3ee1b6e3 6.7.0 true
+5e29960763ef496ea8cf6a5371328a6a 6.7.0 true
+53023f28d68b4b329d9d913f110709d2 6.7.0 true</pre></div><div class="console_widget" data-snippet="snippets/4.console"></div><p>Since the template is executed we can also embed logic inside of the
+template to filter the results.</p><div class="pre_wrapper lang-console"><pre class="programlisting prettyprint lang-console">$ export EC_FORMAT='{{range .Elasticsearch.DefaultPlugins}}{{if eq . "discovery-file" }}{{$.Version}}{{end}}{{end}}'
+# Since the template is executed on every item of the list, filter the empty lines to have a cleaner output.
+$ ecctl stack list --format "${EC_FORMAT}" | sed '/^\s*$/d'
+
+
+6.2.3
+$ unset EC_FORMAT</pre></div><div class="console_widget" data-snippet="snippets/5.console"></div></div></div><div class="navfooter"><span class="prev"><a href="ecctl_output_format.html">
+              « 
+              Output format</a>
+           
+        </span><span class="next">
+           
+          <a href="ecctl_contributing.html">Contributing
+               »
+            </a></span></div></body></html>

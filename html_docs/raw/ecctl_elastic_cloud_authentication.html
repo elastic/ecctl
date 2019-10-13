@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Elastic Cloud authentication
+        | Elastic Cloud Control Documentation
+      | Elastic
+    </title><link rel="home" href="index.html" title="Elastic Cloud Control Documentation" /><link rel="up" href="ecctl_elastic_cloud_control.html" title="Elastic Cloud Control" /><link rel="prev" href="ecctl_installation.html" title="Installation" /><link rel="next" href="ecctl_multiple_configuration_support.html" title="Multiple configuration support" /><meta name="DC.type" content="Learn/Docs/" /><meta name="DC.subject" content="" /><meta name="DC.identifier" content="" /></head><body><div class="breadcrumbs"><span class="breadcrumb-link"><a href="index.html">Elastic Cloud Control Documentation</a></span> » <span class="breadcrumb-link"><a href="ecctl_elastic_cloud_control.html">Elastic Cloud Control</a></span> » <span class="breadcrumb-node">Elastic Cloud authentication</span></div><div class="navheader"><span class="prev"><a href="ecctl_installation.html">
+              « 
+              Installation</a>
+           
+        </span><span class="next">
+           
+          <a href="ecctl_multiple_configuration_support.html">Multiple configuration support
+               »
+            </a></span></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="ecctl_elastic_cloud_authentication"></a>Elastic Cloud authentication<a href="https://github.com/elastic/ecctl/edit/master/docs/ecctl-getting-started.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h2></div></div></div><p>Elastic Cloud uses API keys to authenticate users against its API.
+Additionally, it supports the usage of <a class="ulink" href="https://jwt.io/" target="_top">JWT</a> to validate
+authenticated clients. The preferred authentication method is API keys.</p><p>There are two ways to authenticate against the Elastic Cloud API using
+<code class="literal">ecctl</code>:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">Specifying an API key using the <code class="literal">--apikey</code> flag.</li><li class="listitem">Specifying a <code class="literal">--user</code> and <code class="literal">--pass</code> flags.</li></ul></div><p>The first method requires the user to already have an API key, if this
+is the case, all the outgoing API requests will use an Authentication
+API key header.</p><p>The second method uses the <code class="literal">user</code> and <code class="literal">pass</code> values to obtain a
+valid JWT token, that token is then used as the Authentication
+Bearer header for every API call. A goroutine that refreshes the token
+every minute is started, so that the token doesn’t expire while we’re
+performing actions.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="ecctl_shared_configuration_file"></a>Shared configuration file<a href="https://github.com/elastic/ecctl/edit/master/docs/ecctl-getting-started.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h3></div></div></div><p>Below is an example <code class="literal">YAML</code> configuration file
+<code class="literal">$HOME/.ecctl/config.yaml</code> that will effectively point and configure
+the binary for Elastic Cloud:</p><div class="pre_wrapper lang-yaml"><pre class="programlisting prettyprint lang-yaml">host: https://api.elastic-cloud.com # URL of Elastic Cloud or your ECE installation.
+region: us-east-1 # For ECE installations you can just omit this setting.
+
+# Credentials
+## apikey is the preferred authentication mechanism.
+apikey: bWFyYzo4ZTJmNmZkNjY5ZmQ0MDBkOTQ3ZjI3MTg3ZWI5MWZhYjpOQktHY05jclE0cTBzcUlnTXg3QTd3
+
+## username and password can be used, specially when no API key is available.
+user: username
+pass: password</pre></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="ecctl_environment_variables"></a>Environment variables<a href="https://github.com/elastic/ecctl/edit/master/docs/ecctl-getting-started.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h3></div></div></div><p>The same settings can be defined as environment variables instead of a
+configuration file or to override certain settings of the <code class="literal">YAML</code> file.
+If setting environment variables, you’ll need to prefix the
+configuration parameter with <code class="literal">EC_</code> and capitalize the setting,
+i.e. <code class="literal">EC_HOST</code> or <code class="literal">EC_USER</code>.</p><div class="pre_wrapper lang-sh"><pre class="programlisting prettyprint lang-sh">export EC_APIKEY=bWFyYzo4ZTJmNmZkNjY5ZmQ0MDBkOTQ3ZjI3MTg3ZWI5MWZhYjpOQktHY05jclE0cTBzcUlnTXg3QTd3</pre></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="ecctl_special_environment_variables"></a>Special Environment Variables<a href="https://github.com/elastic/ecctl/edit/master/docs/ecctl-getting-started.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h4></div></div></div><div class="pre_wrapper lang-sh"><pre class="programlisting prettyprint lang-sh">export EC_CONFIG=$HOME/.ecctl/cloud.yaml</pre></div><p><code class="literal">EC_REGIONS</code> will define autocomplete entries for the <code class="literal">--region</code>
+flag, though there is no validation and it is not environment aware
+(e.g. no different list is provided for staging vs production).</p><div class="pre_wrapper lang-sh"><pre class="programlisting prettyprint lang-sh">export EC_REGIONS=="ap-northeast-1 ap-southeast-1 ap-southeast-2 aws-eu-central-1 eu-west-1 gcp-europe-west1 gcp-europe-west3 gcp-us-central1 gcp-us-west1 sa-east-1 us-east-1 us-west-1 us-west-2"</pre></div></div></div></div><div class="navfooter"><span class="prev"><a href="ecctl_installation.html">
+              « 
+              Installation</a>
+           
+        </span><span class="next">
+           
+          <a href="ecctl_multiple_configuration_support.html">Multiple configuration support
+               »
+            </a></span></div></body></html>

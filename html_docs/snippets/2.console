@@ -1,0 +1,26 @@
+$ ecctl init
+Welcome to the Elastic Cloud CLI! This command will guide you through authenticating and setting some default values.
+
+Missing configuration file, woud you like to initialise it? [y/n]: y
+Enter the URL of the Elastic Cloud API or your ECE installation: https://api.elastic-cloud.com
+
+What default output format would you like?
+  [1] text - Human-readable output format, commands with no output templates defined will fall back to JSON.
+  [2] json - JSON formatted output API responses.
+
+Please enter a choice: 1
+
+
+Which authentication mechanism would you like to use?
+  [1] API Keys (Recommended).
+  [2] Username and Password login.
+
+Please enter your choice: 1
+
+Paste your API Key and press enter: xxxxx
+
+Your credentials seem to be valid, and show you're authenticated as "user".
+
+You're all set! Here are some commands to try:
+  $ ecctl auth user key list
+  $ ecctl deployment elasticsearch list

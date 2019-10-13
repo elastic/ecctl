@@ -1,0 +1,7 @@
+# Default behaviour
+$ ecctl version
+# will use ~/.ecctl/staging.yaml
+
+# When an environment is specified, the configuration file used will change
+$ ecctl version --config ece
+# will use ~/.ecctl/ece.yaml

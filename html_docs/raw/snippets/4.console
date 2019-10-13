@@ -1,0 +1,5 @@
+$ ecctl elasticsearch list --format '{{.ClusterID}} {{.PlanInfo.Current.Plan.Elasticsearch.Version}} {{.Healthy}}'
+a2c4f423c1014941b75a48292264dd25 6.7.0 true
+a4f29ff3ba554e69a1e1b40c3ee1b6e3 6.7.0 true
+5e29960763ef496ea8cf6a5371328a6a 6.7.0 true
+53023f28d68b4b329d9d913f110709d2 6.7.0 true
