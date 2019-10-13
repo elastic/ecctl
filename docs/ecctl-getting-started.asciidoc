@@ -39,16 +39,19 @@ NOTE: To get autocompletions working, they must be sourced from your shell profi
 [float]
 === Linux based OS
 
+// NR TO DO we need some content here or the doc build fails
+ 
 TBD 
 
-[float]
-=== Configuration Settings and Precedence
+=== Configuration
 
 In order for `ecctl` to be able to communicate with the API, it needs
 to have a set of configuration parameters defined.
 These parameters can be set in a configuration file, through environment
 variables, or at runtime using the CLI’s global flags.
 
+[float]
+==== Precedence
 The hierarchy is as follows listed from higher precedence to lower:
 
 . Command line flags `--region`, `--host`, `--user`, `--pass`.
@@ -57,7 +60,7 @@ The hierarchy is as follows listed from higher precedence to lower:
 `$HOME/.ecctl/config.<json|toml|yaml|hcl>`
 
 [float]
-=== Generating a configuration file
+=== Generate a configuration file
 
 If it’s your first time using `ecctl`, you might want to use the
 `init` command to assist you in generating a configuration file. The
@@ -94,8 +97,7 @@ You're all set! Here are some commands to try:
   $ ecctl deployment elasticsearch list
 ----
 
-[float]
-=== Elastic Cloud authentication
+=== Authentication
 
 Elastic Cloud uses API keys to authenticate users against its API.
 Additionally, it supports the usage of https://jwt.io/[JWT] to validate
@@ -138,6 +140,7 @@ user: username
 pass: password
 ----
 
+[float]
 ==== Environment variables
 
 The same settings can be defined as environment variables instead of a
@@ -151,6 +154,7 @@ i.e. `EC_HOST` or `EC_USER`.
 export EC_APIKEY=bWFyYzo4ZTJmNmZkNjY5ZmQ0MDBkOTQ3ZjI3MTg3ZWI5MWZhYjpOQktHY05jclE0cTBzcUlnTXg3QTd3
 ----
 
+[float]
 ===== Special Environment Variables
 
 [source,sh]
@@ -167,6 +171,8 @@ flag, though there is no validation and it is not environment aware
 export EC_REGIONS=="ap-northeast-1 ap-southeast-1 ap-southeast-2 aws-eu-central-1 eu-west-1 gcp-europe-west1 gcp-europe-west3 gcp-us-central1 gcp-us-west1 sa-east-1 us-east-1 us-west-1 us-west-2"
 ----
 
+// NR TO DO Should this section move up into the Configuration section?
+[float]
 === Multiple configuration support
 
 `ecctl` supports having multiple configuration files out of the box.
@@ -241,5 +247,5 @@ See the link:./developer_docs/RELEASE.md[release guide].
 
 === Command reference
 
-* link:./docs/ecctl.md[ecctl command help]
+See link:./docs/ecctl.md[ecctl command help]
 
