@@ -1,7 +1,0 @@
-$ export EC_FORMAT='{{range .Elasticsearch.DefaultPlugins}}{{if eq . "discovery-file" }}{{$.Version}}{{end}}{{end}}'
-# Since the template is executed on every item of the list, filter the empty lines to have a cleaner output.
-$ ecctl stack list --format "${EC_FORMAT}" | sed '/^\s*$/d'
-
-
-6.2.3
-$ unset EC_FORMAT
