@@ -242,6 +242,10 @@ $ unset EC_FORMAT
 
 If you are interested in becoming a part of this project, take a look at link:https://github.com/elastic/ecctl/blob/master/CONTRIBUTING.md[Contributing to ecctl].
 
+=== Release Process
+
+See the link:https://github.com/elastic/ecctl/blob/master/developer_docs/RELEASE.md[release guide].
+
 === Command reference
 
 See link:https://github.com/elastic/ecctl/blob/master/docs/ecctl.md[ecctl command reference].
