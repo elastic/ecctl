@@ -13,8 +13,10 @@ thoroughly tested.
 The latest stable binaries can always be found on the
 https://github.com/elastic/ecctl/releases[release page] or compiled from
 the latest on the master branch to leverage the most recently merged
-features. To find out more information about building from source view
-the steps from our link:./CONTRIBUTING.md[contributing page].
+features. 
+
+To learn more about building `ecctl` from the source, see
+the steps from our link:https://github.com/elastic/ecctl/blob/master/CONTRIBUTING.md#setting-up-a-dev-environment[Setting up a dev environment].
 
 [float]
 ==== macOS
@@ -238,14 +240,9 @@ $ unset EC_FORMAT
 
 === Contributing
 
-See the contribution guidelines specified in the
-link:./CONTRIBUTING.md[CONTRIBUTING] doc.
-
-## Release Process
-
-See the link:./developer_docs/RELEASE.md[release guide].
+If you are interested in becoming a part of this project, take a look at link:https://github.com/elastic/ecctl/blob/master/CONTRIBUTING.md[Contributing to ecctl].
 
 === Command reference
 
-See link:./docs/ecctl.md[ecctl command help]
+See link:https://github.com/elastic/ecctl/blob/master/docs/ecctl.md[ecctl command reference].
 
