@@ -13,7 +13,7 @@ require (
 	github.com/elastic/uptd v1.0.0
 	github.com/ghodss/yaml v1.0.0
 	github.com/go-openapi/runtime v0.19.0
-	github.com/go-openapi/strfmt v0.19.0
+	github.com/go-openapi/strfmt v0.19.3
 	github.com/hashicorp/go-multierror v1.0.0
 	github.com/marclop/elasticsearch-cli v0.0.0-20190212132418-ee09f7ae57f1
 	github.com/pkg/errors v0.8.1
