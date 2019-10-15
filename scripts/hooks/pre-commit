@@ -5,4 +5,4 @@ exec 1>&2
 
 echo "-> Running pre-commit hook..."
 
-make lint unit docs
+make lint unit docs SKIP_DEPCHECK=true
