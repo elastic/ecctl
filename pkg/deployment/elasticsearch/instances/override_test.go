@@ -461,6 +461,60 @@ func TestOverrideCapacity(t *testing.T) {
 			},
 		},
 		{
+			name: "Success in overriding a DNT cluster overrides, setting only a storage multiplier",
+			args: args{
+				params: OverrideCapacityParams{
+					ClusterParams: util.ClusterParams{
+						ClusterID: "ef97cb1bee75971e19be2522eca6a021",
+						API: api.NewMock(mock.Response{
+							Response: http.Response{
+								StatusCode: 200,
+								Body:       mock.NewStringBody(dntCluster),
+							},
+						}, mock.Response{
+							Response: http.Response{
+								StatusCode: 200,
+								Body:       NewOverrideResponse(t, 32768/2),
+							},
+						}, mock.Response{
+							Response: http.Response{
+								StatusCode: 200,
+								Body:       NewOverrideResponse(t, 65536/2),
+							},
+						}, mock.Response{
+							Response: http.Response{
+								StatusCode: 200,
+								Body:       NewOverrideResponse(t, 4096/2),
+							},
+						}),
+					},
+					StorageMultiplier: 40,
+					Instances: []string{
+						"instance-0000000009", "instance-0000000008",
+						"instance-0000000013", "instance-0000000014",
+						"instance-0000000012", "instance-0000000010", "instance-0000000011",
+					},
+				},
+			},
+			want: []OverrideResponse{
+				{
+					Instances:         []string{"instance-0000000013", "instance-0000000014"},
+					Capacity:          16384,
+					StorageMultiplier: 40,
+				},
+				{
+					Instances:         []string{"instance-0000000009", "instance-0000000008"},
+					Capacity:          32768,
+					StorageMultiplier: 40,
+				},
+				{
+					Instances:         []string{"instance-0000000012", "instance-0000000010", "instance-0000000011"},
+					Capacity:          2048,
+					StorageMultiplier: 40,
+				},
+			},
+		},
+		{
 			name: "Fails overriding any further than MaxInstanceCapacity",
 			args: args{
 				params: OverrideCapacityParams{

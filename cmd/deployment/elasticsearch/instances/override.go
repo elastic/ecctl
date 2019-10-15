@@ -19,6 +19,7 @@ package cmdelasticsearchinstances
 
 import (
 	"fmt"
+	"os"
 	"path/filepath"
 
 	"github.com/spf13/cobra"
@@ -64,15 +65,27 @@ Set the cluster instance to 3x of its current capacity:
 		}
 
 		multiplier, _ := cmd.Flags().GetUint8("multiplier")
+		storageMultiplier, _ := cmd.Flags().GetUint8("storage-multiplier")
 		value, _ := cmd.Flags().GetUint16("value")
 		reset, _ := cmd.Flags().GetBool("reset")
 
+		if multiplier > 0 || value > 0 || reset {
+			if !cmdutil.ConfirmAction(
+				"WARNING: changing instance capacity incurs a rolling restart, do you want to continue? [n/y]: ",
+				os.Stdin,
+				os.Stdout,
+			) {
+				return nil
+			}
+		}
+
 		res, err := instances.OverrideCapacity(instances.OverrideCapacityParams{
-			ClusterParams: clusterParams,
-			Instances:     instanceSlice,
-			BoostFactor:   multiplier,
-			Value:         uint64(value),
-			Reset:         reset,
+			ClusterParams:     clusterParams,
+			Instances:         instanceSlice,
+			BoostFactor:       multiplier,
+			StorageMultiplier: int64(storageMultiplier),
+			Value:             uint64(value),
+			Reset:             reset,
 		})
 		if err != nil {
 			return err
@@ -90,6 +103,7 @@ func init() {
 	setESInstanceOverrideCmd.Flags().StringSliceP("instance", "i", nil, "Instances on which to apply the override")
 	setESInstanceOverrideCmd.Flags().Bool("all", false, "Applies the override to all of the instances")
 	setESInstanceOverrideCmd.Flags().Uint8("multiplier", 0, "Capacity multiplier")
+	setESInstanceOverrideCmd.Flags().Uint8("storage-multiplier", 0, "Storage multiplier per instance, if not set doesn't override it")
 	setESInstanceOverrideCmd.Flags().Uint16P("value", "", 0, "Absolute value of instance override memory (in MBs)")
 	setESInstanceOverrideCmd.Flags().BoolP("reset", "", false, "Resets the instance(s) memory to the original value found in the current plan")
 }
