@@ -9,6 +9,8 @@ git fetch
 PREV_TAG=$(git tag -l | tail -1)
 CHANGELOGFILE=notes/${VERSION}.md
 
+if [[ -z ${PREV_TAG} ]]; then echo "-> Exiting changelog generation since there's no previous tag"; exit 0; fi
+
 echo "=> Attempting to generate the changelog for release ${VERSION}..."
 read -p "=> Previous release was ${PREV_TAG}, is that correct? " -n 1 -r
 
