@@ -1,7 +1,5 @@
 SHELL := /bin/bash
-export VERSION ?= 1.0.0-rc1
-# Required for Go 1.13 onwards. Remove after OSS.
-export GOPRIVATE ?= github.com/elastic/cloud-sdk-go
+export VERSION ?= 1.0.0-bc1
 export GO111MODULE ?= on
 export GOBIN = $(shell pwd)/bin
 BINARY := ecctl

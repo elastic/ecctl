@@ -17,13 +17,11 @@ github.com/pkg/errors                   BSD-2-Clause
 github.com/pmezard/go-difflib           BSD-3-Clause
 golang.org/x/crypto                     BSD-3-Clause
 golang.org/x/oauth2                     BSD-3-Clause
-golang.org/x/sync                       BSD-3-Clause
-github.com/burntsushi/toml              MIT
 github.com/asaskevich/govalidator       MIT
 github.com/blang/semver                 MIT
 github.com/chzyer/test                  MIT
 github.com/spf13/viper                  MIT
-github.com/hashicorp/go-multierror      MPL-2.0
+github.com/hashicorp/go-multierror      MPL-2.0-no-copyleft-exception
 github.com/chzyer/logex                 no license file was found
 github.com/ghodss/yaml                  no license file was found
 

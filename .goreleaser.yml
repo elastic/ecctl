@@ -19,7 +19,7 @@ brews:
     custom_require: ./scripts/custom_download_strategies.rb
     commit_author:
       name: elasticloudbot
-      email: cloud-tools@elastic.co
+      email: cloud-tooling@elastic.co
     homepage: "https://github.com/elastic/ecctl"
     description: Elastic Cloud Control, the official Elastic Cloud and ECE command line interface
     install: |
