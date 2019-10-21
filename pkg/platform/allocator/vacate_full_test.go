@@ -575,19 +575,6 @@ func TestVacateInterrupt(t *testing.T) {
 									newPlanStep("step4", "success"),
 								},
 							},
-							{
-								ID: "4ee11eb40eda22cac0cce259625c6734",
-								steps: [][]*models.ClusterPlanStepInfo{
-									{
-										newPlanStep("step1", "success"),
-										newPlanStep("step2", "pending"),
-									},
-								},
-								plan: []*models.ClusterPlanStepInfo{
-									newPlanStep("step1", "success"),
-									newPlanStep("step2", "success"),
-								},
-							},
 						},
 					},
 				}}),
@@ -599,9 +586,8 @@ func TestVacateInterrupt(t *testing.T) {
 				"Cluster [3ee11eb40eda22cac0cce259625c6734][Elasticsearch]: running step \"step4\" (Plan duration )...",
 				"\x1b[92;mCluster [3ee11eb40eda22cac0cce259625c6734][Elasticsearch]: finished running all the plan steps\x1b[0m (Total plan duration )",
 			),
-			err: `2 errors occurred:
+			err: `1 error occurred:
 	* allocator allocatorID: cluster [2ee11eb40eda22cac0cce259625c6734][kibana]: was either cancelled or not processed, follow up accordingly
-	* allocator allocatorID: cluster [4ee11eb40eda22cac0cce259625c6734][kibana]: was either cancelled or not processed, follow up accordingly
 
 `,
 		},
