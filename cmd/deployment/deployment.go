@@ -42,5 +42,6 @@ func init() {
 		cmdelasticsearch.Command,
 		cmdkibana.Command,
 		cmdapm.Command,
+		showCmd,
 	)
 }

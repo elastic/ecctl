@@ -15,7 +15,7 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package resource
+package deployment
 
 import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
