@@ -32,12 +32,13 @@ Set the cluster instance to 3x of its current capacity:
 ### Options
 
 ```
-      --all                Applies the override to all of the instances
-  -h, --help               help for override-capacity
-  -i, --instance strings   Instances on which to apply the override
-      --multiplier uint8   Capacity multiplier
-      --reset              Resets the instance(s) memory to the original value found in the current plan
-      --value uint16       Absolute value of instance override memory (in MBs)
+      --all                        Applies the override to all of the instances
+  -h, --help                       help for override-capacity
+  -i, --instance strings           Instances on which to apply the override
+      --multiplier uint8           Capacity multiplier
+      --reset                      Resets the instance(s) memory to the original value found in the current plan
+      --storage-multiplier uint8   Storage multiplier per instance, if not set doesn't override it
+      --value uint16               Absolute value of instance override memory (in MBs)
 ```
 
 ### Options inherited from parent commands

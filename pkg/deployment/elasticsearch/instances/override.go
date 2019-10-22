@@ -47,17 +47,19 @@ var (
 // OverrideCapacityParams is used by OverrideCapacity
 type OverrideCapacityParams struct {
 	util.ClusterParams
-	Instances   []string
-	Value       uint64
-	BoostFactor uint8
-	Reset       bool
+	Instances         []string
+	Value             uint64
+	StorageMultiplier int64
+	BoostFactor       uint8
+	Reset             bool
 }
 
 // OverrideRequest is used in a SetEsClusterInstancesSettingsOverrides call
 // to override any ES settings.
 type OverrideRequest struct {
-	Capacity  int32
-	Instances []string
+	StorageMultiplier int64
+	Capacity          int32
+	Instances         []string
 }
 
 // OverrideResponse is returned by OverrideCapacity
@@ -73,6 +75,11 @@ type TopologySize struct {
 func (params OverrideCapacityParams) Validate() error {
 	var err = new(multierror.Error)
 	err = multierror.Append(params.ClusterParams.Validate())
+
+	// When StorageMultiplier is set, we do not continue checking
+	if params.StorageMultiplier > 0 {
+		return err.ErrorOrNil()
+	}
 
 	if params.BoostFactor <= 1 && params.Value < 1024 && !params.Reset {
 		err = multierror.Append(errors.New("you must specify an absolute value greater than 1024 or a boost factor greater than 1 or reset to the original value"), err)
@@ -99,34 +106,9 @@ func OverrideCapacity(params OverrideCapacityParams) ([]OverrideResponse, error)
 		return nil, err
 	}
 
-	cluster, err := elasticsearch.GetCluster(elasticsearch.GetClusterParams{
-		ClusterParams: params.ClusterParams,
-		Plans:         true,
-		PlanDefaults:  true,
-	})
-
+	overrides, err := newClusterOverrideRequest(params)
 	if err != nil {
 		return nil, err
-	}
-
-	var overrides []OverrideRequest
-	for _, topology := range cluster.PlanInfo.Current.Plan.ClusterTopology {
-		size, err := GetSizeFromTopology(topology)
-		if err != nil {
-			continue
-		}
-
-		override := NewOverrideRequest(cluster.Topology.Instances,
-			size, newSize(params, size.Size), params.Instances,
-		)
-
-		if override.Capacity > maxInstanceCapacity {
-			return nil, errors.Wrap(errMaxInstanceCapacityReached, strings.Join(override.Instances, " "))
-		}
-
-		if !slice.IsEmpty(override.Instances) {
-			overrides = append(overrides, override)
-		}
 	}
 
 	var merr = new(multierror.Error)
@@ -136,9 +118,10 @@ func OverrideCapacity(params OverrideCapacityParams) ([]OverrideResponse, error)
 			clusters_elasticsearch.NewSetEsClusterInstancesSettingsOverridesParams().
 				WithClusterID(params.ClusterID).
 				WithInstanceIds(override.Instances).
-				WithRestartAfterUpdate(ec.Bool(true)).
+				WithRestartAfterUpdate(ec.Bool(override.Capacity != 0)).
 				WithBody(&models.ElasticsearchClusterInstanceSettingsOverrides{
-					InstanceCapacity: override.Capacity,
+					InstanceCapacity:  override.Capacity,
+					StorageMultiplier: float64(override.StorageMultiplier),
 				}),
 			params.AuthWriter,
 		)
@@ -146,8 +129,9 @@ func OverrideCapacity(params OverrideCapacityParams) ([]OverrideResponse, error)
 			merr = multierror.Append(merr, err)
 		} else {
 			response = append(response, OverrideResponse{
-				Instances: override.Instances,
-				Capacity:  res.Payload.InstanceCapacity,
+				Instances:         override.Instances,
+				Capacity:          res.Payload.InstanceCapacity,
+				StorageMultiplier: override.StorageMultiplier,
 			})
 		}
 	}
@@ -209,4 +193,42 @@ func NewOverrideRequest(instances []*models.ClusterInstanceInfo, size TopologySi
 		}
 	}
 	return override
+}
+
+func newClusterOverrideRequest(params OverrideCapacityParams) ([]OverrideRequest, error) {
+	cluster, err := elasticsearch.GetCluster(elasticsearch.GetClusterParams{
+		ClusterParams: params.ClusterParams,
+		Plans:         true,
+		PlanDefaults:  true,
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	var overrides []OverrideRequest
+	for _, topology := range cluster.PlanInfo.Current.Plan.ClusterTopology {
+		size, err := GetSizeFromTopology(topology)
+		if err != nil {
+			continue
+		}
+
+		override := NewOverrideRequest(cluster.Topology.Instances,
+			size, newSize(params, size.Size), params.Instances,
+		)
+
+		if override.Capacity > maxInstanceCapacity {
+			return nil, errors.Wrap(errMaxInstanceCapacityReached, strings.Join(override.Instances, " "))
+		}
+
+		if !slice.IsEmpty(override.Instances) {
+			if params.StorageMultiplier > 0 {
+				override.StorageMultiplier = params.StorageMultiplier
+				override.Capacity = 0
+			}
+			overrides = append(overrides, override)
+		}
+	}
+
+	return overrides, nil
 }

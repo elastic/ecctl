@@ -1,8 +1,13 @@
 {{- define "override" }}{{ range . }}{{ executeTemplate .}}
 {{ end }}{{ end }}{{ define "default" }}
-{{- "INSTANCES" }}{{ tab }}{{ "CAPACITY" }}
-{{- range . }}{{- $Capacity := .Capacity}}{{- range .Instances}}
-{{ . }}{{ tab }}{{ $Capacity }}
+{{- "INSTANCES" }}{{ tab }}{{ "CAPACITY" }}{{tab}}{{ "STORAGE MULTIPLIER" }}
+{{- range . }}
+{{- $Capacity := .Capacity}}
+{{- $StorageMultiplier := .StorageMultiplier}}
+{{- range .Instances}}
+{{ . }}
+{{- tab }}{{if $Capacity}}{{ $Capacity }}{{else}}-{{end}}
+{{- tab}}{{if $StorageMultiplier}}{{ $StorageMultiplier}}{{else}}-{{end}}
 {{- end}}
 {{- end}}
 {{end}}
