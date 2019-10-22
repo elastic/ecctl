@@ -14,7 +14,7 @@ ecctl deployment show <deployment-id> [flags]
 
 ```
       --apm             Shows APM resource information if any
-      --app-search      Shows App Search resource information if any
+      --appsearch       Shows App Search resource information if any
       --elasticsearch   Shows Elasticsearch resource information
   -h, --help            help for show
       --kibana          Shows Kibana resource information if any

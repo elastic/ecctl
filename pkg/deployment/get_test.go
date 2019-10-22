@@ -184,9 +184,9 @@ func TestGet(t *testing.T) {
 
 func TestGetAppSearch(t *testing.T) {
 	const getAppSearchResponse = `{
-  "elasticsearch_cluster_ref_id": "elasticsearch",
+  "elasticsearch_cluster_ref_id": "main-elasticsearch",
   "id": "3531aaf988594efa87c1aabb7caed337",
-  "ref_id": "appsearch"
+  "ref_id": "main-appsearch"
 }`
 
 	const getErrorResponse = `{
@@ -238,9 +238,9 @@ func TestGetAppSearch(t *testing.T) {
 				},
 			},
 			want: &models.AppSearchResourceInfo{
-				ElasticsearchClusterRefID: ec.String("elasticsearch"),
+				ElasticsearchClusterRefID: ec.String("main-elasticsearch"),
 				ID:                        ec.String("3531aaf988594efa87c1aabb7caed337"),
-				RefID:                     ec.String("appsearch"),
+				RefID:                     ec.String("main-appsearch"),
 			},
 		},
 	}
@@ -265,9 +265,9 @@ func TestGetAppSearch(t *testing.T) {
 
 func TestGetApm(t *testing.T) {
 	const getApmResponse = `{
-  "elasticsearch_cluster_ref_id": "elasticsearch",
+  "elasticsearch_cluster_ref_id": "main-elasticsearch",
   "id": "3531aaf988594efa87c1aabb7caed337",
-  "ref_id": "apm"
+  "ref_id": "main-apm"
 }`
 
 	const getErrorResponse = `{
@@ -319,9 +319,9 @@ func TestGetApm(t *testing.T) {
 				},
 			},
 			want: &models.ApmResourceInfo{
-				ElasticsearchClusterRefID: ec.String("elasticsearch"),
+				ElasticsearchClusterRefID: ec.String("main-elasticsearch"),
 				ID:                        ec.String("3531aaf988594efa87c1aabb7caed337"),
-				RefID:                     ec.String("apm"),
+				RefID:                     ec.String("main-apm"),
 			},
 		},
 	}
@@ -347,7 +347,7 @@ func TestGetApm(t *testing.T) {
 func TestGetElasticsearch(t *testing.T) {
 	const getElasticsearchResponse = `{
   "id": "f1d329b0fb34470ba8b18361cabdd2bc",
-  "ref_id": "elasticsearch"
+  "ref_id": "main-elasticsearch"
 }`
 
 	const getErrorResponse = `{
@@ -400,7 +400,7 @@ func TestGetElasticsearch(t *testing.T) {
 			},
 			want: &models.ElasticsearchResourceInfo{
 				ID:    ec.String("f1d329b0fb34470ba8b18361cabdd2bc"),
-				RefID: ec.String("elasticsearch"),
+				RefID: ec.String("main-elasticsearch"),
 			},
 		},
 	}
@@ -425,9 +425,9 @@ func TestGetElasticsearch(t *testing.T) {
 
 func TestGetKibana(t *testing.T) {
 	const getKibanaResponse = `{
-  "elasticsearch_cluster_ref_id": "elasticsearch",
+  "elasticsearch_cluster_ref_id": "main-elasticsearch",
   "id": "3531aaf988594efa87c1aabb7caed337",
-  "ref_id": "kibana"
+  "ref_id": "main-kibana"
 }`
 
 	const getErrorResponse = `{
@@ -479,9 +479,9 @@ func TestGetKibana(t *testing.T) {
 				},
 			},
 			want: &models.KibanaResourceInfo{
-				ElasticsearchClusterRefID: ec.String("elasticsearch"),
+				ElasticsearchClusterRefID: ec.String("main-elasticsearch"),
 				ID:                        ec.String("3531aaf988594efa87c1aabb7caed337"),
-				RefID:                     ec.String("kibana"),
+				RefID:                     ec.String("main-kibana"),
 			},
 		},
 	}

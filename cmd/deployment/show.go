@@ -35,7 +35,7 @@ var showCmd = &cobra.Command{
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		apm, _ := cmd.Flags().GetBool("apm")
-		appsearch, _ := cmd.Flags().GetBool("app-search")
+		appsearch, _ := cmd.Flags().GetBool("appsearch")
 		elasticsearch, _ := cmd.Flags().GetBool("elasticsearch")
 		kibana, _ := cmd.Flags().GetBool("kibana")
 		planLogs, _ := cmd.Flags().GetBool("plan-logs")
@@ -50,7 +50,7 @@ var showCmd = &cobra.Command{
 
 		resourceFlags := []bool{apm, appsearch, elasticsearch, kibana}
 		if !booleans.CheckNoneOrOneIsTrue(resourceFlags) {
-			return errors.New("deployment: only one of --apm, --app-search, --elasticsearch, --kibana flags are allowed")
+			return errors.New("deployment: only one of --apm, --appsearch, --elasticsearch, --kibana flags are allowed")
 		}
 
 		getParams := deployment.GetParams{
@@ -107,7 +107,7 @@ var showCmd = &cobra.Command{
 
 func init() {
 	showCmd.Flags().Bool("apm", false, "Shows APM resource information if any")
-	showCmd.Flags().Bool("app-search", false, "Shows App Search resource information if any")
+	showCmd.Flags().Bool("appsearch", false, "Shows App Search resource information if any")
 	showCmd.Flags().Bool("kibana", false, "Shows Kibana resource information if any")
 	showCmd.Flags().Bool("elasticsearch", false, "Shows Elasticsearch resource information")
 	showCmd.Flags().Bool("plans", false, "Shows the deployment plans")

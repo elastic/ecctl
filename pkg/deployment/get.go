@@ -81,7 +81,7 @@ func GetApm(params GetParams) (*models.ApmResourceInfo, error) {
 		return nil, err
 	}
 
-	refID := "apm"
+	refID := "main-apm"
 
 	res, err := params.API.V1API.Deployments.GetDeploymentApmResourceInfo(
 		deployments.NewGetDeploymentApmResourceInfoParams().
@@ -106,7 +106,7 @@ func GetAppSearch(params GetParams) (*models.AppSearchResourceInfo, error) {
 		return nil, err
 	}
 
-	refID := "appsearch"
+	refID := "main-appsearch"
 
 	res, err := params.API.V1API.Deployments.GetDeploymentAppsearchResourceInfo(
 		deployments.NewGetDeploymentAppsearchResourceInfoParams().
@@ -131,7 +131,7 @@ func GetElasticsearch(params GetParams) (*models.ElasticsearchResourceInfo, erro
 		return nil, err
 	}
 
-	refID := "elasticsearch"
+	refID := "main-elasticsearch"
 
 	res, err := params.API.V1API.Deployments.GetDeploymentEsResourceInfo(
 		deployments.NewGetDeploymentEsResourceInfoParams().
@@ -157,7 +157,7 @@ func GetKibana(params GetParams) (*models.KibanaResourceInfo, error) {
 		return nil, err
 	}
 
-	refID := "kibana"
+	refID := "main-kibana"
 
 	res, err := params.API.V1API.Deployments.GetDeploymentKibResourceInfo(
 		deployments.NewGetDeploymentKibResourceInfoParams().
