@@ -9,7 +9,7 @@ require (
 	github.com/chzyer/logex v1.1.10 // indirect
 	github.com/chzyer/test v0.0.0-20180213035817-a1ea475d72b1 // indirect
 	github.com/davecgh/go-spew v1.1.1
-	github.com/elastic/cloud-sdk-go v1.0.0-bc2
+	github.com/elastic/cloud-sdk-go v1.0.0-bc3
 	github.com/elastic/uptd v1.0.0
 	github.com/ghodss/yaml v1.0.0
 	github.com/go-openapi/runtime v0.19.7
@@ -25,5 +25,3 @@ require (
 )
 
 replace sourcegraph.com/sourcegraph/go-diff v0.5.1 => github.com/sourcegraph/go-diff v0.5.1
-
-replace github.com/elastic/cloud-sdk-go => ../cloud-sdk-go

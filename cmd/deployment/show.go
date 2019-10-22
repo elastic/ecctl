@@ -18,6 +18,8 @@
 package cmddeployment
 
 import (
+	"errors"
+
 	"github.com/elastic/cloud-sdk-go/pkg/util/booleans"
 	"github.com/spf13/cobra"
 
@@ -47,9 +49,8 @@ var showCmd = &cobra.Command{
 		}
 
 		resourceFlags := []bool{apm, appsearch, elasticsearch, kibana}
-		errMsg := "deployment: only one of --apm, --app-search, --elasticsearch, --kibana flags are allowed"
-		if err := booleans.CheckOnlyOneIsTrue(resourceFlags, errMsg); err != nil {
-			return err
+		if !booleans.CheckNoneOrOneIsTrue(resourceFlags) {
+			return errors.New("deployment: only one of --apm, --app-search, --elasticsearch, --kibana flags are allowed")
 		}
 
 		getParams := deployment.GetParams{
