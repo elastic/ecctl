@@ -22,9 +22,10 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/client/deployments"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
+	"github.com/hashicorp/go-multierror"
+
 	"github.com/elastic/ecctl/pkg/deployment/deputil"
 	"github.com/elastic/ecctl/pkg/util"
-	"github.com/hashicorp/go-multierror"
 )
 
 var systemAlerts = ec.Int64(5)
