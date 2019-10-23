@@ -10,19 +10,24 @@ Shows the specified deployment resources
 ecctl deployment show <deployment-id> [flags]
 ```
 
+### Examples
+
+```
+
+* Show kibana resource information from a given deployment:
+    ecctl deployment show <deployment-id> --type kibana
+```
+
 ### Options
 
 ```
-      --apm             Shows APM resource information if any
-      --appsearch       Shows App Search resource information if any
-      --elasticsearch   Shows Elasticsearch resource information
   -h, --help            help for show
-      --kibana          Shows Kibana resource information if any
   -m, --metadata        Shows the deployment metadata
       --plan-defaults   Shows the deployment plan defaults
       --plan-logs       Shows the deployment plan logs
       --plans           Shows the deployment plans
   -s, --settings        Shows the deployment settings
+      --type string     Shows resource information of a specific type if any (elasticsearch|kibana|apm|appsearch)
 ```
 
 ### Options inherited from parent commands

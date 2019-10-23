@@ -18,9 +18,6 @@
 package cmddeployment
 
 import (
-	"errors"
-
-	"github.com/elastic/cloud-sdk-go/pkg/util/booleans"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -29,29 +26,23 @@ import (
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
+const showExample = `
+* Shows kibana resource information from a given deployment:
+    ecctl deployment show <deployment-id> --type kibana`
+
 var showCmd = &cobra.Command{
 	Use:     "show <deployment-id>",
 	Short:   "Shows the specified deployment resources",
+	Example: showExample,
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		apm, _ := cmd.Flags().GetBool("apm")
-		appsearch, _ := cmd.Flags().GetBool("appsearch")
-		elasticsearch, _ := cmd.Flags().GetBool("elasticsearch")
-		kibana, _ := cmd.Flags().GetBool("kibana")
+		resourceType, _ := cmd.Flags().GetString("type")
 		planLogs, _ := cmd.Flags().GetBool("plan-logs")
 		planDefaults, _ := cmd.Flags().GetBool("plan-defaults")
 		metadata, _ := cmd.Flags().GetBool("metadata")
 		settings, _ := cmd.Flags().GetBool("settings")
 		plans, _ := cmd.Flags().GetBool("plans")
-		var showPlans bool
-		if planLogs || planDefaults || plans {
-			showPlans = true
-		}
-
-		resourceFlags := []bool{apm, appsearch, elasticsearch, kibana}
-		if !booleans.CheckNoneOrOneIsTrue(resourceFlags) {
-			return errors.New("deployment: only one of --apm, --appsearch, --elasticsearch, --kibana flags are allowed")
-		}
+		showPlans := planLogs || planDefaults || plans
 
 		getParams := deployment.GetParams{
 			API:          ecctl.Get().API,
@@ -65,39 +56,21 @@ var showCmd = &cobra.Command{
 			},
 		}
 
-		if apm {
-			res, err := deployment.GetApm(getParams)
-			if err != nil {
-				return err
-			}
-			return ecctl.Get().Formatter.Format("deployment/show", res)
+		var err error
+		var res interface{}
+		switch resourceType {
+		case "apm":
+			res, err = deployment.GetApm(getParams)
+		case "kibana":
+			res, err = deployment.GetKibana(getParams)
+		case "elasticsearch":
+			res, err = deployment.GetElasticsearch(getParams)
+		case "appsearch":
+			res, err = deployment.GetAppSearch(getParams)
+		default:
+			res, err = deployment.Get(getParams)
 		}
 
-		if appsearch {
-			res, err := deployment.GetAppSearch(getParams)
-			if err != nil {
-				return err
-			}
-			return ecctl.Get().Formatter.Format("deployment/show", res)
-		}
-
-		if elasticsearch {
-			res, err := deployment.GetElasticsearch(getParams)
-			if err != nil {
-				return err
-			}
-			return ecctl.Get().Formatter.Format("deployment/show", res)
-		}
-
-		if kibana {
-			res, err := deployment.GetKibana(getParams)
-			if err != nil {
-				return err
-			}
-			return ecctl.Get().Formatter.Format("deployment/show", res)
-		}
-
-		res, err := deployment.Get(getParams)
 		if err != nil {
 			return err
 		}
@@ -106,10 +79,7 @@ var showCmd = &cobra.Command{
 }
 
 func init() {
-	showCmd.Flags().Bool("apm", false, "Shows APM resource information if any")
-	showCmd.Flags().Bool("appsearch", false, "Shows App Search resource information if any")
-	showCmd.Flags().Bool("kibana", false, "Shows Kibana resource information if any")
-	showCmd.Flags().Bool("elasticsearch", false, "Shows Elasticsearch resource information")
+	showCmd.Flags().String("type", "", "Shows resource information of a specific type if any (elasticsearch|kibana|apm|appsearch)")
 	showCmd.Flags().Bool("plans", false, "Shows the deployment plans")
 	showCmd.Flags().Bool("plan-logs", false, "Shows the deployment plan logs")
 	showCmd.Flags().Bool("plan-defaults", false, "Shows the deployment plan defaults")
