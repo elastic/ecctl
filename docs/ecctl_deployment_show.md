@@ -1,19 +1,33 @@
-## ecctl deployment
+## ecctl deployment show
 
-Manages deployments
+Shows the specified deployment resources
 
 ### Synopsis
 
-Manages deployments
+Shows the specified deployment resources
 
 ```
-ecctl deployment [flags]
+ecctl deployment show <deployment-id> [flags]
+```
+
+### Examples
+
+```
+
+* Shows kibana resource information from a given deployment:
+  ecctl deployment show <deployment-id> --type kibana
 ```
 
 ### Options
 
 ```
-  -h, --help   help for deployment
+  -h, --help            help for show
+  -m, --metadata        Shows the deployment metadata
+      --plan-defaults   Shows the deployment plan defaults
+      --plan-logs       Shows the deployment plan logs
+      --plans           Shows the deployment plans
+  -s, --settings        Shows the deployment settings
+      --type string     Optional deployment type to show resource information (elasticsearch, kibana, apm, or appsearch)
 ```
 
 ### Options inherited from parent commands
@@ -39,10 +53,5 @@ ecctl deployment [flags]
 
 ### SEE ALSO
 
-* [ecctl](ecctl.md)	 - Elastic Cloud Control
-* [ecctl deployment apm](ecctl_deployment_apm.md)	 - Manages APM deployments
-* [ecctl deployment elasticsearch](ecctl_deployment_elasticsearch.md)	 - Manages Elasticsearch clusters
-* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana clusters
-* [ecctl deployment note](ecctl_deployment_note.md)	 - Manages a deployment's notes
-* [ecctl deployment show](ecctl_deployment_show.md)	 - Shows the specified deployment resources
+* [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
 
