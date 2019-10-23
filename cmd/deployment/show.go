@@ -79,7 +79,7 @@ var showCmd = &cobra.Command{
 }
 
 func init() {
-	showCmd.Flags().String("type", "", "Shows resource information of a specific type if any (elasticsearch|kibana|apm|appsearch)")
+	showCmd.Flags().String("type", "", "Shows resource information of a specific type if available\n(elasticsearch, kibana, apm, or appsearch)")
 	showCmd.Flags().Bool("plans", false, "Shows the deployment plans")
 	showCmd.Flags().Bool("plan-logs", false, "Shows the deployment plan logs")
 	showCmd.Flags().Bool("plan-defaults", false, "Shows the deployment plan defaults")
