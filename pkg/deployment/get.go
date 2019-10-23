@@ -81,12 +81,10 @@ func GetApm(params GetParams) (*models.ApmResourceInfo, error) {
 		return nil, err
 	}
 
-	refID := "main-apm"
-
 	res, err := params.API.V1API.Deployments.GetDeploymentApmResourceInfo(
 		deployments.NewGetDeploymentApmResourceInfoParams().
 			WithDeploymentID(params.DeploymentID).
-			WithRefID(refID).
+			WithRefID("main-apm").
 			WithShowPlans(ec.Bool(params.ShowPlans)).
 			WithShowPlanDefaults(ec.Bool(params.ShowPlanDefaults)).
 			WithShowPlanLogs(ec.Bool(params.ShowPlanLogs)).
@@ -106,12 +104,10 @@ func GetAppSearch(params GetParams) (*models.AppSearchResourceInfo, error) {
 		return nil, err
 	}
 
-	refID := "main-appsearch"
-
 	res, err := params.API.V1API.Deployments.GetDeploymentAppsearchResourceInfo(
 		deployments.NewGetDeploymentAppsearchResourceInfoParams().
 			WithDeploymentID(params.DeploymentID).
-			WithRefID(refID).
+			WithRefID("main-appsearch").
 			WithShowPlans(ec.Bool(params.ShowPlans)).
 			WithShowPlanDefaults(ec.Bool(params.ShowPlanDefaults)).
 			WithShowPlanLogs(ec.Bool(params.ShowPlanLogs)).
@@ -131,12 +127,10 @@ func GetElasticsearch(params GetParams) (*models.ElasticsearchResourceInfo, erro
 		return nil, err
 	}
 
-	refID := "main-elasticsearch"
-
 	res, err := params.API.V1API.Deployments.GetDeploymentEsResourceInfo(
 		deployments.NewGetDeploymentEsResourceInfoParams().
 			WithDeploymentID(params.DeploymentID).
-			WithRefID(refID).
+			WithRefID("main-elasticsearch").
 			WithShowPlans(ec.Bool(params.ShowPlans)).
 			WithShowPlanDefaults(ec.Bool(params.ShowPlanDefaults)).
 			WithShowPlanLogs(ec.Bool(params.ShowPlanLogs)).
@@ -157,12 +151,10 @@ func GetKibana(params GetParams) (*models.KibanaResourceInfo, error) {
 		return nil, err
 	}
 
-	refID := "main-kibana"
-
 	res, err := params.API.V1API.Deployments.GetDeploymentKibResourceInfo(
 		deployments.NewGetDeploymentKibResourceInfoParams().
 			WithDeploymentID(params.DeploymentID).
-			WithRefID(refID).
+			WithRefID("main-kibana").
 			WithShowPlans(ec.Bool(params.ShowPlans)).
 			WithShowPlanDefaults(ec.Bool(params.ShowPlanDefaults)).
 			WithShowPlanLogs(ec.Bool(params.ShowPlanLogs)).

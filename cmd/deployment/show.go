@@ -18,6 +18,8 @@
 package cmddeployment
 
 import (
+	"github.com/elastic/cloud-sdk-go/pkg/util/slice"
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -28,7 +30,9 @@ import (
 
 const showExample = `
 * Shows kibana resource information from a given deployment:
-    ecctl deployment show <deployment-id> --type kibana`
+  ecctl deployment show <deployment-id> --type kibana`
+
+var acceptedTypes = []string{"apm", "appsearch", "elasticsearch", "kibana"}
 
 var showCmd = &cobra.Command{
 	Use:     "show <deployment-id>",
@@ -37,6 +41,10 @@ var showCmd = &cobra.Command{
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		resourceType, _ := cmd.Flags().GetString("type")
+		if resourceType != "" && !slice.HasString(acceptedTypes, resourceType) {
+			return errors.Errorf(`"%v" is not a valid resource type. Accepted resource types are: %v`, resourceType, acceptedTypes)
+		}
+
 		planLogs, _ := cmd.Flags().GetBool("plan-logs")
 		planDefaults, _ := cmd.Flags().GetBool("plan-defaults")
 		metadata, _ := cmd.Flags().GetBool("metadata")
@@ -79,7 +87,7 @@ var showCmd = &cobra.Command{
 }
 
 func init() {
-	showCmd.Flags().String("type", "", "Shows resource information of a specific type if available\n(elasticsearch, kibana, apm, or appsearch)")
+	showCmd.Flags().String("type", "", "Optional deployment type to show resource information (elasticsearch, kibana, apm, or appsearch)")
 	showCmd.Flags().Bool("plans", false, "Shows the deployment plans")
 	showCmd.Flags().Bool("plan-logs", false, "Shows the deployment plan logs")
 	showCmd.Flags().Bool("plan-defaults", false, "Shows the deployment plan defaults")
