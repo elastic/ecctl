@@ -1,8 +1,6 @@
 project_name: ecctl
 before:
   hooks:
-    ## TODO: Remove the GITHUB_TOKEN before going public.
-    - git config --global url."https://${GITHUB_TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
     - go mod download
 release:
   github:
@@ -14,9 +12,6 @@ brews:
   - github:
       owner: elastic
       name: homebrew-ecctl
-    ## TODO: Remove this two directives before going public.
-    download_strategy: EcctlDownloadStrategy
-    custom_require: ./scripts/custom_download_strategies.rb
     commit_author:
       name: elasticloudbot
       email: cloud-tooling@elastic.co
