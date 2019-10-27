@@ -1,7 +1,7 @@
 [id="{p}-overview"]
 == Overview
 
-`ecctl` is the CLI on steroids for the Elastic Cloud API. It wraps
+{p} is the CLI on steroids for the Elastic Cloud API. It wraps
 common operations commonly needed by Elastic Cloud operators within a
 single command line tool.
 
@@ -9,20 +9,22 @@ The goal of this project is to provide an easier way to interact with
 the Elastic Cloud API, ensuring each one of the provided commands is
 thoroughly tested.
 
-== Installation
+[id="{p}-installing"]
+== Installing
 
 The latest stable binaries can always be found on the
 https://github.com/elastic/ecctl/releases[release page] or compiled from
 the latest on the master branch to leverage the most recently merged
 features. 
 
-To learn more about building `ecctl` from the source, see
+To learn more about building {p} from the source, see
 the steps from our link:https://github.com/elastic/ecctl/blob/master/CONTRIBUTING.md#setting-up-a-dev-environment[Setting up a dev environment].
 
 [float]
-=== macOS
+[id="{p}-installing-macos"]
+=== Install on macOS
 
-The simplest installation for macOS users is to install `ecctl` with
+The simplest installation for macOS users is to install {p} with
 `brew`.
 
 [source,console]
@@ -31,8 +33,10 @@ $ brew tap elastic/ecctl
 $ brew tap-pin elastic/ecctl
 $ brew install elastic/ecctl/ecctl
 Updating Homebrew...
+[id="{p}-"]
 => Installing ecctl from elastic/ecctl
 ...
+[id="{p}-"]
 => Summary
 🍺  /usr/local/Cellar/ecctl/1.0.0: 6 files, 13MB, built in 7 seconds
 ----
@@ -40,20 +44,23 @@ Updating Homebrew...
 NOTE: To get autocompletions working, they must be sourced from your shell profile.
 
 [float]
-== Linux based OS
+[id="{p}-installing-linux"]
+== Install on Linux
 
 // NR TO DO we need some content here or the doc build fails
  
 TBD 
 
-== Configuration
+[id="{p}-configuring"]
+== Configuring
 
-In order for `ecctl` to be able to communicate with the API, it needs
+In order for {p} to be able to communicate with the API, it needs
 to have a set of configuration parameters defined.
 These parameters can be set in a configuration file, through environment
 variables, or at runtime using the CLI’s global flags.
 
 [float]
+[id="{p}-configuration-precedence"]
 === Precedence
 The hierarchy is as follows listed from higher precedence to lower:
 
@@ -63,9 +70,10 @@ The hierarchy is as follows listed from higher precedence to lower:
 `$HOME/.ecctl/config.<json|toml|yaml|hcl>`
 
 [float]
+[id="{p}-configuration"]
 == Generate a configuration file
 
-If it’s your first time using `ecctl`, you might want to use the
+If it’s your first time using {p}, you might want to use the
 `init` command to assist you in generating a configuration file. The
 resulting configuration file will be saved under
 `~/.ecctl/config.json`:
@@ -100,14 +108,15 @@ You're all set! Here are some commands to try:
   $ ecctl deployment elasticsearch list
 ----
 
-== Authentication
+[id="{p}-authenticating"]
+== Authenticating
 
 Elastic Cloud uses API keys to authenticate users against its API.
 Additionally, it supports the usage of https://jwt.io/[JWT] to validate
 authenticated clients. The preferred authentication method is API keys.
 
 There are two ways to authenticate against the Elastic Cloud API using
-`ecctl`:
+{p}:
 
 * By specifying an API key using the `--apikey` flag.
 * By specifying the `--user` and `--pass` flags.
@@ -123,7 +132,8 @@ every minute is started, so that the token doesn’t expire while we’re
 performing actions.
 
 [float]
-=== Shared configuration file
+[id="{p}-example-shared-configuration-file"]
+=== Example: A shared configuration file
 
 Below is an example `YAML` configuration file
 `$HOME/.ecctl/config.yaml` that will effectively point and configure
@@ -144,6 +154,7 @@ pass: password
 ----
 
 [float]
+[id="{p}-environment-variables"]
 === Environment variables
 
 The same settings can be defined as environment variables instead of a
@@ -158,6 +169,7 @@ export EC_APIKEY=bWFyYzo4ZTJmNmZkNjY5ZmQ0MDBkOTQ3ZjI3MTg3ZWI5MWZhYjpOQktHY05jclE
 ----
 
 [float]
+[id="{p}-special-environment-variables"]
 ==== Special Environment Variables
 
 [source,sh]
@@ -176,9 +188,10 @@ export EC_REGIONS=="ap-northeast-1 ap-southeast-1 ap-southeast-2 aws-eu-central-
 
 // NR TO DO Should this section move up into the Configuration section?
 [float]
-== Multiple configuration support
+[id="{p}-multiple-configuration-files"]
+== Multiple configuration files
 
-`ecctl` supports having multiple configuration files out of the box.
+{p} supports having multiple configuration files out of the box.
 This allows for easy management of multiple environments or specialized
 targets. By default it will use
 `$HOME/.ecctl/config.<json|toml|yaml|hcl>`, but when the `--config`
@@ -195,6 +208,7 @@ $ ecctl version --config ece
 # will use ~/.ecctl/ece.yaml
 ----
 
+[id="{p}-output-format"]
 == Output format
 
 The `--output` flag allows for the response to be presented in a
@@ -202,9 +216,10 @@ particular way (see `ecctl help` for an updated list of allowed
 formats). The default formatter behavior is to fallback to `json` when
 there’s no _text_ format template or if the formatting fails.
 
+[id="{p}-custom-formatting"]
 == Custom formatting
 
-`ecctl` supports a global `--format` flag which can be passed to any
+{p} supports a global `--format` flag which can be passed to any
 existing command or subcommand. Using the `--format` flag allows you
 to obtain a specific part of a command response that might not have been
 shown before with the default `--output=text`. The `--format`
@@ -212,6 +227,7 @@ internally uses Go templates which means that you can use the power of
 the Go built-in
 https://golang.org/pkg/text/template/[`text/templates`] on demmand.
 
+[id="{p}-examples"]
 === Examples
 
 Obtaining the ID, Version and health status
@@ -239,14 +255,19 @@ $ ecctl stack list --format "${EC_FORMAT}" | sed '/^\s*$/d'
 $ unset EC_FORMAT
 ----
 
+[id="{p}-contributing"]
 == Contributing
 
 If you are interested in becoming a part of this project, take a look at link:https://github.com/elastic/ecctl/blob/master/CONTRIBUTING.md[Contributing to ecctl].
 
+////
+[id="{p}-release-process"]
 == Release Process
 
 See the link:https://github.com/elastic/ecctl/blob/master/developer_docs/RELEASE.md[release guide].
+////
 
+[id="{p}-command-reference"]
 == Command reference
 
 See link:https://github.com/elastic/ecctl/blob/master/docs/ecctl.md[ecctl command reference].
