@@ -3,3 +3,4 @@ vendor
 dist
 reports
 .idea/
+html_docs/

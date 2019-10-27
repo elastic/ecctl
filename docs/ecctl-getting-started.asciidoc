@@ -1,4 +1,5 @@
-== Elastic Cloud Control
+[id="{p}-overview"]
+== Overview
 
 `ecctl` is the CLI on steroids for the Elastic Cloud API. It wraps
 common operations commonly needed by Elastic Cloud operators within a
@@ -8,7 +9,7 @@ The goal of this project is to provide an easier way to interact with
 the Elastic Cloud API, ensuring each one of the provided commands is
 thoroughly tested.
 
-=== Installation
+== Installation
 
 The latest stable binaries can always be found on the
 https://github.com/elastic/ecctl/releases[release page] or compiled from
@@ -19,7 +20,7 @@ To learn more about building `ecctl` from the source, see
 the steps from our link:https://github.com/elastic/ecctl/blob/master/CONTRIBUTING.md#setting-up-a-dev-environment[Setting up a dev environment].
 
 [float]
-==== macOS
+=== macOS
 
 The simplest installation for macOS users is to install `ecctl` with
 `brew`.
@@ -30,22 +31,22 @@ $ brew tap elastic/ecctl
 $ brew tap-pin elastic/ecctl
 $ brew install elastic/ecctl/ecctl
 Updating Homebrew...
-==> Installing ecctl from elastic/ecctl
+=> Installing ecctl from elastic/ecctl
 ...
-==> Summary
+=> Summary
 🍺  /usr/local/Cellar/ecctl/1.0.0: 6 files, 13MB, built in 7 seconds
 ----
 
 NOTE: To get autocompletions working, they must be sourced from your shell profile.
 
 [float]
-=== Linux based OS
+== Linux based OS
 
 // NR TO DO we need some content here or the doc build fails
  
 TBD 
 
-=== Configuration
+== Configuration
 
 In order for `ecctl` to be able to communicate with the API, it needs
 to have a set of configuration parameters defined.
@@ -53,7 +54,7 @@ These parameters can be set in a configuration file, through environment
 variables, or at runtime using the CLI’s global flags.
 
 [float]
-==== Precedence
+=== Precedence
 The hierarchy is as follows listed from higher precedence to lower:
 
 . Command line flags `--region`, `--host`, `--user`, `--pass`.
@@ -62,7 +63,7 @@ The hierarchy is as follows listed from higher precedence to lower:
 `$HOME/.ecctl/config.<json|toml|yaml|hcl>`
 
 [float]
-=== Generate a configuration file
+== Generate a configuration file
 
 If it’s your first time using `ecctl`, you might want to use the
 `init` command to assist you in generating a configuration file. The
@@ -99,7 +100,7 @@ You're all set! Here are some commands to try:
   $ ecctl deployment elasticsearch list
 ----
 
-=== Authentication
+== Authentication
 
 Elastic Cloud uses API keys to authenticate users against its API.
 Additionally, it supports the usage of https://jwt.io/[JWT] to validate
@@ -122,7 +123,7 @@ every minute is started, so that the token doesn’t expire while we’re
 performing actions.
 
 [float]
-==== Shared configuration file
+=== Shared configuration file
 
 Below is an example `YAML` configuration file
 `$HOME/.ecctl/config.yaml` that will effectively point and configure
@@ -143,7 +144,7 @@ pass: password
 ----
 
 [float]
-==== Environment variables
+=== Environment variables
 
 The same settings can be defined as environment variables instead of a
 configuration file or to override certain settings of the `YAML` file.
@@ -157,7 +158,7 @@ export EC_APIKEY=bWFyYzo4ZTJmNmZkNjY5ZmQ0MDBkOTQ3ZjI3MTg3ZWI5MWZhYjpOQktHY05jclE
 ----
 
 [float]
-===== Special Environment Variables
+==== Special Environment Variables
 
 [source,sh]
 ----
@@ -175,7 +176,7 @@ export EC_REGIONS=="ap-northeast-1 ap-southeast-1 ap-southeast-2 aws-eu-central-
 
 // NR TO DO Should this section move up into the Configuration section?
 [float]
-=== Multiple configuration support
+== Multiple configuration support
 
 `ecctl` supports having multiple configuration files out of the box.
 This allows for easy management of multiple environments or specialized
@@ -194,14 +195,14 @@ $ ecctl version --config ece
 # will use ~/.ecctl/ece.yaml
 ----
 
-=== Output format
+== Output format
 
 The `--output` flag allows for the response to be presented in a
 particular way (see `ecctl help` for an updated list of allowed
 formats). The default formatter behavior is to fallback to `json` when
 there’s no _text_ format template or if the formatting fails.
 
-=== Custom formatting
+== Custom formatting
 
 `ecctl` supports a global `--format` flag which can be passed to any
 existing command or subcommand. Using the `--format` flag allows you
@@ -211,7 +212,7 @@ internally uses Go templates which means that you can use the power of
 the Go built-in
 https://golang.org/pkg/text/template/[`text/templates`] on demmand.
 
-==== Examples
+=== Examples
 
 Obtaining the ID, Version and health status
 
@@ -238,15 +239,15 @@ $ ecctl stack list --format "${EC_FORMAT}" | sed '/^\s*$/d'
 $ unset EC_FORMAT
 ----
 
-=== Contributing
+== Contributing
 
 If you are interested in becoming a part of this project, take a look at link:https://github.com/elastic/ecctl/blob/master/CONTRIBUTING.md[Contributing to ecctl].
 
-=== Release Process
+== Release Process
 
 See the link:https://github.com/elastic/ecctl/blob/master/developer_docs/RELEASE.md[release guide].
 
-=== Command reference
+== Command reference
 
 See link:https://github.com/elastic/ecctl/blob/master/docs/ecctl.md[ecctl command reference].
 
