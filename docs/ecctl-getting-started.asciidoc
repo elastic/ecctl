@@ -108,8 +108,8 @@ You're all set! Here are some commands to try:
   $ ecctl deployment elasticsearch list
 ----
 
-[id="{p}-authenticating"]
-== Authenticating
+[id="{p}-authentication"]
+=== Authentication
 
 Elastic Cloud uses API keys to authenticate users against its API.
 Additionally, it supports the usage of https://jwt.io/[JWT] to validate
@@ -131,7 +131,6 @@ Bearer header for every API call. A goroutine that refreshes the token
 every minute is started, so that the token doesn’t expire while we’re
 performing actions.
 
-[float]
 [id="{p}-example-shared-configuration-file"]
 === Example: A shared configuration file
 
@@ -153,7 +152,6 @@ user: username
 pass: password
 ----
 
-[float]
 [id="{p}-environment-variables"]
 === Environment variables
 
@@ -186,10 +184,8 @@ flag, though there is no validation and it is not environment aware
 export EC_REGIONS=="ap-northeast-1 ap-southeast-1 ap-southeast-2 aws-eu-central-1 eu-west-1 gcp-europe-west1 gcp-europe-west3 gcp-us-central1 gcp-us-west1 sa-east-1 us-east-1 us-west-1 us-west-2"
 ----
 
-// NR TO DO Should this section move up into the Configuration section?
-[float]
 [id="{p}-multiple-configuration-files"]
-== Multiple configuration files
+=== Multiple configuration files
 
 {p} supports having multiple configuration files out of the box.
 This allows for easy management of multiple environments or specialized
@@ -228,7 +224,7 @@ the Go built-in
 https://golang.org/pkg/text/template/[`text/templates`] on demmand.
 
 [id="{p}-examples"]
-== Examples
+== Usage examples
 
 Obtaining the ID, Version and health status
 
@@ -255,6 +251,11 @@ $ ecctl stack list --format "${EC_FORMAT}" | sed '/^\s*$/d'
 $ unset EC_FORMAT
 ----
 
+[id="{p}-command-reference"]
+== Command reference
+
+See link:https://github.com/elastic/ecctl/blob/master/docs/ecctl.md[ecctl command reference].
+
 [id="{p}-contributing"]
 == Contributing
 
@@ -266,9 +267,3 @@ If you are interested in becoming a part of this project, take a look at link:ht
 
 See the link:https://github.com/elastic/ecctl/blob/master/developer_docs/RELEASE.md[release guide].
 ////
-
-[id="{p}-command-reference"]
-== Command reference
-
-See link:https://github.com/elastic/ecctl/blob/master/docs/ecctl.md[ecctl command reference].
-
