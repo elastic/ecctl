@@ -62,10 +62,10 @@ variables, or at runtime using the CLI’s global flags.
 [float]
 [id="{p}-configuration-precedence"]
 === Precedence
-The hierarchy is as follows listed from higher precedence to lower:
+The hierarchy is as follows, from higher precedence to lower:
 
-. Command line flags `--region`, `--host`, `--user`, `--pass`.
-. Environment variables.
+. Command line flags `--region`, `--host`, `--user`, `--pass`
+. Environment variables
 . Shared configuration file
 `$HOME/.ecctl/config.<json|toml|yaml|hcl>`
 
@@ -118,8 +118,8 @@ authenticated clients. The preferred authentication method is API keys.
 There are two ways to authenticate against the Elastic Cloud API using
 {p}:
 
-* By specifying an API key using the `--apikey` flag.
-* By specifying the `--user` and `--pass` flags.
+* By specifying an API key using the `--apikey` flag
+* By specifying the `--user` and `--pass` flags
 
 The first method requires the user to already have an API key, if this
 is the case, all the outgoing API requests will use an Authentication
@@ -209,7 +209,7 @@ $ ecctl version --config ece
 ----
 
 [id="{p}-output-format"]
-== Output format
+=== Output format
 
 The `--output` flag allows for the response to be presented in a
 particular way (see `ecctl help` for an updated list of allowed
@@ -217,7 +217,7 @@ formats). The default formatter behavior is to fallback to `json` when
 there’s no _text_ format template or if the formatting fails.
 
 [id="{p}-custom-formatting"]
-== Custom formatting
+=== Custom formatting
 
 {p} supports a global `--format` flag which can be passed to any
 existing command or subcommand. Using the `--format` flag allows you
@@ -228,7 +228,7 @@ the Go built-in
 https://golang.org/pkg/text/template/[`text/templates`] on demmand.
 
 [id="{p}-examples"]
-=== Examples
+== Examples
 
 Obtaining the ID, Version and health status
 
