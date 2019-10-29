@@ -5,14 +5,16 @@
 common operations commonly needed by Elastic Cloud operators within a
 single command line tool.
 
-The goal of this project is to provide an easier way to interact with
-the Elastic Cloud API, ensuring each one of the provided commands is
-thoroughly tested.
+Benfits of {p}:
+
+* Easier to use for ops than using the Cloud UI or using the RESTful API directly
+* Help you automate the deployment lifecycle
+* Provides a foundation for integration with other tools, such as Terraform and Ansible
 
 [id="{p}-installing"]
 == Installing
 
-The latest stable binaries can always be found on the
+The latest stable binaries can be found on the
 https://github.com/elastic/ecctl/releases[release page] or compiled from
 the latest on the master branch to leverage the most recently merged
 features. 
@@ -25,7 +27,7 @@ the steps from our link:https://github.com/elastic/ecctl/blob/master/CONTRIBUTIN
 === Install on macOS
 
 The simplest installation for macOS users is to install {p} with
-`brew`.
+link:https://brew.sh/[Homebrew]:
 
 [source,console]
 ----
@@ -33,7 +35,6 @@ $ brew tap elastic/ecctl
 $ brew tap-pin elastic/ecctl
 $ brew install elastic/ecctl/ecctl
 Updating Homebrew...
-[id="{p}-"]
 => Installing ecctl from elastic/ecctl
 ...
 [id="{p}-"]
@@ -43,26 +44,53 @@ Updating Homebrew...
 
 NOTE: To get autocompletions working, they must be sourced from your shell profile.
 
+////
 [float]
 [id="{p}-installing-linux"]
 == Install on Linux
 
-// NR TO DO we need some content here or the doc build fails
+// NR TO DO with info from https://github.com/elastic/cloud-cli#linux-based-os
  
-TBD 
+The simplest installation for Linux-based users is to install ecl with apt-get. We are hosting ecl binaries in a temporary apt repository so you need to do the following:
+
+[source,console]
+----
+$ echo "deb [trusted=yes] https://s3.us-east-2.amazonaws.com/cloud-soteria-apt-repo stable main" >> etc/apt/sources.list.d/myrepo.list
+$ apt-get install ece-ctl -y
+The following NEW packages will be installed:
+  ece-ctl
+0 upgraded, 1 newly installed, 0 to remove and 16 not upgraded.
+Need to get 4379 kB of archives.
+After this operation, 13.8 MB of additional disk space will be used.
+Get:1 https://s3.us-east-2.amazonaws.com/cloud-soteria-apt-repo/ stable/main ece-ctl amd64 0.12.0 [4379 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 4379 kB in 4s (1052 kB/s)
+dpkg: warning: parsing file '/var/lib/dpkg/tmp.ci/control' near line 11 package 'ece-ctl':
+ missing maintainer
+Selecting previously unselected package ece-ctl.
+(Reading database ... 7965 files and directories currently installed.)
+Preparing to unpack .../ece-ctl_0.12.0_amd64.deb ...
+Unpacking ece-ctl (0.12.0) ...
+dpkg: warning: parsing file '/var/lib/dpkg/status' near line 1607 package 'ece-ctl':
+ missing maintainer
+Setting up ece-ctl (0.12.0) ...
+dpkg: warning: parsing file '/var/lib/dpkg/status' near line 1607 package 'ece-ctl':
+ missing maintainer
+----
+ 
+////
 
 [id="{p}-configuring"]
 == Configuring
 
-In order for {p} to be able to communicate with the API, it needs
+In order for {p} to be able to communicate with the RESTful API, it needs
 to have a set of configuration parameters defined.
 These parameters can be set in a configuration file, through environment
 variables, or at runtime using the CLI’s global flags.
 
 [float]
-[id="{p}-configuration-precedence"]
-=== Precedence
-The hierarchy is as follows, from higher precedence to lower:
+=== Before you begin
+The hierarchy for configuration parameters is as follows, from higher precedence to lower:
 
 . Command line flags `--region`, `--host`, `--user`, `--pass`
 . Environment variables
@@ -70,13 +98,9 @@ The hierarchy is as follows, from higher precedence to lower:
 `$HOME/.ecctl/config.<json|toml|yaml|hcl>`
 
 [float]
-[id="{p}-configuration"]
 == Generate a configuration file
 
-If it’s your first time using {p}, you might want to use the
-`init` command to assist you in generating a configuration file. The
-resulting configuration file will be saved under
-`~/.ecctl/config.json`:
+If it’s your first time using {p}, use the `init` command to assist you in generating a configuration file. The resulting configuration file will be saved under `~/.ecctl/config.json`:
 
 [source,console]
 ----
