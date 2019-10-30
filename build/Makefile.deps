@@ -7,6 +7,6 @@ ifndef SKIP_DEPCHECK
 	@ $(GOBIN)/gobin github.com/elastic/go-licenser@v0.3.0
 	@ $(GOBIN)/gobin github.com/go-bindata/go-bindata/go-bindata@v0.0.0-20190711162640-ee3c2418e368
 	@ $(GOBIN)/gobin golang.org/x/lint/golint
-	@ curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh| sh -s -- -b $(GOBIN) v1.19.0
+	@ curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh| sh -s -- -b $(GOBIN) v1.21.0
 	@ echo "-> Done."
 endif

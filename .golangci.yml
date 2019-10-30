@@ -11,6 +11,7 @@ linters:
     - gochecknoinits
     - scopelint
     - funlen
+    - wsl
 
 linters-settings:
   errcheck:
