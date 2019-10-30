@@ -107,7 +107,7 @@ If it’s your first time using {p}, use the `init` command to assist you in gen
 $ ecctl init
 Welcome to the Elastic Cloud CLI! This command will guide you through authenticating and setting some default values.
 
-Missing configuration file, woud you like to initialise it? [y/n]: y
+Missing configuration file, would you like to initialise it? [y/n]: y
 Enter the URL of the Elastic Cloud API or your ECE installation: https://api.elastic-cloud.com
 
 What default output format would you like?

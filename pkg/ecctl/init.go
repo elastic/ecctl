@@ -53,8 +53,8 @@ const (
 	redacted        = "[REDACTED]"
 	settingsPathMsg = "Found existing settings in %s. Here's a JSON representation of what they look like:\n"
 
-	missingConfigMsg  = `Missing configuration file, woud you like to initialise it? [y/n]: `
-	existingConfigMsg = `Woud you like to change your current settings? [y/n]: `
+	missingConfigMsg  = `Missing configuration file, would you like to initialise it? [y/n]: `
+	existingConfigMsg = `Would you like to change your current settings? [y/n]: `
 
 	hostMsg = "Enter the URL of the Elastic Cloud API or your ECE installation: "
 

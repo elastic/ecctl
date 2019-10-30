@@ -38,7 +38,7 @@ _bindata:
 	@ echo "-> Bundling $(BINDATA_FLAGS)templates as bindata for $(BINARY)..."
 	@ cd pkg/formatter/templates && $(GOBIN)/go-bindata -nometadata -prefix templates -pkg templates $(BINDATA_FLAGS) ./...
 
-## Formats the all Go files to the desired format.
+## Formats all Go files to the desired format.
 .PHONY: format
 format: deps
 	@ echo "-> Formatting Go files..."
