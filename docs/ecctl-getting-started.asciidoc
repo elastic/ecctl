@@ -1,7 +1,7 @@
 [id="{p}-overview"]
 == Overview
 
-NOTE: **{p} is still in beta and should be considered experimental!**
+NOTE: **You are looking at the documentation for a beta release. Please keep in mind that backwards-incompatible changes might be introduced in future releases.**
 
 {p} is the CLI on steroids for the Elastic Cloud Enterprise API. It wraps
 typical operations commonly needed by ECE operators within a
@@ -9,12 +9,12 @@ single command line tool.
 
 Benefits of {p}:
 
-* Easier to use for ops than using the Cloud UI or using the RESTful API directly
+* Easier to use for ops than using the user console using the RESTful API directly
 * Helps you automate the deployment lifecycle
 * Provides a foundation for integration with other tools, such as Terraform and Ansible
 
 Note that, right now, {p} targets ECE installations only. There are, however, plans
-to support public EC API in the future.
+to support public Elasticsearch Service API in the future.
 
 [id="{p}-installing"]
 == Installing
@@ -168,7 +168,7 @@ the binary for Elastic Cloud:
 
 [source,yaml]
 ----
-host: https://api.elastic-cloud.com # URL of your ECE installation.
+host: https://api.elastic-cloud.com # URL of your ECE API endpoint
 
 # Credentials
 ## apikey is the preferred authentication mechanism.
