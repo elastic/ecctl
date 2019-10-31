@@ -4,7 +4,7 @@
 NOTE: **{p} is still in beta and should be considered experimental!**
 
 {p} is the CLI on steroids for the Elastic Cloud Enterprise API. It wraps
-typical operations commonly needed by Elastic Cloud operators within a
+typical operations commonly needed by ECE operators within a
 single command line tool.
 
 Benefits of {p}:
