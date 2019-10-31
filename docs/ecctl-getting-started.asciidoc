@@ -1,15 +1,20 @@
 [id="{p}-overview"]
 == Overview
 
-{p} is the CLI on steroids for the Elastic Cloud API. It wraps
-common operations commonly needed by Elastic Cloud operators within a
+NOTE: **{p} is still in beta and should be considered experimental!**
+
+{p} is the CLI on steroids for the Elastic Cloud Enterprise API. It wraps
+typical operations commonly needed by Elastic Cloud operators within a
 single command line tool.
 
-Benfits of {p}:
+Benefits of {p}:
 
 * Easier to use for ops than using the Cloud UI or using the RESTful API directly
-* Help you automate the deployment lifecycle
+* Helps you automate the deployment lifecycle
 * Provides a foundation for integration with other tools, such as Terraform and Ansible
+
+Note that, right now, {p} targets ECE installations only. There are, however, plans
+to support public EC API in the future.
 
 [id="{p}-installing"]
 == Installing
@@ -29,7 +34,7 @@ the steps from our link:https://github.com/elastic/ecctl/blob/master/CONTRIBUTIN
 The simplest installation for macOS users is to install {p} with
 link:https://brew.sh/[Homebrew]:
 
-[source,console]
+[source]
 ----
 $ brew tap elastic/ecctl
 $ brew tap-pin elastic/ecctl
@@ -37,7 +42,6 @@ $ brew install elastic/ecctl/ecctl
 Updating Homebrew...
 => Installing ecctl from elastic/ecctl
 ...
-[id="{p}-"]
 => Summary
 🍺  /usr/local/Cellar/ecctl/1.0.0: 6 files, 13MB, built in 7 seconds
 ----
@@ -92,7 +96,7 @@ variables, or at runtime using the CLI’s global flags.
 === Before you begin
 The hierarchy for configuration parameters is as follows, from higher precedence to lower:
 
-. Command line flags `--region`, `--host`, `--user`, `--pass`
+. Command line flags `--host`, `--user`, `--pass`
 . Environment variables
 . Shared configuration file
 `$HOME/.ecctl/config.<json|toml|yaml|hcl>`
@@ -102,7 +106,7 @@ The hierarchy for configuration parameters is as follows, from higher precedence
 
 If it’s your first time using {p}, use the `init` command to assist you in generating a configuration file. The resulting configuration file will be saved under `~/.ecctl/config.json`:
 
-[source,console]
+[source]
 ----
 $ ecctl init
 Welcome to the Elastic Cloud CLI! This command will guide you through authenticating and setting some default values.
@@ -164,14 +168,13 @@ the binary for Elastic Cloud:
 
 [source,yaml]
 ----
-host: https://api.elastic-cloud.com # URL of Elastic Cloud or your ECE installation.
-region: us-east-1 # For ECE installations you can just omit this setting.
+host: https://api.elastic-cloud.com # URL of your ECE installation.
 
 # Credentials
 ## apikey is the preferred authentication mechanism.
 apikey: bWFyYzo4ZTJmNmZkNjY5ZmQ0MDBkOTQ3ZjI3MTg3ZWI5MWZhYjpOQktHY05jclE0cTBzcUlnTXg3QTd3
 
-## username and password can be used, specially when no API key is available.
+## username and password can be used when no API key is available.
 user: username
 pass: password
 ----
@@ -199,15 +202,6 @@ export EC_APIKEY=bWFyYzo4ZTJmNmZkNjY5ZmQ0MDBkOTQ3ZjI3MTg3ZWI5MWZhYjpOQktHY05jclE
 export EC_CONFIG=$HOME/.ecctl/cloud.yaml
 ----
 
-`EC_REGIONS` will define autocomplete entries for the `--region`
-flag, though there is no validation and it is not environment aware
-(e.g. no different list is provided for staging vs production).
-
-[source,sh]
-----
-export EC_REGIONS=="ap-northeast-1 ap-southeast-1 ap-southeast-2 aws-eu-central-1 eu-west-1 gcp-europe-west1 gcp-europe-west3 gcp-us-central1 gcp-us-west1 sa-east-1 us-east-1 us-west-1 us-west-2"
-----
-
 [id="{p}-multiple-configuration-files"]
 === Multiple configuration files
 
@@ -217,11 +211,11 @@ targets. By default it will use
 `$HOME/.ecctl/config.<json|toml|yaml|hcl>`, but when the `--config`
 flag is specified, it will append the `--config` name to the file:
 
-[source,console]
+[source]
 ----
 # Default behaviour
 $ ecctl version
-# will use ~/.ecctl/staging.yaml
+# will use ~/.ecctl/config.yaml
 
 # When an environment is specified, the configuration file used will change
 $ ecctl version --config ece
@@ -245,14 +239,14 @@ to obtain a specific part of a command response that might not have been
 shown before with the default `--output=text`. The `--format`
 internally uses Go templates which means that you can use the power of
 the Go built-in
-https://golang.org/pkg/text/template/[`text/templates`] on demmand.
+https://golang.org/pkg/text/template/[`text/templates`] on demand.
 
 [id="{p}-examples"]
 == Usage examples
 
 Obtaining the ID, Version and health status
 
-[source,console]
+[source]
 ----
 $ ecctl elasticsearch list --format '{{.ClusterID}} {{.PlanInfo.Current.Plan.Elasticsearch.Version}} {{.Healthy}}'
 a2c4f423c1014941b75a48292264dd25 6.7.0 true
@@ -264,7 +258,7 @@ a4f29ff3ba554e69a1e1b40c3ee1b6e3 6.7.0 true
 Since the template is executed we can also embed logic inside of the
 template to filter the results.
 
-[source,console]
+[source]
 ----
 $ export EC_FORMAT='{{range .Elasticsearch.DefaultPlugins}}{{if eq . "discovery-file" }}{{$.Version}}{{end}}{{end}}'
 # Since the template is executed on every item of the list, filter the empty lines to have a cleaner output.
