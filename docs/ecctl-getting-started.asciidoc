@@ -13,7 +13,9 @@ Benefits of {p}:
 * Helps you automate the deployment lifecycle
 * Provides a foundation for integration with other tools, such as Terraform and Ansible
 
-Right now, {p} supports ECE installations only, but we plan to support a public Elasticsearch Service API in the future.
+Right now, {p} supports ECE installations only.
+
+//, but we plan to support a public Elasticsearch Service API in the future.
 
 [id="{p}-installing"]
 == Installing
