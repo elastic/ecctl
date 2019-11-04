@@ -1,7 +1,7 @@
 [id="{p}-overview"]
 == Overview
 
-NOTE: **You are looking at the documentation for a beta release. Please keep in mind that backwards-incompatible changes might be introduced in future releases.**
+beta[]
 
 {p} is the CLI on steroids for the Elastic Cloud Enterprise API. It wraps
 typical operations commonly needed by ECE operators within a
@@ -9,12 +9,13 @@ single command line tool.
 
 Benefits of {p}:
 
-* Easier to use for ops than using the user console using the RESTful API directly
+* Easier to use than the Cloud UI or using the RESTful API directly
 * Helps you automate the deployment lifecycle
 * Provides a foundation for integration with other tools, such as Terraform and Ansible
 
-Note that, right now, {p} targets ECE installations only. There are, however, plans
-to support public Elasticsearch Service API in the future.
+Right now, {p} supports ECE installations only.
+
+//, but we plan to support a public Elasticsearch Service API in the future.
 
 [id="{p}-installing"]
 == Installing
