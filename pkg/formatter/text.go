@@ -40,6 +40,7 @@ var defaultTemplateFuncs = template.FuncMap{
 	"formatClusterBytes":        formatClusterBytes,
 	"substr":                    substr,
 	"computeClusterCapacity":    computeClusterCapacity,
+	"equal":                     equal,
 	"derefInt":                  derefInt,
 	"derefBool":                 derefBool,
 	"displayAllocator":          displayAllocator,

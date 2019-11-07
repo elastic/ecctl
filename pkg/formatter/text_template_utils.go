@@ -322,3 +322,27 @@ func stringInSlice(a string, list []string) bool {
 	}
 	return false
 }
+
+// equal checks if the passed values are equal. Currently only strings
+// are supported.
+func equal(x, y interface{}) bool {
+	// setting a to something different than "" to avoid a case where
+	// the passed types are not handled by the switch cases
+	var a = "x"
+	var b string
+	switch s := x.(type) {
+	case string:
+		a = s
+	case *string:
+		a = *s
+	}
+
+	switch s := y.(type) {
+	case string:
+		b = s
+	case *string:
+		b = *s
+	}
+
+	return a == b
+}
