@@ -62,8 +62,9 @@ The codebase is maintained using the "contributor workflow" where everyone witho
 To contribute a patch, make sure you follow this workflow:
 
 1. Fork repository
-2. Create topic branch
-3. Commit patches
+2. Enable GitHub actions to run in your fork
+3. Create topic branch
+4. Commit patches
 
 ### Commit Messages
 
