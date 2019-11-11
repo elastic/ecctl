@@ -29,7 +29,7 @@ import (
 
 var shutdownCmd = &cobra.Command{
 	Use:     "shutdown <deployment-id>",
-	Short:   "Shutdown's a platform deployment",
+	Short:   "Shuts down a deployment and all of its associated sub-resources",
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		force, _ := cmd.Flags().GetBool("force")

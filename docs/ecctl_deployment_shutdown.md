@@ -1,10 +1,10 @@
 ## ecctl deployment shutdown
 
-Shutdown's a platform deployment
+Shuts down a deployment and all of its associated sub-resources
 
 ### Synopsis
 
-Shutdown's a platform deployment
+Shuts down a deployment and all of its associated sub-resources
 
 ```
 ecctl deployment shutdown <deployment-id> [flags]

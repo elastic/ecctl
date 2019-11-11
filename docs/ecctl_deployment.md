@@ -46,5 +46,5 @@ ecctl deployment [flags]
 * [ecctl deployment list](ecctl_deployment_list.md)	 - Lists the platform's deployments
 * [ecctl deployment note](ecctl_deployment_note.md)	 - Manages a deployment's notes
 * [ecctl deployment show](ecctl_deployment_show.md)	 - Shows the specified deployment resources
-* [ecctl deployment shutdown](ecctl_deployment_shutdown.md)	 - Shutdown's a platform deployment
+* [ecctl deployment shutdown](ecctl_deployment_shutdown.md)	 - Shuts down a deployment and all of its associated sub-resources
 
