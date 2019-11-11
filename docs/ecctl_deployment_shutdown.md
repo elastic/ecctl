@@ -1,19 +1,21 @@
-## ecctl deployment
+## ecctl deployment shutdown
 
-Manages deployments
+Shutdown's a platform deployment
 
 ### Synopsis
 
-Manages deployments
+Shutdown's a platform deployment
 
 ```
-ecctl deployment [flags]
+ecctl deployment shutdown <deployment-id> [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for deployment
+  -h, --help            help for shutdown
+      --hide            Hides the deployment and its resources after it has been shut down
+      --skip-snapshot   Skips taking an Elasticsearch snapshot prior to shutting down the deployment
 ```
 
 ### Options inherited from parent commands
@@ -39,12 +41,5 @@ ecctl deployment [flags]
 
 ### SEE ALSO
 
-* [ecctl](ecctl.md)	 - Elastic Cloud Control
-* [ecctl deployment apm](ecctl_deployment_apm.md)	 - Manages APM deployments
-* [ecctl deployment elasticsearch](ecctl_deployment_elasticsearch.md)	 - Manages Elasticsearch clusters
-* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana clusters
-* [ecctl deployment list](ecctl_deployment_list.md)	 - Lists the platform's deployments
-* [ecctl deployment note](ecctl_deployment_note.md)	 - Manages a deployment's notes
-* [ecctl deployment show](ecctl_deployment_show.md)	 - Shows the specified deployment resources
-* [ecctl deployment shutdown](ecctl_deployment_shutdown.md)	 - Shutdown's a platform deployment
+* [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
 
