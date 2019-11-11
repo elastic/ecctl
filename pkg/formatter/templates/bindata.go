@@ -26,6 +26,7 @@
 // text/apm/planhistory.gotmpl
 // text/deployment/list.gotmpl
 // text/deployment/notelist.gotmpl
+// text/deployment/search.gotmpl
 // text/deployment-template/list.gotmpl
 // text/elasticsearch/list.gotmpl
 // text/elasticsearch/overridecapacity.gotmpl
@@ -298,6 +299,26 @@ func textDeploymentNotelistGotmpl() (*asset, error) {
 	}
 
 	info := bindataFileInfo{name: "text/deployment/notelist.gotmpl", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _textDeploymentSearchGotmpl = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x8c\x52\xdd\x6a\x83\x30\x14\xbe\xef\x53\x84\xd0\xdb\xfa\x00\x83\x5e\x64\x55\x98\x74\x95\xd2\xf6\x05\x8e\x7a\xba\xc9\x4c\x0c\x49\x1c\x1b\xe2\xbb\x0f\xf3\x53\x4c\xed\xa0\x57\xc6\xef\x9c\xef\x27\x9f\x0e\xc3\x86\xd4\x78\x6d\x04\x12\xda\x7d\xa3\x52\x4d\x8d\x94\x8c\xe3\x30\x10\x05\xe2\x03\x49\x92\xa2\x6c\xbb\x5f\x8e\xc2\x68\x87\xe3\x0f\x56\xbd\xc1\x0b\x72\xd9\x82\x41\x92\x8c\xe3\x6a\x82\x45\xed\xe7\xe1\x10\x74\x6b\xbc\x42\xdf\x9a\x49\x76\x35\xf9\xd1\x3c\x75\x16\x06\x4a\xbb\x48\x0b\x76\xc8\xe8\x0c\xa1\xd9\x3b\x3b\x5f\xf2\xdd\x39\x63\xa7\xdd\x5b\x34\xd9\xe7\xaf\xac\x60\x11\xc4\x8e\x87\xbb\xf7\xe3\x8d\x68\x0d\x1f\xde\xc4\x4e\xd6\x5f\x4d\x09\x02\xc8\xcb\x96\xd0\x4d\x58\x5f\x83\xe4\x0b\x44\x6a\x04\x55\x7d\xde\xe1\xd8\x82\x36\x4d\xf5\x68\xe6\x4d\x4f\xa8\xbb\x5e\x55\xa8\x13\x26\xb9\xbd\xad\x95\xdf\x92\x24\x4f\x6d\x09\x28\xea\xff\x19\xde\x35\xf0\x42\x88\xa7\xd8\xd9\x3c\x9b\x53\x88\xe3\x3e\xa5\xb2\xb7\x05\x39\xba\x2f\x6b\xc9\xbb\x01\xe1\x8b\x26\x05\x70\x74\x7f\x81\x81\xd2\x1e\x62\xf3\xf9\x72\xd0\x8d\xd6\x5d\x4d\x0b\x28\x34\xe0\xe3\x86\x00\xee\xf9\x17\x00\x00\xff\xff\x34\xd0\x98\x15\xcd\x02\x00\x00")
+
+func textDeploymentSearchGotmplBytes() ([]byte, error) {
+	return bindataRead(
+		_textDeploymentSearchGotmpl,
+		"text/deployment/search.gotmpl",
+	)
+}
+
+func textDeploymentSearchGotmpl() (*asset, error) {
+	bytes, err := textDeploymentSearchGotmplBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "text/deployment/search.gotmpl", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -763,6 +784,7 @@ var _bindata = map[string]func() (*asset, error){
 	"text/apm/planhistory.gotmpl":                textApmPlanhistoryGotmpl,
 	"text/deployment/list.gotmpl":                textDeploymentListGotmpl,
 	"text/deployment/notelist.gotmpl":            textDeploymentNotelistGotmpl,
+	"text/deployment/search.gotmpl":              textDeploymentSearchGotmpl,
 	"text/deployment-template/list.gotmpl":       textDeploymentTemplateListGotmpl,
 	"text/elasticsearch/list.gotmpl":             textElasticsearchListGotmpl,
 	"text/elasticsearch/overridecapacity.gotmpl": textElasticsearchOverridecapacityGotmpl,
@@ -841,6 +863,7 @@ var _bintree = &bintree{nil, map[string]*bintree{
 		"deployment": &bintree{nil, map[string]*bintree{
 			"list.gotmpl":     &bintree{textDeploymentListGotmpl, map[string]*bintree{}},
 			"notelist.gotmpl": &bintree{textDeploymentNotelistGotmpl, map[string]*bintree{}},
+			"search.gotmpl":   &bintree{textDeploymentSearchGotmpl, map[string]*bintree{}},
 		}},
 		"deployment-template": &bintree{nil, map[string]*bintree{
 			"list.gotmpl": &bintree{textDeploymentTemplateListGotmpl, map[string]*bintree{}},
