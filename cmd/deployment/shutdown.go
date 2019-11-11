@@ -30,7 +30,7 @@ import (
 var shutdownCmd = &cobra.Command{
 	Use:     "shutdown <deployment-id>",
 	Short:   "Shutdown's a platform deployment",
-	PreRunE: cobra.MinimumNArgs(1),
+	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		force, _ := cmd.Flags().GetBool("force")
 		var msg = "This action will delete the specified deployment ID and its associated sub-resources, do you want to continue? [y/n]: "

@@ -44,7 +44,7 @@ func (params ShutdownParams) Validate() error {
 		merr = multierror.Append(merr, util.ErrAPIReq)
 	}
 
-	if params.DeploymentID == "" {
+	if len(params.DeploymentID) != 32 {
 		merr = multierror.Append(merr, util.ErrDeploymentID)
 	}
 
