@@ -1,0 +1,15 @@
+{{- define "override" }}{{ range .Deployments }}{{ executeTemplate .}}
+{{ end }}{{ end }}{{ define "default" }}
+{{- "ID" }}{{tab}}{{ "NAME"}}{{tab}}{{"ELASTICSEARCH"}}{{tab}}{{"KIBANA"}}{{tab}}{{"APM"}}{{tab}}{{"APPSEARCH"}}
+{{- range .Deployments }}
+{{- $kibana := "-"}}
+{{- $apm := "-"}}
+{{- $appsearch := "-"}}
+{{- $elasticsearch := "-"}}
+{{- range .Resources.Apm}}{{ $apm = .ID }}{{end}}
+{{- range .Resources.Appsearch}}{{ $appsearch = .ID }}{{end}}
+{{- range .Resources.Elasticsearch}}{{ $elasticsearch = .ID }}{{end}}
+{{- range .Resources.Kibana}}{{ $kibana = .ID }}{{end}}
+{{ .ID }}{{tab}}{{ .Name }}{{ tab }}{{$elasticsearch}}{{tab}}{{ $kibana }}{{ tab }}{{ $apm }}{{ tab }}{{ $appsearch }}
+{{- end}}
+{{end}}

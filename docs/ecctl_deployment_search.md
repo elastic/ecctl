@@ -1,19 +1,35 @@
-## ecctl deployment
+## ecctl deployment search
 
-Manages deployments
+Performs advanced deployment search using the Elasticsearch Query DSL
 
 ### Synopsis
 
-Manages deployments
+Read more about Query DSL in https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html
 
 ```
-ecctl deployment [flags]
+ecctl deployment search -f <query file.json> [flags]
+```
+
+### Examples
+
+```
+$ cat query_string_query.json
+{
+    "query": {
+        "query_string": {
+            "query": "name: admin"
+        }
+    }
+}
+$ ecctl deployment search -f query_string_query.json
+[...]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for deployment
+  -f, --file string   JSON file that contains JSON-style domain-specific language query
+  -h, --help          help for search
 ```
 
 ### Options inherited from parent commands
@@ -39,13 +55,5 @@ ecctl deployment [flags]
 
 ### SEE ALSO
 
-* [ecctl](ecctl.md)	 - Elastic Cloud Control
-* [ecctl deployment apm](ecctl_deployment_apm.md)	 - Manages APM deployments
-* [ecctl deployment elasticsearch](ecctl_deployment_elasticsearch.md)	 - Manages Elasticsearch clusters
-* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana clusters
-* [ecctl deployment list](ecctl_deployment_list.md)	 - Lists the platform's deployments
-* [ecctl deployment note](ecctl_deployment_note.md)	 - Manages a deployment's notes
-* [ecctl deployment search](ecctl_deployment_search.md)	 - Performs advanced deployment search using the Elasticsearch Query DSL
-* [ecctl deployment show](ecctl_deployment_show.md)	 - Shows the specified deployment resources
-* [ecctl deployment shutdown](ecctl_deployment_shutdown.md)	 - Shuts down a deployment and all of its associated sub-resources
+* [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
 
