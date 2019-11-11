@@ -43,7 +43,7 @@ ecctl deployment [flags]
 * [ecctl deployment apm](ecctl_deployment_apm.md)	 - Manages APM deployments
 * [ecctl deployment elasticsearch](ecctl_deployment_elasticsearch.md)	 - Manages Elasticsearch clusters
 * [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana clusters
-* [ecctl deployment list](ecctl_deployment_list.md)	 - Lists the playtform's deployments
+* [ecctl deployment list](ecctl_deployment_list.md)	 - Lists the platform's deployments
 * [ecctl deployment note](ecctl_deployment_note.md)	 - Manages a deployment's notes
 * [ecctl deployment show](ecctl_deployment_show.md)	 - Shows the specified deployment resources
 

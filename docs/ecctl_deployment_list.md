@@ -1,10 +1,10 @@
 ## ecctl deployment list
 
-Lists the playtform's deployments
+Lists the platform's deployments
 
 ### Synopsis
 
-Lists the playtform's deployments
+Lists the platform's deployments
 
 ```
 ecctl deployment list [flags]

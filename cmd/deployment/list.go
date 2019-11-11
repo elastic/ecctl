@@ -26,7 +26,7 @@ import (
 
 var listCmd = &cobra.Command{
 	Use:     "list",
-	Short:   "Lists the playtform's deployments",
+	Short:   "Lists the platform's deployments",
 	PreRunE: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		res, err := deployment.List(deployment.ListParams{
