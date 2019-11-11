@@ -37,6 +37,8 @@ var (
 	ErrAPIReq = errors.New("api reference is required for command")
 	// ErrClusterLength is the message returned when a provided cluster id is not of the expected length (32 chars)
 	ErrClusterLength = errors.New("cluster id should have a length of 32 characters")
+	// ErrDeploymentID is the message returned when a provided cluster id is not of the expected length (32 chars)
+	ErrDeploymentID = errors.New("deployment id should have a length of 32 characters")
 
 	// SkipMaintenanceHeaders tells the EC proxy layer to still send requests to the
 	// underlying cluster instances even if they are in maintenance mode
