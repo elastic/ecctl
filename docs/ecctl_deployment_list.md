@@ -1,19 +1,19 @@
-## ecctl deployment
+## ecctl deployment list
 
-Manages deployments
+Lists the platform's deployments
 
 ### Synopsis
 
-Manages deployments
+Lists the platform's deployments
 
 ```
-ecctl deployment [flags]
+ecctl deployment list [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for deployment
+  -h, --help   help for list
 ```
 
 ### Options inherited from parent commands
@@ -39,11 +39,5 @@ ecctl deployment [flags]
 
 ### SEE ALSO
 
-* [ecctl](ecctl.md)	 - Elastic Cloud Control
-* [ecctl deployment apm](ecctl_deployment_apm.md)	 - Manages APM deployments
-* [ecctl deployment elasticsearch](ecctl_deployment_elasticsearch.md)	 - Manages Elasticsearch clusters
-* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana clusters
-* [ecctl deployment list](ecctl_deployment_list.md)	 - Lists the platform's deployments
-* [ecctl deployment note](ecctl_deployment_note.md)	 - Manages a deployment's notes
-* [ecctl deployment show](ecctl_deployment_show.md)	 - Shows the specified deployment resources
+* [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
 

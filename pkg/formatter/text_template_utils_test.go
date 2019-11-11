@@ -114,3 +114,37 @@ func Test_toS3TypeConfig(t *testing.T) {
 		})
 	}
 }
+
+func Test_equal(t *testing.T) {
+	type args struct {
+		x, y interface{}
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{
+			name: "compare equal returns false",
+			args: args{x: "1", y: "2"},
+			want: false,
+		},
+		{
+			name: "compare equal returns true",
+			args: args{x: "1", y: "1"},
+			want: true,
+		},
+		{
+			name: "compare equal returns false on other types",
+			args: args{x: "1", y: 234},
+			want: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := equal(tt.args.x, tt.args.y); got != tt.want {
+				t.Errorf("equal() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
