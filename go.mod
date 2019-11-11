@@ -18,7 +18,7 @@ require (
 	github.com/pkg/errors v0.8.1
 	github.com/pmezard/go-difflib v1.0.0
 	github.com/spf13/cobra v0.0.5
-	github.com/spf13/viper v1.4.0
+	github.com/spf13/viper v1.5.0
 	golang.org/x/crypto v0.0.0-20190829043050-9756ffdc2472
 	golang.org/x/oauth2 v0.0.0-20190211225200-5f6b76b7c9dd // indirect
 )
