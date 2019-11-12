@@ -20,28 +20,28 @@ package cmddeployment
 import (
 	"github.com/spf13/cobra"
 
-	cmdapm "github.com/elastic/ecctl/cmd/deployment/apm"
-	cmdelasticsearch "github.com/elastic/ecctl/cmd/deployment/elasticsearch"
-	cmdkibana "github.com/elastic/ecctl/cmd/deployment/kibana"
-	cmddeploymentnote "github.com/elastic/ecctl/cmd/deployment/note"
+	cmdutil "github.com/elastic/ecctl/cmd/util"
+	"github.com/elastic/ecctl/pkg/deployment"
+	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
-// Command is the deployment subcommand
-var Command = &cobra.Command{
-	Use:     "deployment",
-	Short:   "Manages deployments",
-	PreRunE: cobra.MaximumNArgs(0),
-	Run: func(cmd *cobra.Command, args []string) {
-		cmd.Help()
+var deleteCmd = &cobra.Command{
+	Use:     "delete <deployment-id>",
+	Short:   "deletes a previously stopped deployment from the platform",
+	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		res, err := deployment.Delete(deployment.DeleteParams{
+			API:          ecctl.Get().API,
+			DeploymentID: args[0],
+		})
+		if err != nil {
+			return err
+		}
+
+		return ecctl.Get().Formatter.Format("", res)
 	},
 }
 
 func init() {
-	Command.AddCommand(
-		cmddeploymentnote.Command,
-		cmdelasticsearch.Command,
-		cmdkibana.Command,
-		cmdapm.Command,
-		showCmd,
-	)
+	Command.AddCommand(deleteCmd)
 }

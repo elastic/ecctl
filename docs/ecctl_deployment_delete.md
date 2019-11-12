@@ -1,19 +1,19 @@
-## ecctl deployment
+## ecctl deployment delete
 
-Manages deployments
+deletes a previously stopped deployment from the platform
 
 ### Synopsis
 
-Manages deployments
+deletes a previously stopped deployment from the platform
 
 ```
-ecctl deployment [flags]
+ecctl deployment delete <deployment-id> [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for deployment
+  -h, --help   help for delete
 ```
 
 ### Options inherited from parent commands
@@ -39,14 +39,5 @@ ecctl deployment [flags]
 
 ### SEE ALSO
 
-* [ecctl](ecctl.md)	 - Elastic Cloud Control
-* [ecctl deployment apm](ecctl_deployment_apm.md)	 - Manages APM deployments
-* [ecctl deployment delete](ecctl_deployment_delete.md)	 - deletes a previously stopped deployment from the platform
-* [ecctl deployment elasticsearch](ecctl_deployment_elasticsearch.md)	 - Manages Elasticsearch clusters
-* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana clusters
-* [ecctl deployment list](ecctl_deployment_list.md)	 - Lists the platform's deployments
-* [ecctl deployment note](ecctl_deployment_note.md)	 - Manages a deployment's notes
-* [ecctl deployment search](ecctl_deployment_search.md)	 - Performs advanced deployment search using the Elasticsearch Query DSL
-* [ecctl deployment show](ecctl_deployment_show.md)	 - Shows the specified deployment resources
-* [ecctl deployment shutdown](ecctl_deployment_shutdown.md)	 - Shuts down a deployment and all of its associated sub-resources
+* [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
 
