@@ -30,7 +30,7 @@ import (
 )
 
 const createLong = `Creates a deployment from a file definition with an automatically generated idempotency token.
-On creation failure, please use the displayed idempotency token to retry the cluster creation.
+On creation failure, please use the displayed idempotency token to retry the cluster creation with --request-id=<token>.
 
 Read more about the deployment definition in https://www.elastic.co/guide/en/cloud-enterprise/current/Deployment_-_CRUD.html`
 
@@ -107,6 +107,15 @@ $ cat deployment_example.json
     }
 }
 $ ecctl deployment create -f deployment_example.json --version=7.4.1
+[...]
+
+## If th previous deployment creation failed
+$ ecctl deployment create -f deployment_example.json --name adeploy --version=7.4.1
+The deployment creation returned with an error, please use the displayed idempotency token
+to recreate the deployment resources
+Idempotency token: GMZPMRrcMYqHdmxjIQkHbdjnhPIeBElcwrHwzVlhGUSMXrEIzVXoBykSVRsKncNb
+unknown error (status 500)
+$ ecctl deployment create -f deployment_example.json --name adeploy --version=7.4.1 --request-id=GMZPMRrcMYqHdmxjIQkHbdjnhPIeBElcwrHwzVlhGUSMXrEIzVXoBykSVRsKncNb
 [...]`[1:]
 
 var createCmd = &cobra.Command{
@@ -162,7 +171,7 @@ func init() {
 	Command.AddCommand(createCmd)
 	createCmd.Flags().String("name", "", "Overrides the deployment name")
 	createCmd.Flags().String("version", "", "Overrides all thee deployment's resources to the specified version")
-	createCmd.Flags().String("request-id", "", "Optional idempotency token - if two create requests share the same request_id token (min size 32 characters, max 128) then only one deployment will be created, the second request will return the info of that deployment (in the same format described below, but with blanks for auth-related fields)")
+	createCmd.Flags().String("request-id", "", "Optional idempotency token - Can be found in the Stderr device when a previous deployment creation failed, for more information see the examples in the help command page")
 	createCmd.Flags().StringP("file", "f", "", "JSON file that contains JSON-style domain-specific deployment definition")
 	createCmd.MarkFlagRequired("file")
 	createCmd.MarkFlagFilename("file", "*.json")
