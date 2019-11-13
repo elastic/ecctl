@@ -1,19 +1,30 @@
-## ecctl deployment
+## ecctl deployment restore
 
-Manages deployments
+Restores a previously shut down deployment and all of its associated sub-resources
 
 ### Synopsis
 
-Manages deployments
+Use --restore-snapshot to automatically restore the latest available Elasticsearch snapshot (if applicable)
 
 ```
-ecctl deployment [flags]
+ecctl deployment restore <deployment-id> [flags]
+```
+
+### Examples
+
+```
+$ ecctl deployment restore 5c17ad7c8df73206baa54b6e2829d9bc
+{
+  "id": "5c17ad7c8df73206baa54b6e2829d9bc"
+}
+
 ```
 
 ### Options
 
 ```
-  -h, --help   help for deployment
+  -h, --help               help for restore
+      --restore-snapshot   Restores snapshots for those resources that allow it (Elasticsearch)
 ```
 
 ### Options inherited from parent commands
@@ -39,16 +50,5 @@ ecctl deployment [flags]
 
 ### SEE ALSO
 
-* [ecctl](ecctl.md)	 - Elastic Cloud Control
-* [ecctl deployment apm](ecctl_deployment_apm.md)	 - Manages APM deployments
-* [ecctl deployment create](ecctl_deployment_create.md)	 - Creates a deployment from a file definition, allowing certain flag overrides
-* [ecctl deployment delete](ecctl_deployment_delete.md)	 - Deletes a previously stopped deployment from the platform
-* [ecctl deployment elasticsearch](ecctl_deployment_elasticsearch.md)	 - Manages Elasticsearch clusters
-* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana clusters
-* [ecctl deployment list](ecctl_deployment_list.md)	 - Lists the platform's deployments
-* [ecctl deployment note](ecctl_deployment_note.md)	 - Manages a deployment's notes
-* [ecctl deployment restore](ecctl_deployment_restore.md)	 - Restores a previously shut down deployment and all of its associated sub-resources
-* [ecctl deployment search](ecctl_deployment_search.md)	 - Performs advanced deployment search using the Elasticsearch Query DSL
-* [ecctl deployment show](ecctl_deployment_show.md)	 - Shows the specified deployment resources
-* [ecctl deployment shutdown](ecctl_deployment_shutdown.md)	 - Shuts down a deployment and all of its associated sub-resources
+* [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
 
