@@ -27,6 +27,7 @@ import (
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/ecctl"
+	"github.com/elastic/ecctl/pkg/util"
 )
 
 const createLong = `Creates a deployment from a file definition with an automatically generated idempotency token.
@@ -144,7 +145,7 @@ var createCmd = &cobra.Command{
 
 		reqID, _ := cmd.Flags().GetString("request-id")
 		if reqID == "" {
-			reqID = cmdutil.RandomString(64)
+			reqID = util.RandomString(64)
 		}
 
 		res, err := deployment.Create(deployment.CreateParams{
