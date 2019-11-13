@@ -256,9 +256,10 @@ func TestInitConfig(t *testing.T) {
 				}))),
 			}},
 			wantSettings: map[string]interface{}{
-				"apikey": "somekey",
-				"host":   "https://ahost",
-				"output": "text",
+				"apikey":   "somekey",
+				"host":     "https://ahost",
+				"insecure": true,
+				"output":   "text",
 			},
 			wantOutput: disclaimer + missingConfigMsg + hostMsg +
 				formatChoiceMsg + "\n" + authChoiceMsg + "\n" + apiKeyMsg + "\n" +
@@ -291,10 +292,11 @@ func TestInitConfig(t *testing.T) {
 				),
 			}},
 			wantSettings: map[string]interface{}{
-				"host":   "https://ahost",
-				"output": "text",
-				"pass":   "apassword",
-				"user":   "auser",
+				"host":     "https://ahost",
+				"insecure": true,
+				"output":   "text",
+				"pass":     "apassword",
+				"user":     "auser",
 			},
 			wantOutput: disclaimer + missingConfigMsg + hostMsg +
 				formatChoiceMsg + "\n" + authChoiceMsg + "\n" + userMsg + passMsg +
@@ -322,9 +324,10 @@ func TestInitConfig(t *testing.T) {
 				}))),
 			}},
 			wantSettings: map[string]interface{}{
-				"apikey": "somekey",
-				"host":   "https://ahost",
-				"output": "text",
+				"apikey":   "somekey",
+				"host":     "https://ahost",
+				"insecure": true,
+				"output":   "text",
 			},
 			wantOutput: disclaimer +
 				fmt.Sprintf(settingsPathMsg, "test_files/userpassmodif.yaml") +
@@ -359,10 +362,11 @@ func TestInitConfig(t *testing.T) {
 				),
 			}},
 			wantSettings: map[string]interface{}{
-				"host":   "https://ahost",
-				"output": "text",
-				"pass":   "apassword",
-				"user":   "auser",
+				"host":     "https://ahost",
+				"insecure": true,
+				"output":   "text",
+				"pass":     "apassword",
+				"user":     "auser",
 			},
 			wantOutput: disclaimer +
 				fmt.Sprintf(settingsPathMsg, "test_files/apikeymodif.yaml") +
