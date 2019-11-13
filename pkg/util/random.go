@@ -15,33 +15,21 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package cmddeployment
+package util
 
 import (
-	"github.com/spf13/cobra"
-
-	cmdutil "github.com/elastic/ecctl/cmd/util"
-	"github.com/elastic/ecctl/pkg/deployment"
-	"github.com/elastic/ecctl/pkg/ecctl"
+	"math/rand"
+	"time"
 )
 
-var deleteCmd = &cobra.Command{
-	Use:     "delete <deployment-id>",
-	Short:   "Deletes a previously stopped deployment from the platform",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
-	RunE: func(cmd *cobra.Command, args []string) error {
-		res, err := deployment.Delete(deployment.DeleteParams{
-			API:          ecctl.Get().API,
-			DeploymentID: args[0],
-		})
-		if err != nil {
-			return err
-		}
+const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-		return ecctl.Get().Formatter.Format("", res)
-	},
-}
-
-func init() {
-	Command.AddCommand(deleteCmd)
+// RandomString generates a random strings with a defined length.
+func RandomString(n int) string {
+	rand.Seed(time.Now().UnixNano())
+	b := make([]byte, n)
+	for i := range b {
+		b[i] = letterBytes[rand.Intn(len(letterBytes))]
+	}
+	return string(b)
 }

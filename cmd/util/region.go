@@ -15,33 +15,7 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package cmddeployment
+package cmdutil
 
-import (
-	"github.com/spf13/cobra"
-
-	cmdutil "github.com/elastic/ecctl/cmd/util"
-	"github.com/elastic/ecctl/pkg/deployment"
-	"github.com/elastic/ecctl/pkg/ecctl"
-)
-
-var deleteCmd = &cobra.Command{
-	Use:     "delete <deployment-id>",
-	Short:   "Deletes a previously stopped deployment from the platform",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
-	RunE: func(cmd *cobra.Command, args []string) error {
-		res, err := deployment.Delete(deployment.DeleteParams{
-			API:          ecctl.Get().API,
-			DeploymentID: args[0],
-		})
-		if err != nil {
-			return err
-		}
-
-		return ecctl.Get().Formatter.Format("", res)
-	},
-}
-
-func init() {
-	Command.AddCommand(deleteCmd)
-}
+// DefaultECERegion is the region for ECE
+const DefaultECERegion = "ece-region"
