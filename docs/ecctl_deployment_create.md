@@ -26,14 +26,17 @@ $ cat deployment_example.json
                 "ref_id": "my-apm-instance",
                 "elasticsearch_cluster_ref_id": "my-es-cluster",
                 "plan": {
-                    "zone_count": 1,
                     "apm": {
                         "version": "6.8.4"
                     },
-                    "size":{
-                        "resource": "memory",
-                        "value": 512
-                    }
+                    "cluster_topology": [{
+                        "instance_configuration_id": "apm",
+                        "size": {
+                            "resource": "memory",
+                            "value": 512
+                        },
+                        "zone_count": 1
+                    }]
                 }
             }
         ],
