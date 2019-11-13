@@ -178,6 +178,9 @@ func InitConfig(params InitConfigParams) error {
 		Client:       params.Client,
 		OutputDevice: outputDevice,
 		ErrorDevice:  params.ErrWriter,
+		// Insecure is set to true by default to allow API calls against HTTPS
+		// endpoints with self-signed certificates.
+		Insecure: true,
 	}
 	if err := params.Viper.Unmarshal(&cfg); err != nil {
 		return err
