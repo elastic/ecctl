@@ -102,14 +102,6 @@ var listTokensCmd = &cobra.Command{
 	RunE:    listTokens,
 }
 
-// CommandPlural is the plural list action.
-var CommandPlural = &cobra.Command{
-	Use:     "enrollment-tokens",
-	Short:   "Retrieves a list of persistent enrollment tokens",
-	PreRunE: cobra.MaximumNArgs(0),
-	RunE:    listTokens,
-}
-
 func init() {
 	Command.AddCommand(
 		createTokenCmd,

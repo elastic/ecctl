@@ -43,14 +43,6 @@ var Command = &cobra.Command{
 	},
 }
 
-// CommandPlural is the list action of constructor.
-var CommandPlural = &cobra.Command{
-	Use:     "constructors",
-	Short:   constructorListMessage,
-	PreRunE: cobra.MaximumNArgs(0),
-	RunE:    listConstructors,
-}
-
 func listConstructors(cmd *cobra.Command, args []string) error {
 	a, err := constructor.List(constructor.Params{
 		API: ecctl.Get().API,

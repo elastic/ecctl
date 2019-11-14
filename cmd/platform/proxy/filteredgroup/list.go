@@ -49,14 +49,6 @@ var platformProxyFilteredGroupsListCmd = &cobra.Command{
 	RunE:    listProxyFilteredGroups,
 }
 
-// CommandPlural represents the list action for proxies filtered group.
-var CommandPlural = &cobra.Command{
-	Use:     "filtered-groups",
-	Short:   filteredGroupsUse,
-	PreRunE: cobra.MaximumNArgs(0),
-	RunE:    listProxyFilteredGroups,
-}
-
 func init() {
 	Command.AddCommand(
 		platformProxyFilteredGroupsListCmd,
