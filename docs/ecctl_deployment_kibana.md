@@ -1,10 +1,10 @@
 ## ecctl deployment kibana
 
-Manages Kibana clusters
+Manages Kibana instances
 
 ### Synopsis
 
-Manages Kibana clusters
+Manages Kibana instances
 
 ```
 ecctl deployment kibana [flags]
@@ -40,16 +40,16 @@ ecctl deployment kibana [flags]
 ### SEE ALSO
 
 * [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
-* [ecctl deployment kibana create](ecctl_deployment_kibana_create.md)	 - Creates a Kibana Cluster
-* [ecctl deployment kibana delete](ecctl_deployment_kibana_delete.md)	 - Deletes a Kibana cluster
+* [ecctl deployment kibana create](ecctl_deployment_kibana_create.md)	 - Creates a Kibana instance
+* [ecctl deployment kibana delete](ecctl_deployment_kibana_delete.md)	 - Deletes a Kibana instance
 * [ecctl deployment kibana enable](ecctl_deployment_kibana_enable.md)	 - Enables a kibana instance in the selected deployment
 * [ecctl deployment kibana list](ecctl_deployment_kibana_list.md)	 - Returns the list of clusters for a region
 * [ecctl deployment kibana plan](ecctl_deployment_kibana_plan.md)	 - Manages Kibana plans
-* [ecctl deployment kibana reallocate](ecctl_deployment_kibana_reallocate.md)	 - Reallocates the Kibana cluster nodes
-* [ecctl deployment kibana restart](ecctl_deployment_kibana_restart.md)	 - Restarts a Kibana cluster
-* [ecctl deployment kibana resync](ecctl_deployment_kibana_resync.md)	 - Resynchronizes the search index and cache for the selected Kibana cluster
+* [ecctl deployment kibana reallocate](ecctl_deployment_kibana_reallocate.md)	 - Reallocates Kibana instances
+* [ecctl deployment kibana restart](ecctl_deployment_kibana_restart.md)	 - Restarts a Kibana instance
+* [ecctl deployment kibana resync](ecctl_deployment_kibana_resync.md)	 - Resynchronizes the search index and cache for the selected Kibana instance
 * [ecctl deployment kibana show](ecctl_deployment_kibana_show.md)	 - Returns the cluster information
-* [ecctl deployment kibana start](ecctl_deployment_kibana_start.md)	 - Starts a Kibana cluster
-* [ecctl deployment kibana stop](ecctl_deployment_kibana_stop.md)	 - Downscales a Kibana cluster, so that it no longer contains any running instances.
-* [ecctl deployment kibana upgrade](ecctl_deployment_kibana_upgrade.md)	 - Upgrades the Kibana cluster to the same version as the Elasticsearch one
+* [ecctl deployment kibana start](ecctl_deployment_kibana_start.md)	 - Starts a Kibana instance
+* [ecctl deployment kibana stop](ecctl_deployment_kibana_stop.md)	 - Downscales a Kibana instance
+* [ecctl deployment kibana upgrade](ecctl_deployment_kibana_upgrade.md)	 - Upgrades the Kibana instance to the same version as the Elasticsearch one
 

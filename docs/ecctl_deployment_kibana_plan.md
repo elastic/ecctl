@@ -39,6 +39,6 @@ ecctl deployment kibana plan [flags]
 
 ### SEE ALSO
 
-* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana clusters
+* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana instances
 * [ecctl deployment kibana plan monitor](ecctl_deployment_kibana_plan_monitor.md)	 - Monitors the pending plan
 

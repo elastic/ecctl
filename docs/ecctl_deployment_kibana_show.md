@@ -44,5 +44,5 @@ ecctl deployment kibana show <cluster id> [flags]
 
 ### SEE ALSO
 
-* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana clusters
+* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana instances
 

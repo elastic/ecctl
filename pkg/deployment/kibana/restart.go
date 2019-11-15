@@ -25,7 +25,7 @@ import (
 	"github.com/elastic/ecctl/pkg/util"
 )
 
-// Restart restarts a Kibana cluster
+// Restart restarts a Kibana instance
 func Restart(params DeploymentParams) error {
 	if err := params.Validate(); err != nil {
 		return err

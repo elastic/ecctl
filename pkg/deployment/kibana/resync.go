@@ -24,7 +24,7 @@ import (
 )
 
 // Resync forces indexer to immediately resynchronize the search index
-// and cache for a given Kibana cluster.
+// and cache for a given Kibana instance.
 func Resync(params DeploymentParams) error {
 	if err := params.Validate(); err != nil {
 		return err

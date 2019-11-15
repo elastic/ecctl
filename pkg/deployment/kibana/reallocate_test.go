@@ -149,7 +149,7 @@ func TestReallocate(t *testing.T) {
 			wantErr: true,
 		},
 		{
-			name: "should fail if get kibana cluster fails",
+			name: "should fail if get kibana instance fails",
 			params: ReallocateParams{
 				DeploymentParams: DeploymentParams{
 					ID: "853cfe89c4a74fb6a6477574d3c03771",

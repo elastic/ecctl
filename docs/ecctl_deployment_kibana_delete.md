@@ -1,10 +1,10 @@
 ## ecctl deployment kibana delete
 
-Deletes a Kibana cluster
+Deletes a Kibana instance
 
 ### Synopsis
 
-Deletes a Kibana cluster
+Deletes a Kibana instance
 
 ```
 ecctl deployment kibana delete <cluster id> [flags]
@@ -41,5 +41,5 @@ ecctl deployment kibana delete <cluster id> [flags]
 
 ### SEE ALSO
 
-* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana clusters
+* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana instances
 

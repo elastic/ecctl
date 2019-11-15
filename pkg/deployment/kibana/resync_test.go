@@ -83,7 +83,7 @@ func TestResync(t *testing.T) {
 			},
 		},
 		{
-			name: "Succeeds to resynchronize Kibana cluster without errors",
+			name: "Succeeds to resynchronize Kibana instance without errors",
 			args: args{params: DeploymentParams{
 				ID: "d324608c97154bdba2dff97511d40368",
 				API: api.NewMock(mock.Response{Response: http.Response{

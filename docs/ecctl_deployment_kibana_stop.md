@@ -1,10 +1,10 @@
 ## ecctl deployment kibana stop
 
-Downscales a Kibana cluster, so that it no longer contains any running instances.
+Downscales a Kibana instance
 
 ### Synopsis
 
-Downscales a Kibana cluster, so that it no longer contains any running instances.
+Downscales a Kibana instance
 
 ```
 ecctl deployment kibana stop <cluster id> [flags]
@@ -40,5 +40,5 @@ ecctl deployment kibana stop <cluster id> [flags]
 
 ### SEE ALSO
 
-* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana clusters
+* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana instances
 

@@ -26,7 +26,7 @@ import (
 // Command represents the top level kibana command.
 var Command = &cobra.Command{
 	Use:     "kibana",
-	Short:   "Manages Kibana clusters",
+	Short:   "Manages Kibana instances",
 	PreRunE: cobra.MaximumNArgs(0),
 	Run:     func(cmd *cobra.Command, args []string) { cmd.Help() },
 }

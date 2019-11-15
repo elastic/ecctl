@@ -1,10 +1,10 @@
 ## ecctl deployment kibana upgrade
 
-Upgrades the Kibana cluster to the same version as the Elasticsearch one
+Upgrades the Kibana instance to the same version as the Elasticsearch one
 
 ### Synopsis
 
-Upgrades the Kibana cluster to the same version as the Elasticsearch one
+Upgrades the Kibana instance to the same version as the Elasticsearch one
 
 ```
 ecctl deployment kibana upgrade <cluster id>> [flags]
@@ -40,5 +40,5 @@ ecctl deployment kibana upgrade <cluster id>> [flags]
 
 ### SEE ALSO
 
-* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana clusters
+* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana instances
 

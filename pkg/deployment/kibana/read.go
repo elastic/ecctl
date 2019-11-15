@@ -56,7 +56,7 @@ func (params ListParams) Validate() error {
 	return merr.ErrorOrNil()
 }
 
-// Get returns the kibana cluster
+// Get returns the kibana instance
 func Get(params ClusterParams) (*models.KibanaClusterInfo, error) {
 	if err := params.Validate(); err != nil {
 		return nil, err
@@ -79,7 +79,7 @@ func Get(params ClusterParams) (*models.KibanaClusterInfo, error) {
 	return res.Payload, nil
 }
 
-// List lists all the kibana clusters matching the filters
+// List lists all the kibana instances matching the filters
 func List(params ListParams) (*models.KibanaClustersInfo, error) {
 	if err := params.Validate(); err != nil {
 		return nil, err

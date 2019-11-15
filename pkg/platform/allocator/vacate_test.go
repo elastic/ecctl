@@ -704,7 +704,7 @@ func TestVacateCluster(t *testing.T) {
 			),
 		},
 		{
-			name: "Succeeds with a kibana cluster",
+			name: "Succeeds with a kibana instance",
 			args: args{
 				buf: new(bytes.Buffer),
 				params: &VacateClusterParams{
@@ -742,7 +742,7 @@ func TestVacateCluster(t *testing.T) {
 			),
 		},
 		{
-			name: "Moving kibana cluster fails",
+			name: "Moving kibana instance fails",
 			args: args{
 				buf: new(bytes.Buffer),
 				params: &VacateClusterParams{

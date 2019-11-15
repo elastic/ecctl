@@ -28,7 +28,7 @@ import (
 
 var stopKibanaCmd = &cobra.Command{
 	Use:     "stop <cluster id>",
-	Short:   "Downscales a Kibana cluster, so that it no longer contains any running instances.",
+	Short:   "Downscales a Kibana instance",
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		track, _ := cmd.Flags().GetBool("track")

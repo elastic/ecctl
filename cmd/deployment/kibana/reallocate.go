@@ -27,8 +27,8 @@ import (
 
 var reallocateKibanaClusterCmd = &cobra.Command{
 	Use:     "reallocate <cluster id>",
-	Short:   "Reallocates the Kibana cluster nodes",
-	Long:    "Reallocates the Kibana cluster nodes. If no \"--instances\" are specified all of the nodes will be restarted",
+	Short:   "Reallocates Kibana instances",
+	Long:    "Reallocates Kibana instances. If no \"--instances\" are specified all of the nodes will be restarted",
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		instances, _ := cmd.Flags().GetStringSlice("instances")

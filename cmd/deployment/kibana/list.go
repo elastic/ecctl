@@ -53,6 +53,6 @@ var kibanaListCmd = &cobra.Command{
 
 func init() {
 	kibanaListCmd.Flags().BoolP("metadata", "m", false, "Shows deployment metadata")
-	kibanaListCmd.Flags().Int64P("size", "s", 100, "Sets the upper limit of Kibana clusters to return")
+	kibanaListCmd.Flags().Int64P("size", "s", 100, "Sets the upper limit of Kibana instances to return")
 	kibanaListCmd.Flags().StringP("version", "v", "", "Filters per version")
 }

@@ -28,7 +28,7 @@ import (
 
 var restartKibanaCmd = &cobra.Command{
 	Use:     "restart <cluster id>",
-	Short:   "Restarts a Kibana cluster",
+	Short:   "Restarts a Kibana instance",
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		track, _ := cmd.Flags().GetBool("track")

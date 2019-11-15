@@ -78,7 +78,7 @@ func TestVacate(t *testing.T) {
 			),
 		},
 		{
-			name: "Succeeds moving a single kibana cluster from a single allocator",
+			name: "Succeeds moving a single kibana instance from a single allocator",
 			args: args{
 				buf: sdkSync.NewBuffer(),
 				params: newVacateTestCase(t, vacateCase{

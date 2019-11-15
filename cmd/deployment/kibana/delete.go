@@ -28,7 +28,7 @@ import (
 
 var deleteKibanaCmd = &cobra.Command{
 	Use:     "delete <cluster id>",
-	Short:   "Deletes a Kibana cluster",
+	Short:   "Deletes a Kibana instance",
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 
 	RunE: func(cmd *cobra.Command, args []string) error {
