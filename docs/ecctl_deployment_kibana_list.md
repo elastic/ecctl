@@ -1,10 +1,10 @@
 ## ecctl deployment kibana list
 
-Returns the list of clusters for a region
+Returns the list of kibana instances
 
 ### Synopsis
 
-Returns the list of clusters for a region
+Returns the list of kibana instances
 
 ```
 ecctl deployment kibana list [flags]

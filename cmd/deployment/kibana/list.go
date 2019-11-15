@@ -29,7 +29,7 @@ import (
 
 var kibanaListCmd = &cobra.Command{
 	Use:     "list",
-	Short:   "Returns the list of clusters for a region",
+	Short:   "Returns the list of kibana instances",
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		size, _ := cmd.Flags().GetInt64("size")
