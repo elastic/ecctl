@@ -102,14 +102,11 @@ func TestGetAllocatorMetadata(t *testing.T) {
 			name: "Get metadata fails due to API failure",
 			args: args{
 				params: MetadataGetParams{
-					ID: "an id",
-					API: api.NewMock(mock.Response{Response: http.Response{
-						Body:       mock.NewStringBody(""),
-						StatusCode: 500,
-					}}),
+					ID:  "an id",
+					API: api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
 				},
 			},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "Get metadata Succeeds",

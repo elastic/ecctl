@@ -54,7 +54,7 @@ func TestDelete(t *testing.T) {
 				API:          api.NewMock(mock.New500Response(mock.NewStringBody("error"))),
 				DeploymentID: util.ValidClusterID,
 			}},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New("error"),
 		},
 		{
 			name: "Succeeds",

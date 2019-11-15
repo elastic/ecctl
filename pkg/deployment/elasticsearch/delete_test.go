@@ -80,7 +80,7 @@ func TestDeleteCluster(t *testing.T) {
 					}),
 				},
 			}},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New("{}"),
 		},
 		{
 			name: "fails due to cluster not being stopped",
@@ -104,15 +104,10 @@ func TestDeleteCluster(t *testing.T) {
 			args: args{params: DeleteClusterParams{
 				ClusterParams: util.ClusterParams{
 					ClusterID: util.ValidClusterID,
-					API: api.NewMock(mock.Response{
-						Response: http.Response{
-							StatusCode: 500,
-							Body:       mock.NewStringBody(`{}`),
-						},
-					}),
+					API:       api.NewMock(mock.New500Response(mock.NewStringBody(`{}`))),
 				},
 			}},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New("{}"),
 		},
 		{
 			name: "fails due to missing cluster ID",

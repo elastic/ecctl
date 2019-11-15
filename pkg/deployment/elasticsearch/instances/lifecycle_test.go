@@ -68,15 +68,10 @@ func TestResume(t *testing.T) {
 			args: args{params: Params{
 				ClusterParams: util.ClusterParams{
 					ClusterID: util.ValidClusterID,
-					API: api.NewMock(mock.Response{
-						Response: http.Response{
-							StatusCode: 500,
-							Body:       mock.NewStringBody(`{}`),
-						},
-					}),
+					API:       api.NewMock(mock.New500Response(mock.NewStringBody(`{}`))),
 				},
 			}},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New("{}"),
 		},
 	}
 	for _, tt := range tests {
@@ -127,15 +122,10 @@ func TestPause(t *testing.T) {
 			args: args{params: Params{
 				ClusterParams: util.ClusterParams{
 					ClusterID: util.ValidClusterID,
-					API: api.NewMock(mock.Response{
-						Response: http.Response{
-							StatusCode: 500,
-							Body:       mock.NewStringBody(`{}`),
-						},
-					}),
+					API:       api.NewMock(mock.New500Response(mock.NewStringBody(`{}`))),
 				},
 			}},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New("{}"),
 		},
 	}
 	for _, tt := range tests {

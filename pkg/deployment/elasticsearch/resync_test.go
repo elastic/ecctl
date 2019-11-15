@@ -24,12 +24,15 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
+
+const errStr = `{
+  "errors": null
+}`
 
 func TestResyncCluster(t *testing.T) {
 	type args struct {
@@ -59,13 +62,10 @@ func TestResyncCluster(t *testing.T) {
 			args: args{params: ResyncClusterParams{
 				ClusterParams: util.ClusterParams{
 					ClusterID: util.ValidClusterID,
-					API: api.NewMock(mock.Response{Response: http.Response{
-						StatusCode: http.StatusForbidden,
-						Body:       mock.NewStringBody(`{}`),
-					}}),
+					API:       api.NewMock(mock.New500Response(mock.NewStringBody(`{}`))),
 				},
 			}},
-			wantErr: errors.New("unknown error (status 403)"),
+			wantErr: errors.New(errStr),
 		},
 		{
 			name: "Fails due to API error",
@@ -102,7 +102,6 @@ func TestResyncCluster(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if err := ResyncCluster(tt.args.params); !reflect.DeepEqual(err, tt.wantErr) {
-				spew.Dump(err, tt.wantErr)
 				t.Errorf("ResyncCluster() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})

@@ -77,12 +77,12 @@ func TestCreate(t *testing.T) {
 				API:     api.NewMock(mock.New500Response(mock.NewStringBody("error"))),
 				Request: &models.DeploymentCreateRequest{},
 			}},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New("error"),
 		},
 		{
 			name: "succeeds",
 			args: args{params: CreateParams{
-				API: api.NewMock(mock.New200Response(mock.NewStringBody(basicESCluster))),
+				API: api.NewMock(mock.New201Response(mock.NewStringBody(basicESCluster))),
 				Request: &models.DeploymentCreateRequest{
 					Name: "my example cluster",
 					Resources: &models.DeploymentCreateResources{
@@ -129,7 +129,7 @@ func TestCreate(t *testing.T) {
 			name: "succeeds with idempotency ID",
 			args: args{params: CreateParams{
 				RequestID: "1232131231",
-				API:       api.NewMock(mock.New200Response(mock.NewStringBody(basicESCluster))),
+				API:       api.NewMock(mock.New201Response(mock.NewStringBody(basicESCluster))),
 				Request: &models.DeploymentCreateRequest{
 					Name: "my example cluster",
 					Resources: &models.DeploymentCreateResources{

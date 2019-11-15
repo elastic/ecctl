@@ -92,16 +92,14 @@ func TestGetSettings(t *testing.T) {
 					StatusCode: 400,
 				}}),
 			}},
-			want:    nil,
 			wantErr: true,
-			error:   errors.New("unknown error (status 400)"),
+			error:   errors.New(errorResponse),
 		},
 		{
 			name: "Get cluster metadata settings fails if api reference is empty",
 			args: args{params: util.ClusterParams{
 				ClusterID: util.ValidClusterID,
 			}},
-			want:    nil,
 			wantErr: true,
 			error:   errors.New("api reference is required for command"),
 		},
@@ -110,7 +108,6 @@ func TestGetSettings(t *testing.T) {
 			args: args{params: util.ClusterParams{
 				ClusterID: util.InvalidClusterID,
 			}},
-			want:    nil,
 			wantErr: true,
 			error:   errors.New("cluster id should have a length of 32 characters"),
 		},
@@ -184,7 +181,7 @@ func TestUpdateClusterMetadataSettings(t *testing.T) {
 			}},
 			want:    nil,
 			wantErr: true,
-			error:   errors.New("unknown error (status 400)"),
+			error:   errors.New(errorResponse),
 		},
 		{
 			name:    "Get cluster metadata settings fails if settings reference is empty",

@@ -79,14 +79,10 @@ func TestShow(t *testing.T) {
 		{
 			name: "Proxies filtered group show fails with 403 Forbidden",
 			args: args{params: CommonParams{
-				API: api.NewMock(mock.Response{Response: http.Response{
-					StatusCode: http.StatusForbidden,
-					Status:     http.StatusText(http.StatusForbidden),
-					Body:       mock.NewStringBody(`{}`),
-				}}),
-				ID: "test1",
+				API: api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
+				ID:  "test1",
 			}},
-			err: errors.New("unknown error (status 403)"),
+			err: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "Proxies filtered group show fails due to empty API",
@@ -168,7 +164,7 @@ func TestCreate(t *testing.T) {
 					API: api.NewMock(mock.Response{Response: http.Response{
 						StatusCode: http.StatusForbidden,
 						Status:     http.StatusText(http.StatusForbidden),
-						Body:       mock.NewStringBody(`{}`),
+						Body:       mock.NewStringBody(`{"error": "some error"}`),
 					}}),
 					ID: "test2",
 				},
@@ -177,7 +173,7 @@ func TestCreate(t *testing.T) {
 				},
 				ExpectedProxiesCount: 15,
 			}},
-			err: errors.New("unknown error (status 403)"),
+			err: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "Proxies filtered group create expected proxies count greater than 0 fails",
@@ -273,14 +269,10 @@ func TestDelete(t *testing.T) {
 		{
 			name: "Proxies filtered group delete fails with 403 Forbidden",
 			args: args{params: CommonParams{
-				API: api.NewMock(mock.Response{Response: http.Response{
-					StatusCode: http.StatusForbidden,
-					Status:     http.StatusText(http.StatusForbidden),
-					Body:       mock.NewStringBody(`{}`),
-				}}),
-				ID: "test1",
+				API: api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
+				ID:  "test1",
 			}},
-			err: errors.New("unknown error (status 403)"),
+			err: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "Proxies filtered group delete fails due to empty API",
@@ -362,7 +354,7 @@ func TestUpdate(t *testing.T) {
 						API: api.NewMock(mock.Response{Response: http.Response{
 							StatusCode: http.StatusForbidden,
 							Status:     http.StatusText(http.StatusForbidden),
-							Body:       mock.NewStringBody(`{}`),
+							Body:       mock.NewStringBody(`{"error": "some error"}`),
 						}}),
 						ID: "test2",
 					},
@@ -375,7 +367,7 @@ func TestUpdate(t *testing.T) {
 				Version: 1,
 			},
 			},
-			err: errors.New("unknown error (status 403)"),
+			err: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "Proxies filtered group update expected proxies count greater than 0 fails",
@@ -607,14 +599,10 @@ func TestList(t *testing.T) {
 		{
 			name: "Proxies filtered group list fails with 403 Forbidden",
 			args: args{params: CommonParams{
-				API: api.NewMock(mock.Response{Response: http.Response{
-					StatusCode: http.StatusForbidden,
-					Status:     http.StatusText(http.StatusForbidden),
-					Body:       mock.NewStringBody(`{}`),
-				}}),
-				ID: "all",
+				API: api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
+				ID:  "all",
 			}},
-			err: errors.New("unknown error (status 403)"),
+			err: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "Proxies filtered group list fails due to empty API",

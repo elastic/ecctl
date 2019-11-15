@@ -86,15 +86,10 @@ func TestUpgrade(t *testing.T) {
 				Version: "5.0.0",
 				ClusterParams: util.ClusterParams{
 					ClusterID: util.ValidClusterID,
-					API: api.NewMock(mock.Response{
-						Response: http.Response{
-							StatusCode: 500,
-							Body:       mock.NewStringBody("{}"),
-						},
-					}),
+					API:       api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
 				},
 			}},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "succeeds without tracking",

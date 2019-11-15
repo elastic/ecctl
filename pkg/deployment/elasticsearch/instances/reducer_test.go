@@ -81,12 +81,9 @@ func TestList(t *testing.T) {
 			name: "fails due to API error",
 			args: args{params: util.ClusterParams{
 				ClusterID: util.ValidClusterID,
-				API: api.NewMock(mock.Response{Response: http.Response{
-					StatusCode: 500,
-					Body:       mock.NewStructBody(models.ElasticsearchClusterInfo{}),
-				}}),
+				API:       api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
 			}},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "fails due parameter validation",

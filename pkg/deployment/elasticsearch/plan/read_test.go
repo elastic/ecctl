@@ -104,13 +104,9 @@ func TestGet(t *testing.T) {
 			name: "Fails when the API returns an error",
 			args: args{params: GetParams{Pending: true, ClusterParams: util.ClusterParams{
 				ClusterID: "8b43ed5e277f7ea6f13606fcf4027f9c",
-				API: api.NewMock(mock.Response{Response: http.Response{
-					StatusCode: http.StatusInternalServerError,
-					Status:     http.StatusText(http.StatusInternalServerError),
-					Body:       mock.NewStringBody(`{}`),
-				}}),
+				API:       api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
 			}}},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New(`{"error": "some error"}`),
 		},
 	}
 	for _, tt := range tests {
@@ -177,13 +173,9 @@ func TestGetHistory(t *testing.T) {
 			name: "Fails when the API returns an error",
 			args: args{params: GetHistoryParams{ClusterParams: util.ClusterParams{
 				ClusterID: "8b43ed5e277f7ea6f13606fcf4027f9c",
-				API: api.NewMock(mock.Response{Response: http.Response{
-					StatusCode: http.StatusInternalServerError,
-					Status:     http.StatusText(http.StatusInternalServerError),
-					Body:       mock.NewStringBody(`{}`),
-				}}),
+				API:       api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
 			}}},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New(`{"error": "some error"}`),
 		},
 	}
 	for _, tt := range tests {

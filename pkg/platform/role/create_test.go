@@ -51,11 +51,11 @@ func TestCreate(t *testing.T) {
 			name: "fails creating the role",
 			args: args{params: CreateParams{
 				API: api.NewMock(mock.New500Response(mock.NewStringBody(
-					`"failed creating role"`,
+					`{"error": "failed creating role"}`,
 				))),
 				Role: &models.RoleAggregateCreateData{},
 			}},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New(`{"error": "failed creating role"}`),
 		},
 		{
 			name: "succeeds",

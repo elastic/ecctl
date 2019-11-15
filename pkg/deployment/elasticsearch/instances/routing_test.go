@@ -62,16 +62,10 @@ func TestStartRouting(t *testing.T) {
 			args: args{params: Params{
 				ClusterParams: util.ClusterParams{
 					ClusterID: util.ValidClusterID,
-					API: api.NewMock(mock.Response{
-						Response: http.Response{
-							Status:     http.StatusText(http.StatusInternalServerError),
-							StatusCode: http.StatusInternalServerError,
-							Body:       mock.NewStringBody(`{}`),
-						},
-					}),
+					API:       api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
 				},
 			}},
-			err: errors.New(`unknown error (status 500)`),
+			err: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "fails due to parameter validation",
@@ -128,16 +122,10 @@ func TestStopRouting(t *testing.T) {
 			args: args{params: Params{
 				ClusterParams: util.ClusterParams{
 					ClusterID: util.ValidClusterID,
-					API: api.NewMock(mock.Response{
-						Response: http.Response{
-							Status:     http.StatusText(http.StatusInternalServerError),
-							StatusCode: http.StatusInternalServerError,
-							Body:       mock.NewStringBody(`{}`),
-						},
-					}),
+					API:       api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
 				},
 			}},
-			err: errors.New(`unknown error (status 500)`),
+			err: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "fails due to parameter validation",

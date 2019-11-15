@@ -162,17 +162,10 @@ func TestQuery(t *testing.T) {
 				RestRequest: RestRequest{Method: "GET"},
 				ClusterParams: util.ClusterParams{
 					ClusterID: util.ValidClusterID,
-					API: api.NewMock(mock.Response{Response: http.Response{
-						StatusCode: http.StatusInternalServerError,
-						Body: mock.NewStructBody(models.ElasticsearchClusterInfo{
-							Metadata: &models.ClusterMetadataInfo{
-								Endpoint: "some-host",
-							},
-						}),
-					}}),
+					API:       api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
 				},
 			}},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "fails to create an elasticsearch-cli app",

@@ -60,14 +60,10 @@ func TestGetInfo(t *testing.T) {
 		},
 		{
 			name: "fails due to API error",
-			args: args{params: GetInfoParams{API: api.NewMock(mock.Response{
-				Response: http.Response{
-					Status:     http.StatusText(http.StatusNotFound),
-					StatusCode: http.StatusNotFound,
-					Body:       mock.NewStringBody(`{}`),
-				},
-			})}},
-			err: errors.New("unknown error (status 404)"),
+			args: args{params: GetInfoParams{
+				API: api.NewMock(mock.New404Response(mock.NewStringBody(`{"error": "some error"}`))),
+			}},
+			err: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "fails due to parameter validation",

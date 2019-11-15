@@ -55,13 +55,13 @@ func TestDelete(t *testing.T) {
 				params: DeleteParams{
 					UserName: "user bob",
 					API: api.NewMock(mock.Response{Response: http.Response{
-						Body:       mock.NewStringBody(""),
+						Body:       mock.NewStringBody(`{"error": "some error"}`),
 						StatusCode: 400,
 					}}),
 				},
 			},
 			wantErr: true,
-			err:     errors.New("unknown error (status 400)"),
+			err:     errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "Delete succeeds",
