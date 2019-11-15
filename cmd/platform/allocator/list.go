@@ -30,7 +30,7 @@ import (
 
 const (
 	allocatorFilterCmdMessage = `Post-query filter out allocators based on metadata tags, for instance 'instanceType:i3.large'`
-	allocatorListMessage      = `Returns all allocators that have instances or are connected in the region. Use --all flag or --output json to show all. Use --query to match any of the allocators properties.`
+	allocatorListMessage      = `Returns all allocators that have instances or are connected to the platform. Use --all flag or --output json to show all. Use --query to match any of the allocators properties.`
 	allocatorQueryExample     = `
 
 Query examples:
@@ -79,7 +79,7 @@ func listAllocators(cmd *cobra.Command, args []string) error {
 	}
 
 	if cmd.Flag("output").Value.String() != "json" && !allFlag {
-		fmt.Printf("Showing allocators that have instances or are connected in the region. Use --all flag or --output json to show all\n")
+		fmt.Printf("Showing allocators that have instances or are connected in the platform. Use --all flag or --output json to show all\n")
 	}
 
 	return ecctl.Get().Formatter.Format(filepath.Join("allocator", templateName), a)

@@ -28,7 +28,7 @@ import (
 )
 
 const (
-	constructorListMessage        = `Returns all of the constructors in the region`
+	constructorListMessage        = `Returns all of the constructors in the platform`
 	constructorShowMessage        = `Returns information about the constructor with given ID`
 	constructorMaintenanceMessage = `Sets/un-sets a constructor's maintenance mode`
 )
