@@ -42,14 +42,6 @@ var Command = &cobra.Command{
 	},
 }
 
-// CommandPlural is the list action for proxies
-var CommandPlural = &cobra.Command{
-	Use:     "proxies",
-	Short:   proxyListMessage,
-	PreRunE: cobra.MaximumNArgs(0),
-	RunE:    listProxies,
-}
-
 func listProxies(cmd *cobra.Command, args []string) error {
 	a, err := proxy.List(proxy.Params{
 		API: ecctl.Get().API,
@@ -91,6 +83,5 @@ func init() {
 		listProxiesCmd,
 		showProxyCmd,
 		cmdfilteredgroup.Command,
-		cmdfilteredgroup.CommandPlural,
 	)
 }

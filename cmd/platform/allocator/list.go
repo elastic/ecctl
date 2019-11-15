@@ -93,26 +93,12 @@ var listAllocatorsCmd = &cobra.Command{
 	RunE:    listAllocators,
 }
 
-// CommandPlural represents the list action for allocator.
-var CommandPlural = &cobra.Command{
-	Use:     "allocators",
-	Short:   allocatorListMessage,
-	Long:    allocatorListMessage + allocatorQueryExample + allocatorFilterExample,
-	PreRunE: cobra.MaximumNArgs(0),
-	RunE:    listAllocators,
-}
-
 func init() {
 	Command.AddCommand(listAllocatorsCmd)
 
-	CommandPlural.Flags().StringArrayP("filter", "f", nil, allocatorFilterCmdMessage)
 	listAllocatorsCmd.Flags().StringArrayP("filter", "f", nil, allocatorFilterCmdMessage)
-	CommandPlural.Flags().Bool("unhealthy", false, "Searches for unhealthy allocators")
 	listAllocatorsCmd.Flags().Bool("unhealthy", false, "Searches for unhealthy allocators")
-	CommandPlural.Flags().String("query", "", queryFlagHelp)
 	listAllocatorsCmd.Flags().String("query", "", queryFlagHelp)
-	CommandPlural.Flags().Bool("metadata", false, "Shows allocators metadata")
 	listAllocatorsCmd.Flags().Bool("metadata", false, "Shows allocators metadata")
-	CommandPlural.Flags().Bool("all", false, "Shows all allocators (including those with no instances or not connected)")
 	listAllocatorsCmd.Flags().Bool("all", false, "Shows all allocators (including those with no instances or not connected)")
 }

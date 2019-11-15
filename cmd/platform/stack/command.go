@@ -37,14 +37,6 @@ var Command = &cobra.Command{
 	},
 }
 
-// CommandPlural is the list action for stack.
-var CommandPlural = &cobra.Command{
-	Use:     "stacks",
-	Short:   "Lists Elastic StackPacks",
-	PreRunE: cobra.MaximumNArgs(0),
-	RunE:    listStackPacks,
-}
-
 var stackListCmd = &cobra.Command{
 	Use:     "list",
 	Short:   "Lists Elastic StackPacks",
@@ -123,5 +115,4 @@ func init() {
 	)
 
 	stackListCmd.Flags().BoolP("deleted", "d", false, "Shows deleted stackpacks")
-	CommandPlural.Flags().BoolP("deleted", "d", false, "Shows deleted stackpacks")
 }

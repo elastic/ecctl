@@ -62,19 +62,14 @@ var infoCmd = &cobra.Command{
 func init() {
 	Command.AddCommand(
 		cmdallocator.Command,
-		cmdallocator.CommandPlural,
 		cmdconstructor.Command,
-		cmdconstructor.CommandPlural,
 		cmddeploymentdemplate.Command,
 		cmdenrollmenttoken.Command,
-		cmdenrollmenttoken.CommandPlural,
 		cmdinstanceconfig.Command,
 		cmdproxy.Command,
-		cmdproxy.CommandPlural,
 		cmdrepository.Command,
 		cmdrole.Command,
 		cmdstack.Command,
-		cmdstack.CommandPlural,
 	)
 
 	Command.AddCommand(infoCmd)

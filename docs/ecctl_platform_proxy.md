@@ -41,7 +41,6 @@ ecctl platform proxy [flags]
 
 * [ecctl platform](ecctl_platform.md)	 - Manages the platform
 * [ecctl platform proxy filtered-group](ecctl_platform_proxy_filtered-group.md)	 - Manages proxies filtered group
-* [ecctl platform proxy filtered-groups](ecctl_platform_proxy_filtered-groups.md)	 - Returns all proxies filtered groups in the region
 * [ecctl platform proxy list](ecctl_platform_proxy_list.md)	 - Returns all of the proxies in the region
 * [ecctl platform proxy show](ecctl_platform_proxy_show.md)	 - Returns information about the proxy with given id
 
