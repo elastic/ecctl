@@ -74,7 +74,6 @@ $ cat deployment_example.json
                 "ref_id": "my-kibana-instance",
                 "elasticsearch_cluster_ref_id": "my-es-cluster",
                 "plan": {
-                    "zone_count": 1,
                     "kibana": {
                         "version": "6.8.4"
                     },
@@ -82,7 +81,8 @@ $ cat deployment_example.json
                         {
                             "instance_configuration_id": "kibana",
                             "memory_per_node": 1024,
-                            "node_count_per_zone": 1
+                            "node_count_per_zone": 1,
+                            "zone_count": 1
                         }
                     ]
                 }
