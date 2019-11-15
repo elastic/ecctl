@@ -1,10 +1,10 @@
 ## ecctl deployment kibana start
 
-Starts a Kibana cluster
+Starts a Kibana instance
 
 ### Synopsis
 
-Starts a Kibana cluster
+Starts a Kibana instance
 
 ```
 ecctl deployment kibana start <cluster id> [flags]
@@ -40,5 +40,5 @@ ecctl deployment kibana start <cluster id> [flags]
 
 ### SEE ALSO
 
-* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana clusters
+* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana instances
 

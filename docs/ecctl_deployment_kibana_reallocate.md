@@ -1,10 +1,10 @@
 ## ecctl deployment kibana reallocate
 
-Reallocates the Kibana cluster nodes
+Reallocates Kibana instances
 
 ### Synopsis
 
-Reallocates the Kibana cluster nodes. If no "--instances" are specified all of the nodes will be restarted
+Reallocates Kibana instances. If no "--instances" are specified all of the nodes will be restarted
 
 ```
 ecctl deployment kibana reallocate <cluster id> [flags]
@@ -40,5 +40,5 @@ ecctl deployment kibana reallocate <cluster id> [flags]
 
 ### SEE ALSO
 
-* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana clusters
+* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana instances
 

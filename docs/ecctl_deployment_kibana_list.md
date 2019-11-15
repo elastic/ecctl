@@ -1,10 +1,10 @@
 ## ecctl deployment kibana list
 
-Returns the list of clusters for a region
+Returns the list of kibana instances
 
 ### Synopsis
 
-Returns the list of clusters for a region
+Returns the list of kibana instances
 
 ```
 ecctl deployment kibana list [flags]
@@ -15,7 +15,7 @@ ecctl deployment kibana list [flags]
 ```
   -h, --help             help for list
   -m, --metadata         Shows deployment metadata
-  -s, --size int         Sets the upper limit of Kibana clusters to return (default 100)
+  -s, --size int         Sets the upper limit of Kibana instances to return (default 100)
   -v, --version string   Filters per version
 ```
 
@@ -42,5 +42,5 @@ ecctl deployment kibana list [flags]
 
 ### SEE ALSO
 
-* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana clusters
+* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana instances
 

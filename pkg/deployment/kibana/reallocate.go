@@ -49,7 +49,7 @@ func (params ReallocateParams) Validate() error {
 	return merr.ErrorOrNil()
 }
 
-// Reallocate will reallocate the Kibana cluster instances, if no
+// Reallocate will reallocate the Kibana instance instances, if no
 // Instances are specified, all of the instances will be moved.
 func Reallocate(params ReallocateParams) error {
 	if err := params.Validate(); err != nil {

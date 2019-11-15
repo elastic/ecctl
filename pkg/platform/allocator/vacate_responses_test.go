@@ -340,7 +340,7 @@ type vacateCaseClusters struct {
 	Allocator string
 	// Elasticsearch clusters that will be simulated
 	elasticsearch []vacateCaseClusterConfig
-	// Kibana clusters that will be simulated
+	// Kibana instances that will be simulated
 	kibana []vacateCaseClusterConfig
 	// APM clusters that will be simulated
 	apm []vacateCaseClusterConfig

@@ -28,7 +28,7 @@ import (
 
 var upgradeKibanaCmd = &cobra.Command{
 	Use:     "upgrade <cluster id>>",
-	Short:   "Upgrades the Kibana cluster to the same version as the Elasticsearch one",
+	Short:   "Upgrades the Kibana instance to the same version as the Elasticsearch one",
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		track, _ := cmd.Flags().GetBool("track")

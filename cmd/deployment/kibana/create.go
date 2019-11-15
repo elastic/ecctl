@@ -34,7 +34,7 @@ import (
 
 var createKibanaCmd = &cobra.Command{
 	Use:   "create -f <definition.json>",
-	Short: "Creates a Kibana Cluster",
+	Short: "Creates a Kibana instance",
 
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -95,7 +95,7 @@ func parseKibanaDefinitionFile(fp string) (models.CreateKibanaRequest, error) {
 
 func init() {
 	createKibanaCmd.Flags().BoolP("track", "t", false, cmdutil.TrackFlagMessage)
-	createKibanaCmd.Flags().StringP("file-template", "f", "", "JSON file that contains the Kibana cluster definition")
+	createKibanaCmd.Flags().StringP("file-template", "f", "", "JSON file that contains the Kibana instance definition")
 	createKibanaCmd.Flags().String("id", "", "Optional ID to set for the Elasticsearch cluster (Overrides ID if present).")
-	createKibanaCmd.Flags().String("name", "", "Optional name to set for the Kibana cluster (Overrides name if present).")
+	createKibanaCmd.Flags().String("name", "", "Optional name to set for the Kibana instance (Overrides name if present).")
 }

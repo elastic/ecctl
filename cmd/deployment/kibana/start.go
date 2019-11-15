@@ -31,7 +31,7 @@ import (
 
 var startKibanaCmd = &cobra.Command{
 	Use:     "start <cluster id>",
-	Short:   "Starts a Kibana cluster",
+	Short:   "Starts a Kibana instance",
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		c, err := kibana.Get(kibana.ClusterParams{

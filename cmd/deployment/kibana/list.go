@@ -29,7 +29,7 @@ import (
 
 var kibanaListCmd = &cobra.Command{
 	Use:     "list",
-	Short:   "Returns the list of clusters for a region",
+	Short:   "Returns the list of kibana instances",
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		size, _ := cmd.Flags().GetInt64("size")
@@ -53,6 +53,6 @@ var kibanaListCmd = &cobra.Command{
 
 func init() {
 	kibanaListCmd.Flags().BoolP("metadata", "m", false, "Shows deployment metadata")
-	kibanaListCmd.Flags().Int64P("size", "s", 100, "Sets the upper limit of Kibana clusters to return")
+	kibanaListCmd.Flags().Int64P("size", "s", 100, "Sets the upper limit of Kibana instances to return")
 	kibanaListCmd.Flags().StringP("version", "v", "", "Filters per version")
 }

@@ -26,7 +26,7 @@ import (
 	"github.com/elastic/ecctl/pkg/util"
 )
 
-// Enable creates a new kibana cluster in the specified deployment
+// Enable creates a new kibana instance in the specified deployment
 func Enable(params DeploymentParams) (*models.ClusterCrudResponse, error) {
 	if err := params.Validate(); err != nil {
 		return nil, err

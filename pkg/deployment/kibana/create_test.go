@@ -129,7 +129,7 @@ func TestCreate(t *testing.T) {
 			},
 		},
 		{
-			name: "Succeeds creating a kibana cluster with no tracking",
+			name: "Succeeds creating a kibana instance with no tracking",
 			args: args{params: CreateParams{
 				CreateKibanaRequest: NewKibanaBody(NewKibanaBodyParams{}),
 				DeploymentParams: DeploymentParams{
@@ -147,7 +147,7 @@ func TestCreate(t *testing.T) {
 			},
 		},
 		{
-			name: "Succeeds creating a kibana cluster with tracking",
+			name: "Succeeds creating a kibana instance with tracking",
 			args: args{params: CreateParams{
 				CreateKibanaRequest: NewKibanaBody(NewKibanaBodyParams{}),
 				DeploymentParams: DeploymentParams{

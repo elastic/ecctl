@@ -44,7 +44,7 @@ ecctl deployment [flags]
 * [ecctl deployment create](ecctl_deployment_create.md)	 - Creates a deployment from a file definition, allowing certain flag overrides
 * [ecctl deployment delete](ecctl_deployment_delete.md)	 - Deletes a previously stopped deployment from the platform
 * [ecctl deployment elasticsearch](ecctl_deployment_elasticsearch.md)	 - Manages Elasticsearch clusters
-* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana clusters
+* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana instances
 * [ecctl deployment list](ecctl_deployment_list.md)	 - Lists the platform's deployments
 * [ecctl deployment note](ecctl_deployment_note.md)	 - Manages a deployment's notes
 * [ecctl deployment restore](ecctl_deployment_restore.md)	 - Restores a previously shut down deployment and all of its associated sub-resources

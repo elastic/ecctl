@@ -1,10 +1,10 @@
 ## ecctl deployment kibana restart
 
-Restarts a Kibana cluster
+Restarts a Kibana instance
 
 ### Synopsis
 
-Restarts a Kibana cluster
+Restarts a Kibana instance
 
 ```
 ecctl deployment kibana restart <cluster id> [flags]
@@ -40,5 +40,5 @@ ecctl deployment kibana restart <cluster id> [flags]
 
 ### SEE ALSO
 
-* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana clusters
+* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana instances
 

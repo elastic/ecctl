@@ -1,10 +1,10 @@
 ## ecctl deployment kibana create
 
-Creates a Kibana Cluster
+Creates a Kibana instance
 
 ### Synopsis
 
-Creates a Kibana Cluster
+Creates a Kibana instance
 
 ```
 ecctl deployment kibana create -f <definition.json> [flags]
@@ -13,10 +13,10 @@ ecctl deployment kibana create -f <definition.json> [flags]
 ### Options
 
 ```
-  -f, --file-template string   JSON file that contains the Kibana cluster definition
+  -f, --file-template string   JSON file that contains the Kibana instance definition
   -h, --help                   help for create
       --id string              Optional ID to set for the Elasticsearch cluster (Overrides ID if present).
-      --name string            Optional name to set for the Kibana cluster (Overrides name if present).
+      --name string            Optional name to set for the Kibana instance (Overrides name if present).
   -t, --track                  Tracks the progress of the performed task
 ```
 
@@ -43,5 +43,5 @@ ecctl deployment kibana create -f <definition.json> [flags]
 
 ### SEE ALSO
 
-* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana clusters
+* [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana instances
 
