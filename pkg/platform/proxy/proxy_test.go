@@ -79,13 +79,9 @@ func TestList(t *testing.T) {
 		{
 			name: "Proxy list fails",
 			args: args{params: Params{
-				API: api.NewMock(mock.Response{Response: http.Response{
-					StatusCode: http.StatusForbidden,
-					Status:     http.StatusText(http.StatusForbidden),
-					Body:       mock.NewStringBody(`{}`),
-				}}),
+				API: api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
 			}},
-			err: errors.New("unknown error (status 403)"),
+			err: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "Proxy list fails due to empty API",
@@ -154,14 +150,10 @@ func TestGet(t *testing.T) {
 			args: args{params: GetParams{
 				ID: "87b2c433c761",
 				Params: Params{
-					API: api.NewMock(mock.Response{Response: http.Response{
-						StatusCode: http.StatusForbidden,
-						Status:     http.StatusText(http.StatusForbidden),
-						Body:       mock.NewStringBody(`{}`),
-					}}),
+					API: api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
 				},
 			}},
-			err: errors.New("unknown error (status 403)"),
+			err: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "Get proxy fails due to empty params.ID",

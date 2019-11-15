@@ -225,14 +225,9 @@ func TestCreate(t *testing.T) {
 		{
 			name: "fails when the API returns an error",
 			args: args{params: CreateParams{
-				API: api.NewMock(mock.Response{
-					Response: http.Response{
-						StatusCode: 500,
-						Body:       mock.NewStringBody(`{}`),
-					},
-				}),
+				API: api.NewMock(mock.New500Response(mock.NewStringBody(`{}`))),
 			}},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New("{}"),
 		},
 		{
 			name: "succeeds with tracking",

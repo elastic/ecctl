@@ -53,11 +53,11 @@ func TestShow(t *testing.T) {
 			name: "fails on api error",
 			args: args{params: ShowParams{
 				API: api.NewMock(mock.New500Response(mock.NewStringBody(
-					"big failure",
+					`{"error": "failed getting role"}`,
 				))),
 				ID: "some",
 			}},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New(`{"error": "failed getting role"}`),
 		},
 		{
 			name: "succeeds",

@@ -66,7 +66,7 @@ func TestResync(t *testing.T) {
 					Body:       mock.NewStringBody(`{}`),
 				}}),
 			}},
-			wantErr: errors.New("unknown error (status 403)"),
+			wantErr: errors.New("{}"),
 		},
 		{
 			name: "Fails due to API error",

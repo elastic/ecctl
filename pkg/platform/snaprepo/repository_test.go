@@ -160,14 +160,11 @@ func TestDelete(t *testing.T) {
 				params: DeleteParams{
 					Name: "my_repo",
 					Params: Params{
-						API: api.NewMock(mock.Response{Response: http.Response{
-							StatusCode: 404,
-							Body:       mock.NewStringBody(`{}`),
-						}}),
+						API: api.NewMock(mock.New404Response(mock.NewStringBody(`{"error": "some error"}`))),
 					},
 				},
 			},
-			wantErr: errors.New("unknown error (status 404)"),
+			wantErr: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "Delete fails on invalid params",

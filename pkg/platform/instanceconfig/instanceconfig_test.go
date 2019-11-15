@@ -98,13 +98,10 @@ func TestList(t *testing.T) {
 			name: "List fails on API error",
 			args: args{
 				params: ListParams{
-					API: api.NewMock(mock.Response{Response: http.Response{
-						Body:       mock.NewStringBody(""),
-						StatusCode: 500,
-					}}),
+					API: api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
 				},
 			},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "List fails on parameter validation failure",
@@ -204,14 +201,11 @@ func TestGet(t *testing.T) {
 			name: "Get fails on API error",
 			args: args{
 				params: GetParams{
-					ID: "kibana",
-					API: api.NewMock(mock.Response{Response: http.Response{
-						Body:       mock.NewStringBody(""),
-						StatusCode: 500,
-					}}),
+					ID:  "kibana",
+					API: api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
 				},
 			},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "Get fails on parameter validation failure (API missing)",
@@ -329,13 +323,10 @@ func TestCreate(t *testing.T) {
 							},
 						},
 					},
-					API: api.NewMock(mock.Response{Response: http.Response{
-						Body:       mock.NewStringBody(""),
-						StatusCode: 500,
-					}}),
+					API: api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
 				},
 			},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "Create fails on parameter validation failure (API missing)",
@@ -424,13 +415,10 @@ func TestUpdate(t *testing.T) {
 							},
 						},
 					},
-					API: api.NewMock(mock.Response{Response: http.Response{
-						Body:       mock.NewStringBody(""),
-						StatusCode: 500,
-					}}),
+					API: api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
 				},
 			},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "Update fails on parameter validation failure (API missing)",
@@ -494,14 +482,11 @@ func TestDelete(t *testing.T) {
 			name: "Delete fails on API error",
 			args: args{
 				params: DeleteParams{
-					ID: "kibana",
-					API: api.NewMock(mock.Response{Response: http.Response{
-						Body:       mock.NewStringBody(""),
-						StatusCode: 500,
-					}}),
+					ID:  "kibana",
+					API: api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
 				},
 			},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "Delete fails on parameter validation failure (API missing)",

@@ -64,14 +64,11 @@ func TestSearch(t *testing.T) {
 			name: "fails if search api call fails",
 			args: args{params: SearchParams{
 				Request: models.SearchRequest{Query: &models.QueryContainer{}},
-				API: api.NewMock(mock.Response{Response: http.Response{
-					Body:       mock.NewStringBody(`{"error":"invalid query"}`),
-					StatusCode: 404,
-				}}),
+				API:     api.NewMock(mock.New404Response(mock.NewStringBody(`{"error": "some error"}`))),
 			}},
 			want:    nil,
 			wantErr: true,
-			error:   errors.New("unknown error (status 404)"),
+			error:   errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "succeeds if search api call succeeds",

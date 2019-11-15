@@ -50,11 +50,11 @@ func TestDelete(t *testing.T) {
 			name: "fails creating the role",
 			args: args{params: DeleteParams{
 				API: api.NewMock(mock.New500Response(mock.NewStringBody(
-					`"failed creating role"`,
+					`{"error": "failed deleting role"}`,
 				))),
 				ID: "some",
 			}},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New(`{"error": "failed deleting role"}`),
 		},
 		{
 			name: "succeeds",

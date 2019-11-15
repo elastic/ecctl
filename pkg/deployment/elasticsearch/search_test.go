@@ -62,13 +62,10 @@ func TestSearchClusters(t *testing.T) {
 			name: "Search clusters fails if search api call fails",
 			args: args{params: SearchClusterParams{
 				Request: models.SearchRequest{Query: &models.QueryContainer{}},
-				API: api.NewMock(mock.Response{Response: http.Response{
-					Body:       mock.NewStringBody("{}"),
-					StatusCode: 404,
-				}}),
+				API:     api.NewMock(mock.New404Response(mock.NewStringBody(`{}`))),
 			}},
 			wantErr: true,
-			error:   errors.New("unknown error (status 404)"),
+			error:   errors.New("{}"),
 		},
 		{
 			name: "Search clusters succeeds if search api call succeeds",

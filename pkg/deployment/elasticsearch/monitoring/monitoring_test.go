@@ -59,18 +59,12 @@ func TestEnable(t *testing.T) {
 			name: "fails due to API error",
 			args: args{params: EnableParams{
 				ClusterParams: util.ClusterParams{
-					API: api.NewMock(mock.Response{
-						Response: http.Response{
-							StatusCode: http.StatusInternalServerError,
-							Status:     http.StatusText(http.StatusInternalServerError),
-							Body:       mock.NewStringBody(`{}`),
-						},
-					}),
+					API:       api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
 					ClusterID: util.ValidClusterID,
 				},
 				TargetID: util.ValidClusterID,
 			}},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "fails due to empty parameters",
@@ -155,17 +149,11 @@ func TestDisable(t *testing.T) {
 			name: "fails due to API error",
 			args: args{params: DisableParams{
 				ClusterParams: util.ClusterParams{
-					API: api.NewMock(mock.Response{
-						Response: http.Response{
-							StatusCode: http.StatusInternalServerError,
-							Status:     http.StatusText(http.StatusInternalServerError),
-							Body:       mock.NewStringBody(`{}`),
-						},
-					}),
+					API:       api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
 					ClusterID: util.ValidClusterID,
 				},
 			}},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "fails due to empty parameters",

@@ -60,21 +60,10 @@ func TestReallocate(t *testing.T) {
 				OutputDevice: output.NewDevice(new(bytes.Buffer)),
 				ClusterParams: util.ClusterParams{
 					ClusterID: util.ValidClusterID,
-					API: api.NewMock(mock.Response{
-						Response: http.Response{
-							StatusCode: 500,
-							Body: mock.NewStructBody(models.ElasticsearchClusterInfo{
-								Topology: &models.ClusterTopologyInfo{
-									Instances: []*models.ClusterInstanceInfo{
-										{InstanceName: ec.String("instance-00000001")},
-									},
-								},
-							}),
-						},
-					}),
+					API:       api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "failed obtaining instances"}`))),
 				},
 			}},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New(`{"error": "failed obtaining instances"}`),
 		},
 		{
 			name: "Fails performing the move operation",
@@ -93,15 +82,12 @@ func TestReallocate(t *testing.T) {
 								},
 							}),
 						},
-					}, mock.Response{ // MOVE
-						Response: http.Response{
-							StatusCode: 500,
-							Body:       mock.NewStringBody(`{}`),
-						},
-					}),
+					}, mock.New500Response( // MOVE
+						mock.NewStringBody(`{"error": "failed moving instances"}`),
+					)),
 				},
 			}},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New(`{"error": "failed moving instances"}`),
 		},
 		{
 			name: "Succeeds when no instances are specified",

@@ -51,10 +51,10 @@ func TestSearch(t *testing.T) {
 		{
 			name: "fails on API error",
 			args: args{params: SearchParams{
-				API:     api.NewMock(mock.New500Response(mock.NewStringBody("error"))),
+				API:     api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
 				Request: &models.SearchRequest{},
 			}},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "Succeeds",

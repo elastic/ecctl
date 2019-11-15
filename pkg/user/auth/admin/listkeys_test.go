@@ -76,22 +76,18 @@ func TestListKeys(t *testing.T) {
 		{
 			name: "fails due to API error on all call",
 			args: args{params: ListKeysParams{
-				API: api.NewMock(
-					mock.New500Response(mock.NewStringBody("")),
-				),
+				API: api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
 				All: true,
 			}},
-			err: errors.New(`unknown error (status 500)`),
+			err: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "fails due to API error on user call",
 			args: args{params: ListKeysParams{
-				API: api.NewMock(
-					mock.New500Response(mock.NewStringBody("")),
-				),
+				API:    api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
 				UserID: "someid",
 			}},
-			err: errors.New(`unknown error (status 500)`),
+			err: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "succeeds listing keys for multiple users",

@@ -52,12 +52,12 @@ func TestSetBlessings(t *testing.T) {
 			name: "fails updating the role",
 			args: args{params: SetBlessingsParams{
 				API: api.NewMock(mock.New500Response(mock.NewStringBody(
-					`"failed creating role"`,
+					`{"error": "failed updating role"}`,
 				))),
 				Blessings: &models.Blessings{},
 				ID:        "one",
 			}},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New(`{"error": "failed updating role"}`),
 		},
 		{
 			name: "succeeds",

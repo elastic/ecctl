@@ -128,14 +128,11 @@ func TestGet(t *testing.T) {
 			name: "Get fails due to API failure",
 			args: args{
 				params: GetParams{
-					ID: "an id",
-					API: api.NewMock(mock.Response{Response: http.Response{
-						Body:       mock.NewStringBody(""),
-						StatusCode: 500,
-					}}),
+					ID:  "an id",
+					API: api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
 				},
 			},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "Get Succeeds",
@@ -406,15 +403,10 @@ func TestList(t *testing.T) {
 		},
 		{
 			name: "List fails due to API error",
-			args: args{
-				params: ListParams{
-					API: api.NewMock(mock.Response{Response: http.Response{
-						Body:       mock.NewStringBody(""),
-						StatusCode: 500,
-					}}),
-				},
-			},
-			err: errors.New("unknown error (status 500)"),
+			args: args{params: ListParams{
+				API: api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
+			}},
+			err: errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "List Succeeds",

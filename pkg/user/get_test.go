@@ -109,14 +109,11 @@ func TestGet(t *testing.T) {
 			args: args{
 				params: GetParams{
 					UserName: "hermenelgilda",
-					API: api.NewMock(mock.Response{Response: http.Response{
-						Body:       mock.NewStringBody(""),
-						StatusCode: 500,
-					}}),
+					API:      api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
 				},
 			},
 			wantErr: true,
-			err:     errors.New("unknown error (status 500)"),
+			err:     errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "Get succeeds",

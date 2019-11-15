@@ -139,13 +139,13 @@ func TestGet(t *testing.T) {
 			args: args{params: GetParams{
 				Version: "6.0.0",
 				API: api.NewMock(mock.Response{
-					Error: errors.New("unknown error"),
+					Error: errors.New(`{"error": "some error"}`),
 				}),
 			}},
 			err: &url.Error{
 				Op:  "Get",
 				URL: "https://mock-host/mock-path/stack/versions/6.0.0",
-				Err: errors.New("unknown error"),
+				Err: errors.New(`{"error": "some error"}`),
 			},
 		},
 		{
@@ -302,13 +302,13 @@ func TestList(t *testing.T) {
 			name: "List fails due to API error",
 			args: args{params: ListParams{
 				API: api.NewMock(mock.Response{
-					Error: errors.New("unknown error"),
+					Error: errors.New(`{"error": "some error"}`),
 				}),
 			}},
 			err: &url.Error{
 				Op:  "Get",
 				URL: "https://mock-host/mock-path/stack/versions?show_deleted=false&show_unusable=false",
-				Err: errors.New("unknown error"),
+				Err: errors.New(`{"error": "some error"}`),
 			},
 		},
 		{
@@ -316,13 +316,13 @@ func TestList(t *testing.T) {
 			args: args{params: ListParams{
 				Deleted: true,
 				API: api.NewMock(mock.Response{
-					Error: errors.New("unknown error"),
+					Error: errors.New(`{"error": "some error"}`),
 				}),
 			}},
 			err: &url.Error{
 				Op:  "Get",
 				URL: "https://mock-host/mock-path/stack/versions?show_deleted=true&show_unusable=false",
-				Err: errors.New("unknown error"),
+				Err: errors.New(`{"error": "some error"}`),
 			},
 		},
 		{
@@ -372,13 +372,13 @@ func TestUpload(t *testing.T) {
 			args: args{params: UploadParams{
 				StackPack: strings.NewReader("aa"),
 				API: api.NewMock(mock.Response{
-					Error: errors.New("unknown error"),
+					Error: errors.New(`{"error": "some error"}`),
 				}),
 			}},
 			err: &url.Error{
 				Op:  "Post",
 				URL: "https://mock-host/mock-path/stack/versions",
-				Err: errors.New("unknown error"),
+				Err: errors.New(`{"error": "some error"}`),
 			},
 		},
 		{
@@ -460,13 +460,13 @@ func TestDelete(t *testing.T) {
 			args: args{params: DeleteParams{
 				Version: "5.6.0",
 				API: api.NewMock(mock.Response{
-					Error: errors.New("unknown error"),
+					Error: errors.New(`{"error": "some error"}`),
 				}),
 			}},
 			err: &url.Error{
 				Op:  "Delete",
 				URL: "https://mock-host/mock-path/stack/versions/5.6.0",
-				Err: errors.New("unknown error"),
+				Err: errors.New(`{"error": "some error"}`),
 			},
 		},
 		{

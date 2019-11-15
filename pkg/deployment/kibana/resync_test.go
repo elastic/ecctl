@@ -63,10 +63,10 @@ func TestResync(t *testing.T) {
 				ID: "2c221bd86b7f48959a59ee3128d5c5e8",
 				API: api.NewMock(mock.Response{Response: http.Response{
 					StatusCode: http.StatusForbidden,
-					Body:       mock.NewStringBody(`{}`),
+					Body:       mock.NewStringBody(`{"error": "some forbidden error"}`),
 				}}),
 			}},
-			wantErr: errors.New("unknown error (status 403)"),
+			wantErr: errors.New(`{"error": "some forbidden error"}`),
 		},
 		{
 			name: "Fails due to API error",

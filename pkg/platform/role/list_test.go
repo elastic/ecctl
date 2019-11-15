@@ -50,10 +50,10 @@ func TestList(t *testing.T) {
 			name: "fails on api error",
 			args: args{params: ListParams{
 				API: api.NewMock(mock.New500Response(mock.NewStringBody(
-					"big failure",
+					`{"error": "failed listing roles"}`,
 				))),
 			}},
-			err: errors.New("unknown error (status 500)"),
+			err: errors.New(`{"error": "failed listing roles"}`),
 		},
 		{
 			name: "succeeds",

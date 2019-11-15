@@ -62,14 +62,11 @@ func TestList(t *testing.T) {
 			name: "List fails due to API failure",
 			args: args{
 				params: ListParams{
-					API: api.NewMock(mock.Response{Response: http.Response{
-						Body:       mock.NewStringBody(""),
-						StatusCode: 500,
-					}}),
+					API: api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "some error"}`))),
 				},
 			},
 			wantErr: true,
-			err:     errors.New("unknown error (status 500)"),
+			err:     errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "List succeeds",

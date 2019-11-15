@@ -175,14 +175,11 @@ func TestCreate(t *testing.T) {
 					UserName: "bob",
 					Password: []byte("supersecretpass"),
 					Roles:    []string{"ece_platform_admin"},
-					API: api.NewMock(mock.Response{Response: http.Response{
-						Body:       mock.NewStringBody(""),
-						StatusCode: 404,
-					}}),
+					API:      api.NewMock(mock.New404Response(mock.NewStringBody(`{"error": "some error"}`))),
 				},
 			},
 			wantErr: true,
-			err:     errors.New("unknown error (status 404)"),
+			err:     errors.New(`{"error": "some error"}`),
 		},
 		{
 			name: "Create succeeds",
