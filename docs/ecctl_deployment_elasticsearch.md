@@ -23,14 +23,13 @@ ecctl deployment elasticsearch [flags]
       --config string      Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
       --force              Do not ask for confirmation
       --format string      Formats the output using a Go template
-      --host string        Base URL to use (default "https://api.elastic-cloud.com")
+      --host string        Base URL to use
       --insecure           Skips all TLS validation
       --message string     A message to set on cluster operation
       --output string      Output format [text|json] (default "text")
       --pass string        Password to use to authenticate (If empty will look for EC_PASS environment variable)
       --pprof              Enables pprofing and saves the profile to pprof-20060102150405
   -q, --quiet              Suppresses the configuration file used for the run, if any
-      --region string      Elastic Cloud region
       --timeout duration   Timeout to use on all HTTP calls (default 30s)
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
@@ -45,7 +44,7 @@ ecctl deployment elasticsearch [flags]
 * [ecctl deployment elasticsearch delete](ecctl_deployment_elasticsearch_delete.md)	 - Deletes an Elasticsearch cluster
 * [ecctl deployment elasticsearch diagnose](ecctl_deployment_elasticsearch_diagnose.md)	 - Generates a diagnostics bundle for the cluster
 * [ecctl deployment elasticsearch instances](ecctl_deployment_elasticsearch_instances.md)	 - Manages elasticsearch at the instance level
-* [ecctl deployment elasticsearch list](ecctl_deployment_elasticsearch_list.md)	 - Returns the list of Elasticsearch clusters for a region
+* [ecctl deployment elasticsearch list](ecctl_deployment_elasticsearch_list.md)	 - Returns the list of Elasticsearch clusters
 * [ecctl deployment elasticsearch monitoring](ecctl_deployment_elasticsearch_monitoring.md)	 - Manages monitoring for an Elasticsearch cluster
 * [ecctl deployment elasticsearch plan](ecctl_deployment_elasticsearch_plan.md)	 - Manages Elasticsearch plans
 * [ecctl deployment elasticsearch reallocate](ecctl_deployment_elasticsearch_reallocate.md)	 - Reallocates the Elasticsearch cluster nodes

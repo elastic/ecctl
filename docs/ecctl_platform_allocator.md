@@ -23,14 +23,13 @@ ecctl platform allocator [flags]
       --config string      Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
       --force              Do not ask for confirmation
       --format string      Formats the output using a Go template
-      --host string        Base URL to use (default "https://api.elastic-cloud.com")
+      --host string        Base URL to use
       --insecure           Skips all TLS validation
       --message string     A message to set on cluster operation
       --output string      Output format [text|json] (default "text")
       --pass string        Password to use to authenticate (If empty will look for EC_PASS environment variable)
       --pprof              Enables pprofing and saves the profile to pprof-20060102150405
   -q, --quiet              Suppresses the configuration file used for the run, if any
-      --region string      Elastic Cloud region
       --timeout duration   Timeout to use on all HTTP calls (default 30s)
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
@@ -40,7 +39,7 @@ ecctl platform allocator [flags]
 ### SEE ALSO
 
 * [ecctl platform](ecctl_platform.md)	 - Manages the platform
-* [ecctl platform allocator list](ecctl_platform_allocator_list.md)	 - Returns all allocators that have instances or are connected in the region. Use --all flag or --output json to show all. Use --query to match any of the allocators properties.
+* [ecctl platform allocator list](ecctl_platform_allocator_list.md)	 - Returns all allocators that have instances or are connected to the platform. Use --all flag or --output json to show all. Use --query to match any of the allocators properties.
 * [ecctl platform allocator maintenance](ecctl_platform_allocator_maintenance.md)	 - Sets the allocator in Maintenance mode
 * [ecctl platform allocator metadata](ecctl_platform_allocator_metadata.md)	 - Manages an allocator's metadata
 * [ecctl platform allocator search](ecctl_platform_allocator_search.md)	 - Performs advanced allocator searching
