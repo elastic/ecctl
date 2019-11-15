@@ -18,6 +18,7 @@
 package cmd
 
 import (
+	"os"
 	"path/filepath"
 	"runtime"
 	"strings"
@@ -35,7 +36,10 @@ var initCmd = &cobra.Command{
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		fp := strings.Replace(ecctlHomePath, homePrefix, cmdutil.GetHomePath(runtime.GOOS), 1)
-		fp = filepath.Join(fp, defaultViper.GetString("config"))
+		if err := os.MkdirAll(fp, 0664); err != nil {
+			return err
+		}
+
 		return ecctl.InitConfig(ecctl.InitConfigParams{
 			Client:           defaultClient,
 			Viper:            defaultViper,
@@ -43,7 +47,7 @@ var initCmd = &cobra.Command{
 			Writer:           defaultOutput,
 			ErrWriter:        defaultError,
 			PasswordReadFunc: terminal.ReadPassword,
-			FilePath:         fp,
+			FilePath:         filepath.Join(fp, defaultViper.GetString("config")),
 		})
 	},
 }
