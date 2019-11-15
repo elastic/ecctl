@@ -54,8 +54,8 @@ var (
 )
 
 var (
-	version, commit, owner, repo string
-	excludedApplicationCommands  = []string{
+	versionInfo                 ecctl.VersionInfo
+	excludedApplicationCommands = []string{
 		"help", "version", "generate", "docs", "completions", "init",
 	}
 	messageErrHasNoPreRunCheck = "command %s/%s has no PreRunE check set"
@@ -81,11 +81,11 @@ var RootCmd = &cobra.Command{
 // Execute adds all child commands to the root command sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 // It returns the statuscode to be used by os.Exit.
-func Execute(v, c, o, r string) int {
+func Execute(v ecctl.VersionInfo) int {
 	defer stopDebug(defaultViper)
 
 	populateValidArgs(RootCmd)
-	version, commit, owner, repo = v, c, o, r
+	versionInfo = v
 
 	if err := RootCmd.Execute(); err != nil {
 		fmt.Fprintln(RootCmd.OutOrStderr(), err)
