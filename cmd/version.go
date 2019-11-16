@@ -23,10 +23,11 @@ import (
 	"os"
 	"runtime"
 
-	"github.com/elastic/ecctl/pkg/ecctl"
 	"github.com/elastic/uptd"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
+
+	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 const (
