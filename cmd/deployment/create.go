@@ -152,7 +152,7 @@ var createCmd = &cobra.Command{
 			API:       ecctl.Get().API,
 			RequestID: reqID,
 			Request:   &r,
-			Overrides: &deployment.CreateOverrides{
+			Overrides: &deployment.PayloadOverrides{
 				Name:    name,
 				Region:  region,
 				Version: version,

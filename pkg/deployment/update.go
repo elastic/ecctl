@@ -28,20 +28,22 @@ import (
 	"github.com/elastic/ecctl/pkg/util"
 )
 
-// CreateParams is consumed by Create.
-type CreateParams struct {
+// UpdateParams is consumed by Update.
+type UpdateParams struct {
 	*api.API
 
-	Request *models.DeploymentCreateRequest
+	DeploymentID string
+	Request      *models.DeploymentUpdateRequest
 
-	RequestID string
+	// Optional values
+	SkipSnapshot      bool
+	HidePrunedOrphans bool
 
-	// deployment Overrides
-	Overrides *PayloadOverrides
+	Region string
 }
 
-// Validate ensures the parameters are usable by Create.
-func (params CreateParams) Validate() error {
+// Validate ensures the parameters are usable by Update.
+func (params UpdateParams) Validate() error {
 	var merr = new(multierror.Error)
 
 	if params.API == nil {
@@ -49,39 +51,40 @@ func (params CreateParams) Validate() error {
 	}
 
 	if params.Request == nil {
-		merr = multierror.Append(merr, errors.New("deployment create: request payload cannot be empty"))
+		merr = multierror.Append(merr, errors.New("deployment update: request payload cannot be empty"))
+	}
+
+	if len(params.DeploymentID) != 32 {
+		merr = multierror.Append(merr, util.ErrDeploymentID)
 	}
 
 	return merr.ErrorOrNil()
 }
 
-// Create performs a Create using the specified Request against the API. Also
-// overrides the passed request with the PayloadOverrides set in the wrapping
-// CreateParams.
-func Create(params CreateParams) (*models.DeploymentCreateResponse, error) {
+// Update receives an update payload with an optional region override in case
+// the region isn't specified in the update request payload. Additionally if
+// Request.PruneOrphans is false then any omitted resources aren't shutdown.
+// The opposite behavior can be expected when the flag is true since the update
+// request is treated as the single source of truth and the complete desired
+// deployment definition.
+func Update(params UpdateParams) (*models.DeploymentUpdateResponse, error) {
 	if err := params.Validate(); err != nil {
 		return nil, err
 	}
 
-	setOverrides(params.Request, params.Overrides)
+	setOverrides(params.Request, &PayloadOverrides{Region: params.Region})
 
-	var id *string
-	if params.RequestID != "" {
-		id = &params.RequestID
-	}
-
-	res, res2, err := params.V1API.Deployments.CreateDeployment(
-		deployments.NewCreateDeploymentParams().
-			WithRequestID(id).
-			WithBody(params.Request),
+	res, err := params.V1API.Deployments.UpdateDeployment(
+		deployments.NewUpdateDeploymentParams().
+			WithDeploymentID(params.DeploymentID).
+			WithBody(params.Request).
+			WithSkipSnapshot(&params.SkipSnapshot).
+			WithHidePrunedOrphans(&params.HidePrunedOrphans),
 		params.AuthWriter,
 	)
+
 	if err != nil {
 		return nil, api.UnwrapError(err)
-	}
-
-	if res == nil {
-		return res2.Payload, nil
 	}
 
 	return res.Payload, nil
