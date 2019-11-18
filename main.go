@@ -20,7 +20,10 @@ package main
 import (
 	"os"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api"
+
 	"github.com/elastic/ecctl/cmd"
+	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var (
@@ -28,10 +31,18 @@ var (
 	commit  string
 	owner   string
 	repo    string
+	built   string
 )
 
 func main() {
 	os.Exit(
-		cmd.Execute(version, commit, owner, repo),
+		cmd.Execute(ecctl.VersionInfo{
+			Version:      version,
+			Commit:       commit,
+			APIVersion:   api.Version,
+			Built:        built,
+			Organization: owner,
+			Repository:   repo,
+		}),
 	)
 }

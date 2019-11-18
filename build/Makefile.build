@@ -6,7 +6,7 @@ CURRENT_ARCH := $(shell uname -s | tr '[:upper:]' '[:lower:]')
 export OWNER := elastic
 export REPO := ecctl
 
-DEFAULT_LDFLAGS ?= -X main.version=$(VERSION)-dev -X main.commit=$(shell git rev-parse HEAD) -X main.owner=$(OWNER) -X main.repo=$(REPO)
+DEFAULT_LDFLAGS ?= -X main.version=$(VERSION)-dev -X main.commit=$(shell git rev-parse HEAD) -X main.owner=$(OWNER) -X main.repo=$(REPO) -X main.built=$(shell date -u +%a_%d_%b_%H:%M:%S_%Y)
 
 REPORT_PATH ?= reports
 TEST_UNIT_FLAGS ?= -timeout 10s -p 4 -race -cover -coverprofile=$(REPORT_PATH)/c.out

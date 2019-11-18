@@ -19,12 +19,15 @@ package cmd
 
 import (
 	"fmt"
+	"io"
 	"os"
 	"runtime"
 
 	"github.com/elastic/uptd"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
+
+	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 const (
@@ -44,34 +47,9 @@ var versionCmd = &cobra.Command{
 	Short:   "Shows ecctl version",
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		fmt.Printf("%s %s (build %s)\n", RootCmd.Use, version, commit)
+		fmt.Fprint(cmd.OutOrStdout(), versionInfo)
 
-		githubUpdateProvider, err := uptd.NewGithubProvider(owner, repo, githubToken())
-		if err != nil {
-			fmt.Fprintln(cmd.OutOrStdout(), errors.Wrap(err, errWrapError.Error()))
-			return nil
-		}
-
-		uptodate, err := uptd.New(githubUpdateProvider, version)
-		if err != nil {
-			fmt.Fprintln(cmd.OutOrStdout(), errors.Wrap(err, errWrapError.Error()))
-			return nil
-		}
-
-		res, err := uptodate.Check()
-		if err != nil {
-			fmt.Fprintln(cmd.OutOrStdout(), errors.Wrap(err, errWrapError.Error()))
-			return nil
-		}
-
-		if res.NeedsUpdate {
-			var message = fmt.Sprintf(updateFmt, RootCmd.Name(),
-				res.Latest.Version.String(), res.Latest.URL,
-			)
-			fmt.Fprintln(cmd.OutOrStdout(), message)
-		}
-
-		return nil
+		return checkUpdate(versionInfo, cmd.OutOrStderr())
 	},
 }
 
@@ -86,6 +64,36 @@ func githubToken() string {
 		}
 	}
 	return ""
+}
+
+func checkUpdate(version ecctl.VersionInfo, device io.Writer) error {
+	githubUpdateProvider, err := uptd.NewGithubProvider(
+		version.Organization, version.Repository, githubToken(),
+	)
+	if err != nil {
+		fmt.Fprintln(device, errors.Wrap(err, errWrapError.Error()))
+		return nil
+	}
+
+	uptodate, err := uptd.New(githubUpdateProvider, version.Version)
+	if err != nil {
+		fmt.Fprintln(device, errors.Wrap(err, errWrapError.Error()))
+		return nil
+	}
+
+	res, err := uptodate.Check()
+	if err != nil {
+		fmt.Fprintln(device, errors.Wrap(err, errWrapError.Error()))
+		return nil
+	}
+
+	if res.NeedsUpdate {
+		var message = fmt.Sprintf(updateFmt, RootCmd.Name(),
+			res.Latest.Version.String(), res.Latest.URL,
+		)
+		fmt.Fprintln(device, message)
+	}
+	return nil
 }
 
 func init() {
