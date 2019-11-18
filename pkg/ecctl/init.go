@@ -56,7 +56,7 @@ const (
 	missingConfigMsg  = `Missing configuration file, would you like to initialise it? [y/n]: `
 	existingConfigMsg = `Would you like to change your current settings? [y/n]: `
 
-	hostMsg = "Enter the URL of the Elastic Cloud API or your ECE installation: "
+	hostMsg = "Enter the URL of your ECE installation: "
 
 	apiKeyMsg = "Paste your API Key and press enter: "
 	userMsg   = "Type in your username: "
