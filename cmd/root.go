@@ -99,14 +99,10 @@ func Execute(v ecctl.VersionInfo) int {
 
 func init() {
 	RootCmd.PersistentFlags().String("config", "config", "Config name, used to have multiple configs in $HOME/.ecctl/<env>")
-	RootCmd.PersistentFlags().String("host", "https://api.elastic-cloud.com", "Base URL to use")
+	RootCmd.PersistentFlags().String("host", "", "Base URL to use")
 	RootCmd.PersistentFlags().String("user", "", "Username to use to authenticate (If empty will look for EC_USER environment variable)")
 	RootCmd.PersistentFlags().String("pass", "", "Password to use to authenticate (If empty will look for EC_PASS environment variable)")
 	RootCmd.PersistentFlags().String("apikey", "", "API key to use to authenticate (If empty will look for EC_APIKEY environment variable)")
-	RootCmd.PersistentFlags().String("region", "", "Elastic Cloud region")
-	RootCmd.Flag("region").Annotations = map[string][]string{
-		cobra.BashCompCustom: {"__ecctl_valid_regions"},
-	}
 	RootCmd.PersistentFlags().Bool("verbose", false, "Enable verbose mode")
 	RootCmd.PersistentFlags().String("output", "text", "Output format [text|json]")
 	RootCmd.PersistentFlags().Bool("force", false, "Do not ask for confirmation")
@@ -117,6 +113,13 @@ func init() {
 	RootCmd.PersistentFlags().Bool("insecure", false, "Skips all TLS validation")
 	RootCmd.PersistentFlags().BoolP("quiet", "q", false, "Suppresses the configuration file used for the run, if any")
 	RootCmd.PersistentFlags().Duration("timeout", time.Second*30, "Timeout to use on all HTTP calls")
+	RootCmd.PersistentFlags().String("region", "", "Elastic Cloud region")
+	RootCmd.Flag("region").Annotations = map[string][]string{
+		cobra.BashCompCustom: {"__ecctl_valid_regions"},
+	}
+	// Remove this line after ESS Public API is available.
+	RootCmd.PersistentFlags().MarkHidden("region")
+
 	defaultViper.BindPFlags(RootCmd.PersistentFlags())
 }
 

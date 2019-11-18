@@ -5,3 +5,4 @@ github.com/spf13/cobra.MarkFlagFilename
 github.com/spf13/cobra.MarkFlagFilename
 (*github.com/spf13/cobra.Command).Help
 (*github.com/spf13/viper.Viper).BindPFlags
+(*github.com/spf13/pflag.FlagSet).MarkHidden

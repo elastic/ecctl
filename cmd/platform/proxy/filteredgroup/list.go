@@ -27,7 +27,7 @@ import (
 )
 
 const (
-	filteredGroupsUse = `Returns all proxies filtered groups in the region`
+	filteredGroupsUse = `Returns all proxies filtered groups in the platform`
 )
 
 func listProxyFilteredGroups(cmd *cobra.Command, args []string) error {

@@ -45,7 +45,7 @@ Read all the simple query string syntax in https://www.elastic.co/guide/en/elast
 
 var listElasticsearchCmd = &cobra.Command{
 	Use:     "list",
-	Short:   "Returns the list of Elasticsearch clusters for a region",
+	Short:   "Returns the list of Elasticsearch clusters",
 	Example: elasticSearchQueryExamples,
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {

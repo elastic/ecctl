@@ -28,7 +28,7 @@ import (
 )
 
 const (
-	proxyListMessage = `Returns all of the proxies in the region`
+	proxyListMessage = `Returns all of the proxies in the platform`
 	proxyShowMessage = `Returns information about the proxy with given id`
 )
 
