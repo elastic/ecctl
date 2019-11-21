@@ -16,6 +16,9 @@ ecctl deployment show <deployment-id> [flags]
 
 * Shows kibana resource information from a given deployment:
   ecctl deployment show <deployment-id> --type kibana
+
+* Shows apm resource information from a given deployment with a specified ref-id.
+  ecctl deployment show <deployment-id> --type apm --ref-id apm-server
 ```
 
 ### Options
@@ -26,6 +29,7 @@ ecctl deployment show <deployment-id> [flags]
       --plan-defaults   Shows the deployment plan defaults
       --plan-logs       Shows the deployment plan logs
       --plans           Shows the deployment plans
+      --ref-id string   Optional deployment type RefId, if not set, the RefId will be auto-discovered through an API call
   -s, --settings        Shows the deployment settings
       --type string     Optional deployment type to show resource information (elasticsearch, kibana, apm, or appsearch)
 ```

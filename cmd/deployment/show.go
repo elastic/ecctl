@@ -30,7 +30,10 @@ import (
 
 const showExample = `
 * Shows kibana resource information from a given deployment:
-  ecctl deployment show <deployment-id> --type kibana`
+  ecctl deployment show <deployment-id> --type kibana
+
+* Shows apm resource information from a given deployment with a specified ref-id.
+  ecctl deployment show <deployment-id> --type apm --ref-id apm-server`
 
 var acceptedTypes = []string{"apm", "appsearch", "elasticsearch", "kibana"}
 
@@ -52,9 +55,11 @@ var showCmd = &cobra.Command{
 		plans, _ := cmd.Flags().GetBool("plans")
 		showPlans := planLogs || planDefaults || plans
 
+		refID, _ := cmd.Flags().GetString("ref-id")
 		getParams := deployment.GetParams{
 			API:          ecctl.Get().API,
 			DeploymentID: args[0],
+			RefID:        refID,
 			QueryParams: deputil.QueryParams{
 				ShowPlans:        showPlans,
 				ShowPlanLogs:     planLogs,
@@ -64,20 +69,10 @@ var showCmd = &cobra.Command{
 			},
 		}
 
-		var err error
-		var res interface{}
-		switch resourceType {
-		case "apm":
-			res, err = deployment.GetApm(getParams)
-		case "kibana":
-			res, err = deployment.GetKibana(getParams)
-		case "elasticsearch":
-			res, err = deployment.GetElasticsearch(getParams)
-		case "appsearch":
-			res, err = deployment.GetAppSearch(getParams)
-		default:
-			res, err = deployment.Get(getParams)
-		}
+		res, err := deployment.GetResource(deployment.GetResourceParams{
+			GetParams: getParams,
+			Type:      resourceType,
+		})
 
 		if err != nil {
 			return err
@@ -89,6 +84,7 @@ var showCmd = &cobra.Command{
 func init() {
 	Command.AddCommand(showCmd)
 	showCmd.Flags().String("type", "", "Optional deployment type to show resource information (elasticsearch, kibana, apm, or appsearch)")
+	showCmd.Flags().String("ref-id", "", "Optional deployment type RefId, if not set, the RefId will be auto-discovered through an API call")
 	showCmd.Flags().Bool("plans", false, "Shows the deployment plans")
 	showCmd.Flags().Bool("plan-logs", false, "Shows the deployment plan logs")
 	showCmd.Flags().Bool("plan-defaults", false, "Shows the deployment plan defaults")
