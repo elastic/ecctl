@@ -37,26 +37,10 @@ type CreateParams struct {
 	RequestID string
 
 	// deployment Overrides
-	Overrides *CreateOverrides
+	Overrides *PayloadOverrides
 }
 
-// CreateOverrides represent the override settings to
-type CreateOverrides struct {
-	// If set, it will override the deployment name.
-	Name string
-
-	// If set, it will override the region when not present in the
-	// DeploymentCreateRequest.
-	// Note this behaviour is different from the rest of overrides
-	// since this field tends to be populated by the global region
-	// field which is implicit (by config) rather than explicit by flag.
-	Region string
-
-	// If set, it'll override all versions to match this one.
-	Version string
-}
-
-// Validate ensures the parameters are usable by Shutdown.
+// Validate ensures the parameters are usable by Create.
 func (params CreateParams) Validate() error {
 	var merr = new(multierror.Error)
 
@@ -71,7 +55,9 @@ func (params CreateParams) Validate() error {
 	return merr.ErrorOrNil()
 }
 
-// Create performs a Create using the specified Request against the API.
+// Create performs a Create using the specified Request against the API. Also
+// overrides the passed request with the PayloadOverrides set in the wrapping
+// CreateParams.
 func Create(params CreateParams) (*models.DeploymentCreateResponse, error) {
 	if err := params.Validate(); err != nil {
 		return nil, err
@@ -99,61 +85,4 @@ func Create(params CreateParams) (*models.DeploymentCreateResponse, error) {
 	}
 
 	return res.Payload, nil
-}
-
-// setOverrides sets a series of overrides
-// nolint
-func setOverrides(req *models.DeploymentCreateRequest, overrides *CreateOverrides) {
-	if req == nil || overrides == nil || req.Resources == nil {
-		return
-	}
-
-	if overrides.Name != "" {
-		req.Name = overrides.Name
-	}
-
-	for _, resource := range req.Resources.Apm {
-		if resource.Region == nil && overrides.Region != "" {
-			resource.Region = &overrides.Region
-		}
-
-		if overrides.Version != "" {
-			if resource.Plan != nil && resource.Plan.Apm != nil {
-				resource.Plan.Apm.Version = overrides.Version
-			}
-		}
-	}
-
-	for _, resource := range req.Resources.Appsearch {
-		if resource.Region == nil && overrides.Region != "" {
-			resource.Region = &overrides.Region
-		}
-		if overrides.Version != "" {
-			if resource.Plan != nil && resource.Plan.Appsearch != nil {
-				resource.Plan.Appsearch.Version = overrides.Version
-			}
-		}
-	}
-
-	for _, resource := range req.Resources.Elasticsearch {
-		if resource.Region == nil && overrides.Region != "" {
-			resource.Region = &overrides.Region
-		}
-		if overrides.Version != "" {
-			if resource.Plan != nil && resource.Plan.Elasticsearch != nil {
-				resource.Plan.Elasticsearch.Version = overrides.Version
-			}
-		}
-	}
-
-	for _, resource := range req.Resources.Kibana {
-		if resource.Region == nil && overrides.Region != "" {
-			resource.Region = &overrides.Region
-		}
-		if overrides.Version != "" {
-			if resource.Plan != nil && resource.Plan.Kibana != nil {
-				resource.Plan.Kibana.Version = overrides.Version
-			}
-		}
-	}
 }
