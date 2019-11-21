@@ -39,6 +39,8 @@ type UpdateParams struct {
 	SkipSnapshot      bool
 	HidePrunedOrphans bool
 
+	// Region is an optional value which if set and the the Request.Resources
+	// are missing a region, it populates that field with the value of Region.
 	Region string
 }
 

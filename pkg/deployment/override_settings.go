@@ -35,8 +35,9 @@ type PayloadOverrides struct {
 	Version string
 }
 
-// setOverrides sets a series of overrides
-// nolint
+// setOverrides sets a series of overrides to either the Create or Update
+// deployment request. See PayloadOverrides to understand which how each
+// field of that struct affects the behavior of this function.
 func setOverrides(req interface{}, overrides *PayloadOverrides) {
 	if req == nil || overrides == nil {
 		return
@@ -68,7 +69,6 @@ func setOverrides(req interface{}, overrides *PayloadOverrides) {
 		apm, appsearch, elasticsearch, kibana,
 		overrides.Region, overrides.Version,
 	)
-
 }
 
 // nolint

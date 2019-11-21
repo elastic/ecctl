@@ -109,7 +109,7 @@ setting --prune-orphans to "true" will cause any resources not specified in the 
 ```
   -f, --file string           Partial (default) or full JSON file deployment update payload
   -h, --help                  help for update
-      --hide-pruned-orphans   Hides orphaned resources that were shut down (only relevant if --skip-orphan-prunning=true)
+      --hide-pruned-orphans   Hides orphaned resources that were shut down (only relevant if --prune-orphans=true)
       --prune-orphans         When set to true, it will remove any resources not specified in the update request, treating the json file contents as the authoritative deployment definition
       --skip-snapshot         Skips taking an Elasticsearch snapshot prior to shutting down the deployment
 ```

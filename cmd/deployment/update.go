@@ -172,7 +172,7 @@ func init() {
 	Command.AddCommand(updateCmd)
 	updateCmd.Flags().Bool("prune-orphans", false, "When set to true, it will remove any resources not specified in the update request, treating the json file contents as the authoritative deployment definition")
 	updateCmd.Flags().Bool("skip-snapshot", false, "Skips taking an Elasticsearch snapshot prior to shutting down the deployment")
-	updateCmd.Flags().Bool("hide-pruned-orphans", false, "Hides orphaned resources that were shut down (only relevant if --skip-orphan-prunning=true)")
+	updateCmd.Flags().Bool("hide-pruned-orphans", false, "Hides orphaned resources that were shut down (only relevant if --prune-orphans=true)")
 	updateCmd.Flags().StringP("file", "f", "", "Partial (default) or full JSON file deployment update payload")
 	updateCmd.MarkFlagRequired("file")
 	updateCmd.MarkFlagFilename("file", "*.json")
