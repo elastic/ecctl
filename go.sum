@@ -51,8 +51,8 @@ github.com/dgrijalva/jwt-go v3.2.0+incompatible/go.mod h1:E3ru+11k8xSBh+hMPgOLZm
 github.com/dgryski/go-sip13 v0.0.0-20181026042036-e10d5fee7954/go.mod h1:vAd38F8PWV+bWy6jNmig1y/TA+kYO4g3RSRF0IAv0no=
 github.com/docker/go-units v0.3.3/go.mod h1:fgPhTUdO+D/Jk86RDLlptpiXQzgHJF7gydDDbaIK4Dk=
 github.com/docker/go-units v0.4.0/go.mod h1:fgPhTUdO+D/Jk86RDLlptpiXQzgHJF7gydDDbaIK4Dk=
-github.com/elastic/cloud-sdk-go v1.0.0-bc5 h1:POlV6bafKwT728xJy+did8Q1QlDweE0z/lVfgRY6ic4=
-github.com/elastic/cloud-sdk-go v1.0.0-bc5/go.mod h1:19tuRaJglGTECDJfiWEDMOVj23ZL+9+YYoIV1fZIGzc=
+github.com/elastic/cloud-sdk-go v1.0.0-bc6 h1:vxt738VM/thyF2QD3mBFNRR1n2Hv0qFJetOXQv/9NbQ=
+github.com/elastic/cloud-sdk-go v1.0.0-bc6/go.mod h1:19tuRaJglGTECDJfiWEDMOVj23ZL+9+YYoIV1fZIGzc=
 github.com/elastic/uptd v1.0.0 h1:oUhbbTK6hjFYB5w5dwjo1HtbqrWyLiqj+6Sb05oawU8=
 github.com/elastic/uptd v1.0.0/go.mod h1:2Pm07gLal/a/gTPq3el2QgOjoxu97pB2I17AprXxa48=
 github.com/fatih/color v1.7.0/go.mod h1:Zm6kSWBoL9eyXnKyktHP6abPY2pDugNf5KwzbycvMj4=
