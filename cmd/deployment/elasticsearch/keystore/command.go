@@ -15,32 +15,18 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package cmdelasticsearch
+package cmdelasticsearchkeystore
 
 import (
 	"github.com/spf13/cobra"
-
-	cmdelasticsearchinstances "github.com/elastic/ecctl/cmd/deployment/elasticsearch/instances"
-	cmdelasticsearchkeystore "github.com/elastic/ecctl/cmd/deployment/elasticsearch/keystore"
-	cmdelasticsearchmonitoring "github.com/elastic/ecctl/cmd/deployment/elasticsearch/monitoring"
-	cmdelasticsearchplan "github.com/elastic/ecctl/cmd/deployment/elasticsearch/plan"
 )
 
-// Command defines the elasticsearch subcommand
+// Command is the elasticsearch keystore command
 var Command = &cobra.Command{
-	Use:     "elasticsearch",
-	Short:   "Manages Elasticsearch clusters",
-	PreRunE: cobra.MaximumNArgs(0),
-	Run: func(cmd *cobra.Command, args []string) {
-		cmd.Help()
+	Use:     `keystore`,
+	Short:   "Manages an Elasticsearch cluster's keystore",
+	PreRunE: cobra.NoArgs,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return cmd.Help()
 	},
-}
-
-func init() {
-	Command.AddCommand(
-		cmdelasticsearchmonitoring.Command,
-		cmdelasticsearchplan.Command,
-		cmdelasticsearchinstances.Command,
-		cmdelasticsearchkeystore.Command,
-	)
 }

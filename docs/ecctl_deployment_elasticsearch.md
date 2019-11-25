@@ -44,6 +44,7 @@ ecctl deployment elasticsearch [flags]
 * [ecctl deployment elasticsearch delete](ecctl_deployment_elasticsearch_delete.md)	 - Deletes an Elasticsearch cluster
 * [ecctl deployment elasticsearch diagnose](ecctl_deployment_elasticsearch_diagnose.md)	 - Generates a diagnostics bundle for the cluster
 * [ecctl deployment elasticsearch instances](ecctl_deployment_elasticsearch_instances.md)	 - Manages elasticsearch at the instance level
+* [ecctl deployment elasticsearch keystore](ecctl_deployment_elasticsearch_keystore.md)	 - Manages an Elasticsearch cluster's keystore
 * [ecctl deployment elasticsearch list](ecctl_deployment_elasticsearch_list.md)	 - Returns the list of Elasticsearch clusters
 * [ecctl deployment elasticsearch monitoring](ecctl_deployment_elasticsearch_monitoring.md)	 - Manages monitoring for an Elasticsearch cluster
 * [ecctl deployment elasticsearch plan](ecctl_deployment_elasticsearch_plan.md)	 - Manages Elasticsearch plans
