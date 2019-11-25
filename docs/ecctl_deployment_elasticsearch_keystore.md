@@ -40,5 +40,5 @@ ecctl deployment elasticsearch keystore [flags]
 
 * [ecctl deployment elasticsearch](ecctl_deployment_elasticsearch.md)	 - Manages Elasticsearch clusters
 * [ecctl deployment elasticsearch keystore set](ecctl_deployment_elasticsearch_keystore_set.md)	 - Updates an Elasticsearch cluster keystore with the contents of a file
-* [ecctl deployment elasticsearch keystore show](ecctl_deployment_elasticsearch_keystore_show.md)	 - Shows the current Elasticsearch keystore settings
+* [ecctl deployment elasticsearch keystore show](ecctl_deployment_elasticsearch_keystore_show.md)	 - Shows an Elasticsearch cluster's keystore settings
 

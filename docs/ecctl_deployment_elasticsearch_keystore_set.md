@@ -5,7 +5,7 @@ Updates an Elasticsearch cluster keystore with the contents of a file
 ### Synopsis
 
 Manages the keystore settings of an Elasticsearch cluster.
-Note that the underlying API call uses the PATCH method, meaning that each operation is add/modify only.
+Note that each operation is add/modify only, unspecified existing keystore values will be unchanged.
 
 ```
 ecctl deployment elasticsearch keystore set <cluster id> -f <file definition.json> [flags]

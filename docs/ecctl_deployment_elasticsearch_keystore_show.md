@@ -1,10 +1,10 @@
 ## ecctl deployment elasticsearch keystore show
 
-Shows the current Elasticsearch keystore settings
+Shows an Elasticsearch cluster's keystore settings
 
 ### Synopsis
 
-Shows the current Elasticsearch keystore settings
+Shows an Elasticsearch cluster's keystore settings
 
 ```
 ecctl deployment elasticsearch keystore show <cluster id> [flags]

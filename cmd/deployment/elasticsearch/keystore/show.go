@@ -39,7 +39,7 @@ const keystoreShowExample = `$ ecctl deployment elasticsearch keystore show 4c05
 
 var getCmd = &cobra.Command{
 	Use:     `show <cluster id>`,
-	Short:   "Shows the current Elasticsearch keystore settings",
+	Short:   "Shows an Elasticsearch cluster's keystore settings",
 	Example: keystoreShowExample,
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
