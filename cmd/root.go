@@ -25,6 +25,7 @@ import (
 	"path/filepath"
 	"time"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/output"
 	multierror "github.com/hashicorp/go-multierror"
 	"github.com/spf13/cobra"
@@ -44,7 +45,7 @@ const (
 )
 
 var (
-	defaultClient = new(http.Client)
+	defaultClient = &http.Client{Transport: api.DefaultTransport}
 	defaultOutput = os.Stdout
 	defaultInput  = os.Stdin
 	defaultError  = os.Stderr
