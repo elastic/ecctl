@@ -37,6 +37,10 @@ type GetParams struct {
 
 	// Optional parameters
 	deputil.QueryParams
+
+	// RefID, when specified, skips auto-discovering the deployment resource
+	// RefID and instead uses the one that's passed.
+	RefID string
 }
 
 // Validate ensures that the parameters are usable by the consuming function.
@@ -49,6 +53,7 @@ func (params GetParams) Validate() error {
 	if len(params.DeploymentID) != 32 {
 		merr = multierror.Append(merr, deputil.NewInvalidDeploymentIDError(params.DeploymentID))
 	}
+
 	return merr.ErrorOrNil()
 }
 
@@ -72,6 +77,7 @@ func Get(params GetParams) (*models.DeploymentGetResponse, error) {
 	if err != nil {
 		return nil, api.UnwrapError(err)
 	}
+
 	return res.Payload, nil
 }
 
@@ -84,7 +90,7 @@ func GetApm(params GetParams) (*models.ApmResourceInfo, error) {
 	res, err := params.API.V1API.Deployments.GetDeploymentApmResourceInfo(
 		deployments.NewGetDeploymentApmResourceInfoParams().
 			WithDeploymentID(params.DeploymentID).
-			WithRefID("main-apm").
+			WithRefID(params.RefID).
 			WithShowPlans(ec.Bool(params.ShowPlans)).
 			WithShowPlanDefaults(ec.Bool(params.ShowPlanDefaults)).
 			WithShowPlanLogs(ec.Bool(params.ShowPlanLogs)).
@@ -107,7 +113,7 @@ func GetAppSearch(params GetParams) (*models.AppSearchResourceInfo, error) {
 	res, err := params.API.V1API.Deployments.GetDeploymentAppsearchResourceInfo(
 		deployments.NewGetDeploymentAppsearchResourceInfoParams().
 			WithDeploymentID(params.DeploymentID).
-			WithRefID("main-appsearch").
+			WithRefID(params.RefID).
 			WithShowPlans(ec.Bool(params.ShowPlans)).
 			WithShowPlanDefaults(ec.Bool(params.ShowPlanDefaults)).
 			WithShowPlanLogs(ec.Bool(params.ShowPlanLogs)).
@@ -130,7 +136,7 @@ func GetElasticsearch(params GetParams) (*models.ElasticsearchResourceInfo, erro
 	res, err := params.API.V1API.Deployments.GetDeploymentEsResourceInfo(
 		deployments.NewGetDeploymentEsResourceInfoParams().
 			WithDeploymentID(params.DeploymentID).
-			WithRefID("main-elasticsearch").
+			WithRefID(params.RefID).
 			WithShowPlans(ec.Bool(params.ShowPlans)).
 			WithShowPlanDefaults(ec.Bool(params.ShowPlanDefaults)).
 			WithShowPlanLogs(ec.Bool(params.ShowPlanLogs)).
@@ -154,7 +160,7 @@ func GetKibana(params GetParams) (*models.KibanaResourceInfo, error) {
 	res, err := params.API.V1API.Deployments.GetDeploymentKibResourceInfo(
 		deployments.NewGetDeploymentKibResourceInfoParams().
 			WithDeploymentID(params.DeploymentID).
-			WithRefID("main-kibana").
+			WithRefID(params.RefID).
 			WithShowPlans(ec.Bool(params.ShowPlans)).
 			WithShowPlanDefaults(ec.Bool(params.ShowPlanDefaults)).
 			WithShowPlanLogs(ec.Bool(params.ShowPlanLogs)).
