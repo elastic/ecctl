@@ -62,7 +62,7 @@ var initCmd = &cobra.Command{
 				return err
 			}
 			cfg = defaultViper.ConfigFileUsed()
-			fmt.Fprintln(defaultOutput, "\nConfig written in:", cfg)
+			fmt.Fprintln(defaultOutput, "\nConfig written to", cfg)
 		}
 
 		return nil
