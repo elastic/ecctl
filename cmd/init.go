@@ -18,6 +18,7 @@
 package cmd
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"runtime"
@@ -36,11 +37,11 @@ var initCmd = &cobra.Command{
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		fp := strings.Replace(ecctlHomePath, homePrefix, cmdutil.GetHomePath(runtime.GOOS), 1)
-		if err := os.MkdirAll(fp, 0664); err != nil {
+		if err := os.MkdirAll(fp, 0775); err != nil {
 			return err
 		}
 
-		return ecctl.InitConfig(ecctl.InitConfigParams{
+		err := ecctl.InitConfig(ecctl.InitConfigParams{
 			Client:           defaultClient,
 			Viper:            defaultViper,
 			Reader:           defaultInput,
@@ -49,6 +50,22 @@ var initCmd = &cobra.Command{
 			PasswordReadFunc: terminal.ReadPassword,
 			FilePath:         filepath.Join(fp, defaultViper.GetString("config")),
 		})
+		if err != nil {
+			return err
+		}
+
+		// Only print this message when viper.ConfigFileUsed() since it means
+		// the config hasn't been read via viper, thus just recently written
+		// down in the path.
+		if cfg := defaultViper.ConfigFileUsed(); cfg == "" {
+			if err := defaultViper.ReadInConfig(); err != nil {
+				return err
+			}
+			cfg = defaultViper.ConfigFileUsed()
+			fmt.Fprintln(defaultOutput, "\nConfig written in:", cfg)
+		}
+
+		return nil
 	},
 }
 
