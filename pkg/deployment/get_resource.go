@@ -19,8 +19,6 @@ package deployment
 
 import (
 	"fmt"
-
-	"github.com/hashicorp/go-multierror"
 )
 
 // GetResourceParams is consumed by GetResource.
@@ -28,14 +26,6 @@ type GetResourceParams struct {
 	GetParams
 
 	Type string
-}
-
-// Validate ensures that the parameters are usable by the consuming function.
-func (params GetResourceParams) Validate() error {
-	var merr = new(multierror.Error)
-	merr = multierror.Append(merr, params.GetParams.Validate())
-
-	return merr.ErrorOrNil()
 }
 
 // GetResource is a high level function which either returns the top level
