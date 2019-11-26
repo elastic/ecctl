@@ -29,7 +29,7 @@ ecctl deployment show <deployment-id> [flags]
       --plan-defaults   Shows the deployment plan defaults
       --plan-logs       Shows the deployment plan logs
       --plans           Shows the deployment plans
-      --ref-id string   Optional deployment type RefId, if not set, the RefId will be auto-discovered through an API call
+      --ref-id string   Optional deployment type RefId, if not set, the RefId will be auto-discovered
   -s, --settings        Shows the deployment settings
       --type string     Optional deployment type to show resource information (elasticsearch, kibana, apm, or appsearch)
 ```
