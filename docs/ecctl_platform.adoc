@@ -1,0 +1,56 @@
+[#ecctl-platform]
+== ecctl platform
+
+Manages the platform
+
+[#synopsis]
+=== Synopsis
+
+Manages the platform
+
+----
+ecctl platform [flags]
+----
+
+[#options]
+=== Options
+
+----
+  -h, --help   help for platform
+----
+
+[#options-inherited-from-parent-commands]
+=== Options inherited from parent commands
+
+----
+      --apikey string      API key to use to authenticate (If empty will look for EC_APIKEY environment variable)
+      --config string      Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
+      --force              Do not ask for confirmation
+      --format string      Formats the output using a Go template
+      --host string        Base URL to use
+      --insecure           Skips all TLS validation
+      --message string     A message to set on cluster operation
+      --output string      Output format [text|json] (default "text")
+      --pass string        Password to use to authenticate (If empty will look for EC_PASS environment variable)
+      --pprof              Enables pprofing and saves the profile to pprof-20060102150405
+  -q, --quiet              Suppresses the configuration file used for the run, if any
+      --timeout duration   Timeout to use on all HTTP calls (default 30s)
+      --trace              Enables tracing saves the trace to trace-20060102150405
+      --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
+      --verbose            Enable verbose mode
+----
+
+[#see-also]
+=== SEE ALSO
+
+* xref:ecctl.adoc[ecctl]	 - Elastic Cloud Control
+* xref:ecctl_platform_allocator.adoc[ecctl platform allocator]	 - Manages allocators
+* xref:ecctl_platform_constructor.adoc[ecctl platform constructor]	 - Manages constructors
+* xref:ecctl_platform_deployment-template.adoc[ecctl platform deployment-template]	 - Manages deployment templates
+* xref:ecctl_platform_enrollment-token.adoc[ecctl platform enrollment-token]	 - Manages tokens
+* xref:ecctl_platform_info.adoc[ecctl platform info]	 - Shows information about the platform
+* xref:ecctl_platform_instance-configuration.adoc[ecctl platform instance-configuration]	 - Manages instance configurations
+* xref:ecctl_platform_proxy.adoc[ecctl platform proxy]	 - Manages proxies
+* xref:ecctl_platform_repository.adoc[ecctl platform repository]	 - Manages snapshot repositories
+* xref:ecctl_platform_role.adoc[ecctl platform role]	 - Manages platform roles
+* xref:ecctl_platform_stack.adoc[ecctl platform stack]	 - Manages Elastic StackPacks

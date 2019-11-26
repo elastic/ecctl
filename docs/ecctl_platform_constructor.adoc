@@ -1,0 +1,49 @@
+[#ecctl-platform-constructor]
+== ecctl platform constructor
+
+Manages constructors
+
+[#synopsis]
+=== Synopsis
+
+Manages constructors
+
+----
+ecctl platform constructor [flags]
+----
+
+[#options]
+=== Options
+
+----
+  -h, --help   help for constructor
+----
+
+[#options-inherited-from-parent-commands]
+=== Options inherited from parent commands
+
+----
+      --apikey string      API key to use to authenticate (If empty will look for EC_APIKEY environment variable)
+      --config string      Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
+      --force              Do not ask for confirmation
+      --format string      Formats the output using a Go template
+      --host string        Base URL to use
+      --insecure           Skips all TLS validation
+      --message string     A message to set on cluster operation
+      --output string      Output format [text|json] (default "text")
+      --pass string        Password to use to authenticate (If empty will look for EC_PASS environment variable)
+      --pprof              Enables pprofing and saves the profile to pprof-20060102150405
+  -q, --quiet              Suppresses the configuration file used for the run, if any
+      --timeout duration   Timeout to use on all HTTP calls (default 30s)
+      --trace              Enables tracing saves the trace to trace-20060102150405
+      --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
+      --verbose            Enable verbose mode
+----
+
+[#see-also]
+=== SEE ALSO
+
+* xref:ecctl_platform.adoc[ecctl platform]	 - Manages the platform
+* xref:ecctl_platform_constructor_list.adoc[ecctl platform constructor list]	 - Returns all of the constructors in the platform
+* xref:ecctl_platform_constructor_maintenance.adoc[ecctl platform constructor maintenance]	 - Sets/un-sets a constructor's maintenance mode
+* xref:ecctl_platform_constructor_show.adoc[ecctl platform constructor show]	 - Returns information about the constructor with given ID

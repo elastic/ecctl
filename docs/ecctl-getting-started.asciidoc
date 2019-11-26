@@ -273,7 +273,7 @@ $ unset EC_FORMAT
 [id="{p}-command-reference"]
 == Command reference
 
-See link:https://github.com/elastic/ecctl/blob/master/docs/ecctl.md[ecctl command reference].
+include::ecctl_index.adoc[]
 
 [id="{p}-contributing"]
 == Contributing
