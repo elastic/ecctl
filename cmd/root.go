@@ -25,7 +25,6 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/output"
 	multierror "github.com/hashicorp/go-multierror"
 	"github.com/spf13/cobra"
@@ -45,7 +44,7 @@ const (
 )
 
 var (
-	defaultClient = &http.Client{Transport: api.DefaultTransport}
+	defaultClient = new(http.Client)
 	defaultOutput = os.Stdout
 	defaultInput  = os.Stdin
 	defaultError  = os.Stderr
@@ -75,6 +74,7 @@ var RootCmd = &cobra.Command{
 		if err := setupDebug(defaultViper.GetBool("trace"), defaultViper.GetBool("pprof")); err != nil {
 			return err
 		}
+
 		return initApp(cmd, defaultClient, defaultViper)
 	},
 }
