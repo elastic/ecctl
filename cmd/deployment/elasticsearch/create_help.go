@@ -1,10 +1,24 @@
-## ecctl deployment elasticsearch create
+// Licensed to Elasticsearch B.V. under one or more contributor
+// license agreements. See the NOTICE file distributed with
+// this work for additional information regarding copyright
+// ownership. Elasticsearch B.V. licenses this file to you under
+// the Apache License, Version 2.0 (the "License"); you may
+// not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
 
-Creates a deployment with (only) an Elasticsearch resource in it
+package cmdelasticsearch
 
-### Synopsis
-
-Creates an Elasticsearch deployment, limitting the creation scope to Elasticsearch resources.
+const (
+	esCreateLong = `Creates an Elasticsearch deployment, limitting the creation scope to Elasticsearch resources.
 There's a few ways to create an Elasticsearch deployment, sane default values are provided, making
 the command work out of the box even when no parameters are set. When version is not specified,
 the latest available stack version will automatically be used. These are the available options:
@@ -23,16 +37,9 @@ the latest available stack version will automatically be used. These are the ava
 
 As an option "--generate-payload" can be used in order to obtain the generated ElasticsearchPayload
 that would be sent as a request, save it, update or extend the topology and create an Elasticsearch
-deployment using the saved payload with the "--file" flag.
+deployment using the saved payload with the "--file" flag.`
 
-```
-ecctl deployment elasticsearch create {--file|--size <int> --version <string> --zones <string>|--topology-element <obj>} [flags]
-```
-
-### Examples
-
-```
-## Create a single node cluster. The command will exit after the API response has been returned, 
+	esCreateExample = `## Create a single node cluster. The command will exit after the API response has been returned, 
 ## without waiting until the deployment resources have been created. 
 $ ecctl deployment elasticsearch create --name example-cluster --size 2048
 Obtained latest stack version: 7.4.2
@@ -132,47 +139,5 @@ Cluster [7dcaeb621dba4248b6a4efc8080a055c][Elasticsearch]: running step "set-mai
 Cluster [7dcaeb621dba4248b6a4efc8080a055c][Elasticsearch]: running step "apply-hot-warm-default-allocation" (Plan duration 1m15.337019401s)...
 Cluster [7dcaeb621dba4248b6a4efc8080a055c][Elasticsearch]: running step "apply-plan-settings" (Plan duration 1m16.346500871s)...
 Cluster [7dcaeb621dba4248b6a4efc8080a055c][Elasticsearch]: running step "post-plan-cleanup" (Plan duration 1m18.334419179s)...
-Cluster [7dcaeb621dba4248b6a4efc8080a055c][Elasticsearch]: finished running all the plan steps (Total plan duration: 1m20.043525071s)
-```
-
-### Options
-
-```
-      --deployment-template string     Deployment template ID on which to base the deployment from (default "default")
-      --file string                    ElasticsearchPayload file definition. See help for more information
-      --generate-payload               Returns the ElasticsearchPayload without actually creating the deployment resources
-  -h, --help                           help for create
-      --name string                    Optional name for the Elasticsearch deployment
-      --plugin strings                 Additional plugins to add to the Elasticsearch deployment
-      --ref-id string                  RefId for the Elasticsearch deployment (default "elasticsearch")
-      --size int32                     Memory (RAM) in MB that each of the deployment nodes will have (default 4096)
-  -e, --topology-element stringArray   Topology element definition. See help for more information
-  -t, --track                          Tracks the progress of the performed task
-      --version string                 Version to use, if not specified, the latest available stack version will be used
-      --zones int32                    Number of zones the deployment will span (default 1)
-```
-
-### Options inherited from parent commands
-
-```
-      --apikey string      API key to use to authenticate (If empty will look for EC_APIKEY environment variable)
-      --config string      Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
-      --force              Do not ask for confirmation
-      --format string      Formats the output using a Go template
-      --host string        Base URL to use
-      --insecure           Skips all TLS validation
-      --message string     A message to set on cluster operation
-      --output string      Output format [text|json] (default "text")
-      --pass string        Password to use to authenticate (If empty will look for EC_PASS environment variable)
-      --pprof              Enables pprofing and saves the profile to pprof-20060102150405
-  -q, --quiet              Suppresses the configuration file used for the run, if any
-      --timeout duration   Timeout to use on all HTTP calls (default 30s)
-      --trace              Enables tracing saves the trace to trace-20060102150405
-      --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
-      --verbose            Enable verbose mode
-```
-
-### SEE ALSO
-
-* [ecctl deployment elasticsearch](ecctl_deployment_elasticsearch.md)	 - Manages Elasticsearch clusters
-
+Cluster [7dcaeb621dba4248b6a4efc8080a055c][Elasticsearch]: finished running all the plan steps (Total plan duration: 1m20.043525071s)`
+)
