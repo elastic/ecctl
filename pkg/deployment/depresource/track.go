@@ -19,6 +19,7 @@ package depresource
 
 import (
 	"errors"
+	"fmt"
 	"sync"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
@@ -74,8 +75,9 @@ func TrackResources(params TrackResourcesParams) error {
 		wg.Add(1)
 
 		go func(r *models.DeploymentResource, w *sync.WaitGroup) {
+			defer w.Done()
 			if *r.Kind == "appsearch" {
-				w.Done()
+				errChan <- fmt.Errorf("cannot track appsearch resource id %s", *r.ID)
 				return
 			}
 
@@ -87,7 +89,6 @@ func TrackResources(params TrackResourcesParams) error {
 				},
 				Output: params.OutputDevice,
 			})
-			w.Done()
 		}(resource, &wg)
 	}
 

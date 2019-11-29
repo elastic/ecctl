@@ -70,7 +70,12 @@ func LatestStackVersion(params LatestStackVersionParams) (string, error) {
 		return "", errors.New("version discovery: failed to obtain stack list, please specify a version")
 	}
 
+	// This check is probably a bit over the top, but you never know.
+	if len(res.Stacks) == 0 {
+		return "", errors.New("version discovery: stack list is seemingly empty, something is terribly wrong")
+	}
 	var version = res.Stacks[0].Version
+
 	if params.Writer != nil {
 		fmt.Fprintln(params.Writer, "Obtained latest stack version:", version)
 	}

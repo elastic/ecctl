@@ -23,6 +23,7 @@ import (
 	"fmt"
 
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/hashicorp/go-multierror"
 )
 
@@ -100,6 +101,7 @@ func (element *ElasticsearchTopologyElement) Validate() error {
 
 // NewElasticsearchTopology creates a []ElasticsearchTopologyElement from a
 // slice of raw strings which are then unmarshaled into the desired slice type.
+// If any of the topology elements is not usable, an error is returned.
 func NewElasticsearchTopology(topology []string) ([]ElasticsearchTopologyElement, error) {
 	var t = make([]ElasticsearchTopologyElement, 0, len(topology))
 	for _, rawElement := range topology {
@@ -108,6 +110,11 @@ func NewElasticsearchTopology(topology []string) ([]ElasticsearchTopologyElement
 		if err := json.Unmarshal([]byte(rawElement), &element); err != nil {
 			return nil, fmt.Errorf("depresource: failed unpacking raw topology: %s", err)
 		}
+
+		if err := element.Validate(); err != nil {
+			return nil, err
+		}
+
 		t = append(t, element)
 	}
 	return t, nil
@@ -139,15 +146,15 @@ func NewElasticsearchTopologyElement(size, zoneCount int32) ElasticsearchTopolog
 // template defined defaults.
 func BuildElasticsearchTopology(params BuildElasticsearchTopologyParams) ([]*models.ElasticsearchClusterTopologyElement, error) {
 	var topologyList []*models.ElasticsearchClusterTopologyElement
-	for _, topology := range params.Topology {
+	for _, desired := range params.Topology {
 		for _, t := range params.ClusterTopology {
-			if matchNodeType(*t.NodeType, topology) {
+			if matchNodeType(*t.NodeType, desired) {
 				// Override the desired topology if values are non zero
-				if topology.Size > 0 {
-					t.Size.Value = &topology.Size
+				if desired.Size > 0 {
+					t.Size.Value = ec.Int32(desired.Size)
 				}
-				if topology.ZoneCount > 0 {
-					t.ZoneCount = topology.ZoneCount
+				if desired.ZoneCount > 0 {
+					t.ZoneCount = desired.ZoneCount
 				}
 
 				topologyList = append(topologyList, t)

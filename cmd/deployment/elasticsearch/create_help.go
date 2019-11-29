@@ -30,7 +30,7 @@ the latest available stack version will automatically be used. These are the ava
     {
       "name": "["data", "master", "ml"]" # type string
       "size": 1024 # type int32
-      "zone_count": " # type int32
+      "zone_count": 1 # type int32
     }
   * File definition: --file=<file path> (shorthand: -f). The definition can be found in:
     https://www.elastic.co/guide/en/cloud-enterprise/current/definitions.html#ElasticsearchPayload
