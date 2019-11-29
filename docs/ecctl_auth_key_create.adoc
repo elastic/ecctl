@@ -1,9 +1,8 @@
-[#ecctl-auth-key-create]
 == ecctl auth key create
 
 Creates a new API key for the current authenticated user
 
-[#synopsis]
+[float]
 === Synopsis
 
 Creates a new API key for the current authenticated user
@@ -12,7 +11,7 @@ Creates a new API key for the current authenticated user
 ecctl auth key create [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -21,7 +20,7 @@ ecctl auth key create [flags]
       --insecure-password string   [INSECURE] User plaintext password
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -42,7 +41,7 @@ ecctl auth key create [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_auth_key.adoc[ecctl auth key]	 - Manages the current authenticated user API keys
+// * xref:ecctl_auth_key.adoc[ecctl auth key]	 - Manages the current authenticated user API keys

@@ -1,9 +1,8 @@
-[#ecctl-deployment-elasticsearch-reallocate]
 == ecctl deployment elasticsearch reallocate
 
 Reallocates the Elasticsearch cluster nodes
 
-[#synopsis]
+[float]
 === Synopsis
 
 Reallocates the Elasticsearch cluster nodes. If no "--instances" are specified all of the nodes will be restarted
@@ -12,7 +11,7 @@ Reallocates the Elasticsearch cluster nodes. If no "--instances" are specified a
 ecctl deployment elasticsearch reallocate <cluster id> [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -21,7 +20,7 @@ ecctl deployment elasticsearch reallocate <cluster id> [flags]
       --instances-down string   Overwrites the default if set to [true|false], marking the instances as 'down'
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -42,7 +41,7 @@ ecctl deployment elasticsearch reallocate <cluster id> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment_elasticsearch.adoc[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters
+// * xref:ecctl_deployment_elasticsearch.adoc[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters

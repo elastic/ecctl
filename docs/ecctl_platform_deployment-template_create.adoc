@@ -1,9 +1,8 @@
-[#ecctl-platform-deployment-template-create]
 == ecctl platform deployment-template create
 
 Creates a platform deployment template
 
-[#synopsis]
+[float]
 === Synopsis
 
 Creates a platform deployment template
@@ -12,7 +11,7 @@ Creates a platform deployment template
 ecctl platform deployment-template create -f <template file>.json [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -21,7 +20,7 @@ ecctl platform deployment-template create -f <template file>.json [flags]
       --id string              Optional ID to set for the deployment template (Overrides ID if present)
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -42,7 +41,7 @@ ecctl platform deployment-template create -f <template file>.json [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_platform_deployment-template.adoc[ecctl platform deployment-template]	 - Manages deployment templates
+// * xref:ecctl_platform_deployment-template.adoc[ecctl platform deployment-template]	 - Manages deployment templates

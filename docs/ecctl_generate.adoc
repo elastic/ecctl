@@ -1,9 +1,8 @@
-[#ecctl-generate]
 == ecctl generate
 
 Generates completions and docs
 
-[#synopsis]
+[float]
 === Synopsis
 
 Generates completions and docs
@@ -12,14 +11,14 @@ Generates completions and docs
 ecctl generate [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
   -h, --help   help for generate
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -40,9 +39,9 @@ ecctl generate [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl.adoc[ecctl]	 - Elastic Cloud Control
-* xref:ecctl_generate_completions.adoc[ecctl generate completions]	 - Outputs the Bash completion to either stdout (default) or to a file
-* xref:ecctl_generate_docs.adoc[ecctl generate docs]	 - Generates the command tree documentation
+// * xref:ecctl.adoc[ecctl]	 - Elastic Cloud Control
+// * xref:ecctl_generate_completions.adoc[ecctl generate completions]	 - Outputs the Bash completion to either stdout (default) or to a file
+// * xref:ecctl_generate_docs.adoc[ecctl generate docs]	 - Generates the command tree documentation

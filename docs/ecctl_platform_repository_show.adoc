@@ -1,9 +1,8 @@
-[#ecctl-platform-repository-show]
 == ecctl platform repository show
 
 Obtains a snapshot repository config
 
-[#synopsis]
+[float]
 === Synopsis
 
 Obtains a snapshot repository config
@@ -12,14 +11,14 @@ Obtains a snapshot repository config
 ecctl platform repository show <repository name> [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
   -h, --help   help for show
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -40,7 +39,7 @@ ecctl platform repository show <repository name> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_platform_repository.adoc[ecctl platform repository]	 - Manages snapshot repositories
+// * xref:ecctl_platform_repository.adoc[ecctl platform repository]	 - Manages snapshot repositories

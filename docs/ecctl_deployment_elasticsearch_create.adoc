@@ -1,9 +1,8 @@
-[#ecctl-deployment-elasticsearch-create]
 == ecctl deployment elasticsearch create
 
 Creates an Elasticsearch cluster
 
-[#synopsis]
+[float]
 === Synopsis
 
 Creates an Elasticsearch cluster
@@ -12,7 +11,7 @@ Creates an Elasticsearch cluster
 ecctl deployment elasticsearch create [--file] [--capacity|--version|--zones] [name] [flags]
 ----
 
-[#examples]
+[float]
 === Examples
 
 ----
@@ -24,7 +23,7 @@ ecctl deployment elasticsearch create [--file] [--capacity|--version|--zones] [n
   ecctl deployment elasticsearch create --file definition.json
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -37,7 +36,7 @@ ecctl deployment elasticsearch create [--file] [--capacity|--version|--zones] [n
   -z, --zones int32      Number of zones for the cluster
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -58,7 +57,7 @@ ecctl deployment elasticsearch create [--file] [--capacity|--version|--zones] [n
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment_elasticsearch.adoc[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters
+// * xref:ecctl_deployment_elasticsearch.adoc[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters

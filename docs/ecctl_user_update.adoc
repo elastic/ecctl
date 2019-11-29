@@ -1,9 +1,8 @@
-[#ecctl-user-update]
 == ecctl user update
 
 Updates a platform user
 
-[#synopsis]
+[float]
 === Synopsis
 
 Updates a platform user
@@ -12,7 +11,7 @@ Updates a platform user
 ecctl user update <username> --role <role> [flags]
 ----
 
-[#examples]
+[float]
 === Examples
 
 ----
@@ -24,7 +23,7 @@ ecctl user update <username> --role <role> [flags]
     ecctl user update --current --email xo@example.com --password
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -39,7 +38,7 @@ ecctl user update <username> --role <role> [flags]
                                    ece_platform_admin, ece_platform_viewer, ece_deployment_manager, ece_deployment_viewer
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -60,7 +59,7 @@ ecctl user update <username> --role <role> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_user.adoc[ecctl user]	 - Manages the platform users
+// * xref:ecctl_user.adoc[ecctl user]	 - Manages the platform users

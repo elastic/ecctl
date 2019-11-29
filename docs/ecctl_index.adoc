@@ -168,8 +168,6 @@ include::ecctl_generate_completions.adoc[]
 
 include::ecctl_generate_docs.adoc[]
 
-include::ecctl_index.adoc[]
-
 include::ecctl_init.adoc[]
 
 include::ecctl_platform.adoc[]
@@ -313,4 +311,3 @@ include::ecctl_user_show.adoc[]
 include::ecctl_user_update.adoc[]
 
 include::ecctl_version.adoc[]
-

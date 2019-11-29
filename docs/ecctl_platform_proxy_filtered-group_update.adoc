@@ -1,9 +1,8 @@
-[#ecctl-platform-proxy-filtered-group-update]
 == ecctl platform proxy filtered-group update
 
 Updates proxies filtered group
 
-[#synopsis]
+[float]
 === Synopsis
 
 Updates proxies filtered group
@@ -12,7 +11,7 @@ Updates proxies filtered group
 ecctl platform proxy filtered-group update <filtered group id> --filters <key1=value1,key2=value2> --expected-proxies-count <int> --version <int> [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -22,7 +21,7 @@ ecctl platform proxy filtered-group update <filtered group id> --filters <key1=v
       --version int                    Version update for filtered group
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -43,7 +42,7 @@ ecctl platform proxy filtered-group update <filtered group id> --filters <key1=v
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_platform_proxy_filtered-group.adoc[ecctl platform proxy filtered-group]	 - Manages proxies filtered group
+// * xref:ecctl_platform_proxy_filtered-group.adoc[ecctl platform proxy filtered-group]	 - Manages proxies filtered group

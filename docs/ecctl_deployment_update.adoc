@@ -1,9 +1,8 @@
-[#ecctl-deployment-update]
 == ecctl deployment update
 
 Updates a deployment from a file definition, allowing certain flag overrides
 
-[#synopsis]
+[float]
 === Synopsis
 
 updates a deployment from a file definition, defaulting prune_orphans=false, making the default
@@ -15,7 +14,7 @@ Read more about the deployment definition in https://www.elastic.co/guide/en/clo
 ecctl deployment update -f <file definition.json> [flags]
 ----
 
-[#examples]
+[float]
 === Examples
 
 ----
@@ -107,7 +106,7 @@ setting --prune-orphans to "true" will cause any resources not specified in the 
 }
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -118,7 +117,7 @@ setting --prune-orphans to "true" will cause any resources not specified in the 
       --skip-snapshot         Skips taking an Elasticsearch snapshot prior to shutting down the deployment
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -139,7 +138,7 @@ setting --prune-orphans to "true" will cause any resources not specified in the 
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment.adoc[ecctl deployment]	 - Manages deployments
+// * xref:ecctl_deployment.adoc[ecctl deployment]	 - Manages deployments

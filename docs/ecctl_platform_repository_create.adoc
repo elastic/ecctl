@@ -1,9 +1,8 @@
-[#ecctl-platform-repository-create]
 == ecctl platform repository create
 
 Creates / updates a snapshot repository
 
-[#synopsis]
+[float]
 === Synopsis
 
 Creates / updates a snapshot repository using a set of settings that can be
@@ -20,7 +19,7 @@ Only the S3 available settings are validated.
 ecctl platform repository create <repository name> --settings <settings file> [flags]
 ----
 
-[#examples]
+[float]
 === Examples
 
 ----
@@ -31,7 +30,7 @@ ecctl platform repository update my-snapshot-repo --settings settings.yml
 ecctl platform repository create custom --type fs --settings settings.yml
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -40,7 +39,7 @@ ecctl platform repository create custom --type fs --settings settings.yml
       --type string       Repository type that will be configured (default "s3")
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -61,7 +60,7 @@ ecctl platform repository create custom --type fs --settings settings.yml
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_platform_repository.adoc[ecctl platform repository]	 - Manages snapshot repositories
+// * xref:ecctl_platform_repository.adoc[ecctl platform repository]	 - Manages snapshot repositories

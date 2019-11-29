@@ -1,9 +1,8 @@
-[#ecctl-deployment-note-show]
 == ecctl deployment note show
 
 Shows a deployment note
 
-[#synopsis]
+[float]
 === Synopsis
 
 Shows a deployment note
@@ -12,7 +11,7 @@ Shows a deployment note
 ecctl deployment note show <deployment id> --id <note id> [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -20,7 +19,7 @@ ecctl deployment note show <deployment id> --id <note id> [flags]
       --id string   Note ID
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -41,7 +40,7 @@ ecctl deployment note show <deployment id> --id <note id> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment_note.adoc[ecctl deployment note]	 - Manages a deployment's notes
+// * xref:ecctl_deployment_note.adoc[ecctl deployment note]	 - Manages a deployment's notes

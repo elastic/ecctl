@@ -1,9 +1,8 @@
-[#ecctl-deployment-elasticsearch-instances-pause]
 == ecctl deployment elasticsearch instances pause
 
 Pauses (stops) specific Elasticsearch instances, use the --all flag to target all instances
 
-[#synopsis]
+[float]
 === Synopsis
 
 Pauses (stops) specific Elasticsearch instances, use the --all flag to target all instances
@@ -12,7 +11,7 @@ Pauses (stops) specific Elasticsearch instances, use the --all flag to target al
 ecctl deployment elasticsearch instances pause <cluster id> [--all|--instances] [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -21,7 +20,7 @@ ecctl deployment elasticsearch instances pause <cluster id> [--all|--instances] 
   -i, --instance strings   Instances to pause
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -42,7 +41,7 @@ ecctl deployment elasticsearch instances pause <cluster id> [--all|--instances] 
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment_elasticsearch_instances.adoc[ecctl deployment elasticsearch instances]	 - Manages elasticsearch at the instance level
+// * xref:ecctl_deployment_elasticsearch_instances.adoc[ecctl deployment elasticsearch instances]	 - Manages elasticsearch at the instance level

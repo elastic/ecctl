@@ -1,9 +1,8 @@
-[#ecctl-deployment-kibana-start]
 == ecctl deployment kibana start
 
 Starts a Kibana instance
 
-[#synopsis]
+[float]
 === Synopsis
 
 Starts a Kibana instance
@@ -12,7 +11,7 @@ Starts a Kibana instance
 ecctl deployment kibana start <cluster id> [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -20,7 +19,7 @@ ecctl deployment kibana start <cluster id> [flags]
   -t, --track   Tracks the progress of the performed task
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -41,7 +40,7 @@ ecctl deployment kibana start <cluster id> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment_kibana.adoc[ecctl deployment kibana]	 - Manages Kibana instances
+// * xref:ecctl_deployment_kibana.adoc[ecctl deployment kibana]	 - Manages Kibana instances

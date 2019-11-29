@@ -1,9 +1,8 @@
-[#ecctl-deployment-list]
 == ecctl deployment list
 
 Lists the platform's deployments
 
-[#synopsis]
+[float]
 === Synopsis
 
 Lists the platform's deployments
@@ -12,14 +11,14 @@ Lists the platform's deployments
 ecctl deployment list [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
   -h, --help   help for list
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -40,7 +39,7 @@ ecctl deployment list [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment.adoc[ecctl deployment]	 - Manages deployments
+// * xref:ecctl_deployment.adoc[ecctl deployment]	 - Manages deployments

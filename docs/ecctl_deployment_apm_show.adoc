@@ -1,9 +1,8 @@
-[#ecctl-deployment-apm-show]
 == ecctl deployment apm show
 
 Shows the specified APM deployment
 
-[#synopsis]
+[float]
 === Synopsis
 
 Shows the specified APM deployment
@@ -12,7 +11,7 @@ Shows the specified APM deployment
 ecctl deployment apm show [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -24,7 +23,7 @@ ecctl deployment apm show [flags]
   -s, --settings        Shows the deployment settings
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -45,7 +44,7 @@ ecctl deployment apm show [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment_apm.adoc[ecctl deployment apm]	 - Manages APM deployments
+// * xref:ecctl_deployment_apm.adoc[ecctl deployment apm]	 - Manages APM deployments

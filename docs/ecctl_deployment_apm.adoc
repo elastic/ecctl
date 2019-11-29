@@ -1,9 +1,8 @@
-[#ecctl-deployment-apm]
 == ecctl deployment apm
 
 Manages APM deployments
 
-[#synopsis]
+[float]
 === Synopsis
 
 Manages APM deployments
@@ -12,14 +11,14 @@ Manages APM deployments
 ecctl deployment apm [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
   -h, --help   help for apm
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -40,17 +39,17 @@ ecctl deployment apm [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment.adoc[ecctl deployment]	 - Manages deployments
-* xref:ecctl_deployment_apm_create.adoc[ecctl deployment apm create]	 - Creates an APM instance in the selected deployment
-* xref:ecctl_deployment_apm_delete.adoc[ecctl deployment apm delete]	 - Deletes an APM deployment
-* xref:ecctl_deployment_apm_enable.adoc[ecctl deployment apm enable]	 - Enables an APM instance in the selected deployment
-* xref:ecctl_deployment_apm_list.adoc[ecctl deployment apm list]	 - Lists the APM deployments
-* xref:ecctl_deployment_apm_plan.adoc[ecctl deployment apm plan]	 - Manages APM plans
-* xref:ecctl_deployment_apm_restart.adoc[ecctl deployment apm restart]	 - Restarts an APM deployment
-* xref:ecctl_deployment_apm_resync.adoc[ecctl deployment apm resync]	 - Resynchronizes the search index and cache for the selected APM deployment
-* xref:ecctl_deployment_apm_show.adoc[ecctl deployment apm show]	 - Shows the specified APM deployment
-* xref:ecctl_deployment_apm_stop.adoc[ecctl deployment apm stop]	 - Stops an APM deployment
-* xref:ecctl_deployment_apm_upgrade.adoc[ecctl deployment apm upgrade]	 - Upgrades an APM deployment to the Elasticsearch deployment version
+// * xref:ecctl_deployment.adoc[ecctl deployment]	 - Manages deployments
+// * xref:ecctl_deployment_apm_create.adoc[ecctl deployment apm create]	 - Creates an APM instance in the selected deployment
+// * xref:ecctl_deployment_apm_delete.adoc[ecctl deployment apm delete]	 - Deletes an APM deployment
+// * xref:ecctl_deployment_apm_enable.adoc[ecctl deployment apm enable]	 - Enables an APM instance in the selected deployment
+// * xref:ecctl_deployment_apm_list.adoc[ecctl deployment apm list]	 - Lists the APM deployments
+// * xref:ecctl_deployment_apm_plan.adoc[ecctl deployment apm plan]	 - Manages APM plans
+// * xref:ecctl_deployment_apm_restart.adoc[ecctl deployment apm restart]	 - Restarts an APM deployment
+// * xref:ecctl_deployment_apm_resync.adoc[ecctl deployment apm resync]	 - Resynchronizes the search index and cache for the selected APM deployment
+// * xref:ecctl_deployment_apm_show.adoc[ecctl deployment apm show]	 - Shows the specified APM deployment
+// * xref:ecctl_deployment_apm_stop.adoc[ecctl deployment apm stop]	 - Stops an APM deployment
+// * xref:ecctl_deployment_apm_upgrade.adoc[ecctl deployment apm upgrade]	 - Upgrades an APM deployment to the Elasticsearch deployment version

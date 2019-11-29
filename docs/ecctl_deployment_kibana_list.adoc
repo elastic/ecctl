@@ -1,9 +1,8 @@
-[#ecctl-deployment-kibana-list]
 == ecctl deployment kibana list
 
 Returns the list of kibana instances
 
-[#synopsis]
+[float]
 === Synopsis
 
 Returns the list of kibana instances
@@ -12,7 +11,7 @@ Returns the list of kibana instances
 ecctl deployment kibana list [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -22,7 +21,7 @@ ecctl deployment kibana list [flags]
   -v, --version string   Filters per version
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -43,7 +42,7 @@ ecctl deployment kibana list [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment_kibana.adoc[ecctl deployment kibana]	 - Manages Kibana instances
+// * xref:ecctl_deployment_kibana.adoc[ecctl deployment kibana]	 - Manages Kibana instances

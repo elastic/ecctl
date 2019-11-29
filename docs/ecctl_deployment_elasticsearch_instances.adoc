@@ -1,9 +1,8 @@
-[#ecctl-deployment-elasticsearch-instances]
 == ecctl deployment elasticsearch instances
 
 Manages elasticsearch at the instance level
 
-[#synopsis]
+[float]
 === Synopsis
 
 Manages elasticsearch at the instance level
@@ -12,14 +11,14 @@ Manages elasticsearch at the instance level
 ecctl deployment elasticsearch instances [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
   -h, --help   help for instances
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -40,12 +39,12 @@ ecctl deployment elasticsearch instances [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment_elasticsearch.adoc[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters
-* xref:ecctl_deployment_elasticsearch_instances_override-capacity.adoc[ecctl deployment elasticsearch instances override-capacity]	 - Sets overrides at the instance level, use the --all flag to target all instances
-* xref:ecctl_deployment_elasticsearch_instances_pause.adoc[ecctl deployment elasticsearch instances pause]	 - Pauses (stops) specific Elasticsearch instances, use the --all flag to target all instances
-* xref:ecctl_deployment_elasticsearch_instances_resume.adoc[ecctl deployment elasticsearch instances resume]	 - Resumes (starts) specific Elasticsearch instances, use the --all flag to target all instances
-* xref:ecctl_deployment_elasticsearch_instances_start-routing.adoc[ecctl deployment elasticsearch instances start-routing]	 - Resumes routing on specific Elasticsearch instances, use the --all flag to target all instances
-* xref:ecctl_deployment_elasticsearch_instances_stop-routing.adoc[ecctl deployment elasticsearch instances stop-routing]	 - Stops routing on specific Elasticsearch instances, use the --all flag to target all instances
+// * xref:ecctl_deployment_elasticsearch.adoc[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters
+// * xref:ecctl_deployment_elasticsearch_instances_override-capacity.adoc[ecctl deployment elasticsearch instances override-capacity]	 - Sets overrides at the instance level, use the --all flag to target all instances
+// * xref:ecctl_deployment_elasticsearch_instances_pause.adoc[ecctl deployment elasticsearch instances pause]	 - Pauses (stops) specific Elasticsearch instances, use the --all flag to target all instances
+// * xref:ecctl_deployment_elasticsearch_instances_resume.adoc[ecctl deployment elasticsearch instances resume]	 - Resumes (starts) specific Elasticsearch instances, use the --all flag to target all instances
+// * xref:ecctl_deployment_elasticsearch_instances_start-routing.adoc[ecctl deployment elasticsearch instances start-routing]	 - Resumes routing on specific Elasticsearch instances, use the --all flag to target all instances
+// * xref:ecctl_deployment_elasticsearch_instances_stop-routing.adoc[ecctl deployment elasticsearch instances stop-routing]	 - Stops routing on specific Elasticsearch instances, use the --all flag to target all instances

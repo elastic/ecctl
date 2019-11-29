@@ -1,9 +1,8 @@
-[#ecctl-deployment-note]
 == ecctl deployment note
 
 Manages a deployment's notes
 
-[#synopsis]
+[float]
 === Synopsis
 
 Manages a deployment's notes
@@ -12,14 +11,14 @@ Manages a deployment's notes
 ecctl deployment note [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
   -h, --help   help for note
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -40,11 +39,11 @@ ecctl deployment note [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment.adoc[ecctl deployment]	 - Manages deployments
-* xref:ecctl_deployment_note_create.adoc[ecctl deployment note create]	 - Adds a note to a deployment
-* xref:ecctl_deployment_note_list.adoc[ecctl deployment note list]	 - Lists the deployment notes
-* xref:ecctl_deployment_note_show.adoc[ecctl deployment note show]	 - Shows a deployment note
-* xref:ecctl_deployment_note_update.adoc[ecctl deployment note update]	 - Updates the deployment notes
+// * xref:ecctl_deployment.adoc[ecctl deployment]	 - Manages deployments
+// * xref:ecctl_deployment_note_create.adoc[ecctl deployment note create]	 - Adds a note to a deployment
+// * xref:ecctl_deployment_note_list.adoc[ecctl deployment note list]	 - Lists the deployment notes
+// * xref:ecctl_deployment_note_show.adoc[ecctl deployment note show]	 - Shows a deployment note
+// * xref:ecctl_deployment_note_update.adoc[ecctl deployment note update]	 - Updates the deployment notes

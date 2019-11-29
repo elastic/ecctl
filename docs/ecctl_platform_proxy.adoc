@@ -1,9 +1,8 @@
-[#ecctl-platform-proxy]
 == ecctl platform proxy
 
 Manages proxies
 
-[#synopsis]
+[float]
 === Synopsis
 
 Manages proxies
@@ -12,14 +11,14 @@ Manages proxies
 ecctl platform proxy [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
   -h, --help   help for proxy
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -40,10 +39,10 @@ ecctl platform proxy [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_platform.adoc[ecctl platform]	 - Manages the platform
-* xref:ecctl_platform_proxy_filtered-group.adoc[ecctl platform proxy filtered-group]	 - Manages proxies filtered group
-* xref:ecctl_platform_proxy_list.adoc[ecctl platform proxy list]	 - Returns all of the proxies in the platform
-* xref:ecctl_platform_proxy_show.adoc[ecctl platform proxy show]	 - Returns information about the proxy with given id
+// * xref:ecctl_platform.adoc[ecctl platform]	 - Manages the platform
+// * xref:ecctl_platform_proxy_filtered-group.adoc[ecctl platform proxy filtered-group]	 - Manages proxies filtered group
+// * xref:ecctl_platform_proxy_list.adoc[ecctl platform proxy list]	 - Returns all of the proxies in the platform
+// * xref:ecctl_platform_proxy_show.adoc[ecctl platform proxy show]	 - Returns information about the proxy with given id

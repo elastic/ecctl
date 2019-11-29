@@ -1,9 +1,8 @@
-[#ecctl-auth]
 == ecctl auth
 
 Manages the platform auth
 
-[#synopsis]
+[float]
 === Synopsis
 
 Manages the platform auth
@@ -12,14 +11,14 @@ Manages the platform auth
 ecctl auth [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
   -h, --help   help for auth
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -40,8 +39,8 @@ ecctl auth [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl.adoc[ecctl]	 - Elastic Cloud Control
-* xref:ecctl_auth_key.adoc[ecctl auth key]	 - Manages the current authenticated user API keys
+// * xref:ecctl.adoc[ecctl]	 - Elastic Cloud Control
+// * xref:ecctl_auth_key.adoc[ecctl auth key]	 - Manages the current authenticated user API keys

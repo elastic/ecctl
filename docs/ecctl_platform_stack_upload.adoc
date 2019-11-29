@@ -1,9 +1,8 @@
-[#ecctl-platform-stack-upload]
 == ecctl platform stack upload
 
 Uploads an Elastic StackPack
 
-[#synopsis]
+[float]
 === Synopsis
 
 Uploads an Elastic StackPack
@@ -12,14 +11,14 @@ Uploads an Elastic StackPack
 ecctl platform stack upload [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
   -h, --help   help for upload
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -40,7 +39,7 @@ ecctl platform stack upload [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_platform_stack.adoc[ecctl platform stack]	 - Manages Elastic StackPacks
+// * xref:ecctl_platform_stack.adoc[ecctl platform stack]	 - Manages Elastic StackPacks

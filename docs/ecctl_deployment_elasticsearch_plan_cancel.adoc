@@ -1,9 +1,8 @@
-[#ecctl-deployment-elasticsearch-plan-cancel]
 == ecctl deployment elasticsearch plan cancel
 
 Cancels the pending plan
 
-[#synopsis]
+[float]
 === Synopsis
 
 Cancels the pending plan
@@ -12,14 +11,14 @@ Cancels the pending plan
 ecctl deployment elasticsearch plan cancel <cluster id> [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
   -h, --help   help for cancel
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -40,7 +39,7 @@ ecctl deployment elasticsearch plan cancel <cluster id> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment_elasticsearch_plan.adoc[ecctl deployment elasticsearch plan]	 - Manages Elasticsearch plans
+// * xref:ecctl_deployment_elasticsearch_plan.adoc[ecctl deployment elasticsearch plan]	 - Manages Elasticsearch plans

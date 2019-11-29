@@ -1,9 +1,8 @@
-[#ecctl-deployment-restore]
 == ecctl deployment restore
 
 Restores a previously shut down deployment and all of its associated sub-resources
 
-[#synopsis]
+[float]
 === Synopsis
 
 Use --restore-snapshot to automatically restore the latest available Elasticsearch snapshot (if applicable)
@@ -12,7 +11,7 @@ Use --restore-snapshot to automatically restore the latest available Elasticsear
 ecctl deployment restore <deployment-id> [flags]
 ----
 
-[#examples]
+[float]
 === Examples
 
  $ ecctl deployment restore 5c17ad7c8df73206baa54b6e2829d9bc
@@ -20,7 +19,7 @@ ecctl deployment restore <deployment-id> [flags]
    "id": "5c17ad7c8df73206baa54b6e2829d9bc"
  }
 
-[#options]
+[float]
 === Options
 
 ----
@@ -28,7 +27,7 @@ ecctl deployment restore <deployment-id> [flags]
       --restore-snapshot   Restores snapshots for those resources that allow it (Elasticsearch)
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -49,7 +48,7 @@ ecctl deployment restore <deployment-id> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment.adoc[ecctl deployment]	 - Manages deployments
+// * xref:ecctl_deployment.adoc[ecctl deployment]	 - Manages deployments

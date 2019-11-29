@@ -1,9 +1,8 @@
-[#ecctl-platform-repository-delete]
 == ecctl platform repository delete
 
 Deletes a snapshot repositories
 
-[#synopsis]
+[float]
 === Synopsis
 
 Deletes a snapshot repositories
@@ -12,14 +11,14 @@ Deletes a snapshot repositories
 ecctl platform repository delete <repository name> [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
   -h, --help   help for delete
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -40,7 +39,7 @@ ecctl platform repository delete <repository name> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_platform_repository.adoc[ecctl platform repository]	 - Manages snapshot repositories
+// * xref:ecctl_platform_repository.adoc[ecctl platform repository]	 - Manages snapshot repositories

@@ -1,9 +1,8 @@
-[#ecctl-user-enable]
 == ecctl user enable
 
 Enables a previously disabled platform user
 
-[#synopsis]
+[float]
 === Synopsis
 
 Enables a previously disabled platform user
@@ -12,14 +11,14 @@ Enables a previously disabled platform user
 ecctl user enable <username> [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
   -h, --help   help for enable
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -40,7 +39,7 @@ ecctl user enable <username> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_user.adoc[ecctl user]	 - Manages the platform users
+// * xref:ecctl_user.adoc[ecctl user]	 - Manages the platform users

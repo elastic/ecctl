@@ -1,9 +1,8 @@
-[#ecctl-platform-stack-list]
 == ecctl platform stack list
 
 Lists Elastic StackPacks
 
-[#synopsis]
+[float]
 === Synopsis
 
 Lists Elastic StackPacks
@@ -12,7 +11,7 @@ Lists Elastic StackPacks
 ecctl platform stack list [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -20,7 +19,7 @@ ecctl platform stack list [flags]
   -h, --help      help for list
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -41,7 +40,7 @@ ecctl platform stack list [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_platform_stack.adoc[ecctl platform stack]	 - Manages Elastic StackPacks
+// * xref:ecctl_platform_stack.adoc[ecctl platform stack]	 - Manages Elastic StackPacks

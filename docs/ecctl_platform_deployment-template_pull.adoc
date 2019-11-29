@@ -1,9 +1,8 @@
-[#ecctl-platform-deployment-template-pull]
 == ecctl platform deployment-template pull
 
 Downloads deployment template into a local folder
 
-[#synopsis]
+[float]
 === Synopsis
 
 Downloads deployment template into a local folder
@@ -12,7 +11,7 @@ Downloads deployment template into a local folder
 ecctl platform deployment-template pull --path <path> [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -20,7 +19,7 @@ ecctl platform deployment-template pull --path <path> [flags]
   -p, --path string   Local path where to store deployment templates
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -41,7 +40,7 @@ ecctl platform deployment-template pull --path <path> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_platform_deployment-template.adoc[ecctl platform deployment-template]	 - Manages deployment templates
+// * xref:ecctl_platform_deployment-template.adoc[ecctl platform deployment-template]	 - Manages deployment templates

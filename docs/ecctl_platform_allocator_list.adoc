@@ -1,9 +1,8 @@
-[#ecctl-platform-allocator-list]
 == ecctl platform allocator list
 
 Returns all allocators that have instances or are connected to the platform. Use --all flag or --output json to show all. Use --query to match any of the allocators properties.
 
-[#synopsis]
+[float]
 === Synopsis
 
 Returns all allocators that have instances or are connected to the platform. Use --all flag or --output json to show all. Use --query to match any of the allocators properties.
@@ -34,7 +33,7 @@ Filter and query flags can be used in combination.
 ecctl platform allocator list [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -46,7 +45,7 @@ ecctl platform allocator list [flags]
       --unhealthy            Searches for unhealthy allocators
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -67,7 +66,7 @@ ecctl platform allocator list [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_platform_allocator.adoc[ecctl platform allocator]	 - Manages allocators
+// * xref:ecctl_platform_allocator.adoc[ecctl platform allocator]	 - Manages allocators

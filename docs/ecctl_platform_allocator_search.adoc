@@ -1,9 +1,8 @@
-[#ecctl-platform-allocator-search]
 == ecctl platform allocator search
 
 Performs advanced allocator searching
 
-[#synopsis]
+[float]
 === Synopsis
 
 Read more about Query DSL in https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html
@@ -12,7 +11,7 @@ Read more about Query DSL in https://www.elastic.co/guide/en/elasticsearch/refer
 ecctl platform allocator search [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -21,7 +20,7 @@ ecctl platform allocator search [flags]
       --query string   Optional argument that contains a JSON-style domain-specific language query
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -42,7 +41,7 @@ ecctl platform allocator search [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_platform_allocator.adoc[ecctl platform allocator]	 - Manages allocators
+// * xref:ecctl_platform_allocator.adoc[ecctl platform allocator]	 - Manages allocators

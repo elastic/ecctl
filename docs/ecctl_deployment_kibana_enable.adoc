@@ -1,9 +1,8 @@
-[#ecctl-deployment-kibana-enable]
 == ecctl deployment kibana enable
 
 Enables a kibana instance in the selected deployment
 
-[#synopsis]
+[float]
 === Synopsis
 
 Enables a kibana instance in the selected deployment
@@ -12,7 +11,7 @@ Enables a kibana instance in the selected deployment
 ecctl deployment kibana enable <deployment id> [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -20,7 +19,7 @@ ecctl deployment kibana enable <deployment id> [flags]
       --track   Tracks the progress of the performed task
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -41,7 +40,7 @@ ecctl deployment kibana enable <deployment id> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment_kibana.adoc[ecctl deployment kibana]	 - Manages Kibana instances
+// * xref:ecctl_deployment_kibana.adoc[ecctl deployment kibana]	 - Manages Kibana instances

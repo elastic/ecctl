@@ -1,9 +1,8 @@
-[#ecctl-user]
 == ecctl user
 
 Manages the platform users
 
-[#synopsis]
+[float]
 === Synopsis
 
 Manages the platform users
@@ -12,14 +11,14 @@ Manages the platform users
 ecctl user [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
   -h, --help   help for user
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -40,15 +39,15 @@ ecctl user [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl.adoc[ecctl]	 - Elastic Cloud Control
-* xref:ecctl_user_create.adoc[ecctl user create]	 - Creates a new platform user
-* xref:ecctl_user_delete.adoc[ecctl user delete]	 - Deletes one or more platform users
-* xref:ecctl_user_disable.adoc[ecctl user disable]	 - Disables a platform user
-* xref:ecctl_user_enable.adoc[ecctl user enable]	 - Enables a previously disabled platform user
-* xref:ecctl_user_key.adoc[ecctl user key]	 - Manages the API keys of a platform user
-* xref:ecctl_user_list.adoc[ecctl user list]	 - Lists all platform users
-* xref:ecctl_user_show.adoc[ecctl user show]	 - Shows details of a specified user
-* xref:ecctl_user_update.adoc[ecctl user update]	 - Updates a platform user
+// * xref:ecctl.adoc[ecctl]	 - Elastic Cloud Control
+// * xref:ecctl_user_create.adoc[ecctl user create]	 - Creates a new platform user
+// * xref:ecctl_user_delete.adoc[ecctl user delete]	 - Deletes one or more platform users
+// * xref:ecctl_user_disable.adoc[ecctl user disable]	 - Disables a platform user
+// * xref:ecctl_user_enable.adoc[ecctl user enable]	 - Enables a previously disabled platform user
+// * xref:ecctl_user_key.adoc[ecctl user key]	 - Manages the API keys of a platform user
+// * xref:ecctl_user_list.adoc[ecctl user list]	 - Lists all platform users
+// * xref:ecctl_user_show.adoc[ecctl user show]	 - Shows details of a specified user
+// * xref:ecctl_user_update.adoc[ecctl user update]	 - Updates a platform user

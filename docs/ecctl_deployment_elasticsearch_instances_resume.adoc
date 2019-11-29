@@ -1,9 +1,8 @@
-[#ecctl-deployment-elasticsearch-instances-resume]
 == ecctl deployment elasticsearch instances resume
 
 Resumes (starts) specific Elasticsearch instances, use the --all flag to target all instances
 
-[#synopsis]
+[float]
 === Synopsis
 
 Resumes (starts) specific Elasticsearch instances, use the --all flag to target all instances
@@ -12,7 +11,7 @@ Resumes (starts) specific Elasticsearch instances, use the --all flag to target 
 ecctl deployment elasticsearch instances resume <cluster id> [--all|--instances] [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -21,7 +20,7 @@ ecctl deployment elasticsearch instances resume <cluster id> [--all|--instances]
   -i, --instance strings   Instances to resume
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -42,7 +41,7 @@ ecctl deployment elasticsearch instances resume <cluster id> [--all|--instances]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment_elasticsearch_instances.adoc[ecctl deployment elasticsearch instances]	 - Manages elasticsearch at the instance level
+// * xref:ecctl_deployment_elasticsearch_instances.adoc[ecctl deployment elasticsearch instances]	 - Manages elasticsearch at the instance level

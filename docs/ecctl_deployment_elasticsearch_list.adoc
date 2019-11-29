@@ -1,9 +1,8 @@
-[#ecctl-deployment-elasticsearch-list]
 == ecctl deployment elasticsearch list
 
 Returns the list of Elasticsearch clusters
 
-[#synopsis]
+[float]
 === Synopsis
 
 Returns the list of Elasticsearch clusters
@@ -12,7 +11,7 @@ Returns the list of Elasticsearch clusters
 ecctl deployment elasticsearch list [flags]
 ----
 
-[#examples]
+[float]
 === Examples
 
 ----
@@ -31,7 +30,7 @@ ecctl deployment elasticsearch list [flags]
 Read all the simple query string syntax in https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -42,7 +41,7 @@ Read all the simple query string syntax in https://www.elastic.co/guide/en/elast
   -v, --version string   Filters per version
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -63,7 +62,7 @@ Read all the simple query string syntax in https://www.elastic.co/guide/en/elast
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment_elasticsearch.adoc[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters
+// * xref:ecctl_deployment_elasticsearch.adoc[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters

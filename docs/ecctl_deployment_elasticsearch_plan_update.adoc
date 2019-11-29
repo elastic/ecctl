@@ -1,9 +1,8 @@
-[#ecctl-deployment-elasticsearch-plan-update]
 == ecctl deployment elasticsearch plan update
 
 Applies or validates the provided plan and tracks the resulting change attempt
 
-[#synopsis]
+[float]
 === Synopsis
 
 Applies the provided plan and tracks the resulting change attempt.
@@ -15,7 +14,7 @@ The plan must be a valid ElasticsearchClusterPlan and will be validated against 
 ecctl deployment elasticsearch plan update <cluster id> [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -25,7 +24,7 @@ ecctl deployment elasticsearch plan update <cluster id> [flags]
   -v, --validate      Only validate the plan
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -46,7 +45,7 @@ ecctl deployment elasticsearch plan update <cluster id> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment_elasticsearch_plan.adoc[ecctl deployment elasticsearch plan]	 - Manages Elasticsearch plans
+// * xref:ecctl_deployment_elasticsearch_plan.adoc[ecctl deployment elasticsearch plan]	 - Manages Elasticsearch plans

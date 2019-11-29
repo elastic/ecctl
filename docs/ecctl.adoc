@@ -1,14 +1,13 @@
-[#ecctl]
 == ecctl
 
 Elastic Cloud Control
 
-[#synopsis]
+[float]
 === Synopsis
 
 Elastic Cloud Control
 
-[#options]
+[float]
 === Options
 
 ----
@@ -30,13 +29,13 @@ Elastic Cloud Control
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_auth.adoc[ecctl auth]	 - Manages the platform auth
-* xref:ecctl_deployment.adoc[ecctl deployment]	 - Manages deployments
-* xref:ecctl_generate.adoc[ecctl generate]	 - Generates completions and docs
-* xref:ecctl_init.adoc[ecctl init]	 - Creates an initial configuration file.
-* xref:ecctl_platform.adoc[ecctl platform]	 - Manages the platform
-* xref:ecctl_user.adoc[ecctl user]	 - Manages the platform users
-* xref:ecctl_version.adoc[ecctl version]	 - Shows ecctl version
+// * xref:ecctl_auth.adoc[ecctl auth]	 - Manages the platform auth
+// * xref:ecctl_deployment.adoc[ecctl deployment]	 - Manages deployments
+// * xref:ecctl_generate.adoc[ecctl generate]	 - Generates completions and docs
+// * xref:ecctl_init.adoc[ecctl init]	 - Creates an initial configuration file.
+// * xref:ecctl_platform.adoc[ecctl platform]	 - Manages the platform
+// * xref:ecctl_user.adoc[ecctl user]	 - Manages the platform users
+// * xref:ecctl_version.adoc[ecctl version]	 - Shows ecctl version

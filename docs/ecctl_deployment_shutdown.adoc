@@ -1,9 +1,8 @@
-[#ecctl-deployment-shutdown]
 == ecctl deployment shutdown
 
 Shuts down a deployment and all of its associated sub-resources
 
-[#synopsis]
+[float]
 === Synopsis
 
 Shuts down a deployment and all of its associated sub-resources
@@ -12,7 +11,7 @@ Shuts down a deployment and all of its associated sub-resources
 ecctl deployment shutdown <deployment-id> [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -21,7 +20,7 @@ ecctl deployment shutdown <deployment-id> [flags]
       --skip-snapshot   Skips taking an Elasticsearch snapshot prior to shutting down the deployment
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -42,7 +41,7 @@ ecctl deployment shutdown <deployment-id> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment.adoc[ecctl deployment]	 - Manages deployments
+// * xref:ecctl_deployment.adoc[ecctl deployment]	 - Manages deployments

@@ -1,9 +1,8 @@
-[#ecctl-platform-allocator-vacate]
 == ecctl platform allocator vacate
 
 Moves all the clusters from the specified allocator
 
-[#synopsis]
+[float]
 === Synopsis
 
 Moves all the clusters from the specified allocator
@@ -12,7 +11,7 @@ Moves all the clusters from the specified allocator
 ecctl platform allocator vacate <source> [flags]
 ----
 
-[#examples]
+[float]
 === Examples
 
 ----
@@ -46,7 +45,7 @@ ecctl platform allocator vacate <source> [flags]
   ecctl [globalFlags] allocator vacate --skip-data-migration=true i-05e245252362f7f1d -c f521dedb07194c478fbbc6624f3bbf8f
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -62,7 +61,7 @@ ecctl platform allocator vacate <source> [flags]
   -t, --target stringArray           Target allocator(s) on which to place the vacated workload
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -83,7 +82,7 @@ ecctl platform allocator vacate <source> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_platform_allocator.adoc[ecctl platform allocator]	 - Manages allocators
+// * xref:ecctl_platform_allocator.adoc[ecctl platform allocator]	 - Manages allocators

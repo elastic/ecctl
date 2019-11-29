@@ -2,7 +2,6 @@
 :n: Elastic Cloud Control
 //:s: ECCTL - DO NOT USE, NOT APPROVED
 :p: ecctl
-:idprefix: ecctl-
 
 include::{asciidoc-dir}/../../shared/attributes.asciidoc[]
 

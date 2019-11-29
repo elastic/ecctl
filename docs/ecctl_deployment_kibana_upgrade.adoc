@@ -1,9 +1,8 @@
-[#ecctl-deployment-kibana-upgrade]
 == ecctl deployment kibana upgrade
 
 Upgrades the Kibana instance to the same version as the Elasticsearch one
 
-[#synopsis]
+[float]
 === Synopsis
 
 Upgrades the Kibana instance to the same version as the Elasticsearch one
@@ -12,7 +11,7 @@ Upgrades the Kibana instance to the same version as the Elasticsearch one
 ecctl deployment kibana upgrade <cluster id>> [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -20,7 +19,7 @@ ecctl deployment kibana upgrade <cluster id>> [flags]
   -t, --track   Tracks the progress of the performed task
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -41,7 +40,7 @@ ecctl deployment kibana upgrade <cluster id>> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment_kibana.adoc[ecctl deployment kibana]	 - Manages Kibana instances
+// * xref:ecctl_deployment_kibana.adoc[ecctl deployment kibana]	 - Manages Kibana instances

@@ -1,9 +1,8 @@
-[#ecctl-platform-allocator-metadata]
 == ecctl platform allocator metadata
 
 Manages an allocator's metadata
 
-[#synopsis]
+[float]
 === Synopsis
 
 Manages an allocator's metadata
@@ -12,14 +11,14 @@ Manages an allocator's metadata
 ecctl platform allocator metadata [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
   -h, --help   help for metadata
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -40,10 +39,10 @@ ecctl platform allocator metadata [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_platform_allocator.adoc[ecctl platform allocator]	 - Manages allocators
-* xref:ecctl_platform_allocator_metadata_delete.adoc[ecctl platform allocator metadata delete]	 - Deletes a single metadata item from a given allocators metadata
-* xref:ecctl_platform_allocator_metadata_set.adoc[ecctl platform allocator metadata set]	 - Sets or updates a single metadata item to a given allocators metadata
-* xref:ecctl_platform_allocator_metadata_show.adoc[ecctl platform allocator metadata show]	 - Shows allocator metadata
+// * xref:ecctl_platform_allocator.adoc[ecctl platform allocator]	 - Manages allocators
+// * xref:ecctl_platform_allocator_metadata_delete.adoc[ecctl platform allocator metadata delete]	 - Deletes a single metadata item from a given allocators metadata
+// * xref:ecctl_platform_allocator_metadata_set.adoc[ecctl platform allocator metadata set]	 - Sets or updates a single metadata item to a given allocators metadata
+// * xref:ecctl_platform_allocator_metadata_show.adoc[ecctl platform allocator metadata show]	 - Shows allocator metadata

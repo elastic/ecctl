@@ -1,9 +1,8 @@
-[#ecctl-platform-deployment-template-update]
 == ecctl platform deployment-template update
 
 Updates a platform deployment template
 
-[#synopsis]
+[float]
 === Synopsis
 
 Updates a platform deployment template
@@ -12,7 +11,7 @@ Updates a platform deployment template
 ecctl platform deployment-template update <template id> -f <template file>.json [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -20,7 +19,7 @@ ecctl platform deployment-template update <template id> -f <template file>.json 
   -h, --help                   help for update
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -41,7 +40,7 @@ ecctl platform deployment-template update <template id> -f <template file>.json 
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_platform_deployment-template.adoc[ecctl platform deployment-template]	 - Manages deployment templates
+// * xref:ecctl_platform_deployment-template.adoc[ecctl platform deployment-template]	 - Manages deployment templates

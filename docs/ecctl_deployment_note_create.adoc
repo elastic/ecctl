@@ -1,9 +1,8 @@
-[#ecctl-deployment-note-create]
 == ecctl deployment note create
 
 Adds a note to a deployment
 
-[#synopsis]
+[float]
 === Synopsis
 
 Adds a note to a deployment
@@ -12,7 +11,7 @@ Adds a note to a deployment
 ecctl deployment note create <deployment id> --message <message content> --type [elasticsearch|kibana|apm] [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -20,7 +19,7 @@ ecctl deployment note create <deployment id> --message <message content> --type 
       --type string   Type of deployment to comment, valid options are: [elasticsearch, kibana, apm] (default "elasticsearch")
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -41,7 +40,7 @@ ecctl deployment note create <deployment id> --message <message content> --type 
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment_note.adoc[ecctl deployment note]	 - Manages a deployment's notes
+// * xref:ecctl_deployment_note.adoc[ecctl deployment note]	 - Manages a deployment's notes

@@ -1,9 +1,8 @@
-[#ecctl-auth-key-list]
 == ecctl auth key list
 
 Lists the API keys for the current authenticated user
 
-[#synopsis]
+[float]
 === Synopsis
 
 Lists the API keys for the current authenticated user
@@ -12,14 +11,14 @@ Lists the API keys for the current authenticated user
 ecctl auth key list [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
   -h, --help   help for list
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -40,7 +39,7 @@ ecctl auth key list [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_auth_key.adoc[ecctl auth key]	 - Manages the current authenticated user API keys
+// * xref:ecctl_auth_key.adoc[ecctl auth key]	 - Manages the current authenticated user API keys

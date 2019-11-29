@@ -1,9 +1,8 @@
-[#ecctl-generate-docs]
 == ecctl generate docs
 
 Generates the command tree documentation
 
-[#synopsis]
+[float]
 === Synopsis
 
 Generates the command tree documentation
@@ -12,7 +11,7 @@ Generates the command tree documentation
 ecctl generate docs [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -20,7 +19,7 @@ ecctl generate docs [flags]
   -l, --location string   Sets the location of the generated output (default "./docs")
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -41,7 +40,7 @@ ecctl generate docs [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_generate.adoc[ecctl generate]	 - Generates completions and docs
+// * xref:ecctl_generate.adoc[ecctl generate]	 - Generates completions and docs

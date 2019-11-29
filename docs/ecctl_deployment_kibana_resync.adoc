@@ -1,9 +1,8 @@
-[#ecctl-deployment-kibana-resync]
 == ecctl deployment kibana resync
 
 Resynchronizes the search index and cache for the selected Kibana instance
 
-[#synopsis]
+[float]
 === Synopsis
 
 Resynchronizes the search index and cache for the selected Kibana instance
@@ -12,14 +11,14 @@ Resynchronizes the search index and cache for the selected Kibana instance
 ecctl deployment kibana resync <cluster id> [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
   -h, --help   help for resync
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -40,7 +39,7 @@ ecctl deployment kibana resync <cluster id> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment_kibana.adoc[ecctl deployment kibana]	 - Manages Kibana instances
+// * xref:ecctl_deployment_kibana.adoc[ecctl deployment kibana]	 - Manages Kibana instances

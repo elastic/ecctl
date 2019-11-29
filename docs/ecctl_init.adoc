@@ -1,9 +1,8 @@
-[#ecctl-init]
 == ecctl init
 
 Creates an initial configuration file.
 
-[#synopsis]
+[float]
 === Synopsis
 
 Creates an initial configuration file.
@@ -12,14 +11,14 @@ Creates an initial configuration file.
 ecctl init [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
   -h, --help   help for init
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -40,7 +39,7 @@ ecctl init [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl.adoc[ecctl]	 - Elastic Cloud Control
+// * xref:ecctl.adoc[ecctl]	 - Elastic Cloud Control

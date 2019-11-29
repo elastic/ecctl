@@ -1,9 +1,8 @@
-[#ecctl-platform-instance-configuration-create]
 == ecctl platform instance-configuration create
 
 Creates a new instance configuration
 
-[#synopsis]
+[float]
 === Synopsis
 
 Creates a new instance configuration
@@ -12,7 +11,7 @@ Creates a new instance configuration
 ecctl platform instance-configuration create -f <config.json> [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -21,7 +20,7 @@ ecctl platform instance-configuration create -f <config.json> [flags]
       --id string     Optional ID to set for the instance configuration (Overrides id if present)
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -42,7 +41,7 @@ ecctl platform instance-configuration create -f <config.json> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_platform_instance-configuration.adoc[ecctl platform instance-configuration]	 - Manages instance configurations
+// * xref:ecctl_platform_instance-configuration.adoc[ecctl platform instance-configuration]	 - Manages instance configurations

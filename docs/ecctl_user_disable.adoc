@@ -1,9 +1,8 @@
-[#ecctl-user-disable]
 == ecctl user disable
 
 Disables a platform user
 
-[#synopsis]
+[float]
 === Synopsis
 
 Disables a platform user
@@ -12,14 +11,14 @@ Disables a platform user
 ecctl user disable <username> [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
   -h, --help   help for disable
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -40,7 +39,7 @@ ecctl user disable <username> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_user.adoc[ecctl user]	 - Manages the platform users
+// * xref:ecctl_user.adoc[ecctl user]	 - Manages the platform users

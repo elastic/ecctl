@@ -1,9 +1,8 @@
-[#ecctl-version]
 == ecctl version
 
 Shows ecctl version
 
-[#synopsis]
+[float]
 === Synopsis
 
 Shows ecctl version
@@ -12,14 +11,14 @@ Shows ecctl version
 ecctl version [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
   -h, --help   help for version
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -40,7 +39,7 @@ ecctl version [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl.adoc[ecctl]	 - Elastic Cloud Control
+// * xref:ecctl.adoc[ecctl]	 - Elastic Cloud Control

@@ -1,9 +1,8 @@
-[#ecctl-deployment-elasticsearch-show]
 == ecctl deployment elasticsearch show
 
 Displays information about the specified cluster
 
-[#synopsis]
+[float]
 === Synopsis
 
 Displays information about the specified cluster
@@ -12,7 +11,7 @@ Displays information about the specified cluster
 ecctl deployment elasticsearch show <cluster id> [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -24,7 +23,7 @@ ecctl deployment elasticsearch show <cluster id> [flags]
   -s, --settings   View the cluster settings
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -45,7 +44,7 @@ ecctl deployment elasticsearch show <cluster id> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment_elasticsearch.adoc[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters
+// * xref:ecctl_deployment_elasticsearch.adoc[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters

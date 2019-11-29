@@ -1,9 +1,8 @@
-[#ecctl-user-show]
 == ecctl user show
 
 Shows details of a specified user
 
-[#synopsis]
+[float]
 === Synopsis
 
 Shows details of a specified user
@@ -12,7 +11,7 @@ Shows details of a specified user
 ecctl user show <user name> [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -20,7 +19,7 @@ ecctl user show <user name> [flags]
   -h, --help      help for show
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -41,7 +40,7 @@ ecctl user show <user name> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_user.adoc[ecctl user]	 - Manages the platform users
+// * xref:ecctl_user.adoc[ecctl user]	 - Manages the platform users

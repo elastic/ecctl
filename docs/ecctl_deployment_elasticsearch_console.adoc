@@ -1,9 +1,8 @@
-[#ecctl-deployment-elasticsearch-console]
 == ecctl deployment elasticsearch console
 
 Starts an interactive console with the cluster
 
-[#synopsis]
+[float]
 === Synopsis
 
 Starts an interactive console that connects to the cluster. If no username or password is specified
@@ -13,7 +12,7 @@ it will use the system's credentials to connect to the cluster (needs admin priv
 ecctl deployment elasticsearch console <cluster id> [flags]
 ----
 
-[#examples]
+[float]
 === Examples
 
 ----
@@ -22,7 +21,7 @@ ecctl deployment elasticsearch console <cluster id> [flags]
     ecctl elasticsearch console 18fc96c491b3d5e10e147463927a5349 --elasticsearch-user user --elasticsearch-pass pass
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -32,7 +31,7 @@ ecctl deployment elasticsearch console <cluster id> [flags]
       --query                       Instead of opening a console it will query the cluster with the arguments passed
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -53,7 +52,7 @@ ecctl deployment elasticsearch console <cluster id> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment_elasticsearch.adoc[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters
+// * xref:ecctl_deployment_elasticsearch.adoc[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters

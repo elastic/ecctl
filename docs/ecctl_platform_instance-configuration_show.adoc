@@ -1,9 +1,8 @@
-[#ecctl-platform-instance-configuration-show]
 == ecctl platform instance-configuration show
 
 Shows an instance configuration
 
-[#synopsis]
+[float]
 === Synopsis
 
 Shows an instance configuration
@@ -12,14 +11,14 @@ Shows an instance configuration
 ecctl platform instance-configuration show <config id> [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
   -h, --help   help for show
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -40,7 +39,7 @@ ecctl platform instance-configuration show <config id> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_platform_instance-configuration.adoc[ecctl platform instance-configuration]	 - Manages instance configurations
+// * xref:ecctl_platform_instance-configuration.adoc[ecctl platform instance-configuration]	 - Manages instance configurations

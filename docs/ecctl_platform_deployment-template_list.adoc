@@ -1,9 +1,8 @@
-[#ecctl-platform-deployment-template-list]
 == ecctl platform deployment-template list
 
 Lists the platform deployment templates
 
-[#synopsis]
+[float]
 === Synopsis
 
 Lists the platform deployment templates
@@ -12,7 +11,7 @@ Lists the platform deployment templates
 ecctl platform deployment-template list [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -22,7 +21,7 @@ ecctl platform deployment-template list [flags]
       --stack-version string           If present, it will cause the returned deployment templates to be adapted to return only the elements allowed in that version.
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -43,7 +42,7 @@ ecctl platform deployment-template list [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_platform_deployment-template.adoc[ecctl platform deployment-template]	 - Manages deployment templates
+// * xref:ecctl_platform_deployment-template.adoc[ecctl platform deployment-template]	 - Manages deployment templates

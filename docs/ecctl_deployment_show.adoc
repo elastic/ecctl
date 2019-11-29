@@ -1,9 +1,8 @@
-[#ecctl-deployment-show]
 == ecctl deployment show
 
 Shows the specified deployment resources
 
-[#synopsis]
+[float]
 === Synopsis
 
 Shows the specified deployment resources
@@ -12,7 +11,7 @@ Shows the specified deployment resources
 ecctl deployment show <deployment-id> [flags]
 ----
 
-[#examples]
+[float]
 === Examples
 
 ----
@@ -21,7 +20,7 @@ ecctl deployment show <deployment-id> [flags]
   ecctl deployment show <deployment-id> --type kibana
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -34,7 +33,7 @@ ecctl deployment show <deployment-id> [flags]
       --type string     Optional deployment type to show resource information (elasticsearch, kibana, apm, or appsearch)
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -55,7 +54,7 @@ ecctl deployment show <deployment-id> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment.adoc[ecctl deployment]	 - Manages deployments
+// * xref:ecctl_deployment.adoc[ecctl deployment]	 - Manages deployments

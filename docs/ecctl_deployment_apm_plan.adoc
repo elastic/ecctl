@@ -1,9 +1,8 @@
-[#ecctl-deployment-apm-plan]
 == ecctl deployment apm plan
 
 Manages APM plans
 
-[#synopsis]
+[float]
 === Synopsis
 
 Manages APM plans
@@ -12,14 +11,14 @@ Manages APM plans
 ecctl deployment apm plan [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
   -h, --help   help for plan
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -40,11 +39,11 @@ ecctl deployment apm plan [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment_apm.adoc[ecctl deployment apm]	 - Manages APM deployments
-* xref:ecctl_deployment_apm_plan_cancel.adoc[ecctl deployment apm plan cancel]	 - Cancels the pending plan
-* xref:ecctl_deployment_apm_plan_history.adoc[ecctl deployment apm plan history]	 - Lists the plan history
-* xref:ecctl_deployment_apm_plan_monitor.adoc[ecctl deployment apm plan monitor]	 - Monitors the pending plan
-* xref:ecctl_deployment_apm_plan_reapply.adoc[ecctl deployment apm plan reapply]	 - Reapplies the latest plan attempt, resetting all transient settings
+// * xref:ecctl_deployment_apm.adoc[ecctl deployment apm]	 - Manages APM deployments
+// * xref:ecctl_deployment_apm_plan_cancel.adoc[ecctl deployment apm plan cancel]	 - Cancels the pending plan
+// * xref:ecctl_deployment_apm_plan_history.adoc[ecctl deployment apm plan history]	 - Lists the plan history
+// * xref:ecctl_deployment_apm_plan_monitor.adoc[ecctl deployment apm plan monitor]	 - Monitors the pending plan
+// * xref:ecctl_deployment_apm_plan_reapply.adoc[ecctl deployment apm plan reapply]	 - Reapplies the latest plan attempt, resetting all transient settings

@@ -1,9 +1,8 @@
-[#ecctl-platform-role-create]
 == ecctl platform role create
 
 Creates a new platform role from a definition
 
-[#synopsis]
+[float]
 === Synopsis
 
 Creates a new platform role from a definition
@@ -12,7 +11,7 @@ Creates a new platform role from a definition
 ecctl platform role create --file <filename.json> [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -20,7 +19,7 @@ ecctl platform role create --file <filename.json> [flags]
   -h, --help          help for create
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -41,7 +40,7 @@ ecctl platform role create --file <filename.json> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_platform_role.adoc[ecctl platform role]	 - Manages platform roles
+// * xref:ecctl_platform_role.adoc[ecctl platform role]	 - Manages platform roles

@@ -1,9 +1,8 @@
-[#ecctl-deployment-apm-resync]
 == ecctl deployment apm resync
 
 Resynchronizes the search index and cache for the selected APM deployment
 
-[#synopsis]
+[float]
 === Synopsis
 
 Resynchronizes the search index and cache for the selected APM deployment
@@ -12,14 +11,14 @@ Resynchronizes the search index and cache for the selected APM deployment
 ecctl deployment apm resync <deployment id> [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
   -h, --help   help for resync
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -40,7 +39,7 @@ ecctl deployment apm resync <deployment id> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment_apm.adoc[ecctl deployment apm]	 - Manages APM deployments
+// * xref:ecctl_deployment_apm.adoc[ecctl deployment apm]	 - Manages APM deployments

@@ -1,9 +1,8 @@
-[#ecctl-deployment-elasticsearch-upgrade]
 == ecctl deployment elasticsearch upgrade
 
 Upgrades the cluster to the specified version
 
-[#synopsis]
+[float]
 === Synopsis
 
 Upgrades the cluster to the specified version
@@ -12,7 +11,7 @@ Upgrades the cluster to the specified version
 ecctl deployment elasticsearch upgrade <cluster id> --version=<version> [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -21,7 +20,7 @@ ecctl deployment elasticsearch upgrade <cluster id> --version=<version> [flags]
   -v, --version string   Filters per version (required)
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -42,7 +41,7 @@ ecctl deployment elasticsearch upgrade <cluster id> --version=<version> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment_elasticsearch.adoc[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters
+// * xref:ecctl_deployment_elasticsearch.adoc[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters

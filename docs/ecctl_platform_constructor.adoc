@@ -1,9 +1,8 @@
-[#ecctl-platform-constructor]
 == ecctl platform constructor
 
 Manages constructors
 
-[#synopsis]
+[float]
 === Synopsis
 
 Manages constructors
@@ -12,14 +11,14 @@ Manages constructors
 ecctl platform constructor [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
   -h, --help   help for constructor
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -40,10 +39,10 @@ ecctl platform constructor [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_platform.adoc[ecctl platform]	 - Manages the platform
-* xref:ecctl_platform_constructor_list.adoc[ecctl platform constructor list]	 - Returns all of the constructors in the platform
-* xref:ecctl_platform_constructor_maintenance.adoc[ecctl platform constructor maintenance]	 - Sets/un-sets a constructor's maintenance mode
-* xref:ecctl_platform_constructor_show.adoc[ecctl platform constructor show]	 - Returns information about the constructor with given ID
+// * xref:ecctl_platform.adoc[ecctl platform]	 - Manages the platform
+// * xref:ecctl_platform_constructor_list.adoc[ecctl platform constructor list]	 - Returns all of the constructors in the platform
+// * xref:ecctl_platform_constructor_maintenance.adoc[ecctl platform constructor maintenance]	 - Sets/un-sets a constructor's maintenance mode
+// * xref:ecctl_platform_constructor_show.adoc[ecctl platform constructor show]	 - Returns information about the constructor with given ID

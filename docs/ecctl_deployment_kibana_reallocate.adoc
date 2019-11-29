@@ -1,9 +1,8 @@
-[#ecctl-deployment-kibana-reallocate]
 == ecctl deployment kibana reallocate
 
 Reallocates Kibana instances
 
-[#synopsis]
+[float]
 === Synopsis
 
 Reallocates Kibana instances. If no "--instances" are specified all of the nodes will be restarted
@@ -12,7 +11,7 @@ Reallocates Kibana instances. If no "--instances" are specified all of the nodes
 ecctl deployment kibana reallocate <cluster id> [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -20,7 +19,7 @@ ecctl deployment kibana reallocate <cluster id> [flags]
   -i, --instances strings   Reallocate only specific instances
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -41,7 +40,7 @@ ecctl deployment kibana reallocate <cluster id> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment_kibana.adoc[ecctl deployment kibana]	 - Manages Kibana instances
+// * xref:ecctl_deployment_kibana.adoc[ecctl deployment kibana]	 - Manages Kibana instances

@@ -1,9 +1,8 @@
-[#ecctl-deployment-note-update]
 == ecctl deployment note update
 
 Updates the deployment notes
 
-[#synopsis]
+[float]
 === Synopsis
 
 Updates the deployment notes
@@ -12,7 +11,7 @@ Updates the deployment notes
 ecctl deployment note update <deployment id> --id <note id> --message <message content> [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -20,7 +19,7 @@ ecctl deployment note update <deployment id> --id <note id> --message <message c
       --id string   Note ID
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -41,7 +40,7 @@ ecctl deployment note update <deployment id> --id <note id> --message <message c
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment_note.adoc[ecctl deployment note]	 - Manages a deployment's notes
+// * xref:ecctl_deployment_note.adoc[ecctl deployment note]	 - Manages a deployment's notes

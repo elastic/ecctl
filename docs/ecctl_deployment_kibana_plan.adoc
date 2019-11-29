@@ -1,9 +1,8 @@
-[#ecctl-deployment-kibana-plan]
 == ecctl deployment kibana plan
 
 Manages Kibana plans
 
-[#synopsis]
+[float]
 === Synopsis
 
 Manages Kibana plans
@@ -12,14 +11,14 @@ Manages Kibana plans
 ecctl deployment kibana plan [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
   -h, --help   help for plan
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -40,8 +39,8 @@ ecctl deployment kibana plan [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment_kibana.adoc[ecctl deployment kibana]	 - Manages Kibana instances
-* xref:ecctl_deployment_kibana_plan_monitor.adoc[ecctl deployment kibana plan monitor]	 - Monitors the pending plan
+// * xref:ecctl_deployment_kibana.adoc[ecctl deployment kibana]	 - Manages Kibana instances
+// * xref:ecctl_deployment_kibana_plan_monitor.adoc[ecctl deployment kibana plan monitor]	 - Monitors the pending plan

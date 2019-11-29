@@ -1,9 +1,8 @@
-[#ecctl-platform-repository]
 == ecctl platform repository
 
 Manages snapshot repositories
 
-[#synopsis]
+[float]
 === Synopsis
 
 Manages snapshot repositories that are used by Elasticsearch clusters
@@ -13,14 +12,14 @@ to perform snapshot operations.
 ecctl platform repository [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
   -h, --help   help for repository
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -41,11 +40,11 @@ ecctl platform repository [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_platform.adoc[ecctl platform]	 - Manages the platform
-* xref:ecctl_platform_repository_create.adoc[ecctl platform repository create]	 - Creates / updates a snapshot repository
-* xref:ecctl_platform_repository_delete.adoc[ecctl platform repository delete]	 - Deletes a snapshot repositories
-* xref:ecctl_platform_repository_list.adoc[ecctl platform repository list]	 - Lists all the snapshot repositories
-* xref:ecctl_platform_repository_show.adoc[ecctl platform repository show]	 - Obtains a snapshot repository config
+// * xref:ecctl_platform.adoc[ecctl platform]	 - Manages the platform
+// * xref:ecctl_platform_repository_create.adoc[ecctl platform repository create]	 - Creates / updates a snapshot repository
+// * xref:ecctl_platform_repository_delete.adoc[ecctl platform repository delete]	 - Deletes a snapshot repositories
+// * xref:ecctl_platform_repository_list.adoc[ecctl platform repository list]	 - Lists all the snapshot repositories
+// * xref:ecctl_platform_repository_show.adoc[ecctl platform repository show]	 - Obtains a snapshot repository config

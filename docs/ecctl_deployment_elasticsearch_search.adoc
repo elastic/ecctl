@@ -1,9 +1,8 @@
-[#ecctl-deployment-elasticsearch-search]
 == ecctl deployment elasticsearch search
 
 Performs advanced clusters searching
 
-[#synopsis]
+[float]
 === Synopsis
 
 Read more about Query DSL in https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html
@@ -12,7 +11,7 @@ Read more about Query DSL in https://www.elastic.co/guide/en/elasticsearch/refer
 ecctl deployment elasticsearch search -f <query file>.json [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -20,7 +19,7 @@ ecctl deployment elasticsearch search -f <query file>.json [flags]
   -h, --help          help for search
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -41,7 +40,7 @@ ecctl deployment elasticsearch search -f <query file>.json [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_deployment_elasticsearch.adoc[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters
+// * xref:ecctl_deployment_elasticsearch.adoc[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters

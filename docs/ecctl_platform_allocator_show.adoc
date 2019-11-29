@@ -1,9 +1,8 @@
-[#ecctl-platform-allocator-show]
 == ecctl platform allocator show
 
 Returns information about the allocator
 
-[#synopsis]
+[float]
 === Synopsis
 
 Returns information about the allocator
@@ -12,7 +11,7 @@ Returns information about the allocator
 ecctl platform allocator show <allocator id> [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
@@ -20,7 +19,7 @@ ecctl platform allocator show <allocator id> [flags]
       --metadata   Show allocator metadata
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -41,7 +40,7 @@ ecctl platform allocator show <allocator id> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_platform_allocator.adoc[ecctl platform allocator]	 - Manages allocators
+// * xref:ecctl_platform_allocator.adoc[ecctl platform allocator]	 - Manages allocators

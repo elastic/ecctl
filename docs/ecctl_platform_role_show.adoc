@@ -1,9 +1,8 @@
-[#ecctl-platform-role-show]
 == ecctl platform role show
 
 Shows the existing platform roles
 
-[#synopsis]
+[float]
 === Synopsis
 
 Shows the existing platform roles
@@ -12,14 +11,14 @@ Shows the existing platform roles
 ecctl platform role show <role> [flags]
 ----
 
-[#options]
+[float]
 === Options
 
 ----
   -h, --help   help for show
 ----
 
-[#options-inherited-from-parent-commands]
+[float]
 === Options inherited from parent commands
 
 ----
@@ -40,7 +39,7 @@ ecctl platform role show <role> [flags]
       --verbose            Enable verbose mode
 ----
 
-[#see-also]
+[float]
 === SEE ALSO
 
-* xref:ecctl_platform_role.adoc[ecctl platform role]	 - Manages platform roles
+// * xref:ecctl_platform_role.adoc[ecctl platform role]	 - Manages platform roles
