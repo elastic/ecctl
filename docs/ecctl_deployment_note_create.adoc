@@ -41,6 +41,6 @@ ecctl deployment note create <deployment id> --message <message content> --type 
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_deployment_note.adoc[ecctl deployment note]	 - Manages a deployment's notes
+* xref:ecctl_deployment_note[ecctl deployment note]	 - Manages a deployment's notes

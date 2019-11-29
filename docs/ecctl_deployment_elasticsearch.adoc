@@ -40,23 +40,23 @@ ecctl deployment elasticsearch [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_deployment.adoc[ecctl deployment]	 - Manages deployments
-// * xref:ecctl_deployment_elasticsearch_console.adoc[ecctl deployment elasticsearch console]	 - Starts an interactive console with the cluster
-// * xref:ecctl_deployment_elasticsearch_create.adoc[ecctl deployment elasticsearch create]	 - Creates an Elasticsearch cluster
-// * xref:ecctl_deployment_elasticsearch_delete.adoc[ecctl deployment elasticsearch delete]	 - Deletes an Elasticsearch cluster
-// * xref:ecctl_deployment_elasticsearch_diagnose.adoc[ecctl deployment elasticsearch diagnose]	 - Generates a diagnostics bundle for the cluster
-// * xref:ecctl_deployment_elasticsearch_instances.adoc[ecctl deployment elasticsearch instances]	 - Manages elasticsearch at the instance level
-// * xref:ecctl_deployment_elasticsearch_keystore.adoc[ecctl deployment elasticsearch keystore]	 - Manages an Elasticsearch cluster's keystore
-// * xref:ecctl_deployment_elasticsearch_list.adoc[ecctl deployment elasticsearch list]	 - Returns the list of Elasticsearch clusters
-// * xref:ecctl_deployment_elasticsearch_monitoring.adoc[ecctl deployment elasticsearch monitoring]	 - Manages monitoring for an Elasticsearch cluster
-// * xref:ecctl_deployment_elasticsearch_plan.adoc[ecctl deployment elasticsearch plan]	 - Manages Elasticsearch plans
-// * xref:ecctl_deployment_elasticsearch_reallocate.adoc[ecctl deployment elasticsearch reallocate]	 - Reallocates the Elasticsearch cluster nodes
-// * xref:ecctl_deployment_elasticsearch_restart.adoc[ecctl deployment elasticsearch restart]	 - Restarts an Elasticsearch cluster
-// * xref:ecctl_deployment_elasticsearch_resync.adoc[ecctl deployment elasticsearch resync]	 - Resynchronizes the search index and cache for the selected Elasticsearch cluster
-// * xref:ecctl_deployment_elasticsearch_search.adoc[ecctl deployment elasticsearch search]	 - Performs advanced clusters searching
-// * xref:ecctl_deployment_elasticsearch_show.adoc[ecctl deployment elasticsearch show]	 - Displays information about the specified cluster
-// * xref:ecctl_deployment_elasticsearch_shutdown.adoc[ecctl deployment elasticsearch shutdown]	 - Shuts down an Elasticsearch cluster, so that it no longer contains any running instances
-// * xref:ecctl_deployment_elasticsearch_start.adoc[ecctl deployment elasticsearch start]	 - Starts a stopped Elasticsearch cluster
-// * xref:ecctl_deployment_elasticsearch_upgrade.adoc[ecctl deployment elasticsearch upgrade]	 - Upgrades the cluster to the specified version
+* xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
+* xref:ecctl_deployment_elasticsearch_console[ecctl deployment elasticsearch console]	 - Starts an interactive console with the cluster
+* xref:ecctl_deployment_elasticsearch_create[ecctl deployment elasticsearch create]	 - Creates an Elasticsearch cluster
+* xref:ecctl_deployment_elasticsearch_delete[ecctl deployment elasticsearch delete]	 - Deletes an Elasticsearch cluster
+* xref:ecctl_deployment_elasticsearch_diagnose[ecctl deployment elasticsearch diagnose]	 - Generates a diagnostics bundle for the cluster
+* xref:ecctl_deployment_elasticsearch_instances[ecctl deployment elasticsearch instances]	 - Manages elasticsearch at the instance level
+* xref:ecctl_deployment_elasticsearch_keystore[ecctl deployment elasticsearch keystore]	 - Manages an Elasticsearch cluster's keystore
+* xref:ecctl_deployment_elasticsearch_list[ecctl deployment elasticsearch list]	 - Returns the list of Elasticsearch clusters
+* xref:ecctl_deployment_elasticsearch_monitoring[ecctl deployment elasticsearch monitoring]	 - Manages monitoring for an Elasticsearch cluster
+* xref:ecctl_deployment_elasticsearch_plan[ecctl deployment elasticsearch plan]	 - Manages Elasticsearch plans
+* xref:ecctl_deployment_elasticsearch_reallocate[ecctl deployment elasticsearch reallocate]	 - Reallocates the Elasticsearch cluster nodes
+* xref:ecctl_deployment_elasticsearch_restart[ecctl deployment elasticsearch restart]	 - Restarts an Elasticsearch cluster
+* xref:ecctl_deployment_elasticsearch_resync[ecctl deployment elasticsearch resync]	 - Resynchronizes the search index and cache for the selected Elasticsearch cluster
+* xref:ecctl_deployment_elasticsearch_search[ecctl deployment elasticsearch search]	 - Performs advanced clusters searching
+* xref:ecctl_deployment_elasticsearch_show[ecctl deployment elasticsearch show]	 - Displays information about the specified cluster
+* xref:ecctl_deployment_elasticsearch_shutdown[ecctl deployment elasticsearch shutdown]	 - Shuts down an Elasticsearch cluster, so that it no longer contains any running instances
+* xref:ecctl_deployment_elasticsearch_start[ecctl deployment elasticsearch start]	 - Starts a stopped Elasticsearch cluster
+* xref:ecctl_deployment_elasticsearch_upgrade[ecctl deployment elasticsearch upgrade]	 - Upgrades the cluster to the specified version

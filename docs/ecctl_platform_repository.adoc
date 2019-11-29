@@ -41,10 +41,10 @@ ecctl platform repository [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_platform.adoc[ecctl platform]	 - Manages the platform
-// * xref:ecctl_platform_repository_create.adoc[ecctl platform repository create]	 - Creates / updates a snapshot repository
-// * xref:ecctl_platform_repository_delete.adoc[ecctl platform repository delete]	 - Deletes a snapshot repositories
-// * xref:ecctl_platform_repository_list.adoc[ecctl platform repository list]	 - Lists all the snapshot repositories
-// * xref:ecctl_platform_repository_show.adoc[ecctl platform repository show]	 - Obtains a snapshot repository config
+* xref:ecctl_platform[ecctl platform]	 - Manages the platform
+* xref:ecctl_platform_repository_create[ecctl platform repository create]	 - Creates / updates a snapshot repository
+* xref:ecctl_platform_repository_delete[ecctl platform repository delete]	 - Deletes a snapshot repositories
+* xref:ecctl_platform_repository_list[ecctl platform repository list]	 - Lists all the snapshot repositories
+* xref:ecctl_platform_repository_show[ecctl platform repository show]	 - Obtains a snapshot repository config

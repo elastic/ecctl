@@ -40,12 +40,12 @@ ecctl platform allocator [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_platform.adoc[ecctl platform]	 - Manages the platform
-// * xref:ecctl_platform_allocator_list.adoc[ecctl platform allocator list]	 - Returns all allocators that have instances or are connected to the platform. Use --all flag or --output json to show all. Use --query to match any of the allocators properties.
-// * xref:ecctl_platform_allocator_maintenance.adoc[ecctl platform allocator maintenance]	 - Sets the allocator in Maintenance mode
-// * xref:ecctl_platform_allocator_metadata.adoc[ecctl platform allocator metadata]	 - Manages an allocator's metadata
-// * xref:ecctl_platform_allocator_search.adoc[ecctl platform allocator search]	 - Performs advanced allocator searching
-// * xref:ecctl_platform_allocator_show.adoc[ecctl platform allocator show]	 - Returns information about the allocator
-// * xref:ecctl_platform_allocator_vacate.adoc[ecctl platform allocator vacate]	 - Moves all the clusters from the specified allocator
+* xref:ecctl_platform[ecctl platform]	 - Manages the platform
+* xref:ecctl_platform_allocator_list[ecctl platform allocator list]	 - Returns all allocators that have instances or are connected to the platform. Use --all flag or --output json to show all. Use --query to match any of the allocators properties.
+* xref:ecctl_platform_allocator_maintenance[ecctl platform allocator maintenance]	 - Sets the allocator in Maintenance mode
+* xref:ecctl_platform_allocator_metadata[ecctl platform allocator metadata]	 - Manages an allocator's metadata
+* xref:ecctl_platform_allocator_search[ecctl platform allocator search]	 - Performs advanced allocator searching
+* xref:ecctl_platform_allocator_show[ecctl platform allocator show]	 - Returns information about the allocator
+* xref:ecctl_platform_allocator_vacate[ecctl platform allocator vacate]	 - Moves all the clusters from the specified allocator

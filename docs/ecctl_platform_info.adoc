@@ -40,6 +40,6 @@ ecctl platform info [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_platform.adoc[ecctl platform]	 - Manages the platform
+* xref:ecctl_platform[ecctl platform]	 - Manages the platform

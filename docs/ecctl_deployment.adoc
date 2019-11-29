@@ -40,18 +40,18 @@ ecctl deployment [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl.adoc[ecctl]	 - Elastic Cloud Control
-// * xref:ecctl_deployment_apm.adoc[ecctl deployment apm]	 - Manages APM deployments
-// * xref:ecctl_deployment_create.adoc[ecctl deployment create]	 - Creates a deployment from a file definition, allowing certain flag overrides
-// * xref:ecctl_deployment_delete.adoc[ecctl deployment delete]	 - Deletes a previously stopped deployment from the platform
-// * xref:ecctl_deployment_elasticsearch.adoc[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters
-// * xref:ecctl_deployment_kibana.adoc[ecctl deployment kibana]	 - Manages Kibana instances
-// * xref:ecctl_deployment_list.adoc[ecctl deployment list]	 - Lists the platform's deployments
-// * xref:ecctl_deployment_note.adoc[ecctl deployment note]	 - Manages a deployment's notes
-// * xref:ecctl_deployment_restore.adoc[ecctl deployment restore]	 - Restores a previously shut down deployment and all of its associated sub-resources
-// * xref:ecctl_deployment_search.adoc[ecctl deployment search]	 - Performs advanced deployment search using the Elasticsearch Query DSL
-// * xref:ecctl_deployment_show.adoc[ecctl deployment show]	 - Shows the specified deployment resources
-// * xref:ecctl_deployment_shutdown.adoc[ecctl deployment shutdown]	 - Shuts down a deployment and all of its associated sub-resources
-// * xref:ecctl_deployment_update.adoc[ecctl deployment update]	 - Updates a deployment from a file definition, allowing certain flag overrides
+* xref:ecctl[ecctl]	 - Elastic Cloud Control
+* xref:ecctl_deployment_apm[ecctl deployment apm]	 - Manages APM deployments
+* xref:ecctl_deployment_create[ecctl deployment create]	 - Creates a deployment from a file definition, allowing certain flag overrides
+* xref:ecctl_deployment_delete[ecctl deployment delete]	 - Deletes a previously stopped deployment from the platform
+* xref:ecctl_deployment_elasticsearch[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters
+* xref:ecctl_deployment_kibana[ecctl deployment kibana]	 - Manages Kibana instances
+* xref:ecctl_deployment_list[ecctl deployment list]	 - Lists the platform's deployments
+* xref:ecctl_deployment_note[ecctl deployment note]	 - Manages a deployment's notes
+* xref:ecctl_deployment_restore[ecctl deployment restore]	 - Restores a previously shut down deployment and all of its associated sub-resources
+* xref:ecctl_deployment_search[ecctl deployment search]	 - Performs advanced deployment search using the Elasticsearch Query DSL
+* xref:ecctl_deployment_show[ecctl deployment show]	 - Shows the specified deployment resources
+* xref:ecctl_deployment_shutdown[ecctl deployment shutdown]	 - Shuts down a deployment and all of its associated sub-resources
+* xref:ecctl_deployment_update[ecctl deployment update]	 - Updates a deployment from a file definition, allowing certain flag overrides

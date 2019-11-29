@@ -40,6 +40,6 @@ ecctl version [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl.adoc[ecctl]	 - Elastic Cloud Control
+* xref:ecctl[ecctl]	 - Elastic Cloud Control

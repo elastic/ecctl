@@ -139,6 +139,6 @@ setting --prune-orphans to "true" will cause any resources not specified in the 
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_deployment.adoc[ecctl deployment]	 - Manages deployments
+* xref:ecctl_deployment[ecctl deployment]	 - Manages deployments

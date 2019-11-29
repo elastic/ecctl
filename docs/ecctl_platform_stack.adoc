@@ -40,10 +40,10 @@ ecctl platform stack [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_platform.adoc[ecctl platform]	 - Manages the platform
-// * xref:ecctl_platform_stack_delete.adoc[ecctl platform stack delete]	 - Deletes an Elastic StackPack
-// * xref:ecctl_platform_stack_list.adoc[ecctl platform stack list]	 - Lists Elastic StackPacks
-// * xref:ecctl_platform_stack_show.adoc[ecctl platform stack show]	 - Shows information about an Elastic StackPack
-// * xref:ecctl_platform_stack_upload.adoc[ecctl platform stack upload]	 - Uploads an Elastic StackPack
+* xref:ecctl_platform[ecctl platform]	 - Manages the platform
+* xref:ecctl_platform_stack_delete[ecctl platform stack delete]	 - Deletes an Elastic StackPack
+* xref:ecctl_platform_stack_list[ecctl platform stack list]	 - Lists Elastic StackPacks
+* xref:ecctl_platform_stack_show[ecctl platform stack show]	 - Shows information about an Elastic StackPack
+* xref:ecctl_platform_stack_upload[ecctl platform stack upload]	 - Uploads an Elastic StackPack

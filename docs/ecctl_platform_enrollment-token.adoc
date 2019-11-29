@@ -40,9 +40,9 @@ ecctl platform enrollment-token [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_platform.adoc[ecctl platform]	 - Manages the platform
-// * xref:ecctl_platform_enrollment-token_create.adoc[ecctl platform enrollment-token create]	 - Creates an enrollment token for role(s)
-// * xref:ecctl_platform_enrollment-token_delete.adoc[ecctl platform enrollment-token delete]	 - Deletes an enrollment token
-// * xref:ecctl_platform_enrollment-token_list.adoc[ecctl platform enrollment-token list]	 - Retrieves a list of persistent enrollment tokens
+* xref:ecctl_platform[ecctl platform]	 - Manages the platform
+* xref:ecctl_platform_enrollment-token_create[ecctl platform enrollment-token create]	 - Creates an enrollment token for role(s)
+* xref:ecctl_platform_enrollment-token_delete[ecctl platform enrollment-token delete]	 - Deletes an enrollment token
+* xref:ecctl_platform_enrollment-token_list[ecctl platform enrollment-token list]	 - Retrieves a list of persistent enrollment tokens

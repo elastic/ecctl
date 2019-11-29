@@ -43,6 +43,6 @@ ecctl deployment elasticsearch shutdown <cluster id> [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_deployment_elasticsearch.adoc[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters
+* xref:ecctl_deployment_elasticsearch[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters

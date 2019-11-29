@@ -40,7 +40,7 @@ ecctl auth [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl.adoc[ecctl]	 - Elastic Cloud Control
-// * xref:ecctl_auth_key.adoc[ecctl auth key]	 - Manages the current authenticated user API keys
+* xref:ecctl[ecctl]	 - Elastic Cloud Control
+* xref:ecctl_auth_key[ecctl auth key]	 - Manages the current authenticated user API keys

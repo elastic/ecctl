@@ -40,9 +40,9 @@ ecctl user key [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_user.adoc[ecctl user]	 - Manages the platform users
-// * xref:ecctl_user_key_delete.adoc[ecctl user key delete]	 - Deletes an existing API key for the specified user
-// * xref:ecctl_user_key_list.adoc[ecctl user key list]	 - Lists the API keys for the specified user, or all platform users
-// * xref:ecctl_user_key_show.adoc[ecctl user key show]	 - Shows the API key details for the specified user
+* xref:ecctl_user[ecctl user]	 - Manages the platform users
+* xref:ecctl_user_key_delete[ecctl user key delete]	 - Deletes an existing API key for the specified user
+* xref:ecctl_user_key_list[ecctl user key list]	 - Lists the API keys for the specified user, or all platform users
+* xref:ecctl_user_key_show[ecctl user key show]	 - Shows the API key details for the specified user

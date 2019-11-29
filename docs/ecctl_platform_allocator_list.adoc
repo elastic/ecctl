@@ -67,6 +67,6 @@ ecctl platform allocator list [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_platform_allocator.adoc[ecctl platform allocator]	 - Manages allocators
+* xref:ecctl_platform_allocator[ecctl platform allocator]	 - Manages allocators

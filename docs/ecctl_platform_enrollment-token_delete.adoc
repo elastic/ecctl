@@ -40,6 +40,6 @@ ecctl platform enrollment-token delete <enrollment-token> [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_platform_enrollment-token.adoc[ecctl platform enrollment-token]	 - Manages tokens
+* xref:ecctl_platform_enrollment-token[ecctl platform enrollment-token]	 - Manages tokens

@@ -41,6 +41,6 @@ ecctl platform instance-configuration update <config id> -f <config.json> [flags
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_platform_instance-configuration.adoc[ecctl platform instance-configuration]	 - Manages instance configurations
+* xref:ecctl_platform_instance-configuration[ecctl platform instance-configuration]	 - Manages instance configurations

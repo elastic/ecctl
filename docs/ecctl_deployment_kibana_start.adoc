@@ -41,6 +41,6 @@ ecctl deployment kibana start <cluster id> [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_deployment_kibana.adoc[ecctl deployment kibana]	 - Manages Kibana instances
+* xref:ecctl_deployment_kibana[ecctl deployment kibana]	 - Manages Kibana instances

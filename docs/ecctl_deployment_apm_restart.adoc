@@ -41,6 +41,6 @@ ecctl deployment apm restart [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_deployment_apm.adoc[ecctl deployment apm]	 - Manages APM deployments
+* xref:ecctl_deployment_apm[ecctl deployment apm]	 - Manages APM deployments

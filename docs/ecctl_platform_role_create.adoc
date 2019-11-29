@@ -41,6 +41,6 @@ ecctl platform role create --file <filename.json> [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_platform_role.adoc[ecctl platform role]	 - Manages platform roles
+* xref:ecctl_platform_role[ecctl platform role]	 - Manages platform roles

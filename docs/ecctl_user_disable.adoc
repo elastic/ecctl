@@ -40,6 +40,6 @@ ecctl user disable <username> [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_user.adoc[ecctl user]	 - Manages the platform users
+* xref:ecctl_user[ecctl user]	 - Manages the platform users

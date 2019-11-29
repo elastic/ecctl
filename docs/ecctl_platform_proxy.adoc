@@ -40,9 +40,9 @@ ecctl platform proxy [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_platform.adoc[ecctl platform]	 - Manages the platform
-// * xref:ecctl_platform_proxy_filtered-group.adoc[ecctl platform proxy filtered-group]	 - Manages proxies filtered group
-// * xref:ecctl_platform_proxy_list.adoc[ecctl platform proxy list]	 - Returns all of the proxies in the platform
-// * xref:ecctl_platform_proxy_show.adoc[ecctl platform proxy show]	 - Returns information about the proxy with given id
+* xref:ecctl_platform[ecctl platform]	 - Manages the platform
+* xref:ecctl_platform_proxy_filtered-group[ecctl platform proxy filtered-group]	 - Manages proxies filtered group
+* xref:ecctl_platform_proxy_list[ecctl platform proxy list]	 - Returns all of the proxies in the platform
+* xref:ecctl_platform_proxy_show[ecctl platform proxy show]	 - Returns information about the proxy with given id

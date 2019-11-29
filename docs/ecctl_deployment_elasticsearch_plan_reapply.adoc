@@ -53,6 +53,6 @@ ecctl deployment elasticsearch plan reapply <cluster id> [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_deployment_elasticsearch_plan.adoc[ecctl deployment elasticsearch plan]	 - Manages Elasticsearch plans
+* xref:ecctl_deployment_elasticsearch_plan[ecctl deployment elasticsearch plan]	 - Manages Elasticsearch plans

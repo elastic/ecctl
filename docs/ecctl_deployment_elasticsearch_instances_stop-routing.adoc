@@ -42,6 +42,6 @@ ecctl deployment elasticsearch instances stop-routing <cluster id> [--all|--inst
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_deployment_elasticsearch_instances.adoc[ecctl deployment elasticsearch instances]	 - Manages elasticsearch at the instance level
+* xref:ecctl_deployment_elasticsearch_instances[ecctl deployment elasticsearch instances]	 - Manages elasticsearch at the instance level

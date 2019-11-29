@@ -40,6 +40,6 @@ ecctl platform repository show <repository name> [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_platform_repository.adoc[ecctl platform repository]	 - Manages snapshot repositories
+* xref:ecctl_platform_repository[ecctl platform repository]	 - Manages snapshot repositories

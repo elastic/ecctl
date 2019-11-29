@@ -41,6 +41,6 @@ ecctl deployment note update <deployment id> --id <note id> --message <message c
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_deployment_note.adoc[ecctl deployment note]	 - Manages a deployment's notes
+* xref:ecctl_deployment_note[ecctl deployment note]	 - Manages a deployment's notes

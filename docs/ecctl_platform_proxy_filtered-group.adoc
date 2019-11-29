@@ -40,11 +40,11 @@ ecctl platform proxy filtered-group [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_platform_proxy.adoc[ecctl platform proxy]	 - Manages proxies
-// * xref:ecctl_platform_proxy_filtered-group_create.adoc[ecctl platform proxy filtered-group create]	 - Creates proxies filtered group
-// * xref:ecctl_platform_proxy_filtered-group_delete.adoc[ecctl platform proxy filtered-group delete]	 - Deletes proxies filtered group
-// * xref:ecctl_platform_proxy_filtered-group_list.adoc[ecctl platform proxy filtered-group list]	 - Returns all proxies filtered groups in the platform
-// * xref:ecctl_platform_proxy_filtered-group_show.adoc[ecctl platform proxy filtered-group show]	 - Shows details for proxies filtered group
-// * xref:ecctl_platform_proxy_filtered-group_update.adoc[ecctl platform proxy filtered-group update]	 - Updates proxies filtered group
+* xref:ecctl_platform_proxy[ecctl platform proxy]	 - Manages proxies
+* xref:ecctl_platform_proxy_filtered-group_create[ecctl platform proxy filtered-group create]	 - Creates proxies filtered group
+* xref:ecctl_platform_proxy_filtered-group_delete[ecctl platform proxy filtered-group delete]	 - Deletes proxies filtered group
+* xref:ecctl_platform_proxy_filtered-group_list[ecctl platform proxy filtered-group list]	 - Returns all proxies filtered groups in the platform
+* xref:ecctl_platform_proxy_filtered-group_show[ecctl platform proxy filtered-group show]	 - Shows details for proxies filtered group
+* xref:ecctl_platform_proxy_filtered-group_update[ecctl platform proxy filtered-group update]	 - Updates proxies filtered group

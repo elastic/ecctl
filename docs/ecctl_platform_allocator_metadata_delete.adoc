@@ -40,6 +40,6 @@ ecctl platform allocator metadata delete <allocator id> <key> [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_platform_allocator_metadata.adoc[ecctl platform allocator metadata]	 - Manages an allocator's metadata
+* xref:ecctl_platform_allocator_metadata[ecctl platform allocator metadata]	 - Manages an allocator's metadata

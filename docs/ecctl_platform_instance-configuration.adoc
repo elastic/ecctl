@@ -40,12 +40,12 @@ ecctl platform instance-configuration [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_platform.adoc[ecctl platform]	 - Manages the platform
-// * xref:ecctl_platform_instance-configuration_create.adoc[ecctl platform instance-configuration create]	 - Creates a new instance configuration
-// * xref:ecctl_platform_instance-configuration_delete.adoc[ecctl platform instance-configuration delete]	 - Deletes an instance configuration
-// * xref:ecctl_platform_instance-configuration_list.adoc[ecctl platform instance-configuration list]	 - Lists the instance configurations
-// * xref:ecctl_platform_instance-configuration_pull.adoc[ecctl platform instance-configuration pull]	 - Downloads instance configuration into a local folder
-// * xref:ecctl_platform_instance-configuration_show.adoc[ecctl platform instance-configuration show]	 - Shows an instance configuration
-// * xref:ecctl_platform_instance-configuration_update.adoc[ecctl platform instance-configuration update]	 - Overwrites an instance configuration
+* xref:ecctl_platform[ecctl platform]	 - Manages the platform
+* xref:ecctl_platform_instance-configuration_create[ecctl platform instance-configuration create]	 - Creates a new instance configuration
+* xref:ecctl_platform_instance-configuration_delete[ecctl platform instance-configuration delete]	 - Deletes an instance configuration
+* xref:ecctl_platform_instance-configuration_list[ecctl platform instance-configuration list]	 - Lists the instance configurations
+* xref:ecctl_platform_instance-configuration_pull[ecctl platform instance-configuration pull]	 - Downloads instance configuration into a local folder
+* xref:ecctl_platform_instance-configuration_show[ecctl platform instance-configuration show]	 - Shows an instance configuration
+* xref:ecctl_platform_instance-configuration_update[ecctl platform instance-configuration update]	 - Overwrites an instance configuration

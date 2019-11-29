@@ -42,6 +42,6 @@ ecctl deployment kibana plan monitor <cluster id> [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_deployment_kibana_plan.adoc[ecctl deployment kibana plan]	 - Manages Kibana plans
+* xref:ecctl_deployment_kibana_plan[ecctl deployment kibana plan]	 - Manages Kibana plans

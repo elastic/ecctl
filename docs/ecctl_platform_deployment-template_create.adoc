@@ -42,6 +42,6 @@ ecctl platform deployment-template create -f <template file>.json [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_platform_deployment-template.adoc[ecctl platform deployment-template]	 - Manages deployment templates
+* xref:ecctl_platform_deployment-template[ecctl platform deployment-template]	 - Manages deployment templates

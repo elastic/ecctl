@@ -139,6 +139,6 @@ $ ecctl deployment create -f deployment_example.json --name adeploy --version=7.
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_deployment.adoc[ecctl deployment]	 - Manages deployments
+* xref:ecctl_deployment[ecctl deployment]	 - Manages deployments

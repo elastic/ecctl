@@ -40,10 +40,10 @@ ecctl deployment note [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_deployment.adoc[ecctl deployment]	 - Manages deployments
-// * xref:ecctl_deployment_note_create.adoc[ecctl deployment note create]	 - Adds a note to a deployment
-// * xref:ecctl_deployment_note_list.adoc[ecctl deployment note list]	 - Lists the deployment notes
-// * xref:ecctl_deployment_note_show.adoc[ecctl deployment note show]	 - Shows a deployment note
-// * xref:ecctl_deployment_note_update.adoc[ecctl deployment note update]	 - Updates the deployment notes
+* xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
+* xref:ecctl_deployment_note_create[ecctl deployment note create]	 - Adds a note to a deployment
+* xref:ecctl_deployment_note_list[ecctl deployment note list]	 - Lists the deployment notes
+* xref:ecctl_deployment_note_show[ecctl deployment note show]	 - Shows a deployment note
+* xref:ecctl_deployment_note_update[ecctl deployment note update]	 - Updates the deployment notes

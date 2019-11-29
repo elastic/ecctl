@@ -40,10 +40,10 @@ ecctl auth key [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
-// * xref:ecctl_auth.adoc[ecctl auth]	 - Manages the platform auth
-// * xref:ecctl_auth_key_create.adoc[ecctl auth key create]	 - Creates a new API key for the current authenticated user
-// * xref:ecctl_auth_key_delete.adoc[ecctl auth key delete]	 - Deletes one or more existing API keys for the specified user
-// * xref:ecctl_auth_key_list.adoc[ecctl auth key list]	 - Lists the API keys for the current authenticated user
-// * xref:ecctl_auth_key_show.adoc[ecctl auth key show]	 - Shows the API key details for the current authenticated user
+* xref:ecctl_auth[ecctl auth]	 - Manages the platform auth
+* xref:ecctl_auth_key_create[ecctl auth key create]	 - Creates a new API key for the current authenticated user
+* xref:ecctl_auth_key_delete[ecctl auth key delete]	 - Deletes one or more existing API keys for the specified user
+* xref:ecctl_auth_key_list[ecctl auth key list]	 - Lists the API keys for the current authenticated user
+* xref:ecctl_auth_key_show[ecctl auth key show]	 - Shows the API key details for the current authenticated user
