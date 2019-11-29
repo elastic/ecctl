@@ -274,7 +274,7 @@ $ unset EC_FORMAT
 == Command reference
 
 :leveloffset: +1 
-include::ecctl_index.adoc[]
+include::ecctl-command-reference-index.adoc[]
 :leveloffset: 0
 
 [id="{p}-contributing"]
