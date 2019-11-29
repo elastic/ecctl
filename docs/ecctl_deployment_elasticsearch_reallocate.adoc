@@ -1,3 +1,4 @@
+[#ecctl_deployment_elasticsearch_reallocate]
 == ecctl deployment elasticsearch reallocate
 
 Reallocates the Elasticsearch cluster nodes

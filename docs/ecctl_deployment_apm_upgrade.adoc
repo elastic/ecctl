@@ -1,3 +1,4 @@
+[#ecctl_deployment_apm_upgrade]
 == ecctl deployment apm upgrade
 
 Upgrades an APM deployment to the Elasticsearch deployment version

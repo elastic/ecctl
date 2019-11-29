@@ -1,3 +1,4 @@
+[#ecctl_deployment_kibana_show]
 == ecctl deployment kibana show
 
 Returns the cluster information

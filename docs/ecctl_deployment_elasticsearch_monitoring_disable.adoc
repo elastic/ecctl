@@ -1,3 +1,4 @@
+[#ecctl_deployment_elasticsearch_monitoring_disable]
 == ecctl deployment elasticsearch monitoring disable
 
 Disables monitoring in the specified cluster

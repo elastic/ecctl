@@ -1,3 +1,4 @@
+[#ecctl_deployment_elasticsearch_monitoring_enable]
 == ecctl deployment elasticsearch monitoring enable
 
 Enables monitoring in the cluster <monitored cluster id>, sending data to the cluster <monitoring cluster id>.

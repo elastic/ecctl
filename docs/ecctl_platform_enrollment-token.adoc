@@ -1,3 +1,4 @@
+[#ecctl_platform_enrollment-token]
 == ecctl platform enrollment-token
 
 Manages tokens

@@ -1,3 +1,4 @@
+[#ecctl_platform_instance-configuration_list]
 == ecctl platform instance-configuration list
 
 Lists the instance configurations

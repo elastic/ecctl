@@ -1,3 +1,4 @@
+[#ecctl_platform_stack_delete]
 == ecctl platform stack delete
 
 Deletes an Elastic StackPack

@@ -1,3 +1,4 @@
+[#ecctl_generate_completions]
 == ecctl generate completions
 
 Outputs the Bash completion to either stdout (default) or to a file

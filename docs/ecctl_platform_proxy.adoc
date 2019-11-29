@@ -1,3 +1,4 @@
+[#ecctl_platform_proxy]
 == ecctl platform proxy
 
 Manages proxies

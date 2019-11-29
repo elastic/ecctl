@@ -1,3 +1,4 @@
+[#ecctl_deployment_elasticsearch_monitoring]
 == ecctl deployment elasticsearch monitoring
 
 Manages monitoring for an Elasticsearch cluster
@@ -44,4 +45,4 @@ ecctl deployment elasticsearch monitoring [flags]
 
 * xref:ecctl_deployment_elasticsearch[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters
 * xref:ecctl_deployment_elasticsearch_monitoring_disable[ecctl deployment elasticsearch monitoring disable]	 - Disables monitoring in the specified cluster
-* xref:ecctl_deployment_elasticsearch_monitoring_enable[ecctl deployment elasticsearch monitoring enable]	 - Enables monitoring in the cluster +++<monitored cluster="" id="">+++, sending data to the cluster +++<monitoring cluster="" id="">++++++</monitoring>++++++</monitored>+++
+* xref:ecctl_deployment_elasticsearch_monitoring_enable[ecctl deployment elasticsearch monitoring enable]	 - Enables monitoring in the cluster <monitored cluster id>, sending data to the cluster <monitoring cluster id>

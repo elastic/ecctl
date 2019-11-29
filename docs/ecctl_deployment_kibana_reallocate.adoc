@@ -1,3 +1,4 @@
+[#ecctl_deployment_kibana_reallocate]
 == ecctl deployment kibana reallocate
 
 Reallocates Kibana instances

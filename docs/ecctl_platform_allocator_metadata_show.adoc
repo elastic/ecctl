@@ -1,3 +1,4 @@
+[#ecctl_platform_allocator_metadata_show]
 == ecctl platform allocator metadata show
 
 Shows allocator metadata

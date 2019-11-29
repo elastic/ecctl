@@ -1,3 +1,4 @@
+[#ecctl_deployment_apm_show]
 == ecctl deployment apm show
 
 Shows the specified APM deployment

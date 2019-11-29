@@ -1,3 +1,4 @@
+[#ecctl_platform_deployment-template_pull]
 == ecctl platform deployment-template pull
 
 Downloads deployment template into a local folder

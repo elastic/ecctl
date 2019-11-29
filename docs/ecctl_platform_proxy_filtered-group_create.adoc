@@ -1,3 +1,4 @@
+[#ecctl_platform_proxy_filtered-group_create]
 == ecctl platform proxy filtered-group create
 
 Creates proxies filtered group

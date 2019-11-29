@@ -1,3 +1,4 @@
+[#ecctl_deployment_elasticsearch_plan_reapply]
 == ecctl deployment elasticsearch plan reapply
 
 Reapplies the latest plan attempt, resetting all transient settings

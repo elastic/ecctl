@@ -1,3 +1,4 @@
+[#ecctl_deployment_apm_plan_cancel]
 == ecctl deployment apm plan cancel
 
 Cancels the pending plan

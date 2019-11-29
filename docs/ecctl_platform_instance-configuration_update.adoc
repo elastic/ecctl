@@ -1,3 +1,4 @@
+[#ecctl_platform_instance-configuration_update]
 == ecctl platform instance-configuration update
 
 Overwrites an instance configuration

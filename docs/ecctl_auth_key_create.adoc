@@ -1,3 +1,4 @@
+[#ecctl_auth_key_create]
 == ecctl auth key create
 
 Creates a new API key for the current authenticated user

@@ -1,3 +1,4 @@
+[#ecctl_auth_key_list]
 == ecctl auth key list
 
 Lists the API keys for the current authenticated user

@@ -1,3 +1,4 @@
+[#ecctl_platform_repository_delete]
 == ecctl platform repository delete
 
 Deletes a snapshot repositories

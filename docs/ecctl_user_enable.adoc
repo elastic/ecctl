@@ -1,3 +1,4 @@
+[#ecctl_user_enable]
 == ecctl user enable
 
 Enables a previously disabled platform user

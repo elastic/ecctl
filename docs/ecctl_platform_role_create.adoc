@@ -1,3 +1,4 @@
+[#ecctl_platform_role_create]
 == ecctl platform role create
 
 Creates a new platform role from a definition

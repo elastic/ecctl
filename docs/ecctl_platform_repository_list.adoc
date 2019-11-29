@@ -1,3 +1,4 @@
+[#ecctl_platform_repository_list]
 == ecctl platform repository list
 
 Lists all the snapshot repositories

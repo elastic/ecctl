@@ -1,3 +1,4 @@
+[#ecctl_auth]
 == ecctl auth
 
 Manages the platform auth

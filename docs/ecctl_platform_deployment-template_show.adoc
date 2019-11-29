@@ -1,3 +1,4 @@
+[#ecctl_platform_deployment-template_show]
 == ecctl platform deployment-template show
 
 Shows information about a specific platform deployment template

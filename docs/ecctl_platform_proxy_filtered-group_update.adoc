@@ -1,3 +1,4 @@
+[#ecctl_platform_proxy_filtered-group_update]
 == ecctl platform proxy filtered-group update
 
 Updates proxies filtered group

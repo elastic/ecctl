@@ -1,3 +1,4 @@
+[#ecctl_deployment_elasticsearch_shutdown]
 == ecctl deployment elasticsearch shutdown
 
 Shuts down an Elasticsearch cluster, so that it no longer contains any running instances

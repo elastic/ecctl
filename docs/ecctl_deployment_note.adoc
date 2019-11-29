@@ -1,3 +1,4 @@
+[#ecctl_deployment_note]
 == ecctl deployment note
 
 Manages a deployment's notes

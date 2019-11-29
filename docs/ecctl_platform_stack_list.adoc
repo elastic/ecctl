@@ -1,3 +1,4 @@
+[#ecctl_platform_stack_list]
 == ecctl platform stack list
 
 Lists Elastic StackPacks

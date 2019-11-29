@@ -1,3 +1,4 @@
+[#ecctl_deployment_kibana_stop]
 == ecctl deployment kibana stop
 
 Downscales a Kibana instance

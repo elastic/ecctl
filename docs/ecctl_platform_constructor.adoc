@@ -1,3 +1,4 @@
+[#ecctl_platform_constructor]
 == ecctl platform constructor
 
 Manages constructors

@@ -1,3 +1,4 @@
+[#ecctl_deployment_apm_create]
 == ecctl deployment apm create
 
 Creates an APM instance in the selected deployment

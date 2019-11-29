@@ -1,3 +1,4 @@
+[#ecctl_platform_repository_show]
 == ecctl platform repository show
 
 Obtains a snapshot repository config

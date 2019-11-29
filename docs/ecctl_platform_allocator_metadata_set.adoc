@@ -1,3 +1,4 @@
+[#ecctl_platform_allocator_metadata_set]
 == ecctl platform allocator metadata set
 
 Sets or updates a single metadata item to a given allocators metadata

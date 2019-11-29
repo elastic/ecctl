@@ -1,3 +1,4 @@
+[#ecctl_platform_allocator_maintenance]
 == ecctl platform allocator maintenance
 
 Sets the allocator in Maintenance mode

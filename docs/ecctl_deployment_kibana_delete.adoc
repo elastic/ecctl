@@ -1,3 +1,4 @@
+[#ecctl_deployment_kibana_delete]
 == ecctl deployment kibana delete
 
 Deletes a Kibana instance

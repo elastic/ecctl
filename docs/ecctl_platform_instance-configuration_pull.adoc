@@ -1,3 +1,4 @@
+[#ecctl_platform_instance-configuration_pull]
 == ecctl platform instance-configuration pull
 
 Downloads instance configuration into a local folder

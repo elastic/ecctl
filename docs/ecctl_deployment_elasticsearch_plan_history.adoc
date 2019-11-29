@@ -1,3 +1,4 @@
+[#ecctl_deployment_elasticsearch_plan_history]
 == ecctl deployment elasticsearch plan history
 
 Lists the plan history

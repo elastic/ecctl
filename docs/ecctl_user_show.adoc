@@ -1,3 +1,4 @@
+[#ecctl_user_show]
 == ecctl user show
 
 Shows details of a specified user

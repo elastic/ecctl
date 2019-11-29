@@ -1,3 +1,4 @@
+[#ecctl_deployment_kibana_start]
 == ecctl deployment kibana start
 
 Starts a Kibana instance

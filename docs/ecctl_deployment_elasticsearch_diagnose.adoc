@@ -1,3 +1,4 @@
+[#ecctl_deployment_elasticsearch_diagnose]
 == ecctl deployment elasticsearch diagnose
 
 Generates a diagnostics bundle for the cluster

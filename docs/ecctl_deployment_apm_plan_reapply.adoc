@@ -1,3 +1,4 @@
+[#ecctl_deployment_apm_plan_reapply]
 == ecctl deployment apm plan reapply
 
 Reapplies the latest plan attempt, resetting all transient settings

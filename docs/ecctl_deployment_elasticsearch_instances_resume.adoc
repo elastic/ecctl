@@ -1,3 +1,4 @@
+[#ecctl_deployment_elasticsearch_instances_resume]
 == ecctl deployment elasticsearch instances resume
 
 Resumes (starts) specific Elasticsearch instances, use the --all flag to target all instances

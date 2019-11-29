@@ -1,3 +1,4 @@
+[#ecctl_user_key]
 == ecctl user key
 
 Manages the API keys of a platform user

@@ -1,3 +1,4 @@
+[#ecctl_deployment_apm_stop]
 == ecctl deployment apm stop
 
 Stops an APM deployment

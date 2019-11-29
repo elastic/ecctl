@@ -1,3 +1,4 @@
+[#ecctl_platform_role]
 == ecctl platform role
 
 Manages platform roles

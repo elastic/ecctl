@@ -1,3 +1,4 @@
+[#ecctl_deployment_elasticsearch_instances_pause]
 == ecctl deployment elasticsearch instances pause
 
 Pauses (stops) specific Elasticsearch instances, use the --all flag to target all instances

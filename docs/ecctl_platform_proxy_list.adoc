@@ -1,3 +1,4 @@
+[#ecctl_platform_proxy_list]
 == ecctl platform proxy list
 
 Returns all of the proxies in the platform

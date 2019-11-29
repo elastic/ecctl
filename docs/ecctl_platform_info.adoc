@@ -1,3 +1,4 @@
+[#ecctl_platform_info]
 == ecctl platform info
 
 Shows information about the platform

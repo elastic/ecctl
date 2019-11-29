@@ -1,3 +1,4 @@
+[#ecctl_deployment_apm_delete]
 == ecctl deployment apm delete
 
 Deletes an APM deployment

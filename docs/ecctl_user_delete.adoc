@@ -1,3 +1,4 @@
+[#ecctl_user_delete]
 == ecctl user delete
 
 Deletes one or more platform users

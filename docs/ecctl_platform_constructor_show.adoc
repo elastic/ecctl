@@ -1,3 +1,4 @@
+[#ecctl_platform_constructor_show]
 == ecctl platform constructor show
 
 Returns information about the constructor with given ID

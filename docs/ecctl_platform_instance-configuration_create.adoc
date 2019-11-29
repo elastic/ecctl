@@ -1,3 +1,4 @@
+[#ecctl_platform_instance-configuration_create]
 == ecctl platform instance-configuration create
 
 Creates a new instance configuration

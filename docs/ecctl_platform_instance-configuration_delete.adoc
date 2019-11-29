@@ -1,3 +1,4 @@
+[#ecctl_platform_instance-configuration_delete]
 == ecctl platform instance-configuration delete
 
 Deletes an instance configuration

@@ -1,3 +1,4 @@
+[#ecctl_user_list]
 == ecctl user list
 
 Lists all platform users

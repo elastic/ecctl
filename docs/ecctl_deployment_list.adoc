@@ -1,3 +1,4 @@
+[#ecctl_deployment_list]
 == ecctl deployment list
 
 Lists the platform's deployments

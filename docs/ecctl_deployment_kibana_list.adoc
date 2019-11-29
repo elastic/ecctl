@@ -1,3 +1,4 @@
+[#ecctl_deployment_kibana_list]
 == ecctl deployment kibana list
 
 Returns the list of kibana instances

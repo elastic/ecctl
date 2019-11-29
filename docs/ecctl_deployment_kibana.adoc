@@ -1,3 +1,4 @@
+[#ecctl_deployment_kibana]
 == ecctl deployment kibana
 
 Manages Kibana instances

@@ -1,3 +1,4 @@
+[#ecctl_platform_deployment-template_update]
 == ecctl platform deployment-template update
 
 Updates a platform deployment template

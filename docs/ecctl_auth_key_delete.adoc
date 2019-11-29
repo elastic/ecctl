@@ -1,3 +1,4 @@
+[#ecctl_auth_key_delete]
 == ecctl auth key delete
 
 Deletes one or more existing API keys for the specified user

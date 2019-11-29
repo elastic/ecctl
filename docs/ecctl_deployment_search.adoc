@@ -1,3 +1,4 @@
+[#ecctl_deployment_search]
 == ecctl deployment search
 
 Performs advanced deployment search using the Elasticsearch Query DSL

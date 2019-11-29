@@ -1,3 +1,4 @@
+[#ecctl_platform_enrollment-token_create]
 == ecctl platform enrollment-token create
 
 Creates an enrollment token for role(s)

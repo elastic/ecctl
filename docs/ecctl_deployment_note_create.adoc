@@ -1,3 +1,4 @@
+[#ecctl_deployment_note_create]
 == ecctl deployment note create
 
 Adds a note to a deployment

@@ -1,3 +1,4 @@
+[#ecctl]
 == ecctl
 
 Elastic Cloud Control

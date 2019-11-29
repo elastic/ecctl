@@ -1,3 +1,4 @@
+[#ecctl_deployment_note_show]
 == ecctl deployment note show
 
 Shows a deployment note

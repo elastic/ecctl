@@ -1,3 +1,4 @@
+[#ecctl_deployment_restore]
 == ecctl deployment restore
 
 Restores a previously shut down deployment and all of its associated sub-resources

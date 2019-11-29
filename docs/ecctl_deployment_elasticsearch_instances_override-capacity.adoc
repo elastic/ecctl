@@ -1,3 +1,4 @@
+[#ecctl_deployment_elasticsearch_instances_override-capacity]
 == ecctl deployment elasticsearch instances override-capacity
 
 Sets overrides at the instance level, use the --all flag to target all instances

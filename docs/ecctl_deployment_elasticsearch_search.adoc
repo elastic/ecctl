@@ -1,3 +1,4 @@
+[#ecctl_deployment_elasticsearch_search]
 == ecctl deployment elasticsearch search
 
 Performs advanced clusters searching

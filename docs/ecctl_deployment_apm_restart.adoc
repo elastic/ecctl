@@ -1,3 +1,4 @@
+[#ecctl_deployment_apm_restart]
 == ecctl deployment apm restart
 
 Restarts an APM deployment

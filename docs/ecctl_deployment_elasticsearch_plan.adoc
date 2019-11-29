@@ -1,3 +1,4 @@
+[#ecctl_deployment_elasticsearch_plan]
 == ecctl deployment elasticsearch plan
 
 Manages Elasticsearch plans

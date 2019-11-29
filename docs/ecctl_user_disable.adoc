@@ -1,3 +1,4 @@
+[#ecctl_user_disable]
 == ecctl user disable
 
 Disables a platform user

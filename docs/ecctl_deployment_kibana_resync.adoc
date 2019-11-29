@@ -1,3 +1,4 @@
+[#ecctl_deployment_kibana_resync]
 == ecctl deployment kibana resync
 
 Resynchronizes the search index and cache for the selected Kibana instance

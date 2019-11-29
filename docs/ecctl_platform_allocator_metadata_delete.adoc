@@ -1,3 +1,4 @@
+[#ecctl_platform_allocator_metadata_delete]
 == ecctl platform allocator metadata delete
 
 Deletes a single metadata item from a given allocators metadata

@@ -1,3 +1,4 @@
+[#ecctl_platform_allocator_vacate]
 == ecctl platform allocator vacate
 
 Moves all the clusters from the specified allocator

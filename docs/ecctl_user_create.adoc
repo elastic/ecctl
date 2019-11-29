@@ -1,3 +1,4 @@
+[#ecctl_user_create]
 == ecctl user create
 
 Creates a new platform user

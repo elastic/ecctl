@@ -1,3 +1,4 @@
+[#ecctl_platform_deployment-template]
 == ecctl platform deployment-template
 
 Manages deployment templates

@@ -1,3 +1,4 @@
+[#ecctl_generate]
 == ecctl generate
 
 Generates completions and docs

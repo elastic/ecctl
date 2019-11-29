@@ -1,3 +1,4 @@
+[#ecctl_generate_docs]
 == ecctl generate docs
 
 Generates the command tree documentation

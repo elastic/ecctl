@@ -1,3 +1,4 @@
+[#ecctl_platform_enrollment-token_delete]
 == ecctl platform enrollment-token delete
 
 Deletes an enrollment token

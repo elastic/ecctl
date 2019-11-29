@@ -1,3 +1,4 @@
+[#ecctl_deployment_kibana_enable]
 == ecctl deployment kibana enable
 
 Enables a kibana instance in the selected deployment

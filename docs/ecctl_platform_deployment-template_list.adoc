@@ -1,3 +1,4 @@
+[#ecctl_platform_deployment-template_list]
 == ecctl platform deployment-template list
 
 Lists the platform deployment templates

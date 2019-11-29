@@ -1,3 +1,4 @@
+[#ecctl_platform_stack]
 == ecctl platform stack
 
 Manages Elastic StackPacks

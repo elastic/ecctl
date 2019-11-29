@@ -1,3 +1,4 @@
+[#ecctl_deployment_elasticsearch_list]
 == ecctl deployment elasticsearch list
 
 Returns the list of Elasticsearch clusters

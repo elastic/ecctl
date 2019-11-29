@@ -1,3 +1,4 @@
+[#ecctl_deployment_note_list]
 == ecctl deployment note list
 
 Lists the deployment notes

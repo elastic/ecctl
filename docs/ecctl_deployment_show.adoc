@@ -1,3 +1,4 @@
+[#ecctl_deployment_show]
 == ecctl deployment show
 
 Shows the specified deployment resources

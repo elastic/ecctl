@@ -1,3 +1,4 @@
+[#ecctl_platform_deployment-template_delete]
 == ecctl platform deployment-template delete
 
 Deletes a specific platform deployment template

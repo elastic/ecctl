@@ -1,3 +1,4 @@
+[#ecctl_platform_constructor_maintenance]
 == ecctl platform constructor maintenance
 
 Sets/un-sets a constructor's maintenance mode

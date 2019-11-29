@@ -1,3 +1,4 @@
+[#ecctl_deployment_elasticsearch_plan_update]
 == ecctl deployment elasticsearch plan update
 
 Applies or validates the provided plan and tracks the resulting change attempt

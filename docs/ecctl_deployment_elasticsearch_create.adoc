@@ -1,3 +1,4 @@
+[#ecctl_deployment_elasticsearch_create]
 == ecctl deployment elasticsearch create
 
 Creates an Elasticsearch cluster

@@ -1,3 +1,4 @@
+[#ecctl_deployment_elasticsearch]
 == ecctl deployment elasticsearch
 
 Manages Elasticsearch clusters

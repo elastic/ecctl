@@ -1,3 +1,4 @@
+[#ecctl_user]
 == ecctl user
 
 Manages the platform users

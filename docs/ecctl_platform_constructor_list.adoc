@@ -1,3 +1,4 @@
+[#ecctl_platform_constructor_list]
 == ecctl platform constructor list
 
 Returns all of the constructors in the platform

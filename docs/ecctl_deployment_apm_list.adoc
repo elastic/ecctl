@@ -1,3 +1,4 @@
+[#ecctl_deployment_apm_list]
 == ecctl deployment apm list
 
 Lists the APM deployments

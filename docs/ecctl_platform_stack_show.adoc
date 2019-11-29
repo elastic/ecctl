@@ -1,3 +1,4 @@
+[#ecctl_platform_stack_show]
 == ecctl platform stack show
 
 Shows information about an Elastic StackPack

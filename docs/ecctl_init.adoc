@@ -1,3 +1,4 @@
+[#ecctl_init]
 == ecctl init
 
 Creates an initial configuration file.

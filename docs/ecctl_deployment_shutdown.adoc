@@ -1,3 +1,4 @@
+[#ecctl_deployment_shutdown]
 == ecctl deployment shutdown
 
 Shuts down a deployment and all of its associated sub-resources

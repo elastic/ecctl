@@ -1,3 +1,4 @@
+[#ecctl_auth_key_show]
 == ecctl auth key show
 
 Shows the API key details for the current authenticated user

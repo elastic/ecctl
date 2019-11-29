@@ -1,3 +1,4 @@
+[#ecctl_platform_stack_upload]
 == ecctl platform stack upload
 
 Uploads an Elastic StackPack

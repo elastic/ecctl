@@ -1,3 +1,4 @@
+[#ecctl_deployment_apm_plan_history]
 == ecctl deployment apm plan history
 
 Lists the plan history

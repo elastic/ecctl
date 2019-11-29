@@ -1,3 +1,4 @@
+[#ecctl_deployment_apm_plan]
 == ecctl deployment apm plan
 
 Manages APM plans

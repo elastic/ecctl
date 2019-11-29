@@ -1,3 +1,4 @@
+[#ecctl_platform_enrollment-token_list]
 == ecctl platform enrollment-token list
 
 Retrieves a list of persistent enrollment tokens

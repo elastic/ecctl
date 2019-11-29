@@ -1,3 +1,4 @@
+[#ecctl_deployment_kibana_restart]
 == ecctl deployment kibana restart
 
 Restarts a Kibana instance

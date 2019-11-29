@@ -1,3 +1,4 @@
+[#ecctl_deployment_elasticsearch_plan_monitor]
 == ecctl deployment elasticsearch plan monitor
 
 Monitors the pending plan

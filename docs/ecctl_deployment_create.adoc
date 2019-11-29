@@ -1,3 +1,4 @@
+[#ecctl_deployment_create]
 == ecctl deployment create
 
 Creates a deployment from a file definition, allowing certain flag overrides

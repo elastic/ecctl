@@ -1,3 +1,4 @@
+[#ecctl_deployment_kibana_upgrade]
 == ecctl deployment kibana upgrade
 
 Upgrades the Kibana instance to the same version as the Elasticsearch one

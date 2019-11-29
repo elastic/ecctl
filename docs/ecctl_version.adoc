@@ -1,3 +1,4 @@
+[#ecctl_version]
 == ecctl version
 
 Shows ecctl version

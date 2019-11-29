@@ -1,3 +1,4 @@
+[#ecctl_deployment_delete]
 == ecctl deployment delete
 
 Deletes a previously stopped deployment from the platform

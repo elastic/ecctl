@@ -1,3 +1,4 @@
+[#ecctl_platform_allocator_show]
 == ecctl platform allocator show
 
 Returns information about the allocator

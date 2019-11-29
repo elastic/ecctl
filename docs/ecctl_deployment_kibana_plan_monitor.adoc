@@ -1,3 +1,4 @@
+[#ecctl_deployment_kibana_plan_monitor]
 == ecctl deployment kibana plan monitor
 
 Monitors the pending plan

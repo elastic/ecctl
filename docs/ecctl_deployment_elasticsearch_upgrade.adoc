@@ -1,3 +1,4 @@
+[#ecctl_deployment_elasticsearch_upgrade]
 == ecctl deployment elasticsearch upgrade
 
 Upgrades the cluster to the specified version

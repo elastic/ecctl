@@ -1,3 +1,4 @@
+[#ecctl_deployment_elasticsearch_instances_stop-routing]
 == ecctl deployment elasticsearch instances stop-routing
 
 Stops routing on specific Elasticsearch instances, use the --all flag to target all instances

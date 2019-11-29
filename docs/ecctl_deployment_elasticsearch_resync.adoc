@@ -1,3 +1,4 @@
+[#ecctl_deployment_elasticsearch_resync]
 == ecctl deployment elasticsearch resync
 
 Resynchronizes the search index and cache for the selected Elasticsearch cluster
