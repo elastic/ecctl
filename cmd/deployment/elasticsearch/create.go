@@ -18,88 +18,116 @@
 package cmdelasticsearch
 
 import (
-	"encoding/json"
-	"os"
-	"path/filepath"
+	"fmt"
 
-	"github.com/elastic/cloud-sdk-go/pkg/input"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
-	"github.com/elastic/ecctl/pkg/deployment/elasticsearch"
-	"github.com/elastic/ecctl/pkg/deployment/elasticsearch/plan"
+	"github.com/elastic/ecctl/pkg/deployment"
+	"github.com/elastic/ecctl/pkg/deployment/depresource"
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/util"
-)
-
-const (
-	esCreateExample = `
-  * Create a single node elasticsearch cluster
-  ecctl deployment elasticsearch create --version 5.6.0 --zones 1 --capacity 2048
- 
-  * Create an elasticsearch cluster from a plan definition.
-  ecctl deployment elasticsearch create --file definition.json
-`
 )
 
 var createElasticsearchCmd = &cobra.Command{
-	Use:     "create [--file] [--capacity|--version|--zones] [name]",
-	Short:   "Creates an Elasticsearch cluster",
-	PreRunE: cobra.MaximumNArgs(1),
+	Use:     "create {--file|--size <int> --version <string> --zones <string>|--topology-element <obj>}",
+	Short:   "Creates a deployment with (only) an Elasticsearch resource in it",
+	PreRunE: cobra.MaximumNArgs(0),
+	Long:    esCreateLong,
 	Example: esCreateExample,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		var name string
-		if len(args) == 1 {
-			name = args[0]
+		var track, _ = cmd.Flags().GetBool("track")
+		var generatePayload, _ = cmd.Flags().GetBool("generate-payload")
+		var zoneCount, _ = cmd.Flags().GetInt32("zones")
+		var size, _ = cmd.Flags().GetInt32("size")
+		var plugin, _ = cmd.Flags().GetStringSlice("plugin")
+		var name, _ = cmd.Flags().GetString("name")
+		var RefID, _ = cmd.Flags().GetString("ref-id")
+		var version, _ = cmd.Flags().GetString("version")
+		var dt, _ = cmd.Flags().GetString("deployment-template")
+		var te, _ = cmd.Flags().GetStringArray("topology-element")
+		var region string
+		if ecctl.Get().Config.Region == "" {
+			region = cmdutil.DefaultECERegion
 		}
 
-		var track, _ = cmd.Flags().GetBool("track")
-		var zoneCount, _ = cmd.Flags().GetInt32("zones")
-		var capacity, _ = cmd.Flags().GetInt32("capacity")
-		var plugin, _ = cmd.Flags().GetStringSlice("plugin")
-		var def *models.ElasticsearchClusterPlan
-
+		var p *models.ElasticsearchPayload
 		if err := cmdutil.FileOrStdin(cmd, "file"); err == nil {
-			reader, _ := input.NewFileOrReader(os.Stdin, cmd.Flag("file").Value.String())
-			if reader != nil {
-				if err := json.NewDecoder(reader).Decode(&def); err != nil {
-					return err
-				}
+			err := cmdutil.DecodeDefinition(cmd, "file", &p)
+			if err != nil && err != cmdutil.ErrNodefinitionLoaded {
+				return err
 			}
 		}
 
-		r, err := elasticsearch.Create(elasticsearch.CreateParams{
-			API:            ecctl.Get().API,
-			ClusterName:    name,
-			PlanDefinition: def,
-			LegacyParams: plan.LegacyParams{
-				Version:   cmd.Flag("version").Value.String(),
-				ZoneCount: zoneCount,
-				Capacity:  capacity,
-				Plugins:   plugin,
+		payload, err := depresource.ParseElasticsearchInput(depresource.ParseElasticsearchInputParams{
+			NewElasticsearchParams: depresource.NewElasticsearchParams{
+				API:        ecctl.Get().API,
+				RefID:      RefID,
+				Version:    version,
+				Plugins:    plugin,
+				Region:     region,
+				TemplateID: dt,
 			},
-			TrackParams: util.TrackParams{
-				Track:  track,
-				Output: ecctl.Get().Config.OutputDevice,
-			},
+			Size:             size,
+			ZoneCount:        zoneCount,
+			Payload:          p,
+			Writer:           ecctl.Get().Config.ErrorDevice,
+			TopologyElements: te,
 		})
 		if err != nil {
 			return err
 		}
-		return ecctl.Get().Formatter.Format(
-			filepath.Join("elasticsearch", "create"),
-			r,
-		)
+
+		// Returns the ElasticsearchPayload skipping the creation of the resources.
+		if generatePayload {
+			return ecctl.Get().Formatter.Format("", payload)
+		}
+
+		var createParams = deployment.CreateParams{
+			API: ecctl.Get().API,
+			Request: &models.DeploymentCreateRequest{
+				Name: name,
+				Resources: &models.DeploymentCreateResources{
+					Elasticsearch: []*models.ElasticsearchPayload{payload},
+				},
+			},
+		}
+
+		res, err := deployment.Create(createParams)
+		if err != nil {
+			return err
+		}
+
+		if err := ecctl.Get().Formatter.Format("", res); err != nil {
+			if !track {
+				return err
+			}
+			fmt.Fprintln(ecctl.Get().Config.OutputDevice, err)
+		}
+
+		if !track {
+			return nil
+		}
+
+		return depresource.TrackResources(depresource.TrackResourcesParams{
+			API:          ecctl.Get().API,
+			Resources:    res.Resources,
+			OutputDevice: ecctl.Get().Config.OutputDevice,
+		})
 	},
 }
 
 func init() {
 	Command.AddCommand(createElasticsearchCmd)
-	createElasticsearchCmd.Flags().String("file", "", "JSON plan definition file location")
-	createElasticsearchCmd.Flags().StringP("version", "v", "", "Filter per version")
-	createElasticsearchCmd.Flags().Int32P("zones", "z", 0, "Number of zones for the cluster")
-	createElasticsearchCmd.Flags().Int32P("capacity", "c", 0, "Capacity per node")
+	createElasticsearchCmd.Flags().String("file", "", "ElasticsearchPayload file definition. See help for more information")
+	createElasticsearchCmd.Flags().String("deployment-template", "default", "Deployment template ID on which to base the deployment from")
+	createElasticsearchCmd.Flags().StringArrayP("topology-element", "e", nil, "Topology element definition. See help for more information")
+	createElasticsearchCmd.Flags().String("version", "", "Version to use, if not specified, the latest available stack version will be used")
+	createElasticsearchCmd.Flags().String("name", "", "Optional name for the Elasticsearch deployment")
+	createElasticsearchCmd.Flags().String("ref-id", "elasticsearch", "RefId for the Elasticsearch deployment")
+	createElasticsearchCmd.Flags().Int32("zones", 1, "Number of zones the deployment will span")
+	createElasticsearchCmd.Flags().Int32("size", 4096, "Memory (RAM) in MB that each of the deployment nodes will have")
 	createElasticsearchCmd.Flags().BoolP("track", "t", false, cmdutil.TrackFlagMessage)
-	createElasticsearchCmd.Flags().StringSlice("plugin", nil, "Additional plugins to add to the Elasticsearch cluster")
+	createElasticsearchCmd.Flags().Bool("generate-payload", false, "Returns the ElasticsearchPayload without actually creating the deployment resources")
+	createElasticsearchCmd.Flags().StringSlice("plugin", nil, "Additional plugins to add to the Elasticsearch deployment")
 }
