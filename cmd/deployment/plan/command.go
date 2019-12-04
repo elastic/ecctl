@@ -30,6 +30,3 @@ var Command = &cobra.Command{
 		cmd.Help()
 	},
 }
-
-func init() {
-}
