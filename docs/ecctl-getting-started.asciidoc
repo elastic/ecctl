@@ -38,7 +38,6 @@ link:https://brew.sh/[Homebrew]:
 [source]
 ----
 $ brew tap elastic/ecctl
-$ brew tap-pin elastic/ecctl
 $ brew install elastic/ecctl/ecctl
 Updating Homebrew...
 => Installing ecctl from elastic/ecctl
