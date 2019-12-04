@@ -46,6 +46,7 @@ ecctl deployment [flags]
 * [ecctl deployment kibana](ecctl_deployment_kibana.md)	 - Manages Kibana instances
 * [ecctl deployment list](ecctl_deployment_list.md)	 - Lists the platform's deployments
 * [ecctl deployment note](ecctl_deployment_note.md)	 - Manages a deployment's notes
+* [ecctl deployment plan](ecctl_deployment_plan.md)	 - Manages deployment plans
 * [ecctl deployment restore](ecctl_deployment_restore.md)	 - Restores a previously shut down deployment and all of its associated sub-resources
 * [ecctl deployment search](ecctl_deployment_search.md)	 - Performs advanced deployment search using the Elasticsearch Query DSL
 * [ecctl deployment show](ecctl_deployment_show.md)	 - Shows the specified deployment resources
