@@ -34,8 +34,18 @@ import (
 // TrackResourcesParams is consumed by TrackResources.
 type TrackResourcesParams struct {
 	*api.API
-	Resources    []*models.DeploymentResource
+
+	// List of current "live" resources,
+	Resources []*models.DeploymentResource
+	// Orphaned are the resources that will become orphaned after a deployment
+	// update.
+	Orphaned *models.Orphaned
+
 	OutputDevice *output.Device
+}
+
+type resource struct {
+	id, kind string
 }
 
 // Validate ensures the parameters are usable by the consuming function.
@@ -63,33 +73,47 @@ func TrackResources(params TrackResourcesParams) error {
 		return err
 	}
 
-	if len(params.Resources) == 0 {
-		return nil
+	var resources = make([]resource, 0, len(params.Resources))
+	for _, r := range params.Resources {
+		resources = append(resources, resource{
+			id:   *r.ID,
+			kind: *r.Kind,
+		})
+	}
+
+	if params.Orphaned != nil {
+		for _, id := range params.Orphaned.Apm {
+			resources = append(resources, resource{
+				id:   id,
+				kind: "apm",
+			})
+		}
+		for _, id := range params.Orphaned.Appsearch {
+			resources = append(resources, resource{
+				id:   id,
+				kind: "appsearch",
+			})
+		}
+		for _, id := range params.Orphaned.Kibana {
+			resources = append(resources, resource{
+				id:   id,
+				kind: "kibana",
+			})
+		}
+		for _, es := range params.Orphaned.Elasticsearch {
+			resources = append(resources, resource{
+				id:   *es.ID,
+				kind: "elasticsearch",
+			})
+		}
 	}
 
 	var merr = new(multierror.Error)
 	var errChan = make(chan error)
 	var wg sync.WaitGroup
-
-	for _, resource := range params.Resources {
+	for _, r := range resources {
 		wg.Add(1)
-
-		go func(r *models.DeploymentResource, w *sync.WaitGroup) {
-			defer w.Done()
-			if *r.Kind == "appsearch" {
-				errChan <- fmt.Errorf("cannot track appsearch resource id %s", *r.ID)
-				return
-			}
-
-			errChan <- util.TrackCluster(util.TrackClusterParams{
-				TrackParams: plan.TrackParams{
-					API:  params.API,
-					ID:   *r.ID,
-					Kind: *r.Kind,
-				},
-				Output: params.OutputDevice,
-			})
-		}(resource, &wg)
+		go trackResource(params.API, params.OutputDevice, r, &wg, errChan)
 	}
 
 	// Close the channel once all the errors have been received.
@@ -103,4 +127,21 @@ func TrackResources(params TrackResourcesParams) error {
 	}
 
 	return merr.ErrorOrNil()
+}
+
+func trackResource(a *api.API, out *output.Device, r resource, w *sync.WaitGroup, errChan chan error) {
+	defer w.Done()
+	if r.kind == "appsearch" {
+		errChan <- fmt.Errorf("cannot track appsearch resource id \"%s\"", r.id)
+		return
+	}
+
+	errChan <- util.TrackCluster(util.TrackClusterParams{
+		TrackParams: plan.TrackParams{
+			API:  a,
+			ID:   r.id,
+			Kind: r.kind,
+		},
+		Output: out,
+	})
 }

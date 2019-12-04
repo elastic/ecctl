@@ -33,7 +33,6 @@ var Command = &cobra.Command{
 
 func init() {
 	Command.AddCommand(
-		enableKibanaCmd,
 		kibanaListCmd,
 		showKibanaClusterCmd,
 		createKibanaCmd,

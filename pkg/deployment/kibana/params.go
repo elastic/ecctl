@@ -18,8 +18,6 @@
 package kibana
 
 import (
-	"errors"
-
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	multierror "github.com/hashicorp/go-multierror"
 
@@ -29,10 +27,6 @@ import (
 
 // stoppedState represents the stopped state string for a cluster
 const stoppedState = "stopped"
-
-var (
-	errEmptyKibanaRequest = errors.New("kibana request cannot be empty")
-)
 
 // DeploymentParams is the base struct meant to be embedded in other kibana pkg params
 type DeploymentParams struct {
