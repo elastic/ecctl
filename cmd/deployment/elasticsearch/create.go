@@ -42,7 +42,7 @@ var createElasticsearchCmd = &cobra.Command{
 		var size, _ = cmd.Flags().GetInt32("size")
 		var plugin, _ = cmd.Flags().GetStringSlice("plugin")
 		var name, _ = cmd.Flags().GetString("name")
-		var RefID, _ = cmd.Flags().GetString("ref-id")
+		var refID, _ = cmd.Flags().GetString("ref-id")
 		var version, _ = cmd.Flags().GetString("version")
 		var dt, _ = cmd.Flags().GetString("deployment-template")
 		var te, _ = cmd.Flags().GetStringArray("topology-element")
@@ -62,7 +62,7 @@ var createElasticsearchCmd = &cobra.Command{
 		payload, err := depresource.ParseElasticsearchInput(depresource.ParseElasticsearchInputParams{
 			NewElasticsearchParams: depresource.NewElasticsearchParams{
 				API:        ecctl.Get().API,
-				RefID:      RefID,
+				RefID:      refID,
 				Version:    version,
 				Plugins:    plugin,
 				Region:     region,

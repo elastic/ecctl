@@ -25,7 +25,6 @@ import (
 	"testing"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
-	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	"github.com/elastic/cloud-sdk-go/pkg/output"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
@@ -67,19 +66,57 @@ func TestTrackResources(t *testing.T) {
 				},
 			}},
 			err: &multierror.Error{Errors: []error{
-				fmt.Errorf("cannot track appsearch resource id %s", "an id"),
+				fmt.Errorf("cannot track appsearch resource id \"%s\"", "an id"),
 			}},
 		},
 		{
 			name: "returns an error due to parameter validation",
 			args: args{params: TrackResourcesParams{
-				API:          api.NewMock(mock.New500Response(mock.NewStructBody(errors.New("error")))),
+				API:          api.NewMock(),
 				OutputDevice: output.NewDevice(ioutil.Discard),
 				Resources: []*models.DeploymentResource{
 					{ID: ec.String("invalid id"), Kind: ec.String("elasticsearch")},
 				},
 			}},
 			err: &multierror.Error{Errors: []error{
+				fmt.Errorf("plan Track: invalid ID"),
+			}},
+		},
+		{
+			name: "returns an error due to parameter validation (Orphaned Appsearch)",
+			args: args{params: TrackResourcesParams{
+				API:          api.NewMock(),
+				OutputDevice: output.NewDevice(ioutil.Discard),
+				Orphaned:     &models.Orphaned{Appsearch: []string{"invalid id"}},
+			}},
+			err: &multierror.Error{Errors: []error{
+				fmt.Errorf("cannot track appsearch resource id \"invalid id\""),
+			}},
+		},
+		{
+			name: "returns an error due to parameter validation (Orphaned and Resources)",
+			args: args{params: TrackResourcesParams{
+				API:          api.NewMock(),
+				OutputDevice: output.NewDevice(ioutil.Discard),
+				Resources: []*models.DeploymentResource{
+					{ID: ec.String("invalid id"), Kind: ec.String("elasticsearch")},
+					{ID: ec.String("invalid id"), Kind: ec.String("kibana")},
+					{ID: ec.String("invalid id"), Kind: ec.String("apm")},
+				},
+				Orphaned: &models.Orphaned{
+					Apm:    []string{"invalid id"},
+					Kibana: []string{"invalid id"},
+					Elasticsearch: []*models.OrphanedElasticsearch{
+						{ID: ec.String("invalid id")},
+					},
+				},
+			}},
+			err: &multierror.Error{Errors: []error{
+				fmt.Errorf("plan Track: invalid ID"),
+				fmt.Errorf("plan Track: invalid ID"),
+				fmt.Errorf("plan Track: invalid ID"),
+				fmt.Errorf("plan Track: invalid ID"),
+				fmt.Errorf("plan Track: invalid ID"),
 				fmt.Errorf("plan Track: invalid ID"),
 			}},
 		},
