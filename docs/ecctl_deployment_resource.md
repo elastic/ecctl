@@ -39,5 +39,5 @@ ecctl deployment resource [flags]
 ### SEE ALSO
 
 * [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
-* [ecctl deployment resource upgrade](ecctl_deployment_resource_upgrade.md)	 - Upgrades a deploymnt resource
+* [ecctl deployment resource upgrade](ecctl_deployment_resource_upgrade.md)	 - Upgrades a deployment resource
 

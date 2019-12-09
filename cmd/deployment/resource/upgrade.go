@@ -30,7 +30,7 @@ import (
 // upgradeCmd is the deployment subcommand
 var upgradeCmd = &cobra.Command{
 	Use:     "upgrade <deployment id> --type <type> --ref-id <ref-id>",
-	Short:   "Upgrades a deploymnt resource",
+	Short:   "Upgrades a deployment resource",
 	Long:    upgradeLong,
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -67,8 +67,8 @@ var upgradeCmd = &cobra.Command{
 func init() {
 	Command.AddCommand(upgradeCmd)
 	upgradeCmd.Flags().BoolP("track", "t", false, cmdutil.TrackFlagMessage)
-	upgradeCmd.Flags().String("type", "", "Optional deployment type to show resource information (elasticsearch, kibana, apm, or appsearch)")
+	upgradeCmd.Flags().String("type", "", "Optional stateless deployment type to upgrade (kibana, apm, or appsearch)")
 	upgradeCmd.MarkFlagRequired("type")
-	upgradeCmd.Flags().String("ref-id", "", "Optional deployment type RefId, if not set, the RefId will be auto-discovered")
+	upgradeCmd.Flags().String("ref-id", "", "Optional deployment RefId, if not set, the RefId will be auto-discovered")
 	upgradeCmd.MarkFlagRequired("ref-id")
 }

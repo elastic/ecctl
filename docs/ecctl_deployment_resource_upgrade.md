@@ -1,6 +1,6 @@
 ## ecctl deployment resource upgrade
 
-Upgrades a deploymnt resource
+Upgrades a deployment resource
 
 ### Synopsis
 
@@ -15,9 +15,9 @@ ecctl deployment resource upgrade <deployment id> --type <type> --ref-id <ref-id
 
 ```
   -h, --help            help for upgrade
-      --ref-id string   Optional deployment type RefId, if not set, the RefId will be auto-discovered
+      --ref-id string   Optional deployment RefId, if not set, the RefId will be auto-discovered
   -t, --track           Tracks the progress of the performed task
-      --type string     Optional deployment type to show resource information (elasticsearch, kibana, apm, or appsearch)
+      --type string     Optional stateless deployment type to upgrade (kibana, apm, or appsearch)
 ```
 
 ### Options inherited from parent commands
