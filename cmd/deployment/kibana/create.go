@@ -61,7 +61,7 @@ var createKibanaCmd = &cobra.Command{
 		}
 
 		if payload == nil {
-			p, err := depresource.NewKibana(depresource.NewKibanaParams{
+			p, err := depresource.NewKibana(depresource.NewStateless{
 				DeploymentID:       id,
 				ElasticsearchRefID: esRefID,
 				API:                ecctl.Get().API,

@@ -39,9 +39,8 @@ ecctl deployment apm [flags]
 ### SEE ALSO
 
 * [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
-* [ecctl deployment apm create](ecctl_deployment_apm_create.md)	 - Creates an APM instance in the selected deployment
+* [ecctl deployment apm create](ecctl_deployment_apm_create.md)	 - Creates a Apm instance
 * [ecctl deployment apm delete](ecctl_deployment_apm_delete.md)	 - Deletes an APM deployment
-* [ecctl deployment apm enable](ecctl_deployment_apm_enable.md)	 - Enables an APM instance in the selected deployment
 * [ecctl deployment apm list](ecctl_deployment_apm_list.md)	 - Lists the APM deployments
 * [ecctl deployment apm plan](ecctl_deployment_apm_plan.md)	 - Manages APM plans
 * [ecctl deployment apm restart](ecctl_deployment_apm_restart.md)	 - Restarts an APM deployment

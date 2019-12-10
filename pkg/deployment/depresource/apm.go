@@ -25,15 +25,15 @@ import (
 )
 
 const (
-	// DefaultKibanahRefID is used when the RefID is not specified.
-	DefaultKibanahRefID = "kibana"
+	// DefaultApmRefID is used when the RefID is not specified.
+	DefaultApmRefID = "apm"
 )
 
-// NewKibana creates a *models.KibanaPayload from the parameters.
+// NewApm creates a *models.ApmPayload from the parameters.
 // It relies on a simplified single dimension memory size and zone count to
-// construct the Kibana's topology.
-func NewKibana(params NewStateless) (*models.KibanaPayload, error) {
-	params.fillDefaults(DefaultKibanahRefID)
+// construct the Apm's topology.
+func NewApm(params NewStateless) (*models.ApmPayload, error) {
+	params.fillDefaults(DefaultApmRefID)
 	if err := params.Validate(); err != nil {
 		return nil, err
 	}
@@ -44,8 +44,8 @@ func NewKibana(params NewStateless) (*models.KibanaPayload, error) {
 		return nil, err
 	}
 
-	// Obtain the deployment template so we can create the kibana topology from
-	// the specified sizes. The sizing overrides are done in newKibanaPayload.
+	// Obtain the deployment template so we can create the apm topology from
+	// the specified sizes. The sizing overrides are done in newApmPayload.
 	res, err := params.V1API.PlatformConfigurationTemplates.GetDeploymentTemplate(
 		platform_configuration_templates.NewGetDeploymentTemplateParams().
 			WithTemplateID(params.TemplateID).
@@ -56,17 +56,17 @@ func NewKibana(params NewStateless) (*models.KibanaPayload, error) {
 		return nil, api.UnwrapError(err)
 	}
 
-	var clusterTopology = res.Payload.ClusterTemplate.Kibana.Plan.ClusterTopology
-	var topology = models.KibanaClusterTopologyElement{Size: new(models.TopologySize)}
+	var clusterTopology = res.Payload.ClusterTemplate.Apm.Plan.ClusterTopology
+	var topology = models.ApmTopologyElement{Size: new(models.TopologySize)}
 	if len(clusterTopology) > 0 {
 		topology = *clusterTopology[0]
 	}
-	var payload = newKibanaPayload(params, topology)
+	var payload = newApmPayload(params, topology)
 
 	return &payload, nil
 }
 
-func newKibanaPayload(params NewStateless, topology models.KibanaClusterTopologyElement) models.KibanaPayload {
+func newApmPayload(params NewStateless, topology models.ApmTopologyElement) models.ApmPayload {
 	if params.Size > 0 {
 		topology.Size.Value = ec.Int32(params.Size)
 	}
@@ -74,14 +74,14 @@ func newKibanaPayload(params NewStateless, topology models.KibanaClusterTopology
 		topology.ZoneCount = params.ZoneCount
 	}
 
-	return models.KibanaPayload{
+	return models.ApmPayload{
 		ElasticsearchClusterRefID: ec.String(params.ElasticsearchRefID),
 		DisplayName:               params.Name,
 		Region:                    ec.String(params.Region),
 		RefID:                     ec.String(params.RefID),
-		Plan: &models.KibanaClusterPlan{
-			Kibana:          &models.KibanaConfiguration{Version: params.Version},
-			ClusterTopology: []*models.KibanaClusterTopologyElement{&topology},
+		Plan: &models.ApmPlan{
+			Apm:             &models.ApmConfiguration{Version: params.Version},
+			ClusterTopology: []*models.ApmTopologyElement{&topology},
 		},
 	}
 }
