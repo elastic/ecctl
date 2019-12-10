@@ -4,8 +4,8 @@ Creates a Apm instance
 
 ### Synopsis
 
-Creates a Apm deployment, limitting the creation scope to Apm resources.
-There's a few ways to create an Apm deployment, sane default values are provided, making
+Creates an APM deployment, limitting the creation scope to APM resources.
+There's a few ways to create an APM deployment, sane default values are provided, making
 the command work out of the box even when no parameters are set. When version is not specified,
 the matching elasticsearch deployment version will be used. These are the available options:
 
