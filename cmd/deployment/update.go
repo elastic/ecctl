@@ -18,6 +18,7 @@
 package cmddeployment
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/elastic/cloud-sdk-go/pkg/models"
@@ -25,11 +26,13 @@ import (
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/deployment"
+	"github.com/elastic/ecctl/pkg/deployment/depresource"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 const updateLong = `updates a deployment from a file definition, defaulting prune_orphans=false, making the default
 update action safe for partial updates, to override this behavior toggle --prune-orphans.
+To track the changes toggle the --track flag.
 
 Read more about the deployment definition in https://www.elastic.co/guide/en/cloud-enterprise/current/Deployment_-_CRUD.html`
 
@@ -164,12 +167,29 @@ var updateCmd = &cobra.Command{
 			return err
 		}
 
-		return ecctl.Get().Formatter.Format("", res)
+		var track, _ = cmd.Flags().GetBool("track")
+		if err := ecctl.Get().Formatter.Format("", res); err != nil {
+			if !track {
+				return err
+			}
+			fmt.Fprintln(ecctl.Get().Config.OutputDevice, err)
+		}
+
+		if !track {
+			return nil
+		}
+
+		return depresource.TrackResources(depresource.TrackResourcesParams{
+			API:          ecctl.Get().API,
+			Resources:    res.Resources,
+			OutputDevice: ecctl.Get().Config.OutputDevice,
+		})
 	},
 }
 
 func init() {
 	Command.AddCommand(updateCmd)
+	updateCmd.Flags().BoolP("track", "t", false, cmdutil.TrackFlagMessage)
 	updateCmd.Flags().Bool("prune-orphans", false, "When set to true, it will remove any resources not specified in the update request, treating the json file contents as the authoritative deployment definition")
 	updateCmd.Flags().Bool("skip-snapshot", false, "Skips taking an Elasticsearch snapshot prior to shutting down the deployment")
 	updateCmd.Flags().Bool("hide-pruned-orphans", false, "Hides orphaned resources that were shut down (only relevant if --prune-orphans=true)")

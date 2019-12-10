@@ -18,12 +18,14 @@
 package cmddeployment
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/deployment"
+	"github.com/elastic/ecctl/pkg/deployment/depresource"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
@@ -51,12 +53,29 @@ var shutdownCmd = &cobra.Command{
 			return err
 		}
 
-		return ecctl.Get().Formatter.Format("deployment/shutdown", res)
+		var track, _ = cmd.Flags().GetBool("track")
+		if err := ecctl.Get().Formatter.Format("deployment/shutdown", res); err != nil {
+			if !track {
+				return err
+			}
+			fmt.Fprintln(ecctl.Get().Config.OutputDevice, err)
+		}
+
+		if !track {
+			return nil
+		}
+
+		return depresource.TrackResources(depresource.TrackResourcesParams{
+			API:          ecctl.Get().API,
+			Orphaned:     res.Orphaned,
+			OutputDevice: ecctl.Get().Config.OutputDevice,
+		})
 	},
 }
 
 func init() {
 	Command.AddCommand(shutdownCmd)
+	shutdownCmd.Flags().BoolP("track", "t", false, cmdutil.TrackFlagMessage)
 	shutdownCmd.Flags().Bool("skip-snapshot", false, "Skips taking an Elasticsearch snapshot prior to shutting down the deployment")
 	shutdownCmd.Flags().Bool("hide", false, "Hides the deployment and its resources after it has been shut down")
 }
