@@ -20,6 +20,7 @@ package cmdallocator
 import (
 	"errors"
 	"fmt"
+	"os"
 	"strconv"
 
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
@@ -91,10 +92,11 @@ var vacateAllocatorCmd = &cobra.Command{
 
 		moveOnly, _ := cmd.Flags().GetBool("move-only")
 
-		overrideFailsafeRaw, _ := cmd.Flags().GetBool("override-failsafe")
-		overrideFailsafe, err := cmdutil.ActionConfirm(strconv.FormatBool(overrideFailsafeRaw), "--override-failsafe flag specified. Are you sure you want to proceed? [y/N]: ")
-		if err != nil {
-			return err
+		overrideFailsafe, _ := cmd.Flags().GetBool("override-failsafe")
+		force, _ := cmd.Flags().GetBool("force")
+		var msg = "--override-failsafe flag specified. Are you sure you want to proceed? [y/N]: "
+		if !force && !cmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
+			return nil
 		}
 
 		target, _ := cmd.Flags().GetStringSlice("target")
@@ -157,7 +159,7 @@ var vacateAllocatorCmd = &cobra.Command{
 			PlanOverrides: allocator.PlanOverrides{
 				SkipSnapshot:      skipSnapshot,
 				SkipDataMigration: skipDataMigration,
-				OverrideFailsafe:  overrideFailsafe,
+				OverrideFailsafe:  ec.Bool(overrideFailsafe),
 			},
 		}
 		if len(args) == 1 && allocatorDownRaw != "" {
