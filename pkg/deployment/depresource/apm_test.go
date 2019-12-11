@@ -128,7 +128,7 @@ func TestNewApm(t *testing.T) {
 			err: errors.New("unable to obtain deployment template ID from existing deployment ID, please specify a one"),
 		},
 		{
-			name: "obtains the deployment info but fails getting the template ID info",
+			name: "obtains the deployment info but fails getting the template ID info from the API",
 			args: args{params: NewStateless{
 				DeploymentID: util.ValidClusterID,
 				API: api.NewMock(

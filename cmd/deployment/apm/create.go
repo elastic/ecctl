@@ -18,8 +18,6 @@
 package cmdapm
 
 import (
-	"fmt"
-
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/spf13/cobra"
@@ -37,7 +35,6 @@ var createApmCmd = &cobra.Command{
 	Example: apmCreateExample,
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		var track, _ = cmd.Flags().GetBool("track")
 		var generatePayload, _ = cmd.Flags().GetBool("generate-payload")
 		var zoneCount, _ = cmd.Flags().GetInt32("zones")
 		var size, _ = cmd.Flags().GetInt32("size")
@@ -103,22 +100,17 @@ var createApmCmd = &cobra.Command{
 			return err
 		}
 
-		if err := ecctl.Get().Formatter.Format("", res); err != nil {
-			if !track {
-				return err
-			}
-			fmt.Fprintln(ecctl.Get().Config.OutputDevice, err)
-		}
-
-		if !track {
-			return nil
-		}
-
-		return depresource.TrackResources(depresource.TrackResourcesParams{
-			API:          ecctl.Get().API,
-			Resources:    res.Resources,
-			Orphaned:     res.ShutdownResources,
-			OutputDevice: ecctl.Get().Config.OutputDevice,
+		var track, _ = cmd.Flags().GetBool("track")
+		return cmdutil.Track(cmdutil.TrackParams{
+			TrackResourcesParams: depresource.TrackResourcesParams{
+				API:          ecctl.Get().API,
+				Resources:    res.Resources,
+				Orphaned:     res.ShutdownResources,
+				OutputDevice: ecctl.Get().Config.OutputDevice,
+			},
+			Formatter: ecctl.Get().Formatter,
+			Track:     track,
+			Response:  res,
 		})
 	},
 }
