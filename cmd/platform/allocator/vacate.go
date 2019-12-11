@@ -95,7 +95,7 @@ var vacateAllocatorCmd = &cobra.Command{
 		overrideFailsafe, _ := cmd.Flags().GetBool("override-failsafe")
 		force, _ := cmd.Flags().GetBool("force")
 		var msg = "--override-failsafe flag specified. Are you sure you want to proceed? [y/N]: "
-		if !force && !cmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
+		if overrideFailsafe && !force && !cmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
 			return nil
 		}
 
