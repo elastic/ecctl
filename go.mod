@@ -21,6 +21,7 @@ require (
 	github.com/spf13/viper v1.6.1
 	golang.org/x/crypto v0.0.0-20190829043050-9756ffdc2472
 	golang.org/x/oauth2 v0.0.0-20190211225200-5f6b76b7c9dd // indirect
+	golang.org/x/tools v0.0.0-20190617190820-da514acc4774 // indirect
 )
 
 replace sourcegraph.com/sourcegraph/go-diff v0.5.1 => github.com/sourcegraph/go-diff v0.5.1

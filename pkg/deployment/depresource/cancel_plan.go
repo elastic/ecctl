@@ -18,11 +18,10 @@
 package depresource
 
 import (
-	"errors"
-
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/deployments"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/util/slice"
 	"github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/deployment/deputil"
@@ -51,8 +50,8 @@ func (params CancelPlanParams) Validate() error {
 		merr = multierror.Append(merr, deputil.NewInvalidDeploymentIDError(params.DeploymentID))
 	}
 
-	if params.Type == "" {
-		merr = multierror.Append(merr, errors.New("deployment resource type cannot be empty"))
+	if !slice.HasString(util.ValidTypes, params.Type) {
+		merr = multierror.Append(merr, deputil.NewInvalidResourceTypeError(params.Type))
 	}
 
 	return merr.ErrorOrNil()

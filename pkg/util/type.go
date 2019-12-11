@@ -30,6 +30,7 @@ var (
 		"elasticsearch",
 		"kibana",
 		"apm",
+		"appsearch",
 	}
 )
 

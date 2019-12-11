@@ -39,7 +39,7 @@ func (params ListParams) Validate() error {
 	return nil
 }
 
-// List returns the platform deployemnts
+// List returns the platform deployments
 func List(params ListParams) (*models.DeploymentsListResponse, error) {
 	if err := params.Validate(); err != nil {
 		return nil, err

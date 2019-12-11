@@ -39,5 +39,7 @@ ecctl deployment resource [flags]
 ### SEE ALSO
 
 * [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
+* [ecctl deployment resource stop](ecctl_deployment_resource_stop.md)	 - Stops a deployment resource
+* [ecctl deployment resource stop-maintenance](ecctl_deployment_resource_stop-maintenance.md)	 - Stops maintenance mode on a deployment resource
 * [ecctl deployment resource upgrade](ecctl_deployment_resource_upgrade.md)	 - Upgrades a deployment resource
 
