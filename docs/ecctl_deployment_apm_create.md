@@ -5,7 +5,7 @@ Creates a Apm instance
 ### Synopsis
 
 Creates an APM deployment, limitting the creation scope to APM resources.
-There's a few ways to create an APM deployment, sane default values are provided, making
+There are a few ways to create an APM deployment, sane default values are provided, making
 the command work out of the box even when no parameters are set. When version is not specified,
 the matching elasticsearch deployment version will be used. These are the available options:
 
@@ -13,7 +13,7 @@ the matching elasticsearch deployment version will be used. These are the availa
   * File definition: --file=<file path> (shorthand: -f). The definition can be found in:
     https://www.elastic.co/guide/en/cloud-enterprise/current/definitions.html#ApmPayload
 
-As an option "--generate-payload" can be used in order to obtain the generated ApmPayload
+As an option, "--generate-payload" can be used in order to obtain the generated ApmPayload
 that would be sent as a request, save it, update or extend the topology and create an Apm
 deployment using the saved payload with the "--file" flag.
 
@@ -82,7 +82,7 @@ $ cat apm_create_example.json | dev-cli deployment apm create --track --id a57f8
       --ref-id string                 RefId for the Apm deployment (default "apm")
       --size int32                    Memory (RAM) in MB that each of the deployment nodes will have (default 512)
   -t, --track                         Tracks the progress of the performed task
-      --version string                Version to use, if not specified, the deployment's stack version will be used
+      --version string                Optional version to use. If not specified, it will default to the deployment's stack version
       --zones int32                   Number of zones the deployment will span (default 1)
 ```
 

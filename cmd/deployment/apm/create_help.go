@@ -19,7 +19,7 @@ package cmdapm
 
 const (
 	apmCreateLong = `Creates an APM deployment, limitting the creation scope to APM resources.
-There's a few ways to create an APM deployment, sane default values are provided, making
+There are a few ways to create an APM deployment, sane default values are provided, making
 the command work out of the box even when no parameters are set. When version is not specified,
 the matching elasticsearch deployment version will be used. These are the available options:
 
@@ -27,7 +27,7 @@ the matching elasticsearch deployment version will be used. These are the availa
   * File definition: --file=<file path> (shorthand: -f). The definition can be found in:
     https://www.elastic.co/guide/en/cloud-enterprise/current/definitions.html#ApmPayload
 
-As an option "--generate-payload" can be used in order to obtain the generated ApmPayload
+As an option, "--generate-payload" can be used in order to obtain the generated ApmPayload
 that would be sent as a request, save it, update or extend the topology and create an Apm
 deployment using the saved payload with the "--file" flag.`
 
