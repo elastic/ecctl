@@ -18,7 +18,6 @@
 package cmddeployment
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/elastic/cloud-sdk-go/pkg/models"
@@ -168,21 +167,16 @@ var updateCmd = &cobra.Command{
 		}
 
 		var track, _ = cmd.Flags().GetBool("track")
-		if err := ecctl.Get().Formatter.Format("", res); err != nil {
-			if !track {
-				return err
-			}
-			fmt.Fprintln(ecctl.Get().Config.OutputDevice, err)
-		}
-
-		if !track {
-			return nil
-		}
-
-		return depresource.TrackResources(depresource.TrackResourcesParams{
-			API:          ecctl.Get().API,
-			Resources:    res.Resources,
-			OutputDevice: ecctl.Get().Config.OutputDevice,
+		return cmdutil.Track(cmdutil.TrackParams{
+			TrackResourcesParams: depresource.TrackResourcesParams{
+				API:          ecctl.Get().API,
+				Resources:    res.Resources,
+				Orphaned:     res.ShutdownResources,
+				OutputDevice: ecctl.Get().Config.OutputDevice,
+			},
+			Formatter: ecctl.Get().Formatter,
+			Track:     track,
+			Response:  res,
 		})
 	},
 }

@@ -18,7 +18,6 @@
 package cmddeployment
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -54,21 +53,16 @@ var shutdownCmd = &cobra.Command{
 		}
 
 		var track, _ = cmd.Flags().GetBool("track")
-		if err := ecctl.Get().Formatter.Format("deployment/shutdown", res); err != nil {
-			if !track {
-				return err
-			}
-			fmt.Fprintln(ecctl.Get().Config.OutputDevice, err)
-		}
-
-		if !track {
-			return nil
-		}
-
-		return depresource.TrackResources(depresource.TrackResourcesParams{
-			API:          ecctl.Get().API,
-			Orphaned:     res.Orphaned,
-			OutputDevice: ecctl.Get().Config.OutputDevice,
+		return cmdutil.Track(cmdutil.TrackParams{
+			Template: "deployment/shutdown",
+			TrackResourcesParams: depresource.TrackResourcesParams{
+				API:          ecctl.Get().API,
+				Orphaned:     res.Orphaned,
+				OutputDevice: ecctl.Get().Config.OutputDevice,
+			},
+			Formatter: ecctl.Get().Formatter,
+			Track:     track,
+			Response:  res,
 		})
 	},
 }
