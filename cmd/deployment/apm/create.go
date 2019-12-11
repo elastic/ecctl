@@ -30,7 +30,7 @@ import (
 
 var createApmCmd = &cobra.Command{
 	Use:     "create -f <definition.json>",
-	Short:   "Creates a Apm instance",
+	Short:   "Creates an Apm instance",
 	Long:    apmCreateLong,
 	Example: apmCreateExample,
 	PreRunE: cobra.MaximumNArgs(0),

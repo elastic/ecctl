@@ -1,6 +1,6 @@
 ## ecctl deployment apm create
 
-Creates a Apm instance
+Creates an Apm instance
 
 ### Synopsis
 
