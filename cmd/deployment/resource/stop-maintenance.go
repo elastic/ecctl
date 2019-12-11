@@ -20,9 +20,8 @@ package cmddeploymentresource
 import (
 	"fmt"
 
-	"github.com/spf13/cobra"
-
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
+	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/deployment/depresource"
@@ -85,7 +84,6 @@ var stopMaintCmd = &cobra.Command{
 }
 
 func init() {
-	// Add flag for ignore missing
 	Command.AddCommand(stopMaintCmd)
 	stopMaintCmd.Flags().Bool("all", false, "Stops maintenance mode on all instances of a defined resource type")
 	stopMaintCmd.Flags().Bool("ignore-missing", false, "If set and the specified instance does not exist, then quietly proceed to the next instance")

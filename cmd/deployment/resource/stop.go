@@ -20,9 +20,8 @@ package cmddeploymentresource
 import (
 	"fmt"
 
-	"github.com/spf13/cobra"
-
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
+	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/deployment"
@@ -103,7 +102,6 @@ func getRefID(resType, depID string) (string, error) {
 }
 
 func init() {
-	// Add flag for ignore missing
 	Command.AddCommand(stopCmd)
 	stopCmd.Flags().Bool("all", false, "Stops all instances of a defined resource type")
 	stopCmd.Flags().Bool("ignore-missing", false, "If set and the specified instance does not exist, then quietly proceed to the next instance")
