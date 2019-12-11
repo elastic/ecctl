@@ -13,7 +13,7 @@ ecctl deployment resource stop-maintenance <deployment id> --type <type> [--all|
 ### Options
 
 ```
-      --all                   Stops maintenace mode on all instances of a defined resource type
+      --all                   Stops maintenance mode on all instances of a defined resource type
   -h, --help                  help for stop-maintenance
       --ignore-missing        If set and the specified instance does not exist, then quietly proceed to the next instance
   -i, --instance-id strings   Deployment instance IDs to use (e.g. instance-0000000001)
