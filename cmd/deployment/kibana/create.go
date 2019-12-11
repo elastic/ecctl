@@ -18,8 +18,6 @@
 package cmdkibana
 
 import (
-	"fmt"
-
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/spf13/cobra"
@@ -61,7 +59,7 @@ var createKibanaCmd = &cobra.Command{
 		}
 
 		if payload == nil {
-			p, err := depresource.NewKibana(depresource.NewKibanaParams{
+			p, err := depresource.NewKibana(depresource.NewStateless{
 				DeploymentID:       id,
 				ElasticsearchRefID: esRefID,
 				API:                ecctl.Get().API,
@@ -103,22 +101,16 @@ var createKibanaCmd = &cobra.Command{
 			return err
 		}
 
-		if err := ecctl.Get().Formatter.Format("", res); err != nil {
-			if !track {
-				return err
-			}
-			fmt.Fprintln(ecctl.Get().Config.OutputDevice, err)
-		}
-
-		if !track {
-			return nil
-		}
-
-		return depresource.TrackResources(depresource.TrackResourcesParams{
-			API:          ecctl.Get().API,
-			Resources:    res.Resources,
-			Orphaned:     res.ShutdownResources,
-			OutputDevice: ecctl.Get().Config.OutputDevice,
+		return cmdutil.Track(cmdutil.TrackParams{
+			TrackResourcesParams: depresource.TrackResourcesParams{
+				API:          ecctl.Get().API,
+				Resources:    res.Resources,
+				Orphaned:     res.ShutdownResources,
+				OutputDevice: ecctl.Get().Config.OutputDevice,
+			},
+			Formatter: ecctl.Get().Formatter,
+			Track:     track,
+			Response:  res,
 		})
 	},
 }

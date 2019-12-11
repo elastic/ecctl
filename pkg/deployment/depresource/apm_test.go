@@ -32,12 +32,12 @@ import (
 	"github.com/elastic/ecctl/pkg/util"
 )
 
-var kibanaTemplateResponse = models.DeploymentTemplateInfo{
+var apmTemplateResponse = models.DeploymentTemplateInfo{
 	ID: "default",
 	ClusterTemplate: &models.DeploymentTemplateDefinitionRequest{
-		Kibana: &models.CreateKibanaInCreateElasticsearchRequest{
-			Plan: &models.KibanaClusterPlan{
-				ClusterTopology: []*models.KibanaClusterTopologyElement{
+		Apm: &models.CreateApmInCreateElasticsearchRequest{
+			Plan: &models.ApmPlan{
+				ClusterTopology: []*models.ApmTopologyElement{
 					{
 						Size: &models.TopologySize{
 							Resource: ec.String("memory"),
@@ -54,7 +54,7 @@ var kibanaTemplateResponse = models.DeploymentTemplateInfo{
 	},
 }
 
-func TestNewKibana(t *testing.T) {
+func TestNewApm(t *testing.T) {
 	var internalError = models.BasicFailedReply{
 		Errors: []*models.BasicFailedReplyElement{
 			{},
@@ -87,7 +87,7 @@ func TestNewKibana(t *testing.T) {
 	tests := []struct {
 		name string
 		args args
-		want *models.KibanaPayload
+		want *models.ApmPayload
 		err  error
 	}{
 		{
@@ -128,7 +128,7 @@ func TestNewKibana(t *testing.T) {
 			err: errors.New("unable to obtain deployment template ID from existing deployment ID, please specify a one"),
 		},
 		{
-			name: "obtains the deployment info but fails getting the template ID info",
+			name: "obtains the deployment info but fails getting the template ID info from the API",
 			args: args{params: NewStateless{
 				DeploymentID: util.ValidClusterID,
 				API: api.NewMock(
@@ -145,17 +145,17 @@ func TestNewKibana(t *testing.T) {
 				DeploymentID: util.ValidClusterID,
 				API: api.NewMock(
 					mock.New200Response(mock.NewStructBody(getResponse)),
-					mock.New200Response(mock.NewStructBody(kibanaTemplateResponse)),
+					mock.New200Response(mock.NewStructBody(apmTemplateResponse)),
 				),
 				Region: "ece-region",
 			}},
-			want: &models.KibanaPayload{
+			want: &models.ApmPayload{
 				ElasticsearchClusterRefID: ec.String("elasticsearch"),
 				Region:                    ec.String("ece-region"),
-				RefID:                     ec.String("kibana"),
-				Plan: &models.KibanaClusterPlan{
-					Kibana: &models.KibanaConfiguration{},
-					ClusterTopology: []*models.KibanaClusterTopologyElement{
+				RefID:                     ec.String("apm"),
+				Plan: &models.ApmPlan{
+					Apm: &models.ApmConfiguration{},
+					ClusterTopology: []*models.ApmTopologyElement{
 						{
 							Size: &models.TopologySize{
 								Resource: ec.String("memory"),
@@ -175,17 +175,17 @@ func TestNewKibana(t *testing.T) {
 				DeploymentID: util.ValidClusterID,
 				API: api.NewMock(
 					mock.New200Response(mock.NewStructBody(getResponse)),
-					mock.New200Response(mock.NewStructBody(kibanaTemplateResponse)),
+					mock.New200Response(mock.NewStructBody(apmTemplateResponse)),
 				),
 				Region: "ece-region",
 			}},
-			want: &models.KibanaPayload{
+			want: &models.ApmPayload{
 				ElasticsearchClusterRefID: ec.String("elasticsearch"),
 				Region:                    ec.String("ece-region"),
-				RefID:                     ec.String("kibana"),
-				Plan: &models.KibanaClusterPlan{
-					Kibana: &models.KibanaConfiguration{},
-					ClusterTopology: []*models.KibanaClusterTopologyElement{
+				RefID:                     ec.String("apm"),
+				Plan: &models.ApmPlan{
+					Apm: &models.ApmConfiguration{},
+					ClusterTopology: []*models.ApmTopologyElement{
 						{
 							Size: &models.TopologySize{
 								Resource: ec.String("memory"),
@@ -200,9 +200,9 @@ func TestNewKibana(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := NewKibana(tt.args.params)
+			got, err := NewApm(tt.args.params)
 			if !reflect.DeepEqual(err, tt.err) {
-				t.Errorf("NewKibana() error = %v, wantErr %v", err, tt.err)
+				t.Errorf("NewApm() error = %v, wantErr %v", err, tt.err)
 				return
 			}
 			if !reflect.DeepEqual(got, tt.want) {
@@ -210,7 +210,7 @@ func TestNewKibana(t *testing.T) {
 				w, _ := json.Marshal(tt.want)
 				println(string(g))
 				println(string(w))
-				t.Errorf("NewKibana() = %v, want %v", got, tt.want)
+				t.Errorf("NewApm() = %v, want %v", got, tt.want)
 			}
 		})
 	}
