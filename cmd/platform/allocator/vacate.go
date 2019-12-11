@@ -20,6 +20,7 @@ package cmdallocator
 import (
 	"errors"
 	"fmt"
+	"os"
 	"strconv"
 
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
@@ -90,6 +91,14 @@ var vacateAllocatorCmd = &cobra.Command{
 		}
 
 		moveOnly, _ := cmd.Flags().GetBool("move-only")
+
+		overrideFailsafe, _ := cmd.Flags().GetBool("override-failsafe")
+		force, _ := cmd.Flags().GetBool("force")
+		var msg = "--override-failsafe has been flag specified. Are you sure you want to proceed? [y/N]: "
+		if overrideFailsafe && !force && !cmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
+			return nil
+		}
+
 		target, _ := cmd.Flags().GetStringSlice("target")
 		kind, _ := cmd.Flags().GetString("kind")
 
@@ -150,6 +159,7 @@ var vacateAllocatorCmd = &cobra.Command{
 			PlanOverrides: allocator.PlanOverrides{
 				SkipSnapshot:      skipSnapshot,
 				SkipDataMigration: skipDataMigration,
+				OverrideFailsafe:  ec.Bool(overrideFailsafe),
 			},
 		}
 		if len(args) == 1 && allocatorDownRaw != "" {
@@ -178,6 +188,7 @@ func init() {
 	vacateAllocatorCmd.Flags().Uint("concurrency", 8, "Maximum number of concurrent moves to perform at any time")
 	vacateAllocatorCmd.Flags().String("allocator-down", "", "Disables the allocator health auto-discovery, setting the allocator-down to either [true|false]")
 	vacateAllocatorCmd.Flags().Bool("move-only", true, "Keeps the cluster in its current -possibly broken- state and just does the bare minimum to move the requested instances across to another allocator. [true|false]")
+	vacateAllocatorCmd.Flags().Bool("override-failsafe", false, "If false (the default) then the plan will fail out if it believes the requested sequence of operations can result in data loss - this flag will override some of these restraints. [true|false]")
 	vacateAllocatorCmd.Flags().String("skip-snapshot", "", "Skips the snapshot operation on the specified cluster IDs. ONLY available when the cluster IDs are specified. [true|false]")
 	vacateAllocatorCmd.Flags().String("skip-data-migration", "", "Skips the data-migration operation on the specified cluster IDs. ONLY available when the cluster IDs are specified and --move-only is true. [true|false]")
 }
