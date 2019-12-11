@@ -90,7 +90,13 @@ var vacateAllocatorCmd = &cobra.Command{
 		}
 
 		moveOnly, _ := cmd.Flags().GetBool("move-only")
-		overrideFailsafe, _ := cmd.Flags().GetBool("override-failsafe")
+
+		overrideFailsafeRaw, _ := cmd.Flags().GetBool("override-failsafe")
+		overrideFailsafe, err := cmdutil.ActionConfirm(strconv.FormatBool(overrideFailsafeRaw), "--override-failsafe flag specified. Are you sure you want to proceed? [y/N]: ")
+		if err != nil {
+			return err
+		}
+
 		target, _ := cmd.Flags().GetStringSlice("target")
 		kind, _ := cmd.Flags().GetString("kind")
 
@@ -151,7 +157,7 @@ var vacateAllocatorCmd = &cobra.Command{
 			PlanOverrides: allocator.PlanOverrides{
 				SkipSnapshot:      skipSnapshot,
 				SkipDataMigration: skipDataMigration,
-				OverrideFailsafe:  ec.Bool(overrideFailsafe),
+				OverrideFailsafe:  overrideFailsafe,
 			},
 		}
 		if len(args) == 1 && allocatorDownRaw != "" {
