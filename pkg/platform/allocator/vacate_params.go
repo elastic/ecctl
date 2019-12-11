@@ -193,4 +193,5 @@ type PlanOverrides struct {
 	// SkipSnapshot overwrites the Transient part of an Elastisearch vacate.
 	SkipSnapshot      *bool
 	SkipDataMigration *bool
+	OverrideFailsafe  *bool
 }

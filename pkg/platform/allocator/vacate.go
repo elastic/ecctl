@@ -472,6 +472,10 @@ func ComputeVacateRequest(pr *models.MoveClustersDetails, clusters, to []string,
 			c.CalculatedPlan.PlanConfiguration.SkipDataMigration = overrides.SkipDataMigration
 		}
 
+		if overrides.OverrideFailsafe != nil {
+			c.CalculatedPlan.PlanConfiguration.OverrideFailsafe = overrides.OverrideFailsafe
+		}
+
 		c.CalculatedPlan.PlanConfiguration.PreferredAllocators = to
 		req.ElasticsearchClusters = append(req.ElasticsearchClusters,
 			&models.MoveElasticsearchClusterConfiguration{
