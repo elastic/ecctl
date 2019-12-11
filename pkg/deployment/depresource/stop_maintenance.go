@@ -18,57 +18,43 @@
 package depresource
 
 import (
-	"errors"
-
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/deployments"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	"github.com/hashicorp/go-multierror"
-
-	"github.com/elastic/ecctl/pkg/deployment/deputil"
-	"github.com/elastic/ecctl/pkg/util"
 )
 
-// CancelPlanParams is consumed by CancelPlan
-type CancelPlanParams struct {
-	*api.API
-
-	DeploymentID string
-	Type         string
-	RefID        string
-	ForceDelete  bool
-}
-
-// Validate ensures the parameters are usable by the consuming function.
-func (params CancelPlanParams) Validate() error {
-	var merr = new(multierror.Error)
-
-	if params.API == nil {
-		merr = multierror.Append(merr, util.ErrAPIReq)
-	}
-
-	if len(params.DeploymentID) != 32 {
-		merr = multierror.Append(merr, deputil.NewInvalidDeploymentIDError(params.DeploymentID))
-	}
-
-	if params.Type == "" {
-		merr = multierror.Append(merr, errors.New("deployment resource type cannot be empty"))
-	}
-
-	return merr.ErrorOrNil()
-}
-
-// CancelPlan cancels a deployment resource plan.
-func CancelPlan(params CancelPlanParams) (*models.DeploymentResourceCrudResponse, error) {
+// StopMaintenanceMode stops maintenance mode of all instances belonging to a deployment resource type.
+func StopMaintenanceMode(params StopParams) (models.DeploymentResourceCommandResponse, error) {
 	if err := params.Validate(); err != nil {
 		return nil, err
 	}
 
-	res, err := params.V1API.Deployments.CancelDeploymentResourcePendingPlan(
-		deployments.NewCancelDeploymentResourcePendingPlanParams().
+	res, err := params.V1API.Deployments.StopDeploymentResourceInstancesAllMaintenanceMode(
+		deployments.NewStopDeploymentResourceInstancesAllMaintenanceModeParams().
 			WithDeploymentID(params.DeploymentID).
-			WithForceDelete(&params.ForceDelete).
 			WithResourceKind(params.Type).
+			WithRefID(params.RefID),
+		params.AuthWriter,
+	)
+	if err != nil {
+		return nil, api.UnwrapError(err)
+	}
+
+	return res.Payload, nil
+}
+
+// StopInstancesMaintenanceMode stops maintenance mode of defined instances belonging to a deployment resource.
+func StopInstancesMaintenanceMode(params StopInstancesParams) (models.DeploymentResourceCommandResponse, error) {
+	if err := params.Validate(); err != nil {
+		return nil, err
+	}
+
+	res, err := params.V1API.Deployments.StopDeploymentResourceMaintenanceMode(
+		deployments.NewStopDeploymentResourceMaintenanceModeParams().
+			WithDeploymentID(params.DeploymentID).
+			WithResourceKind(params.Type).
+			WithIgnoreMissing(params.IgnoreMissing).
+			WithInstanceIds(params.InstanceIDs).
 			WithRefID(params.RefID),
 		params.AuthWriter,
 	)
