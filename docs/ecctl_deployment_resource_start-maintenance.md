@@ -1,19 +1,24 @@
-## ecctl deployment resource
+## ecctl deployment resource start-maintenance
 
-Manages deployment resources
+Starts maintenance mode on a deployment resource
 
 ### Synopsis
 
-Manages deployment resources
+Starts maintenance mode on a deployment resource
 
 ```
-ecctl deployment resource [flags]
+ecctl deployment resource start-maintenance <deployment id> --type <type> [--all|--i <instance-id>,<instance-id>] [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for resource
+      --all                   Starts maintenance mode on all instances of a defined resource type
+  -h, --help                  help for start-maintenance
+      --ignore-missing        If set and the specified instance does not exist, then quietly proceed to the next instance
+  -i, --instance-id strings   Deployment instance IDs to use (e.g. instance-0000000001)
+      --ref-id string         Optional deployment RefId, if not set, the RefId will be auto-discovered
+      --type string           Deployment resource type to use (elasticsearch, kibana, apm, or appsearch)
 ```
 
 ### Options inherited from parent commands
@@ -38,8 +43,5 @@ ecctl deployment resource [flags]
 
 ### SEE ALSO
 
-* [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
-* [ecctl deployment resource start](ecctl_deployment_resource_start.md)	 - Starts a previously stopped deployment resource
-* [ecctl deployment resource start-maintenance](ecctl_deployment_resource_start-maintenance.md)	 - Starts maintenance mode on a deployment resource
-* [ecctl deployment resource upgrade](ecctl_deployment_resource_upgrade.md)	 - Upgrades a deployment resource
+* [ecctl deployment resource](ecctl_deployment_resource.md)	 - Manages deployment resources
 
