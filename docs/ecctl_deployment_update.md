@@ -6,6 +6,7 @@ Updates a deployment from a file definition, allowing certain flag overrides
 
 updates a deployment from a file definition, defaulting prune_orphans=false, making the default
 update action safe for partial updates, to override this behavior toggle --prune-orphans.
+To track the changes toggle the --track flag.
 
 Read more about the deployment definition in https://www.elastic.co/guide/en/cloud-enterprise/current/Deployment_-_CRUD.html
 
@@ -112,6 +113,7 @@ setting --prune-orphans to "true" will cause any resources not specified in the 
       --hide-pruned-orphans   Hides orphaned resources that were shut down (only relevant if --prune-orphans=true)
       --prune-orphans         When set to true, it will remove any resources not specified in the update request, treating the json file contents as the authoritative deployment definition
       --skip-snapshot         Skips taking an Elasticsearch snapshot prior to shutting down the deployment
+  -t, --track                 Tracks the progress of the performed task
 ```
 
 ### Options inherited from parent commands
