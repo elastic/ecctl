@@ -1,19 +1,24 @@
-## ecctl deployment resource
+## ecctl deployment resource shutdown
 
-Manages deployment resources
+Shuts down a deployment resource by its type and ref-id
 
 ### Synopsis
 
-Manages deployment resources
+Shuts down a deployment resource type (APM, Appsearch, Elasticsearch, Kibana). Shutting down a
+type doesn't necessarily shut down the deployment itself but rather a specific  resource.
 
 ```
-ecctl deployment resource [flags]
+ecctl deployment resource shutdown <deployment id> --type <type> --ref-id <ref-id> [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for resource
+  -h, --help                   help for shutdown
+      --hide string            Optionally hides the deployment resource from being listed by default
+      --ref-id string          Required deployment RefId
+      --skip-snapshot string   Optional flag to toggle skipping the resource snapshot before shutting it down
+      --type string            Required deployment type to shutdown (elasticsearch, kibana, apm, or appsearch)
 ```
 
 ### Options inherited from parent commands
@@ -38,7 +43,5 @@ ecctl deployment resource [flags]
 
 ### SEE ALSO
 
-* [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
-* [ecctl deployment resource shutdown](ecctl_deployment_resource_shutdown.md)	 - Shuts down a deployment resource by its type and ref-id
-* [ecctl deployment resource upgrade](ecctl_deployment_resource_upgrade.md)	 - Upgrades a deployment resource
+* [ecctl deployment resource](ecctl_deployment_resource.md)	 - Manages deployment resources
 
