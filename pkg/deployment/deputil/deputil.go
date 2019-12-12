@@ -33,12 +33,6 @@ func NewInvalidDeploymentIDError(id string) error {
 	return fmt.Errorf("id \"%s\" is invalid", id)
 }
 
-// NewInvalidResourceTypeError is returned when a deployment ID is invalid.
-func NewInvalidResourceTypeError(resourceType string) error {
-	return fmt.Errorf(`"%v" is not a valid resource type. Accepted resource types are: %v`,
-		resourceType, util.ValidTypes)
-}
-
 // Validator wraps the Validate signature
 type Validator interface {
 	Validate() error
