@@ -14,11 +14,11 @@ ecctl deployment resource shutdown <deployment id> --type <type> --ref-id <ref-i
 ### Options
 
 ```
-  -h, --help                   help for shutdown
-      --hide string            Optionally hides the deployment resource from being listed by default
-      --ref-id string          Required deployment RefId
-      --skip-snapshot string   Optional flag to toggle skipping the resource snapshot before shutting it down
-      --type string            Required deployment type to shutdown (elasticsearch, kibana, apm, or appsearch)
+  -h, --help            help for shutdown
+      --hide            Optionally hides the deployment resource from being listed by default
+      --ref-id string   Required deployment RefId
+      --skip-snapshot   Optional flag to toggle skipping the resource snapshot before shutting it down
+      --type string     Required deployment type to shutdown (elasticsearch, kibana, apm, or appsearch)
 ```
 
 ### Options inherited from parent commands
