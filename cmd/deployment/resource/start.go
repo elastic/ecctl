@@ -30,7 +30,7 @@ import (
 
 var startCmd = &cobra.Command{
 	Use:     "start <deployment id> --type <type> [--all|--i <instance-id>,<instance-id>]",
-	Short:   "Starts a deployment resource",
+	Short:   "Starts a previously stopped deployment resource",
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		resType, _ := cmd.Flags().GetString("type")
