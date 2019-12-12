@@ -37,39 +37,19 @@ var stopMaintCmd = &cobra.Command{
 		refID, _ := cmd.Flags().GetString("ref-id")
 		instanceID, _ := cmd.Flags().GetStringSlice("instance-id")
 		ignoreMissing, _ := cmd.Flags().GetBool("ignore-missing")
-
-		if refID == "" {
-			var err error
-			refID, err = getRefID(resType, args[0])
-			if err != nil {
-				return err
-			}
-		}
+		all, _ := cmd.Flags().GetBool("all")
 
 		if err := cmdutil.IncompatibleFlags(cmd, "all", "instance-id"); err != nil {
 			fmt.Fprintln(cmd.OutOrStderr(), err)
 		}
 
-		if all, _ := cmd.Flags().GetBool("all"); all {
-			_, err := depresource.StopMaintenanceMode(depresource.StopParams{
-				API:          ecctl.Get().API,
-				DeploymentID: args[0],
-				Type:         resType,
-				RefID:        refID,
-			})
-			if err != nil {
-				return err
-			}
-
-			return nil
-		}
-
-		_, err := depresource.StopInstancesMaintenanceMode(depresource.StopInstancesParams{
+		_, err := depresource.StopMaintenanceModeAllOrSpecified(depresource.StopInstancesParams{
 			StopParams: depresource.StopParams{
 				API:          ecctl.Get().API,
 				DeploymentID: args[0],
 				Type:         resType,
 				RefID:        refID,
+				All:          all,
 			},
 			InstanceIDs:   instanceID,
 			IgnoreMissing: ec.Bool(ignoreMissing),

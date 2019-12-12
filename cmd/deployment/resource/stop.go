@@ -24,7 +24,6 @@ import (
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
-	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/deployment/depresource"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
@@ -38,39 +37,19 @@ var stopCmd = &cobra.Command{
 		refID, _ := cmd.Flags().GetString("ref-id")
 		instanceID, _ := cmd.Flags().GetStringSlice("instance-id")
 		ignoreMissing, _ := cmd.Flags().GetBool("ignore-missing")
-
-		if refID == "" {
-			var err error
-			refID, err = getRefID(resType, args[0])
-			if err != nil {
-				return err
-			}
-		}
+		all, _ := cmd.Flags().GetBool("all")
 
 		if err := cmdutil.IncompatibleFlags(cmd, "all", "instance-id"); err != nil {
 			fmt.Fprintln(cmd.OutOrStderr(), err)
 		}
 
-		if all, _ := cmd.Flags().GetBool("all"); all {
-			_, err := depresource.Stop(depresource.StopParams{
-				API:          ecctl.Get().API,
-				DeploymentID: args[0],
-				Type:         resType,
-				RefID:        refID,
-			})
-			if err != nil {
-				return err
-			}
-
-			return nil
-		}
-
-		_, err := depresource.StopInstances(depresource.StopInstancesParams{
+		_, err := depresource.StopAllOrSpecified(depresource.StopInstancesParams{
 			StopParams: depresource.StopParams{
 				API:          ecctl.Get().API,
 				DeploymentID: args[0],
 				Type:         resType,
 				RefID:        refID,
+				All:          all,
 			},
 			InstanceIDs:   instanceID,
 			IgnoreMissing: ec.Bool(ignoreMissing),
@@ -82,23 +61,6 @@ var stopCmd = &cobra.Command{
 		return nil
 
 	},
-}
-
-func getRefID(resType, depID string) (string, error) {
-	getResourceParams := deployment.GetResourceParams{
-		GetParams: deployment.GetParams{
-			API:          ecctl.Get().API,
-			DeploymentID: depID,
-		},
-		Type: resType,
-	}
-
-	refID, err := deployment.GetTypeRefID(getResourceParams)
-	if err != nil {
-		return "", err
-	}
-
-	return refID, nil
 }
 
 func init() {

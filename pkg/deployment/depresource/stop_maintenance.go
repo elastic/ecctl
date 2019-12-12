@@ -29,6 +29,10 @@ func StopMaintenanceMode(params StopParams) (models.DeploymentResourceCommandRes
 		return nil, err
 	}
 
+	if err := params.fillDefaults(); err != nil {
+		return nil, err
+	}
+
 	res, err := params.V1API.Deployments.StopDeploymentResourceInstancesAllMaintenanceMode(
 		deployments.NewStopDeploymentResourceInstancesAllMaintenanceModeParams().
 			WithDeploymentID(params.DeploymentID).
@@ -49,6 +53,10 @@ func StopInstancesMaintenanceMode(params StopInstancesParams) (models.Deployment
 		return nil, err
 	}
 
+	if err := params.StopParams.fillDefaults(); err != nil {
+		return nil, err
+	}
+
 	res, err := params.V1API.Deployments.StopDeploymentResourceMaintenanceMode(
 		deployments.NewStopDeploymentResourceMaintenanceModeParams().
 			WithDeploymentID(params.DeploymentID).
@@ -63,4 +71,21 @@ func StopInstancesMaintenanceMode(params StopInstancesParams) (models.Deployment
 	}
 
 	return res.Payload, nil
+}
+
+// StopMaintenanceModeAllOrSpecified stops all or defined instances belonging to a deployment resource.
+func StopMaintenanceModeAllOrSpecified(params StopInstancesParams) (models.DeploymentResourceCommandResponse, error) {
+	if params.All {
+		res, err := StopMaintenanceMode(params.StopParams)
+		if err != nil {
+			return nil, err
+		}
+		return res, nil
+	}
+
+	res, err := StopInstancesMaintenanceMode(params)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
 }

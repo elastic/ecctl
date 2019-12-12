@@ -24,6 +24,7 @@ import (
 	"github.com/hashicorp/go-multierror"
 	"github.com/pkg/errors"
 
+	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/deployment/deputil"
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -34,6 +35,7 @@ type StopParams struct {
 	DeploymentID string
 	Type         string
 	RefID        string
+	All          bool
 }
 
 // Validate ensures the parameters are usable by Stop.
@@ -52,11 +54,26 @@ func (params StopParams) Validate() error {
 		merr = multierror.Append(merr, errors.New("deployment resource type cannot be empty"))
 	}
 
+	return merr.ErrorOrNil()
+}
+
+func (params *StopParams) fillDefaults() error {
 	if params.RefID == "" {
-		merr = multierror.Append(merr, errors.New("a ref_id must be provided"))
+		refID, err := deployment.GetTypeRefID(deployment.GetResourceParams{
+			GetParams: deployment.GetParams{
+				API:          params.API,
+				DeploymentID: params.DeploymentID,
+			},
+			Type: params.Type,
+		})
+		if err != nil {
+			return err
+		}
+
+		params.RefID = refID
 	}
 
-	return merr.ErrorOrNil()
+	return nil
 }
 
 // StopInstancesParams is consumed by StopInstances.
@@ -85,6 +102,10 @@ func Stop(params StopParams) (models.DeploymentResourceCommandResponse, error) {
 		return nil, err
 	}
 
+	if err := params.fillDefaults(); err != nil {
+		return nil, err
+	}
+
 	res, err := params.V1API.Deployments.StopDeploymentResourceInstancesAll(
 		deployments.NewStopDeploymentResourceInstancesAllParams().
 			WithDeploymentID(params.DeploymentID).
@@ -105,6 +126,10 @@ func StopInstances(params StopInstancesParams) (models.DeploymentResourceCommand
 		return nil, err
 	}
 
+	if err := params.StopParams.fillDefaults(); err != nil {
+		return nil, err
+	}
+
 	res, err := params.V1API.Deployments.StopDeploymentResourceInstances(
 		deployments.NewStopDeploymentResourceInstancesParams().
 			WithDeploymentID(params.DeploymentID).
@@ -119,4 +144,21 @@ func StopInstances(params StopInstancesParams) (models.DeploymentResourceCommand
 	}
 
 	return res.Payload, nil
+}
+
+// StopAllOrSpecified stops all or defined instances belonging to a deployment resource.
+func StopAllOrSpecified(params StopInstancesParams) (models.DeploymentResourceCommandResponse, error) {
+	if params.All {
+		res, err := Stop(params.StopParams)
+		if err != nil {
+			return nil, err
+		}
+		return res, nil
+	}
+
+	res, err := StopInstances(params)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
 }

@@ -53,7 +53,7 @@ func TestCancelPlan(t *testing.T) {
 			err: &multierror.Error{Errors: []error{
 				util.ErrAPIReq,
 				errors.New("id \"\" is invalid"),
-				errors.New(`"" is not a valid resource type. Accepted resource types are: [elasticsearch kibana apm appsearch]`),
+				errors.New(`deployment resource type cannot be empty`),
 			}},
 		},
 		{
