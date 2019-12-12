@@ -53,7 +53,7 @@ func TestCancelPlan(t *testing.T) {
 			err: &multierror.Error{Errors: []error{
 				util.ErrAPIReq,
 				errors.New("id \"\" is invalid"),
-				errors.New(`deployment resource type cannot be empty`),
+				errors.New("deployment resource type cannot be empty"),
 			}},
 		},
 		{
