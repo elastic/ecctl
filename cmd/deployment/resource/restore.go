@@ -18,6 +18,7 @@
 package cmddeploymentresource
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -38,10 +39,17 @@ var restoreCmd = &cobra.Command{
 		restoreSnapshot, _ := cmd.Flags().GetBool("restore-snapshot")
 
 		force, _ := cmd.Flags().GetBool("force")
-		var dataLoss = resType == "elasticsearch" && !restoreSnapshot
-		var msg = "This action restore an Elasticsearch resource without its snapshot which might incur data loss, do you want to continue? [y/n]: "
+		var esType = resType == "elasticsearch"
+		var dataLoss = esType && !restoreSnapshot
+		var msg = "This action restores an Elasticsearch resource without its snapshot which might incur data loss, do you want to continue? [y/n]: "
 		if dataLoss && !force && !cmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
 			return nil
+		}
+
+		if restoreSnapshot && !esType {
+			fmt.Fprintf(ecctl.Get().Config.ErrorDevice,
+				"Using --restore-snapshot on resource type \"%s\" will have no effect\n", resType,
+			)
 		}
 
 		return depresource.Restore(depresource.RestoreParams{
@@ -56,9 +64,9 @@ var restoreCmd = &cobra.Command{
 
 func init() {
 	Command.AddCommand(restoreCmd)
-	restoreCmd.Flags().String("type", "", "Required stateless deployment type to restore (elasticsearch, kibana, apm, or appsearch)")
+	restoreCmd.Flags().String("type", "", "Required deployment type to restore (elasticsearch, kibana, apm, or appsearch)")
 	restoreCmd.MarkFlagRequired("type")
 	restoreCmd.Flags().String("ref-id", "", "Required deployment RefId")
 	restoreCmd.MarkFlagRequired("ref-id")
-	restoreCmd.Flags().Bool("restore-snapshot", false, "Optional flag to toggle restoring a snapshot for an Elasticsearch resource")
+	restoreCmd.Flags().Bool("restore-snapshot", false, "Optional flag to toggle restoring a snapshot for an Elasticsearch resource. It has no eeffect for other resources")
 }
