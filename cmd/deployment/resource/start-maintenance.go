@@ -19,6 +19,7 @@ package cmddeploymentresource
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/spf13/cobra"
@@ -38,9 +39,15 @@ var startMaintCmd = &cobra.Command{
 		instanceID, _ := cmd.Flags().GetStringSlice("instance-id")
 		ignoreMissing, _ := cmd.Flags().GetBool("ignore-missing")
 		all, _ := cmd.Flags().GetBool("all")
+		force, _ := cmd.Flags().GetBool("force")
 
 		if err := cmdutil.IncompatibleFlags(cmd, "all", "instance-id"); err != nil {
 			fmt.Fprintln(cmd.OutOrStderr(), err)
+		}
+
+		var msg = "This action will incur in downtime if used with the --all flag. Do you want to continue? [y/n]: "
+		if all && !force && !cmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
+			return nil
 		}
 
 		_, err := depresource.StartMaintenanceModeAllOrSpecified(depresource.StartInstancesParams{
