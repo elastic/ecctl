@@ -68,5 +68,5 @@ func init() {
 	restoreCmd.MarkFlagRequired("type")
 	restoreCmd.Flags().String("ref-id", "", "Required deployment RefId")
 	restoreCmd.MarkFlagRequired("ref-id")
-	restoreCmd.Flags().Bool("restore-snapshot", false, "Optional flag to toggle restoring a snapshot for an Elasticsearch resource. It has no eeffect for other resources")
+	restoreCmd.Flags().Bool("restore-snapshot", false, "Optional flag to toggle restoring a snapshot for an Elasticsearch resource. It has no effect for other resources")
 }
