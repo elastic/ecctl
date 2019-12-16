@@ -26,12 +26,14 @@ import (
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/deployment"
+	"github.com/elastic/ecctl/pkg/deployment/depresource"
 	"github.com/elastic/ecctl/pkg/ecctl"
 	"github.com/elastic/ecctl/pkg/util"
 )
 
 const createLong = `Creates a deployment from a file definition with an automatically generated idempotency token.
 On creation failure, please use the displayed idempotency token to retry the cluster creation with --request-id=<token>.
+To track the creation of the resources toggle the --track flag.
 
 Read more about the deployment definition in https://www.elastic.co/guide/en/cloud-enterprise/current/Deployment_-_CRUD.html`
 
@@ -167,12 +169,23 @@ var createCmd = &cobra.Command{
 			return err
 		}
 
-		return ecctl.Get().Formatter.Format("", res)
+		var track, _ = cmd.Flags().GetBool("track")
+		return cmdutil.Track(cmdutil.TrackParams{
+			TrackResourcesParams: depresource.TrackResourcesParams{
+				API:          ecctl.Get().API,
+				Resources:    res.Resources,
+				OutputDevice: ecctl.Get().Config.OutputDevice,
+			},
+			Formatter: ecctl.Get().Formatter,
+			Track:     track,
+			Response:  res,
+		})
 	},
 }
 
 func init() {
 	Command.AddCommand(createCmd)
+	createCmd.Flags().BoolP("track", "t", false, cmdutil.TrackFlagMessage)
 	createCmd.Flags().String("name", "", "Overrides the deployment name")
 	createCmd.Flags().String("version", "", "Overrides all thee deployment's resources to the specified version")
 	createCmd.Flags().String("request-id", "", "Optional idempotency token - Can be found in the Stderr device when a previous deployment creation failed, for more information see the examples in the help command page")

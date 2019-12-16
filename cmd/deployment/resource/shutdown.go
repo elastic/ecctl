@@ -15,7 +15,7 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package cmddeployment
+package cmddeploymentresource
 
 import (
 	"os"
@@ -28,48 +28,43 @@ import (
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
+// shutdownCmd is the deployment subcommand
 var shutdownCmd = &cobra.Command{
-	Use:     "shutdown <deployment-id>",
-	Short:   "Shuts down a deployment and all of its associated sub-resources",
+	Use:     "shutdown <deployment id> --type <type> --ref-id <ref-id>",
+	Short:   "Shuts down a deployment resource by its type and ref-id",
+	Long:    shutdownLong,
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
+		resType, _ := cmd.Flags().GetString("type")
+		refID, _ := cmd.Flags().GetString("ref-id")
+		skipSnapshot, _ := cmd.Flags().GetBool("skip-snapshot")
+		hide, _ := cmd.Flags().GetBool("hide")
+
 		force, _ := cmd.Flags().GetBool("force")
-		var msg = "This action will delete the specified deployment ID and its associated sub-resources, do you want to continue? [y/n]: "
+		var msg = "This action will shut down a deployment's resource type. Do you want to continue? [y/n]: "
 		if !force && !cmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
 			return nil
 		}
 
-		skipSnapshot, _ := cmd.Flags().GetBool("skip-snapshot")
-		hide, _ := cmd.Flags().GetBool("hide")
-
-		res, err := deployment.Shutdown(deployment.ShutdownParams{
-			API:          ecctl.Get().API,
-			DeploymentID: args[0],
+		return depresource.Shutdown(depresource.ShutdownParams{
+			ResourceParams: deployment.ResourceParams{
+				API:          ecctl.Get().API,
+				DeploymentID: args[0],
+				Type:         resType,
+				RefID:        refID,
+			},
 			SkipSnapshot: skipSnapshot,
 			Hide:         hide,
 		})
-		if err != nil {
-			return err
-		}
 
-		var track, _ = cmd.Flags().GetBool("track")
-		return cmdutil.Track(cmdutil.TrackParams{
-			Template: "deployment/shutdown",
-			TrackResourcesParams: depresource.TrackResourcesParams{
-				API:          ecctl.Get().API,
-				Orphaned:     res.Orphaned,
-				OutputDevice: ecctl.Get().Config.OutputDevice,
-			},
-			Formatter: ecctl.Get().Formatter,
-			Track:     track,
-			Response:  res,
-		})
 	},
 }
 
 func init() {
 	Command.AddCommand(shutdownCmd)
-	shutdownCmd.Flags().BoolP("track", "t", false, cmdutil.TrackFlagMessage)
-	shutdownCmd.Flags().Bool("skip-snapshot", false, "Skips taking an Elasticsearch snapshot prior to shutting down the deployment")
-	shutdownCmd.Flags().Bool("hide", false, "Hides the deployment and its resources after it has been shut down")
+	shutdownCmd.Flags().String("type", "", "Required deployment type to shutdown (elasticsearch, kibana, apm, or appsearch)")
+	shutdownCmd.MarkFlagRequired("type")
+	shutdownCmd.Flags().String("ref-id", "", "Optional deployment RefId, auto-discovered if not specified")
+	shutdownCmd.Flags().Bool("skip-snapshot", false, "Optional flag to toggle skipping the resource snapshot before shutting it down")
+	shutdownCmd.Flags().Bool("hide", false, "Optionally hides the deployment resource from being listed by default")
 }

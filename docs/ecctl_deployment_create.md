@@ -6,6 +6,7 @@ Creates a deployment from a file definition, allowing certain flag overrides
 
 Creates a deployment from a file definition with an automatically generated idempotency token.
 On creation failure, please use the displayed idempotency token to retry the cluster creation with --request-id=<token>.
+To track the creation of the resources toggle the --track flag.
 
 Read more about the deployment definition in https://www.elastic.co/guide/en/cloud-enterprise/current/Deployment_-_CRUD.html
 
@@ -110,6 +111,7 @@ $ ecctl deployment create -f deployment_example.json --name adeploy --version=7.
   -h, --help                help for create
       --name string         Overrides the deployment name
       --request-id string   Optional idempotency token - Can be found in the Stderr device when a previous deployment creation failed, for more information see the examples in the help command page
+  -t, --track               Tracks the progress of the performed task
       --version string      Overrides all thee deployment's resources to the specified version
 ```
 
