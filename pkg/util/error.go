@@ -18,10 +18,35 @@
 package util
 
 import (
+	"fmt"
+
 	"github.com/elastic/cloud-sdk-go/pkg/api"
+	"github.com/hashicorp/go-multierror"
 )
 
 // ReturnErrOnly is used to strip the first return argument of a function call
 func ReturnErrOnly(_ interface{}, e error) error {
 	return api.UnwrapError(e)
+}
+
+// WrapError takes the error that is passed and either wraps the error with the
+// text or each of the multierror errors with it.
+func WrapError(text string, err error) error {
+	if merr, ok := err.(*multierror.Error); ok {
+		var newMerrs = make([]error, 0, len(merr.Errors))
+		for _, e := range merr.Errors {
+			newMerrs = append(newMerrs, wrap(e, text))
+		}
+		merr.Errors = newMerrs
+		return merr.ErrorOrNil()
+	}
+
+	return wrap(err, text)
+}
+
+func wrap(err error, text string) error {
+	if text != "" {
+		return fmt.Errorf("%s: %s", text, err)
+	}
+	return err
 }
