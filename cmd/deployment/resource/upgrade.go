@@ -70,5 +70,4 @@ func init() {
 	upgradeCmd.Flags().String("type", "", "Optional stateless deployment type to upgrade (kibana, apm, or appsearch)")
 	upgradeCmd.MarkFlagRequired("type")
 	upgradeCmd.Flags().String("ref-id", "", "Optional deployment RefId, if not set, the RefId will be auto-discovered")
-	upgradeCmd.MarkFlagRequired("ref-id")
 }

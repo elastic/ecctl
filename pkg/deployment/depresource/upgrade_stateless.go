@@ -25,6 +25,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	"github.com/hashicorp/go-multierror"
 
+	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/deployment/deputil"
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -57,10 +58,33 @@ func (params UpgradeStatelessParams) Validate() error {
 	return merr.ErrorOrNil()
 }
 
+func (params *UpgradeStatelessParams) fillDefaults() error {
+	if params.RefID == "" {
+		refID, err := deployment.GetTypeRefID(deployment.GetResourceParams{
+			GetParams: deployment.GetParams{
+				API:          params.API,
+				DeploymentID: params.DeploymentID,
+			},
+			Type: params.Type,
+		})
+		if err != nil {
+			return err
+		}
+
+		params.RefID = refID
+	}
+
+	return nil
+}
+
 // UpgradeStateless upgrades a stateless deployment resource like APM, Kibana
 // and AppSearch.
 func UpgradeStateless(params UpgradeStatelessParams) (*models.DeploymentResourceUpgradeResponse, error) {
 	if err := params.Validate(); err != nil {
+		return nil, err
+	}
+
+	if err := params.fillDefaults(); err != nil {
 		return nil, err
 	}
 
