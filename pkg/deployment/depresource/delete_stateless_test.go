@@ -26,8 +26,10 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/hashicorp/go-multierror"
 
+	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/util"
 )
 
@@ -53,58 +55,92 @@ func TestDeleteStateless(t *testing.T) {
 			err: &multierror.Error{Errors: []error{
 				util.ErrAPIReq,
 				errors.New("id \"\" is invalid"),
-				errors.New("deployment resource ref id cannot be empty"),
 				errors.New("deployment resource type cannot be empty"),
+				errors.New("failed auto-discovering the resource ref id: api reference is required for command"),
+				errors.New("failed auto-discovering the resource ref id: id \"\" is invalid"),
 			}},
 		},
 		{
 			name: "fails due to parameter validation on invalid type",
 			args: args{params: DeleteStatelessParams{
-				Type: "elasticsearch",
+				ResourceParams: deployment.ResourceParams{
+					Type: "elasticsearch",
+				},
 			}},
 			err: &multierror.Error{Errors: []error{
 				util.ErrAPIReq,
 				errors.New("id \"\" is invalid"),
-				errors.New("deployment resource ref id cannot be empty"),
+				errors.New("failed auto-discovering the resource ref id: api reference is required for command"),
+				errors.New("failed auto-discovering the resource ref id: id \"\" is invalid"),
 				errors.New("deployment resource type \"elasticsearch\" is not supported"),
 			}},
 		},
 		{
 			name: "fails due to API error",
 			args: args{params: DeleteStatelessParams{
-				API:          api.NewMock(mock.New404Response(mock.NewStructBody(internalError))),
-				DeploymentID: util.ValidClusterID,
-				RefID:        "kibana",
-				Type:         "kibana",
+				ResourceParams: deployment.ResourceParams{
+					API:          api.NewMock(mock.New404Response(mock.NewStructBody(internalError))),
+					DeploymentID: util.ValidClusterID,
+					RefID:        "kibana",
+					Type:         "kibana",
+				},
 			}},
 			err: errors.New(string(internalErrorBytes)),
 		},
 		{
 			name: "succeeds on APM resource",
 			args: args{params: DeleteStatelessParams{
-				API:          api.NewMock(mock.New200Response(mock.NewStringBody(""))),
-				DeploymentID: util.ValidClusterID,
-				RefID:        "kibana",
-				Type:         "kibana",
+				ResourceParams: deployment.ResourceParams{
+					API:          api.NewMock(mock.New200Response(mock.NewStringBody(""))),
+					DeploymentID: util.ValidClusterID,
+					RefID:        "kibana",
+					Type:         "kibana",
+				},
 			}},
 		},
 		{
 			name: "fails due to API error on APM resource",
 			args: args{params: DeleteStatelessParams{
-				API:          api.NewMock(mock.New404Response(mock.NewStructBody(internalError))),
-				DeploymentID: util.ValidClusterID,
-				RefID:        "apm",
-				Type:         "apm",
+				ResourceParams: deployment.ResourceParams{
+					API:          api.NewMock(mock.New404Response(mock.NewStructBody(internalError))),
+					DeploymentID: util.ValidClusterID,
+					RefID:        "apm",
+					Type:         "apm",
+				},
 			}},
 			err: errors.New(string(internalErrorBytes)),
 		},
 		{
 			name: "succeeds",
 			args: args{params: DeleteStatelessParams{
-				API:          api.NewMock(mock.New200Response(mock.NewStringBody(""))),
-				DeploymentID: util.ValidClusterID,
-				RefID:        "apm",
-				Type:         "apm",
+				ResourceParams: deployment.ResourceParams{
+					API:          api.NewMock(mock.New200Response(mock.NewStringBody(""))),
+					DeploymentID: util.ValidClusterID,
+					RefID:        "apm",
+					Type:         "apm",
+				},
+			}},
+		},
+		{
+			name: "succeeds with refID autodiscovery",
+			args: args{params: DeleteStatelessParams{
+				ResourceParams: deployment.ResourceParams{
+					API: api.NewMock(
+						mock.New200Response(mock.NewStructBody(models.DeploymentGetResponse{
+							Healthy: ec.Bool(true),
+							ID:      ec.String(util.ValidClusterID),
+							Resources: &models.DeploymentResources{
+								Apm: []*models.ApmResourceInfo{{
+									ID:    ec.String(util.ValidClusterID),
+									RefID: ec.String("apm"),
+								}},
+							},
+						})),
+						mock.New200Response(mock.NewStringBody("")),
+					),
+					DeploymentID: util.ValidClusterID,
+					Type:         "apm",
+				},
 			}},
 		},
 	}

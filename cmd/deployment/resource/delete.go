@@ -21,6 +21,7 @@ import (
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
+	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/deployment/depresource"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
@@ -35,10 +36,12 @@ var deleteCmd = &cobra.Command{
 		refID, _ := cmd.Flags().GetString("ref-id")
 
 		return depresource.DeleteStateless(depresource.DeleteStatelessParams{
-			API:          ecctl.Get().API,
-			DeploymentID: args[0],
-			Type:         resType,
-			RefID:        refID,
+			ResourceParams: deployment.ResourceParams{
+				API:          ecctl.Get().API,
+				DeploymentID: args[0],
+				Type:         resType,
+				RefID:        refID,
+			},
 		})
 	},
 }
@@ -47,6 +50,5 @@ func init() {
 	Command.AddCommand(deleteCmd)
 	deleteCmd.Flags().String("type", "", "Required stateless deployment type to upgrade (kibana, apm, or appsearch)")
 	deleteCmd.MarkFlagRequired("type")
-	deleteCmd.Flags().String("ref-id", "", "Required deployment RefId")
-	deleteCmd.MarkFlagRequired("ref-id")
+	deleteCmd.Flags().String("ref-id", "", "Optional deployment RefId, auto-discovered if not specified")
 }
