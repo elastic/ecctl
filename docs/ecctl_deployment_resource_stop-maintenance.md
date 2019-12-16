@@ -1,19 +1,24 @@
-## ecctl deployment resource
+## ecctl deployment resource stop-maintenance
 
-Manages deployment resources
+Stops maintenance mode on a deployment resource
 
 ### Synopsis
 
-Manages deployment resources
+Stops maintenance mode on a deployment resource
 
 ```
-ecctl deployment resource [flags]
+ecctl deployment resource stop-maintenance <deployment id> --type <type> [--all|--i <instance-id>,<instance-id>] [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for resource
+      --all                   Stops maintenance mode on all instances of a defined resource type
+  -h, --help                  help for stop-maintenance
+      --ignore-missing        If set and the specified instance does not exist, then quietly proceed to the next instance
+  -i, --instance-id strings   Deployment instance IDs to use (e.g. instance-0000000001)
+      --ref-id string         Optional deployment RefId, if not set, the RefId will be auto-discovered
+      --type string           Deployment resource type to use (elasticsearch, kibana, apm, or appsearch)
 ```
 
 ### Options inherited from parent commands
@@ -38,11 +43,5 @@ ecctl deployment resource [flags]
 
 ### SEE ALSO
 
-* [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
-* [ecctl deployment resource shutdown](ecctl_deployment_resource_shutdown.md)	 - Shuts down a deployment resource by its type and ref-id
-* [ecctl deployment resource start](ecctl_deployment_resource_start.md)	 - Starts a previously stopped deployment resource
-* [ecctl deployment resource start-maintenance](ecctl_deployment_resource_start-maintenance.md)	 - Starts maintenance mode on a deployment resource
-* [ecctl deployment resource stop](ecctl_deployment_resource_stop.md)	 - Stops a deployment resource
-* [ecctl deployment resource stop-maintenance](ecctl_deployment_resource_stop-maintenance.md)	 - Stops maintenance mode on a deployment resource
-* [ecctl deployment resource upgrade](ecctl_deployment_resource_upgrade.md)	 - Upgrades a deployment resource
+* [ecctl deployment resource](ecctl_deployment_resource.md)	 - Manages deployment resources
 

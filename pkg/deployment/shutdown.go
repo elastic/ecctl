@@ -52,7 +52,7 @@ func (params ShutdownParams) Validate() error {
 }
 
 // Shutdown shuts down a deployment and all of its associated resources. To
-// shutdown individual deployment resources use the type especific APIs.
+// shutdown individual deployment resources use the type specific APIs.
 func Shutdown(params ShutdownParams) (*models.DeploymentShutdownResponse, error) {
 	if err := params.Validate(); err != nil {
 		return nil, err
