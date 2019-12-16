@@ -18,23 +18,15 @@
 package depresource
 
 import (
-	"errors"
-
-	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/deployments"
-	"github.com/hashicorp/go-multierror"
 
-	"github.com/elastic/ecctl/pkg/deployment/deputil"
+	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/util"
 )
 
 // ShutdownParams is consumed by Shutdown.
 type ShutdownParams struct {
-	*api.API
-
-	DeploymentID string
-	RefID        string
-	Type         string
+	deployment.ResourceParams
 
 	// Optional Values
 	// Skips taking a snapshot before shutting down the deployment resource.
@@ -44,31 +36,8 @@ type ShutdownParams struct {
 	Hide bool
 }
 
-// Validate ensures the parameters are usable by the consuming function.
-func (params ShutdownParams) Validate() error {
-	var merr = new(multierror.Error)
-
-	if params.API == nil {
-		merr = multierror.Append(merr, util.ErrAPIReq)
-	}
-
-	if len(params.DeploymentID) != 32 {
-		merr = multierror.Append(merr, deputil.NewInvalidDeploymentIDError(params.DeploymentID))
-	}
-
-	if params.RefID == "" {
-		merr = multierror.Append(merr, errors.New("deployment resource ref id cannot be empty"))
-	}
-
-	if params.Type == "" {
-		merr = multierror.Append(merr, errors.New("deployment resource type cannot be empty"))
-	}
-
-	return merr.ErrorOrNil()
-}
-
 // Shutdown stops all the running instances for the specified resource type ref
-// ID on a Deployment.
+// ID on a Deployment. If no refID is specified, it tries to autodiscover it.
 func Shutdown(params ShutdownParams) error {
 	if err := params.Validate(); err != nil {
 		return err

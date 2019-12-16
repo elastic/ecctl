@@ -18,9 +18,12 @@
 package cmddeploymentresource
 
 import (
+	"os"
+
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
+	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/deployment/depresource"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
@@ -37,11 +40,19 @@ var shutdownCmd = &cobra.Command{
 		skipSnapshot, _ := cmd.Flags().GetBool("skip-snapshot")
 		hide, _ := cmd.Flags().GetBool("hide")
 
+		force, _ := cmd.Flags().GetBool("force")
+		var msg = "This action will shut down a deployment's resource type. Do you want to continue? [y/n]: "
+		if !force && !cmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
+			return nil
+		}
+
 		return depresource.Shutdown(depresource.ShutdownParams{
-			API:          ecctl.Get().API,
-			DeploymentID: args[0],
-			Type:         resType,
-			RefID:        refID,
+			ResourceParams: deployment.ResourceParams{
+				API:          ecctl.Get().API,
+				DeploymentID: args[0],
+				Type:         resType,
+				RefID:        refID,
+			},
 			SkipSnapshot: skipSnapshot,
 			Hide:         hide,
 		})
@@ -53,8 +64,7 @@ func init() {
 	Command.AddCommand(shutdownCmd)
 	shutdownCmd.Flags().String("type", "", "Required deployment type to shutdown (elasticsearch, kibana, apm, or appsearch)")
 	shutdownCmd.MarkFlagRequired("type")
-	shutdownCmd.Flags().String("ref-id", "", "Required deployment RefId")
-	shutdownCmd.MarkFlagRequired("ref-id")
+	shutdownCmd.Flags().String("ref-id", "", "Optional deployment RefId, auto-discovered if not specified")
 	shutdownCmd.Flags().Bool("skip-snapshot", false, "Optional flag to toggle skipping the resource snapshot before shutting it down")
 	shutdownCmd.Flags().Bool("hide", false, "Optionally hides the deployment resource from being listed by default")
 }
