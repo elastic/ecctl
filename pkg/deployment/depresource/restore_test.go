@@ -26,8 +26,10 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/hashicorp/go-multierror"
 
+	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/deployment/deputil"
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -52,65 +54,100 @@ func TestRestore(t *testing.T) {
 			err: &multierror.Error{Errors: []error{
 				util.ErrAPIReq,
 				deputil.NewInvalidDeploymentIDError(""),
-				errors.New("deployment resource ref id cannot be empty"),
 				errors.New("deployment resource type cannot be empty"),
+				errors.New("failed auto-discovering the resource ref id: api reference is required for command"),
+				errors.New("failed auto-discovering the resource ref id: id \"\" is invalid"),
 			}},
 		},
 		{
 			name: "fails due to restore Kibana due to API error",
 			args: args{params: RestoreParams{
-				API:          api.NewMock(mock.New404Response(mock.NewStructBody(internalError))),
-				DeploymentID: util.ValidClusterID,
-				RefID:        "kibana",
-				Type:         "kibana",
+				ResourceParams: deployment.ResourceParams{
+					API:          api.NewMock(mock.New404Response(mock.NewStructBody(internalError))),
+					DeploymentID: util.ValidClusterID,
+					RefID:        "kibana",
+					Type:         "kibana",
+				},
 			}},
 			err: errors.New(string(internalErrorBytes)),
 		},
 		{
 			name: "fails to restore APM due to API error",
 			args: args{params: RestoreParams{
-				API:          api.NewMock(mock.New404Response(mock.NewStructBody(internalError))),
-				DeploymentID: util.ValidClusterID,
-				RefID:        "apm",
-				Type:         "apm",
+				ResourceParams: deployment.ResourceParams{
+					API:          api.NewMock(mock.New404Response(mock.NewStructBody(internalError))),
+					DeploymentID: util.ValidClusterID,
+					RefID:        "apm",
+					Type:         "apm",
+				},
 			}},
 			err: errors.New(string(internalErrorBytes)),
 		},
 		{
 			name: "fails due to restore Elasticsearch due to API error",
 			args: args{params: RestoreParams{
-				API:          api.NewMock(mock.New404Response(mock.NewStructBody(internalError))),
-				DeploymentID: util.ValidClusterID,
-				RefID:        "elasticsearch",
-				Type:         "elasticsearch",
+				ResourceParams: deployment.ResourceParams{
+					API:          api.NewMock(mock.New404Response(mock.NewStructBody(internalError))),
+					DeploymentID: util.ValidClusterID,
+					RefID:        "elasticsearch",
+					Type:         "elasticsearch",
+				},
 			}},
 			err: errors.New(string(internalErrorBytes)),
 		},
 		{
 			name: "Succeeds restoring Kibana",
 			args: args{params: RestoreParams{
-				API:          api.NewMock(mock.New200Response(mock.NewStringBody(""))),
-				DeploymentID: util.ValidClusterID,
-				RefID:        "kibana",
-				Type:         "kibana",
+				ResourceParams: deployment.ResourceParams{
+					API:          api.NewMock(mock.New200Response(mock.NewStringBody(""))),
+					DeploymentID: util.ValidClusterID,
+					RefID:        "kibana",
+					Type:         "kibana",
+				},
 			}},
 		},
 		{
 			name: "Succeeds restoring APM",
 			args: args{params: RestoreParams{
-				API:          api.NewMock(mock.New200Response(mock.NewStringBody(""))),
-				DeploymentID: util.ValidClusterID,
-				RefID:        "apm",
-				Type:         "apm",
+				ResourceParams: deployment.ResourceParams{
+					API:          api.NewMock(mock.New200Response(mock.NewStringBody(""))),
+					DeploymentID: util.ValidClusterID,
+					RefID:        "apm",
+					Type:         "apm",
+				},
 			}},
 		},
 		{
 			name: "Succeeds restoring Elasticsearch",
 			args: args{params: RestoreParams{
-				API:          api.NewMock(mock.New200Response(mock.NewStringBody(""))),
-				DeploymentID: util.ValidClusterID,
-				RefID:        "elasticsearch",
-				Type:         "elasticsearch",
+				ResourceParams: deployment.ResourceParams{
+					API:          api.NewMock(mock.New200Response(mock.NewStringBody(""))),
+					DeploymentID: util.ValidClusterID,
+					RefID:        "elasticsearch",
+					Type:         "elasticsearch",
+				},
+			}},
+		},
+		{
+			name: "Succeeds restoring Elasticsearch with refID autodiscovery",
+			args: args{params: RestoreParams{
+				ResourceParams: deployment.ResourceParams{
+					API: api.NewMock(
+						mock.New200Response(mock.NewStructBody(models.DeploymentGetResponse{
+							Healthy: ec.Bool(true),
+							ID:      ec.String(util.ValidClusterID),
+							Resources: &models.DeploymentResources{
+								Elasticsearch: []*models.ElasticsearchResourceInfo{{
+									ID:    ec.String(util.ValidClusterID),
+									RefID: ec.String("elasticsearch"),
+								}},
+							},
+						})),
+						mock.New200Response(mock.NewStringBody("")),
+					),
+					DeploymentID: util.ValidClusterID,
+					Type:         "elasticsearch",
+				},
 			}},
 		},
 	}

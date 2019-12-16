@@ -24,6 +24,7 @@ import (
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
+	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/deployment/depresource"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
@@ -53,10 +54,12 @@ var restoreCmd = &cobra.Command{
 		}
 
 		return depresource.Restore(depresource.RestoreParams{
-			API:             ecctl.Get().API,
-			DeploymentID:    args[0],
-			Type:            resType,
-			RefID:           refID,
+			ResourceParams: deployment.ResourceParams{
+				API:          ecctl.Get().API,
+				DeploymentID: args[0],
+				Type:         resType,
+				RefID:        refID,
+			},
 			RestoreSnapshot: restoreSnapshot,
 		})
 	},
@@ -66,7 +69,6 @@ func init() {
 	Command.AddCommand(restoreCmd)
 	restoreCmd.Flags().String("type", "", "Required deployment type to restore (elasticsearch, kibana, apm, or appsearch)")
 	restoreCmd.MarkFlagRequired("type")
-	restoreCmd.Flags().String("ref-id", "", "Required deployment RefId")
-	restoreCmd.MarkFlagRequired("ref-id")
+	restoreCmd.Flags().String("ref-id", "", "Optional deployment RefId, auto-discovered if not specified")
 	restoreCmd.Flags().Bool("restore-snapshot", false, "Optional flag to toggle restoring a snapshot for an Elasticsearch resource. It has no effect for other resources")
 }

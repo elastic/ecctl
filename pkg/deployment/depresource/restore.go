@@ -18,49 +18,18 @@
 package depresource
 
 import (
-	"errors"
-
-	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/deployments"
-	"github.com/hashicorp/go-multierror"
 
-	"github.com/elastic/ecctl/pkg/deployment/deputil"
+	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/util"
 )
 
 // RestoreParams is consumed by Restore
 type RestoreParams struct {
-	*api.API
-
-	DeploymentID string
-	Type         string
-	RefID        string
+	deployment.ResourceParams
 
 	// Optional
 	RestoreSnapshot bool
-}
-
-// Validate ensures the parameters are usable by the consuming function.
-func (params RestoreParams) Validate() error {
-	var merr = new(multierror.Error)
-
-	if params.API == nil {
-		merr = multierror.Append(merr, util.ErrAPIReq)
-	}
-
-	if len(params.DeploymentID) != 32 {
-		merr = multierror.Append(merr, deputil.NewInvalidDeploymentIDError(params.DeploymentID))
-	}
-
-	if params.RefID == "" {
-		merr = multierror.Append(merr, errors.New("deployment resource ref id cannot be empty"))
-	}
-
-	if params.Type == "" {
-		merr = multierror.Append(merr, errors.New("deployment resource type cannot be empty"))
-	}
-
-	return merr.ErrorOrNil()
 }
 
 // Restore upgrades a stateless deployment resource like APM, Kibana
