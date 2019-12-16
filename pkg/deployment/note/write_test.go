@@ -191,7 +191,7 @@ func TestAdd(t *testing.T) {
 				util.ErrAPIReq,
 				errors.New("invalid id"),
 				errors.New("user id cannot be empty"),
-				errors.New("invalid type : valid types are [elasticsearch kibana apm]"),
+				errors.New("invalid type : valid types are [elasticsearch kibana apm appsearch]"),
 				errors.New("message cannot be empty"),
 			}},
 		},
