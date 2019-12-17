@@ -18,73 +18,17 @@
 package depresource
 
 import (
-	"errors"
-
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/deployments"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	"github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/deployment"
-	"github.com/elastic/ecctl/pkg/deployment/deputil"
-	"github.com/elastic/ecctl/pkg/util"
 )
-
-// UpgradeStatelessParams is consumed by UpgradeStateless
-type UpgradeStatelessParams struct {
-	*api.API
-
-	DeploymentID string
-	Type         string
-	RefID        string
-}
-
-// Validate ensures the parameters are usable by the consuming function.
-func (params UpgradeStatelessParams) Validate() error {
-	var merr = new(multierror.Error)
-
-	if params.API == nil {
-		merr = multierror.Append(merr, util.ErrAPIReq)
-	}
-
-	if len(params.DeploymentID) != 32 {
-		merr = multierror.Append(merr, deputil.NewInvalidDeploymentIDError(params.DeploymentID))
-	}
-
-	if params.Type == "" {
-		merr = multierror.Append(merr, errors.New("deployment resource type cannot be empty"))
-	}
-
-	return merr.ErrorOrNil()
-}
-
-func (params *UpgradeStatelessParams) fillDefaults() error {
-	if params.RefID == "" {
-		refID, err := deployment.GetTypeRefID(deployment.GetResourceParams{
-			GetParams: deployment.GetParams{
-				API:          params.API,
-				DeploymentID: params.DeploymentID,
-			},
-			Type: params.Type,
-		})
-		if err != nil {
-			return err
-		}
-
-		params.RefID = refID
-	}
-
-	return nil
-}
 
 // UpgradeStateless upgrades a stateless deployment resource like APM, Kibana
 // and AppSearch.
-func UpgradeStateless(params UpgradeStatelessParams) (*models.DeploymentResourceUpgradeResponse, error) {
+func UpgradeStateless(params deployment.ResourceParams) (*models.DeploymentResourceUpgradeResponse, error) {
 	if err := params.Validate(); err != nil {
-		return nil, err
-	}
-
-	if err := params.fillDefaults(); err != nil {
 		return nil, err
 	}
 

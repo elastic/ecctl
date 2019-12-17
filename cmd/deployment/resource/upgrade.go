@@ -23,6 +23,7 @@ import (
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
+	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/deployment/depresource"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
@@ -37,7 +38,7 @@ var upgradeCmd = &cobra.Command{
 		resType, _ := cmd.Flags().GetString("type")
 		refID, _ := cmd.Flags().GetString("ref-id")
 
-		res, err := depresource.UpgradeStateless(depresource.UpgradeStatelessParams{
+		res, err := depresource.UpgradeStateless(deployment.ResourceParams{
 			API:          ecctl.Get().API,
 			DeploymentID: args[0],
 			Type:         resType,

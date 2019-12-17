@@ -29,76 +29,9 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/hashicorp/go-multierror"
 
+	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/util"
 )
-
-func TestUpgradeStatelessParams_FillDefaults(t *testing.T) {
-	tests := []struct {
-		name    string
-		params  UpgradeStatelessParams
-		wantErr bool
-		err     error
-	}{
-		{
-			name: "fill defaults should return error on missing api",
-			params: UpgradeStatelessParams{
-				DeploymentID: "f1d329b0fb34470ba8b18361cabdd2bc",
-				Type:         "elasticsearch",
-			},
-			err: &multierror.Error{
-				Errors: []error{
-					errors.New("api reference is required for command"),
-				},
-			},
-			wantErr: true,
-		},
-		{
-			name: "fillDefaults should succeed when RefID is set",
-			params: UpgradeStatelessParams{
-				RefID: "main-elasticsearch",
-			},
-			wantErr: false,
-		},
-		{
-			name: "validate should pass if all params are properly set and RefID is empty",
-			params: UpgradeStatelessParams{
-				API: api.NewMock(
-					mock.New200Response(mock.NewStructBody(models.DeploymentGetResponse{
-						Healthy: ec.Bool(true),
-						ID:      ec.String("3531aaf988594efa87c1aabb7caed337"),
-						Resources: &models.DeploymentResources{
-							Elasticsearch: []*models.ElasticsearchResourceInfo{{
-								ID:    ec.String("3531aaf988594efa87c1aabb7caed337"),
-								RefID: ec.String("elasticsearch"),
-							}},
-						},
-					})),
-				),
-				DeploymentID: "f1d329b0fb34470ba8b18361cabdd2bc",
-				Type:         "elasticsearch",
-			},
-			wantErr: false,
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			err := tt.params.fillDefaults()
-
-			if (err != nil) != tt.wantErr {
-				t.Errorf("fillDefaults() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
-
-			if tt.wantErr && tt.err == nil {
-				t.Errorf("fillDefaults() expected errors = '%v' but no errors returned", tt.err)
-			}
-
-			if tt.wantErr && err.Error() != tt.err.Error() {
-				t.Errorf("fillDefaults() expected errors = '%v' but got %v", tt.err, err)
-			}
-		})
-	}
-}
 
 func TestUpgradeStateless(t *testing.T) {
 	var internalError = models.BasicFailedReply{
@@ -108,7 +41,7 @@ func TestUpgradeStateless(t *testing.T) {
 	}
 	internalErrorBytes, _ := json.MarshalIndent(internalError, "", "  ")
 	type args struct {
-		params UpgradeStatelessParams
+		params deployment.ResourceParams
 	}
 	tests := []struct {
 		name string
@@ -123,20 +56,23 @@ func TestUpgradeStateless(t *testing.T) {
 				util.ErrAPIReq,
 				errors.New("id \"\" is invalid"),
 				errors.New("deployment resource type cannot be empty"),
+				errors.New("failed auto-discovering the resource ref id: api reference is required for command"),
+				errors.New(`failed auto-discovering the resource ref id: id "" is invalid`),
 			}},
 		},
 		{
 			name: "fails due to API error",
-			args: args{params: UpgradeStatelessParams{
+			args: args{params: deployment.ResourceParams{
 				API:          api.NewMock(mock.New404Response(mock.NewStructBody(internalError))),
 				DeploymentID: util.ValidClusterID,
+				RefID:        "main-kibana",
 				Type:         "kibana",
 			}},
 			err: errors.New(string(internalErrorBytes)),
 		},
 		{
 			name: "succeeds",
-			args: args{params: UpgradeStatelessParams{
+			args: args{params: deployment.ResourceParams{
 				API:          api.NewMock(mock.New202Response(mock.NewStringBody(""))),
 				DeploymentID: util.ValidClusterID,
 				Type:         "kibana",
@@ -146,7 +82,7 @@ func TestUpgradeStateless(t *testing.T) {
 		},
 		{
 			name: "succeeds when RefID is not set",
-			args: args{params: UpgradeStatelessParams{
+			args: args{params: deployment.ResourceParams{
 				API: api.NewMock(
 					mock.New200Response(mock.NewStructBody(models.DeploymentGetResponse{
 						Healthy: ec.Bool(true),
