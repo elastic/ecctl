@@ -25,55 +25,13 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/elastic/ecctl/pkg/deployment"
-	"github.com/elastic/ecctl/pkg/deployment/deputil"
-	"github.com/elastic/ecctl/pkg/util"
 )
 
 // StartParams is consumed by start.
 type StartParams struct {
-	*api.API
-	DeploymentID string
-	Type         string
-	RefID        string
-	All          bool
-}
+	deployment.ResourceParams
 
-// Validate ensures the parameters are usable by Start.
-func (params StartParams) Validate() error {
-	var merr = new(multierror.Error)
-
-	if params.API == nil {
-		merr = multierror.Append(merr, util.ErrAPIReq)
-	}
-
-	if len(params.DeploymentID) != 32 {
-		merr = multierror.Append(merr, deputil.NewInvalidDeploymentIDError(params.DeploymentID))
-	}
-
-	if params.Type == "" {
-		merr = multierror.Append(merr, errors.New("deployment resource type cannot be empty"))
-	}
-
-	return merr.ErrorOrNil()
-}
-
-func (params *StartParams) fillDefaults() error {
-	if params.RefID == "" {
-		refID, err := deployment.GetTypeRefID(deployment.GetResourceParams{
-			GetParams: deployment.GetParams{
-				API:          params.API,
-				DeploymentID: params.DeploymentID,
-			},
-			Type: params.Type,
-		})
-		if err != nil {
-			return err
-		}
-
-		params.RefID = refID
-	}
-
-	return nil
+	All bool
 }
 
 // StartInstancesParams is consumed by StartInstances.
@@ -84,7 +42,7 @@ type StartInstancesParams struct {
 }
 
 // Validate ensures the parameters are usable by StartInstances.
-func (params StartInstancesParams) Validate() error {
+func (params *StartInstancesParams) Validate() error {
 	var merr = new(multierror.Error)
 
 	if len(params.InstanceIDs) == 0 {
@@ -99,10 +57,6 @@ func (params StartInstancesParams) Validate() error {
 // Start starts all instances belonging to a deployment resource type.
 func Start(params StartParams) (models.DeploymentResourceCommandResponse, error) {
 	if err := params.Validate(); err != nil {
-		return nil, err
-	}
-
-	if err := params.fillDefaults(); err != nil {
 		return nil, err
 	}
 
@@ -123,10 +77,6 @@ func Start(params StartParams) (models.DeploymentResourceCommandResponse, error)
 // StartInstances starts defined instances belonging to a deployment resource.
 func StartInstances(params StartInstancesParams) (models.DeploymentResourceCommandResponse, error) {
 	if err := params.Validate(); err != nil {
-		return nil, err
-	}
-
-	if err := params.StartParams.fillDefaults(); err != nil {
 		return nil, err
 	}
 

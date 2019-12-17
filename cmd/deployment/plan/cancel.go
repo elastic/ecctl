@@ -21,6 +21,7 @@ import (
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
+	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/deployment/depresource"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
@@ -36,11 +37,13 @@ var cancelPlan = &cobra.Command{
 		refID, _ := cmd.Flags().GetString("ref-id")
 
 		_, err := depresource.CancelPlan(depresource.CancelPlanParams{
-			API:          ecctl.Get().API,
-			DeploymentID: args[0],
-			Type:         resType,
-			RefID:        refID,
-			ForceDelete:  force,
+			ResourceParams: deployment.ResourceParams{
+				API:          ecctl.Get().API,
+				DeploymentID: args[0],
+				Type:         resType,
+				RefID:        refID,
+			},
+			ForceDelete: force,
 		})
 
 		return err
@@ -52,5 +55,4 @@ func init() {
 	cancelPlan.Flags().String("type", "", "Optional deployment type to show resource information (elasticsearch, kibana, apm, or appsearch)")
 	cancelPlan.MarkFlagRequired("type")
 	cancelPlan.Flags().String("ref-id", "", "Optional deployment type RefId, if not set, the RefId will be auto-discovered")
-	cancelPlan.MarkFlagRequired("ref-id")
 }
