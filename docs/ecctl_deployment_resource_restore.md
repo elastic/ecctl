@@ -1,19 +1,22 @@
-## ecctl deployment resource
+## ecctl deployment resource restore
 
-Manages deployment resources
+Restores a previously shut down deployment resource
 
 ### Synopsis
 
-Manages deployment resources
+Restores a previously shut down deployment resource
 
 ```
-ecctl deployment resource [flags]
+ecctl deployment resource restore <deployment id> --type <type> --ref-id <ref-id> [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for resource
+  -h, --help               help for restore
+      --ref-id string      Optional deployment RefId, auto-discovered if not specified
+      --restore-snapshot   Optional flag to toggle restoring a snapshot for an Elasticsearch resource. It has no effect for other resources
+      --type string        Required deployment type to restore (elasticsearch, kibana, apm, or appsearch)
 ```
 
 ### Options inherited from parent commands
@@ -38,12 +41,5 @@ ecctl deployment resource [flags]
 
 ### SEE ALSO
 
-* [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
-* [ecctl deployment resource restore](ecctl_deployment_resource_restore.md)	 - Restores a previously shut down deployment resource
-* [ecctl deployment resource shutdown](ecctl_deployment_resource_shutdown.md)	 - Shuts down a deployment resource by its type and ref-id
-* [ecctl deployment resource start](ecctl_deployment_resource_start.md)	 - Starts a previously stopped deployment resource
-* [ecctl deployment resource start-maintenance](ecctl_deployment_resource_start-maintenance.md)	 - Starts maintenance mode on a deployment resource
-* [ecctl deployment resource stop](ecctl_deployment_resource_stop.md)	 - Stops a deployment resource
-* [ecctl deployment resource stop-maintenance](ecctl_deployment_resource_stop-maintenance.md)	 - Stops maintenance mode on a deployment resource
-* [ecctl deployment resource upgrade](ecctl_deployment_resource_upgrade.md)	 - Upgrades a deployment resource
+* [ecctl deployment resource](ecctl_deployment_resource.md)	 - Manages deployment resources
 
