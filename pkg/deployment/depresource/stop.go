@@ -25,55 +25,13 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/elastic/ecctl/pkg/deployment"
-	"github.com/elastic/ecctl/pkg/deployment/deputil"
-	"github.com/elastic/ecctl/pkg/util"
 )
 
 // StopParams is consumed by Stop.
 type StopParams struct {
-	*api.API
-	DeploymentID string
-	Type         string
-	RefID        string
-	All          bool
-}
+	deployment.ResourceParams
 
-// Validate ensures the parameters are usable by Stop.
-func (params StopParams) Validate() error {
-	var merr = new(multierror.Error)
-
-	if params.API == nil {
-		merr = multierror.Append(merr, util.ErrAPIReq)
-	}
-
-	if len(params.DeploymentID) != 32 {
-		merr = multierror.Append(merr, deputil.NewInvalidDeploymentIDError(params.DeploymentID))
-	}
-
-	if params.Type == "" {
-		merr = multierror.Append(merr, errors.New("deployment resource type cannot be empty"))
-	}
-
-	return merr.ErrorOrNil()
-}
-
-func (params *StopParams) fillDefaults() error {
-	if params.RefID == "" {
-		refID, err := deployment.GetTypeRefID(deployment.GetResourceParams{
-			GetParams: deployment.GetParams{
-				API:          params.API,
-				DeploymentID: params.DeploymentID,
-			},
-			Type: params.Type,
-		})
-		if err != nil {
-			return err
-		}
-
-		params.RefID = refID
-	}
-
-	return nil
+	All bool
 }
 
 // StopInstancesParams is consumed by StopInstances.
@@ -84,7 +42,7 @@ type StopInstancesParams struct {
 }
 
 // Validate ensures the parameters are usable by StopInstances.
-func (params StopInstancesParams) Validate() error {
+func (params *StopInstancesParams) Validate() error {
 	var merr = new(multierror.Error)
 
 	if len(params.InstanceIDs) == 0 {
@@ -99,10 +57,6 @@ func (params StopInstancesParams) Validate() error {
 // Stop stops all instances belonging to a deployment resource type.
 func Stop(params StopParams) (models.DeploymentResourceCommandResponse, error) {
 	if err := params.Validate(); err != nil {
-		return nil, err
-	}
-
-	if err := params.fillDefaults(); err != nil {
 		return nil, err
 	}
 
@@ -123,10 +77,6 @@ func Stop(params StopParams) (models.DeploymentResourceCommandResponse, error) {
 // StopInstances stops defined instances belonging to a deployment resource.
 func StopInstances(params StopInstancesParams) (models.DeploymentResourceCommandResponse, error) {
 	if err := params.Validate(); err != nil {
-		return nil, err
-	}
-
-	if err := params.StopParams.fillDefaults(); err != nil {
 		return nil, err
 	}
 

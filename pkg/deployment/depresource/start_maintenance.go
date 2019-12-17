@@ -29,10 +29,6 @@ func StartMaintenanceMode(params StartParams) (models.DeploymentResourceCommandR
 		return nil, err
 	}
 
-	if err := params.fillDefaults(); err != nil {
-		return nil, err
-	}
-
 	res, err := params.V1API.Deployments.StartDeploymentResourceInstancesAllMaintenanceMode(
 		deployments.NewStartDeploymentResourceInstancesAllMaintenanceModeParams().
 			WithDeploymentID(params.DeploymentID).
@@ -50,10 +46,6 @@ func StartMaintenanceMode(params StartParams) (models.DeploymentResourceCommandR
 // StartInstancesMaintenanceMode starts maintenance mode of defined instances belonging to a deployment resource.
 func StartInstancesMaintenanceMode(params StartInstancesParams) (models.DeploymentResourceCommandResponse, error) {
 	if err := params.Validate(); err != nil {
-		return nil, err
-	}
-
-	if err := params.StartParams.fillDefaults(); err != nil {
 		return nil, err
 	}
 

@@ -28,6 +28,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/hashicorp/go-multierror"
 
+	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/util"
 )
 
@@ -48,59 +49,71 @@ func TestStopMaintenanceMode(t *testing.T) {
 			err: &multierror.Error{Errors: []error{
 				errors.New("api reference is required for command"),
 				errors.New(`id "" is invalid`),
-				errors.New(`deployment resource type cannot be empty`),
+				errors.New("deployment resource type cannot be empty"),
+				errors.New("failed auto-discovering the resource ref id: api reference is required for command"),
+				errors.New(`failed auto-discovering the resource ref id: id "" is invalid`),
 			}},
 		},
 		{
 			name: "fails due to API error",
 			args: args{params: StopParams{
-				API:          api.NewMock(mock.New404Response(mock.NewStructBody(internalError))),
-				DeploymentID: util.ValidClusterID,
-				Type:         "elasticsearch",
-				RefID:        "main-elasticsearch",
+				ResourceParams: deployment.ResourceParams{
+					API:          api.NewMock(mock.New404Response(mock.NewStructBody(internalError))),
+					DeploymentID: util.ValidClusterID,
+					Type:         "elasticsearch",
+					RefID:        "main-elasticsearch",
+				},
 			}},
 			err: errors.New(string(internalErrorBytes)),
 		},
 		{
 			name: "fails due to RefID discovery",
 			args: args{params: StopParams{
-				API: api.NewMock(mock.New500Response(mock.NewStructBody(&models.BasicFailedReply{
-					Errors: []*models.BasicFailedReplyElement{
-						{Code: ec.String("deployment.missing")},
-					},
-				}))),
-				DeploymentID: util.ValidClusterID,
-				Type:         "elasticsearch",
+				ResourceParams: deployment.ResourceParams{
+					API: api.NewMock(mock.New500Response(mock.NewStructBody(&models.BasicFailedReply{
+						Errors: []*models.BasicFailedReplyElement{
+							{Code: ec.String("deployment.missing")},
+						},
+					}))),
+					DeploymentID: util.ValidClusterID,
+					Type:         "elasticsearch",
+				},
 			}},
-			err: errors.New(errGet500),
+			err: &multierror.Error{Errors: []error{
+				errors.New(errGet500),
+			}},
 		},
 		{
 			name: "succeeds",
 			args: args{params: StopParams{
-				API:          api.NewMock(mock.New200Response(mock.NewStringBody(""))),
-				DeploymentID: util.ValidClusterID,
-				Type:         "elasticsearch",
-				RefID:        "main-elasticsearch",
+				ResourceParams: deployment.ResourceParams{
+					API:          api.NewMock(mock.New200Response(mock.NewStringBody(""))),
+					DeploymentID: util.ValidClusterID,
+					Type:         "elasticsearch",
+					RefID:        "main-elasticsearch",
+				},
 			}},
 		},
 		{
 			name: "succeeds when RefID is not set",
 			args: args{params: StopParams{
-				API: api.NewMock(
-					mock.New200Response(mock.NewStructBody(models.DeploymentGetResponse{
-						Healthy: ec.Bool(true),
-						ID:      ec.String("3531aaf988594efa87c1aabb7caed337"),
-						Resources: &models.DeploymentResources{
-							Elasticsearch: []*models.ElasticsearchResourceInfo{{
-								ID:    ec.String("3531aaf988594efa87c1aabb7caed337"),
-								RefID: ec.String("elasticsearch"),
-							}},
-						},
-					})),
-					mock.New200Response(mock.NewStringBody("")),
-				),
-				DeploymentID: util.ValidClusterID,
-				Type:         "elasticsearch",
+				ResourceParams: deployment.ResourceParams{
+					API: api.NewMock(
+						mock.New200Response(mock.NewStructBody(models.DeploymentGetResponse{
+							Healthy: ec.Bool(true),
+							ID:      ec.String("3531aaf988594efa87c1aabb7caed337"),
+							Resources: &models.DeploymentResources{
+								Elasticsearch: []*models.ElasticsearchResourceInfo{{
+									ID:    ec.String("3531aaf988594efa87c1aabb7caed337"),
+									RefID: ec.String("elasticsearch"),
+								}},
+							},
+						})),
+						mock.New200Response(mock.NewStringBody("")),
+					),
+					DeploymentID: util.ValidClusterID,
+					Type:         "elasticsearch",
+				},
 			}},
 		},
 	}
@@ -136,17 +149,21 @@ func TestStopInstancesMaintenanceMode(t *testing.T) {
 				errors.New("deployment stop: at least 1 instance ID must be provided"),
 				errors.New("api reference is required for command"),
 				errors.New(`id "" is invalid`),
-				errors.New(`deployment resource type cannot be empty`),
+				errors.New("deployment resource type cannot be empty"),
+				errors.New("failed auto-discovering the resource ref id: api reference is required for command"),
+				errors.New(`failed auto-discovering the resource ref id: id "" is invalid`),
 			}},
 		},
 		{
 			name: "fails due to API error",
 			args: args{params: StopInstancesParams{
 				StopParams: StopParams{
-					API:          api.NewMock(mock.New404Response(mock.NewStructBody(internalError))),
-					DeploymentID: util.ValidClusterID,
-					Type:         "elasticsearch",
-					RefID:        "main-elasticsearch",
+					ResourceParams: deployment.ResourceParams{
+						API:          api.NewMock(mock.New404Response(mock.NewStructBody(internalError))),
+						DeploymentID: util.ValidClusterID,
+						Type:         "elasticsearch",
+						RefID:        "main-elasticsearch",
+					},
 				},
 				InstanceIDs: []string{"instance-0000000001", "instance-0000000002"},
 			}},
@@ -156,26 +173,32 @@ func TestStopInstancesMaintenanceMode(t *testing.T) {
 			name: "fails due to RefID discovery",
 			args: args{params: StopInstancesParams{
 				StopParams: StopParams{
-					API: api.NewMock(mock.New500Response(mock.NewStructBody(&models.BasicFailedReply{
-						Errors: []*models.BasicFailedReplyElement{
-							{Code: ec.String("deployment.missing")},
-						},
-					}))),
-					DeploymentID: util.ValidClusterID,
-					Type:         "elasticsearch",
+					ResourceParams: deployment.ResourceParams{
+						API: api.NewMock(mock.New500Response(mock.NewStructBody(&models.BasicFailedReply{
+							Errors: []*models.BasicFailedReplyElement{
+								{Code: ec.String("deployment.missing")},
+							},
+						}))),
+						DeploymentID: util.ValidClusterID,
+						Type:         "elasticsearch",
+					},
 				},
 				InstanceIDs: []string{"instance-0000000001", "instance-0000000002"},
 			}},
-			err: errors.New(errGet500),
+			err: &multierror.Error{Errors: []error{
+				errors.New(errGet500),
+			}},
 		},
 		{
 			name: "succeeds",
 			args: args{params: StopInstancesParams{
 				StopParams: StopParams{
-					API:          api.NewMock(mock.New200Response(mock.NewStringBody(""))),
-					DeploymentID: util.ValidClusterID,
-					Type:         "elasticsearch",
-					RefID:        "main-elasticsearch",
+					ResourceParams: deployment.ResourceParams{
+						API:          api.NewMock(mock.New200Response(mock.NewStringBody(""))),
+						DeploymentID: util.ValidClusterID,
+						Type:         "elasticsearch",
+						RefID:        "main-elasticsearch",
+					},
 				},
 				InstanceIDs: []string{"instance-0000000001", "instance-0000000002"},
 			}},
@@ -184,21 +207,23 @@ func TestStopInstancesMaintenanceMode(t *testing.T) {
 			name: "succeeds when RefID is not set",
 			args: args{params: StopInstancesParams{
 				StopParams: StopParams{
-					API: api.NewMock(
-						mock.New200Response(mock.NewStructBody(models.DeploymentGetResponse{
-							Healthy: ec.Bool(true),
-							ID:      ec.String("3531aaf988594efa87c1aabb7caed337"),
-							Resources: &models.DeploymentResources{
-								Elasticsearch: []*models.ElasticsearchResourceInfo{{
-									ID:    ec.String("3531aaf988594efa87c1aabb7caed337"),
-									RefID: ec.String("elasticsearch"),
-								}},
-							},
-						})),
-						mock.New200Response(mock.NewStringBody("")),
-					),
-					DeploymentID: util.ValidClusterID,
-					Type:         "elasticsearch",
+					ResourceParams: deployment.ResourceParams{
+						API: api.NewMock(
+							mock.New200Response(mock.NewStructBody(models.DeploymentGetResponse{
+								Healthy: ec.Bool(true),
+								ID:      ec.String("3531aaf988594efa87c1aabb7caed337"),
+								Resources: &models.DeploymentResources{
+									Elasticsearch: []*models.ElasticsearchResourceInfo{{
+										ID:    ec.String("3531aaf988594efa87c1aabb7caed337"),
+										RefID: ec.String("elasticsearch"),
+									}},
+								},
+							})),
+							mock.New200Response(mock.NewStringBody("")),
+						),
+						DeploymentID: util.ValidClusterID,
+						Type:         "elasticsearch",
+					},
 				},
 				InstanceIDs: []string{"instance-0000000001", "instance-0000000002"},
 			}},
@@ -233,10 +258,12 @@ func TestStopMaintenanceModeAllOrSpecified(t *testing.T) {
 			name: "fails due to API error when all is not set",
 			args: args{params: StopInstancesParams{
 				StopParams: StopParams{
-					API:          api.NewMock(mock.New404Response(mock.NewStructBody(internalError))),
-					DeploymentID: util.ValidClusterID,
-					Type:         "elasticsearch",
-					RefID:        "main-elasticsearch",
+					ResourceParams: deployment.ResourceParams{
+						API:          api.NewMock(mock.New404Response(mock.NewStructBody(internalError))),
+						DeploymentID: util.ValidClusterID,
+						Type:         "elasticsearch",
+						RefID:        "main-elasticsearch",
+					},
 				},
 				InstanceIDs: []string{"instance-0000000001", "instance-0000000002"},
 			}},
@@ -246,11 +273,13 @@ func TestStopMaintenanceModeAllOrSpecified(t *testing.T) {
 			name: "fails due to API error when all is set to true",
 			args: args{params: StopInstancesParams{
 				StopParams: StopParams{
-					API:          api.NewMock(mock.New404Response(mock.NewStructBody(internalError))),
-					DeploymentID: util.ValidClusterID,
-					Type:         "elasticsearch",
-					RefID:        "main-elasticsearch",
-					All:          true,
+					ResourceParams: deployment.ResourceParams{
+						API:          api.NewMock(mock.New404Response(mock.NewStructBody(internalError))),
+						DeploymentID: util.ValidClusterID,
+						Type:         "elasticsearch",
+						RefID:        "main-elasticsearch",
+					},
+					All: true,
 				},
 			}},
 			err: errors.New(string(internalErrorBytes)),
@@ -259,10 +288,12 @@ func TestStopMaintenanceModeAllOrSpecified(t *testing.T) {
 			name: "succeeds when all is not set",
 			args: args{params: StopInstancesParams{
 				StopParams: StopParams{
-					API:          api.NewMock(mock.New200Response(mock.NewStringBody(""))),
-					DeploymentID: util.ValidClusterID,
-					Type:         "elasticsearch",
-					RefID:        "main-elasticsearch",
+					ResourceParams: deployment.ResourceParams{
+						API:          api.NewMock(mock.New200Response(mock.NewStringBody(""))),
+						DeploymentID: util.ValidClusterID,
+						Type:         "elasticsearch",
+						RefID:        "main-elasticsearch",
+					},
 				},
 				InstanceIDs: []string{"instance-0000000001", "instance-0000000002"},
 			}},
@@ -271,11 +302,13 @@ func TestStopMaintenanceModeAllOrSpecified(t *testing.T) {
 			name: "succeeds when all is set to true",
 			args: args{params: StopInstancesParams{
 				StopParams: StopParams{
-					API:          api.NewMock(mock.New200Response(mock.NewStringBody(""))),
-					DeploymentID: util.ValidClusterID,
-					Type:         "elasticsearch",
-					RefID:        "main-elasticsearch",
-					All:          true,
+					ResourceParams: deployment.ResourceParams{
+						API:          api.NewMock(mock.New200Response(mock.NewStringBody(""))),
+						DeploymentID: util.ValidClusterID,
+						Type:         "elasticsearch",
+						RefID:        "main-elasticsearch",
+					},
+					All: true,
 				},
 			}},
 		},

@@ -26,8 +26,10 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/hashicorp/go-multierror"
 
+	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/util"
 )
 
@@ -38,6 +40,15 @@ func TestCancelPlan(t *testing.T) {
 		},
 	}
 	internalErrorBytes, _ := json.MarshalIndent(internalError, "", "  ")
+	var errGet500 = `failed auto-discovering the resource ref id: {
+  "errors": [
+    {
+      "code": "deployment.missing",
+      "fields": null,
+      "message": null
+    }
+  ]
+}`
 	type args struct {
 		params CancelPlanParams
 	}
@@ -54,23 +65,48 @@ func TestCancelPlan(t *testing.T) {
 				util.ErrAPIReq,
 				errors.New("id \"\" is invalid"),
 				errors.New("deployment resource type cannot be empty"),
+				errors.New("failed auto-discovering the resource ref id: api reference is required for command"),
+				errors.New(`failed auto-discovering the resource ref id: id "" is invalid`),
 			}},
 		},
 		{
 			name: "fails due to API error",
 			args: args{params: CancelPlanParams{
-				API:          api.NewMock(mock.New404Response(mock.NewStructBody(internalError))),
-				DeploymentID: util.ValidClusterID,
-				Type:         "elasticsearch",
+				ResourceParams: deployment.ResourceParams{
+					API:          api.NewMock(mock.New404Response(mock.NewStructBody(internalError))),
+					DeploymentID: util.ValidClusterID,
+					Type:         "elasticsearch",
+					RefID:        "main-elasticsearch",
+				},
 			}},
 			err: errors.New(string(internalErrorBytes)),
 		},
 		{
+			name: "fails due to RefID discovery",
+			args: args{params: CancelPlanParams{
+				ResourceParams: deployment.ResourceParams{
+					API: api.NewMock(mock.New500Response(mock.NewStructBody(&models.BasicFailedReply{
+						Errors: []*models.BasicFailedReplyElement{
+							{Code: ec.String("deployment.missing")},
+						},
+					}))),
+					DeploymentID: util.ValidClusterID,
+					Type:         "elasticsearch",
+				},
+			}},
+			err: &multierror.Error{Errors: []error{
+				errors.New(errGet500),
+			}},
+		},
+		{
 			name: "succeeds",
 			args: args{params: CancelPlanParams{
-				API:          api.NewMock(mock.New200Response(mock.NewStringBody(""))),
-				DeploymentID: util.ValidClusterID,
-				Type:         "elasticsearch",
+				ResourceParams: deployment.ResourceParams{
+					API:          api.NewMock(mock.New200Response(mock.NewStringBody(""))),
+					DeploymentID: util.ValidClusterID,
+					Type:         "elasticsearch",
+					RefID:        "main-elasticsearch",
+				},
 			}},
 			want: new(models.DeploymentResourceCrudResponse),
 		},

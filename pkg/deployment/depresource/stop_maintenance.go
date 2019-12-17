@@ -29,10 +29,6 @@ func StopMaintenanceMode(params StopParams) (models.DeploymentResourceCommandRes
 		return nil, err
 	}
 
-	if err := params.fillDefaults(); err != nil {
-		return nil, err
-	}
-
 	res, err := params.V1API.Deployments.StopDeploymentResourceInstancesAllMaintenanceMode(
 		deployments.NewStopDeploymentResourceInstancesAllMaintenanceModeParams().
 			WithDeploymentID(params.DeploymentID).
@@ -50,10 +46,6 @@ func StopMaintenanceMode(params StopParams) (models.DeploymentResourceCommandRes
 // StopInstancesMaintenanceMode stops maintenance mode of defined instances belonging to a deployment resource.
 func StopInstancesMaintenanceMode(params StopInstancesParams) (models.DeploymentResourceCommandResponse, error) {
 	if err := params.Validate(); err != nil {
-		return nil, err
-	}
-
-	if err := params.StopParams.fillDefaults(); err != nil {
 		return nil, err
 	}
 

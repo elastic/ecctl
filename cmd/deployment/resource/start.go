@@ -24,6 +24,7 @@ import (
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
+	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/deployment/depresource"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
@@ -45,11 +46,13 @@ var startCmd = &cobra.Command{
 
 		_, err := depresource.StartAllOrSpecified(depresource.StartInstancesParams{
 			StartParams: depresource.StartParams{
-				API:          ecctl.Get().API,
-				DeploymentID: args[0],
-				Type:         resType,
-				RefID:        refID,
-				All:          all,
+				ResourceParams: deployment.ResourceParams{
+					API:          ecctl.Get().API,
+					DeploymentID: args[0],
+					Type:         resType,
+					RefID:        refID,
+				},
+				All: all,
 			},
 			InstanceIDs:   instanceID,
 			IgnoreMissing: ec.Bool(ignoreMissing),
