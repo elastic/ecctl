@@ -26,8 +26,10 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/hashicorp/go-multierror"
 
+	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/util"
 )
 
@@ -39,7 +41,7 @@ func TestUpgradeStateless(t *testing.T) {
 	}
 	internalErrorBytes, _ := json.MarshalIndent(internalError, "", "  ")
 	type args struct {
-		params UpgradeStatelessParams
+		params deployment.ResourceParams
 	}
 	tests := []struct {
 		name string
@@ -54,31 +56,55 @@ func TestUpgradeStateless(t *testing.T) {
 				util.ErrAPIReq,
 				errors.New("id \"\" is invalid"),
 				errors.New("deployment resource type cannot be empty"),
+				errors.New("failed auto-discovering the resource ref id: api reference is required for command"),
+				errors.New(`failed auto-discovering the resource ref id: id "" is invalid`),
 			}},
 		},
 		{
 			name: "fails due to API error",
-			args: args{params: UpgradeStatelessParams{
+			args: args{params: deployment.ResourceParams{
 				API:          api.NewMock(mock.New404Response(mock.NewStructBody(internalError))),
 				DeploymentID: util.ValidClusterID,
+				RefID:        "main-kibana",
 				Type:         "kibana",
 			}},
 			err: errors.New(string(internalErrorBytes)),
 		},
 		{
 			name: "succeeds",
-			args: args{params: UpgradeStatelessParams{
+			args: args{params: deployment.ResourceParams{
 				API:          api.NewMock(mock.New202Response(mock.NewStringBody(""))),
 				DeploymentID: util.ValidClusterID,
 				Type:         "kibana",
+				RefID:        "main-kibana",
 			}},
 			want: new(models.DeploymentResourceUpgradeResponse),
+		},
+		{
+			name: "succeeds when RefID is not set",
+			args: args{params: deployment.ResourceParams{
+				API: api.NewMock(
+					mock.New200Response(mock.NewStructBody(models.DeploymentGetResponse{
+						Healthy: ec.Bool(true),
+						ID:      ec.String("3531aaf988594efa87c1aabb7caed337"),
+						Resources: &models.DeploymentResources{
+							Elasticsearch: []*models.ElasticsearchResourceInfo{{
+								ID:    ec.String("3531aaf988594efa87c1aabb7caed337"),
+								RefID: ec.String("elasticsearch"),
+							}},
+						},
+					})),
+					mock.New200Response(mock.NewStringBody("")),
+				),
+				DeploymentID: util.ValidClusterID,
+				Type:         "elasticsearch",
+			}},
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := UpgradeStateless(tt.args.params)
-			if !reflect.DeepEqual(err, tt.err) {
+			if tt.err != nil && err.Error() != tt.err.Error() {
 				t.Errorf("UpgradeStateless() error = %v, wantErr %v", err, tt.err)
 				return
 			}
