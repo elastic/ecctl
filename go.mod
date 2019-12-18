@@ -9,7 +9,6 @@ require (
 	github.com/chzyer/test v0.0.0-20180213035817-a1ea475d72b1 // indirect
 	github.com/davecgh/go-spew v1.1.1
 	github.com/elastic/cloud-sdk-go v1.0.0-bc9
-	github.com/elastic/uptd v1.0.0
 	github.com/ghodss/yaml v1.0.0
 	github.com/go-openapi/runtime v0.19.9
 	github.com/go-openapi/strfmt v0.19.4
@@ -20,7 +19,6 @@ require (
 	github.com/spf13/cobra v0.0.5
 	github.com/spf13/viper v1.6.1
 	golang.org/x/crypto v0.0.0-20190829043050-9756ffdc2472
-	golang.org/x/oauth2 v0.0.0-20190211225200-5f6b76b7c9dd // indirect
 )
 
 replace sourcegraph.com/sourcegraph/go-diff v0.5.1 => github.com/sourcegraph/go-diff v0.5.1
