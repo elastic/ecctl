@@ -48,6 +48,7 @@ func NewApplication(c Config) (*App, error) {
 		AuthWriter:    authWriter,
 		Region:        c.Region,
 		SkipTLSVerify: c.Insecure,
+		Timeout:       c.Timeout,
 		VerboseSettings: api.VerboseSettings{
 			Verbose: c.Verbose,
 			Device:  c.OutputDevice,

@@ -173,10 +173,6 @@ func initApp(cmd *cobra.Command, client *http.Client, v *viper.Viper) error {
 		return errors.New("cmd: root http client cannot be nil")
 	}
 
-	if timeout := v.GetDuration("timeout"); timeout.Nanoseconds() > 0 {
-		client.Timeout = timeout
-	}
-
 	var c = ecctl.Config{
 		Client:       client,
 		OutputDevice: output.NewDevice(defaultOutput),
