@@ -21,9 +21,8 @@ brews:
       bin.install "ecctl"
       system "#{bin}/ecctl", "generate", "completions", "-l", "#{var}/ecctl.auto"
     caveats: |
-      Make sure to source #{var}/ecctl.auto for autocompletions
-      If you have previously built ecctl from source, make sure you've removed that 
-      binary from any directory that has been added to your user $PATH.
+      If you have previously built ecctl from source, make sure you've removed that binary from any directory that has been added to your user $PATH.
+      To enable autocompletion make sure to run `source <(ecctl generate completions)` and add it to your shell interpreter configuration file by running `echo "source <(ecctl generate completions)" >> ~/.bash_profile` or `echo "source <(ecctl generate completions)" >> ~/.zshrc` in case you are using ZSH.
     test: system "#{bin}/ecctl version"
     folder: Formula
 builds:
