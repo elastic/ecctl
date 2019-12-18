@@ -112,7 +112,7 @@ $ ecctl init
 Welcome to the Elastic Cloud CLI! This command will guide you through authenticating and setting some default values.
 
 Missing configuration file, would you like to initialise it? [y/n]: y
-Enter the URL of your ECE installation: http://192.168.44.10:12300
+Enter the URL of your ECE installation: https://192.168.44.10:12434
 
 What default output format would you like?
   [1] text - Human-readable output format, commands with no output templates defined will fall back to JSON.
