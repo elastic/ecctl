@@ -21,6 +21,7 @@ import (
 	"errors"
 	"io"
 	"net/http"
+	"time"
 
 	"github.com/elastic/cloud-sdk-go/pkg/output"
 	"github.com/elastic/cloud-sdk-go/pkg/util/slice"
@@ -57,6 +58,8 @@ type Config struct {
 	OutputDevice *output.Device `json:"-"`
 	ErrorDevice  io.Writer      `json:"-"`
 	Client       *http.Client   `json:"-"`
+
+	Timeout time.Duration `json:"timeout,omitempty"`
 
 	Verbose  bool `json:"verbose,omitempty"`
 	Force    bool `json:"force,omitempty"`
