@@ -1,0 +1,58 @@
+[#ecctl_deployment_kibana]
+== ecctl deployment kibana
+
+Manages Kibana instances
+
+[float]
+=== Synopsis
+
+Manages Kibana instances
+
+----
+ecctl deployment kibana [flags]
+----
+
+[float]
+=== Options
+
+----
+  -h, --help   help for kibana
+----
+
+[float]
+=== Options inherited from parent commands
+
+----
+      --apikey string      API key to use to authenticate (If empty will look for EC_APIKEY environment variable)
+      --config string      Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
+      --force              Do not ask for confirmation
+      --format string      Formats the output using a Go template
+      --host string        Base URL to use
+      --insecure           Skips all TLS validation
+      --message string     A message to set on cluster operation
+      --output string      Output format [text|json] (default "text")
+      --pass string        Password to use to authenticate (If empty will look for EC_PASS environment variable)
+      --pprof              Enables pprofing and saves the profile to pprof-20060102150405
+  -q, --quiet              Suppresses the configuration file used for the run, if any
+      --timeout duration   Timeout to use on all HTTP calls (default 30s)
+      --trace              Enables tracing saves the trace to trace-20060102150405
+      --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
+      --verbose            Enable verbose mode
+----
+
+[float]
+=== See also
+
+* xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
+* xref:ecctl_deployment_kibana_create[ecctl deployment kibana create]	 - Creates a Kibana instance
+* xref:ecctl_deployment_kibana_delete[ecctl deployment kibana delete]	 - Deletes a Kibana instance
+* xref:ecctl_deployment_kibana_enable[ecctl deployment kibana enable]	 - Enables a kibana instance in the selected deployment
+* xref:ecctl_deployment_kibana_list[ecctl deployment kibana list]	 - Returns the list of kibana instances
+* xref:ecctl_deployment_kibana_plan[ecctl deployment kibana plan]	 - Manages Kibana plans
+* xref:ecctl_deployment_kibana_reallocate[ecctl deployment kibana reallocate]	 - Reallocates Kibana instances
+* xref:ecctl_deployment_kibana_restart[ecctl deployment kibana restart]	 - Restarts a Kibana instance
+* xref:ecctl_deployment_kibana_resync[ecctl deployment kibana resync]	 - Resynchronizes the search index and cache for the selected Kibana instance
+* xref:ecctl_deployment_kibana_show[ecctl deployment kibana show]	 - Returns the cluster information
+* xref:ecctl_deployment_kibana_start[ecctl deployment kibana start]	 - Starts a Kibana instance
+* xref:ecctl_deployment_kibana_stop[ecctl deployment kibana stop]	 - Downscales a Kibana instance
+* xref:ecctl_deployment_kibana_upgrade[ecctl deployment kibana upgrade]	 - Upgrades the Kibana instance to the same version as the Elasticsearch one

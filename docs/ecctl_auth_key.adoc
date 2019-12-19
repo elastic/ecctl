@@ -1,24 +1,28 @@
-## ecctl deployment elasticsearch monitoring
+[#ecctl_auth_key]
+== ecctl auth key
 
-Manages monitoring for an Elasticsearch cluster
+Manages the current authenticated user API keys
 
-### Synopsis
+[float]
+=== Synopsis
 
-Manages monitoring for an Elasticsearch cluster
+Manages the current authenticated user API keys
 
-```
-ecctl deployment elasticsearch monitoring [flags]
-```
+----
+ecctl auth key [flags]
+----
 
-### Options
+[float]
+=== Options
 
-```
-  -h, --help   help for monitoring
-```
+----
+  -h, --help   help for key
+----
 
-### Options inherited from parent commands
+[float]
+=== Options inherited from parent commands
 
-```
+----
       --apikey string      API key to use to authenticate (If empty will look for EC_APIKEY environment variable)
       --config string      Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
       --force              Do not ask for confirmation
@@ -34,11 +38,13 @@ ecctl deployment elasticsearch monitoring [flags]
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
       --verbose            Enable verbose mode
-```
+----
 
-### SEE ALSO
+[float]
+=== See also
 
-* [ecctl deployment elasticsearch](ecctl_deployment_elasticsearch.md)	 - Manages Elasticsearch clusters
-* [ecctl deployment elasticsearch monitoring disable](ecctl_deployment_elasticsearch_monitoring_disable.md)	 - Disables monitoring in the specified cluster
-* [ecctl deployment elasticsearch monitoring enable](ecctl_deployment_elasticsearch_monitoring_enable.md)	 - Enables monitoring for the cluster by sending data to a monitoring cluster you specify
-
+* xref:ecctl_auth[ecctl auth]	 - Manages the platform auth
+* xref:ecctl_auth_key_create[ecctl auth key create]	 - Creates a new API key for the current authenticated user
+* xref:ecctl_auth_key_delete[ecctl auth key delete]	 - Deletes one or more existing API keys for the specified user
+* xref:ecctl_auth_key_list[ecctl auth key list]	 - Lists the API keys for the current authenticated user
+* xref:ecctl_auth_key_show[ecctl auth key show]	 - Shows the API key details for the current authenticated user

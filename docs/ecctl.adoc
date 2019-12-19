@@ -1,28 +1,22 @@
-## ecctl deployment elasticsearch monitoring
+[#ecctl]
+== ecctl
 
-Manages monitoring for an Elasticsearch cluster
+Elastic Cloud Control
 
-### Synopsis
+[float]
+=== Synopsis
 
-Manages monitoring for an Elasticsearch cluster
+Elastic Cloud Control
 
-```
-ecctl deployment elasticsearch monitoring [flags]
-```
+[float]
+=== Options
 
-### Options
-
-```
-  -h, --help   help for monitoring
-```
-
-### Options inherited from parent commands
-
-```
+----
       --apikey string      API key to use to authenticate (If empty will look for EC_APIKEY environment variable)
       --config string      Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
       --force              Do not ask for confirmation
       --format string      Formats the output using a Go template
+  -h, --help               help for ecctl
       --host string        Base URL to use
       --insecure           Skips all TLS validation
       --message string     A message to set on cluster operation
@@ -34,11 +28,15 @@ ecctl deployment elasticsearch monitoring [flags]
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
       --verbose            Enable verbose mode
-```
+----
 
-### SEE ALSO
+[float]
+=== See also
 
-* [ecctl deployment elasticsearch](ecctl_deployment_elasticsearch.md)	 - Manages Elasticsearch clusters
-* [ecctl deployment elasticsearch monitoring disable](ecctl_deployment_elasticsearch_monitoring_disable.md)	 - Disables monitoring in the specified cluster
-* [ecctl deployment elasticsearch monitoring enable](ecctl_deployment_elasticsearch_monitoring_enable.md)	 - Enables monitoring for the cluster by sending data to a monitoring cluster you specify
-
+* xref:ecctl_auth[ecctl auth]	 - Manages the platform auth
+* xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
+* xref:ecctl_generate[ecctl generate]	 - Generates completions and docs
+* xref:ecctl_init[ecctl init]	 - Creates an initial configuration file.
+* xref:ecctl_platform[ecctl platform]	 - Manages the platform
+* xref:ecctl_user[ecctl user]	 - Manages the platform users
+* xref:ecctl_version[ecctl version]	 - Shows ecctl version

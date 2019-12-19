@@ -1,24 +1,29 @@
-## ecctl deployment elasticsearch monitoring
+[#ecctl_deployment_elasticsearch_search]
+== ecctl deployment elasticsearch search
 
-Manages monitoring for an Elasticsearch cluster
+Performs advanced clusters searching
 
-### Synopsis
+[float]
+=== Synopsis
 
-Manages monitoring for an Elasticsearch cluster
+Read more about Query DSL in https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html
 
-```
-ecctl deployment elasticsearch monitoring [flags]
-```
+----
+ecctl deployment elasticsearch search -f <query file>.json [flags]
+----
 
-### Options
+[float]
+=== Options
 
-```
-  -h, --help   help for monitoring
-```
+----
+  -f, --file string   JSON file that contains JSON-style domain-specific language query
+  -h, --help          help for search
+----
 
-### Options inherited from parent commands
+[float]
+=== Options inherited from parent commands
 
-```
+----
       --apikey string      API key to use to authenticate (If empty will look for EC_APIKEY environment variable)
       --config string      Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
       --force              Do not ask for confirmation
@@ -34,11 +39,9 @@ ecctl deployment elasticsearch monitoring [flags]
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
       --verbose            Enable verbose mode
-```
+----
 
-### SEE ALSO
+[float]
+=== See also
 
-* [ecctl deployment elasticsearch](ecctl_deployment_elasticsearch.md)	 - Manages Elasticsearch clusters
-* [ecctl deployment elasticsearch monitoring disable](ecctl_deployment_elasticsearch_monitoring_disable.md)	 - Disables monitoring in the specified cluster
-* [ecctl deployment elasticsearch monitoring enable](ecctl_deployment_elasticsearch_monitoring_enable.md)	 - Enables monitoring for the cluster by sending data to a monitoring cluster you specify
-
+* xref:ecctl_deployment_elasticsearch[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters

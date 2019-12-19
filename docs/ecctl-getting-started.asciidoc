@@ -272,7 +272,17 @@ $ unset EC_FORMAT
 [id="{p}-command-reference"]
 == Command reference
 
-See link:https://github.com/elastic/ecctl/blob/master/docs/ecctl.md[ecctl command reference].
+{n} includes commands to administer:
+
+* Platform components
+* Platform authentication
+* Platform users
+* Elastic Stack deployments
+* And more
+
+:leveloffset: +1 
+include::ecctl-command-reference-index.adoc[]
+:leveloffset: 0
 
 [id="{p}-contributing"]
 == Contributing

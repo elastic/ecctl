@@ -1,24 +1,46 @@
-## ecctl deployment elasticsearch monitoring
+[#ecctl_deployment_elasticsearch_create]
+== ecctl deployment elasticsearch create
 
-Manages monitoring for an Elasticsearch cluster
+Creates an Elasticsearch cluster
 
-### Synopsis
+[float]
+=== Synopsis
 
-Manages monitoring for an Elasticsearch cluster
+Creates an Elasticsearch cluster
 
-```
-ecctl deployment elasticsearch monitoring [flags]
-```
+----
+ecctl deployment elasticsearch create [--file] [--capacity|--version|--zones] [name] [flags]
+----
 
-### Options
+[float]
+=== Examples
 
-```
-  -h, --help   help for monitoring
-```
+----
 
-### Options inherited from parent commands
+  * Create a single node elasticsearch cluster
+  ecctl deployment elasticsearch create --version 5.6.0 --zones 1 --capacity 2048
 
-```
+  * Create an elasticsearch cluster from a plan definition.
+  ecctl deployment elasticsearch create --file definition.json
+----
+
+[float]
+=== Options
+
+----
+  -c, --capacity int32   Capacity per node
+      --file string      JSON plan definition file location
+  -h, --help             help for create
+      --plugin strings   Additional plugins to add to the Elasticsearch cluster
+  -t, --track            Tracks the progress of the performed task
+  -v, --version string   Filter per version
+  -z, --zones int32      Number of zones for the cluster
+----
+
+[float]
+=== Options inherited from parent commands
+
+----
       --apikey string      API key to use to authenticate (If empty will look for EC_APIKEY environment variable)
       --config string      Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
       --force              Do not ask for confirmation
@@ -34,11 +56,9 @@ ecctl deployment elasticsearch monitoring [flags]
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
       --verbose            Enable verbose mode
-```
+----
 
-### SEE ALSO
+[float]
+=== See also
 
-* [ecctl deployment elasticsearch](ecctl_deployment_elasticsearch.md)	 - Manages Elasticsearch clusters
-* [ecctl deployment elasticsearch monitoring disable](ecctl_deployment_elasticsearch_monitoring_disable.md)	 - Disables monitoring in the specified cluster
-* [ecctl deployment elasticsearch monitoring enable](ecctl_deployment_elasticsearch_monitoring_enable.md)	 - Enables monitoring for the cluster by sending data to a monitoring cluster you specify
-
+* xref:ecctl_deployment_elasticsearch[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters
