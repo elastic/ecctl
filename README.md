@@ -1,4 +1,6 @@
-# Elastic Cloud Control
+# Elastic Cloud Control 
+
+![](./ecctl.png)
 
 NOTE: **You are looking at the documentation for a beta release. Please keep in mind that backwards-incompatible changes might be introduced in future releases.**
 
