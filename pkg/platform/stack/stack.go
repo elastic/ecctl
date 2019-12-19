@@ -92,9 +92,11 @@ func Upload(params UploadParams) error {
 	var merr = new(multierror.Error)
 	for _, e := range res.Payload.Errors {
 		for _, ee := range e.Errors.Errors {
-			merr = multierror.Append(merr,
-				fmt.Errorf("%s: %s", *ee.Code, *ee.Message),
-			)
+			if !strings.Contains(*ee.Message, "__MACOSX") {
+				merr = multierror.Append(merr,
+					fmt.Errorf("%s: %s", *ee.Code, *ee.Message),
+				)
+			}
 		}
 	}
 	return merr.ErrorOrNil()
