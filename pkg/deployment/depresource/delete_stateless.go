@@ -33,7 +33,7 @@ type DeleteStatelessParams struct {
 }
 
 // Validate ensures the parameters are usable by the consuming function.
-func (params DeleteStatelessParams) Validate() error {
+func (params *DeleteStatelessParams) Validate() error {
 	var merr = new(multierror.Error)
 
 	merr = multierror.Append(merr, params.ResourceParams.Validate())

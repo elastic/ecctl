@@ -18,6 +18,8 @@
 package cmddeploymentresource
 
 import (
+	"os"
+
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -34,6 +36,12 @@ var deleteCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		resType, _ := cmd.Flags().GetString("type")
 		refID, _ := cmd.Flags().GetString("ref-id")
+
+		force, _ := cmd.Flags().GetBool("force")
+		var msg = "This action will delete a deployment's resource type and its configuration history. Do you want to continue? [y/n]: "
+		if !force && !cmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
+			return nil
+		}
 
 		return depresource.DeleteStateless(depresource.DeleteStatelessParams{
 			ResourceParams: deployment.ResourceParams{
