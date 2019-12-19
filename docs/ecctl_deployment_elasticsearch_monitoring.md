@@ -40,5 +40,5 @@ ecctl deployment elasticsearch monitoring [flags]
 
 * [ecctl deployment elasticsearch](ecctl_deployment_elasticsearch.md)	 - Manages Elasticsearch clusters
 * [ecctl deployment elasticsearch monitoring disable](ecctl_deployment_elasticsearch_monitoring_disable.md)	 - Disables monitoring in the specified cluster
-* [ecctl deployment elasticsearch monitoring enable](ecctl_deployment_elasticsearch_monitoring_enable.md)	 - Enables monitoring for the cluster by sending data to a monitoring cluster
+* [ecctl deployment elasticsearch monitoring enable](ecctl_deployment_elasticsearch_monitoring_enable.md)	 - Enables monitoring for the cluster by sending data to a monitoring cluster you specify
 
