@@ -19,81 +19,17 @@ package cmd
 
 import (
 	"fmt"
-	"io"
-	"os"
-	"runtime"
 
-	"github.com/elastic/uptd"
-	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-
-	"github.com/elastic/ecctl/pkg/ecctl"
-)
-
-const (
-	updateFmt = `
-Your version of %s is out of date! The latest version is %s.
-You can use the binaries from %s.`
-)
-
-var (
-	errWrapError        = errors.New("\ncan't check newer version")
-	primaryGithubToken  = "GITHUB_TOKEN"
-	fallbackGithubToken = "HOMEBREW_GITHUB_API_TOKEN"
 )
 
 var versionCmd = &cobra.Command{
 	Use:     "version",
 	Short:   "Shows ecctl version",
 	PreRunE: cobra.MaximumNArgs(0),
-	RunE: func(cmd *cobra.Command, args []string) error {
+	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Fprint(cmd.OutOrStdout(), versionInfo)
-
-		return checkUpdate(versionInfo, cmd.OutOrStderr())
 	},
-}
-
-func githubToken() string {
-	var envVars = []string{primaryGithubToken}
-	if runtime.GOOS == "darwin" {
-		envVars = append(envVars, fallbackGithubToken)
-	}
-	for _, key := range envVars {
-		if token := os.Getenv(key); token != "" {
-			return token
-		}
-	}
-	return ""
-}
-
-func checkUpdate(version ecctl.VersionInfo, device io.Writer) error {
-	githubUpdateProvider, err := uptd.NewGithubProvider(
-		version.Organization, version.Repository, githubToken(),
-	)
-	if err != nil {
-		fmt.Fprintln(device, errors.Wrap(err, errWrapError.Error()))
-		return nil
-	}
-
-	uptodate, err := uptd.New(githubUpdateProvider, version.Version)
-	if err != nil {
-		fmt.Fprintln(device, errors.Wrap(err, errWrapError.Error()))
-		return nil
-	}
-
-	res, err := uptodate.Check()
-	if err != nil {
-		fmt.Fprintln(device, errors.Wrap(err, errWrapError.Error()))
-		return nil
-	}
-
-	if res.NeedsUpdate {
-		var message = fmt.Sprintf(updateFmt, RootCmd.Name(),
-			res.Latest.Version.String(), res.Latest.URL,
-		)
-		fmt.Fprintln(device, message)
-	}
-	return nil
 }
 
 func init() {
