@@ -33,13 +33,14 @@ import (
 var generateElasticsearchDiagnosticsCmd = &cobra.Command{
 	Use:     "diagnose <cluster id>",
 	Short:   "Generates a diagnostics bundle for the cluster",
+	Long:    "Generates a diagnostics bundle for the cluster, a timeout increase might be necessary",
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		location := cmd.Flag("location").Value.String()
 		filename := fmt.Sprint("diagnostic-", args[0], ".zip")
 		path := filepath.Join(location, filename)
 
-		f, err := os.Open(path)
+		f, err := os.Create(path)
 		if err != nil {
 			return err
 		}
