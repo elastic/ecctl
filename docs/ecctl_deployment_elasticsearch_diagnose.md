@@ -4,7 +4,7 @@ Generates a diagnostics bundle for the cluster
 
 ### Synopsis
 
-Generates a diagnostics bundle for the cluster
+Generates a diagnostics bundle for the cluster, a timeout increase might be necessary
 
 ```
 ecctl deployment elasticsearch diagnose <cluster id> [flags]
