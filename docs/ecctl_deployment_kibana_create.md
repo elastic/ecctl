@@ -18,7 +18,7 @@ that would be sent as a request, save it, update or extend the topology and crea
 deployment using the saved payload with the "--file" flag.
 
 ```
-ecctl deployment kibana create -f <definition.json> [flags]
+ecctl deployment kibana create --id <deployment-id> [flags]
 ```
 
 ### Examples

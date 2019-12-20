@@ -29,7 +29,7 @@ import (
 )
 
 var createKibanaCmd = &cobra.Command{
-	Use:     "create -f <definition.json>",
+	Use:     "create --id <deployment-id>",
 	Short:   "Creates a Kibana instance",
 	Long:    kibanaCreateLong,
 	Example: kibanaCreateExample,
