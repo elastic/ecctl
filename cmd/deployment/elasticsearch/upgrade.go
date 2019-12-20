@@ -55,7 +55,7 @@ var upgradeElasticsearchVersionCmd = &cobra.Command{
 func init() {
 	Command.AddCommand(upgradeElasticsearchVersionCmd)
 
-	upgradeElasticsearchVersionCmd.Flags().StringP("version", "v", "", "Filters per version (required)")
+	upgradeElasticsearchVersionCmd.Flags().StringP("version", "v", "", "Version to upgrade to (required)")
 	upgradeElasticsearchVersionCmd.Flags().BoolP("track", "t", false, cmdutil.TrackFlagMessage)
 	cobra.MarkFlagRequired(upgradeElasticsearchVersionCmd.Flags(), "version")
 }

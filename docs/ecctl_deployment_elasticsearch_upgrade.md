@@ -15,7 +15,7 @@ ecctl deployment elasticsearch upgrade <cluster id> --version=<version> [flags]
 ```
   -h, --help             help for upgrade
   -t, --track            Tracks the progress of the performed task
-  -v, --version string   Filters per version (required)
+  -v, --version string   Version to upgrade to (required)
 ```
 
 ### Options inherited from parent commands

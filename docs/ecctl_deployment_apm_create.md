@@ -18,7 +18,7 @@ that would be sent as a request, save it, update or extend the topology and crea
 deployment using the saved payload with the "--file" flag.
 
 ```
-ecctl deployment apm create -f <definition.json> [flags]
+ecctl deployment apm create --id <deployment-id> [flags]
 ```
 
 ### Examples

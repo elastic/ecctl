@@ -29,7 +29,7 @@ import (
 )
 
 var createApmCmd = &cobra.Command{
-	Use:     "create -f <definition.json>",
+	Use:     "create --id <deployment-id>",
 	Short:   "Creates an Apm instance",
 	Long:    apmCreateLong,
 	Example: apmCreateExample,
