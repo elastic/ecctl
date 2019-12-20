@@ -76,6 +76,10 @@ var createKibanaCmd = &cobra.Command{
 			payload = p
 		}
 
+		if payload.Region == nil || *payload.Region == "" {
+			payload.Region = ec.String(region)
+		}
+
 		// Returns the KibanaPayload skipping the creation of the resources.
 		if generatePayload {
 			return ecctl.Get().Formatter.Format("", payload)
