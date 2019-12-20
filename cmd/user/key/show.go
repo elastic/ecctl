@@ -27,12 +27,13 @@ import (
 var showCmd = &cobra.Command{
 	Use:     "show --user=<user id> <key id>",
 	Short:   "Shows the API key details for the specified user",
-	PreRunE: cobra.MinimumNArgs(2),
+	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
+		user, _ := cmd.Flags().GetString("user")
 		res, err := userauthadmin.GetKey(userauthadmin.GetKeyParams{
-			UserID: args[0],
+			UserID: user,
 			API:    ecctl.Get().API,
-			ID:     args[1],
+			ID:     args[0],
 		})
 		if err != nil {
 			return err

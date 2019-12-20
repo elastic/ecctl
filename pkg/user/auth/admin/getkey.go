@@ -63,7 +63,7 @@ func GetKey(params GetKeyParams) (*models.APIKeyResponse, error) {
 	res, err := params.V1API.Authentication.GetUserAPIKey(
 		authentication.NewGetUserAPIKeyParams().
 			WithAPIKeyID(params.ID).
-			WithUserID(params.ID),
+			WithUserID(params.UserID),
 		params.AuthWriter,
 	)
 
