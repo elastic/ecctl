@@ -53,7 +53,7 @@ func (params UpdateParams) Validate() error {
 	return merr.ErrorOrNil()
 }
 
-// TODO: Use different resource types when this is supported by the API.
+// Use different resource types when this is supported by the API.
 // For the time being, the notes endpoint only allows elasticsearch IDs.
 func (params *UpdateParams) fillDefaults() error {
 	esID, err := getElasticsearchID(deployment.GetParams{
