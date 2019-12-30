@@ -13,8 +13,7 @@ ecctl deployment note create <deployment id> --message <message content> --type 
 ### Options
 
 ```
-  -h, --help          help for create
-      --type string   Type of deployment to comment, valid options are: [elasticsearch, kibana, apm] (default "elasticsearch")
+  -h, --help   help for create
 ```
 
 ### Options inherited from parent commands

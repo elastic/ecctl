@@ -27,6 +27,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
+	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/util"
@@ -34,7 +35,7 @@ import (
 
 func TestList(t *testing.T) {
 	var messageDateTime = util.ParseDate(t, "2018-04-13T07:11:54.999Z")
-	var listNotesPayload = `
+	const listNotesPayload = `
 	{
 		"version": 2,
 		"notes": [
@@ -50,7 +51,18 @@ func TestList(t *testing.T) {
 				"user_id": "marc"
 			}
 		]
-}`[1:]
+}`
+	const getResponse = `{
+  "healthy": true,
+  "id": "e3dac8bf3dc64c528c295a94d0f19a77",
+  "resources": {
+    "elasticsearch": [{
+      "id": "418017cd1c7f402cbb7a981b2004ceeb",
+      "ref_id": "main-elasticsearch",
+      "region": "ece-region"
+    }]
+  }
+}`
 	type args struct {
 		params ListParams
 	}
@@ -58,17 +70,21 @@ func TestList(t *testing.T) {
 		name    string
 		args    args
 		want    *models.Notes
-		wantErr bool
+		wantErr error
 	}{
 		{
 			name: "List notes succeeds",
 			args: args{
 				params: ListParams{Params: deployment.Params{
-					ID: "a2c4f423c1014941b75a48292264dd25",
+					ID: "e3dac8bf3dc64c528c295a94d0f19a77",
 					API: api.NewMock(mock.Response{Response: http.Response{
-						Body:       mock.NewStringBody(listNotesPayload),
+						Body:       mock.NewStringBody(getResponse),
 						StatusCode: 200,
-					}}),
+					}},
+						mock.Response{Response: http.Response{
+							Body:       mock.NewStringBody(listNotesPayload),
+							StatusCode: 200,
+						}}),
 				}},
 			},
 			want: &models.Notes{
@@ -88,115 +104,62 @@ func TestList(t *testing.T) {
 			},
 		},
 		{
-			name: "List notes fails when an error is received",
+			name: "List notes fails when an error is received (fails to get deployment)",
 			args: args{
 				params: ListParams{Params: deployment.Params{
-					ID:  "a2c4f423c1014941b75a48292264dd25",
-					API: api.NewMock(mock.Response{Error: errors.New("an error")}),
+					ID: "a2c4f423c1014941b75a48292264dd25",
+					API: api.NewMock(mock.Response{
+						Response: http.Response{
+							StatusCode: http.StatusNotFound,
+							Status:     http.StatusText(http.StatusNotFound),
+							Body:       mock.NewStringBody(`{}`),
+						},
+					}),
 				}},
 			},
-			wantErr: true,
+			wantErr: errors.New(errNull),
 		},
 		{
-			name: "List fails when deployment ID is empty",
+			name: "List notes fails when an api error is received",
+			args: args{
+				params: ListParams{Params: deployment.Params{
+					ID: "a2c4f423c1014941b75a48292264dd25",
+					API: api.NewMock(mock.Response{Response: http.Response{
+						Body:       mock.NewStringBody(getResponse),
+						StatusCode: 200,
+					}},
+						mock.Response{
+							Response: http.Response{
+								StatusCode: http.StatusNotFound,
+								Status:     http.StatusText(http.StatusNotFound),
+								Body:       mock.NewStringBody(`{}`),
+							},
+						}),
+				}},
+			},
+			wantErr: errors.New(errNull),
+		},
+		{
+			name: "List fails due to validation",
 			args: args{
 				params: ListParams{
-					Params: deployment.Params{
-						API: new(api.API),
-					},
+					Params: deployment.Params{},
 				},
 			},
-			wantErr: true,
+			wantErr: &multierror.Error{Errors: []error{
+				util.ErrAPIReq,
+				errors.New(`id "" is invalid`),
+			}},
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := List(tt.args.params)
-			if (err != nil) != tt.wantErr {
+			if !reflect.DeepEqual(err, tt.wantErr) {
 				t.Errorf("List() error = %v, wantErr %v", err, tt.wantErr)
-				return
 			}
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("List() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
-func TestGet(t *testing.T) {
-	var messageDateTime = util.ParseDate(t, "2018-04-13T07:11:54.999Z")
-	var simpleNote = `{
-		"id": "1",
-		"message": "a message",
-		"user_id": "root",
-		"timestamp": "2018-04-13T07:11:54.999Z"
-	}`
-
-	type args struct {
-		params GetParams
-	}
-	tests := []struct {
-		name    string
-		args    args
-		want    *models.Note
-		wantErr bool
-	}{
-		{
-			name: "Get note succeeds",
-			args: args{params: GetParams{Params: Params{
-				NoteID: "1",
-				Params: deployment.Params{
-					ID: "a2c4f423c1014941b75a48292264dd25",
-					API: api.NewMock(mock.Response{Response: http.Response{
-						Body:       mock.NewStringBody(simpleNote),
-						StatusCode: 200,
-					}}),
-				},
-			}}},
-			want: &models.Note{
-				ID:        "1",
-				Message:   ec.String("a message"),
-				UserID:    "root",
-				Timestamp: messageDateTime,
-			},
-		},
-		{
-			name: "Get note fails due to client error",
-			args: args{
-				params: GetParams{Params: Params{
-					NoteID: "1",
-					Params: deployment.Params{
-						ID:  "a2c4f423c1014941b75a48292264dd25",
-						API: api.NewMock(mock.Response{Error: errors.New("an error")}),
-					},
-				}},
-			},
-			wantErr: true,
-		},
-		{
-			name: "Get note fails due to empty note ID",
-			args: args{
-				params: GetParams{
-					Params: Params{
-						Params: deployment.Params{
-							ID:  "a2c4f423c1014941b75a48292264dd25",
-							API: new(api.API),
-						},
-					},
-				},
-			},
-			wantErr: true,
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := Get(tt.args.params)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("Get() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Get() = %v, want %v", got, tt.want)
 			}
 		})
 	}

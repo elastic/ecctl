@@ -21,7 +21,27 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/deployments"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+
+	"github.com/elastic/ecctl/pkg/deployment"
 )
+
+// ListParams is used by List
+type ListParams struct {
+	deployment.Params
+}
+
+func (params *ListParams) fillDefaults() error {
+	esID, err := getElasticsearchID(deployment.GetParams{
+		API:          params.API,
+		DeploymentID: params.ID,
+	})
+	if err != nil {
+		return err
+	}
+
+	params.ID = esID
+	return err
+}
 
 // List lists all of the notes for the deployment
 func List(params ListParams) (*models.Notes, error) {
@@ -29,28 +49,13 @@ func List(params ListParams) (*models.Notes, error) {
 		return nil, err
 	}
 
-	res, err := params.API.V1API.Deployments.GetDeploymentNotes(
-		deployments.NewGetDeploymentNotesParams().
-			WithDeploymentID(params.ID),
-		params.AuthWriter,
-	)
-	if err != nil {
-		return nil, api.UnwrapError(err)
-	}
-
-	return res.Payload, nil
-}
-
-// Get obtains a note from a deployment and note ID
-func Get(params GetParams) (*models.Note, error) {
-	if err := params.Validate(); err != nil {
+	if err := params.fillDefaults(); err != nil {
 		return nil, err
 	}
 
-	res, err := params.API.V1API.Deployments.GetDeploymentNote(
-		deployments.NewGetDeploymentNoteParams().
-			WithDeploymentID(params.ID).
-			WithNoteID(params.NoteID),
+	res, err := params.API.V1API.Deployments.GetDeploymentNotes(
+		deployments.NewGetDeploymentNotesParams().
+			WithDeploymentID(params.ID),
 		params.AuthWriter,
 	)
 	if err != nil {

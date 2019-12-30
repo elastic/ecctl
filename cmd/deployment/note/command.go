@@ -44,9 +44,10 @@ var deploymentNoteCreateCmd = &cobra.Command{
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		return note.Add(note.AddParams{
-			API:     ecctl.Get().API,
-			ID:      args[0],
-			Type:    cmd.Flag("type").Value.String(),
+			Params: deployment.Params{
+				API: ecctl.Get().API,
+				ID:  args[0],
+			},
 			Message: cmd.Flag("message").Value.String(),
 			UserID:  ecctl.Get().Config.User,
 		})
@@ -123,7 +124,6 @@ func init() {
 		deploymentNoteShowCmd,
 	)
 
-	deploymentNoteCreateCmd.Flags().String("type", "elasticsearch", "Type of deployment to comment, valid options are: [elasticsearch, kibana, apm]")
 	deploymentNoteUpdateCmd.Flags().String("id", "", "Note ID")
 	deploymentNoteShowCmd.Flags().String("id", "", "Note ID")
 }

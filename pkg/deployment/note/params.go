@@ -20,19 +20,16 @@ package note
 import (
 	"errors"
 
+	multierror "github.com/hashicorp/go-multierror"
+
 	"github.com/elastic/ecctl/pkg/deployment"
 )
 
 var (
-	errEmptyNoteMessage = errors.New("note message cannot be empty")
-	errEmptyUserID      = errors.New("user id cannot be empty")
-	errEmptyNoteID      = errors.New("note id cannot be empty")
+	errEmptyNoteMessage = "note message cannot be empty"
+	errEmptyUserID      = "user id cannot be empty"
+	errEmptyNoteID      = "note id cannot be empty"
 )
-
-// ListParams is used by List
-type ListParams struct {
-	deployment.Params
-}
 
 // Params is used on Get and Update Notes
 type Params struct {
@@ -42,38 +39,23 @@ type Params struct {
 
 // Validate confirms the parmeters are valid
 func (params Params) Validate() error {
+	var merr = new(multierror.Error)
+
 	if params.NoteID == "" {
-		return errEmptyNoteID
+		merr = multierror.Append(merr, errors.New(errEmptyNoteID))
 	}
 
-	return params.Params.Validate()
+	merr = multierror.Append(merr, params.Params.Validate())
+
+	return merr.ErrorOrNil()
 }
 
-// GetParams is used on ListNotes
-type GetParams struct {
-	Params
-}
-
-// UpdateParams is used on ListNotes
-type UpdateParams struct {
-	Params
-	UserID  string
-	Message string
-}
-
-// Validate confirms the parmeters are valid
-func (params UpdateParams) Validate() error {
-	if params.Message == "" {
-		return errEmptyNoteMessage
+func getElasticsearchID(params deployment.GetParams) (string, error) {
+	res, err := deployment.Get(params)
+	if err != nil {
+		return "", err
 	}
 
-	if params.UserID == "" {
-		return errEmptyUserID
-	}
-
-	if params.Params.NoteID == "" {
-		return errEmptyNoteID
-	}
-
-	return params.Params.Validate()
+	deploymentID := *res.Resources.Elasticsearch[0].ID
+	return deploymentID, nil
 }

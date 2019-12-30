@@ -18,44 +18,19 @@
 package note
 
 import (
-	"errors"
-
+	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/deployments"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
-	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/deployment"
-	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/util"
 )
 
-// AddParams is consumed by Add.
-type AddParams struct {
-	deployment.Params
-	Message     string
-	UserID      string
-	Commentator ecctl.Commentator
+// GetParams is used on List
+type GetParams struct {
+	Params
 }
 
-// Validate ensures the parameters are valid
-func (params AddParams) Validate() error {
-	var merr = new(multierror.Error)
-
-	if params.UserID == "" {
-		merr = multierror.Append(merr, errors.New(errEmptyUserID))
-	}
-
-	if params.Message == "" {
-		merr = multierror.Append(merr, errors.New(errEmptyNoteMessage))
-	}
-
-	merr = multierror.Append(merr, params.Params.Validate())
-
-	return merr.ErrorOrNil()
-}
-
-func (params *AddParams) fillDefaults() error {
+func (params *GetParams) fillDefaults() error {
 	esID, err := getElasticsearchID(deployment.GetParams{
 		API:          params.API,
 		DeploymentID: params.ID,
@@ -68,28 +43,25 @@ func (params *AddParams) fillDefaults() error {
 	return err
 }
 
-// Add posts a new message to the specified deployment
-func Add(params AddParams) error {
+// Get obtains a note from a deployment and note ID
+func Get(params GetParams) (*models.Note, error) {
 	if err := params.Validate(); err != nil {
-		return err
+		return nil, err
 	}
 
 	if err := params.fillDefaults(); err != nil {
-		return err
+		return nil, err
 	}
 
-	var message = params.Message
-	if params.Commentator != nil {
-		message = params.Commentator.Message(message)
-	}
-
-	return util.ReturnErrOnly(params.V1API.Deployments.CreateDeploymentNote(
-		deployments.NewCreateDeploymentNoteParams().
+	res, err := params.API.V1API.Deployments.GetDeploymentNote(
+		deployments.NewGetDeploymentNoteParams().
 			WithDeploymentID(params.ID).
-			WithBody(&models.Note{
-				Message: ec.String(message),
-				UserID:  params.UserID,
-			}),
+			WithNoteID(params.NoteID),
 		params.AuthWriter,
-	))
+	)
+	if err != nil {
+		return nil, api.UnwrapError(err)
+	}
+
+	return res.Payload, nil
 }

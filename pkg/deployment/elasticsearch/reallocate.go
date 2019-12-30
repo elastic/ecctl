@@ -29,6 +29,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/plan"
 	multierror "github.com/hashicorp/go-multierror"
 
+	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/deployment/note"
 	"github.com/elastic/ecctl/pkg/ecctl"
 	"github.com/elastic/ecctl/pkg/util"
@@ -88,9 +89,10 @@ func Reallocate(params ReallocateParams) error {
 	// note to the deployment is not critical and is only a nice to have.
 	//nolint
 	note.Add(note.AddParams{
-		API:         params.API,
-		ID:          params.ClusterID,
-		Type:        "elasticsearch",
+		Params: deployment.Params{
+			API:         params.API,
+			ID:          params.ClusterID,
+		},
 		Message:     fmt.Sprintf(reallocateMessage, "elasticsearch", strings.Join(params.Instances, " ")),
 		UserID:      params.User,
 		Commentator: ecctl.GetOperationInstance(),
