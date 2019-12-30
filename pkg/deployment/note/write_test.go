@@ -66,7 +66,7 @@ func TestAdd(t *testing.T) {
 		err  error
 	}{
 		{
-			name: "Succeeds posting an Elasticsearch note",
+			name: "Succeeds posting a deployment note",
 			args: args{params: AddParams{
 				Params: deployment.Params{
 					API: api.NewMock(mock.Response{Response: http.Response{
@@ -86,7 +86,7 @@ func TestAdd(t *testing.T) {
 			}},
 		},
 		{
-			name: "Succeeds posting an Elasticsearch note (Commentator wrapped)",
+			name: "Succeeds posting a deployment note (Commentator wrapped)",
 			args: args{params: AddParams{
 				Params: deployment.Params{
 					API: api.NewMock(mock.Response{Response: http.Response{

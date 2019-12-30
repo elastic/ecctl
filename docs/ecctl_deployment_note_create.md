@@ -7,13 +7,14 @@ Adds a note to a deployment
 Adds a note to a deployment
 
 ```
-ecctl deployment note create <deployment id> --message <message content> --type [elasticsearch|kibana|apm] [flags]
+ecctl deployment note create <deployment id> --comment <comment content> [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for create
+      --comment string   Content of your deployment note
+  -h, --help             help for create
 ```
 
 ### Options inherited from parent commands
