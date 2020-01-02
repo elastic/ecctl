@@ -64,20 +64,21 @@ func TestGet(t *testing.T) {
 	}{
 		{
 			name: "Get note succeeds",
-			args: args{params: GetParams{Params: Params{
+			args: args{params: GetParams{
 				NoteID: "1",
-				Params: deployment.Params{
-					ID: "e3dac8bf3dc64c528c295a94d0f19a77",
-					API: api.NewMock(mock.Response{Response: http.Response{
-						Body:       mock.NewStringBody(getResponse),
-						StatusCode: 200,
-					}},
-						mock.Response{Response: http.Response{
-							Body:       mock.NewStringBody(simpleNote),
+				Params: Params{
+					Params: deployment.Params{
+						ID: "e3dac8bf3dc64c528c295a94d0f19a77",
+						API: api.NewMock(mock.Response{Response: http.Response{
+							Body:       mock.NewStringBody(getResponse),
 							StatusCode: 200,
-						}}),
-				},
-			}}},
+						}},
+							mock.Response{Response: http.Response{
+								Body:       mock.NewStringBody(simpleNote),
+								StatusCode: 200,
+							}}),
+					},
+				}}},
 			want: &models.Note{
 				ID:        "1",
 				Message:   ec.String("a message"),
@@ -88,42 +89,44 @@ func TestGet(t *testing.T) {
 		{
 			name: "Get note fails due to api error (fails to get deployment)",
 			args: args{
-				params: GetParams{Params: Params{
+				params: GetParams{
 					NoteID: "1",
-					Params: deployment.Params{
-						ID: "a2c4f423c1014941b75a48292264dd25",
-						API: api.NewMock(mock.Response{
-							Response: http.Response{
-								StatusCode: http.StatusNotFound,
-								Status:     http.StatusText(http.StatusNotFound),
-								Body:       mock.NewStringBody(`{}`),
-							},
-						}),
-					},
-				}},
-			},
-			wantErr: errors.New(errNull),
-		},
-		{
-			name: "Get note fails due to api error",
-			args: args{
-				params: GetParams{Params: Params{
-					NoteID: "1",
-					Params: deployment.Params{
-						ID: "a2c4f423c1014941b75a48292264dd25",
-						API: api.NewMock(mock.Response{Response: http.Response{
-							Body:       mock.NewStringBody(getResponse),
-							StatusCode: 200,
-						}},
-							mock.Response{
+					Params: Params{
+						Params: deployment.Params{
+							ID: "a2c4f423c1014941b75a48292264dd25",
+							API: api.NewMock(mock.Response{
 								Response: http.Response{
 									StatusCode: http.StatusNotFound,
 									Status:     http.StatusText(http.StatusNotFound),
 									Body:       mock.NewStringBody(`{}`),
 								},
 							}),
-					},
-				}},
+						},
+					}},
+			},
+			wantErr: errors.New(errNull),
+		},
+		{
+			name: "Get note fails due to api error",
+			args: args{
+				params: GetParams{
+					NoteID: "1",
+					Params: Params{
+						Params: deployment.Params{
+							ID: "a2c4f423c1014941b75a48292264dd25",
+							API: api.NewMock(mock.Response{Response: http.Response{
+								Body:       mock.NewStringBody(getResponse),
+								StatusCode: 200,
+							}},
+								mock.Response{
+									Response: http.Response{
+										StatusCode: http.StatusNotFound,
+										Status:     http.StatusText(http.StatusNotFound),
+										Body:       mock.NewStringBody(`{}`),
+									},
+								}),
+						},
+					}},
 			},
 			wantErr: errors.New(errNull),
 		},
@@ -138,7 +141,7 @@ func TestGet(t *testing.T) {
 			},
 			wantErr: &multierror.Error{Errors: []error{
 				errors.New("note id cannot be empty"),
-				util.ErrAPIReq,
+				errors.New("api reference is required for command"),
 				errors.New(`id "" is invalid`),
 			}},
 		},

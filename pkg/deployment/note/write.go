@@ -25,14 +25,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	multierror "github.com/hashicorp/go-multierror"
 
-	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/ecctl"
 	"github.com/elastic/ecctl/pkg/util"
 )
 
 // AddParams is consumed by Add.
 type AddParams struct {
-	deployment.Params
+	Params
 	Message     string
 	UserID      string
 	Commentator ecctl.Commentator
@@ -53,21 +52,6 @@ func (params AddParams) Validate() error {
 	merr = multierror.Append(merr, params.Params.Validate())
 
 	return merr.ErrorOrNil()
-}
-
-// Use different resource types when this is supported by the API.
-// For the time being, the notes endpoint only allows elasticsearch IDs.
-func (params *AddParams) fillDefaults() error {
-	esID, err := getElasticsearchID(deployment.GetParams{
-		API:          params.API,
-		DeploymentID: params.ID,
-	})
-	if err != nil {
-		return err
-	}
-
-	params.ID = esID
-	return err
 }
 
 // Add posts a new message to the specified deployment

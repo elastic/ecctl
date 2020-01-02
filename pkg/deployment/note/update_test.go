@@ -67,8 +67,8 @@ func TestUpdate(t *testing.T) {
 			args: args{params: UpdateParams{
 				UserID:  "root",
 				Message: "a modified message",
+				NoteID:  "1",
 				Params: Params{
-					NoteID: "1",
 					Params: deployment.Params{
 						ID: "e3dac8bf3dc64c528c295a94d0f19a77",
 						API: api.NewMock(mock.Response{Response: http.Response{
@@ -94,8 +94,8 @@ func TestUpdate(t *testing.T) {
 			args: args{params: UpdateParams{
 				UserID:  "epifanio",
 				Message: "a modified message",
+				NoteID:  "1",
 				Params: Params{
-					NoteID: "1",
 					Params: deployment.Params{
 						ID: "a2c4f423c1014941b75a48292264dd25",
 						API: api.NewMock(mock.Response{
@@ -115,8 +115,8 @@ func TestUpdate(t *testing.T) {
 			args: args{params: UpdateParams{
 				UserID:  "epifanio",
 				Message: "a modified message",
+				NoteID:  "1",
 				Params: Params{
-					NoteID: "1",
 					Params: deployment.Params{
 						ID: "a2c4f423c1014941b75a48292264dd25",
 						API: api.NewMock(mock.Response{Response: http.Response{
@@ -144,9 +144,9 @@ func TestUpdate(t *testing.T) {
 			},
 			wantErr: &multierror.Error{Errors: []error{
 				errors.New("user id cannot be empty"),
-				errors.New("note message cannot be empty"),
+				errors.New("note comment cannot be empty"),
 				errors.New("note id cannot be empty"),
-				util.ErrAPIReq,
+				errors.New("api reference is required for command"),
 				errors.New(`id "" is invalid`),
 			}},
 		},

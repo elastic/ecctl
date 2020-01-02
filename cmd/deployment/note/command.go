@@ -43,13 +43,14 @@ var deploymentNoteCreateCmd = &cobra.Command{
 	Short:   "Adds a note to a deployment",
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		msg, _ := cmd.Flags().GetString("comment")
+		comment, _ := cmd.Flags().GetString("comment")
 		return note.Add(note.AddParams{
-			Params: deployment.Params{
-				API: ecctl.Get().API,
-				ID:  args[0],
-			},
-			Message: msg,
+			Params: note.Params{
+				Params: deployment.Params{
+					API: ecctl.Get().API,
+					ID:  args[0],
+				}},
+			Message: comment,
 			UserID:  ecctl.Get().Config.User,
 		})
 	},
@@ -60,7 +61,7 @@ var deploymentNoteListCmd = &cobra.Command{
 	Short:   "Lists the deployment notes",
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, err := note.List(note.ListParams{
+		res, err := note.List(note.Params{
 			Params: deployment.Params{
 				API: ecctl.Get().API,
 				ID:  args[0],
@@ -79,14 +80,14 @@ var deploymentNoteUpdateCmd = &cobra.Command{
 	Short:   "Updates the deployment notes",
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		msg, _ := cmd.Flags().GetString("comment")
+		comment, _ := cmd.Flags().GetString("comment")
 		noteID, _ := cmd.Flags().GetString("id")
 		return util.ReturnErrOnly(
 			note.Update(note.UpdateParams{
-				Message: msg,
+				Message: comment,
 				UserID:  ecctl.Get().Config.User,
+				NoteID:  noteID,
 				Params: note.Params{
-					NoteID: noteID,
 					Params: deployment.Params{
 						API: ecctl.Get().API,
 						ID:  args[0],
@@ -104,8 +105,8 @@ var deploymentNoteShowCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		noteID, _ := cmd.Flags().GetString("id")
 		res, err := note.Get(note.GetParams{
+			NoteID: noteID,
 			Params: note.Params{
-				NoteID: noteID,
 				Params: deployment.Params{
 					API: ecctl.Get().API,
 					ID:  args[0],

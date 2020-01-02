@@ -18,15 +18,11 @@
 package note
 
 import (
-	"errors"
-
-	multierror "github.com/hashicorp/go-multierror"
-
 	"github.com/elastic/ecctl/pkg/deployment"
 )
 
 var (
-	errEmptyNoteMessage = "note message cannot be empty"
+	errEmptyNoteMessage = "note comment cannot be empty"
 	errEmptyUserID      = "user id cannot be empty"
 	errEmptyNoteID      = "note id cannot be empty"
 )
@@ -34,28 +30,19 @@ var (
 // Params is used on Get and Update Notes
 type Params struct {
 	deployment.Params
-	NoteID string
 }
 
-// Validate confirms the parmeters are valid
-func (params Params) Validate() error {
-	var merr = new(multierror.Error)
-
-	if params.NoteID == "" {
-		merr = multierror.Append(merr, errors.New(errEmptyNoteID))
-	}
-
-	merr = multierror.Append(merr, params.Params.Validate())
-
-	return merr.ErrorOrNil()
-}
-
-func getElasticsearchID(params deployment.GetParams) (string, error) {
-	res, err := deployment.Get(params)
+// Use different resource types when this is supported by the API.
+// For the time being, the notes endpoint only allows elasticsearch IDs.
+func (params *Params) fillDefaults() error {
+	esID, err := deployment.GetElasticsearchID(deployment.GetParams{
+		API:          params.API,
+		DeploymentID: params.ID,
+	})
 	if err != nil {
-		return "", err
+		return err
 	}
 
-	deploymentID := *res.Resources.Elasticsearch[0].ID
-	return deploymentID, nil
+	params.ID = esID
+	return err
 }

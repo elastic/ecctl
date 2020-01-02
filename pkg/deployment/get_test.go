@@ -503,3 +503,77 @@ func TestGetKibana(t *testing.T) {
 		})
 	}
 }
+
+func TestGetElasticsearchID(t *testing.T) {
+	const getResponse = `{
+  "healthy": true,
+  "id": "e3dac8bf3dc64c528c295a94d0f19a77",
+  "resources": {
+    "elasticsearch": [{
+      "id": "418017cd1c7f402cbb7a981b2004ceeb",
+      "ref_id": "main-elasticsearch",
+      "region": "ece-region"
+    }]
+  }
+}`
+
+	const getErrorResponse = `{
+  "errors": null
+}`
+
+	type args struct {
+		params GetParams
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    string
+		wantErr bool
+		err     error
+	}{
+		{
+			name: "Get fails due to API failure",
+			args: args{
+				params: GetParams{
+					DeploymentID: "e3dac8bf3dc64c528c295a94d0f19a77",
+					API: api.NewMock(mock.Response{Response: http.Response{
+						Body:       mock.NewStringBody(""),
+						StatusCode: 500,
+					}}),
+				},
+			},
+			wantErr: true,
+			err:     errors.New(getErrorResponse),
+		},
+		{
+			name: "Get succeeds",
+			args: args{
+				params: GetParams{
+					DeploymentID: "e3dac8bf3dc64c528c295a94d0f19a77",
+					API: api.NewMock(mock.Response{Response: http.Response{
+						Body:       mock.NewStringBody(getResponse),
+						StatusCode: 200,
+					}}),
+				},
+			},
+			want: "418017cd1c7f402cbb7a981b2004ceeb",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := GetElasticsearchID(tt.args.params)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("getElasticsearchID() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+
+			if tt.wantErr && tt.err != nil && err.Error() != tt.err.Error() {
+				t.Errorf("getElasticsearchID() actual error = '%v', want error '%v'", err, tt.err)
+			}
+
+			if !tt.wantErr && !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("getElasticsearchID() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

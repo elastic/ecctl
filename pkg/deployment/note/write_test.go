@@ -68,19 +68,20 @@ func TestAdd(t *testing.T) {
 		{
 			name: "Succeeds posting a deployment note",
 			args: args{params: AddParams{
-				Params: deployment.Params{
-					API: api.NewMock(mock.Response{Response: http.Response{
-						Body:       mock.NewStringBody(getResponse),
-						StatusCode: 200,
+				Params: Params{
+					Params: deployment.Params{
+						API: api.NewMock(mock.Response{Response: http.Response{
+							Body:       mock.NewStringBody(getResponse),
+							StatusCode: 200,
+						}},
+							mock.Response{Response: http.Response{
+								StatusCode: http.StatusCreated,
+								Status:     http.StatusText(http.StatusCreated),
+								Body:       mock.NewStringBody(`{}`),
+							},
+							}),
+						ID: "e3dac8bf3dc64c528c295a94d0f19a77",
 					}},
-						mock.Response{Response: http.Response{
-							StatusCode: http.StatusCreated,
-							Status:     http.StatusText(http.StatusCreated),
-							Body:       mock.NewStringBody(`{}`),
-						},
-						}),
-					ID: "e3dac8bf3dc64c528c295a94d0f19a77",
-				},
 				UserID:  "someid",
 				Message: "note message",
 			}},
@@ -88,20 +89,21 @@ func TestAdd(t *testing.T) {
 		{
 			name: "Succeeds posting a deployment note (Commentator wrapped)",
 			args: args{params: AddParams{
-				Params: deployment.Params{
-					API: api.NewMock(mock.Response{Response: http.Response{
-						Body:       mock.NewStringBody(getResponse),
-						StatusCode: 200,
+				Params: Params{
+					Params: deployment.Params{
+						API: api.NewMock(mock.Response{Response: http.Response{
+							Body:       mock.NewStringBody(getResponse),
+							StatusCode: 200,
+						}},
+							mock.Response{
+								Response: http.Response{
+									StatusCode: http.StatusCreated,
+									Status:     http.StatusText(http.StatusCreated),
+									Body:       mock.NewStringBody(`{}`),
+								},
+							}),
+						ID: "e3dac8bf3dc64c528c295a94d0f19a77",
 					}},
-						mock.Response{
-							Response: http.Response{
-								StatusCode: http.StatusCreated,
-								Status:     http.StatusText(http.StatusCreated),
-								Body:       mock.NewStringBody(`{}`),
-							},
-						}),
-					ID: "e3dac8bf3dc64c528c295a94d0f19a77",
-				},
 				UserID:      "someid",
 				Message:     "note message",
 				Commentator: &c{m: "somemessage"},
@@ -110,18 +112,19 @@ func TestAdd(t *testing.T) {
 		{
 			name: "Fails posting note (Fails to get deployment)",
 			args: args{params: AddParams{
-				Params: deployment.Params{
-					API: api.NewMock(
-						mock.Response{
-							Response: http.Response{
-								StatusCode: http.StatusNotFound,
-								Status:     http.StatusText(http.StatusNotFound),
-								Body:       mock.NewStringBody(`{}`),
+				Params: Params{
+					Params: deployment.Params{
+						API: api.NewMock(
+							mock.Response{
+								Response: http.Response{
+									StatusCode: http.StatusNotFound,
+									Status:     http.StatusText(http.StatusNotFound),
+									Body:       mock.NewStringBody(`{}`),
+								},
 							},
-						},
-					),
-					ID: util.ValidClusterID,
-				},
+						),
+						ID: util.ValidClusterID,
+					}},
 				UserID:  "someid",
 				Message: "note message",
 			}},
@@ -132,8 +135,8 @@ func TestAdd(t *testing.T) {
 			args: args{params: AddParams{}},
 			err: &multierror.Error{Errors: []error{
 				errors.New("user id cannot be empty"),
-				errors.New("note message cannot be empty"),
-				util.ErrAPIReq,
+				errors.New("note comment cannot be empty"),
+				errors.New("api reference is required for command"),
 				errors.New(`id "" is invalid`),
 			}},
 		},

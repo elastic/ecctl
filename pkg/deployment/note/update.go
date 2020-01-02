@@ -25,13 +25,12 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	multierror "github.com/hashicorp/go-multierror"
-
-	"github.com/elastic/ecctl/pkg/deployment"
 )
 
 // UpdateParams is used on Update
 type UpdateParams struct {
 	Params
+	NoteID  string
 	UserID  string
 	Message string
 }
@@ -48,24 +47,13 @@ func (params UpdateParams) Validate() error {
 		merr = multierror.Append(merr, errors.New(errEmptyNoteMessage))
 	}
 
+	if params.NoteID == "" {
+		merr = multierror.Append(merr, errors.New(errEmptyNoteID))
+	}
+
 	merr = multierror.Append(merr, params.Params.Validate())
 
 	return merr.ErrorOrNil()
-}
-
-// Use different resource types when this is supported by the API.
-// For the time being, the notes endpoint only allows elasticsearch IDs.
-func (params *UpdateParams) fillDefaults() error {
-	esID, err := getElasticsearchID(deployment.GetParams{
-		API:          params.API,
-		DeploymentID: params.ID,
-	})
-	if err != nil {
-		return err
-	}
-
-	params.ID = esID
-	return err
 }
 
 // Update updates a note from its deployment and note ID

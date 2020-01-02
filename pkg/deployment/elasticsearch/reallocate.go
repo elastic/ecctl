@@ -89,10 +89,11 @@ func Reallocate(params ReallocateParams) error {
 	// note to the deployment is not critical and is only a nice to have.
 	//nolint
 	note.Add(note.AddParams{
+		Params: note.Params{
 		Params: deployment.Params{
 			API:         params.API,
 			ID:          params.ClusterID,
-		},
+		}},
 		Message:     fmt.Sprintf(reallocateMessage, "elasticsearch", strings.Join(params.Instances, " ")),
 		UserID:      params.User,
 		Commentator: ecctl.GetOperationInstance(),

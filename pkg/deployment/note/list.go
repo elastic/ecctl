@@ -21,32 +21,15 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/deployments"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-
-	"github.com/elastic/ecctl/pkg/deployment"
 )
 
 // ListParams is used by List
 type ListParams struct {
-	deployment.Params
-}
-
-// Use different resource types when this is supported by the API.
-// For the time being, the notes endpoint only allows elasticsearch IDs.
-func (params *ListParams) fillDefaults() error {
-	esID, err := getElasticsearchID(deployment.GetParams{
-		API:          params.API,
-		DeploymentID: params.ID,
-	})
-	if err != nil {
-		return err
-	}
-
-	params.ID = esID
-	return err
+	Params
 }
 
 // List lists all of the notes for the deployment
-func List(params ListParams) (*models.Notes, error) {
+func List(params Params) (*models.Notes, error) {
 	if err := params.Validate(); err != nil {
 		return nil, err
 	}

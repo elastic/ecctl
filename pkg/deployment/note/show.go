@@ -18,31 +18,31 @@
 package note
 
 import (
+	"errors"
+
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/deployments"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-
-	"github.com/elastic/ecctl/pkg/deployment"
+	multierror "github.com/hashicorp/go-multierror"
 )
 
 // GetParams is used on List
 type GetParams struct {
 	Params
+	NoteID string
 }
 
-// Use different resource types when this is supported by the API.
-// For the time being, the notes endpoint only allows elasticsearch IDs.
-func (params *GetParams) fillDefaults() error {
-	esID, err := getElasticsearchID(deployment.GetParams{
-		API:          params.API,
-		DeploymentID: params.ID,
-	})
-	if err != nil {
-		return err
+// Validate confirms the parmeters are valid
+func (params GetParams) Validate() error {
+	var merr = new(multierror.Error)
+
+	if params.NoteID == "" {
+		merr = multierror.Append(merr, errors.New(errEmptyNoteID))
 	}
 
-	params.ID = esID
-	return err
+	merr = multierror.Append(merr, params.Params.Validate())
+
+	return merr.ErrorOrNil()
 }
 
 // Get obtains a note from a deployment and note ID

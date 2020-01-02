@@ -64,7 +64,7 @@ func TestList(t *testing.T) {
   }
 }`
 	type args struct {
-		params ListParams
+		params Params
 	}
 	tests := []struct {
 		name    string
@@ -75,7 +75,7 @@ func TestList(t *testing.T) {
 		{
 			name: "List notes succeeds",
 			args: args{
-				params: ListParams{Params: deployment.Params{
+				params: Params{deployment.Params{
 					ID: "e3dac8bf3dc64c528c295a94d0f19a77",
 					API: api.NewMock(mock.Response{Response: http.Response{
 						Body:       mock.NewStringBody(getResponse),
@@ -106,7 +106,7 @@ func TestList(t *testing.T) {
 		{
 			name: "List notes fails when an error is received (fails to get deployment)",
 			args: args{
-				params: ListParams{Params: deployment.Params{
+				params: Params{deployment.Params{
 					ID: "a2c4f423c1014941b75a48292264dd25",
 					API: api.NewMock(mock.Response{
 						Response: http.Response{
@@ -122,7 +122,7 @@ func TestList(t *testing.T) {
 		{
 			name: "List notes fails when an api error is received",
 			args: args{
-				params: ListParams{Params: deployment.Params{
+				params: Params{deployment.Params{
 					ID: "a2c4f423c1014941b75a48292264dd25",
 					API: api.NewMock(mock.Response{Response: http.Response{
 						Body:       mock.NewStringBody(getResponse),
@@ -141,13 +141,9 @@ func TestList(t *testing.T) {
 		},
 		{
 			name: "List fails due to validation",
-			args: args{
-				params: ListParams{
-					Params: deployment.Params{},
-				},
-			},
+			args: args{params: Params{}},
 			wantErr: &multierror.Error{Errors: []error{
-				util.ErrAPIReq,
+				errors.New("api reference is required for command"),
 				errors.New(`id "" is invalid`),
 			}},
 		},
