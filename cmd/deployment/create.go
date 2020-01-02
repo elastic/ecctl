@@ -115,7 +115,7 @@ $ cat deployment_example.json
 $ ecctl deployment create -f deployment_example.json --version=7.4.1
 [...]
 
-## If th previous deployment creation failed
+## If the previous deployment creation failed
 $ ecctl deployment create -f deployment_example.json --name adeploy --version=7.4.1
 The deployment creation returned with an error, please use the displayed idempotency token
 to recreate the deployment resources
@@ -187,7 +187,7 @@ func init() {
 	Command.AddCommand(createCmd)
 	createCmd.Flags().BoolP("track", "t", false, cmdutil.TrackFlagMessage)
 	createCmd.Flags().String("name", "", "Overrides the deployment name")
-	createCmd.Flags().String("version", "", "Overrides all thee deployment's resources to the specified version")
+	createCmd.Flags().String("version", "", "Overrides all the deployment's resources to the specified version")
 	createCmd.Flags().String("request-id", "", "Optional idempotency token - Can be found in the Stderr device when a previous deployment creation failed, for more information see the examples in the help command page")
 	createCmd.Flags().StringP("file", "f", "", "JSON file that contains JSON-style domain-specific deployment definition")
 	createCmd.MarkFlagRequired("file")

@@ -94,7 +94,7 @@ $ cat deployment_example.json
 $ ecctl deployment create -f deployment_example.json --version=7.4.1
 [...]
 
-## If th previous deployment creation failed
+## If the previous deployment creation failed
 $ ecctl deployment create -f deployment_example.json --name adeploy --version=7.4.1
 The deployment creation returned with an error, please use the displayed idempotency token
 to recreate the deployment resources
@@ -112,7 +112,7 @@ $ ecctl deployment create -f deployment_example.json --name adeploy --version=7.
       --name string         Overrides the deployment name
       --request-id string   Optional idempotency token - Can be found in the Stderr device when a previous deployment creation failed, for more information see the examples in the help command page
   -t, --track               Tracks the progress of the performed task
-      --version string      Overrides all thee deployment's resources to the specified version
+      --version string      Overrides all the deployment's resources to the specified version
 ```
 
 ### Options inherited from parent commands
