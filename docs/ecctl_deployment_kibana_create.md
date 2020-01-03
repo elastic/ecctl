@@ -71,7 +71,7 @@ $ cat kibana_create_example.json | dev-cli deployment kibana create --track --id
   -h, --help                          help for create
       --id string                     Deployment ID where to create the Kibana deployment
       --name string                   Optional name to set for the Kibana deployment (Overrides name if present)
-      --ref-id string                 RefId for the Kibana deployment (default "kibana")
+      --ref-id string                 RefId for the Kibana deployment (default "main-kibana")
       --size int32                    Memory (RAM) in MB that each of the deployment nodes will have (default 1024)
   -t, --track                         Tracks the progress of the performed task
       --version string                Version to use, if not specified, the deployment's stack version will be used
