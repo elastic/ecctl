@@ -124,7 +124,7 @@ func init() {
 	createKibanaCmd.Flags().StringP("file", "f", "", "KibanaPayload file definition. See help for more information")
 	createKibanaCmd.Flags().String("deployment-template", "", "Optional deployment template ID, automatically obtained from the current deployment")
 	createKibanaCmd.Flags().String("version", "", "Version to use, if not specified, the deployment's stack version will be used")
-	createKibanaCmd.Flags().String("ref-id", "kibana", "RefId for the Kibana deployment")
+	createKibanaCmd.Flags().String("ref-id", "main-kibana", "RefId for the Kibana deployment")
 	createKibanaCmd.Flags().String("id", "", "Deployment ID where to create the Kibana deployment")
 	createKibanaCmd.MarkFlagRequired("id")
 	createKibanaCmd.Flags().String("elasticsearch-ref-id", "", "Optional Elasticsearch ref ID where the Kibana deployment will connect to")

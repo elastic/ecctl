@@ -26,7 +26,7 @@ import (
 
 const (
 	// DefaultApmRefID is used when the RefID is not specified.
-	DefaultApmRefID = "apm"
+	DefaultApmRefID = "main-apm"
 )
 
 // NewApm creates a *models.ApmPayload from the parameters.

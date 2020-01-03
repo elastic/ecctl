@@ -79,7 +79,7 @@ $ cat apm_create_example.json | dev-cli deployment apm create --track --id a57f8
   -h, --help                          help for create
       --id string                     Deployment ID where to create the Apm deployment
       --name string                   Optional name to set for the Apm deployment (Overrides name if present)
-      --ref-id string                 RefId for the Apm deployment (default "apm")
+      --ref-id string                 RefId for the Apm deployment (default "main-apm")
       --size int32                    Memory (RAM) in MB that each of the deployment nodes will have (default 512)
   -t, --track                         Tracks the progress of the performed task
       --version string                Optional version to use. If not specified, it will default to the deployment's stack version

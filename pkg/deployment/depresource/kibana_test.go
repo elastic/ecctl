@@ -65,7 +65,7 @@ func TestNewKibana(t *testing.T) {
 	var getResponse = models.DeploymentGetResponse{
 		Resources: &models.DeploymentResources{
 			Elasticsearch: []*models.ElasticsearchResourceInfo{{
-				RefID: ec.String("elasticsearch"),
+				RefID: ec.String("main-elasticsearch"),
 				Info: &models.ElasticsearchClusterInfo{
 					PlanInfo: &models.ElasticsearchClusterPlansInfo{
 						Current: &models.ElasticsearchClusterPlanInfo{
@@ -150,9 +150,9 @@ func TestNewKibana(t *testing.T) {
 				Region: "ece-region",
 			}},
 			want: &models.KibanaPayload{
-				ElasticsearchClusterRefID: ec.String("elasticsearch"),
+				ElasticsearchClusterRefID: ec.String("main-elasticsearch"),
 				Region:                    ec.String("ece-region"),
-				RefID:                     ec.String("kibana"),
+				RefID:                     ec.String("main-kibana"),
 				Plan: &models.KibanaClusterPlan{
 					Kibana: &models.KibanaConfiguration{},
 					ClusterTopology: []*models.KibanaClusterTopologyElement{
@@ -180,9 +180,9 @@ func TestNewKibana(t *testing.T) {
 				Region: "ece-region",
 			}},
 			want: &models.KibanaPayload{
-				ElasticsearchClusterRefID: ec.String("elasticsearch"),
+				ElasticsearchClusterRefID: ec.String("main-elasticsearch"),
 				Region:                    ec.String("ece-region"),
-				RefID:                     ec.String("kibana"),
+				RefID:                     ec.String("main-kibana"),
 				Plan: &models.KibanaClusterPlan{
 					Kibana: &models.KibanaConfiguration{},
 					ClusterTopology: []*models.KibanaClusterTopologyElement{
