@@ -18,32 +18,40 @@
 package note
 
 import (
+	"errors"
+
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/deployments"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	multierror "github.com/hashicorp/go-multierror"
 )
 
-// List lists all of the notes for the deployment
-func List(params ListParams) (*models.Notes, error) {
-	if err := params.Validate(); err != nil {
-		return nil, err
+// GetParams is used on List
+type GetParams struct {
+	Params
+	NoteID string
+}
+
+// Validate confirms the parmeters are valid
+func (params GetParams) Validate() error {
+	var merr = new(multierror.Error)
+
+	if params.NoteID == "" {
+		merr = multierror.Append(merr, errors.New(errEmptyNoteID))
 	}
 
-	res, err := params.API.V1API.Deployments.GetDeploymentNotes(
-		deployments.NewGetDeploymentNotesParams().
-			WithDeploymentID(params.ID),
-		params.AuthWriter,
-	)
-	if err != nil {
-		return nil, api.UnwrapError(err)
-	}
+	merr = multierror.Append(merr, params.Params.Validate())
 
-	return res.Payload, nil
+	return merr.ErrorOrNil()
 }
 
 // Get obtains a note from a deployment and note ID
 func Get(params GetParams) (*models.Note, error) {
 	if err := params.Validate(); err != nil {
+		return nil, err
+	}
+
+	if err := params.fillDefaults(); err != nil {
 		return nil, err
 	}
 

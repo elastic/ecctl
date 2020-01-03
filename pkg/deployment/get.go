@@ -173,3 +173,14 @@ func GetKibana(params GetParams) (*models.KibanaResourceInfo, error) {
 	}
 	return res.Payload, nil
 }
+
+// GetElasticsearchID returns the deployment's elasticsearch resource ID
+func GetElasticsearchID(params GetParams) (string, error) {
+	res, err := Get(params)
+	if err != nil {
+		return "", err
+	}
+
+	esID := *res.Resources.Elasticsearch[0].ID
+	return esID, nil
+}

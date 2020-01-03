@@ -18,31 +18,34 @@
 package note
 
 import (
-	"github.com/elastic/ecctl/pkg/deployment"
+	"github.com/elastic/cloud-sdk-go/pkg/api"
+	"github.com/elastic/cloud-sdk-go/pkg/client/deployments"
+	"github.com/elastic/cloud-sdk-go/pkg/models"
 )
 
-var (
-	errEmptyNoteMessage = "note comment cannot be empty"
-	errEmptyUserID      = "user id cannot be empty"
-	errEmptyNoteID      = "note id cannot be empty"
-)
-
-// Params is used on Get and Update Notes
-type Params struct {
-	deployment.Params
+// ListParams is used by List
+type ListParams struct {
+	Params
 }
 
-// Use different resource types when this is supported by the API.
-// For the time being, the notes endpoint only allows elasticsearch IDs.
-func (params *Params) fillDefaults() error {
-	esID, err := deployment.GetElasticsearchID(deployment.GetParams{
-		API:          params.API,
-		DeploymentID: params.ID,
-	})
-	if err != nil {
-		return err
+// List lists all of the notes for the deployment
+func List(params Params) (*models.Notes, error) {
+	if err := params.Validate(); err != nil {
+		return nil, err
 	}
 
-	params.ID = esID
-	return err
+	if err := params.fillDefaults(); err != nil {
+		return nil, err
+	}
+
+	res, err := params.API.V1API.Deployments.GetDeploymentNotes(
+		deployments.NewGetDeploymentNotesParams().
+			WithDeploymentID(params.ID),
+		params.AuthWriter,
+	)
+	if err != nil {
+		return nil, api.UnwrapError(err)
+	}
+
+	return res.Payload, nil
 }

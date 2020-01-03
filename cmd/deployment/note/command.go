@@ -38,16 +38,19 @@ var Command = &cobra.Command{
 }
 
 var deploymentNoteCreateCmd = &cobra.Command{
-	Use:     "create <deployment id> --message <message content> --type [elasticsearch|kibana|apm]",
+	Use:     "create <deployment id> --comment <comment content>",
 	Aliases: []string{"add"},
 	Short:   "Adds a note to a deployment",
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
+		comment, _ := cmd.Flags().GetString("comment")
 		return note.Add(note.AddParams{
-			API:     ecctl.Get().API,
-			ID:      args[0],
-			Type:    cmd.Flag("type").Value.String(),
-			Message: cmd.Flag("message").Value.String(),
+			Params: note.Params{
+				Params: deployment.Params{
+					API: ecctl.Get().API,
+					ID:  args[0],
+				}},
+			Message: comment,
 			UserID:  ecctl.Get().Config.User,
 		})
 	},
@@ -58,7 +61,7 @@ var deploymentNoteListCmd = &cobra.Command{
 	Short:   "Lists the deployment notes",
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, err := note.List(note.ListParams{
+		res, err := note.List(note.Params{
 			Params: deployment.Params{
 				API: ecctl.Get().API,
 				ID:  args[0],
@@ -73,16 +76,18 @@ var deploymentNoteListCmd = &cobra.Command{
 }
 
 var deploymentNoteUpdateCmd = &cobra.Command{
-	Use:     "update <deployment id> --id <note id> --message <message content>",
+	Use:     "update <deployment id> --id <note id> --comment <comment content>",
 	Short:   "Updates the deployment notes",
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
+		comment, _ := cmd.Flags().GetString("comment")
+		noteID, _ := cmd.Flags().GetString("id")
 		return util.ReturnErrOnly(
 			note.Update(note.UpdateParams{
-				Message: cmd.Flag("message").Value.String(),
+				Message: comment,
 				UserID:  ecctl.Get().Config.User,
+				NoteID:  noteID,
 				Params: note.Params{
-					NoteID: cmd.Flag("id").Value.String(),
 					Params: deployment.Params{
 						API: ecctl.Get().API,
 						ID:  args[0],
@@ -98,9 +103,10 @@ var deploymentNoteShowCmd = &cobra.Command{
 	Short:   "Shows a deployment note",
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
+		noteID, _ := cmd.Flags().GetString("id")
 		res, err := note.Get(note.GetParams{
+			NoteID: noteID,
 			Params: note.Params{
-				NoteID: cmd.Flag("id").Value.String(),
 				Params: deployment.Params{
 					API: ecctl.Get().API,
 					ID:  args[0],
@@ -123,7 +129,12 @@ func init() {
 		deploymentNoteShowCmd,
 	)
 
-	deploymentNoteCreateCmd.Flags().String("type", "elasticsearch", "Type of deployment to comment, valid options are: [elasticsearch, kibana, apm]")
+	deploymentNoteCreateCmd.Flags().String("comment", "", "Content of your deployment note")
+	deploymentNoteCreateCmd.MarkFlagRequired("comment")
+	deploymentNoteUpdateCmd.Flags().String("comment", "", "Content of your deployment note")
+	deploymentNoteUpdateCmd.MarkFlagRequired("comment")
 	deploymentNoteUpdateCmd.Flags().String("id", "", "Note ID")
+	deploymentNoteUpdateCmd.MarkFlagRequired("id")
 	deploymentNoteShowCmd.Flags().String("id", "", "Note ID")
+	deploymentNoteShowCmd.MarkFlagRequired("id")
 }
