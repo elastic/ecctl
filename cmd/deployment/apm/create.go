@@ -125,7 +125,7 @@ func init() {
 	createApmCmd.Flags().StringP("file", "f", "", "ApmPayload file definition. See help for more information")
 	createApmCmd.Flags().String("deployment-template", "", "Optional deployment template ID, automatically obtained from the current deployment")
 	createApmCmd.Flags().String("version", "", "Optional version to use. If not specified, it will default to the deployment's stack version")
-	createApmCmd.Flags().String("ref-id", "apm", "RefId for the Apm deployment")
+	createApmCmd.Flags().String("ref-id", "main-apm", "RefId for the Apm deployment")
 	createApmCmd.Flags().String("id", "", "Deployment ID where to create the Apm deployment")
 	createApmCmd.MarkFlagRequired("id")
 	createApmCmd.Flags().String("elasticsearch-ref-id", "", "Optional Elasticsearch ref ID where the Apm deployment will connect to")

@@ -44,7 +44,7 @@ const (
 	DefaultDataZoneCount = 1
 
 	// DefaultElasticsearchRefID is used when the RefID is not specified.
-	DefaultElasticsearchRefID = "elasticsearch"
+	DefaultElasticsearchRefID = "main-elasticsearch"
 )
 
 // NewElasticsearchParams is consumed by NewElasticsearch.

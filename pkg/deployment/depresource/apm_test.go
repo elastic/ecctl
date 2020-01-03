@@ -65,7 +65,7 @@ func TestNewApm(t *testing.T) {
 	var getResponse = models.DeploymentGetResponse{
 		Resources: &models.DeploymentResources{
 			Elasticsearch: []*models.ElasticsearchResourceInfo{{
-				RefID: ec.String("elasticsearch"),
+				RefID: ec.String("main-elasticsearch"),
 				Info: &models.ElasticsearchClusterInfo{
 					PlanInfo: &models.ElasticsearchClusterPlansInfo{
 						Current: &models.ElasticsearchClusterPlanInfo{
@@ -150,9 +150,9 @@ func TestNewApm(t *testing.T) {
 				Region: "ece-region",
 			}},
 			want: &models.ApmPayload{
-				ElasticsearchClusterRefID: ec.String("elasticsearch"),
+				ElasticsearchClusterRefID: ec.String("main-elasticsearch"),
 				Region:                    ec.String("ece-region"),
-				RefID:                     ec.String("apm"),
+				RefID:                     ec.String("main-apm"),
 				Plan: &models.ApmPlan{
 					Apm: &models.ApmConfiguration{},
 					ClusterTopology: []*models.ApmTopologyElement{
@@ -180,9 +180,9 @@ func TestNewApm(t *testing.T) {
 				Region: "ece-region",
 			}},
 			want: &models.ApmPayload{
-				ElasticsearchClusterRefID: ec.String("elasticsearch"),
+				ElasticsearchClusterRefID: ec.String("main-elasticsearch"),
 				Region:                    ec.String("ece-region"),
-				RefID:                     ec.String("apm"),
+				RefID:                     ec.String("main-apm"),
 				Plan: &models.ApmPlan{
 					Apm: &models.ApmConfiguration{},
 					ClusterTopology: []*models.ApmTopologyElement{

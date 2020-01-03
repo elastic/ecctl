@@ -25,15 +25,15 @@ import (
 )
 
 const (
-	// DefaultKibanahRefID is used when the RefID is not specified.
-	DefaultKibanahRefID = "kibana"
+	// DefaultKibanaRefID is used when the RefID is not specified.
+	DefaultKibanaRefID = "main-kibana"
 )
 
 // NewKibana creates a *models.KibanaPayload from the parameters.
 // It relies on a simplified single dimension memory size and zone count to
 // construct the Kibana's topology.
 func NewKibana(params NewStateless) (*models.KibanaPayload, error) {
-	params.fillDefaults(DefaultKibanahRefID)
+	params.fillDefaults(DefaultKibanaRefID)
 	if err := params.Validate(); err != nil {
 		return nil, err
 	}
