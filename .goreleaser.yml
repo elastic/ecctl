@@ -8,23 +8,7 @@ release:
     name: ecctl
   name_template: '{{.Tag}}'
   draft: false
-brews:
-  - github:
-      owner: elastic
-      name: homebrew-ecctl
-    commit_author:
-      name: elasticloudbot
-      email: cloud-tooling@elastic.co
-    homepage: "https://github.com/elastic/ecctl"
-    description: Elastic Cloud Control, the official Elastic Cloud and ECE command line interface
-    install: |
-      bin.install "ecctl"
-      system "#{bin}/ecctl", "generate", "completions", "-l", "#{var}/ecctl.auto"
-    caveats: |
-      If you have previously built ecctl from source, make sure you've removed that binary from any directory that has been added to your user $PATH.
-      To enable autocompletion make sure to run `source <(ecctl generate completions)` and add it to your shell interpreter configuration file by running `echo "source <(ecctl generate completions)" >> ~/.bash_profile` or `echo "source <(ecctl generate completions)" >> ~/.zshrc` in case you are using ZSH.
-    test: system "#{bin}/ecctl version"
-    folder: Formula
+  disable: true
 builds:
 - main: .
   env:
@@ -38,7 +22,7 @@ builds:
   ignore:
     - goos: darwin
       goarch: 386
-  ldflags: -s -w -X main.version={{.Env.VERSION }} -X main.commit={{.Commit}} -X main.owner={{.Env.OWNER}} -X main.repo={{.Env.REPO}}
+  ldflags: -s -w -X main.version={{.Env.VERSION }} -X main.commit={{.Commit}} -X main.owner={{.Env.OWNER}} -X main.repo={{.Env.REPO}} -X main.built={{.Env.BUILT}}
   binary: ecctl
   lang: go
 archives:
@@ -51,7 +35,7 @@ archives:
 snapshot:
   name_template: SNAPSHOT-{{ .Commit }}
 nfpms:
-  - name_template: "{{ .ProjectName }}_{{ .Env.VERSION }}_{{ .Os }}_{{ .Arch }}"
+  - file_name_template: "{{ .ProjectName }}_{{ .Env.VERSION }}_{{ .Os }}_{{ .Arch }}"
     license: Apache 2.0
     replacements:
       amd64: 64-bit
