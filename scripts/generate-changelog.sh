@@ -17,7 +17,7 @@ read -p "=> Previous release was ${PREV_TAG}, is that correct? " -n 1 -r
 if [[ ${REPLY} =~ ^[Yy]$ ]]; then
     echo ""
     cp scripts/changelog.tpl.md ${CHANGELOGFILE}
-    git -c log.showSignature=false log --pretty=oneline --abbrev-commit --no-decorate --no-color tags/${PREV_TAG}...master >> ${CHANGELOGFILE}
+    git -c log.showSignature=false log --pretty="* %h %s" --no-decorate --no-color tags/${PREV_TAG}...master >> ${CHANGELOGFILE}
     
     echo "=> Changelog generated."
     VISUAL="${VISUAL:-"${EDITOR:-vim}"}"
