@@ -86,6 +86,13 @@ type VacateParams struct {
 	// bare minimum to move the requested instances across to another allocator.
 	MoveOnly *bool
 
+	// SkipTracking skips displaying and waiting for the individual vacates to complete.
+	// Setting it to true will render the concurrency flag pretty much ineffective since
+	// the vacate action is asynchronous and the only thing keeping the working items in
+	// the pool is the tracking function call which synchronously waits until the vacate
+	// has effectively finished.
+	SkipTracking bool
+
 	// Plan body overrides to place in all of the vacate clusters.
 	PlanOverrides
 }
@@ -132,20 +139,20 @@ func (params VacateParams) Validate() error {
 // VacateClusterParams is used by VacateCluster to move a cluster node
 // from an allocator.
 type VacateClusterParams struct {
-	*api.API
-	ID                  string
-	ClusterID           string
-	Kind                string
 	PreferredAllocators []string
 	ClusterFilter       []string
-	MaxPollRetries      uint8
-	TrackFrequency      time.Duration
-	AllocatorDown       *bool
-	MoveOnly            *bool
-	Output              *output.Device
-
 	// Plan body overrides to place in all of the vacate clusters.
 	PlanOverrides
+	ID        string
+	ClusterID string
+	Kind      string
+	*api.API
+	TrackFrequency time.Duration
+	AllocatorDown  *bool
+	MoveOnly       *bool
+	Output         *output.Device
+	MaxPollRetries uint8
+	SkipTracking   bool
 }
 
 // Validate validates the parameters
