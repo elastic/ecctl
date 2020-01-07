@@ -42,6 +42,10 @@ ecctl platform allocator vacate <source> [flags]
   # Override the skip_data_migration setting
   ecctl [globalFlags] allocator vacate --skip-data-migration=true i-05e245252362f7f1d -c f521dedb07194c478fbbc6624f3bbf8f
   
+  # Skips tracking the vacate progress which will cause the command to return almost immediately.
+  # Not recommended since it can lead to failed vacates without the operator knowing about them.
+  ecctl [globalFlags] allocator vacate --skip-tracking i-05e245252362f7f1d
+
 ```
 
 ### Options
@@ -57,6 +61,7 @@ ecctl platform allocator vacate <source> [flags]
       --override-failsafe            If false (the default) then the plan will fail out if it believes the requested sequence of operations can result in data loss - this flag will override some of these restraints. [true|false]
       --skip-data-migration string   Skips the data-migration operation on the specified cluster IDs. ONLY available when the cluster IDs are specified and --move-only is true. [true|false]
       --skip-snapshot string         Skips the snapshot operation on the specified cluster IDs. ONLY available when the cluster IDs are specified. [true|false]
+      --skip-tracking                Skips tracking the vacate progress causing the command to return after the move operation has been executed. Not recommended.
   -t, --target stringArray           Target allocator(s) on which to place the vacated workload
 ```
 

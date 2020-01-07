@@ -60,7 +60,11 @@ const vacateExamples = `  ecctl [globalFlags] allocator vacate i-05e245252362f7f
 
   # Override the skip_data_migration setting
   ecctl [globalFlags] allocator vacate --skip-data-migration=true i-05e245252362f7f1d -c f521dedb07194c478fbbc6624f3bbf8f
-  `
+  
+  # Skips tracking the vacate progress which will cause the command to return almost immediately.
+  # Not recommended since it can lead to failed vacates without the operator knowing about them.
+  ecctl [globalFlags] allocator vacate --skip-tracking i-05e245252362f7f1d
+`
 
 var vacateAllocatorCmd = &cobra.Command{
 	Use:     "vacate <source>",
@@ -68,7 +72,6 @@ var vacateAllocatorCmd = &cobra.Command{
 	Example: vacateExamples,
 	PreRunE: cobra.MinimumNArgs(1),
 	Aliases: []string{"move-nodes"},
-
 	RunE: func(cmd *cobra.Command, args []string) error {
 		concurrency, err := strconv.ParseUint(cmd.Flag("concurrency").Value.String(), 10, 64)
 		if err != nil {
@@ -127,6 +130,11 @@ var vacateAllocatorCmd = &cobra.Command{
 			return err
 		}
 
+		skipTracking, _ := cmd.Flags().GetBool("skip-tracking")
+		if !force && skipTracking && !cmdutil.ConfirmAction("--skip-tracking flag specified. Are you sure you want to proceed? [y/N]: ", os.Stdin, os.Stderr) {
+			return nil
+		}
+
 		setAllocatorMaintenance, _ := cmd.Flags().GetBool("maintenance")
 
 		var merr error
@@ -156,6 +164,7 @@ var vacateAllocatorCmd = &cobra.Command{
 			Concurrency:         uint16(concurrency),
 			Output:              ecctl.Get().Config.OutputDevice,
 			MoveOnly:            ec.Bool(moveOnly),
+			SkipTracking:        skipTracking,
 			PlanOverrides: allocator.PlanOverrides{
 				SkipSnapshot:      skipSnapshot,
 				SkipDataMigration: skipDataMigration,
@@ -180,7 +189,7 @@ func validateSkipDataMigration(clusters []string, moveOnly bool) error {
 
 func init() {
 	Command.AddCommand(vacateAllocatorCmd)
-
+	vacateAllocatorCmd.Flags().Bool("skip-tracking", false, "Skips tracking the vacate progress causing the command to return after the move operation has been executed. Not recommended.")
 	vacateAllocatorCmd.Flags().StringP("kind", "k", "", "Kind of workload to vacate (elasticsearch|kibana)")
 	vacateAllocatorCmd.Flags().StringArrayP("cluster", "c", nil, "Cluster IDs to include in the vacate")
 	vacateAllocatorCmd.Flags().StringArrayP("target", "t", nil, "Target allocator(s) on which to place the vacated workload")
