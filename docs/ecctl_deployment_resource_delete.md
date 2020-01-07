@@ -15,7 +15,7 @@ ecctl deployment resource delete <deployment id> --type <type> --ref-id <ref-id>
 ```
   -h, --help            help for delete
       --ref-id string   Optional deployment RefId, auto-discovered if not specified
-      --type string     Required stateless deployment type to upgrade (kibana, apm, or appsearch)
+      --type string     Required stateless deployment resource type (apm, appsearch, kibana)
 ```
 
 ### Options inherited from parent commands

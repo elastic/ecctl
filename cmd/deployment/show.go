@@ -83,7 +83,7 @@ var showCmd = &cobra.Command{
 
 func init() {
 	Command.AddCommand(showCmd)
-	showCmd.Flags().String("type", "", "Optional deployment type to show resource information (elasticsearch, kibana, apm, or appsearch)")
+	cmdutil.AddTypeFlag(showCmd, "Optional", true)
 	showCmd.Flags().String("ref-id", "", "Optional deployment type RefId, if not set, the RefId will be auto-discovered")
 	showCmd.Flags().Bool("plans", false, "Shows the deployment plans")
 	showCmd.Flags().Bool("plan-logs", false, "Shows the deployment plan logs")

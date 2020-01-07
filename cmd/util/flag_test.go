@@ -28,6 +28,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/spf13/cobra"
+	flag "github.com/spf13/pflag"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -147,6 +148,70 @@ func TestIncompatibleFlags(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if err := IncompatibleFlags(tt.args.cmd, tt.args.first, tt.args.second); !reflect.DeepEqual(err, tt.err) {
 				t.Errorf("IncompatibleFlags() error = %v, wantErr %v", err, tt.err)
+			}
+		})
+	}
+}
+
+func TestAddTypeFlag(t *testing.T) {
+	var wantSomethingAssert = &flag.Flag{
+		Name:  "type",
+		Usage: "Optional deployment resource type (apm, appsearch, kibana)",
+		Annotations: map[string][]string{
+			cobra.BashCompCustom: {"__ecctl_valid_stateless_types"},
+		},
+	}
+
+	var wantSomethingRequiredAssert = &flag.Flag{
+		Name:  "type",
+		Usage: "Required deployment resource type (apm, appsearch, kibana, elasticsearch)",
+		Annotations: map[string][]string{
+			cobra.BashCompCustom: {"__ecctl_valid_all_types"},
+		},
+	}
+
+	type args struct {
+		cmd    *cobra.Command
+		prefix string
+		all    bool
+	}
+	tests := []struct {
+		name string
+		args args
+		want *flag.Flag
+	}{
+		{
+			name: "Annotates the type flag with stateless types",
+			args: args{
+				cmd: &cobra.Command{
+					Use: "something",
+					Run: func(cmd *cobra.Command, args []string) {},
+				},
+				prefix: "Optional",
+				all:    false,
+			},
+			want: wantSomethingAssert,
+		},
+		{
+			name: "Annotates the type flag with all types",
+			args: args{
+				cmd: &cobra.Command{
+					Use: "somethingrequired",
+					Run: func(cmd *cobra.Command, args []string) {},
+				},
+				prefix: "Required",
+				all:    true,
+			},
+			want: wantSomethingRequiredAssert,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			AddTypeFlag(tt.args.cmd, tt.args.prefix, tt.args.all)
+			got := tt.args.cmd.Flag("type")
+			got.Value = nil
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("AddTypeFlag() got = \n%+v, want \n%+v", got, tt.want)
 			}
 		})
 	}

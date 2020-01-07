@@ -56,7 +56,7 @@ var deleteCmd = &cobra.Command{
 
 func init() {
 	Command.AddCommand(deleteCmd)
-	deleteCmd.Flags().String("type", "", "Required stateless deployment type to upgrade (kibana, apm, or appsearch)")
+	cmdutil.AddTypeFlag(deleteCmd, "Required stateless", false)
 	deleteCmd.MarkFlagRequired("type")
 	deleteCmd.Flags().String("ref-id", "", "Optional deployment RefId, auto-discovered if not specified")
 }

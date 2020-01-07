@@ -77,7 +77,7 @@ func init() {
 	Command.AddCommand(stopCmd)
 	stopCmd.Flags().Bool("all", false, "Stops all instances of a defined resource type")
 	stopCmd.Flags().Bool("ignore-missing", false, "If set and the specified instance does not exist, then quietly proceed to the next instance")
-	stopCmd.Flags().String("type", "", "Deployment resource type to stop (elasticsearch, kibana, apm, or appsearch)")
+	cmdutil.AddTypeFlag(stopCmd, "Required", true)
 	stopCmd.MarkFlagRequired("type")
 	stopCmd.Flags().String("ref-id", "", "Optional deployment RefId, if not set, the RefId will be auto-discovered")
 	stopCmd.Flags().StringSliceP("instance-id", "i", nil, "Deployment instance IDs to stop (e.g. instance-0000000001)")

@@ -19,11 +19,37 @@ package cmdutil
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/deployment/elasticsearch/instances"
 	"github.com/elastic/ecctl/pkg/util"
+)
+
+const (
+	compFuncTpl = `__ecctl_valid_%s_types()
+{
+   COMPREPLY=( %s )
+}
+`
+)
+
+var (
+	// StatelessTypes declares the stateless deployment resource types
+	StatelessTypes = []string{"apm", "appsearch", "kibana"}
+
+	// StatefulTypes declares the stateful deployment resource types (Elasticsearch).
+	StatefulTypes = []string{"elasticsearch"}
+
+	// AllTypes is StatelessTypes appending StatefulTypes
+	AllTypes = append(StatelessTypes, StatefulTypes...)
+
+	// StatelessTypesCompFunc is the bash autocompletion function for stateless types.
+	StatelessTypesCompFunc = fmt.Sprintf(compFuncTpl, "stateless", strings.Join(StatelessTypes, " "))
+
+	// AllTypesCompFunc is the bash autocompletion function for all types.
+	AllTypesCompFunc = fmt.Sprintf(compFuncTpl, "all", strings.Join(AllTypes, " "))
 )
 
 // GetInstances tries to obtain a slice with the elasticsearch cluster
@@ -46,4 +72,22 @@ func IncompatibleFlags(cmd *cobra.Command, first, second string) error {
 		)
 	}
 	return nil
+}
+
+// AddTypeFlag adds a type string  flag to the specified command, with the
+// resource types autocompletion function. It is intended to be used for any
+// commands which call the deployment/resource APIs.
+func AddTypeFlag(cmd *cobra.Command, prefix string, all bool) *string {
+	validTypes, comp := StatelessTypes, "__ecctl_valid_stateless_types"
+	if all {
+		validTypes, comp = AllTypes, "__ecctl_valid_all_types"
+	}
+
+	s := cmd.Flags().String("type", "", fmt.Sprintf(
+		"%s deployment resource type (%s)", prefix, strings.Join(validTypes, ", "),
+	))
+
+	cmd.Flag("type").Annotations = map[string][]string{cobra.BashCompCustom: {comp}}
+
+	return s
 }

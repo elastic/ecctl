@@ -62,7 +62,7 @@ var shutdownCmd = &cobra.Command{
 
 func init() {
 	Command.AddCommand(shutdownCmd)
-	shutdownCmd.Flags().String("type", "", "Required deployment type to shutdown (elasticsearch, kibana, apm, or appsearch)")
+	cmdutil.AddTypeFlag(shutdownCmd, "Required", true)
 	shutdownCmd.MarkFlagRequired("type")
 	shutdownCmd.Flags().String("ref-id", "", "Optional deployment RefId, auto-discovered if not specified")
 	shutdownCmd.Flags().Bool("skip-snapshot", false, "Optional flag to toggle skipping the resource snapshot before shutting it down")
