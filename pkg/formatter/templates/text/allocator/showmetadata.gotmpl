@@ -11,5 +11,17 @@
 {{- range .Metadata }}
 {{- .Key }}:{{- .Value }}{{ " " }}
 {{- end}}
+{{- if .Instances}}
+
+{{ "DEPLOYMENT ID" }}{{ tab }}{{ "RESOURCE ID" }}{{ tab }}{{ "INSTANCE ID"}}{{ tab }}{{ "TYPE" }}{{ tab }}{{"HEALTHY"}}
+{{- tab }}{{ "MEMORY" }}{{ tab }}{{ "MOVING" }}{{ tab }}{{ "VERSION" }}{{ tab }}{{ "ZONES" }}{{tab}}{{ "PENDING" }}
+{{- tab }}{{ "INSTANCE CONFIG ID" }}
+{{- range .Instances}}
+{{ .DeploymentID }}{{ tab }}{{ .ClusterID }}{{ tab }}{{ .InstanceName }}{{ tab }}{{ .ClusterType }}{{ tab }}{{ .Healthy }}
+{{- tab }}{{ .NodeMemory }}{{ tab }}{{ .Moving }}{{ tab }}
+{{- if .PlansInfo}}{{ .PlansInfo.Version}}{{ tab }}{{.PlansInfo.ZoneCount}}{{ tab }}{{.PlansInfo.Pending}}{{tab}}{{else}}
+{{- "-"}}{{tab}}{{"-"}}{{tab}}{{"-"}}{{tab}}{{end}}
+{{- .InstanceConfigurationID }}
+{{- end}}{{end}}
 {{end -}}
 {{end}}
