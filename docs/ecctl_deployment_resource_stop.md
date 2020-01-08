@@ -18,7 +18,7 @@ ecctl deployment resource stop <deployment id> --type <type> [--all|--i <instanc
       --ignore-missing        If set and the specified instance does not exist, then quietly proceed to the next instance
   -i, --instance-id strings   Deployment instance IDs to stop (e.g. instance-0000000001)
       --ref-id string         Optional deployment RefId, if not set, the RefId will be auto-discovered
-      --type string           Deployment resource type to stop (elasticsearch, kibana, apm, or appsearch)
+      --type string           Required deployment resource type (apm, appsearch, kibana, elasticsearch)
 ```
 
 ### Options inherited from parent commands

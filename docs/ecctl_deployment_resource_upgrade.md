@@ -17,7 +17,7 @@ ecctl deployment resource upgrade <deployment id> --type <type> --ref-id <ref-id
   -h, --help            help for upgrade
       --ref-id string   Optional deployment RefId, if not set, the RefId will be auto-discovered
   -t, --track           Tracks the progress of the performed task
-      --type string     Optional stateless deployment type to upgrade (kibana, apm, or appsearch)
+      --type string     Required deployment resource type (apm, appsearch, kibana, elasticsearch)
 ```
 
 ### Options inherited from parent commands

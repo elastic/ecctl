@@ -52,7 +52,7 @@ var cancelPlan = &cobra.Command{
 
 func init() {
 	Command.AddCommand(cancelPlan)
-	cancelPlan.Flags().String("type", "", "Optional deployment type to show resource information (elasticsearch, kibana, apm, or appsearch)")
+	cmdutil.AddTypeFlag(cancelPlan, "Optional", true)
 	cancelPlan.MarkFlagRequired("type")
 	cancelPlan.Flags().String("ref-id", "", "Optional deployment type RefId, if not set, the RefId will be auto-discovered")
 }

@@ -68,7 +68,7 @@ var upgradeCmd = &cobra.Command{
 func init() {
 	Command.AddCommand(upgradeCmd)
 	upgradeCmd.Flags().BoolP("track", "t", false, cmdutil.TrackFlagMessage)
-	upgradeCmd.Flags().String("type", "", "Optional stateless deployment type to upgrade (kibana, apm, or appsearch)")
+	cmdutil.AddTypeFlag(upgradeCmd, "Required", true)
 	upgradeCmd.MarkFlagRequired("type")
 	upgradeCmd.Flags().String("ref-id", "", "Optional deployment RefId, if not set, the RefId will be auto-discovered")
 }

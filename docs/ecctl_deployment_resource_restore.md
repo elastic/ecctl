@@ -16,7 +16,7 @@ ecctl deployment resource restore <deployment id> --type <type> --ref-id <ref-id
   -h, --help               help for restore
       --ref-id string      Optional deployment RefId, auto-discovered if not specified
       --restore-snapshot   Optional flag to toggle restoring a snapshot for an Elasticsearch resource. It has no effect for other resources
-      --type string        Required deployment type to restore (elasticsearch, kibana, apm, or appsearch)
+      --type string        Required deployment resource type (apm, appsearch, kibana, elasticsearch)
 ```
 
 ### Options inherited from parent commands

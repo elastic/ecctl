@@ -67,7 +67,7 @@ var restoreCmd = &cobra.Command{
 
 func init() {
 	Command.AddCommand(restoreCmd)
-	restoreCmd.Flags().String("type", "", "Required deployment type to restore (elasticsearch, kibana, apm, or appsearch)")
+	cmdutil.AddTypeFlag(restoreCmd, "Required", true)
 	restoreCmd.MarkFlagRequired("type")
 	restoreCmd.Flags().String("ref-id", "", "Optional deployment RefId, auto-discovered if not specified")
 	restoreCmd.Flags().Bool("restore-snapshot", false, "Optional flag to toggle restoring a snapshot for an Elasticsearch resource. It has no effect for other resources")

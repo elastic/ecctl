@@ -18,7 +18,7 @@ ecctl deployment resource shutdown <deployment id> --type <type> --ref-id <ref-i
       --hide            Optionally hides the deployment resource from being listed by default
       --ref-id string   Optional deployment RefId, auto-discovered if not specified
       --skip-snapshot   Optional flag to toggle skipping the resource snapshot before shutting it down
-      --type string     Required deployment type to shutdown (elasticsearch, kibana, apm, or appsearch)
+      --type string     Required deployment resource type (apm, appsearch, kibana, elasticsearch)
 ```
 
 ### Options inherited from parent commands

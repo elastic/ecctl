@@ -70,7 +70,7 @@ func init() {
 	Command.AddCommand(startCmd)
 	startCmd.Flags().Bool("all", false, "Starts all instances of a defined resource type")
 	startCmd.Flags().Bool("ignore-missing", false, "If set and the specified instance does not exist, then quietly proceed to the next instance")
-	startCmd.Flags().String("type", "", "Deployment resource type to start (elasticsearch, kibana, apm, or appsearch)")
+	cmdutil.AddTypeFlag(startCmd, "Required", true)
 	startCmd.MarkFlagRequired("type")
 	startCmd.Flags().String("ref-id", "", "Optional deployment RefId, if not set, the RefId will be auto-discovered")
 	startCmd.Flags().StringSliceP("instance-id", "i", nil, "Deployment instance IDs to start (e.g. instance-0000000001)")

@@ -77,7 +77,7 @@ func init() {
 	Command.AddCommand(startMaintCmd)
 	startMaintCmd.Flags().Bool("all", false, "Starts maintenance mode on all instances of a defined resource type")
 	startMaintCmd.Flags().Bool("ignore-missing", false, "If set and the specified instance does not exist, then quietly proceed to the next instance")
-	startMaintCmd.Flags().String("type", "", "Deployment resource type to use (elasticsearch, kibana, apm, or appsearch)")
+	cmdutil.AddTypeFlag(startMaintCmd, "Required", true)
 	startMaintCmd.MarkFlagRequired("type")
 	startMaintCmd.Flags().String("ref-id", "", "Optional deployment RefId, if not set, the RefId will be auto-discovered")
 	startMaintCmd.Flags().StringSliceP("instance-id", "i", nil, "Deployment instance IDs to use (e.g. instance-0000000001)")
