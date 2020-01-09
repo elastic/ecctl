@@ -28,7 +28,7 @@ import (
 )
 
 var resyncKibanaCmd = &cobra.Command{
-	Use:     "resync [<deployment id> | --all",
+	Use:     "resync [<deployment id> | --all]",
 	Short:   "Resynchronizes the search index and cache for the selected Kibana instance",
 	PreRunE: cmdutil.CheckInputHas1ArgsOr0ArgAndAll,
 	RunE: func(cmd *cobra.Command, args []string) error {

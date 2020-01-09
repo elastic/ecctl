@@ -7,7 +7,7 @@ Resynchronizes the search index and cache for the selected Kibana instance
 Resynchronizes the search index and cache for the selected Kibana instance
 
 ```
-ecctl deployment kibana resync [<deployment id> | --all [flags]
+ecctl deployment kibana resync [<deployment id> | --all] [flags]
 ```
 
 ### Options
