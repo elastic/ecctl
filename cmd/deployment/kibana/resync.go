@@ -28,13 +28,14 @@ import (
 )
 
 var resyncKibanaCmd = &cobra.Command{
-	Use:     "resync [<deployment id> | --all]",
-	Short:   "Resynchronizes the search index and cache for the selected Kibana instance",
+	Use:     "resync {<deployment id> | --all}",
+	Short:   "Resynchronizes the search index and cache for the selected Kibana instance or all instances",
 	PreRunE: cmdutil.CheckInputHas1ArgsOr0ArgAndAll,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		all, _ := cmd.Flags().GetBool("all")
 
 		if all {
+			fmt.Println("Resynchronizing all Kibana instances")
 			res, err := kibana.ResyncAll(kibana.ResyncAllParams{
 				API: ecctl.Get().API,
 			})

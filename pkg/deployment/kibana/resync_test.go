@@ -143,7 +143,7 @@ func TestResyncAll(t *testing.T) {
 			},
 		},
 		{
-			name: "Succeeds to resynchronize Kibana instance without errors",
+			name: "Succeeds to re-synchronize all Kibana instances without errors",
 			args: args{params: ResyncAllParams{
 				API: api.NewMock(mock.Response{Response: http.Response{
 					StatusCode: http.StatusAccepted,
