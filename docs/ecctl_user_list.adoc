@@ -41,6 +41,6 @@ ecctl user list [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_user[ecctl user]	 - Manages the platform users

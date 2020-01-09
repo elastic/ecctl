@@ -41,6 +41,6 @@ ecctl platform stack show [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_platform_stack[ecctl platform stack]	 - Manages Elastic StackPacks

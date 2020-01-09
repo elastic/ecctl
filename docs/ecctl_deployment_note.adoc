@@ -41,7 +41,7 @@ ecctl deployment note [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
 * xref:ecctl_deployment_note_create[ecctl deployment note create]	 - Adds a note to a deployment

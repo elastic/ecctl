@@ -41,7 +41,7 @@ ecctl platform proxy filtered-group [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_platform_proxy[ecctl platform proxy]	 - Manages proxies
 * xref:ecctl_platform_proxy_filtered-group_create[ecctl platform proxy filtered-group create]	 - Creates proxies filtered group

@@ -1,12 +1,12 @@
 [#ecctl_deployment_elasticsearch_monitoring_enable]
 == ecctl deployment elasticsearch monitoring enable
 
-Enables monitoring for the cluster by sending data to a monitoring cluster you specify.
+Enables monitoring for the cluster by sending data to a monitoring cluster you specify
 
 [float]
 === Synopsis
 
-Enables monitoring for the cluster by sending data to a monitoring cluster you specify.
+Enables monitoring for the cluster by sending data to a monitoring cluster you specify
 
 ----
 ecctl deployment elasticsearch monitoring enable <monitored cluster id> <monitoring cluster id> [flags]
@@ -41,6 +41,6 @@ ecctl deployment elasticsearch monitoring enable <monitored cluster id> <monitor
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_deployment_elasticsearch_monitoring[ecctl deployment elasticsearch monitoring]	 - Manages monitoring for an Elasticsearch cluster

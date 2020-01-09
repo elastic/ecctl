@@ -41,6 +41,6 @@ ecctl user key show --user=<user id> <key id> [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_user_key[ecctl user key]	 - Manages the API keys of a platform user

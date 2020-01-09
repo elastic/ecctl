@@ -44,6 +44,6 @@ ecctl platform proxy filtered-group update <filtered group id> --filters <key1=v
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_platform_proxy_filtered-group[ecctl platform proxy filtered-group]	 - Manages proxies filtered group

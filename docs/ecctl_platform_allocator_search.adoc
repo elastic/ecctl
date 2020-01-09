@@ -43,6 +43,6 @@ ecctl platform allocator search [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_platform_allocator[ecctl platform allocator]	 - Manages allocators

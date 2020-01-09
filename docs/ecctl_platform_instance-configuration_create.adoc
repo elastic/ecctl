@@ -43,6 +43,6 @@ ecctl platform instance-configuration create -f <config.json> [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_platform_instance-configuration[ecctl platform instance-configuration]	 - Manages instance configurations

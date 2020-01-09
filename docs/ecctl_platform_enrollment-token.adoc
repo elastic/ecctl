@@ -41,7 +41,7 @@ ecctl platform enrollment-token [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_platform[ecctl platform]	 - Manages the platform
 * xref:ecctl_platform_enrollment-token_create[ecctl platform enrollment-token create]	 - Creates an enrollment token for role(s)

@@ -41,6 +41,6 @@ ecctl auth key list [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_auth_key[ecctl auth key]	 - Manages the current authenticated user API keys

@@ -41,7 +41,7 @@ ecctl user [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl[ecctl]	 - Elastic Cloud Control
 * xref:ecctl_user_create[ecctl user create]	 - Creates a new platform user

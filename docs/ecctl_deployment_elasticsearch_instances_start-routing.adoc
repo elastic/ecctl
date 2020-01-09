@@ -43,6 +43,6 @@ ecctl deployment elasticsearch instances start-routing <cluster id> [--all|--ins
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_deployment_elasticsearch_instances[ecctl deployment elasticsearch instances]	 - Manages elasticsearch at the instance level

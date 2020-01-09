@@ -41,6 +41,6 @@ ecctl platform role list [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_platform_role[ecctl platform role]	 - Manages platform roles

@@ -41,7 +41,7 @@ ecctl platform allocator metadata [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_platform_allocator[ecctl platform allocator]	 - Manages allocators
 * xref:ecctl_platform_allocator_metadata_delete[ecctl platform allocator metadata delete]	 - Deletes a single metadata item from a given allocators metadata

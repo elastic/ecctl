@@ -41,7 +41,7 @@ ecctl deployment elasticsearch plan [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_deployment_elasticsearch[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters
 * xref:ecctl_deployment_elasticsearch_plan_cancel[ecctl deployment elasticsearch plan cancel]	 - Cancels the pending plan

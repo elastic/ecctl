@@ -41,12 +41,11 @@ ecctl deployment apm [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
-* xref:ecctl_deployment_apm_create[ecctl deployment apm create]	 - Creates an APM instance in the selected deployment
+* xref:ecctl_deployment_apm_create[ecctl deployment apm create]	 - Creates an Apm instance
 * xref:ecctl_deployment_apm_delete[ecctl deployment apm delete]	 - Deletes an APM deployment
-* xref:ecctl_deployment_apm_enable[ecctl deployment apm enable]	 - Enables an APM instance in the selected deployment
 * xref:ecctl_deployment_apm_list[ecctl deployment apm list]	 - Lists the APM deployments
 * xref:ecctl_deployment_apm_plan[ecctl deployment apm plan]	 - Manages APM plans
 * xref:ecctl_deployment_apm_restart[ecctl deployment apm restart]	 - Restarts an APM deployment

@@ -1,40 +1,26 @@
-[#ecctl_deployment_elasticsearch_create]
-== ecctl deployment elasticsearch create
+[#ecctl_deployment_resource_upgrade]
+== ecctl deployment resource upgrade
 
-Creates an Elasticsearch cluster
+Upgrades a deployment resource
 
 [float]
 === Synopsis
 
-Creates an Elasticsearch cluster
+Upgrades a stateless deployment resource so it matches the Elasticsearch
+deployment version. Only stateless resources are supported in the --type flag
 
 ----
-ecctl deployment elasticsearch create [--file] [--capacity|--version|--zones] [name] [flags]
-----
-
-[float]
-=== Examples
-
-----
-
-  * Create a single node elasticsearch cluster
-  ecctl deployment elasticsearch create --version 5.6.0 --zones 1 --capacity 2048
-
-  * Create an elasticsearch cluster from a plan definition.
-  ecctl deployment elasticsearch create --file definition.json
+ecctl deployment resource upgrade <deployment id> --type <type> --ref-id <ref-id> [flags]
 ----
 
 [float]
 === Options
 
 ----
-  -c, --capacity int32   Capacity per node
-      --file string      JSON plan definition file location
-  -h, --help             help for create
-      --plugin strings   Additional plugins to add to the Elasticsearch cluster
-  -t, --track            Tracks the progress of the performed task
-  -v, --version string   Filter per version
-  -z, --zones int32      Number of zones for the cluster
+  -h, --help            help for upgrade
+      --ref-id string   Optional deployment RefId, if not set, the RefId will be auto-discovered
+  -t, --track           Tracks the progress of the performed task
+      --type string     Required deployment resource type (apm, appsearch, kibana, elasticsearch)
 ----
 
 [float]
@@ -59,6 +45,6 @@ ecctl deployment elasticsearch create [--file] [--capacity|--version|--zones] [n
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
-* xref:ecctl_deployment_elasticsearch[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters
+* xref:ecctl_deployment_resource[ecctl deployment resource]	 - Manages deployment resources

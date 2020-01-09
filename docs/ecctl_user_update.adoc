@@ -61,6 +61,6 @@ ecctl user update <username> --role <role> [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_user[ecctl user]	 - Manages the platform users

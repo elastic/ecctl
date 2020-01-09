@@ -44,6 +44,6 @@ ecctl deployment kibana list [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_deployment_kibana[ecctl deployment kibana]	 - Manages Kibana instances

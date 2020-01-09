@@ -64,6 +64,6 @@ Read all the simple query string syntax in https://www.elastic.co/guide/en/elast
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_deployment_elasticsearch[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters

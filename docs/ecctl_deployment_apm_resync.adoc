@@ -41,6 +41,6 @@ ecctl deployment apm resync <deployment id> [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_deployment_apm[ecctl deployment apm]	 - Manages APM deployments

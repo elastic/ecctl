@@ -41,11 +41,10 @@ ecctl deployment elasticsearch [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
 * xref:ecctl_deployment_elasticsearch_console[ecctl deployment elasticsearch console]	 - Starts an interactive console with the cluster
-* xref:ecctl_deployment_elasticsearch_create[ecctl deployment elasticsearch create]	 - Creates an Elasticsearch cluster
 * xref:ecctl_deployment_elasticsearch_delete[ecctl deployment elasticsearch delete]	 - Deletes an Elasticsearch cluster
 * xref:ecctl_deployment_elasticsearch_diagnose[ecctl deployment elasticsearch diagnose]	 - Generates a diagnostics bundle for the cluster
 * xref:ecctl_deployment_elasticsearch_instances[ecctl deployment elasticsearch instances]	 - Manages elasticsearch at the instance level

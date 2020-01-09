@@ -46,6 +46,6 @@ ecctl deployment apm show [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_deployment_apm[ecctl deployment apm]	 - Manages APM deployments

@@ -41,7 +41,7 @@ ecctl auth key [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_auth[ecctl auth]	 - Manages the platform auth
 * xref:ecctl_auth_key_create[ecctl auth key create]	 - Creates a new API key for the current authenticated user

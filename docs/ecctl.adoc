@@ -31,7 +31,7 @@ Elastic Cloud Control
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_auth[ecctl auth]	 - Manages the platform auth
 * xref:ecctl_deployment[ecctl deployment]	 - Manages deployments

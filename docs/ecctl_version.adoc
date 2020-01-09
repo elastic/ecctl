@@ -41,6 +41,6 @@ ecctl version [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl[ecctl]	 - Elastic Cloud Control

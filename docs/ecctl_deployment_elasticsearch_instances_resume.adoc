@@ -43,6 +43,6 @@ ecctl deployment elasticsearch instances resume <cluster id> [--all|--instances]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_deployment_elasticsearch_instances[ecctl deployment elasticsearch instances]	 - Manages elasticsearch at the instance level

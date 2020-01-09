@@ -41,6 +41,6 @@ ecctl platform proxy list [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_platform_proxy[ecctl platform proxy]	 - Manages proxies
