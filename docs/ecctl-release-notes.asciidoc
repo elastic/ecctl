@@ -3,22 +3,21 @@
 
 This section summarizes the changes in each {n} release.
 
-* <<{p}-release-notes-1.0.0-beta1>>
+* <<{p}-release-notes-v1.0.0-beta1>>
 
-[id="{p}-release-notes-1.0.0-beta1"]
-=== Elastic Cloud Control (ecctl) 1.0.0-beta1
+[id="{p}-release-notes-v1.0.0-beta1"]
+=== Elastic Cloud Control (ecctl) v1.0.0-beta1
 ++++
-<titleabbrev>1.0.0-beta1</titleabbrev>
+<titleabbrev>v1.0.0-beta1</titleabbrev>
 ++++
 
 Elastic cloud control (ecctl) is Elastic’s CLI interface to manage the Elastic Cloud Enterprise platform and is now open for a public beta.
 
-New for 1.0.0-beta1:
+New for v1.0.0-beta1:
 
-// TODO What are the ecctl creation commands? When I run `ecctl` (not on beta1, mind), I get auth, deployment, generate, help, init, platform, user, and version. The `ecctl deployment` command maybe? You can do an ecctl deployment elasticsearch create, for example. 
-* *New deployment APIs for ecctl creation commands*. With the availability of our deployment APIs for ECE, we’ve switched the ecctl creation commands to make use of the new APIs. This switch ensures better supportability and compatibility with ECE functionality and allows you to fully control your deployments. 
+* *New APIs for ecctl deployment commands*. With the availability of our deployment APIs for ECE, we’ve switched the `ecctl deployment` commands to make use of the new APIs. This switch ensures better supportability and compatibility with ECE functionality and allows you to fully control your deployments. 
 +
-Use the ecctl creation commands to:
+Use the `ecctl deployment` commands to:
 +
 ** Create, update, read, and delete deployments
 ** Perform maintenance and upgrades
