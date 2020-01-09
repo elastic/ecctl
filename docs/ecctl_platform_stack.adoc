@@ -41,7 +41,7 @@ ecctl platform stack [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_platform[ecctl platform]	 - Manages the platform
 * xref:ecctl_platform_stack_delete[ecctl platform stack delete]	 - Deletes an Elastic StackPack

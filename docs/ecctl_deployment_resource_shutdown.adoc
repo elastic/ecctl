@@ -46,6 +46,6 @@ ecctl deployment resource shutdown <deployment id> --type <type> --ref-id <ref-i
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_deployment_resource[ecctl deployment resource]	 - Manages deployment resources

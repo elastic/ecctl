@@ -41,7 +41,7 @@ ecctl platform instance-configuration [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_platform[ecctl platform]	 - Manages the platform
 * xref:ecctl_platform_instance-configuration_create[ecctl platform instance-configuration create]	 - Creates a new instance configuration

@@ -103,6 +103,6 @@ $ cat kibana_create_example.json | dev-cli deployment kibana create --track --id
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_deployment_kibana[ecctl deployment kibana]	 - Manages Kibana instances

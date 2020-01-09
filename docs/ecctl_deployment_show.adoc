@@ -60,6 +60,6 @@ ecctl deployment show <deployment-id> [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_deployment[ecctl deployment]	 - Manages deployments

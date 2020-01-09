@@ -41,6 +41,6 @@ ecctl platform instance-configuration delete <config id> [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_platform_instance-configuration[ecctl platform instance-configuration]	 - Manages instance configurations

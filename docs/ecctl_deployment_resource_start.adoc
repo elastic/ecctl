@@ -46,6 +46,6 @@ ecctl deployment resource start <deployment id> --type <type> [--all|--i <instan
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_deployment_resource[ecctl deployment resource]	 - Manages deployment resources

@@ -42,7 +42,7 @@ ecctl platform repository [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_platform[ecctl platform]	 - Manages the platform
 * xref:ecctl_platform_repository_create[ecctl platform repository create]	 - Creates / updates a snapshot repository

@@ -42,6 +42,6 @@ ecctl user show <user name> [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_user[ecctl user]	 - Manages the platform users

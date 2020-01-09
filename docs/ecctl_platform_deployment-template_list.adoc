@@ -44,6 +44,6 @@ ecctl platform deployment-template list [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_platform_deployment-template[ecctl platform deployment-template]	 - Manages deployment templates

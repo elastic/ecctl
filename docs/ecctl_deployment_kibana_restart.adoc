@@ -42,6 +42,6 @@ ecctl deployment kibana restart <cluster id> [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_deployment_kibana[ecctl deployment kibana]	 - Manages Kibana instances

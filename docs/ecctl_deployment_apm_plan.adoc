@@ -41,7 +41,7 @@ ecctl deployment apm plan [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_deployment_apm[ecctl deployment apm]	 - Manages APM deployments
 * xref:ecctl_deployment_apm_plan_cancel[ecctl deployment apm plan cancel]	 - Cancels the pending plan

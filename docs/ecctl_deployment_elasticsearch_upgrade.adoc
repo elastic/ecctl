@@ -43,6 +43,6 @@ ecctl deployment elasticsearch upgrade <cluster id> --version=<version> [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_deployment_elasticsearch[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters

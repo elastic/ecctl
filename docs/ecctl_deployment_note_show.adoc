@@ -42,6 +42,6 @@ ecctl deployment note show <deployment id> --id <note id> [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_deployment_note[ecctl deployment note]	 - Manages a deployment's notes

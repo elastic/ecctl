@@ -41,7 +41,7 @@ ecctl deployment apm [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
 * xref:ecctl_deployment_apm_create[ecctl deployment apm create]	 - Creates an Apm instance

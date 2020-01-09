@@ -41,7 +41,7 @@ ecctl deployment plan [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
 * xref:ecctl_deployment_plan_cancel[ecctl deployment plan cancel]	 - Cancels a resource's pending plan

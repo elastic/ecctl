@@ -44,6 +44,6 @@ ecctl deployment resource restore <deployment id> --type <type> --ref-id <ref-id
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_deployment_resource[ecctl deployment resource]	 - Manages deployment resources

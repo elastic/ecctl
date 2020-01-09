@@ -41,6 +41,6 @@ ecctl platform constructor list [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_platform_constructor[ecctl platform constructor]	 - Manages constructors

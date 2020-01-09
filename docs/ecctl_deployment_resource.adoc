@@ -41,7 +41,7 @@ ecctl deployment resource [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
 * xref:ecctl_deployment_resource_delete[ecctl deployment resource delete]	 - Deletes a previously shut down deployment resource

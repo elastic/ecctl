@@ -43,6 +43,6 @@ ecctl generate completions [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_generate[ecctl generate]	 - Generates completions and docs

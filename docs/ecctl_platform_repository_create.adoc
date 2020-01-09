@@ -62,6 +62,6 @@ ecctl platform repository create custom --type fs --settings settings.yml
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_platform_repository[ecctl platform repository]	 - Manages snapshot repositories

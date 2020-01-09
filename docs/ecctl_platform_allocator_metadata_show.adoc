@@ -41,6 +41,6 @@ ecctl platform allocator metadata show <allocator id> [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_platform_allocator_metadata[ecctl platform allocator metadata]	 - Manages an allocator's metadata

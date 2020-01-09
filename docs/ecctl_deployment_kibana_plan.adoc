@@ -41,7 +41,7 @@ ecctl deployment kibana plan [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_deployment_kibana[ecctl deployment kibana]	 - Manages Kibana instances
 * xref:ecctl_deployment_kibana_plan_monitor[ecctl deployment kibana plan monitor]	 - Monitors the pending plan

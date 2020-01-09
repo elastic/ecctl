@@ -41,7 +41,7 @@ ecctl platform deployment-template [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_platform[ecctl platform]	 - Manages the platform
 * xref:ecctl_platform_deployment-template_create[ecctl platform deployment-template create]	 - Creates a platform deployment template

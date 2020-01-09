@@ -43,6 +43,6 @@ ecctl deployment plan cancel <deployment id> --type <type> --ref-id <ref-id> [fl
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_deployment_plan[ecctl deployment plan]	 - Manages deployment plans

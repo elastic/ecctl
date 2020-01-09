@@ -41,6 +41,6 @@ ecctl deployment list [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_deployment[ecctl deployment]	 - Manages deployments

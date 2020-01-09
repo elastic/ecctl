@@ -42,6 +42,6 @@ ecctl deployment elasticsearch search -f <query file>.json [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_deployment_elasticsearch[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters

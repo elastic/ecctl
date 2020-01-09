@@ -53,6 +53,6 @@ ecctl platform enrollment-token create --role <ROLE> [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_platform_enrollment-token[ecctl platform enrollment-token]	 - Manages tokens

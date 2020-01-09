@@ -41,7 +41,7 @@ ecctl deployment elasticsearch [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
 * xref:ecctl_deployment_elasticsearch_console[ecctl deployment elasticsearch console]	 - Starts an interactive console with the cluster

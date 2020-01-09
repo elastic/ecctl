@@ -41,6 +41,6 @@ ecctl deployment elasticsearch monitoring enable <monitored cluster id> <monitor
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_deployment_elasticsearch_monitoring[ecctl deployment elasticsearch monitoring]	 - Manages monitoring for an Elasticsearch cluster

@@ -46,6 +46,6 @@ ecctl deployment resource stop <deployment id> --type <type> [--all|--i <instanc
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_deployment_resource[ecctl deployment resource]	 - Manages deployment resources

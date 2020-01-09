@@ -41,7 +41,7 @@ ecctl user key [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_user[ecctl user]	 - Manages the platform users
 * xref:ecctl_user_key_delete[ecctl user key delete]	 - Deletes an existing API key for the specified user

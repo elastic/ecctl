@@ -41,7 +41,7 @@ ecctl deployment kibana [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
 * xref:ecctl_deployment_kibana_create[ecctl deployment kibana create]	 - Creates a Kibana instance

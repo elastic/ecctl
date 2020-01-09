@@ -41,6 +41,6 @@ ecctl platform repository delete <repository name> [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_platform_repository[ecctl platform repository]	 - Manages snapshot repositories

@@ -42,6 +42,6 @@ ecctl deployment apm plan history <cluster id> [flags]
 ----
 
 [float]
-=== SEE ALSO
+=== See also
 
 * xref:ecctl_deployment_apm_plan[ecctl deployment apm plan]	 - Manages APM plans
