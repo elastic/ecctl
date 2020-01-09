@@ -1,23 +1,25 @@
-[#ecctl_deployment_elasticsearch_diagnose]
-== ecctl deployment elasticsearch diagnose
+[#ecctl_deployment_resource_restore]
+== ecctl deployment resource restore
 
-Generates a diagnostics bundle for the cluster
+Restores a previously shut down deployment resource
 
 [float]
 === Synopsis
 
-Generates a diagnostics bundle for the cluster, a timeout increase might be necessary
+Restores a previously shut down deployment resource
 
 ----
-ecctl deployment elasticsearch diagnose <cluster id> [flags]
+ecctl deployment resource restore <deployment id> --type <type> --ref-id <ref-id> [flags]
 ----
 
 [float]
 === Options
 
 ----
-  -h, --help              help for diagnose
-  -l, --location string   Directory location to store diagnostics file (default "./")
+  -h, --help               help for restore
+      --ref-id string      Optional deployment RefId, auto-discovered if not specified
+      --restore-snapshot   Optional flag to toggle restoring a snapshot for an Elasticsearch resource. It has no effect for other resources
+      --type string        Required deployment resource type (apm, appsearch, kibana, elasticsearch)
 ----
 
 [float]
@@ -44,4 +46,4 @@ ecctl deployment elasticsearch diagnose <cluster id> [flags]
 [float]
 === See also
 
-* xref:ecctl_deployment_elasticsearch[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters
+* xref:ecctl_deployment_resource[ecctl deployment resource]	 - Manages deployment resources

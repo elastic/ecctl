@@ -1,23 +1,27 @@
-[#ecctl_deployment_elasticsearch_diagnose]
-== ecctl deployment elasticsearch diagnose
+[#ecctl_deployment_resource_start-maintenance]
+== ecctl deployment resource start-maintenance
 
-Generates a diagnostics bundle for the cluster
+Starts maintenance mode on a deployment resource
 
 [float]
 === Synopsis
 
-Generates a diagnostics bundle for the cluster, a timeout increase might be necessary
+Starts maintenance mode on a deployment resource
 
 ----
-ecctl deployment elasticsearch diagnose <cluster id> [flags]
+ecctl deployment resource start-maintenance <deployment id> --type <type> [--all|--i <instance-id>,<instance-id>] [flags]
 ----
 
 [float]
 === Options
 
 ----
-  -h, --help              help for diagnose
-  -l, --location string   Directory location to store diagnostics file (default "./")
+      --all                   Starts maintenance mode on all instances of a defined resource type
+  -h, --help                  help for start-maintenance
+      --ignore-missing        If set and the specified instance does not exist, then quietly proceed to the next instance
+  -i, --instance-id strings   Deployment instance IDs to use (e.g. instance-0000000001)
+      --ref-id string         Optional deployment RefId, if not set, the RefId will be auto-discovered
+      --type string           Required deployment resource type (apm, appsearch, kibana, elasticsearch)
 ----
 
 [float]
@@ -44,4 +48,4 @@ ecctl deployment elasticsearch diagnose <cluster id> [flags]
 [float]
 === See also
 
-* xref:ecctl_deployment_elasticsearch[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters
+* xref:ecctl_deployment_resource[ecctl deployment resource]	 - Manages deployment resources

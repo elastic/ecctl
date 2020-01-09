@@ -46,7 +46,6 @@ ecctl deployment kibana [flags]
 * xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
 * xref:ecctl_deployment_kibana_create[ecctl deployment kibana create]	 - Creates a Kibana instance
 * xref:ecctl_deployment_kibana_delete[ecctl deployment kibana delete]	 - Deletes a Kibana instance
-* xref:ecctl_deployment_kibana_enable[ecctl deployment kibana enable]	 - Enables a kibana instance in the selected deployment
 * xref:ecctl_deployment_kibana_list[ecctl deployment kibana list]	 - Returns the list of kibana instances
 * xref:ecctl_deployment_kibana_plan[ecctl deployment kibana plan]	 - Manages Kibana plans
 * xref:ecctl_deployment_kibana_reallocate[ecctl deployment kibana reallocate]	 - Reallocates Kibana instances

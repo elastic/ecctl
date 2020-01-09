@@ -1,23 +1,24 @@
-[#ecctl_deployment_elasticsearch_diagnose]
-== ecctl deployment elasticsearch diagnose
+[#ecctl_deployment_plan_cancel]
+== ecctl deployment plan cancel
 
-Generates a diagnostics bundle for the cluster
+Cancels a resource's pending plan
 
 [float]
 === Synopsis
 
-Generates a diagnostics bundle for the cluster, a timeout increase might be necessary
+Cancels a resource's pending plan
 
 ----
-ecctl deployment elasticsearch diagnose <cluster id> [flags]
+ecctl deployment plan cancel <deployment id> --type <type> --ref-id <ref-id> [flags]
 ----
 
 [float]
 === Options
 
 ----
-  -h, --help              help for diagnose
-  -l, --location string   Directory location to store diagnostics file (default "./")
+  -h, --help            help for cancel
+      --ref-id string   Optional deployment type RefId, if not set, the RefId will be auto-discovered
+      --type string     Optional deployment resource type (apm, appsearch, kibana, elasticsearch)
 ----
 
 [float]
@@ -44,4 +45,4 @@ ecctl deployment elasticsearch diagnose <cluster id> [flags]
 [float]
 === See also
 
-* xref:ecctl_deployment_elasticsearch[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters
+* xref:ecctl_deployment_plan[ecctl deployment plan]	 - Manages deployment plans

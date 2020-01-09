@@ -9,15 +9,16 @@ Updates the deployment notes
 Updates the deployment notes
 
 ----
-ecctl deployment note update <deployment id> --id <note id> --message <message content> [flags]
+ecctl deployment note update <deployment id> --id <note id> --comment <comment content> [flags]
 ----
 
 [float]
 === Options
 
 ----
-  -h, --help        help for update
-      --id string   Note ID
+      --comment string   Content of your deployment note
+  -h, --help             help for update
+      --id string        Note ID
 ----
 
 [float]

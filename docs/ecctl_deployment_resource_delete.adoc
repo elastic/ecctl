@@ -1,23 +1,24 @@
-[#ecctl_deployment_apm_enable]
-== ecctl deployment apm enable
+[#ecctl_deployment_resource_delete]
+== ecctl deployment resource delete
 
-Enables an APM instance in the selected deployment
+Deletes a previously shut down deployment resource
 
 [float]
 === Synopsis
 
-Enables an APM instance in the selected deployment
+Deletes a previously shut down deployment resource
 
 ----
-ecctl deployment apm enable <deployment id> [flags]
+ecctl deployment resource delete <deployment id> --type <type> --ref-id <ref-id> [flags]
 ----
 
 [float]
 === Options
 
 ----
-  -h, --help    help for enable
-      --track   Tracks the progress of the performed task
+  -h, --help            help for delete
+      --ref-id string   Optional deployment RefId, auto-discovered if not specified
+      --type string     Required stateless deployment resource type (apm, appsearch, kibana)
 ----
 
 [float]
@@ -44,4 +45,4 @@ ecctl deployment apm enable <deployment id> [flags]
 [float]
 === See also
 
-* xref:ecctl_deployment_apm[ecctl deployment apm]	 - Manages APM deployments
+* xref:ecctl_deployment_resource[ecctl deployment resource]	 - Manages deployment resources

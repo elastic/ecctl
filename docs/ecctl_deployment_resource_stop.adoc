@@ -1,23 +1,27 @@
-[#ecctl_deployment_kibana_enable]
-== ecctl deployment kibana enable
+[#ecctl_deployment_resource_stop]
+== ecctl deployment resource stop
 
-Enables a kibana instance in the selected deployment
+Stops a deployment resource
 
 [float]
 === Synopsis
 
-Enables a kibana instance in the selected deployment
+Stops a deployment resource
 
 ----
-ecctl deployment kibana enable <deployment id> [flags]
+ecctl deployment resource stop <deployment id> --type <type> [--all|--i <instance-id>,<instance-id>] [flags]
 ----
 
 [float]
 === Options
 
 ----
-  -h, --help    help for enable
-      --track   Tracks the progress of the performed task
+      --all                   Stops all instances of a defined resource type
+  -h, --help                  help for stop
+      --ignore-missing        If set and the specified instance does not exist, then quietly proceed to the next instance
+  -i, --instance-id strings   Deployment instance IDs to stop (e.g. instance-0000000001)
+      --ref-id string         Optional deployment RefId, if not set, the RefId will be auto-discovered
+      --type string           Required deployment resource type (apm, appsearch, kibana, elasticsearch)
 ----
 
 [float]
@@ -44,4 +48,4 @@ ecctl deployment kibana enable <deployment id> [flags]
 [float]
 === See also
 
-* xref:ecctl_deployment_kibana[ecctl deployment kibana]	 - Manages Kibana instances
+* xref:ecctl_deployment_resource[ecctl deployment resource]	 - Manages deployment resources

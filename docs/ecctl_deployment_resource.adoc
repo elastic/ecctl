@@ -1,23 +1,22 @@
-[#ecctl_deployment_elasticsearch_diagnose]
-== ecctl deployment elasticsearch diagnose
+[#ecctl_deployment_resource]
+== ecctl deployment resource
 
-Generates a diagnostics bundle for the cluster
+Manages deployment resources
 
 [float]
 === Synopsis
 
-Generates a diagnostics bundle for the cluster, a timeout increase might be necessary
+Manages deployment resources
 
 ----
-ecctl deployment elasticsearch diagnose <cluster id> [flags]
+ecctl deployment resource [flags]
 ----
 
 [float]
 === Options
 
 ----
-  -h, --help              help for diagnose
-  -l, --location string   Directory location to store diagnostics file (default "./")
+  -h, --help   help for resource
 ----
 
 [float]
@@ -44,4 +43,12 @@ ecctl deployment elasticsearch diagnose <cluster id> [flags]
 [float]
 === See also
 
-* xref:ecctl_deployment_elasticsearch[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters
+* xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
+* xref:ecctl_deployment_resource_delete[ecctl deployment resource delete]	 - Deletes a previously shut down deployment resource
+* xref:ecctl_deployment_resource_restore[ecctl deployment resource restore]	 - Restores a previously shut down deployment resource
+* xref:ecctl_deployment_resource_shutdown[ecctl deployment resource shutdown]	 - Shuts down a deployment resource by its type and ref-id
+* xref:ecctl_deployment_resource_start[ecctl deployment resource start]	 - Starts a previously stopped deployment resource
+* xref:ecctl_deployment_resource_start-maintenance[ecctl deployment resource start-maintenance]	 - Starts maintenance mode on a deployment resource
+* xref:ecctl_deployment_resource_stop[ecctl deployment resource stop]	 - Stops a deployment resource
+* xref:ecctl_deployment_resource_stop-maintenance[ecctl deployment resource stop-maintenance]	 - Stops maintenance mode on a deployment resource
+* xref:ecctl_deployment_resource_upgrade[ecctl deployment resource upgrade]	 - Upgrades a deployment resource

@@ -1,23 +1,26 @@
-[#ecctl_deployment_elasticsearch_diagnose]
-== ecctl deployment elasticsearch diagnose
+[#ecctl_deployment_resource_upgrade]
+== ecctl deployment resource upgrade
 
-Generates a diagnostics bundle for the cluster
+Upgrades a deployment resource
 
 [float]
 === Synopsis
 
-Generates a diagnostics bundle for the cluster, a timeout increase might be necessary
+Upgrades a stateless deployment resource so it matches the Elasticsearch
+deployment version. Only stateless resources are supported in the --type flag
 
 ----
-ecctl deployment elasticsearch diagnose <cluster id> [flags]
+ecctl deployment resource upgrade <deployment id> --type <type> --ref-id <ref-id> [flags]
 ----
 
 [float]
 === Options
 
 ----
-  -h, --help              help for diagnose
-  -l, --location string   Directory location to store diagnostics file (default "./")
+  -h, --help            help for upgrade
+      --ref-id string   Optional deployment RefId, if not set, the RefId will be auto-discovered
+  -t, --track           Tracks the progress of the performed task
+      --type string     Required deployment resource type (apm, appsearch, kibana, elasticsearch)
 ----
 
 [float]
@@ -44,4 +47,4 @@ ecctl deployment elasticsearch diagnose <cluster id> [flags]
 [float]
 === See also
 
-* xref:ecctl_deployment_elasticsearch[ecctl deployment elasticsearch]	 - Manages Elasticsearch clusters
+* xref:ecctl_deployment_resource[ecctl deployment resource]	 - Manages deployment resources
