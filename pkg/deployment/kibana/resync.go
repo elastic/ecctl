@@ -18,10 +18,25 @@
 package kibana
 
 import (
+	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/clusters_kibana"
+	"github.com/elastic/cloud-sdk-go/pkg/models"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
+
+// ResyncAllParams is consumed by ResyncAll
+type ResyncAllParams struct {
+	*api.API
+}
+
+// Validate ensures the parameters are usable by the consuming function.
+func (params ResyncAllParams) Validate() error {
+	if params.API == nil {
+		return util.ErrAPIReq
+	}
+	return nil
+}
 
 // Resync forces indexer to immediately resynchronize the search index
 // and cache for a given Kibana instance.
@@ -37,4 +52,22 @@ func Resync(params DeploymentParams) error {
 			params.API.AuthWriter,
 		),
 	)
+}
+
+// ResyncAll asynchronously resynchronizes the search index for all Kibana instances.
+func ResyncAll(params ResyncAllParams) (*models.ModelVersionIndexSynchronizationResults, error) {
+	if err := params.Validate(); err != nil {
+		return nil, err
+	}
+
+	res, err := params.API.V1API.ClustersKibana.ResyncKibanaClusters(
+		clusters_kibana.NewResyncKibanaClustersParams(),
+		params.API.AuthWriter,
+	)
+	if err != nil {
+		return nil, api.UnwrapError(err)
+	}
+
+	return res.Payload, nil
+
 }

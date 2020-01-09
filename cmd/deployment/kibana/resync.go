@@ -30,12 +30,29 @@ import (
 var resyncKibanaCmd = &cobra.Command{
 	Use:     "resync <cluster id>",
 	Short:   "Resynchronizes the search index and cache for the selected Kibana instance",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: cmdutil.CheckInputHas1ArgsOr0ArgAndAll,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		all, _ := cmd.Flags().GetBool("all")
+
+		if all {
+			res, err := kibana.ResyncAll(kibana.ResyncAllParams{
+				API: ecctl.Get().API,
+			})
+			if err != nil {
+				return err
+			}
+
+			return ecctl.Get().Formatter.Format("", res)
+		}
+
 		fmt.Printf("Resynchronizing Kibana instance: %s\n", args[0])
 		return kibana.Resync(kibana.DeploymentParams{
 			API: ecctl.Get().API,
 			ID:  args[0],
 		})
 	},
+}
+
+func init() {
+	resyncKibanaCmd.Flags().Bool("all", false, "Resynchronizes the search index for all Kibana instances")
 }
