@@ -1,0 +1,47 @@
+[id="{p}-release-notes"]
+== Release notes
+
+This section summarizes the changes in each {n} release.
+
+* <<{p}-release-notes-1.0.0-beta1>>
+
+[id="{p}-release-notes-1.0.0-beta1"]
+=== Elastic Cloud Control (ecctl) 1.0.0-beta1
+
+Elastic cloud control (ecctl) is Elastic’s CLI interface to manage the Elastic Cloud Enterprise platform and is now open for a public beta.
+
+New for 1.0.0-beta1:
+
+// TODO What are the ecctl creation commands? When I run `ecctl` (not on beta1, mind), I get auth, deployment, generate, help, init, platform, user, and version. The `ecctl deployment` command maybe? You can do an ecctl deployment elasticsearch create, for example. 
+* *New deployment APIs for ecctl creation commands*. With the availability of our deployment APIs for ECE, we’ve switched the ecctl creation commands to make use of the new APIs. This switch ensures better supportability and compatibility with ECE functionality and allows you to fully control your deployments. 
++
+Use the ecctl creation commands to:
++
+** Create, update, read, and delete deployments
+** Perform maintenance and upgrades
+** Start and stop deployments 
+
+* *New `elasticsearch keystore` commands*. You can now manage your Elasticsearch keystore through ecctl by setting an Elasticsearch keystore or showing the current configuration.
++
+--
+Example usage:
+
+`ecctl elasticsearch keystore show` - shows the current keystore configuration
+
+`ecctl elasticsearch keystore set` - sets a new keystore configuration
+--
+
+* *Track resource changes using the `--track` flag*. When creating, updating, or shutting down deployments, you can now use the `--track` flag to track progress for changes to deployments in a synchronous manner.
+
+* *Simple initialization*. TLS verification has been turned off for the `init` command so that you can configure ecctl against a self-signed ECE instance with greater ease.
+
+[float]
+==== Bug fixes
+
+We fixed the following bugs:
+
+* The `ecctl user key show` command no longer sends faulty parameters to the API server and now works as expected. https://github.com/elastic/ecctl/pull/58[#58]
+* Issues with the `init` command not being able to persist ecctl configuration to the home directory have been resolved. https://github.com/elastic/ecctl/pull/39[#39]
+* The `ecctl` commands now honor the `--timeout` flag in any of the commands as expected, where before a static 30s timeout was used even when `Http.Client.Timeout` was specified. https://github.com/elastic/ecctl/pull/100[#100]
+
+_Release date: January 9, 2020_

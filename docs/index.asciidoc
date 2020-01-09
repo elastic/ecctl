@@ -6,3 +6,5 @@
 include::{asciidoc-dir}/../../shared/attributes.asciidoc[]
 
 include::ecctl-getting-started.asciidoc[]
+
+include::ecctl-release-notes.asciidoc[]
