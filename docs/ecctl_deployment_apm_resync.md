@@ -1,18 +1,19 @@
 ## ecctl deployment apm resync
 
-Resynchronizes the search index and cache for the selected APM deployment
+Resynchronizes the search index and cache for the selected APM deployment or all APM deployments
 
 ### Synopsis
 
-Resynchronizes the search index and cache for the selected APM deployment
+Resynchronizes the search index and cache for the selected APM deployment or all APM deployments
 
 ```
-ecctl deployment apm resync <deployment id> [flags]
+ecctl deployment apm resync {<deployment id> | --all} [flags]
 ```
 
 ### Options
 
 ```
+      --all    Resynchronizes the search index for all APM instances
   -h, --help   help for resync
 ```
 

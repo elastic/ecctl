@@ -20,6 +20,7 @@ package apm
 import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/clusters_apm"
+	"github.com/elastic/cloud-sdk-go/pkg/models"
 	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/deployment/deputil"
@@ -44,6 +45,19 @@ func (params ResyncParams) Validate() error {
 	return err.ErrorOrNil()
 }
 
+// ResyncAllParams is consumed by ResyncAll
+type ResyncAllParams struct {
+	*api.API
+}
+
+// Validate ensures the parameters are usable by the consuming function.
+func (params ResyncAllParams) Validate() error {
+	if params.API == nil {
+		return util.ErrAPIReq
+	}
+	return nil
+}
+
 // Resync forces indexer to immediately resynchronize the search index
 // and cache for a given APM cluster.
 func Resync(params ResyncParams) error {
@@ -58,4 +72,21 @@ func Resync(params ResyncParams) error {
 			params.AuthWriter,
 		),
 	)
+}
+
+// ResyncAll asynchronously resynchronizes the search index for all APM instances.
+func ResyncAll(params ResyncAllParams) (*models.ModelVersionIndexSynchronizationResults, error) {
+	if err := params.Validate(); err != nil {
+		return nil, err
+	}
+
+	res, err := params.API.V1API.ClustersApm.ResyncApmClusters(
+		clusters_apm.NewResyncApmClustersParams(),
+		params.API.AuthWriter,
+	)
+	if err != nil {
+		return nil, api.UnwrapError(err)
+	}
+
+	return res.Payload, nil
 }
