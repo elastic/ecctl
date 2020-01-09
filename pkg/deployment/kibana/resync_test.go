@@ -26,6 +26,7 @@ import (
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
+	"github.com/elastic/cloud-sdk-go/pkg/models"
 	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
@@ -98,6 +99,70 @@ func TestResync(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if err := Resync(tt.args.params); !reflect.DeepEqual(err, tt.wantErr) {
 				t.Errorf("Resync() error = %v, wantErr %v", err, tt.wantErr)
+			}
+		})
+	}
+}
+
+func TestResyncAll(t *testing.T) {
+	type args struct {
+		params ResyncAllParams
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantErr error
+		want    *models.ModelVersionIndexSynchronizationResults
+	}{
+		{
+			name:    "Fails due to parameter validation (API)",
+			args:    args{params: ResyncAllParams{}},
+			wantErr: errors.New("api reference is required for command"),
+		},
+		{
+			name: "Fails due to unknown API response",
+			args: args{params: ResyncAllParams{
+				API: api.NewMock(mock.Response{Response: http.Response{
+					StatusCode: http.StatusForbidden,
+					Body:       mock.NewStringBody(`{"error": "some forbidden error"}`),
+				}}),
+			}},
+			wantErr: errors.New(`{"error": "some forbidden error"}`),
+		},
+		{
+			name: "Fails due to API error",
+			args: args{params: ResyncAllParams{
+				API: api.NewMock(mock.Response{
+					Error: errors.New("error with API"),
+				}),
+			}},
+			wantErr: &url.Error{
+				Op:  "Post",
+				URL: "https://mock-host/mock-path/clusters/kibana/_resync?skip_matching_version=true",
+				Err: errors.New("error with API"),
+			},
+		},
+		{
+			name: "Succeeds to re-synchronize all Kibana instances without errors",
+			args: args{params: ResyncAllParams{
+				API: api.NewMock(mock.Response{Response: http.Response{
+					StatusCode: http.StatusAccepted,
+					Body:       mock.NewStringBody(`{}`),
+				}}),
+			}},
+			want: &models.ModelVersionIndexSynchronizationResults{},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := ResyncAll(tt.args.params)
+			if !reflect.DeepEqual(tt.wantErr, err) {
+				t.Errorf("ResyncAll() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("ResyncAll() = %v, want %v", got, tt.want)
 			}
 		})
 	}
