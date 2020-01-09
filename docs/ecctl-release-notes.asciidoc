@@ -7,6 +7,9 @@ This section summarizes the changes in each {n} release.
 
 [id="{p}-release-notes-1.0.0-beta1"]
 === Elastic Cloud Control (ecctl) 1.0.0-beta1
+++++
+<titleabbrev>1.0.0-beta1</titleabbrev>
+++++
 
 Elastic cloud control (ecctl) is Elastic’s CLI interface to manage the Elastic Cloud Enterprise platform and is now open for a public beta.
 
