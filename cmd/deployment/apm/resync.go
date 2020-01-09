@@ -28,13 +28,14 @@ import (
 )
 
 var resyncApmCmd = &cobra.Command{
-	Use:     "resync [<deployment id> | --all]",
-	Short:   "Resynchronizes the search index and cache for the selected APM deployment",
+	Use:     "resync {<deployment id> | --all}",
+	Short:   "Resynchronizes the search index and cache for the selected APM deployment or all APM deployments",
 	PreRunE: cmdutil.CheckInputHas1ArgsOr0ArgAndAll,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		all, _ := cmd.Flags().GetBool("all")
 
 		if all {
+			fmt.Println("Resynchronizing all APM deployments")
 			res, err := apm.ResyncAll(apm.ResyncAllParams{
 				API: ecctl.Get().API,
 			})
