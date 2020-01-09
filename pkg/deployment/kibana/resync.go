@@ -69,5 +69,4 @@ func ResyncAll(params ResyncAllParams) (*models.ModelVersionIndexSynchronization
 	}
 
 	return res.Payload, nil
-
 }

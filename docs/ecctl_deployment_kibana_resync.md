@@ -13,6 +13,7 @@ ecctl deployment kibana resync <cluster id> [flags]
 ### Options
 
 ```
+      --all    Resynchronizes the search index for all Kibana instances
   -h, --help   help for resync
 ```
 
