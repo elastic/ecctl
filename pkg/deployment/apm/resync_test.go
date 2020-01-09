@@ -143,7 +143,7 @@ func TestResyncAll(t *testing.T) {
 			},
 		},
 		{
-			name: "Succeeds to resynchronize APM instance without errors",
+			name: "Succeeds to resynchronize all APM instances without errors",
 			args: args{params: ResyncAllParams{
 				API: api.NewMock(mock.Response{Response: http.Response{
 					StatusCode: http.StatusAccepted,
