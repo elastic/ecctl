@@ -11,6 +11,10 @@ This section summarizes the changes in each {n} release.
 <titleabbrev>v1.0.0-beta1</titleabbrev>
 ++++
 
+<<{p}-release-notes-v1.0.0-beta1-whats-new,What's new>> | <<{p}-release-notes-v1.0.0-beta1-bug-fixes,Bug fixes>> | <<{p}-release-notes-v1.0.0-beta1-breaking-changes,Breaking changes>> | <<{p}-release-notes-v1.0.0-beta1-changelog,Changelog>>
+
+Welcome to the v1.0.0-beta1 release of {n}. This version brings new features, some breaking changes, and bug fixes. 
+
 Elastic cloud control (ecctl) is Elastic’s CLI interface to manage the Elastic Cloud Enterprise platform and is now open for a public beta.
 
 Download the release binaries:
@@ -25,6 +29,7 @@ https://download.elastic.co/downloads/ecctl/v1.0.0-beta1/ecctl_v1.0.0-beta1_linu
 https://download.elastic.co/downloads/ecctl/v1.0.0-beta1/ecctl_v1.0.0-beta1_linux_amd64.tar.gz[ecctl_v1.0.0-beta1_linux_amd64.tar.gz]
 
 [float]
+[id="{p}-release-notes-v1.0.0-beta1-whats-new"]
 ==== What's new
 
 * *Create Kibana and APM resources with new deployment APIs*. With the availability of our deployment APIs for ECE, we’ve switched the `ecctl deployment` command to make use of the new APIs. This change ensures better supportability and compatibility with ECE functionality and allows you to control your deployments fully. 
@@ -101,6 +106,17 @@ WARNING: This flag is intended to help you complete a vacate operation, but it m
 * *Improved documentation*. We now include the full {p} command reference with our official documentation. We also added auto-completion instructions to the docs.
 
 [float]
+[id="{p}-release-notes-v1.0.0-beta1-bug-fixes"]
+==== Bug fixes
+
+* The `ecctl user key show` command no longer sends faulty parameters to the API server and now works as expected.
+* The `init` command now writes the JSON configuration without returning an error. 
+* The `--timeout` flag is now honored as expected, where before a static 30s timeout was used even when `Http.Client.Timeout` was specified.
+*  API errors which previously were returned as `unknown error (status xxx)` are now unpacked as expected.
+* The `user key show` command now works as expected. Previously, the Key ID was being set instead of the User ID.
+
+[float]
+[id="{p}-release-notes-v1.0.0-beta1-breaking-changes"]
 ==== Breaking changes
 
 * *Removed pluralized list commands*. We removed all plurals from {p} commands and now use only the format `ecctl <COMMAND> list`. Commands removed by this change are:
@@ -118,15 +134,7 @@ WARNING: This flag is intended to help you complete a vacate operation, but it m
 // Specifically, an upcoming change in ECE 2.5.0 will remove the ability to create deployments that specify a custom topology and only allows the creation of deployments that include a `deployment_template_id` in the create request. And, deployment templates might specify additional required resources, such as Kibana or APM, that need to be included during deployment creation.
 
 [float]
-==== Bug fixes
-
-* The `ecctl user key show` command no longer sends faulty parameters to the API server and now works as expected.
-* The `init` command now writes the JSON configuration without returning an error. 
-* The `--timeout` flag is now honored as expected, where before a static 30s timeout was used even when `Http.Client.Timeout` was specified.
-*  API errors which previously were returned as `unknown error (status xxx)` are now unpacked as expected.
-* The `user key show` command now works as expected. Previously, the Key ID was being set instead of the User ID.
-
-[float]
+[id="{p}-release-notes-v1.0.0-beta1-changelog"]
 ==== Changelog
 
 [%hardbreaks]
