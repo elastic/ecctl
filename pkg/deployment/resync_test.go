@@ -28,8 +28,6 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	multierror "github.com/hashicorp/go-multierror"
-
-	"github.com/elastic/ecctl/pkg/util"
 )
 
 func TestResync(t *testing.T) {
@@ -45,7 +43,7 @@ func TestResync(t *testing.T) {
 			name: "Fails due to parameter validation (Cluster ID)",
 			args: args{},
 			wantErr: &multierror.Error{Errors: []error{
-				util.ErrAPIReq,
+				errors.New("api reference is required for command"),
 				errors.New(`id "" is invalid`),
 			}},
 		},
@@ -55,7 +53,7 @@ func TestResync(t *testing.T) {
 				ID: "d324608c97154bdba2dff97511d40368",
 			}},
 			wantErr: &multierror.Error{Errors: []error{
-				util.ErrAPIReq,
+				errors.New("api reference is required for command"),
 			}},
 		},
 		{
@@ -84,7 +82,7 @@ func TestResync(t *testing.T) {
 			},
 		},
 		{
-			name: "Succeeds to resynchronize deployment without errors",
+			name: "Succeeds to resynchronize a deployment without errors",
 			args: args{params: ResyncParams{
 				ID: "d324608c97154bdba2dff97511d40368",
 				API: api.NewMock(mock.Response{Response: http.Response{
@@ -143,7 +141,7 @@ func TestResyncAll(t *testing.T) {
 			},
 		},
 		{
-			name: "Succeeds to resynchronize Deployment without errors",
+			name: "Succeeds to resynchronize all deployments without errors",
 			args: args{params: ResyncAllParams{
 				API: api.NewMock(mock.Response{Response: http.Response{
 					StatusCode: http.StatusOK,

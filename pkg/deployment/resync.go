@@ -18,23 +18,22 @@
 package deployment
 
 import (
-	"github.com/elastic/cloud-sdk-go/pkg/client/deployments"
 	"github.com/elastic/cloud-sdk-go/pkg/api"
+	"github.com/elastic/cloud-sdk-go/pkg/client/deployments"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	multierror "github.com/hashicorp/go-multierror"
 
-	"github.com/elastic/ecctl/pkg/util"
 	"github.com/elastic/ecctl/pkg/deployment/deputil"
+	"github.com/elastic/ecctl/pkg/util"
 )
 
-// ResyncParams represents parameters used to resynchronize an APM cluster.
+// ResyncParams is consumed by Resync
 type ResyncParams struct {
 	*api.API
 	ID string
 }
 
-// Validate ensures that the parameters such as APM cluster ID and
-// the API client object are valid before the API call is made.
+// Validate ensures the parameters are usable by the consuming function.
 func (params ResyncParams) Validate() error {
 	var err = multierror.Append(new(multierror.Error),
 		deputil.ValidateParams(&params),
@@ -56,7 +55,7 @@ func (params ResyncAllParams) Validate() error {
 }
 
 // Resync forces indexer to immediately resynchronize the search index
-// and cache for a given Kibana instance.
+// and cache for a given deployment.
 func Resync(params ResyncParams) error {
 	if err := params.Validate(); err != nil {
 		return err
@@ -71,7 +70,7 @@ func Resync(params ResyncParams) error {
 	)
 }
 
-// ResyncAll asynchronously resynchronizes the search index for all Kibana instances.
+// ResyncAll asynchronously resynchronizes the search index for all deployments.
 func ResyncAll(params ResyncAllParams) (*models.IndexSynchronizationResults, error) {
 	if err := params.Validate(); err != nil {
 		return nil, err

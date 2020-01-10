@@ -28,13 +28,14 @@ import (
 )
 
 var resyncDeploymentCmd = &cobra.Command{
-	Use:     "resync [<deployment id> | --all]",
-	Short:   "Resynchronizes the search index and cache for the selected deployment",
+	Use:     "resync {<deployment id> | --all}",
+	Short:   "Resynchronizes the search index and cache for the selected deployment or all",
 	PreRunE: cmdutil.CheckInputHas1ArgsOr0ArgAndAll,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		all, _ := cmd.Flags().GetBool("all")
 
 		if all {
+			fmt.Println("Resynchronizing all deployments")
 			res, err := deployment.ResyncAll(deployment.ResyncAllParams{
 				API: ecctl.Get().API,
 			})
