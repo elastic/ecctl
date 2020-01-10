@@ -40,7 +40,6 @@ ecctl deployment elasticsearch [flags]
 
 * [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
 * [ecctl deployment elasticsearch console](ecctl_deployment_elasticsearch_console.md)	 - Starts an interactive console with the cluster
-* [ecctl deployment elasticsearch create](ecctl_deployment_elasticsearch_create.md)	 - Creates an Elasticsearch cluster
 * [ecctl deployment elasticsearch delete](ecctl_deployment_elasticsearch_delete.md)	 - Deletes an Elasticsearch cluster
 * [ecctl deployment elasticsearch diagnose](ecctl_deployment_elasticsearch_diagnose.md)	 - Generates a diagnostics bundle for the cluster
 * [ecctl deployment elasticsearch instances](ecctl_deployment_elasticsearch_instances.md)	 - Manages elasticsearch at the instance level

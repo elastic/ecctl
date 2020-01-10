@@ -41,5 +41,6 @@ ecctl platform constructor [flags]
 * [ecctl platform](ecctl_platform.md)	 - Manages the platform
 * [ecctl platform constructor list](ecctl_platform_constructor_list.md)	 - Returns all of the constructors in the platform
 * [ecctl platform constructor maintenance](ecctl_platform_constructor_maintenance.md)	 - Sets/un-sets a constructor's maintenance mode
+* [ecctl platform constructor resync](ecctl_platform_constructor_resync.md)	 - Resynchronizes the search index and cache for the selected constructor or all
 * [ecctl platform constructor show](ecctl_platform_constructor_show.md)	 - Returns information about the constructor with given ID
 

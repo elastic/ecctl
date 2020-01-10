@@ -39,7 +39,7 @@ var Command = &cobra.Command{
 
 var enableMonitoringElasticsearchClusterCmd = &cobra.Command{
 	Use:     "enable <monitored cluster id> <monitoring cluster id>",
-	Short:   "Enables monitoring in the cluster <monitored cluster id>, sending data to the cluster <monitoring cluster id>",
+	Short:   "Enables monitoring for the cluster by sending data to a monitoring cluster you specify",
 	PreRunE: cmdutil.MinimumNArgsAndUUID(2),
 
 	RunE: func(cmd *cobra.Command, args []string) error {

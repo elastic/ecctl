@@ -1,18 +1,19 @@
 ## ecctl deployment kibana resync
 
-Resynchronizes the search index and cache for the selected Kibana instance
+Resynchronizes the search index and cache for the selected Kibana instance or all instances
 
 ### Synopsis
 
-Resynchronizes the search index and cache for the selected Kibana instance
+Resynchronizes the search index and cache for the selected Kibana instance or all instances
 
 ```
-ecctl deployment kibana resync <cluster id> [flags]
+ecctl deployment kibana resync {<deployment id> | --all} [flags]
 ```
 
 ### Options
 
 ```
+      --all    Resynchronizes the search index for all Kibana instances
   -h, --help   help for resync
 ```
 

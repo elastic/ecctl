@@ -68,13 +68,11 @@ Set the cluster instance to 3x of its current capacity:
 		storageMultiplier, _ := cmd.Flags().GetUint8("storage-multiplier")
 		value, _ := cmd.Flags().GetUint16("value")
 		reset, _ := cmd.Flags().GetBool("reset")
+		force, _ := cmd.Flags().GetBool("force")
 
 		if multiplier > 0 || value > 0 || reset {
-			if !cmdutil.ConfirmAction(
-				"WARNING: changing instance capacity incurs a rolling restart, do you want to continue? [n/y]: ",
-				os.Stdin,
-				os.Stdout,
-			) {
+			msg := "WARNING: changing instance capacity incurs a rolling restart, do you want to continue? [n/y]: "
+			if !force && !cmdutil.ConfirmAction(msg, os.Stdin, os.Stdout) {
 				return nil
 			}
 		}

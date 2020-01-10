@@ -30,17 +30,13 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 	"github.com/elastic/ecctl/pkg/util"
 )
 
 const (
-	homePrefix         = "$HOME"
-	bashCompletionFunc = `__ecctl_valid_regions()
-{
-   COMPREPLY=($(echo ${EC_REGIONS}))
-}
-`
+	homePrefix = "$HOME"
 )
 
 var (
@@ -51,6 +47,13 @@ var (
 	defaultViper  = viper.New()
 
 	ecctlHomePath = filepath.Join(homePrefix, ".ecctl")
+
+	bashCompletionFunc = `__ecctl_valid_regions()
+{
+   COMPREPLY=($(echo ${EC_REGIONS}))
+}
+` + cmdutil.StatelessTypesCompFunc + "\n" +
+		cmdutil.AllTypesCompFunc
 )
 
 var (
@@ -171,10 +174,6 @@ func initApp(cmd *cobra.Command, client *http.Client, v *viper.Viper) error {
 
 	if client == nil {
 		return errors.New("cmd: root http client cannot be nil")
-	}
-
-	if timeout := v.GetDuration("timeout"); timeout.Nanoseconds() > 0 {
-		client.Timeout = timeout
 	}
 
 	var c = ecctl.Config{

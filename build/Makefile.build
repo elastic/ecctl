@@ -5,6 +5,7 @@ BUILD_OUTPUT ?= "pkg/$(BINARY)_{{.OS}}_{{.Arch}}"
 CURRENT_ARCH := $(shell uname -s | tr '[:upper:]' '[:lower:]')
 export OWNER := elastic
 export REPO := ecctl
+export BUILT := $(shell date -u +%a_%d_%b_%H:%M:%S_%Y)
 
 DEFAULT_LDFLAGS ?= -X main.version=$(VERSION)-dev -X main.commit=$(shell git rev-parse HEAD) -X main.owner=$(OWNER) -X main.repo=$(REPO) -X main.built=$(shell date -u +%a_%d_%b_%H:%M:%S_%Y)
 
@@ -44,8 +45,9 @@ release:
 ifneq ($(SKIP_TAG),true)
 	@ $(MAKE) tag
 endif
-	@ echo "-> Releasing $(BINARY) v$(VERSION)..."
-	@ ./scripts/goreleaser release --rm-dist --release-notes=notes/$(VERSION).md
+	@ echo "-> Releasing $(BINARY) $(VERSION)..."
+	@ okta-awscli
+	@ ./scripts/goreleaser release --skip-validate --rm-dist --release-notes=notes/$(VERSION).md
 
 ## Generates a changelog file in notes/$(VERSION) for the next release.
 changelog:

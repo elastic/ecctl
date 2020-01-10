@@ -20,6 +20,7 @@ package cmdallocator
 import (
 	"errors"
 	"fmt"
+	"os"
 	"strconv"
 
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
@@ -59,7 +60,11 @@ const vacateExamples = `  ecctl [globalFlags] allocator vacate i-05e245252362f7f
 
   # Override the skip_data_migration setting
   ecctl [globalFlags] allocator vacate --skip-data-migration=true i-05e245252362f7f1d -c f521dedb07194c478fbbc6624f3bbf8f
-  `
+  
+  # Skips tracking the vacate progress which will cause the command to return almost immediately.
+  # Not recommended since it can lead to failed vacates without the operator knowing about them.
+  ecctl [globalFlags] allocator vacate --skip-tracking i-05e245252362f7f1d
+`
 
 var vacateAllocatorCmd = &cobra.Command{
 	Use:     "vacate <source>",
@@ -67,7 +72,6 @@ var vacateAllocatorCmd = &cobra.Command{
 	Example: vacateExamples,
 	PreRunE: cobra.MinimumNArgs(1),
 	Aliases: []string{"move-nodes"},
-
 	RunE: func(cmd *cobra.Command, args []string) error {
 		concurrency, err := strconv.ParseUint(cmd.Flag("concurrency").Value.String(), 10, 64)
 		if err != nil {
@@ -90,6 +94,14 @@ var vacateAllocatorCmd = &cobra.Command{
 		}
 
 		moveOnly, _ := cmd.Flags().GetBool("move-only")
+
+		overrideFailsafe, _ := cmd.Flags().GetBool("override-failsafe")
+		force, _ := cmd.Flags().GetBool("force")
+		var msg = "--override-failsafe has been flag specified. Are you sure you want to proceed? [y/N]: "
+		if overrideFailsafe && !force && !cmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
+			return nil
+		}
+
 		target, _ := cmd.Flags().GetStringSlice("target")
 		kind, _ := cmd.Flags().GetString("kind")
 
@@ -116,6 +128,11 @@ var vacateAllocatorCmd = &cobra.Command{
 		skipDataMigration, err := cmdutil.ActionConfirm(skipDataMigrationRaw, "--skip-data-migration flag specified. Are you sure you want to proceed? [y/N]: ")
 		if err != nil {
 			return err
+		}
+
+		skipTracking, _ := cmd.Flags().GetBool("skip-tracking")
+		if !force && skipTracking && !cmdutil.ConfirmAction("--skip-tracking flag specified. Are you sure you want to proceed? [y/N]: ", os.Stdin, os.Stderr) {
+			return nil
 		}
 
 		setAllocatorMaintenance, _ := cmd.Flags().GetBool("maintenance")
@@ -147,9 +164,11 @@ var vacateAllocatorCmd = &cobra.Command{
 			Concurrency:         uint16(concurrency),
 			Output:              ecctl.Get().Config.OutputDevice,
 			MoveOnly:            ec.Bool(moveOnly),
+			SkipTracking:        skipTracking,
 			PlanOverrides: allocator.PlanOverrides{
 				SkipSnapshot:      skipSnapshot,
 				SkipDataMigration: skipDataMigration,
+				OverrideFailsafe:  ec.Bool(overrideFailsafe),
 			},
 		}
 		if len(args) == 1 && allocatorDownRaw != "" {
@@ -170,7 +189,7 @@ func validateSkipDataMigration(clusters []string, moveOnly bool) error {
 
 func init() {
 	Command.AddCommand(vacateAllocatorCmd)
-
+	vacateAllocatorCmd.Flags().Bool("skip-tracking", false, "Skips tracking the vacate progress causing the command to return after the move operation has been executed. Not recommended.")
 	vacateAllocatorCmd.Flags().StringP("kind", "k", "", "Kind of workload to vacate (elasticsearch|kibana)")
 	vacateAllocatorCmd.Flags().StringArrayP("cluster", "c", nil, "Cluster IDs to include in the vacate")
 	vacateAllocatorCmd.Flags().StringArrayP("target", "t", nil, "Target allocator(s) on which to place the vacated workload")
@@ -178,6 +197,7 @@ func init() {
 	vacateAllocatorCmd.Flags().Uint("concurrency", 8, "Maximum number of concurrent moves to perform at any time")
 	vacateAllocatorCmd.Flags().String("allocator-down", "", "Disables the allocator health auto-discovery, setting the allocator-down to either [true|false]")
 	vacateAllocatorCmd.Flags().Bool("move-only", true, "Keeps the cluster in its current -possibly broken- state and just does the bare minimum to move the requested instances across to another allocator. [true|false]")
+	vacateAllocatorCmd.Flags().Bool("override-failsafe", false, "If false (the default) then the plan will fail out if it believes the requested sequence of operations can result in data loss - this flag will override some of these restraints. [true|false]")
 	vacateAllocatorCmd.Flags().String("skip-snapshot", "", "Skips the snapshot operation on the specified cluster IDs. ONLY available when the cluster IDs are specified. [true|false]")
 	vacateAllocatorCmd.Flags().String("skip-data-migration", "", "Skips the data-migration operation on the specified cluster IDs. ONLY available when the cluster IDs are specified and --move-only is true. [true|false]")
 }

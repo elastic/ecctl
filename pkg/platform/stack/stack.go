@@ -92,9 +92,15 @@ func Upload(params UploadParams) error {
 	var merr = new(multierror.Error)
 	for _, e := range res.Payload.Errors {
 		for _, ee := range e.Errors.Errors {
-			merr = multierror.Append(merr,
-				fmt.Errorf("%s: %s", *ee.Code, *ee.Message),
-			)
+			// ECE stack packs seem to have a __MACOSX packed file which is
+			// causing the command to return an error. Error thrown is:
+			// This version cannot be parsed: [__MACOSX] because:
+			// Unknown version string: [__MACOSX]
+			if !strings.Contains(*ee.Message, "__MACOSX") {
+				merr = multierror.Append(merr,
+					fmt.Errorf("%s: %s", *ee.Code, *ee.Message),
+				)
+			}
 		}
 	}
 	return merr.ErrorOrNil()

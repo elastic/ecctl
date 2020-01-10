@@ -243,6 +243,52 @@ func TestComputeVacateRequest(t *testing.T) {
 			},
 		},
 		{
+			name: "No filters with OverrideFailsafe override",
+			args: args{
+				pr: &models.MoveClustersDetails{
+					ElasticsearchClusters: []*models.MoveElasticsearchClusterDetails{
+						{
+							ClusterID: ec.String("63d765d37613423e97b1040257cf20c8"),
+							CalculatedPlan: &models.TransientElasticsearchPlanConfiguration{
+								PlanConfiguration: &models.ElasticsearchPlanControlConfiguration{
+									Timeout:              4096,
+									ReallocateInstances:  ec.Bool(false),
+									ExtendedMaintenance:  ec.Bool(false),
+									OverrideFailsafe:     ec.Bool(false),
+									SkipDataMigration:    ec.Bool(false),
+									SkipPostUpgradeSteps: ec.Bool(false),
+									SkipSnapshot:         ec.Bool(false),
+								},
+							},
+						},
+					},
+				},
+				clusters:  nil,
+				to:        nil,
+				overrides: PlanOverrides{OverrideFailsafe: ec.Bool(true)},
+			},
+			want: &models.MoveClustersRequest{
+				ElasticsearchClusters: []*models.MoveElasticsearchClusterConfiguration{
+					{
+						ClusterIds: []string{
+							"63d765d37613423e97b1040257cf20c8",
+						},
+						PlanOverride: &models.TransientElasticsearchPlanConfiguration{
+							PlanConfiguration: &models.ElasticsearchPlanControlConfiguration{
+								Timeout:              4096,
+								ReallocateInstances:  ec.Bool(false),
+								ExtendedMaintenance:  ec.Bool(false),
+								OverrideFailsafe:     ec.Bool(true),
+								SkipDataMigration:    ec.Bool(false),
+								SkipPostUpgradeSteps: ec.Bool(false),
+								SkipSnapshot:         ec.Bool(false),
+							},
+						},
+					},
+				},
+			},
+		},
+		{
 			name: "Set target allocator",
 			args: args{
 				pr: &models.MoveClustersDetails{
@@ -704,6 +750,24 @@ func TestVacateCluster(t *testing.T) {
 			),
 		},
 		{
+			name: "Succeeds with an elasticsearch cluster with no tracking",
+			args: args{
+				buf: new(bytes.Buffer),
+				params: &VacateClusterParams{
+					ID:             "someID",
+					ClusterID:      "3ee11eb40eda22cac0cce259625c6734",
+					Kind:           "elasticsearch",
+					Output:         new(output.Device),
+					TrackFrequency: time.Nanosecond,
+					SkipTracking:   true,
+					MaxPollRetries: 1,
+					API: discardResponses(
+						newElasticsearchVacateMove(t, "someID", vacateCaseClusterConfig{}),
+					),
+				},
+			},
+		},
+		{
 			name: "Succeeds with a kibana instance",
 			args: args{
 				buf: new(bytes.Buffer),
@@ -740,6 +804,24 @@ func TestVacateCluster(t *testing.T) {
 				"Cluster [2ee11eb40eda22cac0cce259625c6734][Kibana]: running step \"step3\" (Plan duration )...",
 				"\x1b[92;mCluster [2ee11eb40eda22cac0cce259625c6734][Kibana]: finished running all the plan steps\x1b[0m (Total plan duration )",
 			),
+		},
+		{
+			name: "Succeeds with a kibana instance with no tracking",
+			args: args{
+				buf: new(bytes.Buffer),
+				params: &VacateClusterParams{
+					ID:             "someID",
+					ClusterID:      "2ee11eb40eda22cac0cce259625c6734",
+					Kind:           "kibana",
+					Output:         new(output.Device),
+					TrackFrequency: time.Nanosecond,
+					SkipTracking:   true,
+					MaxPollRetries: 1,
+					API: discardResponses(
+						newKibanaVacateMove(t, "someID", vacateCaseClusterConfig{}),
+					),
+				},
+			},
 		},
 		{
 			name: "Moving kibana instance fails",

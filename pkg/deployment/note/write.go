@@ -19,15 +19,10 @@ package note
 
 import (
 	"errors"
-	"fmt"
 
-	"github.com/elastic/cloud-sdk-go/pkg/api"
-	"github.com/elastic/cloud-sdk-go/pkg/client/clusters_apm"
-	"github.com/elastic/cloud-sdk-go/pkg/client/clusters_kibana"
 	"github.com/elastic/cloud-sdk-go/pkg/client/deployments"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
-	"github.com/elastic/cloud-sdk-go/pkg/util/slice"
 	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
@@ -36,10 +31,7 @@ import (
 
 // AddParams is consumed by Add.
 type AddParams struct {
-	*api.API
-
-	ID          string
-	Type        string
+	Params
 	Message     string
 	UserID      string
 	Commentator ecctl.Commentator
@@ -47,30 +39,19 @@ type AddParams struct {
 
 // Validate ensures the parameters are valid
 func (params AddParams) Validate() error {
-	var err = new(multierror.Error)
-	if params.API == nil {
-		err = multierror.Append(err, util.ErrAPIReq)
-	}
-
-	if len(params.ID) != 32 {
-		err = multierror.Append(err, errors.New("invalid id"))
-	}
+	var merr = new(multierror.Error)
 
 	if params.UserID == "" {
-		err = multierror.Append(err, errors.New("user id cannot be empty"))
-	}
-
-	if !slice.HasString(util.ValidTypes, params.Type) {
-		err = multierror.Append(err,
-			fmt.Errorf("invalid type %s: valid types are %v", params.Type, util.ValidTypes),
-		)
+		merr = multierror.Append(merr, errors.New(errEmptyUserID))
 	}
 
 	if params.Message == "" {
-		err = multierror.Append(err, errors.New("message cannot be empty"))
+		merr = multierror.Append(merr, errors.New(errEmptyNoteMessage))
 	}
 
-	return err.ErrorOrNil()
+	merr = multierror.Append(merr, params.Params.Validate())
+
+	return merr.ErrorOrNil()
 }
 
 // Add posts a new message to the specified deployment
@@ -79,30 +60,8 @@ func Add(params AddParams) error {
 		return err
 	}
 
-	var deploymentID string
-	switch params.Type {
-	case "elasticsearch":
-		deploymentID = params.ID
-	case "kibana":
-		res, err := params.V1API.ClustersKibana.GetKibanaCluster(
-			clusters_kibana.NewGetKibanaClusterParams().
-				WithClusterID(params.ID),
-			params.AuthWriter,
-		)
-		if err != nil {
-			return api.UnwrapError(err)
-		}
-		deploymentID = *res.Payload.ElasticsearchCluster.ElasticsearchID
-	case "apm":
-		res, err := params.V1API.ClustersApm.GetApmCluster(
-			clusters_apm.NewGetApmClusterParams().
-				WithClusterID(params.ID),
-			params.AuthWriter,
-		)
-		if err != nil {
-			return api.UnwrapError(err)
-		}
-		deploymentID = *res.Payload.ElasticsearchCluster.ElasticsearchID
+	if err := params.fillDefaults(); err != nil {
+		return err
 	}
 
 	var message = params.Message
@@ -112,34 +71,11 @@ func Add(params AddParams) error {
 
 	return util.ReturnErrOnly(params.V1API.Deployments.CreateDeploymentNote(
 		deployments.NewCreateDeploymentNoteParams().
-			WithDeploymentID(deploymentID).
+			WithDeploymentID(params.ID).
 			WithBody(&models.Note{
 				Message: ec.String(message),
 				UserID:  params.UserID,
 			}),
 		params.AuthWriter,
 	))
-}
-
-// Update updates a note from its deployment and note ID
-func Update(params UpdateParams) (*models.Note, error) {
-	if err := params.Validate(); err != nil {
-		return nil, err
-	}
-
-	res, err := params.API.V1API.Deployments.UpdateDeploymentNote(
-		deployments.NewUpdateDeploymentNoteParams().
-			WithDeploymentID(params.ID).
-			WithNoteID(params.NoteID).
-			WithBody(&models.Note{
-				Message: ec.String(params.Message),
-				UserID:  params.UserID,
-			}),
-		params.AuthWriter,
-	)
-	if err != nil {
-		return nil, api.UnwrapError(err)
-	}
-
-	return res.Payload, nil
 }

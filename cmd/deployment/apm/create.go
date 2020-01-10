@@ -18,59 +18,119 @@
 package cmdapm
 
 import (
-	"encoding/json"
-	"os"
-	"path/filepath"
-
-	"github.com/elastic/cloud-sdk-go/pkg/input"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
-	"github.com/elastic/ecctl/pkg/deployment/apm"
+	"github.com/elastic/ecctl/pkg/deployment"
+	"github.com/elastic/ecctl/pkg/deployment/depresource"
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/util"
 )
 
 var createApmCmd = &cobra.Command{
-	Use:     "create -f <file definition> --id <deployment id>",
-	Short:   "Creates an APM instance in the selected deployment",
+	Use:     "create --id <deployment-id>",
+	Short:   "Creates an Apm instance",
+	Long:    apmCreateLong,
+	Example: apmCreateExample,
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if err := cmdutil.FileOrStdin(cmd, "file"); err != nil {
-			return err
+		var generatePayload, _ = cmd.Flags().GetBool("generate-payload")
+		var zoneCount, _ = cmd.Flags().GetInt32("zones")
+		var size, _ = cmd.Flags().GetInt32("size")
+		var name, _ = cmd.Flags().GetString("name")
+		var refID, _ = cmd.Flags().GetString("ref-id")
+		var esRefID, _ = cmd.Flags().GetString("elasticsearch-ref-id")
+		var id, _ = cmd.Flags().GetString("id")
+		var version, _ = cmd.Flags().GetString("version")
+		var dt, _ = cmd.Flags().GetString("deployment-template")
+		var region string
+		if ecctl.Get().Config.Region == "" {
+			region = cmdutil.DefaultECERegion
 		}
 
-		f, err := input.NewFileOrReader(os.Stdin, cmd.Flag("file").Value.String())
-		if err != nil {
-			return err
-		}
-		defer f.Close()
-
-		var definition models.CreateApmRequest
-		if err := json.NewDecoder(f).Decode(&definition); err != nil {
-			return err
+		var payload *models.ApmPayload
+		if err := cmdutil.FileOrStdin(cmd, "file"); err == nil {
+			err := cmdutil.DecodeDefinition(cmd, "file", &payload)
+			if err != nil && err != cmdutil.ErrNodefinitionLoaded {
+				return err
+			}
 		}
 
-		track, _ := cmd.Flags().GetBool("track")
-		res, err := apm.Create(apm.CreateParams{
-			API:              ecctl.Get().API,
-			ID:               cmd.Flag("id").Value.String(),
-			CreateApmRequest: definition,
-			TrackParams: util.TrackParams{
-				Track:  track,
-				Output: ecctl.Get().Config.OutputDevice,
+		if payload == nil {
+			p, err := depresource.NewApm(depresource.NewStateless{
+				DeploymentID:       id,
+				ElasticsearchRefID: esRefID,
+				API:                ecctl.Get().API,
+				RefID:              refID,
+				Version:            version,
+				Region:             region,
+				TemplateID:         dt,
+				Size:               size,
+				ZoneCount:          zoneCount,
+			})
+			if err != nil {
+				return err
+			}
+			payload = p
+		}
+
+		if payload.Region == nil || *payload.Region == "" {
+			payload.Region = ec.String(region)
+		}
+
+		// Returns the ApmPayload skipping the creation of the resources.
+		if generatePayload {
+			return ecctl.Get().Formatter.Format("", payload)
+		}
+
+		var updateParams = deployment.UpdateParams{
+			DeploymentID: id,
+			API:          ecctl.Get().API,
+			Request: &models.DeploymentUpdateRequest{
+				// Setting PruneOrphans to false since we don't want any side
+				// effects on the deployment when only a partial deployment
+				// definition is sent.
+				PruneOrphans: ec.Bool(false),
+				Name:         name,
+				Resources: &models.DeploymentUpdateResources{
+					Apm: []*models.ApmPayload{payload},
+				},
 			},
-		})
+		}
+
+		res, err := deployment.Update(updateParams)
 		if err != nil {
 			return err
 		}
-		return ecctl.Get().Formatter.Format(filepath.Join("apm", "create"), res)
+
+		var track, _ = cmd.Flags().GetBool("track")
+		return cmdutil.Track(cmdutil.TrackParams{
+			TrackResourcesParams: depresource.TrackResourcesParams{
+				API:          ecctl.Get().API,
+				Resources:    res.Resources,
+				Orphaned:     res.ShutdownResources,
+				OutputDevice: ecctl.Get().Config.OutputDevice,
+			},
+			Formatter: ecctl.Get().Formatter,
+			Track:     track,
+			Response:  res,
+		})
 	},
 }
 
 func init() {
-	createApmCmd.Flags().StringP("file", "f", "", "Deployment definition")
-	createApmCmd.Flags().String("id", "", "Overrides the deployment ID on which it's tied")
-	createApmCmd.Flags().Bool("track", false, cmdutil.TrackFlagMessage)
+	Command.AddCommand(createApmCmd)
+	createApmCmd.Flags().BoolP("track", "t", false, cmdutil.TrackFlagMessage)
+	createApmCmd.Flags().StringP("file", "f", "", "ApmPayload file definition. See help for more information")
+	createApmCmd.Flags().String("deployment-template", "", "Optional deployment template ID, automatically obtained from the current deployment")
+	createApmCmd.Flags().String("version", "", "Optional version to use. If not specified, it will default to the deployment's stack version")
+	createApmCmd.Flags().String("ref-id", "main-apm", "RefId for the Apm deployment")
+	createApmCmd.Flags().String("id", "", "Deployment ID where to create the Apm deployment")
+	createApmCmd.MarkFlagRequired("id")
+	createApmCmd.Flags().String("elasticsearch-ref-id", "", "Optional Elasticsearch ref ID where the Apm deployment will connect to")
+	createApmCmd.Flags().String("name", "", "Optional name to set for the Apm deployment (Overrides name if present)")
+	createApmCmd.Flags().Int32("zones", 1, "Number of zones the deployment will span")
+	createApmCmd.Flags().Int32("size", 512, "Memory (RAM) in MB that each of the deployment nodes will have")
+	createApmCmd.Flags().Bool("generate-payload", false, "Returns the ApmPayload without actually creating the deployment resources")
 }

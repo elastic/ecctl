@@ -1,0 +1,55 @@
+[#ecctl_deployment_apm]
+== ecctl deployment apm
+
+Manages APM deployments
+
+[float]
+=== Synopsis
+
+Manages APM deployments
+
+----
+ecctl deployment apm [flags]
+----
+
+[float]
+=== Options
+
+----
+  -h, --help   help for apm
+----
+
+[float]
+=== Options inherited from parent commands
+
+----
+      --apikey string      API key to use to authenticate (If empty will look for EC_APIKEY environment variable)
+      --config string      Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
+      --force              Do not ask for confirmation
+      --format string      Formats the output using a Go template
+      --host string        Base URL to use
+      --insecure           Skips all TLS validation
+      --message string     A message to set on cluster operation
+      --output string      Output format [text|json] (default "text")
+      --pass string        Password to use to authenticate (If empty will look for EC_PASS environment variable)
+      --pprof              Enables pprofing and saves the profile to pprof-20060102150405
+  -q, --quiet              Suppresses the configuration file used for the run, if any
+      --timeout duration   Timeout to use on all HTTP calls (default 30s)
+      --trace              Enables tracing saves the trace to trace-20060102150405
+      --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
+      --verbose            Enable verbose mode
+----
+
+[float]
+=== See also
+
+* xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
+* xref:ecctl_deployment_apm_create[ecctl deployment apm create]	 - Creates an Apm instance
+* xref:ecctl_deployment_apm_delete[ecctl deployment apm delete]	 - Deletes an APM deployment
+* xref:ecctl_deployment_apm_list[ecctl deployment apm list]	 - Lists the APM deployments
+* xref:ecctl_deployment_apm_plan[ecctl deployment apm plan]	 - Manages APM plans
+* xref:ecctl_deployment_apm_restart[ecctl deployment apm restart]	 - Restarts an APM deployment
+* xref:ecctl_deployment_apm_resync[ecctl deployment apm resync]	 - Resynchronizes the search index and cache for the selected APM deployment
+* xref:ecctl_deployment_apm_show[ecctl deployment apm show]	 - Shows the specified APM deployment
+* xref:ecctl_deployment_apm_stop[ecctl deployment apm stop]	 - Stops an APM deployment
+* xref:ecctl_deployment_apm_upgrade[ecctl deployment apm upgrade]	 - Upgrades an APM deployment to the Elasticsearch deployment version

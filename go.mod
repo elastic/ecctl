@@ -8,19 +8,18 @@ require (
 	github.com/chzyer/logex v1.1.10 // indirect
 	github.com/chzyer/test v0.0.0-20180213035817-a1ea475d72b1 // indirect
 	github.com/davecgh/go-spew v1.1.1
-	github.com/elastic/cloud-sdk-go v1.0.0-bc8
-	github.com/elastic/uptd v1.0.0
+	github.com/elastic/cloud-sdk-go v1.0.0-bc9
 	github.com/ghodss/yaml v1.0.0
-	github.com/go-openapi/runtime v0.19.8
-	github.com/go-openapi/strfmt v0.19.3
+	github.com/go-openapi/runtime v0.19.9
+	github.com/go-openapi/strfmt v0.19.4
 	github.com/hashicorp/go-multierror v1.0.0
 	github.com/marclop/elasticsearch-cli v0.0.0-20190212132418-ee09f7ae57f1
 	github.com/pkg/errors v0.8.1
 	github.com/pmezard/go-difflib v1.0.0
 	github.com/spf13/cobra v0.0.5
-	github.com/spf13/viper v1.5.0
+	github.com/spf13/pflag v1.0.5
+	github.com/spf13/viper v1.6.1
 	golang.org/x/crypto v0.0.0-20190829043050-9756ffdc2472
-	golang.org/x/oauth2 v0.0.0-20190211225200-5f6b76b7c9dd // indirect
 )
 
 replace sourcegraph.com/sourcegraph/go-diff v0.5.1 => github.com/sourcegraph/go-diff v0.5.1

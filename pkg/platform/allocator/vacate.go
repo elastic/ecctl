@@ -237,6 +237,7 @@ func newVacateClusterParams(params addAllocatorMovesToPoolParams, id, kind strin
 		ID:                  params.ID,
 		Kind:                kind,
 		ClusterID:           id,
+		SkipTracking:        params.VacateParams.SkipTracking,
 		ClusterFilter:       params.VacateParams.ClusterFilter,
 		PreferredAllocators: params.VacateParams.PreferredAllocators,
 		MaxPollRetries:      params.VacateParams.MaxPollRetries,
@@ -270,6 +271,10 @@ func VacateCluster(params *VacateClusterParams) error {
 
 	if err := moveClusterByType(params); err != nil {
 		return err
+	}
+
+	if params.SkipTracking {
+		return nil
 	}
 
 	return trackMovedCluster(params)
@@ -470,6 +475,10 @@ func ComputeVacateRequest(pr *models.MoveClustersDetails, clusters, to []string,
 
 		if overrides.SkipDataMigration != nil {
 			c.CalculatedPlan.PlanConfiguration.SkipDataMigration = overrides.SkipDataMigration
+		}
+
+		if overrides.OverrideFailsafe != nil {
+			c.CalculatedPlan.PlanConfiguration.OverrideFailsafe = overrides.OverrideFailsafe
 		}
 
 		c.CalculatedPlan.PlanConfiguration.PreferredAllocators = to

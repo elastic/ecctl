@@ -24,6 +24,8 @@ import (
 	cmdelasticsearch "github.com/elastic/ecctl/cmd/deployment/elasticsearch"
 	cmdkibana "github.com/elastic/ecctl/cmd/deployment/kibana"
 	cmddeploymentnote "github.com/elastic/ecctl/cmd/deployment/note"
+	cmddeploymentplan "github.com/elastic/ecctl/cmd/deployment/plan"
+	cmddeploymentresource "github.com/elastic/ecctl/cmd/deployment/resource"
 )
 
 // Command is the deployment subcommand
@@ -42,5 +44,7 @@ func init() {
 		cmdelasticsearch.Command,
 		cmdkibana.Command,
 		cmdapm.Command,
+		cmddeploymentplan.Command,
+		cmddeploymentresource.Command,
 	)
 }

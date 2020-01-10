@@ -1,10 +1,10 @@
 ## ecctl deployment elasticsearch monitoring enable
 
-Enables monitoring in the cluster <monitored cluster id>, sending data to the cluster <monitoring cluster id>
+Enables monitoring for the cluster by sending data to a monitoring cluster you specify
 
 ### Synopsis
 
-Enables monitoring in the cluster <monitored cluster id>, sending data to the cluster <monitoring cluster id>
+Enables monitoring for the cluster by sending data to a monitoring cluster you specify
 
 ```
 ecctl deployment elasticsearch monitoring enable <monitored cluster id> <monitoring cluster id> [flags]

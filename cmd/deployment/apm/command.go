@@ -35,10 +35,8 @@ var Command = &cobra.Command{
 
 func init() {
 	Command.AddCommand(
-		enableApmCmd,
 		listApmCmd,
 		showApmCmd,
-		createApmCmd,
 		deleteApmCmd,
 		stopApmCmd,
 		restartApmCmd,

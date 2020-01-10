@@ -39,6 +39,7 @@ link:https://brew.sh/[Homebrew]:
 ----
 $ brew tap elastic/tap
 $ brew install elastic/tap/ecctl
+
 Updating Homebrew...
 => Installing ecctl from elastic/ecctl
 ...
@@ -244,6 +245,50 @@ https://golang.org/pkg/text/template/[`text/templates`] on demand.
 [id="{p}-examples"]
 == Usage examples
 
+To create your first deployment, use the `ecctl deployment create` command, which accepts https://github.com/elastic/ecctl/blob/master/docs/ecctl_deployment_create.md#examples[a deployment description in the form of a JSON file] and a stack version and name as inputs.
+
+[source,sh]
+--
+ecctl deployment create --file ./deployment.json --name=my-new-deployment --version=7.4.1
+{
+  "created": true,
+  "id": "c44ad3fa558a237d0c17d0f4273801df",
+  "name": "my example cluster",
+  "resources": [
+    {
+      "cloud_id": "my_elasticsearch_cluster:REDACTED",
+      "credentials": {
+        "password": "REDACTED",
+        "username": "elastic"
+      },
+      "id": "edd8b0bf7ece46dab47acc7074a7f191",
+      "kind": "elasticsearch",
+      "ref_id": "my-es-cluster",
+      "region": "ece-region"
+    },
+    {
+      "elasticsearch_cluster_ref_id": "my-es-cluster",
+      "id": "44dd3575894b4fc89bd600f56d1c130d",
+      "kind": "kibana",
+      "ref_id": "my-kibana-instance",
+      "region": "ece-region"
+    },
+    {
+      "elasticsearch_cluster_ref_id": "my-es-cluster",
+      "id": "9868cd370bdc469a8364ece4fe0db16d",
+      "kind": "apm",
+      "ref_id": "my-apm-instance",
+      "region": "ece-region",
+      "secret_token": "REDACTED"
+    }
+  ]
+}
+--
+
+There’s much more you can use ecctl for. You can  explore ecctl and its various commands by issuing `ecctl <command> <help>` to see the different options that we support. 
+
+// NR as per Omer, ecctl elasticsearch is no longer supported (do we need to mention this in the release notes for beta1?)
+////
 Obtaining the ID, Version and health status
 
 [source]
@@ -268,6 +313,7 @@ $ ecctl stack list --format "${EC_FORMAT}" | sed '/^\s*$/d'
 6.2.3
 $ unset EC_FORMAT
 ----
+////
 
 [id="{p}-command-reference"]
 == Command reference
