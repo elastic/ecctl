@@ -37,9 +37,8 @@ link:https://brew.sh/[Homebrew]:
 
 [source]
 ----
-$ brew tap elastic/ecctl
-$ brew tap-pin elastic/ecctl
-$ brew install elastic/ecctl/ecctl
+$ brew tap elastic/tap
+$ brew install elastic/tap/ecctl
 Updating Homebrew...
 => Installing ecctl from elastic/ecctl
 ...
@@ -47,7 +46,7 @@ Updating Homebrew...
 🍺  /usr/local/Cellar/ecctl/1.0.0: 6 files, 13MB, built in 7 seconds
 ----
 
-NOTE: To get autocompletions working, they must be sourced from your shell profile.
+NOTE: To get autocompletions working make sure to run `source <(ecctl generate completions)`. If you prefer to add to your shell interpreter configuration file run `echo "source <(ecctl generate completions)" >> ~/.bash_profile` or `echo "source <(ecctl generate completions)" >> ~/.zshrc`.
 
 ////
 [float]
@@ -113,7 +112,7 @@ $ ecctl init
 Welcome to the Elastic Cloud CLI! This command will guide you through authenticating and setting some default values.
 
 Missing configuration file, would you like to initialise it? [y/n]: y
-Enter the URL of your ECE installation: http://192.168.44.10:12300
+Enter the URL of your ECE installation: https://192.168.44.10:12434
 
 What default output format would you like?
   [1] text - Human-readable output format, commands with no output templates defined will fall back to JSON.
@@ -273,7 +272,17 @@ $ unset EC_FORMAT
 [id="{p}-command-reference"]
 == Command reference
 
-See link:https://github.com/elastic/ecctl/blob/master/docs/ecctl.md[ecctl command reference].
+{n} includes commands to administer:
+
+* Platform components
+* Platform authentication
+* Platform users
+* Elastic Stack deployments
+* And more
+
+:leveloffset: +1 
+include::ecctl-command-reference-index.adoc[]
+:leveloffset: 0
 
 [id="{p}-contributing"]
 == Contributing
