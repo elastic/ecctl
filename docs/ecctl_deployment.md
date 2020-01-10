@@ -49,6 +49,7 @@ ecctl deployment [flags]
 * [ecctl deployment plan](ecctl_deployment_plan.md)	 - Manages deployment plans
 * [ecctl deployment resource](ecctl_deployment_resource.md)	 - Manages deployment resources
 * [ecctl deployment restore](ecctl_deployment_restore.md)	 - Restores a previously shut down deployment and all of its associated sub-resources
+* [ecctl deployment resync](ecctl_deployment_resync.md)	 - Resynchronizes the search index and cache for the selected deployment or all
 * [ecctl deployment search](ecctl_deployment_search.md)	 - Performs advanced deployment search using the Elasticsearch Query DSL
 * [ecctl deployment show](ecctl_deployment_show.md)	 - Shows the specified deployment resources
 * [ecctl deployment shutdown](ecctl_deployment_shutdown.md)	 - Shuts down a deployment and all of its associated sub-resources
