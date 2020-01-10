@@ -1,19 +1,20 @@
-## ecctl platform constructor
+## ecctl platform constructor resync
 
-Manages constructors
+Resynchronizes the search index and cache for the selected constructor or all
 
 ### Synopsis
 
-Manages constructors
+Resynchronizes the search index and cache for the selected constructor or all
 
 ```
-ecctl platform constructor [flags]
+ecctl platform constructor resync {<constructor id> | --all} [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for constructor
+      --all    Resynchronizes the search index for all constructors
+  -h, --help   help for resync
 ```
 
 ### Options inherited from parent commands
@@ -38,9 +39,5 @@ ecctl platform constructor [flags]
 
 ### SEE ALSO
 
-* [ecctl platform](ecctl_platform.md)	 - Manages the platform
-* [ecctl platform constructor list](ecctl_platform_constructor_list.md)	 - Returns all of the constructors in the platform
-* [ecctl platform constructor maintenance](ecctl_platform_constructor_maintenance.md)	 - Sets/un-sets a constructor's maintenance mode
-* [ecctl platform constructor resync](ecctl_platform_constructor_resync.md)	 - Resynchronizes the search index and cache for the selected constructor or all
-* [ecctl platform constructor show](ecctl_platform_constructor_show.md)	 - Returns information about the constructor with given ID
+* [ecctl platform constructor](ecctl_platform_constructor.md)	 - Manages constructors
 
