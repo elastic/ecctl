@@ -28,13 +28,5 @@ docker run --rm -ti --privileged \
     -v "$(pwd):/go/src/github.com/${OWNER}/${REPO}" \
     -w "/go/src/github.com/${OWNER}/${REPO}" ecctl:goreleaser ${*}
 
-# Upload the binaries and the checksums.
-for f in dist/*.{tar.gz,deb,rpm,txt}; do
-    aws --profile ecsecurity s3 cp --acl bucket-owner-full-control \
-    ${f} s3://download.elasticsearch.org/downloads/ecctl/${VERSION}/
-done
-
-# Create the actual Github Release.
-hub release create -F notes/${VERSION}.md -m ${VERSION}
-
-echo "-> Please update the brew formula https://github.com/elastic/homebrew-ecctl with the new version and checksums"
+# Run post actions
+./goreleaser-post-actions.sh ${VERSION}
