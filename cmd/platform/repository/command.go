@@ -191,5 +191,5 @@ func init() {
 
 	platformSnapshotCreateCmd.Flags().String("settings", "", "Configuration file for the snapshot repository")
 	platformSnapshotCreateCmd.Flags().String("type", "s3", "Repository type that will be configured")
-	cobra.MarkFlagRequired(platformSnapshotCreateCmd.Flags(), "settings")
+	platformSnapshotCreateCmd.MarkFlagFilename("settings", "json", "yaml", "yml")
 }

@@ -3,6 +3,6 @@
 {{- "NAME" }}{{tab}}{{ "TYPE" }}{{tab}}{{ "REGION" }}{{tab}}{{ "BUCKET NAME" }}{{tab}}{{ "ACCESS KEY" }}
 {{- range .Configs }}{{ $config := (toS3TypeConfig .Config) }}{{ $settings := $config.Settings }}
 {{ .RepositoryName }}{{tab}}{{ $config.Type }}{{tab}}{{ $settings.Region }}{{tab}}{{ $settings.Bucket }}
-{{ tab}}{{ $settings.AccessKey}}
+{{- tab}}{{ $settings.AccessKey}}
 {{- end }}
 {{end}}
