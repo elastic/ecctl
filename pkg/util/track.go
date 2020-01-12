@@ -28,16 +28,16 @@ import (
 const (
 	// DefaultRetries retries for the plan.TrackParams which accounts
 	// for the Pending plan not being present in the backend, it will retry
-	// the request the times specified here. 4 is the default anectdotically
-	// because it provides a maximum sleeping time of (PollFrequency * 2)^4
-	// or math.Exp2(4). Increasing this value will cause the PlanTracker to
+	// the request the times specified here. 2 is the default anectdotically
+	// because it provides a maximum sleeping time of (PollFrequency * 2)^2
+	// or math.Exp2(2). Increasing this value will cause the PlanTracker to
 	// sleep for more time than it's required, thus making ecctl less efficient.
-	DefaultRetries = 4
+	DefaultRetries = 2
 
 	// DefaultPollFrequency is frequency on which the API is polled for updates
 	// on pending plans. This value is also used as the cooldown time when used
 	// with MaxRetries > 0.
-	DefaultPollFrequency = time.Second
+	DefaultPollFrequency = time.Second * 10
 )
 
 // TrackParams are intended to be used as a field in other params structs
