@@ -14,14 +14,14 @@ The version is currently defined in the [Makefile](./Makefile) as an exported en
 
 ```Makefile
 SHELL := /bin/bash
-export VERSION ?= 1.0.0
+export VERSION ?= v1.0.0
 ```
 
 Say we want to perform a minor version release (i.e. no breaking changes and only new features and bug fixes are being included); in which case we'll update the _MINOR_ part of the version:
 
 ```Makefile
 SHELL := /bin/bash
-export VERSION ?= 1.1.0
+export VERSION ?= v1.1.0
 ```
 
 ### Generating a changelog for the new version
@@ -32,4 +32,4 @@ After a changelog has been manually curated, a new pull request can be opened wi
 
 ## Executing the release
 
-After the new changelog and version have been merged to master, the only thing remaining is to run `make release`. This is the makefile target which will do the release.
+After the new changelog and version have been merged to master, the only thing remaining is to run `make tag`. This is the makefile target which will push the GitHub tag and will trigger the corresponding [GitHub action](.github/workflows/release.yml) which will release ecctl.
