@@ -2,6 +2,7 @@ project_name: ecctl
 before:
   hooks:
     - go mod download
+    - go mod tidy
 release:
   github:
     owner: elastic
