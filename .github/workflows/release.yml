@@ -3,9 +3,10 @@ name: goreleaser
 on:
   push:
     tags:
-      - *.*.*
+      - '*.*.*'
 
 jobs:
+  release:
   name: Release a new version
   goreleaser:
     runs-on: ubuntu-latest
