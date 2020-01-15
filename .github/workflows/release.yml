@@ -6,8 +6,8 @@ on:
       - '*.*.*'
 
 jobs:
-  name: Release a new version
   goreleaser:
+    name: Release a new version
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
