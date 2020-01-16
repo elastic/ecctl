@@ -49,8 +49,8 @@ github.com/dgrijalva/jwt-go v3.2.0+incompatible/go.mod h1:E3ru+11k8xSBh+hMPgOLZm
 github.com/dgryski/go-sip13 v0.0.0-20181026042036-e10d5fee7954/go.mod h1:vAd38F8PWV+bWy6jNmig1y/TA+kYO4g3RSRF0IAv0no=
 github.com/docker/go-units v0.3.3/go.mod h1:fgPhTUdO+D/Jk86RDLlptpiXQzgHJF7gydDDbaIK4Dk=
 github.com/docker/go-units v0.4.0/go.mod h1:fgPhTUdO+D/Jk86RDLlptpiXQzgHJF7gydDDbaIK4Dk=
-github.com/elastic/cloud-sdk-go v1.0.0-bc9.0.20200116031708-0bf4c0725daf h1:Jh/vxpJEGd0c1vPAgSrVIl4fqZtjru1/ypfCRGGao5w=
-github.com/elastic/cloud-sdk-go v1.0.0-bc9.0.20200116031708-0bf4c0725daf/go.mod h1:nZFXjcp6QvdlJjFIpVSdCl52NsDQlxnEYRskeR92mAA=
+github.com/elastic/cloud-sdk-go v1.0.0-bc10 h1:F7zMgHX0QPhDYuF30Vguesvu0/F4yOhtzU4zwoi/er4=
+github.com/elastic/cloud-sdk-go v1.0.0-bc10/go.mod h1:nZFXjcp6QvdlJjFIpVSdCl52NsDQlxnEYRskeR92mAA=
 github.com/fatih/color v1.9.0/go.mod h1:eQcE1qtQxscV5RaZvpXrrb8Drkc3/DdQ+uUYCNjL+zU=
 github.com/fsnotify/fsnotify v0.0.0-20170329110642-4da3e2cfbabc/go.mod h1:jwhsz4b93w/PPRr/qN1Yymfu8t87LnFCMoQvtojpjFo=
 github.com/fsnotify/fsnotify v1.4.7 h1:IXs+QLmnXW2CcXuY+8Mzv/fWEsPGWxqefPtCP5CnV9I=
