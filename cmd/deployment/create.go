@@ -137,7 +137,7 @@ var createCmd = &cobra.Command{
 			return err
 		}
 
-		var region string
+		var region = ecctl.Get().Config.Region
 		if ecctl.Get().Config.Region == "" {
 			region = cmdutil.DefaultECERegion
 		}

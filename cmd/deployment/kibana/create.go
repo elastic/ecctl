@@ -45,7 +45,7 @@ var createKibanaCmd = &cobra.Command{
 		var id, _ = cmd.Flags().GetString("id")
 		var version, _ = cmd.Flags().GetString("version")
 		var dt, _ = cmd.Flags().GetString("deployment-template")
-		var region string
+		var region = ecctl.Get().Config.Region
 		if ecctl.Get().Config.Region == "" {
 			region = cmdutil.DefaultECERegion
 		}
