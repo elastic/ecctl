@@ -148,7 +148,7 @@ var updateCmd = &cobra.Command{
 		skipSnapshot, _ := cmd.Flags().GetBool("skip-snapshot")
 		hidePrunedOrphans, _ := cmd.Flags().GetBool("hide-pruned-orphans")
 
-		var region string
+		var region = ecctl.Get().Config.Region
 		if ecctl.Get().Config.Region == "" {
 			region = cmdutil.DefaultECERegion
 		}
