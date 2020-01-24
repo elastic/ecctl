@@ -106,7 +106,7 @@ func AddTrackFlags(cmd *cobra.Command) {
 }
 
 // GetTrackSettings obtains the currently set tracking settings, the first
-// return value being the MaxPolLRetries and the second one the poll frequency.
+// return value being the MaxPollRetries and the second one the poll frequency.
 func GetTrackSettings(cmd *cobra.Command) (int, time.Duration) {
 	maxPollRetries, _ := cmd.Flags().GetInt(maxPollRetriesFlag)
 	pollFrequency, _ := cmd.Flags().GetDuration(pollFrequencyFlag)
