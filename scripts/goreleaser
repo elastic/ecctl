@@ -29,4 +29,6 @@ docker run --rm -ti --privileged \
     -w "/go/src/github.com/${OWNER}/${REPO}" ecctl:goreleaser ${*}
 
 # Run post actions
-./goreleaser-post-actions.sh ${VERSION}
+if [[ ${1} != "snapshot" ]]; then
+    ./scripts/goreleaser-post-actions.sh ${VERSION}
+fi
