@@ -57,8 +57,10 @@ ecctl platform allocator vacate <source> [flags]
   -h, --help                         help for vacate
   -k, --kind string                  Kind of workload to vacate (elasticsearch|kibana)
   -m, --maintenance                  Whether to set the allocator(s) in maintenance before performing the vacate
+      --max-poll-retries int         Optional maximum plan tracking retries (default 2)
       --move-only                    Keeps the cluster in its current -possibly broken- state and just does the bare minimum to move the requested instances across to another allocator. [true|false] (default true)
       --override-failsafe            If false (the default) then the plan will fail out if it believes the requested sequence of operations can result in data loss - this flag will override some of these restraints. [true|false]
+      --poll-frequency duration      Optional polling frequency to check for plan change updates (default 10s)
       --skip-data-migration string   Skips the data-migration operation on the specified cluster IDs. ONLY available when the cluster IDs are specified and --move-only is true. [true|false]
       --skip-snapshot string         Skips the snapshot operation on the specified cluster IDs. ONLY available when the cluster IDs are specified. [true|false]
       --skip-tracking                Skips tracking the vacate progress causing the command to return after the move operation has been executed. Not recommended.
