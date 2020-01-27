@@ -10,7 +10,7 @@ require (
 	github.com/davecgh/go-spew v1.1.1
 	github.com/elastic/cloud-sdk-go v1.0.0-bc12
 	github.com/ghodss/yaml v1.0.0
-	github.com/go-openapi/runtime v0.19.9
+	github.com/go-openapi/runtime v0.19.10
 	github.com/go-openapi/strfmt v0.19.4
 	github.com/hashicorp/go-multierror v1.0.0
 	github.com/marclop/elasticsearch-cli v0.0.0-20190212132418-ee09f7ae57f1
