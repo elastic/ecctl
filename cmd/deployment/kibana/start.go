@@ -20,6 +20,7 @@ package cmdkibana
 import (
 	"fmt"
 
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -32,7 +33,7 @@ import (
 var startKibanaCmd = &cobra.Command{
 	Use:     "start <cluster id>",
 	Short:   "Starts a Kibana instance",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		c, err := kibana.Get(kibana.ClusterParams{
 			DeploymentParams: kibana.DeploymentParams{

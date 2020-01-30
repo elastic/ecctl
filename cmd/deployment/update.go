@@ -21,6 +21,7 @@ import (
 	"os"
 
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -128,11 +129,11 @@ var updateCmd = &cobra.Command{
 	Short:   "Updates a deployment from a file definition, allowing certain flag overrides",
 	Long:    updateLong,
 	Example: updateExample,
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		filename, _ := cmd.Flags().GetString("file")
 		var r models.DeploymentUpdateRequest
-		if err := cmdutil.DecodeFile(filename, &r); err != nil {
+		if err := sdkcmdutil.DecodeFile(filename, &r); err != nil {
 			return err
 		}
 
@@ -141,7 +142,7 @@ var updateCmd = &cobra.Command{
 
 		force, _ := cmd.Flags().GetBool("force")
 		var msg = `setting --prune-orphans to "true" will cause any resources not specified in the update request to be removed from the deployment, do you want to continue? [y/n]: `
-		if pruneOrphans && !force && !cmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
+		if pruneOrphans && !force && !sdkcmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
 			return nil
 		}
 

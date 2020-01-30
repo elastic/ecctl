@@ -18,6 +18,7 @@
 package cmddeploymentplan
 
 import (
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -30,7 +31,7 @@ import (
 var cancelPlan = &cobra.Command{
 	Use:     "cancel <deployment id> --type <type> --ref-id <ref-id>",
 	Short:   "Cancels a resource's pending plan",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		force, _ := cmd.Flags().GetBool("force")
 		resType, _ := cmd.Flags().GetString("type")

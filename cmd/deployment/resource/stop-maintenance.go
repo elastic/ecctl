@@ -20,6 +20,7 @@ package cmddeploymentresource
 import (
 	"fmt"
 
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/spf13/cobra"
 
@@ -32,7 +33,7 @@ import (
 var stopMaintCmd = &cobra.Command{
 	Use:     "stop-maintenance <deployment id> --type <type> [--all|--i <instance-id>,<instance-id>]",
 	Short:   "Stops maintenance mode on a deployment resource",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		resType, _ := cmd.Flags().GetString("type")
 		refID, _ := cmd.Flags().GetString("ref-id")
@@ -40,7 +41,7 @@ var stopMaintCmd = &cobra.Command{
 		ignoreMissing, _ := cmd.Flags().GetBool("ignore-missing")
 		all, _ := cmd.Flags().GetBool("all")
 
-		if err := cmdutil.IncompatibleFlags(cmd, "all", "instance-id"); err != nil {
+		if err := sdkcmdutil.IncompatibleFlags(cmd, "all", "instance-id"); err != nil {
 			fmt.Fprintln(cmd.OutOrStderr(), err)
 		}
 

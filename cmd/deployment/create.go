@@ -22,6 +22,7 @@ import (
 	"os"
 
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -133,7 +134,7 @@ var createCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		filename, _ := cmd.Flags().GetString("file")
 		var r models.DeploymentCreateRequest
-		if err := cmdutil.DecodeFile(filename, &r); err != nil {
+		if err := sdkcmdutil.DecodeFile(filename, &r); err != nil {
 			return err
 		}
 

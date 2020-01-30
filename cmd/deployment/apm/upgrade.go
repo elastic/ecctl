@@ -20,6 +20,7 @@ package cmdapm
 import (
 	"path/filepath"
 
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -31,7 +32,7 @@ import (
 var upgradeApmCmd = &cobra.Command{
 	Use:     "upgrade <deployment id>",
 	Short:   "Upgrades an APM deployment to the Elasticsearch deployment version",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		track, _ := cmd.Flags().GetBool("track")
 		res, err := apm.Upgrade(apm.UpgradeParams{

@@ -18,6 +18,7 @@
 package cmdelasticsearch
 
 import (
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -30,7 +31,7 @@ var upgradeElasticsearchVersionCmd = &cobra.Command{
 	Use:   "upgrade <cluster id> --version=<version>",
 	Short: "Upgrades the cluster to the specified version",
 
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		version := cmd.Flag("version").Value.String()
 		track, _ := cmd.Flags().GetBool("track")

@@ -20,6 +20,7 @@ package cmdapmplan
 import (
 	"path/filepath"
 
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -32,7 +33,7 @@ import (
 var reapplyLatestPlanCmd = &cobra.Command{
 	Use:     "reapply <cluster id>",
 	Short:   "Reapplies the latest plan attempt, resetting all transient settings",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		var reparams = &planutil.ReapplyParams{ID: args[0]}
 		// Obtains the parameter's value and sets it in params

@@ -21,6 +21,7 @@ import (
 	"fmt"
 	"path/filepath"
 
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -33,7 +34,7 @@ var listPlansCmd = &cobra.Command{
 	Use:     "history <cluster id>",
 	Short:   "Lists the plan history",
 	Aliases: []string{"attempts"},
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		track, _ := cmd.Flags().GetBool("track")
 		p, err := apm.ListPlanHistory(apm.PlanParams{

@@ -21,6 +21,7 @@ import (
 	"fmt"
 	"time"
 
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -32,7 +33,7 @@ import (
 var restartElasticsearchCmd = &cobra.Command{
 	Use:     "restart <cluster id>",
 	Short:   "Restarts an Elasticsearch cluster",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 
 	RunE: func(cmd *cobra.Command, args []string) error {
 		track, _ := cmd.Flags().GetBool("track")

@@ -24,6 +24,7 @@ import (
 
 	"github.com/elastic/cloud-sdk-go/pkg/input"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -42,7 +43,7 @@ The plan must be a valid ElasticsearchClusterPlan and will be validated against 
 	PreRunE: cobra.MinimumNArgs(1),
 
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if err := cmdutil.FileOrStdin(cmd, "file"); err != nil {
+		if err := sdkcmdutil.FileOrStdin(cmd, "file"); err != nil {
 			return err
 		}
 

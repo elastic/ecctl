@@ -20,6 +20,7 @@ package cmdelasticsearchinstances
 import (
 	"fmt"
 
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -32,7 +33,7 @@ var stopElasticsearchInstancesRoutingCmd = &cobra.Command{
 	Use:     "stop-routing <cluster id> [--all|--instances]",
 	Aliases: []string{"pause-routing"},
 	Short:   "Stops routing on specific Elasticsearch instances, use the --all flag to target all instances",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 
 	RunE: func(cmd *cobra.Command, args []string) error {
 		var clusterParams = util.ClusterParams{
@@ -40,7 +41,7 @@ var stopElasticsearchInstancesRoutingCmd = &cobra.Command{
 			API:       ecctl.Get().API,
 		}
 
-		if err := cmdutil.IncompatibleFlags(cmd, "all", "instance"); err != nil {
+		if err := sdkcmdutil.IncompatibleFlags(cmd, "all", "instance"); err != nil {
 			fmt.Fprintln(cmd.OutOrStderr(), err)
 		}
 
@@ -66,14 +67,14 @@ var startElasticsearchInstancesRoutingCmd = &cobra.Command{
 	Aliases: []string{"resume-routing"},
 
 	Short:   "Resumes routing on specific Elasticsearch instances, use the --all flag to target all instances",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		var clusterParams = util.ClusterParams{
 			ClusterID: args[0],
 			API:       ecctl.Get().API,
 		}
 
-		if err := cmdutil.IncompatibleFlags(cmd, "all", "instance"); err != nil {
+		if err := sdkcmdutil.IncompatibleFlags(cmd, "all", "instance"); err != nil {
 			fmt.Fprintln(cmd.OutOrStderr(), err)
 		}
 

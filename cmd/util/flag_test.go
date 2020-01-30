@@ -18,7 +18,6 @@
 package cmdutil
 
 import (
-	"errors"
 	"net/http"
 	"reflect"
 	"strconv"
@@ -96,60 +95,6 @@ func TestGetInstances(t *testing.T) {
 			}
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("GetInstances() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
-func TestIncompatibleFlags(t *testing.T) {
-	cmdWithSliceFlag := &cobra.Command{
-		Use: "something",
-		Run: func(cmd *cobra.Command, args []string) {},
-	}
-	cmdWithSliceFlag.Flags().StringSlice("instance", []string{"1", "2", "3"}, "instance")
-	cmdWithSliceFlag.Flags().Bool("all", false, "all")
-	cmdWithSliceFlag.ParseFlags([]string{})
-
-	cmdWithSliceFlagChanged := &cobra.Command{
-		Use: "something",
-		Run: func(cmd *cobra.Command, args []string) {},
-	}
-	cmdWithSliceFlagChanged.Flags().StringSlice("instance", []string{"1", "2", "3"}, "instance")
-	cmdWithSliceFlagChanged.Flags().Bool("all", false, "all")
-	cmdWithSliceFlagChanged.ParseFlags([]string{"--all", "--instance=1"})
-
-	type args struct {
-		cmd    *cobra.Command
-		first  string
-		second string
-	}
-	tests := []struct {
-		name string
-		args args
-		err  error
-	}{
-		{
-			name: "returns no error when no flag is specified",
-			args: args{
-				cmd:    cmdWithSliceFlag,
-				first:  "instance",
-				second: "all",
-			},
-		},
-		{
-			name: "returns an error when both flags are specified",
-			args: args{
-				cmd:    cmdWithSliceFlagChanged,
-				first:  "all",
-				second: "instance",
-			},
-			err: errors.New(`incompatible flags "--all" and "--instance" specified, "--instance" will be ignored"`),
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if err := IncompatibleFlags(tt.args.cmd, tt.args.first, tt.args.second); !reflect.DeepEqual(err, tt.err) {
-				t.Errorf("IncompatibleFlags() error = %v, wantErr %v", err, tt.err)
 			}
 		})
 	}

@@ -22,6 +22,7 @@ import (
 	"os"
 	"path/filepath"
 
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -48,14 +49,14 @@ Set all the instances in the cluster to 2x multiplier:
 
 Set the cluster instance to 3x of its current capacity:
     ecctl deployment elasticsearch instances override-capacity 18fc96c491b3d5e10e147463927a5349 --instance instance-0000000003 --multiplier 3`,
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		clusterParams := util.ClusterParams{
 			API:       ecctl.Get().API,
 			ClusterID: args[0],
 		}
 
-		if err := cmdutil.IncompatibleFlags(cmd, "all", "instance"); err != nil {
+		if err := sdkcmdutil.IncompatibleFlags(cmd, "all", "instance"); err != nil {
 			fmt.Fprintln(cmd.OutOrStderr(), err)
 		}
 
@@ -72,7 +73,7 @@ Set the cluster instance to 3x of its current capacity:
 
 		if multiplier > 0 || value > 0 || reset {
 			msg := "WARNING: changing instance capacity incurs a rolling restart, do you want to continue? [n/y]: "
-			if !force && !cmdutil.ConfirmAction(msg, os.Stdin, os.Stdout) {
+			if !force && !sdkcmdutil.ConfirmAction(msg, os.Stdin, os.Stdout) {
 				return nil
 			}
 		}

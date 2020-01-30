@@ -18,6 +18,7 @@
 package cmdelasticsearch
 
 import (
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -30,7 +31,7 @@ var shutdownElasticsearchCmd = &cobra.Command{
 	Use:     "shutdown <cluster id>",
 	Aliases: []string{"stop"},
 	Short:   "Shuts down an Elasticsearch cluster, so that it no longer contains any running instances",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 
 	RunE: func(cmd *cobra.Command, args []string) error {
 		track, _ := cmd.Flags().GetBool("track")

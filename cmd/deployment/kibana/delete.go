@@ -18,6 +18,7 @@
 package cmdkibana
 
 import (
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -29,7 +30,7 @@ import (
 var deleteKibanaCmd = &cobra.Command{
 	Use:     "delete <cluster id>",
 	Short:   "Deletes a Kibana instance",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if stop, _ := cmd.Flags().GetBool("stop"); stop {
