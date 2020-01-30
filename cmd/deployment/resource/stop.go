@@ -21,6 +21,7 @@ import (
 	"fmt"
 	"os"
 
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/spf13/cobra"
 
@@ -33,7 +34,7 @@ import (
 var stopCmd = &cobra.Command{
 	Use:     "stop <deployment id> --type <type> [--all|--i <instance-id>,<instance-id>]",
 	Short:   "Stops a deployment resource",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		resType, _ := cmd.Flags().GetString("type")
 		refID, _ := cmd.Flags().GetString("ref-id")
@@ -42,12 +43,12 @@ var stopCmd = &cobra.Command{
 		all, _ := cmd.Flags().GetBool("all")
 		force, _ := cmd.Flags().GetBool("force")
 
-		if err := cmdutil.IncompatibleFlags(cmd, "all", "instance-id"); err != nil {
+		if err := sdkcmdutil.IncompatibleFlags(cmd, "all", "instance-id"); err != nil {
 			fmt.Fprintln(cmd.OutOrStderr(), err)
 		}
 
 		var msg = "This action will incur in downtime if used with the --all flag. Do you want to continue? [y/n]: "
-		if all && !force && !cmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
+		if all && !force && !sdkcmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
 			return nil
 		}
 

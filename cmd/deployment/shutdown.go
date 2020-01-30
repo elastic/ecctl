@@ -20,6 +20,7 @@ package cmddeployment
 import (
 	"os"
 
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -31,11 +32,11 @@ import (
 var shutdownCmd = &cobra.Command{
 	Use:     "shutdown <deployment-id>",
 	Short:   "Shuts down a deployment and all of its associated sub-resources",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		force, _ := cmd.Flags().GetBool("force")
 		var msg = "This action will delete the specified deployment ID and its associated sub-resources, do you want to continue? [y/n]: "
-		if !force && !cmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
+		if !force && !sdkcmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
 			return nil
 		}
 

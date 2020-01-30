@@ -20,9 +20,9 @@ package cmdkibana
 import (
 	"path/filepath"
 
+	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
-	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/deployment/deputil"
 	"github.com/elastic/ecctl/pkg/deployment/kibana"
 	"github.com/elastic/ecctl/pkg/ecctl"

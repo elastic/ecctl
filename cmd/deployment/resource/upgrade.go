@@ -19,6 +19,7 @@ package cmddeploymentresource
 
 import (
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/spf13/cobra"
 
@@ -33,7 +34,7 @@ var upgradeCmd = &cobra.Command{
 	Use:     "upgrade <deployment id> --type <type> --ref-id <ref-id>",
 	Short:   "Upgrades a deployment resource",
 	Long:    upgradeLong,
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		resType, _ := cmd.Flags().GetString("type")
 		refID, _ := cmd.Flags().GetString("ref-id")

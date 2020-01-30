@@ -18,6 +18,7 @@
 package cmdkibana
 
 import (
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -29,7 +30,7 @@ import (
 var restartKibanaCmd = &cobra.Command{
 	Use:     "restart <cluster id>",
 	Short:   "Restarts a Kibana instance",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		track, _ := cmd.Flags().GetBool("track")
 		return kibana.Restart(kibana.DeploymentParams{

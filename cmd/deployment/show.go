@@ -18,6 +18,7 @@
 package cmddeployment
 
 import (
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/elastic/cloud-sdk-go/pkg/util/slice"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
@@ -41,7 +42,7 @@ var showCmd = &cobra.Command{
 	Use:     "show <deployment-id>",
 	Short:   "Shows the specified deployment resources",
 	Example: showExample,
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		resourceType, _ := cmd.Flags().GetString("type")
 		if resourceType != "" && !slice.HasString(acceptedTypes, resourceType) {

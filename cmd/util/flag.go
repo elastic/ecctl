@@ -62,18 +62,6 @@ func GetInstances(cmd *cobra.Command, params util.ClusterParams, flagName string
 	return cmd.Flags().GetStringSlice(flagName)
 }
 
-// IncompatibleFlags checks if both flags have been specified, and if so
-// returns an error.
-func IncompatibleFlags(cmd *cobra.Command, first, second string) error {
-	if cmd.Flag(first).Changed && cmd.Flag(second).Changed {
-		return fmt.Errorf(
-			`incompatible flags "--%s" and "--%s" specified, "--%s" will be ignored"`,
-			first, second, second,
-		)
-	}
-	return nil
-}
-
 // AddTypeFlag adds a type string  flag to the specified command, with the
 // resource types autocompletion function. It is intended to be used for any
 // commands which call the deployment/resource APIs.

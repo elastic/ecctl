@@ -19,6 +19,7 @@ package cmdkibana
 
 import (
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/spf13/cobra"
 
@@ -51,9 +52,9 @@ var createKibanaCmd = &cobra.Command{
 		}
 
 		var payload *models.KibanaPayload
-		if err := cmdutil.FileOrStdin(cmd, "file"); err == nil {
-			err := cmdutil.DecodeDefinition(cmd, "file", &payload)
-			if err != nil && err != cmdutil.ErrNodefinitionLoaded {
+		if err := sdkcmdutil.FileOrStdin(cmd, "file"); err == nil {
+			err := sdkcmdutil.DecodeDefinition(cmd, "file", &payload)
+			if err != nil && err != sdkcmdutil.ErrNodefinitionLoaded {
 				return err
 			}
 		}

@@ -20,6 +20,7 @@ package cmddeploymentresource
 import (
 	"os"
 
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -33,7 +34,7 @@ var shutdownCmd = &cobra.Command{
 	Use:     "shutdown <deployment id> --type <type> --ref-id <ref-id>",
 	Short:   "Shuts down a deployment resource by its type and ref-id",
 	Long:    shutdownLong,
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		resType, _ := cmd.Flags().GetString("type")
 		refID, _ := cmd.Flags().GetString("ref-id")
@@ -42,7 +43,7 @@ var shutdownCmd = &cobra.Command{
 
 		force, _ := cmd.Flags().GetBool("force")
 		var msg = "This action will shut down a deployment's resource type. Do you want to continue? [y/n]: "
-		if !force && !cmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
+		if !force && !sdkcmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
 			return nil
 		}
 

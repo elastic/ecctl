@@ -20,6 +20,7 @@ package cmdapmplan
 import (
 	"fmt"
 
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -31,7 +32,7 @@ import (
 var cancelPlanCmd = &cobra.Command{
 	Use:     "cancel <cluster id>",
 	Short:   "Cancels the pending plan",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		track, _ := cmd.Flags().GetBool("track")
 		err := apm.CancelPlan(apm.PlanParams{

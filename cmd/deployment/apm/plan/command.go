@@ -18,9 +18,8 @@
 package cmdapmplan
 
 import (
+	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
-
-	cmdutil "github.com/elastic/ecctl/cmd/util"
 )
 
 // Command represents the APM plan subcommand.

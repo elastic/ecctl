@@ -21,6 +21,7 @@ import (
 	"fmt"
 	"os"
 
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -33,7 +34,7 @@ import (
 var restoreCmd = &cobra.Command{
 	Use:     "restore <deployment id> --type <type> --ref-id <ref-id>",
 	Short:   "Restores a previously shut down deployment resource",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		resType, _ := cmd.Flags().GetString("type")
 		refID, _ := cmd.Flags().GetString("ref-id")
@@ -43,7 +44,7 @@ var restoreCmd = &cobra.Command{
 		var esType = resType == "elasticsearch"
 		var dataLoss = esType && !restoreSnapshot
 		var msg = "This action restores an Elasticsearch resource without its snapshot which might incur data loss, do you want to continue? [y/n]: "
-		if dataLoss && !force && !cmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
+		if dataLoss && !force && !sdkcmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
 			return nil
 		}
 

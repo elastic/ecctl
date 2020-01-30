@@ -20,9 +20,9 @@ package cmddeploymentnote
 import (
 	"path/filepath"
 
+	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
-	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/deployment/note"
 	"github.com/elastic/ecctl/pkg/ecctl"

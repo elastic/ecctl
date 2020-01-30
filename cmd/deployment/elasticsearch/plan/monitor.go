@@ -21,6 +21,7 @@ import (
 	"time"
 
 	"github.com/elastic/cloud-sdk-go/pkg/plan"
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -32,7 +33,7 @@ var monitorPlanCmd = &cobra.Command{
 	Use:     "monitor <cluster id>",
 	Aliases: []string{"track"},
 	Short:   "Monitors the pending plan",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		return util.TrackCluster(util.TrackClusterParams{
 			TrackParams: plan.TrackParams{

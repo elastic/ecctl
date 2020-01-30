@@ -20,6 +20,7 @@ package cmdelasticsearch
 import (
 	"fmt"
 
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -31,7 +32,7 @@ import (
 var startElasticsearchCmd = &cobra.Command{
 	Use:     "start <cluster id>",
 	Short:   "Starts a stopped Elasticsearch cluster",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 
 	RunE: func(cmd *cobra.Command, args []string) error {
 		c, err := elasticsearch.GetCluster(elasticsearch.GetClusterParams{

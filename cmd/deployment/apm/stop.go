@@ -18,6 +18,7 @@
 package cmdapm
 
 import (
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -29,7 +30,7 @@ import (
 var stopApmCmd = &cobra.Command{
 	Use:     "stop <apm deployment id>",
 	Short:   "Stops an APM deployment",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	Aliases: []string{"shutdown"},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		track, _ := cmd.Flags().GetBool("track")

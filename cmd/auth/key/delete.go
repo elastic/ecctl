@@ -22,10 +22,10 @@ import (
 	"sync"
 	"time"
 
+	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	multierror "github.com/hashicorp/go-multierror"
 	"github.com/spf13/cobra"
 
-	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 	userauth "github.com/elastic/ecctl/pkg/user/auth"
 )
