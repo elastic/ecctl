@@ -20,7 +20,6 @@ package allocator
 import (
 	"fmt"
 	"strings"
-	"time"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/platform_infrastructure"
@@ -31,15 +30,11 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/util/slice"
 	multierror "github.com/hashicorp/go-multierror"
 	"github.com/pkg/errors"
+
+	"github.com/elastic/ecctl/pkg/util"
 )
 
 const (
-	// DefaultTrackRetries is used when TrackRetries is empty
-	DefaultTrackRetries uint8 = 4
-
-	// DefaultTrackFrequency is used when TrackFrequency is 0
-	DefaultTrackFrequency = time.Second
-
 	// PlanPendingMessage is used to discard
 	PlanPendingMessage = "There is a plan still pending, cancel that or wait for it to complete before restarting"
 )
@@ -301,11 +296,11 @@ func fillVacateClusterParams(params *VacateClusterParams) (*VacateClusterParams,
 	}
 
 	if params.MaxPollRetries == 0 {
-		params.MaxPollRetries = DefaultTrackRetries
+		params.MaxPollRetries = util.DefaultRetries
 	}
 
 	if params.TrackFrequency.Nanoseconds() == 0 {
-		params.TrackFrequency = DefaultTrackFrequency
+		params.TrackFrequency = util.DefaultPollFrequency
 	}
 
 	return params, nil

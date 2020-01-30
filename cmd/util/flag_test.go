@@ -21,7 +21,9 @@ import (
 	"errors"
 	"net/http"
 	"reflect"
+	"strconv"
 	"testing"
+	"time"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
@@ -212,6 +214,104 @@ func TestAddTypeFlag(t *testing.T) {
 			got.Value = nil
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("AddTypeFlag() got = \n%+v, want \n%+v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestAddTrackFlags(t *testing.T) {
+	var wantRetriesPflag = &flag.Flag{
+		Name:     maxPollRetriesFlag,
+		DefValue: strconv.Itoa(util.DefaultRetries),
+		Usage:    "Optional maximum plan tracking retries",
+	}
+	var wantPollFrequencyPflag = &flag.Flag{
+		Name:     pollFrequencyFlag,
+		DefValue: util.DefaultPollFrequency.String(),
+		Usage:    "Optional polling frequency to check for plan change updates",
+	}
+	type args struct {
+		cmd *cobra.Command
+	}
+	tests := []struct {
+		name          string
+		args          args
+		wantRetries   *flag.Flag
+		wantFrequency *flag.Flag
+	}{
+		{
+			name: "Annotates the type flag with all types",
+			args: args{
+				cmd: &cobra.Command{
+					Use: "somethingrequired",
+					Run: func(cmd *cobra.Command, args []string) {},
+				},
+			},
+			wantRetries:   wantRetriesPflag,
+			wantFrequency: wantPollFrequencyPflag,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			AddTrackFlags(tt.args.cmd)
+		})
+		gotRetries := tt.args.cmd.Flag(maxPollRetriesFlag)
+		gotRetries.Value = nil
+		if !reflect.DeepEqual(gotRetries, tt.wantRetries) {
+			t.Errorf("AddTypeFlag() gotRetries = \n%+v, wantRetries \n%+v", gotRetries, tt.wantRetries)
+		}
+		gotFrequency := tt.args.cmd.Flag(pollFrequencyFlag)
+		gotFrequency.Value = nil
+		if !reflect.DeepEqual(gotFrequency, tt.wantFrequency) {
+			t.Errorf("AddTypeFlag() gotFrequency = \n%+v, wantFrequency \n%+v", gotFrequency, tt.wantFrequency)
+		}
+	}
+}
+
+func TestGetTrackSettings(t *testing.T) {
+	c := &cobra.Command{
+		Use: "somethingrequired",
+		Run: func(cmd *cobra.Command, args []string) {},
+	}
+	AddTrackFlags(c)
+
+	c2 := &cobra.Command{
+		Use: "somethingrequired",
+		Run: func(cmd *cobra.Command, args []string) {},
+	}
+	AddTrackFlags(c2)
+	_ = c2.Flag(maxPollRetriesFlag).Value.Set("5")
+	_ = c2.Flag(pollFrequencyFlag).Value.Set("50s")
+	type args struct {
+		cmd *cobra.Command
+	}
+	tests := []struct {
+		name  string
+		args  args
+		want  int
+		want1 time.Duration
+	}{
+		{
+			name:  "Gets default values",
+			args:  args{cmd: c},
+			want:  util.DefaultRetries,
+			want1: util.DefaultPollFrequency,
+		},
+		{
+			name:  "Gets the changed values",
+			args:  args{cmd: c2},
+			want:  5,
+			want1: time.Second * 50,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, got1 := GetTrackSettings(tt.args.cmd)
+			if got != tt.want {
+				t.Errorf("GetTrackSettings() got = %v, want %v", got, tt.want)
+			}
+			if got1 != tt.want1 {
+				t.Errorf("GetTrackSettings() got1 = %v, want %v", got1, tt.want1)
 			}
 		})
 	}

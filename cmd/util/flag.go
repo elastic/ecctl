@@ -20,6 +20,7 @@ package cmdutil
 import (
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/spf13/cobra"
 
@@ -33,6 +34,11 @@ const (
    COMPREPLY=( %s )
 }
 `
+)
+
+const (
+	maxPollRetriesFlag = "max-poll-retries"
+	pollFrequencyFlag  = "poll-frequency"
 )
 
 var (
@@ -90,4 +96,19 @@ func AddTypeFlag(cmd *cobra.Command, prefix string, all bool) *string {
 	cmd.Flag("type").Annotations = map[string][]string{cobra.BashCompCustom: {comp}}
 
 	return s
+}
+
+// AddTrackFlags adds flags which control the tracking frequency to the passed
+// command reference.
+func AddTrackFlags(cmd *cobra.Command) {
+	cmd.Flags().Int(maxPollRetriesFlag, util.DefaultRetries, "Optional maximum plan tracking retries")
+	cmd.Flags().Duration(pollFrequencyFlag, util.DefaultPollFrequency, "Optional polling frequency to check for plan change updates")
+}
+
+// GetTrackSettings obtains the currently set tracking settings, the first
+// return value being the MaxPollRetries and the second one the poll frequency.
+func GetTrackSettings(cmd *cobra.Command) (int, time.Duration) {
+	maxPollRetries, _ := cmd.Flags().GetInt(maxPollRetriesFlag)
+	pollFrequency, _ := cmd.Flags().GetDuration(pollFrequencyFlag)
+	return maxPollRetries, pollFrequency
 }

@@ -155,6 +155,7 @@ var vacateAllocatorCmd = &cobra.Command{
 			fmt.Fprint(ecctl.Get().Config.OutputDevice, merr)
 		}
 
+		maxRetries, pollFrequency := cmdutil.GetTrackSettings(cmd)
 		var params = &allocator.VacateParams{
 			API:                 ecctl.Get().API,
 			Allocators:          args,
@@ -170,6 +171,8 @@ var vacateAllocatorCmd = &cobra.Command{
 				SkipDataMigration: skipDataMigration,
 				OverrideFailsafe:  ec.Bool(overrideFailsafe),
 			},
+			MaxPollRetries: uint8(maxRetries),
+			TrackFrequency: pollFrequency,
 		}
 		if len(args) == 1 && allocatorDownRaw != "" {
 			params.AllocatorDown = &allocatorDown
@@ -200,4 +203,5 @@ func init() {
 	vacateAllocatorCmd.Flags().Bool("override-failsafe", false, "If false (the default) then the plan will fail out if it believes the requested sequence of operations can result in data loss - this flag will override some of these restraints. [true|false]")
 	vacateAllocatorCmd.Flags().String("skip-snapshot", "", "Skips the snapshot operation on the specified cluster IDs. ONLY available when the cluster IDs are specified. [true|false]")
 	vacateAllocatorCmd.Flags().String("skip-data-migration", "", "Skips the data-migration operation on the specified cluster IDs. ONLY available when the cluster IDs are specified and --move-only is true. [true|false]")
+	cmdutil.AddTrackFlags(vacateAllocatorCmd)
 }
