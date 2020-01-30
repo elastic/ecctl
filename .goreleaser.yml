@@ -27,7 +27,7 @@ builds:
   binary: ecctl
   lang: go
 archives:
-  - name_template: '{{ .ProjectName }}_{{ .Env.VERSION }}_{{ .Os }}_{{ .Arch }}{{ if .Arm}}v{{ .Arm }}{{ end }}'
+  - name_template: '{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm}}v{{ .Arm }}{{ end }}'
     format: tar.gz
     files:
     - LICENSE*
@@ -36,7 +36,7 @@ archives:
 snapshot:
   name_template: SNAPSHOT-{{ .Commit }}
 nfpms:
-  - file_name_template: "{{ .ProjectName }}_{{ .Env.VERSION }}_{{ .Os }}_{{ .Arch }}"
+  - file_name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
     license: Apache 2.0
     replacements:
       amd64: 64-bit
@@ -45,5 +45,5 @@ nfpms:
       - deb
       - rpm
 checksum:
-  name_template: '{{ .ProjectName }}_{{ .Env.VERSION }}_checksums.txt'
+  name_template: '{{ .ProjectName }}_{{ .Version }}_checksums.txt'
 dist: dist
