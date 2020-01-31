@@ -77,7 +77,7 @@ func TestList(t *testing.T) {
 			},
 		},
 		{
-			name: "Runner list with an empty API",
+			name: "Runner list fails with an empty API",
 			args: args{params: Params{
 				API: nil,
 			}},
