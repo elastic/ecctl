@@ -1,0 +1,7 @@
+{{- define "override" }}{{ range .Runners }}{{executeTemplate .}}
+{{ end }}{{ end }}{{ define "default" }}
+{{- "RUNNER ID" }}{{tab}}{{"HOST IP" }}{{tab}}{{ "PUBLIC HOSTNAME" }}{{tab}}{{ "HEALTHY" }}{{tab}}{{ "CONNECTED" }}
+{{- range .Runners }}
+{{ .RunnerID }}{{tab}}{{ .HostIP }}{{tab}}{{ .PublicHostname }}{{tab}}{{ .Healthy }}{{tab}}{{ .Connected }}
+{{- end}}
+{{end}}

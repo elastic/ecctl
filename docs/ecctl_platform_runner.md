@@ -1,19 +1,19 @@
-## ecctl platform
+## ecctl platform runner
 
-Manages the platform
+Manages platform runners
 
 ### Synopsis
 
-Manages the platform
+Manages platform runners
 
 ```
-ecctl platform [flags]
+ecctl platform runner [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for platform
+  -h, --help   help for runner
 ```
 
 ### Options inherited from parent commands
@@ -38,16 +38,6 @@ ecctl platform [flags]
 
 ### SEE ALSO
 
-* [ecctl](ecctl.md)	 - Elastic Cloud Control
-* [ecctl platform allocator](ecctl_platform_allocator.md)	 - Manages allocators
-* [ecctl platform constructor](ecctl_platform_constructor.md)	 - Manages constructors
-* [ecctl platform deployment-template](ecctl_platform_deployment-template.md)	 - Manages deployment templates
-* [ecctl platform enrollment-token](ecctl_platform_enrollment-token.md)	 - Manages tokens
-* [ecctl platform info](ecctl_platform_info.md)	 - Shows information about the platform
-* [ecctl platform instance-configuration](ecctl_platform_instance-configuration.md)	 - Manages instance configurations
-* [ecctl platform proxy](ecctl_platform_proxy.md)	 - Manages proxies
-* [ecctl platform repository](ecctl_platform_repository.md)	 - Manages snapshot repositories
-* [ecctl platform role](ecctl_platform_role.md)	 - Manages platform roles
-* [ecctl platform runner](ecctl_platform_runner.md)	 - Manages platform runners
-* [ecctl platform stack](ecctl_platform_stack.md)	 - Manages Elastic StackPacks
+* [ecctl platform](ecctl_platform.md)	 - Manages the platform
+* [ecctl platform runner list](ecctl_platform_runner_list.md)	 - Lists the existing platform runners
 

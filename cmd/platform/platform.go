@@ -28,6 +28,7 @@ import (
 	cmdproxy "github.com/elastic/ecctl/cmd/platform/proxy"
 	cmdrepository "github.com/elastic/ecctl/cmd/platform/repository"
 	cmdrole "github.com/elastic/ecctl/cmd/platform/role"
+	cmdrunner "github.com/elastic/ecctl/cmd/platform/runner"
 	cmdstack "github.com/elastic/ecctl/cmd/platform/stack"
 	"github.com/elastic/ecctl/pkg/ecctl"
 	"github.com/elastic/ecctl/pkg/platform"
@@ -70,6 +71,7 @@ func init() {
 		cmdrepository.Command,
 		cmdrole.Command,
 		cmdstack.Command,
+		cmdrunner.Command,
 	)
 
 	Command.AddCommand(infoCmd)
