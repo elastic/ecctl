@@ -132,9 +132,8 @@ Paste your API Key and press enter: xxxxx
 
 Your credentials seem to be valid, and show you're authenticated as "user".
 
-You're all set! Here are some commands to try:
-  $ ecctl auth user key list
-  $ ecctl deployment elasticsearch list
+You're all set! Here is a command to try:
+  $ ecctl deployment list
 ----
 
 [id="{p}-authentication"]
