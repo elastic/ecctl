@@ -24,7 +24,7 @@ import (
 // Command is the top level runner command.
 var Command = &cobra.Command{
 	Use:     "runner",
-	Short:   "Manages platform runners",
+	Short:   "Manages platform runners (for ECE installations only)",
 	PreRunE: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()

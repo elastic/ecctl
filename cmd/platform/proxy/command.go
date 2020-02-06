@@ -35,7 +35,7 @@ const (
 // Command represents the proxy command
 var Command = &cobra.Command{
 	Use:     "proxy",
-	Short:   "Manages proxies",
+	Short:   "Manages proxies (for ECE installations only)",
 	PreRunE: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()

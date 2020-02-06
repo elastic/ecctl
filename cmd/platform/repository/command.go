@@ -32,7 +32,7 @@ import (
 )
 
 const (
-	snapshotShortHelp       = "Manages snapshot repositories"
+	snapshotShortHelp       = "Manages snapshot repositories (for ECE installations only)"
 	snapshotCreateShortHelp = "Creates / updates a snapshot repository"
 )
 
