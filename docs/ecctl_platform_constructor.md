@@ -1,10 +1,10 @@
 ## ecctl platform constructor
 
-Manages constructors
+Manages constructors (for ECE installations only)
 
 ### Synopsis
 
-Manages constructors
+Manages constructors (for ECE installations only)
 
 ```
 ecctl platform constructor [flags]

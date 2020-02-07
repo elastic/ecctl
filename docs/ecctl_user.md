@@ -1,10 +1,10 @@
 ## ecctl user
 
-Manages the platform users
+Manages the platform users (for ECE installations only)
 
 ### Synopsis
 
-Manages the platform users
+Manages the platform users (for ECE installations only)
 
 ```
 ecctl user [flags]

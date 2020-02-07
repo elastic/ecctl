@@ -39,8 +39,8 @@ ecctl platform stack [flags]
 ### SEE ALSO
 
 * [ecctl platform](ecctl_platform.md)	 - Manages the platform
-* [ecctl platform stack delete](ecctl_platform_stack_delete.md)	 - Deletes an Elastic StackPack
+* [ecctl platform stack delete](ecctl_platform_stack_delete.md)	 - Deletes an Elastic StackPack (for ECE installations only)
 * [ecctl platform stack list](ecctl_platform_stack_list.md)	 - Lists Elastic StackPacks
 * [ecctl platform stack show](ecctl_platform_stack_show.md)	 - Shows information about an Elastic StackPack
-* [ecctl platform stack upload](ecctl_platform_stack_upload.md)	 - Uploads an Elastic StackPack
+* [ecctl platform stack upload](ecctl_platform_stack_upload.md)	 - Uploads an Elastic StackPack (for ECE installations only)
 

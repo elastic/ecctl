@@ -1,10 +1,10 @@
 ## ecctl platform stack delete
 
-Deletes an Elastic StackPack
+Deletes an Elastic StackPack (for ECE installations only)
 
 ### Synopsis
 
-Deletes an Elastic StackPack
+Deletes an Elastic StackPack (for ECE installations only)
 
 ```
 ecctl platform stack delete [flags]

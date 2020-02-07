@@ -39,15 +39,15 @@ ecctl platform [flags]
 ### SEE ALSO
 
 * [ecctl](ecctl.md)	 - Elastic Cloud Control
-* [ecctl platform allocator](ecctl_platform_allocator.md)	 - Manages allocators
-* [ecctl platform constructor](ecctl_platform_constructor.md)	 - Manages constructors
+* [ecctl platform allocator](ecctl_platform_allocator.md)	 - Manages allocators (for ECE installations only)
+* [ecctl platform constructor](ecctl_platform_constructor.md)	 - Manages constructors (for ECE installations only)
 * [ecctl platform deployment-template](ecctl_platform_deployment-template.md)	 - Manages deployment templates
-* [ecctl platform enrollment-token](ecctl_platform_enrollment-token.md)	 - Manages tokens
-* [ecctl platform info](ecctl_platform_info.md)	 - Shows information about the platform
-* [ecctl platform instance-configuration](ecctl_platform_instance-configuration.md)	 - Manages instance configurations
-* [ecctl platform proxy](ecctl_platform_proxy.md)	 - Manages proxies
-* [ecctl platform repository](ecctl_platform_repository.md)	 - Manages snapshot repositories
-* [ecctl platform role](ecctl_platform_role.md)	 - Manages platform roles
-* [ecctl platform runner](ecctl_platform_runner.md)	 - Manages platform runners
+* [ecctl platform enrollment-token](ecctl_platform_enrollment-token.md)	 - Manages tokens (for ECE installations only)
+* [ecctl platform info](ecctl_platform_info.md)	 - Shows information about the platform (for ECE installations only)
+* [ecctl platform instance-configuration](ecctl_platform_instance-configuration.md)	 - Manages instance configurations (for ECE installations only)
+* [ecctl platform proxy](ecctl_platform_proxy.md)	 - Manages proxies (for ECE installations only)
+* [ecctl platform repository](ecctl_platform_repository.md)	 - Manages snapshot repositories (for ECE installations only)
+* [ecctl platform role](ecctl_platform_role.md)	 - Manages platform roles (for ECE installations only)
+* [ecctl platform runner](ecctl_platform_runner.md)	 - Manages platform runners (for ECE installations only)
 * [ecctl platform stack](ecctl_platform_stack.md)	 - Manages Elastic StackPacks
 

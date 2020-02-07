@@ -39,5 +39,5 @@ ecctl platform allocator show <allocator id> [flags]
 
 ### SEE ALSO
 
-* [ecctl platform allocator](ecctl_platform_allocator.md)	 - Manages allocators
+* [ecctl platform allocator](ecctl_platform_allocator.md)	 - Manages allocators (for ECE installations only)
 

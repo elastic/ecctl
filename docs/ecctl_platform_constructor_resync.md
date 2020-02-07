@@ -39,5 +39,5 @@ ecctl platform constructor resync {<constructor id> | --all} [flags]
 
 ### SEE ALSO
 
-* [ecctl platform constructor](ecctl_platform_constructor.md)	 - Manages constructors
+* [ecctl platform constructor](ecctl_platform_constructor.md)	 - Manages constructors (for ECE installations only)
 

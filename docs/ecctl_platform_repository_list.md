@@ -38,5 +38,5 @@ ecctl platform repository list [flags]
 
 ### SEE ALSO
 
-* [ecctl platform repository](ecctl_platform_repository.md)	 - Manages snapshot repositories
+* [ecctl platform repository](ecctl_platform_repository.md)	 - Manages snapshot repositories (for ECE installations only)
 

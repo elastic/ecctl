@@ -1,6 +1,6 @@
 ## ecctl platform repository
 
-Manages snapshot repositories
+Manages snapshot repositories (for ECE installations only)
 
 ### Synopsis
 

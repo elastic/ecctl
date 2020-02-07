@@ -38,5 +38,5 @@ ecctl platform enrollment-token delete <enrollment-token> [flags]
 
 ### SEE ALSO
 
-* [ecctl platform enrollment-token](ecctl_platform_enrollment-token.md)	 - Manages tokens
+* [ecctl platform enrollment-token](ecctl_platform_enrollment-token.md)	 - Manages tokens (for ECE installations only)
 

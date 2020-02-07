@@ -1,10 +1,10 @@
 ## ecctl platform proxy
 
-Manages proxies
+Manages proxies (for ECE installations only)
 
 ### Synopsis
 
-Manages proxies
+Manages proxies (for ECE installations only)
 
 ```
 ecctl platform proxy [flags]
