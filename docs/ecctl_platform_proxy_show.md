@@ -38,5 +38,5 @@ ecctl platform proxy show <proxy id> [flags]
 
 ### SEE ALSO
 
-* [ecctl platform proxy](ecctl_platform_proxy.md)	 - Manages proxies
+* [ecctl platform proxy](ecctl_platform_proxy.md)	 - Manages proxies (for ECE installations only)
 

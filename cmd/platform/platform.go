@@ -46,7 +46,7 @@ var Command = &cobra.Command{
 
 var infoCmd = &cobra.Command{
 	Use:     "info",
-	Short:   "Shows information about the platform",
+	Short:   "Shows information about the platform (for ECE installations only)",
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		p, err := platform.GetInfo(platform.GetInfoParams{

@@ -26,7 +26,7 @@ import (
 // Command is the user subcommand
 var Command = &cobra.Command{
 	Use:     "user",
-	Short:   "Manages the platform users",
+	Short:   "Manages the platform users (for ECE installations only)",
 	PreRunE: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()

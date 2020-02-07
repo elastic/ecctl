@@ -1,10 +1,10 @@
 ## ecctl platform runner
 
-Manages platform runners
+Manages platform runners (for ECE installations only)
 
 ### Synopsis
 
-Manages platform runners
+Manages platform runners (for ECE installations only)
 
 ```
 ecctl platform runner [flags]

@@ -1,10 +1,10 @@
 ## ecctl platform stack upload
 
-Uploads an Elastic StackPack
+Uploads an Elastic StackPack (for ECE installations only)
 
 ### Synopsis
 
-Uploads an Elastic StackPack
+Uploads an Elastic StackPack (for ECE installations only)
 
 ```
 ecctl platform stack upload [flags]

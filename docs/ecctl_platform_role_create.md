@@ -39,5 +39,5 @@ ecctl platform role create --file <filename.json> [flags]
 
 ### SEE ALSO
 
-* [ecctl platform role](ecctl_platform_role.md)	 - Manages platform roles
+* [ecctl platform role](ecctl_platform_role.md)	 - Manages platform roles (for ECE installations only)
 
