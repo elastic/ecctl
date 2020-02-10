@@ -52,7 +52,8 @@ func Show(params ShowParams) (*models.RunnerInfo, error) {
 	}
 
 	res, err := params.API.V1API.PlatformInfrastructure.GetRunner(
-		platform_infrastructure.NewGetRunnerParams().WithRunnerID(params.ID),
+		platform_infrastructure.NewGetRunnerParams().
+			WithRunnerID(params.ID),
 		params.AuthWriter,
 	)
 	if err != nil {
