@@ -1,19 +1,19 @@
-## ecctl platform runner
+## ecctl platform runner show
 
-Manages platform runners (for ECE installations only)
+Shows information about the specified runner
 
 ### Synopsis
 
-Manages platform runners (for ECE installations only)
+Shows information about the specified runner
 
 ```
-ecctl platform runner [flags]
+ecctl platform runner show <runner id> [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for runner
+  -h, --help   help for show
 ```
 
 ### Options inherited from parent commands
@@ -38,7 +38,5 @@ ecctl platform runner [flags]
 
 ### SEE ALSO
 
-* [ecctl platform](ecctl_platform.md)	 - Manages the platform
-* [ecctl platform runner list](ecctl_platform_runner_list.md)	 - Lists the existing platform runners
-* [ecctl platform runner show](ecctl_platform_runner_show.md)	 - Shows information about the specified runner
+* [ecctl platform runner](ecctl_platform_runner.md)	 - Manages platform runners (for ECE installations only)
 
