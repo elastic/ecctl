@@ -241,7 +241,7 @@ func TestInitConfig(t *testing.T) {
 				FilePath: filepath.Join(testFiles, "newConfig"),
 				Reader: io.MultiReader(
 					strings.NewReader("y\n"),
-					strings.NewReader("https://ahost\n"),
+					strings.NewReader("1\n"),
 					strings.NewReader("1\n"),
 					strings.NewReader("1\n"),
 					strings.NewReader("anapikey\n"),
@@ -257,11 +257,11 @@ func TestInitConfig(t *testing.T) {
 			}},
 			wantSettings: map[string]interface{}{
 				"apikey":   "somekey",
-				"host":     "https://ahost",
+				"host":     "https://api.elastic-cloud.com",
 				"insecure": true,
 				"output":   "text",
 			},
-			wantOutput: disclaimer + missingConfigMsg + hostMsg +
+			wantOutput: disclaimer + missingConfigMsg + hostChoiceMsg + "\n" +
 				formatChoiceMsg + "\n" + authChoiceMsg + "\n" + apiKeyMsg + "\n" +
 				"\n" + fmt.Sprintf(validCredentialsMsg, "anacleto") + finalMsg + "\n",
 		},
@@ -272,6 +272,7 @@ func TestInitConfig(t *testing.T) {
 				FilePath: filepath.Join(testFiles, "newConfigUserPass"),
 				Reader: io.MultiReader(
 					strings.NewReader("y\n"),
+					strings.NewReader("2\n"),
 					strings.NewReader("https://ahost\n"),
 					strings.NewReader("1\n"),
 					strings.NewReader("2\n"),
@@ -298,7 +299,7 @@ func TestInitConfig(t *testing.T) {
 				"pass":     "apassword",
 				"user":     "auser",
 			},
-			wantOutput: disclaimer + missingConfigMsg + hostMsg +
+			wantOutput: disclaimer + missingConfigMsg + hostChoiceMsg + "\n" + hostMsg +
 				formatChoiceMsg + "\n" + authChoiceMsg + "\n" + userMsg + passMsg +
 				"\n" + "\n" + fmt.Sprintf(validCredentialsMsg, "auser") + finalMsg + "\n",
 		},
@@ -309,6 +310,7 @@ func TestInitConfig(t *testing.T) {
 				FilePath: filepath.Join(testFiles, "doesnt_matter"),
 				Reader: io.MultiReader(
 					strings.NewReader("y\n"),
+					strings.NewReader("2\n"),
 					strings.NewReader("https://ahost\n"),
 					strings.NewReader("1\n"),
 					strings.NewReader("1\n"),
@@ -331,9 +333,9 @@ func TestInitConfig(t *testing.T) {
 			},
 			wantOutput: disclaimer +
 				fmt.Sprintf(settingsPathMsg, "test_files/userpassmodif.yaml") +
-				userPassConfigToModifyContents + "\n" + existingConfigMsg + hostMsg +
-				formatChoiceMsg + "\n" + authChoiceMsg + "\n" + apiKeyMsg + "\n" +
-				"\n" + fmt.Sprintf(validCredentialsMsg, "anacleto") + finalMsg + "\n",
+				userPassConfigToModifyContents + "\n" + existingConfigMsg + hostChoiceMsg +
+				"\n" + hostMsg + formatChoiceMsg + "\n" + authChoiceMsg + "\n" + apiKeyMsg +
+				"\n" + "\n" + fmt.Sprintf(validCredentialsMsg, "anacleto") + finalMsg + "\n",
 		},
 		{
 			name: "finds a config file and user changes the values, from apikey to user/pass",
@@ -342,6 +344,7 @@ func TestInitConfig(t *testing.T) {
 				FilePath: filepath.Join(testFiles, "doesnt_matter"),
 				Reader: io.MultiReader(
 					strings.NewReader("y\n"),
+					strings.NewReader("2\n"),
 					strings.NewReader("https://ahost\n"),
 					strings.NewReader("1\n"),
 					strings.NewReader("2\n"),
@@ -370,9 +373,9 @@ func TestInitConfig(t *testing.T) {
 			},
 			wantOutput: disclaimer +
 				fmt.Sprintf(settingsPathMsg, "test_files/apikeymodif.yaml") +
-				apiKeyConfigToModifyContents + "\n" + existingConfigMsg + hostMsg +
-				formatChoiceMsg + "\n" + authChoiceMsg + "\n" + userMsg + passMsg +
-				"\n" + "\n" + fmt.Sprintf(validCredentialsMsg, "auser") + finalMsg + "\n",
+				apiKeyConfigToModifyContents + "\n" + existingConfigMsg + hostChoiceMsg +
+				"\n" + hostMsg + formatChoiceMsg + "\n" + authChoiceMsg + "\n" + userMsg +
+				passMsg + "\n" + "\n" + fmt.Sprintf(validCredentialsMsg, "auser") + finalMsg + "\n",
 		},
 	}
 	for _, tt := range tests {

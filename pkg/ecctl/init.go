@@ -49,6 +49,12 @@ const (
 )
 
 const (
+	_ = iota
+	essInfraChoice
+	eceInfraChoice
+)
+
+const (
 	disclaimer      = "Welcome to the Elastic Cloud CLI! This command will guide you through authenticating and setting some default values.\n\n"
 	redacted        = "[REDACTED]"
 	settingsPathMsg = "Found existing settings in %s. Here's a JSON representation of what they look like:\n"
@@ -67,6 +73,13 @@ const (
 )
 
 var (
+	hostChoiceMsg = `
+Select which type of infrastructure this configuration will for:
+  [1] Elastic Cloud (Elasticsearch Service).
+  [2] Elastic Cloud Enterprise (ECE).
+
+Please enter your choice: `
+
 	authChoiceMsg = `
 Which authentication mechanism would you like to use?
   [1] API Keys (Recommended).
@@ -186,7 +199,10 @@ func InitConfig(params InitConfigParams) error {
 	// Insecure is set to true by default to allow API calls against HTTPS
 	// endpoints with self-signed certificates.
 	cfg.Insecure = true
-	cfg.Host = scanner.Scan(hostMsg)
+
+	if err := askInfraSelection(&cfg, scanner, params.Writer, params.ErrWriter); err != nil {
+		return err
+	}
 
 	if err := askOutputFormat(&cfg, scanner, params.Writer, params.ErrWriter); err != nil {
 		return err
@@ -206,7 +222,7 @@ func InitConfig(params InitConfigParams) error {
 		return err
 	}
 
-	// It's better to write the config as is since it ommits defaults and
+	// It's better to write the config as is since it omits defaults and
 	// empties vs viper's behaviour in `WriteConfig`.
 	return writeConfig(cfg, params.FilePath, ".json")
 }
@@ -241,6 +257,26 @@ func printConfig(writer io.Writer, v *viper.Viper) error {
 	enc := json.NewEncoder(writer)
 	enc.SetIndent("", "  ")
 	return enc.Encode(c)
+}
+
+func askInfraSelection(cfg *Config, scanner *input.Scanner, writer, errWriter io.Writer) error {
+	infraChoiceRaw := scanner.Scan(hostChoiceMsg)
+	fmt.Fprintln(writer)
+	infraChoice, err := strconv.Atoi(infraChoiceRaw)
+	if err != nil {
+		return err
+	}
+
+	cfg.Host = "https://api.elastic-cloud.com"
+	switch infraChoice {
+	case eceInfraChoice:
+		cfg.Host = scanner.Scan(hostMsg)
+	case essInfraChoice:
+	default:
+		fmt.Fprintln(errWriter, "invalid choice, defaulting to \"https://api.elastic-cloud.com\"")
+	}
+
+	return nil
 }
 
 func askOutputFormat(cfg *Config, scanner *input.Scanner, writer, errWriter io.Writer) error {
