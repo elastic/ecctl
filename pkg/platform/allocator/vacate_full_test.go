@@ -142,6 +142,67 @@ func TestVacate(t *testing.T) {
 			),
 		},
 		{
+			name: "Succeeds moving a single Appsearch cluster from a single allocator (without tracking)",
+			args: args{
+				buf: sdkSync.NewBuffer(),
+				params: newVacateTestCase(t, vacateCase{
+					skipTracking: true,
+					topology: []vacateCaseClusters{
+						{
+							Allocator: "allocatorID",
+							appsearch: []vacateCaseClusterConfig{
+								{
+									ID: "3ee11eb40eda22cac0cce259625c6734",
+									steps: [][]*models.ClusterPlanStepInfo{
+										{
+											newPlanStep("step1", "success"),
+											newPlanStep("step2", "pending"),
+										},
+									},
+									plan: []*models.ClusterPlanStepInfo{
+										newPlanStep("step1", "success"),
+										newPlanStep("step2", "success"),
+									},
+								},
+							},
+						},
+					},
+				}),
+			},
+		},
+		{
+			name: "Succeeds moving a single Appsearch cluster from a single allocator, but returns error due to unsupported tracking type",
+			args: args{
+				buf: sdkSync.NewBuffer(),
+				params: newVacateTestCase(t, vacateCase{
+					topology: []vacateCaseClusters{
+						{
+							Allocator: "allocatorID",
+							appsearch: []vacateCaseClusterConfig{
+								{
+									ID: "3ee11eb40eda22cac0cce259625c6734",
+									steps: [][]*models.ClusterPlanStepInfo{
+										{
+											newPlanStep("step1", "success"),
+											newPlanStep("step2", "pending"),
+										},
+									},
+									plan: []*models.ClusterPlanStepInfo{
+										newPlanStep("step1", "success"),
+										newPlanStep("step2", "success"),
+									},
+								},
+							},
+						},
+					},
+				}),
+			},
+			err: `1 error occurred:
+	* allocator allocatorID: cluster [3ee11eb40eda22cac0cce259625c6734][appsearch]: instance is being moved but tracking is not supported, please check the vacate progress from the UI
+
+`,
+		},
+		{
 			name: "Succeeds moving a multiple clusters from a single allocator",
 			args: args{
 				buf: sdkSync.NewBuffer(),

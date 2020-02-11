@@ -97,6 +97,18 @@ func TestComputeVacateRequest(t *testing.T) {
 							},
 						},
 					},
+					AppsearchClusters: []*models.MoveAppSearchDetails{
+						{
+							ClusterID: ec.String("d8ad23ad6f064709bbae7ab87a7e1bc9"),
+							CalculatedPlan: &models.TransientAppSearchPlanConfiguration{
+								PlanConfiguration: &models.AppSearchPlanControlConfiguration{
+									Timeout:             4096,
+									ReallocateInstances: ec.Bool(false),
+									ExtendedMaintenance: ec.Bool(false),
+								},
+							},
+						},
+					},
 				},
 				clusters: nil,
 				to:       nil,
@@ -141,6 +153,20 @@ func TestComputeVacateRequest(t *testing.T) {
 						},
 						PlanOverride: &models.TransientApmPlanConfiguration{
 							PlanConfiguration: &models.ApmPlanControlConfiguration{
+								Timeout:             4096,
+								ReallocateInstances: ec.Bool(false),
+								ExtendedMaintenance: ec.Bool(false),
+							},
+						},
+					},
+				},
+				AppsearchClusters: []*models.MoveAppSearchConfiguration{
+					{
+						ClusterIds: []string{
+							"d8ad23ad6f064709bbae7ab87a7e1bc9",
+						},
+						PlanOverride: &models.TransientAppSearchPlanConfiguration{
+							PlanConfiguration: &models.AppSearchPlanControlConfiguration{
 								Timeout:             4096,
 								ReallocateInstances: ec.Bool(false),
 								ExtendedMaintenance: ec.Bool(false),
@@ -600,6 +626,27 @@ func TestCheckVacateFailures(t *testing.T) {
 			}},
 		},
 		{
+			name: "Returns na apm error on Kibana vacate failure",
+			args: args{
+				failures: &models.MoveClustersDetails{
+					AppsearchClusters: []*models.MoveAppSearchDetails{
+						{
+							ClusterID: ec.String("123456789"),
+							Errors: []*models.BasicFailedReplyElement{
+								{
+									Code:    ec.String("unknown"),
+									Message: ec.String("an apm error message"),
+								},
+							},
+						},
+					},
+				},
+			},
+			err: &multierror.Error{Errors: []error{
+				errors.New("cluster [123456789][appsearch] failed vacating, reason: code: unknown, message: an apm error message"),
+			}},
+		},
+		{
 			name: "Returns an elasticsearch & kibana error on multiple ES & Kibana vacate failures",
 			args: args{
 				failures: &models.MoveClustersDetails{
@@ -813,6 +860,24 @@ func TestVacateCluster(t *testing.T) {
 					ID:             "someID",
 					ClusterID:      "2ee11eb40eda22cac0cce259625c6734",
 					Kind:           "kibana",
+					Output:         new(output.Device),
+					TrackFrequency: time.Nanosecond,
+					SkipTracking:   true,
+					MaxPollRetries: 1,
+					API: discardResponses(
+						newKibanaVacateMove(t, "someID", vacateCaseClusterConfig{}),
+					),
+				},
+			},
+		},
+		{
+			name: "Succeeds with a appsearch instance with no tracking",
+			args: args{
+				buf: new(bytes.Buffer),
+				params: &VacateClusterParams{
+					ID:             "someID",
+					ClusterID:      "2ee11eb40eda22cac0cce259625c6734",
+					Kind:           "appsearch",
 					Output:         new(output.Device),
 					TrackFrequency: time.Nanosecond,
 					SkipTracking:   true,
@@ -1131,7 +1196,61 @@ func Test_addAllocatorMovesToPool(t *testing.T) {
 			wantMoved:     true,
 		},
 		{
-			name: "Move clusters when a matching filter is specified",
+			name: "Move clusters when no filter is specified (Apm)",
+			args: args{params: addAllocatorMovesToPoolParams{
+				ID: "allocator-1",
+				Pool: func() *pool.Pool {
+					p, _ := pool.NewPool(pool.Params{
+						Size:    1,
+						Run:     VacateClusterInPool,
+						Timeout: pool.DefaultTimeout,
+					})
+					return p
+				}(),
+				VacateParams: &VacateParams{},
+				Moves: &models.MoveClustersDetails{
+					ApmClusters: []*models.MoveApmClusterDetails{
+						{
+							ClusterID: ec.String("d7ad23ad6f064709bbae7ab87a7e1bc9"),
+							CalculatedPlan: &models.TransientApmPlanConfiguration{
+								PlanConfiguration: &models.ApmPlanControlConfiguration{},
+							},
+						},
+					},
+				},
+			}},
+			wantLeftovers: nil,
+			wantMoved:     true,
+		},
+		{
+			name: "Move clusters when no filter is specified (AppSearch)",
+			args: args{params: addAllocatorMovesToPoolParams{
+				ID: "allocator-1",
+				Pool: func() *pool.Pool {
+					p, _ := pool.NewPool(pool.Params{
+						Size:    1,
+						Run:     VacateClusterInPool,
+						Timeout: pool.DefaultTimeout,
+					})
+					return p
+				}(),
+				VacateParams: &VacateParams{},
+				Moves: &models.MoveClustersDetails{
+					AppsearchClusters: []*models.MoveAppSearchDetails{
+						{
+							ClusterID: ec.String("d7ad23ad6f064709bbae7ab87a7e1bc9"),
+							CalculatedPlan: &models.TransientAppSearchPlanConfiguration{
+								PlanConfiguration: &models.AppSearchPlanControlConfiguration{},
+							},
+						},
+					},
+				},
+			}},
+			wantLeftovers: nil,
+			wantMoved:     true,
+		},
+		{
+			name: "Move clusters when a matching filter is specified (Kibana)",
 			args: args{params: addAllocatorMovesToPoolParams{
 				ID: "allocator-1",
 				Pool: func() *pool.Pool {
@@ -1166,7 +1285,7 @@ func Test_addAllocatorMovesToPool(t *testing.T) {
 			wantMoved:     true,
 		},
 		{
-			name: "Move clusters when a matching filter is specified",
+			name: "Move clusters when a matching filter is specified (Elasticsearch)",
 			args: args{params: addAllocatorMovesToPoolParams{
 				ID: "allocator-1",
 				Pool: func() *pool.Pool {
@@ -1192,6 +1311,33 @@ func Test_addAllocatorMovesToPool(t *testing.T) {
 							ClusterID: ec.String("d7ad23ad6f064709bbae7ab87a7e1bc9"),
 							CalculatedPlan: &models.TransientKibanaPlanConfiguration{
 								PlanConfiguration: &models.KibanaPlanControlConfiguration{},
+							},
+						},
+					},
+				},
+			}},
+			wantLeftovers: nil,
+			wantMoved:     true,
+		},
+		{
+			name: "Move clusters when no filter is specified (AppSearch)",
+			args: args{params: addAllocatorMovesToPoolParams{
+				ID: "allocator-1",
+				Pool: func() *pool.Pool {
+					p, _ := pool.NewPool(pool.Params{
+						Size:    1,
+						Run:     VacateClusterInPool,
+						Timeout: pool.DefaultTimeout,
+					})
+					return p
+				}(),
+				VacateParams: &VacateParams{KindFilter: "appsearch"},
+				Moves: &models.MoveClustersDetails{
+					AppsearchClusters: []*models.MoveAppSearchDetails{
+						{
+							ClusterID: ec.String("d7ad23ad6f064709bbae7ab87a7e1bc9"),
+							CalculatedPlan: &models.TransientAppSearchPlanConfiguration{
+								PlanConfiguration: &models.AppSearchPlanControlConfiguration{},
 							},
 						},
 					},
