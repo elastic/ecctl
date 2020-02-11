@@ -23,6 +23,7 @@ import (
 
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 	enrollmenttoken "github.com/elastic/ecctl/pkg/platform/enrollment-token"
 )
@@ -35,7 +36,7 @@ const (
 // Command represents the enrollment-token subcomand.
 var Command = &cobra.Command{
 	Use:     "enrollment-token",
-	Short:   "Manages tokens (Requires platform administration privileges)",
+	Short:   fmt.Sprintf("Manages tokens %v", cmdutil.PlatformAdminRequired),
 	PreRunE: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()

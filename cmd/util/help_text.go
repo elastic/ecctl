@@ -15,26 +15,7 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package cmdrole
+package cmdutil
 
-import (
-	"fmt"
-
-	"github.com/spf13/cobra"
-
-	cmdutil "github.com/elastic/ecctl/cmd/util"
-)
-
-// Command is the top level role command.
-var Command = &cobra.Command{
-	Use:     "role",
-	Short:   fmt.Sprintf("Manages platform roles %v", cmdutil.PlatformAdminRequired),
-	PreRunE: cobra.MaximumNArgs(0),
-	Run: func(cmd *cobra.Command, args []string) {
-		cmd.Help()
-	},
-}
-
-func init() {
-
-}
+// PlatformAdminRequired is an additional helper text for commands
+const PlatformAdminRequired = "(Requires platform administration privileges)"

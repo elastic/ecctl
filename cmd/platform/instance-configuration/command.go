@@ -18,13 +18,15 @@
 package cmdinstanceconfig
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 
 	"github.com/elastic/cloud-sdk-go/pkg/input"
-	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 	"github.com/elastic/ecctl/pkg/platform/instanceconfig"
 )
@@ -32,7 +34,7 @@ import (
 // Command is the top instance-config subcommand.
 var Command = &cobra.Command{
 	Use:     "instance-configuration",
-	Short:   "Manages instance configurations (Requires platform administration privileges)",
+	Short:   fmt.Sprintf("Manages instance configurations %v", cmdutil.PlatformAdminRequired),
 	PreRunE: cobra.MaximumNArgs(0),
 	Run:     func(cmd *cobra.Command, args []string) { cmd.Help() },
 }
@@ -60,7 +62,7 @@ var platformInstanceConfigurationCreateCmd = &cobra.Command{
 	PreRunE: cobra.MaximumNArgs(0),
 
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if err := cmdutil.FileOrStdin(cmd, "file"); err != nil {
+		if err := sdkcmdutil.FileOrStdin(cmd, "file"); err != nil {
 			return err
 		}
 
@@ -127,7 +129,7 @@ var platformInstanceConfigurationUpdateCmd = &cobra.Command{
 	Short:   "Overwrites an instance configuration",
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if err := cmdutil.FileOrStdin(cmd, "file"); err != nil {
+		if err := sdkcmdutil.FileOrStdin(cmd, "file"); err != nil {
 			return err
 		}
 

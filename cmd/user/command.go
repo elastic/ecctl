@@ -18,15 +18,18 @@
 package cmduser
 
 import (
+	"fmt"
+
 	"github.com/spf13/cobra"
 
 	cmduserkey "github.com/elastic/ecctl/cmd/user/key"
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 )
 
 // Command is the user subcommand
 var Command = &cobra.Command{
 	Use:     "user",
-	Short:   "Manages the platform users (Requires platform administration privileges)",
+	Short:   fmt.Sprintf("Manages the platform users %v", cmdutil.PlatformAdminRequired),
 	PreRunE: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()

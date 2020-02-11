@@ -18,13 +18,17 @@
 package cmdrunner
 
 import (
+	"fmt"
+
 	"github.com/spf13/cobra"
+
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 )
 
 // Command is the top level runner command.
 var Command = &cobra.Command{
 	Use:     "runner",
-	Short:   "Manages platform runners (Requires platform administration privileges)",
+	Short:   fmt.Sprintf("Manages platform runners %v", cmdutil.PlatformAdminRequired),
 	PreRunE: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()

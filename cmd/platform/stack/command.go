@@ -18,11 +18,13 @@
 package cmdstack
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 	"github.com/elastic/ecctl/pkg/platform/stack"
 )
@@ -76,7 +78,7 @@ func listStackPacks(cmd *cobra.Command, args []string) error {
 
 var stackUploadCmd = &cobra.Command{
 	Use:     "upload",
-	Short:   "Uploads an Elastic StackPack (Requires platform administration privileges)",
+	Short:   fmt.Sprintf("Uploads an Elastic StackPack %v", cmdutil.PlatformAdminRequired),
 	PreRunE: cobra.MinimumNArgs(1),
 
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -95,7 +97,7 @@ var stackUploadCmd = &cobra.Command{
 
 var stackDeleteCmd = &cobra.Command{
 	Use:     "delete",
-	Short:   "Deletes an Elastic StackPack (Requires platform administration privileges)",
+	Short:   fmt.Sprintf("Deletes an Elastic StackPack %v", cmdutil.PlatformAdminRequired),
 	PreRunE: cobra.MinimumNArgs(1),
 
 	RunE: func(cmd *cobra.Command, args []string) error {

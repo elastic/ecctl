@@ -18,11 +18,13 @@
 package cmdproxy
 
 import (
+	"fmt"
 	"path/filepath"
 
 	"github.com/spf13/cobra"
 
 	cmdfilteredgroup "github.com/elastic/ecctl/cmd/platform/proxy/filteredgroup"
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 	"github.com/elastic/ecctl/pkg/platform/proxy"
 )
@@ -35,7 +37,7 @@ const (
 // Command represents the proxy command
 var Command = &cobra.Command{
 	Use:     "proxy",
-	Short:   "Manages proxies (Requires platform administration privileges)",
+	Short:   fmt.Sprintf("Manages proxies %v", cmdutil.PlatformAdminRequired),
 	PreRunE: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
