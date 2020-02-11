@@ -174,6 +174,8 @@ func waitVacateCompletion(p *pool.Pool, hasWork bool) error {
 	return errs.ErrorOrNil()
 }
 
+// nolint better to have this grouped rather than scattered around, there's
+// already enough private functions.
 func addAllocatorMovesToPool(params addAllocatorMovesToPoolParams) ([]pool.Validator, bool) {
 	var leftovers []pool.Validator
 	var vacates = make([]pool.Validator, 0)
@@ -414,6 +416,8 @@ func trackMovedCluster(params *VacateClusterParams) error {
 
 // CheckVacateFailures iterates over the list of failures returning
 // a multierror with any of the failures found.
+//
+// nolint
 func CheckVacateFailures(failures *models.MoveClustersDetails, filter []string) error {
 	if failures == nil {
 		return nil

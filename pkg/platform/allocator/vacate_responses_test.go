@@ -449,7 +449,7 @@ func newVacateTestCase(t *testing.T, tc vacateCase) *VacateParams {
 		}
 
 		for ii := range topology.appsearch {
-			_, r := newAPMVacateMove(t, alloc, topology.appsearch[ii])
+			_, r := newAppsearchVacateMove(t, alloc, topology.appsearch[ii])
 			responses = append(responses, r...)
 		}
 	}
@@ -724,8 +724,8 @@ func newAppsearchVacateMove(t *testing.T, alloc string, move vacateCaseClusterCo
 		var step = move.steps[iii]
 		responses = append(responses, mock.Response{Response: http.Response{
 			StatusCode: 200,
-			Body: newApmPollerBody(t,
-				&models.ApmPlanInfo{PlanAttemptLog: step},
+			Body: newAppSearchPollerBody(t,
+				&models.AppSearchPlanInfo{PlanAttemptLog: step},
 				nil,
 			),
 		}})
@@ -737,9 +737,9 @@ func newAppsearchVacateMove(t *testing.T, alloc string, move vacateCaseClusterCo
 		util.PlanNotFound,
 		mock.Response{Response: http.Response{
 			StatusCode: 200,
-			Body: newApmPollerBody(t,
+			Body: newAppSearchPollerBody(t,
 				nil,
-				&models.ApmPlanInfo{PlanAttemptLog: move.plan},
+				&models.AppSearchPlanInfo{PlanAttemptLog: move.plan},
 			),
 		}},
 	)
