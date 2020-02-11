@@ -32,7 +32,7 @@ import (
 // Command is the top instance-config subcommand.
 var Command = &cobra.Command{
 	Use:     "instance-configuration",
-	Short:   "Manages instance configurations (for ECE installations only)",
+	Short:   "Manages instance configurations (Requires platform administration privileges)",
 	PreRunE: cobra.MaximumNArgs(0),
 	Run:     func(cmd *cobra.Command, args []string) { cmd.Help() },
 }

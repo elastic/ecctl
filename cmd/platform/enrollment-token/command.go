@@ -35,7 +35,7 @@ const (
 // Command represents the enrollment-token subcomand.
 var Command = &cobra.Command{
 	Use:     "enrollment-token",
-	Short:   "Manages tokens (for ECE installations only)",
+	Short:   "Manages tokens (Requires platform administration privileges)",
 	PreRunE: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()

@@ -76,7 +76,7 @@ func listStackPacks(cmd *cobra.Command, args []string) error {
 
 var stackUploadCmd = &cobra.Command{
 	Use:     "upload",
-	Short:   "Uploads an Elastic StackPack (for ECE installations only)",
+	Short:   "Uploads an Elastic StackPack (Requires platform administration privileges)",
 	PreRunE: cobra.MinimumNArgs(1),
 
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -95,7 +95,7 @@ var stackUploadCmd = &cobra.Command{
 
 var stackDeleteCmd = &cobra.Command{
 	Use:     "delete",
-	Short:   "Deletes an Elastic StackPack (for ECE installations only)",
+	Short:   "Deletes an Elastic StackPack (Requires platform administration privileges)",
 	PreRunE: cobra.MinimumNArgs(1),
 
 	RunE: func(cmd *cobra.Command, args []string) error {

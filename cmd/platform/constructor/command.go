@@ -36,7 +36,7 @@ const (
 // Command represents the constructor command
 var Command = &cobra.Command{
 	Use:     "constructor",
-	Short:   "Manages constructors (for ECE installations only)",
+	Short:   "Manages constructors (Requires platform administration privileges)",
 	PreRunE: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()

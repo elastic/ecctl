@@ -38,5 +38,5 @@ ecctl platform runner show <runner id> [flags]
 
 ### SEE ALSO
 
-* [ecctl platform runner](ecctl_platform_runner.md)	 - Manages platform runners (for ECE installations only)
+* [ecctl platform runner](ecctl_platform_runner.md)	 - Manages platform runners (Requires platform administration privileges)
 

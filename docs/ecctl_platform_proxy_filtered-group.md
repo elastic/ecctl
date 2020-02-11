@@ -38,7 +38,7 @@ ecctl platform proxy filtered-group [flags]
 
 ### SEE ALSO
 
-* [ecctl platform proxy](ecctl_platform_proxy.md)	 - Manages proxies (for ECE installations only)
+* [ecctl platform proxy](ecctl_platform_proxy.md)	 - Manages proxies (Requires platform administration privileges)
 * [ecctl platform proxy filtered-group create](ecctl_platform_proxy_filtered-group_create.md)	 - Creates proxies filtered group
 * [ecctl platform proxy filtered-group delete](ecctl_platform_proxy_filtered-group_delete.md)	 - Deletes proxies filtered group
 * [ecctl platform proxy filtered-group list](ecctl_platform_proxy_filtered-group_list.md)	 - Returns all proxies filtered groups in the platform

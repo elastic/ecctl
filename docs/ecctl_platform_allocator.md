@@ -1,10 +1,10 @@
 ## ecctl platform allocator
 
-Manages allocators (for ECE installations only)
+Manages allocators (Requires platform administration privileges)
 
 ### Synopsis
 
-Manages allocators (for ECE installations only)
+Manages allocators (Requires platform administration privileges)
 
 ```
 ecctl platform allocator [flags]

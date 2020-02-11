@@ -26,7 +26,7 @@ import (
 // Command represents the allocator command
 var Command = &cobra.Command{
 	Use:     "allocator",
-	Short:   "Manages allocators (for ECE installations only)",
+	Short:   "Manages allocators (Requires platform administration privileges)",
 	PreRunE: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()

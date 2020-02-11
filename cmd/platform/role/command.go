@@ -24,7 +24,7 @@ import (
 // Command is the top level role command.
 var Command = &cobra.Command{
 	Use:     "role",
-	Short:   "Manages platform roles (for ECE installations only)",
+	Short:   "Manages platform roles (Requires platform administration privileges)",
 	PreRunE: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()

@@ -38,5 +38,5 @@ ecctl platform repository delete <repository name> [flags]
 
 ### SEE ALSO
 
-* [ecctl platform repository](ecctl_platform_repository.md)	 - Manages snapshot repositories (for ECE installations only)
+* [ecctl platform repository](ecctl_platform_repository.md)	 - Manages snapshot repositories (Requires platform administration privileges)
 
