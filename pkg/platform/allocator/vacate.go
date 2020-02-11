@@ -174,8 +174,9 @@ func waitVacateCompletion(p *pool.Pool, hasWork bool) error {
 	return errs.ErrorOrNil()
 }
 
-// nolint better to have this grouped rather than scattered around, there's
-// already enough private functions.
+// nolint since the linter says it's too complex, it's because of the for loop
+// combination with ifs. It's better to have this grouped rather than scattered
+// around.
 func addAllocatorMovesToPool(params addAllocatorMovesToPoolParams) ([]pool.Validator, bool) {
 	var leftovers []pool.Validator
 	var vacates = make([]pool.Validator, 0)
@@ -403,6 +404,7 @@ func trackMovedCluster(params *VacateClusterParams) error {
 	})
 	if err != nil {
 		// Remove this after AppSearch is supported in the plan tracker
+		// https://github.com/elastic/cloud-sdk-go/issues/34
 		if params.Kind == "appsearch" {
 			wrapMessage := "instance is being moved but tracking is not supported, please check the vacate progress from the UI"
 			return errors.New(vacateWrapMessage(params, wrapMessage))
@@ -417,7 +419,7 @@ func trackMovedCluster(params *VacateClusterParams) error {
 // CheckVacateFailures iterates over the list of failures returning
 // a multierror with any of the failures found.
 //
-// nolint
+// nolint because of the complexity score here
 func CheckVacateFailures(failures *models.MoveClustersDetails, filter []string) error {
 	if failures == nil {
 		return nil

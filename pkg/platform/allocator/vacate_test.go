@@ -605,7 +605,7 @@ func TestCheckVacateFailures(t *testing.T) {
 			}},
 		},
 		{
-			name: "Returns na apm error on Kibana vacate failure",
+			name: "Returns an error on APM vacate failure",
 			args: args{
 				failures: &models.MoveClustersDetails{
 					ApmClusters: []*models.MoveApmClusterDetails{
@@ -626,7 +626,7 @@ func TestCheckVacateFailures(t *testing.T) {
 			}},
 		},
 		{
-			name: "Returns na apm error on Kibana vacate failure",
+			name: "Returns an error on AppSearch vacate failure",
 			args: args{
 				failures: &models.MoveClustersDetails{
 					AppsearchClusters: []*models.MoveAppSearchDetails{
@@ -871,7 +871,7 @@ func TestVacateCluster(t *testing.T) {
 			},
 		},
 		{
-			name: "Succeeds with a appsearch instance with no tracking",
+			name: "Succeeds with an appsearch instance with no tracking",
 			args: args{
 				buf: new(bytes.Buffer),
 				params: &VacateClusterParams{
