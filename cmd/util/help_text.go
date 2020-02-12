@@ -15,27 +15,16 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package cmdallocator
+package cmdutil
 
 import (
-	"github.com/spf13/cobra"
-
-	cmdallocatormetadata "github.com/elastic/ecctl/cmd/platform/allocator/metadata"
-	cmdutil "github.com/elastic/ecctl/cmd/util"
+	"fmt"
 )
 
-// Command represents the allocator command
-var Command = &cobra.Command{
-	Use:     "allocator",
-	Short:   cmdutil.AdminReqDescription("Manages allocators"),
-	PreRunE: cobra.MaximumNArgs(0),
-	Run: func(cmd *cobra.Command, args []string) {
-		cmd.Help()
-	},
-}
+// PlatformAdminRequired is an additional helper text for commands
+const PlatformAdminRequired = "(Requires platform administration privileges)"
 
-func init() {
-	Command.AddCommand(
-		cmdallocatormetadata.Command,
-	)
+// AdminReqDescription adds a text about required admin permissions to a string
+func AdminReqDescription(desc string) string {
+	return fmt.Sprintf("%s %v", desc, PlatformAdminRequired)
 }

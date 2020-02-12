@@ -23,6 +23,7 @@ import (
 
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 	"github.com/elastic/ecctl/pkg/platform/constructor"
 )
@@ -36,7 +37,7 @@ const (
 // Command represents the constructor command
 var Command = &cobra.Command{
 	Use:     "constructor",
-	Short:   "Manages constructors (for ECE installations only)",
+	Short:   cmdutil.AdminReqDescription("Manages constructors"),
 	PreRunE: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()

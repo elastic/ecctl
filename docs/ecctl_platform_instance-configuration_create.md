@@ -40,5 +40,5 @@ ecctl platform instance-configuration create -f <config.json> [flags]
 
 ### SEE ALSO
 
-* [ecctl platform instance-configuration](ecctl_platform_instance-configuration.md)	 - Manages instance configurations (for ECE installations only)
+* [ecctl platform instance-configuration](ecctl_platform_instance-configuration.md)	 - Manages instance configurations (Requires platform administration privileges)
 

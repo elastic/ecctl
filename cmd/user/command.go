@@ -21,12 +21,13 @@ import (
 	"github.com/spf13/cobra"
 
 	cmduserkey "github.com/elastic/ecctl/cmd/user/key"
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 )
 
 // Command is the user subcommand
 var Command = &cobra.Command{
 	Use:     "user",
-	Short:   "Manages the platform users (for ECE installations only)",
+	Short:   cmdutil.AdminReqDescription("Manages the platform users"),
 	PreRunE: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()

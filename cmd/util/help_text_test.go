@@ -15,27 +15,37 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package cmdallocator
+package cmdutil
 
 import (
-	"github.com/spf13/cobra"
-
-	cmdallocatormetadata "github.com/elastic/ecctl/cmd/platform/allocator/metadata"
-	cmdutil "github.com/elastic/ecctl/cmd/util"
+	"reflect"
+	"testing"
 )
 
-// Command represents the allocator command
-var Command = &cobra.Command{
-	Use:     "allocator",
-	Short:   cmdutil.AdminReqDescription("Manages allocators"),
-	PreRunE: cobra.MaximumNArgs(0),
-	Run: func(cmd *cobra.Command, args []string) {
-		cmd.Help()
-	},
-}
+func TestAdminReqDescription(t *testing.T) {
+	type args struct {
+		msg string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			name: "Returns a string with the expected appended text",
+			args: args{
+				msg: "Manages resources",
+			},
+			want: "Manages resources (Requires platform administration privileges)",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := AdminReqDescription(tt.args.msg)
 
-func init() {
-	Command.AddCommand(
-		cmdallocatormetadata.Command,
-	)
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("AdminReqDescription() expected = %v, but got %v", tt.want, got)
+			}
+		})
+	}
 }

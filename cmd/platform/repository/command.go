@@ -23,20 +23,22 @@ import (
 	"path/filepath"
 
 	"github.com/elastic/cloud-sdk-go/pkg/input"
-	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 	"github.com/elastic/ecctl/pkg/platform/snaprepo"
 	"github.com/elastic/ecctl/pkg/util"
 )
 
 const (
-	snapshotShortHelp       = "Manages snapshot repositories (for ECE installations only)"
 	snapshotCreateShortHelp = "Creates / updates a snapshot repository"
 )
 
 var (
+	snapshotShortHelp = cmdutil.AdminReqDescription("Manages snapshot repositories")
+
 	snapshotLongHelp = `
 Manages snapshot repositories that are used by Elasticsearch clusters
 to perform snapshot operations.
@@ -146,7 +148,7 @@ func setSnapshot(cmd *cobra.Command, args []string) error {
 		}
 	}
 
-	if err := cmdutil.FileOrStdin(cmd, "settings"); err != nil {
+	if err := sdkcmdutil.FileOrStdin(cmd, "settings"); err != nil {
 		return err
 	}
 

@@ -38,5 +38,5 @@ ecctl platform role list [flags]
 
 ### SEE ALSO
 
-* [ecctl platform role](ecctl_platform_role.md)	 - Manages platform roles (for ECE installations only)
+* [ecctl platform role](ecctl_platform_role.md)	 - Manages platform roles (Requires platform administration privileges)
 

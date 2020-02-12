@@ -1,10 +1,10 @@
 ## ecctl platform instance-configuration
 
-Manages instance configurations (for ECE installations only)
+Manages instance configurations (Requires platform administration privileges)
 
 ### Synopsis
 
-Manages instance configurations (for ECE installations only)
+Manages instance configurations (Requires platform administration privileges)
 
 ```
 ecctl platform instance-configuration [flags]

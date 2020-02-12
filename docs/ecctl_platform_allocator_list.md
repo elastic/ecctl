@@ -63,5 +63,5 @@ ecctl platform allocator list [flags]
 
 ### SEE ALSO
 
-* [ecctl platform allocator](ecctl_platform_allocator.md)	 - Manages allocators (for ECE installations only)
+* [ecctl platform allocator](ecctl_platform_allocator.md)	 - Manages allocators (Requires platform administration privileges)
 

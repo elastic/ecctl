@@ -53,5 +53,5 @@ ecctl user create --username <username> --role <role> [flags]
 
 ### SEE ALSO
 
-* [ecctl user](ecctl_user.md)	 - Manages the platform users (for ECE installations only)
+* [ecctl user](ecctl_user.md)	 - Manages the platform users (Requires platform administration privileges)
 

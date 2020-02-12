@@ -23,6 +23,7 @@ import (
 
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 	"github.com/elastic/ecctl/pkg/platform/stack"
 )
@@ -76,7 +77,7 @@ func listStackPacks(cmd *cobra.Command, args []string) error {
 
 var stackUploadCmd = &cobra.Command{
 	Use:     "upload",
-	Short:   "Uploads an Elastic StackPack (for ECE installations only)",
+	Short:   cmdutil.AdminReqDescription("Uploads an Elastic StackPack"),
 	PreRunE: cobra.MinimumNArgs(1),
 
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -95,7 +96,7 @@ var stackUploadCmd = &cobra.Command{
 
 var stackDeleteCmd = &cobra.Command{
 	Use:     "delete",
-	Short:   "Deletes an Elastic StackPack (for ECE installations only)",
+	Short:   cmdutil.AdminReqDescription("Deletes an Elastic StackPack"),
 	PreRunE: cobra.MinimumNArgs(1),
 
 	RunE: func(cmd *cobra.Command, args []string) error {

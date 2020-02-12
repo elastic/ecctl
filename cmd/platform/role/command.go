@@ -19,12 +19,14 @@ package cmdrole
 
 import (
 	"github.com/spf13/cobra"
+
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 )
 
 // Command is the top level role command.
 var Command = &cobra.Command{
 	Use:     "role",
-	Short:   "Manages platform roles (for ECE installations only)",
+	Short:   cmdutil.AdminReqDescription("Manages platform roles"),
 	PreRunE: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()

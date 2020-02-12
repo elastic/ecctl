@@ -1,10 +1,10 @@
 ## ecctl platform info
 
-Shows information about the platform (for ECE installations only)
+Shows information about the platform (Requires platform administration privileges)
 
 ### Synopsis
 
-Shows information about the platform (for ECE installations only)
+Shows information about the platform (Requires platform administration privileges)
 
 ```
 ecctl platform info [flags]

@@ -38,7 +38,7 @@ ecctl user key [flags]
 
 ### SEE ALSO
 
-* [ecctl user](ecctl_user.md)	 - Manages the platform users (for ECE installations only)
+* [ecctl user](ecctl_user.md)	 - Manages the platform users (Requires platform administration privileges)
 * [ecctl user key delete](ecctl_user_key_delete.md)	 - Deletes an existing API key for the specified user
 * [ecctl user key list](ecctl_user_key_list.md)	 - Lists the API keys for the specified user, or all platform users
 * [ecctl user key show](ecctl_user_key_show.md)	 - Shows the API key details for the specified user
