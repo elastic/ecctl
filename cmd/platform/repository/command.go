@@ -18,7 +18,6 @@
 package cmdrepository
 
 import (
-	"fmt"
 	"io"
 	"os"
 	"path/filepath"
@@ -38,7 +37,7 @@ const (
 )
 
 var (
-	snapshotShortHelp = fmt.Sprintf("Manages snapshot repositories %v", cmdutil.PlatformAdminRequired)
+	snapshotShortHelp = cmdutil.AdminReqDescription("Manages snapshot repositories")
 
 	snapshotLongHelp = `
 Manages snapshot repositories that are used by Elasticsearch clusters

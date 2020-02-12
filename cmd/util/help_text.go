@@ -17,5 +17,14 @@
 
 package cmdutil
 
+import (
+	"fmt"
+)
+
 // PlatformAdminRequired is an additional helper text for commands
 const PlatformAdminRequired = "(Requires platform administration privileges)"
+
+// AdminReqDescription adds a text about required admin permissions to a string
+func AdminReqDescription(desc string) string {
+	return fmt.Sprintf("%s %v", desc, PlatformAdminRequired)
+}

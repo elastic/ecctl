@@ -18,7 +18,6 @@
 package cmdstack
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
 
@@ -78,7 +77,7 @@ func listStackPacks(cmd *cobra.Command, args []string) error {
 
 var stackUploadCmd = &cobra.Command{
 	Use:     "upload",
-	Short:   fmt.Sprintf("Uploads an Elastic StackPack %v", cmdutil.PlatformAdminRequired),
+	Short:   cmdutil.AdminReqDescription("Uploads an Elastic StackPack"),
 	PreRunE: cobra.MinimumNArgs(1),
 
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -97,7 +96,7 @@ var stackUploadCmd = &cobra.Command{
 
 var stackDeleteCmd = &cobra.Command{
 	Use:     "delete",
-	Short:   fmt.Sprintf("Deletes an Elastic StackPack %v", cmdutil.PlatformAdminRequired),
+	Short:   cmdutil.AdminReqDescription("Deletes an Elastic StackPack"),
 	PreRunE: cobra.MinimumNArgs(1),
 
 	RunE: func(cmd *cobra.Command, args []string) error {

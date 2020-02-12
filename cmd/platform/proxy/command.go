@@ -18,7 +18,6 @@
 package cmdproxy
 
 import (
-	"fmt"
 	"path/filepath"
 
 	"github.com/spf13/cobra"
@@ -37,7 +36,7 @@ const (
 // Command represents the proxy command
 var Command = &cobra.Command{
 	Use:     "proxy",
-	Short:   fmt.Sprintf("Manages proxies %v", cmdutil.PlatformAdminRequired),
+	Short:   cmdutil.AdminReqDescription("Manages proxies"),
 	PreRunE: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()

@@ -18,8 +18,6 @@
 package cmdplatform
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
 
 	cmdallocator "github.com/elastic/ecctl/cmd/platform/allocator"
@@ -49,7 +47,7 @@ var Command = &cobra.Command{
 
 var infoCmd = &cobra.Command{
 	Use:     "info",
-	Short:   fmt.Sprintf("Shows information about the platform %v", cmdutil.PlatformAdminRequired),
+	Short:   cmdutil.AdminReqDescription("Shows information about the platform"),
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		p, err := platform.GetInfo(platform.GetInfoParams{

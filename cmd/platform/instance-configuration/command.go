@@ -18,7 +18,6 @@
 package cmdinstanceconfig
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
 
@@ -34,7 +33,7 @@ import (
 // Command is the top instance-config subcommand.
 var Command = &cobra.Command{
 	Use:     "instance-configuration",
-	Short:   fmt.Sprintf("Manages instance configurations %v", cmdutil.PlatformAdminRequired),
+	Short:   cmdutil.AdminReqDescription("Manages instance configurations"),
 	PreRunE: cobra.MaximumNArgs(0),
 	Run:     func(cmd *cobra.Command, args []string) { cmd.Help() },
 }
