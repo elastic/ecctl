@@ -49,14 +49,24 @@ const (
 )
 
 const (
-	disclaimer      = "Welcome to the Elastic Cloud CLI! This command will guide you through authenticating and setting some default values.\n\n"
+	_ = iota
+	essInfraChoice
+	eceInfraChoice
+	esspInfraChoice
+)
+
+const (
+	disclaimer      = "Welcome to Elastic Cloud Control (ecctl)! This command will guide you through authenticating and setting some default values.\n\n"
 	redacted        = "[REDACTED]"
 	settingsPathMsg = "Found existing settings in %s. Here's a JSON representation of what they look like:\n"
 
 	missingConfigMsg  = `Missing configuration file, would you like to initialise it? [y/n]: `
 	existingConfigMsg = `Would you like to change your current settings? [y/n]: `
 
-	hostMsg = "Enter the URL of your ECE installation: "
+	essHostAddress = "https://api.elastic-cloud.com"
+	eceHostMsg     = "Enter the URL of your ECE installation: "
+	esspHostMsg    = "Enter the URL of your ESSP installation: "
+	essChoiceMsg   = "Using \"%s\" as the API endpoint.\n"
 
 	apiKeyMsg = "Paste your API Key and press enter: "
 	userMsg   = "Type in your username: "
@@ -67,6 +77,14 @@ const (
 )
 
 var (
+	hostChoiceMsg = `
+Select which type of Elastic Cloud offering will you be working with:
+  [1] Elasticsearch Service (default).
+  [2] Elastic Cloud Enterprise (ECE).
+  [3] Elasticsearch Service Private (ESSP).
+
+Please enter your choice: `
+
 	authChoiceMsg = `
 Which authentication mechanism would you like to use?
   [1] API Keys (Recommended).
@@ -186,7 +204,10 @@ func InitConfig(params InitConfigParams) error {
 	// Insecure is set to true by default to allow API calls against HTTPS
 	// endpoints with self-signed certificates.
 	cfg.Insecure = true
-	cfg.Host = scanner.Scan(hostMsg)
+
+	if err := askInfraSelection(&cfg, scanner, params.Writer, params.ErrWriter); err != nil {
+		return err
+	}
 
 	if err := askOutputFormat(&cfg, scanner, params.Writer, params.ErrWriter); err != nil {
 		return err
@@ -206,7 +227,7 @@ func InitConfig(params InitConfigParams) error {
 		return err
 	}
 
-	// It's better to write the config as is since it ommits defaults and
+	// It's better to write the config as is since it omits defaults and
 	// empties vs viper's behaviour in `WriteConfig`.
 	return writeConfig(cfg, params.FilePath, ".json")
 }
@@ -241,6 +262,29 @@ func printConfig(writer io.Writer, v *viper.Viper) error {
 	enc := json.NewEncoder(writer)
 	enc.SetIndent("", "  ")
 	return enc.Encode(c)
+}
+
+func askInfraSelection(cfg *Config, scanner *input.Scanner, writer, errWriter io.Writer) error {
+	infraChoiceRaw := scanner.Scan(hostChoiceMsg)
+	fmt.Fprintln(writer)
+	infraChoice, err := strconv.Atoi(infraChoiceRaw)
+	if err != nil {
+		return err
+	}
+
+	cfg.Host = essHostAddress
+	switch infraChoice {
+	case essInfraChoice:
+		fmt.Fprintf(writer, essChoiceMsg, essHostAddress)
+	case eceInfraChoice:
+		cfg.Host = scanner.Scan(eceHostMsg)
+	case esspInfraChoice:
+		cfg.Host = scanner.Scan(esspHostMsg)
+	default:
+		fmt.Fprintf(errWriter, "invalid choice, defaulting to %s", essHostAddress)
+	}
+
+	return nil
 }
 
 func askOutputFormat(cfg *Config, scanner *input.Scanner, writer, errWriter io.Writer) error {
