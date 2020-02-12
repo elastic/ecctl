@@ -18,8 +18,6 @@
 package cmdallocator
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
 
 	cmdallocatormetadata "github.com/elastic/ecctl/cmd/platform/allocator/metadata"
@@ -29,7 +27,7 @@ import (
 // Command represents the allocator command
 var Command = &cobra.Command{
 	Use:     "allocator",
-	Short:   fmt.Sprintf("Manages allocators %v", cmdutil.PlatformAdminRequired),
+	Short:   cmdutil.AdminReqDescription("Manages allocators"),
 	PreRunE: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()

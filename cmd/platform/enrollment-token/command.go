@@ -36,7 +36,7 @@ const (
 // Command represents the enrollment-token subcomand.
 var Command = &cobra.Command{
 	Use:     "enrollment-token",
-	Short:   fmt.Sprintf("Manages tokens %v", cmdutil.PlatformAdminRequired),
+	Short:   cmdutil.AdminReqDescription("Manages tokens"),
 	PreRunE: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
