@@ -52,17 +52,21 @@ const (
 	_ = iota
 	essInfraChoice
 	eceInfraChoice
+	esspInfraChoice
 )
 
 const (
-	disclaimer      = "Welcome to the Elastic Cloud CLI! This command will guide you through authenticating and setting some default values.\n\n"
+	disclaimer      = "Welcome to Elastic Cloud Control (ecctl)! This command will guide you through authenticating and setting some default values.\n\n"
 	redacted        = "[REDACTED]"
 	settingsPathMsg = "Found existing settings in %s. Here's a JSON representation of what they look like:\n"
 
 	missingConfigMsg  = `Missing configuration file, would you like to initialise it? [y/n]: `
 	existingConfigMsg = `Would you like to change your current settings? [y/n]: `
 
-	hostMsg = "Enter the URL of your ECE installation: "
+	essHostAddress = "https://api.elastic-cloud.com"
+	eceHostMsg     = "Enter the URL of your ECE installation: "
+	esspHostMsg    = "Enter the URL of your ESSP installation: "
+	essChoiceMsg   = "Using \"%s\" as the API endpoint.\n"
 
 	apiKeyMsg = "Paste your API Key and press enter: "
 	userMsg   = "Type in your username: "
@@ -74,9 +78,10 @@ const (
 
 var (
 	hostChoiceMsg = `
-Select which type of infrastructure this configuration will for:
-  [1] Elastic Cloud (Elasticsearch Service).
+Select which type of Elastic Cloud offering will you be working with:
+  [1] Elasticsearch Service (default).
   [2] Elastic Cloud Enterprise (ECE).
+  [3] Elasticsearch Service Private (ESSP).
 
 Please enter your choice: `
 
@@ -267,13 +272,16 @@ func askInfraSelection(cfg *Config, scanner *input.Scanner, writer, errWriter io
 		return err
 	}
 
-	cfg.Host = "https://api.elastic-cloud.com"
+	cfg.Host = essHostAddress
 	switch infraChoice {
-	case eceInfraChoice:
-		cfg.Host = scanner.Scan(hostMsg)
 	case essInfraChoice:
+		fmt.Fprintf(writer, essChoiceMsg, essHostAddress)
+	case eceInfraChoice:
+		cfg.Host = scanner.Scan(eceHostMsg)
+	case esspInfraChoice:
+		cfg.Host = scanner.Scan(esspHostMsg)
 	default:
-		fmt.Fprintln(errWriter, "invalid choice, defaulting to \"https://api.elastic-cloud.com\"")
+		fmt.Fprintf(errWriter, "invalid choice, defaulting to %s", essHostAddress)
 	}
 
 	return nil

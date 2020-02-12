@@ -262,8 +262,9 @@ func TestInitConfig(t *testing.T) {
 				"output":   "text",
 			},
 			wantOutput: disclaimer + missingConfigMsg + hostChoiceMsg + "\n" +
-				formatChoiceMsg + "\n" + authChoiceMsg + "\n" + apiKeyMsg + "\n" +
-				"\n" + fmt.Sprintf(validCredentialsMsg, "anacleto") + finalMsg + "\n",
+				fmt.Sprintf(essChoiceMsg, essHostAddress) + formatChoiceMsg +
+				"\n" + authChoiceMsg + "\n" + apiKeyMsg + "\n" + "\n" +
+				fmt.Sprintf(validCredentialsMsg, "anacleto") + finalMsg + "\n",
 		},
 		{
 			name: "doesn't find a config file and user creates a new one with user/pass",
@@ -299,7 +300,7 @@ func TestInitConfig(t *testing.T) {
 				"pass":     "apassword",
 				"user":     "auser",
 			},
-			wantOutput: disclaimer + missingConfigMsg + hostChoiceMsg + "\n" + hostMsg +
+			wantOutput: disclaimer + missingConfigMsg + hostChoiceMsg + "\n" + eceHostMsg +
 				formatChoiceMsg + "\n" + authChoiceMsg + "\n" + userMsg + passMsg +
 				"\n" + "\n" + fmt.Sprintf(validCredentialsMsg, "auser") + finalMsg + "\n",
 		},
@@ -310,7 +311,7 @@ func TestInitConfig(t *testing.T) {
 				FilePath: filepath.Join(testFiles, "doesnt_matter"),
 				Reader: io.MultiReader(
 					strings.NewReader("y\n"),
-					strings.NewReader("2\n"),
+					strings.NewReader("3\n"),
 					strings.NewReader("https://ahost\n"),
 					strings.NewReader("1\n"),
 					strings.NewReader("1\n"),
@@ -334,7 +335,7 @@ func TestInitConfig(t *testing.T) {
 			wantOutput: disclaimer +
 				fmt.Sprintf(settingsPathMsg, "test_files/userpassmodif.yaml") +
 				userPassConfigToModifyContents + "\n" + existingConfigMsg + hostChoiceMsg +
-				"\n" + hostMsg + formatChoiceMsg + "\n" + authChoiceMsg + "\n" + apiKeyMsg +
+				"\n" + esspHostMsg + formatChoiceMsg + "\n" + authChoiceMsg + "\n" + apiKeyMsg +
 				"\n" + "\n" + fmt.Sprintf(validCredentialsMsg, "anacleto") + finalMsg + "\n",
 		},
 		{
@@ -374,7 +375,7 @@ func TestInitConfig(t *testing.T) {
 			wantOutput: disclaimer +
 				fmt.Sprintf(settingsPathMsg, "test_files/apikeymodif.yaml") +
 				apiKeyConfigToModifyContents + "\n" + existingConfigMsg + hostChoiceMsg +
-				"\n" + hostMsg + formatChoiceMsg + "\n" + authChoiceMsg + "\n" + userMsg +
+				"\n" + eceHostMsg + formatChoiceMsg + "\n" + authChoiceMsg + "\n" + userMsg +
 				passMsg + "\n" + "\n" + fmt.Sprintf(validCredentialsMsg, "auser") + finalMsg + "\n",
 		},
 	}
