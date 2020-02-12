@@ -174,6 +174,9 @@ func waitVacateCompletion(p *pool.Pool, hasWork bool) error {
 	return errs.ErrorOrNil()
 }
 
+// nolint since the linter says it's too complex, it's because of the for loop
+// combination with ifs. It's better to have this grouped rather than scattered
+// around.
 func addAllocatorMovesToPool(params addAllocatorMovesToPoolParams) ([]pool.Validator, bool) {
 	var leftovers []pool.Validator
 	var vacates = make([]pool.Validator, 0)
@@ -213,6 +216,18 @@ func addAllocatorMovesToPool(params addAllocatorMovesToPoolParams) ([]pool.Valid
 		}
 
 		var kind = "apm"
+		if kindFilter != "" && kind != kindFilter {
+			break
+		}
+		vacates = append(vacates, newVacateClusterParams(params, *move.ClusterID, kind))
+	}
+
+	for _, move := range params.Moves.AppsearchClusters {
+		if len(filter) > 0 && !slice.HasString(filter, *move.ClusterID) {
+			continue
+		}
+
+		var kind = "appsearch"
 		if kindFilter != "" && kind != kindFilter {
 			break
 		}
@@ -353,6 +368,10 @@ func newMoveClusterParams(params *VacateClusterParams) (*platform_infrastructure
 		moveParams.SetClusterType(ec.String("apm"))
 	}
 
+	if len(req.AppsearchClusters) > 0 {
+		moveParams.SetClusterType(ec.String("appsearch"))
+	}
+
 	return moveParams, nil
 }
 
@@ -384,7 +403,14 @@ func trackMovedCluster(params *VacateClusterParams) error {
 		MaxRetries:    params.MaxPollRetries,
 	})
 	if err != nil {
-		return errors.Wrap(err, vacateWrapMessage(params, "track"))
+		// Remove this after AppSearch is supported in the plan tracker
+		// https://github.com/elastic/cloud-sdk-go/issues/34
+		if params.Kind == "appsearch" {
+			wrapMessage := "instance is being moved but tracking is not supported, please check the vacate progress from the UI"
+			return errors.New(vacateWrapMessage(params, wrapMessage))
+		}
+		wrapMessage := "plan tracker returned an error but vacate is in progress"
+		return errors.Wrap(err, vacateWrapMessage(params, wrapMessage))
 	}
 
 	return plan.Stream(channel, params.Output)
@@ -392,6 +418,8 @@ func trackMovedCluster(params *VacateClusterParams) error {
 
 // CheckVacateFailures iterates over the list of failures returning
 // a multierror with any of the failures found.
+//
+// nolint because of the complexity score here
 func CheckVacateFailures(failures *models.MoveClustersDetails, filter []string) error {
 	if failures == nil {
 		return nil
@@ -447,6 +475,24 @@ func CheckVacateFailures(failures *models.MoveClustersDetails, filter []string) 
 		if !strings.Contains(ferr.Error(), PlanPendingMessage) {
 			merr = multierror.Append(merr,
 				fmt.Errorf("cluster [%s][apm] failed vacating, reason: %s", *failure.ClusterID, ferr),
+			)
+		}
+	}
+
+	for _, failure := range failures.AppsearchClusters {
+		if len(filter) > 0 && !slice.HasString(filter, *failure.ClusterID) {
+			continue
+		}
+
+		var ferr error
+		if len(failure.Errors) > 0 {
+			var err = failure.Errors[0]
+			ferr = fmt.Errorf("code: %s, message: %s", *err.Code, *err.Message)
+		}
+
+		if !strings.Contains(ferr.Error(), PlanPendingMessage) {
+			merr = multierror.Append(merr,
+				fmt.Errorf("cluster [%s][appsearch] failed vacating, reason: %s", *failure.ClusterID, ferr),
 			)
 		}
 	}
@@ -507,6 +553,20 @@ func ComputeVacateRequest(pr *models.MoveClustersDetails, clusters, to []string,
 		c.CalculatedPlan.PlanConfiguration.PreferredAllocators = to
 		req.ApmClusters = append(req.ApmClusters,
 			&models.MoveApmClusterConfiguration{
+				ClusterIds:   []string{*c.ClusterID},
+				PlanOverride: c.CalculatedPlan,
+			},
+		)
+	}
+
+	for _, c := range pr.AppsearchClusters {
+		if len(clusters) > 0 && !slice.HasString(clusters, *c.ClusterID) {
+			continue
+		}
+
+		c.CalculatedPlan.PlanConfiguration.PreferredAllocators = to
+		req.AppsearchClusters = append(req.AppsearchClusters,
+			&models.MoveAppSearchConfiguration{
 				ClusterIds:   []string{*c.ClusterID},
 				PlanOverride: c.CalculatedPlan,
 			},

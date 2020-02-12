@@ -42,6 +42,35 @@ import (
 
 const planStepLogErrorMessage = "Unexpected error during step: [perform-snapshot]: [no.found.constructor.models.TimeoutException: Timeout]"
 
+type vacateCase struct {
+	topology     []vacateCaseClusters
+	skipTracking bool
+}
+
+type vacateCaseClusters struct {
+	// Allocator ID
+	Allocator string
+	// Elasticsearch clusters that will be simulated
+	elasticsearch []vacateCaseClusterConfig
+	// Kibana instances that will be simulated
+	kibana []vacateCaseClusterConfig
+	// APM clusters that will be simulated
+	apm []vacateCaseClusterConfig
+	// AppSearch clusters that will be simulated
+	appsearch []vacateCaseClusterConfig
+}
+
+type vacateCaseClusterConfig struct {
+	// ID of the cluster
+	ID string
+	// Fails the `_move` api call to actually move a cluster
+	fail bool
+	// Plan steps that are fetched by the
+	steps [][]*models.ClusterPlanStepInfo
+	// Current plan steps the move
+	plan []*models.ClusterPlanStepInfo
+}
+
 func newBody(t *testing.T, v interface{}) string {
 	b, err := json.Marshal(v)
 	if err != nil {
@@ -119,6 +148,25 @@ func newApmMove(t *testing.T, clusterID, allocator string) io.ReadCloser {
 	)))
 }
 
+func newAppsearchMove(t *testing.T, clusterID, allocator string) io.ReadCloser {
+	return ioutil.NopCloser(strings.NewReader(newBody(t,
+		models.MoveClustersCommandResponse{
+			Moves: &models.MoveClustersDetails{
+				AppsearchClusters: []*models.MoveAppSearchDetails{{
+					ClusterID: ec.String(clusterID),
+					CalculatedPlan: &models.TransientAppSearchPlanConfiguration{
+						PlanConfiguration: &models.AppSearchPlanControlConfiguration{
+							MoveAllocators: []*models.AllocatorMoveRequest{
+								{From: ec.String(allocator)},
+							},
+						},
+					},
+				}},
+			},
+		},
+	)))
+}
+
 func newKibanaMoveFailure(t *testing.T, clusterID, allocator string) io.ReadCloser {
 	return ioutil.NopCloser(strings.NewReader(newBody(t,
 		models.MoveClustersCommandResponse{
@@ -148,7 +196,7 @@ func newKibanaMoveFailure(t *testing.T, clusterID, allocator string) io.ReadClos
 	)))
 }
 
-func newMulipleMoves(t *testing.T, allocator string, es, kibana, apm []string) io.ReadCloser {
+func newMulipleMoves(t *testing.T, allocator string, es, kibana, apm, appsearch []string) io.ReadCloser {
 	var res = models.MoveClustersCommandResponse{Moves: &models.MoveClustersDetails{}}
 	for _, id := range es {
 		res.Moves.ElasticsearchClusters = append(res.Moves.ElasticsearchClusters,
@@ -193,31 +241,45 @@ func newMulipleMoves(t *testing.T, allocator string, es, kibana, apm []string) i
 			},
 		)
 	}
+
+	for _, id := range appsearch {
+		res.Moves.AppsearchClusters = append(res.Moves.AppsearchClusters,
+			&models.MoveAppSearchDetails{
+				ClusterID: ec.String(id),
+				CalculatedPlan: &models.TransientAppSearchPlanConfiguration{
+					PlanConfiguration: &models.AppSearchPlanControlConfiguration{
+						MoveAllocators: []*models.AllocatorMoveRequest{
+							{From: ec.String(allocator)},
+						},
+					},
+				},
+			},
+		)
+	}
 	return ioutil.NopCloser(strings.NewReader(newBody(t, res)))
 }
 
 func newPollerBody(t *testing.T, pending, current *models.ElasticsearchClusterPlanInfo) io.ReadCloser {
 	payload := &models.ElasticsearchClusterPlansInfo{Pending: pending, Current: current}
-	var response, err = json.MarshalIndent(payload, "", "  ")
-	if err != nil {
-		t.Fatal(err)
-	}
-	response = append(response, []byte("\n\n")...)
-	return ioutil.NopCloser(bytes.NewReader(response))
+	return newPayloadFromStruct(t, payload)
 }
 
 func newApmPollerBody(t *testing.T, pending, current *models.ApmPlanInfo) io.ReadCloser {
 	payload := &models.ApmPlansInfo{Pending: pending, Current: current}
-	var response, err = json.MarshalIndent(payload, "", "  ")
-	if err != nil {
-		t.Fatal(err)
-	}
-	response = append(response, []byte("\n\n")...)
-	return ioutil.NopCloser(bytes.NewReader(response))
+	return newPayloadFromStruct(t, payload)
+}
+
+func newAppSearchPollerBody(t *testing.T, pending, current *models.AppSearchPlanInfo) io.ReadCloser {
+	payload := &models.AppSearchPlansInfo{Pending: pending, Current: current}
+	return newPayloadFromStruct(t, payload)
 }
 
 func newKibanaPollerBody(t *testing.T, pending, current *models.KibanaClusterPlanInfo) io.ReadCloser {
 	payload := &models.KibanaClusterPlansInfo{Pending: pending, Current: current}
+	return newPayloadFromStruct(t, payload)
+}
+
+func newPayloadFromStruct(t *testing.T, payload interface{}) io.ReadCloser {
 	var response, err = json.MarshalIndent(payload, "", "  ")
 	if err != nil {
 		t.Fatal(err)
@@ -331,32 +393,6 @@ func newAllocator(t *testing.T, id, clusterID, kind string) io.ReadCloser {
 	return ioutil.NopCloser(strings.NewReader(newBody(t, res)))
 }
 
-type vacateCase struct {
-	topology []vacateCaseClusters
-}
-
-type vacateCaseClusters struct {
-	// Allocator ID
-	Allocator string
-	// Elasticsearch clusters that will be simulated
-	elasticsearch []vacateCaseClusterConfig
-	// Kibana instances that will be simulated
-	kibana []vacateCaseClusterConfig
-	// APM clusters that will be simulated
-	apm []vacateCaseClusterConfig
-}
-
-type vacateCaseClusterConfig struct {
-	// ID of the cluster
-	ID string
-	// Fails the `_move` api call to actually move a cluster
-	fail bool
-	// Plan steps that are fetched by the
-	steps [][]*models.ClusterPlanStepInfo
-	// Current plan steps the move
-	plan []*models.ClusterPlanStepInfo
-}
-
 // newVacateTestCase builds a test case from a vacateCase topology
 func newVacateTestCase(t *testing.T, tc vacateCase) *VacateParams {
 	var responses = make([]mock.Response, 0, len(tc.topology))
@@ -370,6 +406,7 @@ func newVacateTestCase(t *testing.T, tc vacateCase) *VacateParams {
 		var esmoves []string
 		var kibanaMoves []string
 		var apmMoves []string
+		var appsearchMoves []string
 
 		// Get all moves
 		for ii := range topology.elasticsearch {
@@ -381,9 +418,12 @@ func newVacateTestCase(t *testing.T, tc vacateCase) *VacateParams {
 		for ii := range topology.apm {
 			apmMoves = append(apmMoves, topology.apm[ii].ID)
 		}
+		for ii := range topology.appsearch {
+			appsearchMoves = append(appsearchMoves, topology.appsearch[ii].ID)
+		}
 
 		responses = append(responses, mock.Response{Response: http.Response{
-			Body:       newMulipleMoves(t, alloc, esmoves, kibanaMoves, apmMoves),
+			Body:       newMulipleMoves(t, alloc, esmoves, kibanaMoves, apmMoves, appsearchMoves),
 			StatusCode: 202,
 		}})
 	}
@@ -407,8 +447,14 @@ func newVacateTestCase(t *testing.T, tc vacateCase) *VacateParams {
 			_, r := newAPMVacateMove(t, alloc, topology.apm[ii])
 			responses = append(responses, r...)
 		}
+
+		for ii := range topology.appsearch {
+			_, r := newAppsearchVacateMove(t, alloc, topology.appsearch[ii])
+			responses = append(responses, r...)
+		}
 	}
 	return &VacateParams{
+		SkipTracking:   tc.skipTracking,
 		Output:         output.NewDevice(sdkSync.NewBuffer()),
 		Allocators:     allocators,
 		API:            api.NewMock(responses...),
@@ -424,7 +470,7 @@ func newAPMVacateMove(t *testing.T, alloc string, move vacateCaseClusterConfig) 
 		Body:       newAllocator(t, alloc, move.ID, "apm"),
 		StatusCode: 200,
 	}}, mock.Response{Response: http.Response{
-		Body:       newKibanaMove(t, move.ID, alloc),
+		Body:       newApmMove(t, move.ID, alloc),
 		StatusCode: 202,
 	}})
 
@@ -623,6 +669,77 @@ func newElasticsearchVacateMove(t *testing.T, alloc string, move vacateCaseClust
 			Body: newPollerBody(t,
 				nil,
 				&models.ElasticsearchClusterPlanInfo{PlanAttemptLog: move.plan},
+			),
+		}},
+	)
+
+	return api.NewMock(responses...), responses
+}
+
+func newAppsearchVacateMove(t *testing.T, alloc string, move vacateCaseClusterConfig) (*api.API, []mock.Response) {
+	var responses = make([]mock.Response, 0, 4)
+	responses = append(responses, mock.Response{Response: http.Response{
+		Body:       newAllocator(t, alloc, move.ID, "appsearch"),
+		StatusCode: 200,
+	}}, mock.Response{Response: http.Response{
+		Body:       newAppsearchMove(t, move.ID, alloc),
+		StatusCode: 202,
+	}})
+
+	if move.fail {
+		body := ioutil.NopCloser(strings.NewReader(newBody(t, &models.MoveClustersCommandResponse{
+			Failures: &models.MoveClustersDetails{
+				ApmClusters: []*models.MoveApmClusterDetails{{
+					ClusterID: ec.String(move.ID),
+					CalculatedPlan: &models.TransientApmPlanConfiguration{
+						PlanConfiguration: &models.ApmPlanControlConfiguration{
+							MoveAllocators: []*models.AllocatorMoveRequest{{From: ec.String(alloc)}},
+						},
+					},
+					Errors: []*models.BasicFailedReplyElement{
+						{
+							Code:    ec.String("a code"),
+							Message: ec.String("a message"),
+						},
+					},
+				}},
+			}})))
+		// Return a response with a failed move
+		responses = append(responses, mock.Response{Response: http.Response{
+			Body:       body,
+			StatusCode: 202,
+		}})
+		// No extra responses should be given back for this cluster
+		// when a move failures happens.
+		return api.NewMock(responses...), responses
+	}
+
+	responses = append(responses, mock.Response{Response: http.Response{
+		Body:       newAppsearchMove(t, move.ID, alloc),
+		StatusCode: 202,
+	}})
+
+	// Define steps
+	for iii := range move.steps {
+		var step = move.steps[iii]
+		responses = append(responses, mock.Response{Response: http.Response{
+			StatusCode: 200,
+			Body: newAppSearchPollerBody(t,
+				&models.AppSearchPlanInfo{PlanAttemptLog: step},
+				nil,
+			),
+		}})
+	}
+
+	// Plan finished
+	responses = append(responses,
+		util.PlanNotFound,
+		util.PlanNotFound,
+		mock.Response{Response: http.Response{
+			StatusCode: 200,
+			Body: newAppSearchPollerBody(t,
+				nil,
+				&models.AppSearchPlanInfo{PlanAttemptLog: move.plan},
 			),
 		}},
 	)
