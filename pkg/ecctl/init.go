@@ -78,7 +78,7 @@ const (
 
 var (
 	hostChoiceMsg = `
-Select which type of Elastic Cloud offering will you be working with:
+Select which type of Elastic Cloud offering you will be working with:
   [1] Elasticsearch Service (default).
   [2] Elastic Cloud Enterprise (ECE).
   [3] Elasticsearch Service Private (ESSP).
