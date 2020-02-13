@@ -39,5 +39,5 @@ ecctl platform instance-configuration update <config id> -f <config.json> [flags
 
 ### SEE ALSO
 
-* [ecctl platform instance-configuration](ecctl_platform_instance-configuration.md)	 - Manages instance configurations (Requires platform administration privileges)
+* [ecctl platform instance-configuration](ecctl_platform_instance-configuration.md)	 - Manages instance configurations (Available for ECE only)
 

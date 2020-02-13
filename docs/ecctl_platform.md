@@ -39,15 +39,15 @@ ecctl platform [flags]
 ### SEE ALSO
 
 * [ecctl](ecctl.md)	 - Elastic Cloud Control
-* [ecctl platform allocator](ecctl_platform_allocator.md)	 - Manages allocators (Requires platform administration privileges)
-* [ecctl platform constructor](ecctl_platform_constructor.md)	 - Manages constructors (Requires platform administration privileges)
+* [ecctl platform allocator](ecctl_platform_allocator.md)	 - Manages allocators (Available for ECE only)
+* [ecctl platform constructor](ecctl_platform_constructor.md)	 - Manages constructors (Available for ECE only)
 * [ecctl platform deployment-template](ecctl_platform_deployment-template.md)	 - Manages deployment templates
-* [ecctl platform enrollment-token](ecctl_platform_enrollment-token.md)	 - Manages tokens (Requires platform administration privileges)
-* [ecctl platform info](ecctl_platform_info.md)	 - Shows information about the platform (Requires platform administration privileges)
-* [ecctl platform instance-configuration](ecctl_platform_instance-configuration.md)	 - Manages instance configurations (Requires platform administration privileges)
-* [ecctl platform proxy](ecctl_platform_proxy.md)	 - Manages proxies (Requires platform administration privileges)
-* [ecctl platform repository](ecctl_platform_repository.md)	 - Manages snapshot repositories (Requires platform administration privileges)
-* [ecctl platform role](ecctl_platform_role.md)	 - Manages platform roles (Requires platform administration privileges)
-* [ecctl platform runner](ecctl_platform_runner.md)	 - Manages platform runners (Requires platform administration privileges)
+* [ecctl platform enrollment-token](ecctl_platform_enrollment-token.md)	 - Manages tokens (Available for ECE only)
+* [ecctl platform info](ecctl_platform_info.md)	 - Shows information about the platform (Available for ECE only)
+* [ecctl platform instance-configuration](ecctl_platform_instance-configuration.md)	 - Manages instance configurations (Available for ECE only)
+* [ecctl platform proxy](ecctl_platform_proxy.md)	 - Manages proxies (Available for ECE only)
+* [ecctl platform repository](ecctl_platform_repository.md)	 - Manages snapshot repositories (Available for ECE only)
+* [ecctl platform role](ecctl_platform_role.md)	 - Manages platform roles (Available for ECE only)
+* [ecctl platform runner](ecctl_platform_runner.md)	 - Manages platform runners (Available for ECE only)
 * [ecctl platform stack](ecctl_platform_stack.md)	 - Manages Elastic StackPacks
 

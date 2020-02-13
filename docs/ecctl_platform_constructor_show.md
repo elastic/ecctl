@@ -38,5 +38,5 @@ ecctl platform constructor show <constructor id> [flags]
 
 ### SEE ALSO
 
-* [ecctl platform constructor](ecctl_platform_constructor.md)	 - Manages constructors (Requires platform administration privileges)
+* [ecctl platform constructor](ecctl_platform_constructor.md)	 - Manages constructors (Available for ECE only)
 

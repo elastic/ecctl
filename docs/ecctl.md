@@ -34,6 +34,6 @@ Elastic Cloud Control
 * [ecctl generate](ecctl_generate.md)	 - Generates completions and docs
 * [ecctl init](ecctl_init.md)	 - Creates an initial configuration file.
 * [ecctl platform](ecctl_platform.md)	 - Manages the platform
-* [ecctl user](ecctl_user.md)	 - Manages the platform users (Requires platform administration privileges)
+* [ecctl user](ecctl_user.md)	 - Manages the platform users (Available for ECE only)
 * [ecctl version](ecctl_version.md)	 - Shows ecctl version
 

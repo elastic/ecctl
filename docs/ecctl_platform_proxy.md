@@ -1,10 +1,10 @@
 ## ecctl platform proxy
 
-Manages proxies (Requires platform administration privileges)
+Manages proxies (Available for ECE only)
 
 ### Synopsis
 
-Manages proxies (Requires platform administration privileges)
+Manages proxies (Available for ECE only)
 
 ```
 ecctl platform proxy [flags]

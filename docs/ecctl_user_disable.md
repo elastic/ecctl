@@ -38,5 +38,5 @@ ecctl user disable <username> [flags]
 
 ### SEE ALSO
 
-* [ecctl user](ecctl_user.md)	 - Manages the platform users (Requires platform administration privileges)
+* [ecctl user](ecctl_user.md)	 - Manages the platform users (Available for ECE only)
 

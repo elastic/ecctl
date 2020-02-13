@@ -38,5 +38,5 @@ ecctl platform role delete <role> [flags]
 
 ### SEE ALSO
 
-* [ecctl platform role](ecctl_platform_role.md)	 - Manages platform roles (Requires platform administration privileges)
+* [ecctl platform role](ecctl_platform_role.md)	 - Manages platform roles (Available for ECE only)
 

@@ -1,10 +1,10 @@
 ## ecctl platform role
 
-Manages platform roles (Requires platform administration privileges)
+Manages platform roles (Available for ECE only)
 
 ### Synopsis
 
-Manages platform roles (Requires platform administration privileges)
+Manages platform roles (Available for ECE only)
 
 ```
 ecctl platform role [flags]
