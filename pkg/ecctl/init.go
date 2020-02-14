@@ -56,6 +56,35 @@ const (
 )
 
 const (
+	_ = iota
+	gcpUsCentral1Choice
+	gcpUsEast4Choice
+	gcpUsWest1Choice
+	gcpNorthamericaNortheast1Choice
+	gcpAustraliaSoutheast1Choice
+	gcpEuropeWest1Choice
+	gcpEuropeWest2Choice
+	gcpEuropeWest3Choice
+	gcpAsiaNortheast1Choice
+	gcpAsiaSouth1Choice
+	awsUsEast1Choice
+	awsUsWest1Choice
+	awsUsWest2Choice
+	awsEuCentral1Choice
+	awsEuWest2Choice
+	awsEuWest1Choice
+	awsApNortheast1Choice
+	awsApSoutheast1Choice
+	awsApSoutheast2Choice
+	awsSaEast1Choice
+	azureEastUs2Choice
+	azureWestUs2Choice
+	azureWestEuropeChoice
+	azureJapanEastChoice
+	azureSouthEastAsiaChoice
+)
+
+const (
 	disclaimer      = "Welcome to Elastic Cloud Control (ecctl)! This command will guide you through authenticating and setting some default values.\n\n"
 	redacted        = "[REDACTED]"
 	settingsPathMsg = "Found existing settings in %s. Here's a JSON representation of what they look like:\n"
@@ -82,6 +111,42 @@ Select which type of Elastic Cloud offering you will be working with:
   [1] Elasticsearch Service (default).
   [2] Elastic Cloud Enterprise (ECE).
   [3] Elasticsearch Service Private (ESSP).
+
+Please enter your choice: `
+
+	regionChoiceMsg = `
+Select a region you would like to have as default:
+  
+  GCP
+  [1] us-central1 (Iowa)
+  [2] us-east4 (N. Virginia)
+  [3] us-west1 (Oregon)
+  [4] northamerica-northeast1 (Montreal)
+  [5] australia-southeast1 (Sydney)
+  [6] europe-west1 (Belgium)
+  [7] europe-west2 (London)
+  [8] europe-west3 (Frankfurt)
+  [9] asia-northeast1 (Tokyo)
+  [10] asia-south1 (Mumbai)
+
+  AWS
+  [11] us-east-1 (N. Virginia)
+  [12] us-west-1 (N. California)
+  [13] us-west-2 (Oregon)
+  [14] eu-central-1 (Frankfurt)
+  [15] eu-west-2 (London)
+  [16] eu-west-1 (Ireland)
+  [17] ap-northeast-1 (Tokyo)
+  [18] ap-southeast-1 (Singapore)
+  [19] ap-southeast-2 (Sydney)
+  [20] sa-east-1 (São Paulo)
+
+  Azure
+  [21] eastus2 (Virginia)
+  [22] westus2 (Washington)
+  [23] westeurope (Netherlands)
+  [24] japaneast (Tokyo)
+  [25] southeastasia (Singapore)
 
 Please enter your choice: `
 
@@ -276,12 +341,81 @@ func askInfraSelection(cfg *Config, scanner *input.Scanner, writer, errWriter io
 	switch infraChoice {
 	case essInfraChoice:
 		fmt.Fprintf(writer, essChoiceMsg, essHostAddress)
+		if err := askRegionSelection(cfg, scanner, writer); err != nil {
+			return err
+		}
 	case eceInfraChoice:
 		cfg.Host = scanner.Scan(eceHostMsg)
 	case esspInfraChoice:
 		cfg.Host = scanner.Scan(esspHostMsg)
 	default:
 		fmt.Fprintf(errWriter, "invalid choice, defaulting to %s", essHostAddress)
+	}
+
+	return nil
+}
+
+func askRegionSelection(cfg *Config, scanner *input.Scanner, writer io.Writer) error {
+	regionChoiceRaw := scanner.Scan(regionChoiceMsg)
+	fmt.Fprintln(writer)
+	regionChoice, err := strconv.Atoi(regionChoiceRaw)
+	if err != nil {
+		return err
+	}
+
+	switch regionChoice {
+	case gcpUsCentral1Choice:
+		cfg.Region = "gcp-us-central1"
+	case gcpUsEast4Choice:
+		cfg.Region = "gcp-us-east4"
+	case gcpUsWest1Choice:
+		cfg.Region = "gcp-us-west1"
+	case gcpNorthamericaNortheast1Choice:
+		cfg.Region = "gcp-northamerica-northeast1"
+	case gcpAustraliaSoutheast1Choice:
+		cfg.Region = "gcp-australia-southeast1"
+	case gcpEuropeWest1Choice:
+		cfg.Region = "gcp-europe-west1"
+	case gcpEuropeWest2Choice:
+		cfg.Region = "gcp-europe-west2"
+	case gcpEuropeWest3Choice:
+		cfg.Region = "gcp-europe-west3"
+	case gcpAsiaNortheast1Choice:
+		cfg.Region = "gcp-asia-northeast1"
+	case gcpAsiaSouth1Choice:
+		cfg.Region = "gcp-asia-south1"
+	case awsUsEast1Choice:
+		cfg.Region = "us-east-1"
+	case awsUsWest1Choice:
+		cfg.Region = "us-west-1"
+	case awsUsWest2Choice:
+		cfg.Region = "us-west-2"
+	case awsEuCentral1Choice:
+		cfg.Region = "aws-eu-central-1"
+	case awsEuWest2Choice:
+		cfg.Region = "aws-eu-west-2"
+	case awsEuWest1Choice:
+		cfg.Region = "eu-west-1"
+	case awsApNortheast1Choice:
+		cfg.Region = "ap-northeast-1"
+	case awsApSoutheast1Choice:
+		cfg.Region = "ap-southeast-1"
+	case awsApSoutheast2Choice:
+		cfg.Region = "ap-southeast-2"
+	case awsSaEast1Choice:
+		cfg.Region = "sa-east-1"
+	case azureEastUs2Choice:
+		cfg.Region = "azure-eastus2"
+	case azureWestUs2Choice:
+		cfg.Region = "azure-westus2"
+	case azureWestEuropeChoice:
+		cfg.Region = "azure-westeurope"
+	case azureJapanEastChoice:
+		cfg.Region = "azure-japaneast"
+	case azureSouthEastAsiaChoice:
+		cfg.Region = "azure-southeastasia"
+	default:
+		return errors.New("invalid region choice")
 	}
 
 	return nil

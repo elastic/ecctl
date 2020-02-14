@@ -244,6 +244,7 @@ func TestInitConfig(t *testing.T) {
 					strings.NewReader("1\n"),
 					strings.NewReader("1\n"),
 					strings.NewReader("1\n"),
+					strings.NewReader("1\n"),
 					strings.NewReader("anapikey\n"),
 				),
 				Writer:    new(bytes.Buffer),
@@ -260,11 +261,12 @@ func TestInitConfig(t *testing.T) {
 				"host":     "https://api.elastic-cloud.com",
 				"insecure": true,
 				"output":   "text",
+				"region":   "gcp-us-central1",
 			},
 			wantOutput: disclaimer + missingConfigMsg + hostChoiceMsg + "\n" +
-				fmt.Sprintf(essChoiceMsg, essHostAddress) + formatChoiceMsg +
-				"\n" + authChoiceMsg + "\n" + apiKeyMsg + "\n" + "\n" +
-				fmt.Sprintf(validCredentialsMsg, "anacleto") + finalMsg + "\n",
+				fmt.Sprintf(essChoiceMsg, essHostAddress) + regionChoiceMsg + "\n" +
+				formatChoiceMsg + "\n" + authChoiceMsg + "\n" + apiKeyMsg + "\n" +
+				"\n" + fmt.Sprintf(validCredentialsMsg, "anacleto") + finalMsg + "\n",
 		},
 		{
 			name: "doesn't find a config file and user creates a new one with user/pass",
