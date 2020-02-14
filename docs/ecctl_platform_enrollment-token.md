@@ -1,10 +1,10 @@
 ## ecctl platform enrollment-token
 
-Manages tokens (Requires platform administration privileges)
+Manages tokens (Available for ECE only)
 
 ### Synopsis
 
-Manages tokens (Requires platform administration privileges)
+Manages tokens (Available for ECE only)
 
 ```
 ecctl platform enrollment-token [flags]

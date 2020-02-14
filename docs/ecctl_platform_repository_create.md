@@ -60,5 +60,5 @@ ecctl platform repository create custom --type fs --settings settings.yml
 
 ### SEE ALSO
 
-* [ecctl platform repository](ecctl_platform_repository.md)	 - Manages snapshot repositories (Requires platform administration privileges)
+* [ecctl platform repository](ecctl_platform_repository.md)	 - Manages snapshot repositories (Available for ECE only)
 

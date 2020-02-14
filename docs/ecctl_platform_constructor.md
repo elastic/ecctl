@@ -1,10 +1,10 @@
 ## ecctl platform constructor
 
-Manages constructors (Requires platform administration privileges)
+Manages constructors (Available for ECE only)
 
 ### Synopsis
 
-Manages constructors (Requires platform administration privileges)
+Manages constructors (Available for ECE only)
 
 ```
 ecctl platform constructor [flags]

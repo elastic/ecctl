@@ -22,7 +22,7 @@ import (
 )
 
 // PlatformAdminRequired is an additional helper text for commands
-const PlatformAdminRequired = "(Requires platform administration privileges)"
+const PlatformAdminRequired = "(Available for ECE only)"
 
 // AdminReqDescription adds a text about required admin permissions to a string
 func AdminReqDescription(desc string) string {

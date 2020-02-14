@@ -38,7 +38,7 @@ ecctl platform allocator metadata [flags]
 
 ### SEE ALSO
 
-* [ecctl platform allocator](ecctl_platform_allocator.md)	 - Manages allocators (Requires platform administration privileges)
+* [ecctl platform allocator](ecctl_platform_allocator.md)	 - Manages allocators (Available for ECE only)
 * [ecctl platform allocator metadata delete](ecctl_platform_allocator_metadata_delete.md)	 - Deletes a single metadata item from a given allocators metadata
 * [ecctl platform allocator metadata set](ecctl_platform_allocator_metadata_set.md)	 - Sets or updates a single metadata item to a given allocators metadata
 * [ecctl platform allocator metadata show](ecctl_platform_allocator_metadata_show.md)	 - Shows allocator metadata

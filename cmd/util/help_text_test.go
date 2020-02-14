@@ -36,7 +36,7 @@ func TestAdminReqDescription(t *testing.T) {
 			args: args{
 				msg: "Manages resources",
 			},
-			want: "Manages resources (Requires platform administration privileges)",
+			want: "Manages resources (Available for ECE only)",
 		},
 	}
 	for _, tt := range tests {

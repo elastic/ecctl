@@ -1,10 +1,10 @@
 ## ecctl platform runner
 
-Manages platform runners (Requires platform administration privileges)
+Manages platform runners (Available for ECE only)
 
 ### Synopsis
 
-Manages platform runners (Requires platform administration privileges)
+Manages platform runners (Available for ECE only)
 
 ```
 ecctl platform runner [flags]
