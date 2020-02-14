@@ -62,8 +62,8 @@ func TestResync(t *testing.T) {
 				ID: "2c221bd86b7f48959a59ee3128d5c5e8",
 				Params: Params{
 					API: api.NewMock(mock.Response{Response: http.Response{
-					StatusCode: http.StatusForbidden,
-					Body:       mock.NewStringBody(`{"error": "some forbidden error"}`),
+						StatusCode: http.StatusForbidden,
+						Body:       mock.NewStringBody(`{"error": "some forbidden error"}`),
 					}}),
 				},
 			}},
@@ -75,7 +75,7 @@ func TestResync(t *testing.T) {
 				ID: "2c221bd86b7f48959a59ee3128d5c5e8",
 				Params: Params{
 					API: api.NewMock(mock.Response{
-					Error: errors.New("error with API"),
+						Error: errors.New("error with API"),
 					}),
 				},
 			}},
@@ -91,8 +91,8 @@ func TestResync(t *testing.T) {
 				ID: "d324608c97154bdba2dff97511d40368",
 				Params: Params{
 					API: api.NewMock(mock.Response{Response: http.Response{
-					StatusCode: http.StatusOK,
-					Body:       mock.NewStringBody(`{}`),
+						StatusCode: http.StatusOK,
+						Body:       mock.NewStringBody(`{}`),
 					}}),
 				},
 			}},
