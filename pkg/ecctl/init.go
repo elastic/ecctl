@@ -355,6 +355,7 @@ func askInfraSelection(cfg *Config, scanner *input.Scanner, writer, errWriter io
 	return nil
 }
 
+//nolint
 func askRegionSelection(cfg *Config, scanner *input.Scanner, writer io.Writer) error {
 	regionChoiceRaw := scanner.Scan(regionChoiceMsg)
 	fmt.Fprintln(writer)
