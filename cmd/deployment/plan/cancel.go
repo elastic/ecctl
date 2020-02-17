@@ -53,7 +53,7 @@ var cancelPlan = &cobra.Command{
 
 func init() {
 	Command.AddCommand(cancelPlan)
-	cmdutil.AddTypeFlag(cancelPlan, "Optional", true)
+	cmdutil.AddTypeFlag(cancelPlan, "Required", true)
 	cancelPlan.MarkFlagRequired("type")
-	cancelPlan.Flags().String("ref-id", "", "Optional deployment type RefId, if not set, the RefId will be auto-discovered")
+	cancelPlan.Flags().String("ref-id", "", "Optional deployment RefId, if not set, the RefId will be auto-discovered")
 }
