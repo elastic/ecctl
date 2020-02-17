@@ -7,7 +7,7 @@ Cancels a resource's pending plan
 Cancels a resource's pending plan
 
 ```
-ecctl deployment plan cancel <deployment id> --type <type> --ref-id <ref-id> [flags]
+ecctl deployment plan cancel <deployment id> --type <type> [--ref-id <ref-id>] [flags]
 ```
 
 ### Options
