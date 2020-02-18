@@ -1,6 +1,6 @@
 .PHONY: help
 help:
-	@printf "Makefile usage $(BINARY) v$(VERSION)\n";
+	@printf "Makefile usage $(BINARY) $(VERSION)\n";
 
 	@awk '{ \
 			if ($$0 ~ /^.PHONY: [a-zA-Z\-\_0-9]+$$/) { \
