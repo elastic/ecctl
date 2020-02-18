@@ -18,8 +18,6 @@
 package cmdappsearch
 
 import (
-	"path/filepath"
-
 	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
@@ -46,22 +44,22 @@ var showAppSearchCmd = &cobra.Command{
 		res, err := deployment.GetResource(deployment.GetResourceParams{
 			Type: "appsearch",
 			GetParams: deployment.GetParams{
-			API: ecctl.Get().API,
-			DeploymentID:  args[0],
-			RefID: refID,
-			QueryParams: deputil.QueryParams{
-				ShowPlans:        showPlans,
-				ShowPlanLogs:     planLogs,
-				ShowPlanDefaults: planDefaults,
-				ShowMetadata:     metadata,
-				ShowSettings:     settings,
+				API:          ecctl.Get().API,
+				DeploymentID: args[0],
+				RefID:        refID,
+				QueryParams: deputil.QueryParams{
+					ShowPlans:        showPlans,
+					ShowPlanLogs:     planLogs,
+					ShowPlanDefaults: planDefaults,
+					ShowMetadata:     metadata,
+					ShowSettings:     settings,
+				},
 			},
-		},
 		})
 		if err != nil {
 			return err
 		}
-		return ecctl.Get().Formatter.Format(filepath.Join("appsearch", "show"), res)
+		return ecctl.Get().Formatter.Format("", res)
 	},
 }
 
