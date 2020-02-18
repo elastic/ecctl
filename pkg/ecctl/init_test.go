@@ -333,6 +333,7 @@ func TestInitConfig(t *testing.T) {
 				"host":     "https://ahost",
 				"insecure": true,
 				"output":   "text",
+				"region":   "us-west-2",
 			},
 			wantOutput: disclaimer +
 				fmt.Sprintf(settingsPathMsg, "test_files/userpassmodif.yaml") +
