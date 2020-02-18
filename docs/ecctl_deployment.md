@@ -40,6 +40,7 @@ ecctl deployment [flags]
 
 * [ecctl](ecctl.md)	 - Elastic Cloud Control
 * [ecctl deployment apm](ecctl_deployment_apm.md)	 - Manages APM deployments
+* [ecctl deployment appsearch](ecctl_deployment_appsearch.md)	 - Manages AppSearch deployments
 * [ecctl deployment create](ecctl_deployment_create.md)	 - Creates a deployment from a file definition, allowing certain flag overrides
 * [ecctl deployment delete](ecctl_deployment_delete.md)	 - Deletes a previously stopped deployment from the platform
 * [ecctl deployment elasticsearch](ecctl_deployment_elasticsearch.md)	 - Manages Elasticsearch clusters
