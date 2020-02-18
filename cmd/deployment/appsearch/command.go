@@ -15,24 +15,16 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package cmddeployment
+package cmdappsearch
 
 import (
 	"github.com/spf13/cobra"
-
-	cmdapm "github.com/elastic/ecctl/cmd/deployment/apm"
-	cmdappsearch "github.com/elastic/ecctl/cmd/deployment/appsearch"
-	cmdelasticsearch "github.com/elastic/ecctl/cmd/deployment/elasticsearch"
-	cmdkibana "github.com/elastic/ecctl/cmd/deployment/kibana"
-	cmddeploymentnote "github.com/elastic/ecctl/cmd/deployment/note"
-	cmddeploymentplan "github.com/elastic/ecctl/cmd/deployment/plan"
-	cmddeploymentresource "github.com/elastic/ecctl/cmd/deployment/resource"
 )
 
 // Command is the deployment subcommand
 var Command = &cobra.Command{
-	Use:     "deployment",
-	Short:   "Manages deployments",
+	Use:     "appsearch",
+	Short:   "Manages AppSearch deployments",
 	PreRunE: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
@@ -41,12 +33,6 @@ var Command = &cobra.Command{
 
 func init() {
 	Command.AddCommand(
-		cmddeploymentnote.Command,
-		cmdelasticsearch.Command,
-		cmdkibana.Command,
-		cmdapm.Command,
-		cmdappsearch.Command,
-		cmddeploymentplan.Command,
-		cmddeploymentresource.Command,
+		showAppSearchCmd,
 	)
 }
