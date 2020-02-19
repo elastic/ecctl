@@ -25,9 +25,8 @@ ecctl deployment appsearch create --id <deployment-id> [flags]
 
 ```
 ## Create a single AppSearch server. The command will exit after the API response has been returned, 
-## without waiting until the deployment resources have been created. To make the command wait until
-the resources have been created use the "--track" flag.
-$ ecctl deployment appsearch create --id=a57f8b7ce54c4afb90ce3755d1e94000 --track
+## without waiting until the deployment resources have been created.
+$ ecctl deployment appsearch create --id=a57f8b7ce54c4afb90ce3755d1e94000
 {
   "id": "a57f8b7ce54c4afb90ce3755d1e94000",
   "name": "a57f8b7ce54c4afb90ce3755d1e94000",
@@ -55,17 +54,12 @@ $ ecctl deployment appsearch create --id=a57f8b7ce54c4afb90ce3755d1e94000 --trac
     }
   ]
 }
-Cluster [53d104a432a648f68ec76d52ecb521d5][AppSearch]: running step "wait-until-running" (Plan duration 1.38505959s)...
-Cluster [39e4a65fc2b14651b666aaff18a13b8f][Kibana]: finished running all the plan steps (Total plan duration: 1.73493053s)
-Cluster [d38209e8e60c4ea9bce307598a19c4b7][Elasticsearch]: finished running all the plan steps (Total plan duration: 1.849794895s)
-Cluster [53d104a432a648f68ec76d52ecb521d5][AppSearch]: running step "set-maintenance" (Plan duration 11.162178491s)...
-Cluster [53d104a432a648f68ec76d52ecb521d5][AppSearch]: finished running all the plan steps (Total plan duration: 16.677195277s)
 
 ## Save the definition to a file for later use.
 $ ecctl deployment appsearch create --generate-payload --id a57f8b7ce54c4afb90ce3755d1e94000 --zones 2 --size 2048 > appsearch_create_example.json
 
-## Create the deployment piping through the file contents tracking the creation progress
-$ cat appsearch_create_example.json | dev-cli deployment appsearch create --track --id a57f8b7ce54c4afb90ce3755d1e94000
+## Create the deployment piping through the file contents.
+$ cat appsearch_create_example.json | dev-cli deployment appsearch create --id a57f8b7ce54c4afb90ce3755d1e94000
 [...]
 ```
 
@@ -81,7 +75,6 @@ $ cat appsearch_create_example.json | dev-cli deployment appsearch create --trac
       --name string                   Optional name to set for the AppSearch deployment (Overrides name if present)
       --ref-id string                 RefId for the AppSearch deployment (default "main-appsearch")
       --size int32                    Memory (RAM) in MB that each of the deployment nodes will have (default 2048)
-  -t, --track                         Tracks the progress of the performed task
       --version string                Optional version to use. If not specified, it will default to the deployment's stack version
       --zones int32                   Number of zones the deployment will span (default 1)
 ```
