@@ -1,19 +1,20 @@
-## ecctl deployment appsearch
+## ecctl deployment appsearch delete
 
-Manages AppSearch deployments
+Deletes a previously shut down AppSearch deployment resource
 
 ### Synopsis
 
-Manages AppSearch deployments
+Deletes a previously shut down AppSearch deployment resource
 
 ```
-ecctl deployment appsearch [flags]
+ecctl deployment appsearch delete <deployment id> [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for appsearch
+  -h, --help            help for delete
+      --ref-id string   Optional RefId, auto-discovered if not specified
 ```
 
 ### Options inherited from parent commands
@@ -38,9 +39,5 @@ ecctl deployment appsearch [flags]
 
 ### SEE ALSO
 
-* [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
-* [ecctl deployment appsearch create](ecctl_deployment_appsearch_create.md)	 - Creates an AppSearch instance
-* [ecctl deployment appsearch delete](ecctl_deployment_appsearch_delete.md)	 - Deletes a previously shut down AppSearch deployment resource
-* [ecctl deployment appsearch show](ecctl_deployment_appsearch_show.md)	 - Shows the specified AppSearch deployment
-* [ecctl deployment appsearch shutdown](ecctl_deployment_appsearch_shutdown.md)	 - Shuts down an AppSearch deployment
+* [ecctl deployment appsearch](ecctl_deployment_appsearch.md)	 - Manages AppSearch deployments
 
