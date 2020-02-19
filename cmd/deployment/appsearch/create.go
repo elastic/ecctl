@@ -104,12 +104,25 @@ var createAppSearchCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		return ecctl.Get().Formatter.Format("", res)
+
+		var track, _ = cmd.Flags().GetBool("track")
+		return cmdutil.Track(cmdutil.TrackParams{
+			TrackResourcesParams: depresource.TrackResourcesParams{
+				API:          ecctl.Get().API,
+				Resources:    res.Resources,
+				Orphaned:     res.ShutdownResources,
+				OutputDevice: ecctl.Get().Config.OutputDevice,
+			},
+			Formatter: ecctl.Get().Formatter,
+			Track:     track,
+			Response:  res,
+		})
 	},
 }
 
 func init() {
 	Command.AddCommand(createAppSearchCmd)
+	createAppSearchCmd.Flags().BoolP("track", "t", false, cmdutil.TrackFlagMessage)
 	createAppSearchCmd.Flags().StringP("file", "f", "", "AppSearchPayload file definition. See help for more information")
 	createAppSearchCmd.Flags().String("deployment-template", "", "Optional deployment template ID, automatically obtained from the current deployment")
 	createAppSearchCmd.Flags().String("version", "", "Optional version to use. If not specified, it will default to the deployment's stack version")

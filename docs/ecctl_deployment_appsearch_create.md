@@ -75,6 +75,7 @@ $ cat appsearch_create_example.json | dev-cli deployment appsearch create --id a
       --name string                   Optional name to set for the AppSearch deployment (Overrides name if present)
       --ref-id string                 RefId for the AppSearch deployment (default "main-appsearch")
       --size int32                    Memory (RAM) in MB that each of the deployment nodes will have (default 2048)
+  -t, --track                         Tracks the progress of the performed task
       --version string                Optional version to use. If not specified, it will default to the deployment's stack version
       --zones int32                   Number of zones the deployment will span (default 1)
 ```
