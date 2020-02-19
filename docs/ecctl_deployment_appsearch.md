@@ -39,5 +39,6 @@ ecctl deployment appsearch [flags]
 ### SEE ALSO
 
 * [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
+* [ecctl deployment appsearch create](ecctl_deployment_appsearch_create.md)	 - Creates an AppSearch instance
 * [ecctl deployment appsearch show](ecctl_deployment_appsearch_show.md)	 - Shows the specified AppSearch deployment
 

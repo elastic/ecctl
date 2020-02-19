@@ -64,6 +64,7 @@ var showAppSearchCmd = &cobra.Command{
 }
 
 func init() {
+	Command.AddCommand(showAppSearchCmd)
 	showAppSearchCmd.Flags().String("ref-id", "", "Optional RefId, auto-discovered if not specified")
 	showAppSearchCmd.Flags().Bool("plans", false, "Shows the deployment plans")
 	showAppSearchCmd.Flags().Bool("plan-logs", false, "Shows the deployment plan logs")
