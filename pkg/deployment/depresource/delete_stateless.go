@@ -45,7 +45,7 @@ func (params *DeleteStatelessParams) Validate() error {
 	return merr.ErrorOrNil()
 }
 
-// DeleteStateless upgrades a stateless deployment resource like APM, Kibana
+// DeleteStateless deletes a stateless deployment resource like APM, Kibana
 // and AppSearch.
 func DeleteStateless(params DeleteStatelessParams) error {
 	if err := params.Validate(); err != nil {
