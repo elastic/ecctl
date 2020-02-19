@@ -30,9 +30,3 @@ var Command = &cobra.Command{
 		cmd.Help()
 	},
 }
-
-func init() {
-	Command.AddCommand(
-		showAppSearchCmd,
-	)
-}
