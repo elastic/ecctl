@@ -299,15 +299,11 @@ func InitConfig(params InitConfigParams) error {
 	// endpoints with self-signed certificates.
 	cfg.Insecure = true
 
-	if err := askInfraSelection(&cfg, scanner, params.Writer, params.ErrWriter); err != nil {
+	if err := askInfraSelection(&cfg, scanner, params.Writer, params.ErrWriter, params.PasswordReadFunc); err != nil {
 		return err
 	}
 
 	if err := askOutputFormat(&cfg, scanner, params.Writer, params.ErrWriter); err != nil {
-		return err
-	}
-
-	if err := askAuthMechanism(&cfg, scanner, params.Writer, params.PasswordReadFunc); err != nil {
 		return err
 	}
 
@@ -358,7 +354,7 @@ func printConfig(writer io.Writer, v *viper.Viper) error {
 	return enc.Encode(c)
 }
 
-func askInfraSelection(cfg *Config, scanner *input.Scanner, writer, errWriter io.Writer) error {
+func askInfraSelection(cfg *Config, scanner *input.Scanner, writer, errWriter io.Writer, passFunc PassFunc) error {
 	infraChoiceRaw := scanner.Scan(hostChoiceMsg)
 	fmt.Fprintln(writer)
 	infraChoice, err := strconv.Atoi(infraChoiceRaw)
@@ -373,10 +369,19 @@ func askInfraSelection(cfg *Config, scanner *input.Scanner, writer, errWriter io
 		if err := askRegionSelection(cfg, scanner, writer, essRegions); err != nil {
 			return err
 		}
+		if err := askAPIKey(cfg, writer, passFunc); err != nil {
+			return err
+		}
 	case eceInfraChoice:
 		cfg.Host = scanner.Scan(eceHostMsg)
+		if err := askAuthMechanism(cfg, scanner, writer, passFunc); err != nil {
+			return err
+		}
 	case esspInfraChoice:
 		cfg.Host = scanner.Scan(esspHostMsg)
+		if err := askAPIKey(cfg, writer, passFunc); err != nil {
+			return err
+		}
 		// For the time being the only available region for ESSP is us-west-2. Once more
 		// regions have been added, this should be set in a similar way to essInfraChoice
 		cfg.Region = "us-west-2"
@@ -422,6 +427,7 @@ func askOutputFormat(cfg *Config, scanner *input.Scanner, writer, errWriter io.W
 		fmt.Fprintln(errWriter, "invalid choice, defaulting to \"text\"")
 	}
 
+	fmt.Fprintln(writer)
 	return nil
 }
 
@@ -437,12 +443,9 @@ func askAuthMechanism(cfg *Config, scanner *input.Scanner, writer io.Writer, pas
 	default:
 		return errors.New("invalid authentication choice")
 	case apiKeyChoice:
-		apikey, err := ReadSecret(writer, passFunc, apiKeyMsg)
-		if err != nil {
+		if err := askAPIKey(cfg, writer, passFunc); err != nil {
 			return err
 		}
-		cfg.APIKey = string(apikey)
-		cfg.User, cfg.Pass = "", ""
 	case userPassChoice:
 		cfg.User = scanner.Scan(userMsg)
 
@@ -454,7 +457,18 @@ func askAuthMechanism(cfg *Config, scanner *input.Scanner, writer io.Writer, pas
 		cfg.APIKey = ""
 	}
 
-	fmt.Fprintln(writer)
+	return nil
+}
+
+func askAPIKey(cfg *Config, writer io.Writer, passFunc PassFunc) error {
+	apikey, err := ReadSecret(writer, passFunc, apiKeyMsg)
+	if err != nil {
+		return err
+	}
+
+	cfg.APIKey = string(apikey)
+	cfg.User, cfg.Pass = "", ""
+
 	return nil
 }
 
