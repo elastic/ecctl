@@ -100,3 +100,27 @@ func GetTrackSettings(cmd *cobra.Command) (int, time.Duration) {
 	pollFrequency, _ := cmd.Flags().GetDuration(pollFrequencyFlag)
 	return maxPollRetries, pollFrequency
 }
+
+// ConflictingFlags checks if both flags have been specified, and if so
+// returns an error.
+func ConflictingFlags(cmd *cobra.Command, first, second string) error {
+	if cmd.Flag(first).Changed && cmd.Flag(second).Changed {
+		return fmt.Errorf(
+			`conflicting flags: "--%s" and "--%s" should not be used together"`,
+			first, second,
+		)
+	}
+	return nil
+}
+
+// MustUseAFlag checks if one or another flags are used, and if not
+// returns an error.
+func MustUseAFlag(cmd *cobra.Command, first, second string) error {
+	if !cmd.Flag(first).Changed && !cmd.Flag(second).Changed {
+		return fmt.Errorf(
+			`necessary flags: one of "--%s" or "--%s" should be used"`,
+			first, second,
+		)
+	}
+	return nil
+}

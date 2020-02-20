@@ -15,7 +15,7 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package cmdallocator
+package cmdrunner
 
 import (
 	"encoding/json"
@@ -28,25 +28,18 @@ import (
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/platform/allocator"
+	"github.com/elastic/ecctl/pkg/platform/runner"
 )
 
-const (
-	fileArg       = "file"
-	queryArg      = "query"
-	queryExamples = `Read more about Query DSL in https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html`
-)
-
-// Command represents the allocator search command.
-var searchAllocatorCmd = &cobra.Command{
-	Use:     `search`,
-	Short:   "Performs advanced allocator searching",
-	Long:    queryExamples,
+// Command represents the runner search command.
+var searchCmd = &cobra.Command{
+	Use:     "search",
+	Short:   "Performs advanced runner searching",
+	Long:    "Read more about Query DSL in https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html",
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
-
-		file, _ := cmd.Flags().GetString(fileArg)
-		query, _ := cmd.Flags().GetString(queryArg)
+		file, _ := cmd.Flags().GetString("file")
+		query, _ := cmd.Flags().GetString("query")
 
 		if err := cmdutil.ConflictingFlags(cmd, "file", "query"); err != nil {
 			return err
@@ -68,25 +61,27 @@ var searchAllocatorCmd = &cobra.Command{
 				err = json.Unmarshal([]byte(uq), &sr)
 			}
 		}
-
 		if err != nil {
 			return err
 		}
 
-		r, err := allocator.Search(
-			allocator.SearchParams{
-				API:     ecctl.Get().API,
+		r, err := runner.Search(
+			runner.SearchParams{
+				Params: runner.Params{
+					API: ecctl.Get().API,
+				},
 				Request: sr,
 			})
 		if err != nil {
 			return err
 		}
-		return ecctl.Get().Formatter.Format(filepath.Join("allocator", "list"), r)
+
+		return ecctl.Get().Formatter.Format(filepath.Join("runner", "list"), r)
 	},
 }
 
 func init() {
-	Command.AddCommand(searchAllocatorCmd)
-	searchAllocatorCmd.Flags().StringP(fileArg, "f", "", "JSON file that contains JSON-style domain-specific language query")
-	searchAllocatorCmd.Flags().String(queryArg, "", "Optional argument that contains a JSON-style domain-specific language query")
+	Command.AddCommand(searchCmd)
+	searchCmd.Flags().StringP("file", "f", "", "JSON file that contains JSON-style domain-specific language query")
+	searchCmd.Flags().String("query", "", "Optional argument that contains a JSON-style domain-specific language query")
 }

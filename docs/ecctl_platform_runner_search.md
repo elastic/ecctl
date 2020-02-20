@@ -1,19 +1,21 @@
-## ecctl platform runner
+## ecctl platform runner search
 
-Manages platform runners (Available for ECE only)
+Performs advanced runner searching
 
 ### Synopsis
 
-Manages platform runners (Available for ECE only)
+Read more about Query DSL in https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html
 
 ```
-ecctl platform runner [flags]
+ecctl platform runner search [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for runner
+  -f, --file string    JSON file that contains JSON-style domain-specific language query
+  -h, --help           help for search
+      --query string   Optional argument that contains a JSON-style domain-specific language query
 ```
 
 ### Options inherited from parent commands
@@ -38,9 +40,5 @@ ecctl platform runner [flags]
 
 ### SEE ALSO
 
-* [ecctl platform](ecctl_platform.md)	 - Manages the platform
-* [ecctl platform runner list](ecctl_platform_runner_list.md)	 - Lists the existing platform runners
-* [ecctl platform runner resync](ecctl_platform_runner_resync.md)	 - Resynchronizes the search index and cache for the selected runner or all
-* [ecctl platform runner search](ecctl_platform_runner_search.md)	 - Performs advanced runner searching
-* [ecctl platform runner show](ecctl_platform_runner_show.md)	 - Shows information about the specified runner
+* [ecctl platform runner](ecctl_platform_runner.md)	 - Manages platform runners (Available for ECE only)
 
