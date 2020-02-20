@@ -83,5 +83,5 @@ var searchCmd = &cobra.Command{
 func init() {
 	Command.AddCommand(searchCmd)
 	searchCmd.Flags().StringP("file", "f", "", "JSON file that contains JSON-style domain-specific language query")
-	searchCmd.Flags().String("query", "", "Optional argument that contains a JSON-style domain-specific language query")
+	searchCmd.Flags().String("query", "", "Searches using a given JSON query")
 }
