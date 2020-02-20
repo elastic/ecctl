@@ -43,4 +43,5 @@ ecctl deployment appsearch [flags]
 * [ecctl deployment appsearch delete](ecctl_deployment_appsearch_delete.md)	 - Deletes a previously shut down AppSearch deployment resource
 * [ecctl deployment appsearch show](ecctl_deployment_appsearch_show.md)	 - Shows the specified AppSearch deployment
 * [ecctl deployment appsearch shutdown](ecctl_deployment_appsearch_shutdown.md)	 - Shuts down an AppSearch deployment
+* [ecctl deployment appsearch upgrade](ecctl_deployment_appsearch_upgrade.md)	 - Upgrades an AppSearch deployment to the Elasticsearch deployment version
 
