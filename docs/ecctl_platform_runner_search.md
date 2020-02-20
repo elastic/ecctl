@@ -15,7 +15,7 @@ ecctl platform runner search [flags]
 ```
   -f, --file string    JSON file that contains JSON-style domain-specific language query
   -h, --help           help for search
-      --query string   Optional argument that contains a JSON-style domain-specific language query
+      --query string   Searches using a given JSON query
 ```
 
 ### Options inherited from parent commands
