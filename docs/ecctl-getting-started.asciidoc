@@ -3,19 +3,14 @@
 
 beta[]
 
-{p} is the CLI on steroids for the Elastic Cloud Enterprise API. It wraps
-typical operations commonly needed by ECE operators within a
-single command line tool.
+{p} is the CLI on steroids for the Elastic Cloud API. It wraps typical 
+operations commonly needed by operators within a single command line tool.
 
 Benefits of {p}:
 
 * Easier to use than the Cloud UI or using the RESTful API directly
 * Helps you automate the deployment lifecycle
 * Provides a foundation for integration with other tools, such as Terraform and Ansible
-
-Right now, {p} supports ECE installations only.
-
-//, but we plan to support a public Elasticsearch Service API in the future.
 
 [id="{p}-installing"]
 == Installing
@@ -123,20 +118,13 @@ Please enter your choice: 1
 
 Using "https://api.elastic-cloud.com" as the API endpoint.
 
+Paste your API Key and press enter: xxxxx
+
 What default output format would you like?
   [1] text - Human-readable output format, commands with no output templates defined will fall back to JSON.
   [2] json - JSON formatted output API responses.
 
 Please enter a choice: 1
-
-
-Which authentication mechanism would you like to use?
-  [1] API Keys (Recommended).
-  [2] Username and Password login.
-
-Please enter your choice: 1
-
-Paste your API Key and press enter: xxxxx
 
 Your credentials seem to be valid, and show you're authenticated as "user".
 
@@ -176,7 +164,7 @@ the binary for Elastic Cloud:
 
 [source,yaml]
 ----
-host: https://api.elastic-cloud.com # URL of your ECE API endpoint
+host: https://api.elastic-cloud.com # URL of your Elastic Cloud API endpoint
 
 # Credentials
 ## apikey is the preferred authentication mechanism.
@@ -327,10 +315,8 @@ $ unset EC_FORMAT
 
 {n} includes commands to administer:
 
-* Platform components
-* Platform authentication
-* Platform users
 * Elastic Stack deployments
+* Platform components
 * And more
 
 :leveloffset: +1 
