@@ -1,19 +1,21 @@
-## ecctl deployment appsearch
+## ecctl deployment appsearch upgrade
 
-Manages AppSearch deployments
+Upgrades an AppSearch deployment to the Elasticsearch deployment version
 
 ### Synopsis
 
-Manages AppSearch deployments
+Upgrades an AppSearch deployment to the Elasticsearch deployment version
 
 ```
-ecctl deployment appsearch [flags]
+ecctl deployment appsearch upgrade <deployment id> [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for appsearch
+  -h, --help            help for upgrade
+      --ref-id string   Optional RefId, if not set, the RefId will be auto-discovered
+  -t, --track           Tracks the progress of the performed task
 ```
 
 ### Options inherited from parent commands
@@ -38,10 +40,5 @@ ecctl deployment appsearch [flags]
 
 ### SEE ALSO
 
-* [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
-* [ecctl deployment appsearch create](ecctl_deployment_appsearch_create.md)	 - Creates an AppSearch instance
-* [ecctl deployment appsearch delete](ecctl_deployment_appsearch_delete.md)	 - Deletes a previously shut down AppSearch deployment resource
-* [ecctl deployment appsearch show](ecctl_deployment_appsearch_show.md)	 - Shows the specified AppSearch deployment
-* [ecctl deployment appsearch shutdown](ecctl_deployment_appsearch_shutdown.md)	 - Shuts down an AppSearch deployment
-* [ecctl deployment appsearch upgrade](ecctl_deployment_appsearch_upgrade.md)	 - Upgrades an AppSearch deployment to the Elasticsearch deployment version
+* [ecctl deployment appsearch](ecctl_deployment_appsearch.md)	 - Manages AppSearch deployments
 
