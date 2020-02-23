@@ -3,8 +3,8 @@
 
 beta[]
 
-{p} is the CLI on steroids for the Elastic Cloud API. It wraps typical 
-operations commonly needed by operators within a single command line tool.
+{p} is the CLI on steroids for the Elasticsearch Service and Elastic Cloud Enterprise APIs. 
+It wraps typical operations commonly needed by operators within a single command line tool.
 
 Benefits of {p}:
 
@@ -139,7 +139,7 @@ Elastic Cloud uses API keys to authenticate users against its API.
 Additionally, it supports the usage of https://jwt.io/[JWT] to validate
 authenticated clients. The preferred authentication method is API keys.
 
-There are two ways to authenticate against the Elastic Cloud API using
+There are two ways to authenticate against the Elasticsearch Service or the Elastic Cloud Enterprise APIs
 {p}:
 
 * By specifying an API key using the `--apikey` flag
@@ -164,7 +164,7 @@ the binary for Elastic Cloud:
 
 [source,yaml]
 ----
-host: https://api.elastic-cloud.com # URL of your Elastic Cloud API endpoint
+host: https://api.elastic-cloud.com # URL of your Elasticsearch Service or Elastic Cloud Enterprise API endpoint
 
 # Credentials
 ## apikey is the preferred authentication mechanism.
