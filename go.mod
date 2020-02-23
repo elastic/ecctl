@@ -16,7 +16,7 @@ require (
 	github.com/marclop/elasticsearch-cli v0.0.0-20190212132418-ee09f7ae57f1
 	github.com/pkg/errors v0.9.1
 	github.com/pmezard/go-difflib v1.0.0
-	github.com/spf13/cobra v0.0.5
+	github.com/spf13/cobra v0.0.6
 	github.com/spf13/pflag v1.0.5
 	github.com/spf13/viper v1.6.2
 	golang.org/x/crypto v0.0.0-20190829043050-9756ffdc2472
