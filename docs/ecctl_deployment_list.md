@@ -30,6 +30,7 @@ ecctl deployment list [flags]
       --pass string        Password to use to authenticate (If empty will look for EC_PASS environment variable)
       --pprof              Enables pprofing and saves the profile to pprof-20060102150405
   -q, --quiet              Suppresses the configuration file used for the run, if any
+      --region string      Elasticsearch Service region
       --timeout duration   Timeout to use on all HTTP calls (default 30s)
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
