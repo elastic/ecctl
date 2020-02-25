@@ -117,12 +117,10 @@ func init() {
 	RootCmd.PersistentFlags().Bool("insecure", false, "Skips all TLS validation")
 	RootCmd.PersistentFlags().BoolP("quiet", "q", false, "Suppresses the configuration file used for the run, if any")
 	RootCmd.PersistentFlags().Duration("timeout", time.Second*30, "Timeout to use on all HTTP calls")
-	RootCmd.PersistentFlags().String("region", "", "Elastic Cloud region")
+	RootCmd.PersistentFlags().String("region", "", "Elasticsearch Service region")
 	RootCmd.Flag("region").Annotations = map[string][]string{
 		cobra.BashCompCustom: {"__ecctl_valid_regions"},
 	}
-	// Remove this line after ESS Public API is available.
-	RootCmd.PersistentFlags().MarkHidden("region")
 
 	defaultViper.BindPFlags(RootCmd.PersistentFlags())
 }
