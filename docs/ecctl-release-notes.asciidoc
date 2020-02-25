@@ -19,19 +19,21 @@ Welcome to the v1.0.0-beta2 release of {n}! This version brings new features, so
 Download the release binaries:
 
 [%hardbreaks]
-https://download.elastic.co/downloads/ecctl/v1.0.0-beta2/ecctl_1.0.0-beta2_darwin_amd64.tar.gz[ecctl_v1.0.0-beta2_darwin_amd64.tar.gz]
-https://download.elastic.co/downloads/ecctl/v1.0.0-beta2/ecctl_1.0.0-beta2_linux_32-bit.deb[ecctl_v1.0.0-beta2_linux_32-bit.deb]
-https://download.elastic.co/downloads/ecctl/v1.0.0-beta2/ecctl_1.0.0-beta2_linux_32-bit.rpm[ecctl_v1.0.0-beta2_linux_32-bit.rpm]
-https://download.elastic.co/downloads/ecctl/v1.0.0-beta2/ecctl_1.0.0-beta2_linux_386.tar.g[ecctl_v1.0.0-beta2_linux_386.tar.g]
-https://download.elastic.co/downloads/ecctl/v1.0.0-beta2/ecctl_1.0.0-beta2_linux_64-bit.deb[ecctl_v1.0.0-beta2_linux_64-bit.deb]
-https://download.elastic.co/downloads/ecctl/v1.0.0-beta2/ecctl_1.0.0-beta2_linux_64-bit.rpm[ecctl_v1.0.0-beta2_linux_64-bit.rpm]
-https://download.elastic.co/downloads/ecctl/v1.0.0-beta2/ecctl_1.0.0-beta2_linux_amd64.tar.gz[ecctl_v1.0.0-beta2_linux_amd64.tar.gz]
+https://download.elastic.co/downloads/ecctl/1.0.0-beta2/ecctl_1.0.0-beta2_darwin_amd64.tar.gz[ecctl_1.0.0-beta2_darwin_amd64.tar.gz]
+https://download.elastic.co/downloads/ecctl/1.0.0-beta2/ecctl_1.0.0-beta2_linux_32-bit.deb[ecctl_1.0.0-beta2_linux_32-bit.deb]
+https://download.elastic.co/downloads/ecctl/1.0.0-beta2/ecctl_1.0.0-beta2_linux_32-bit.rpm[ecctl_1.0.0-beta2_linux_32-bit.rpm]
+https://download.elastic.co/downloads/ecctl/1.0.0-beta2/ecctl_1.0.0-beta2_linux_386.tar.g[ecctl_1.0.0-beta2_linux_386.tar.g]
+https://download.elastic.co/downloads/ecctl/1.0.0-beta2/ecctl_1.0.0-beta2_linux_64-bit.deb[ecctl_1.0.0-beta2_linux_64-bit.deb]
+https://download.elastic.co/downloads/ecctl/1.0.0-beta2/ecctl_1.0.0-beta2_linux_64-bit.rpm[ecctl_1.0.0-beta2_linux_64-bit.rpm]
+https://download.elastic.co/downloads/ecctl/1.0.0-beta2/ecctl_1.0.0-beta2_linux_amd64.tar.gz[ecctl_1.0.0-beta2_linux_amd64.tar.gz]
 
 [float]
 [id="{p}-release-notes-v1.0.0-beta2-whats-new"]
 ==== What's new
 
 * *Feature X.* Describe feature X, explain the benefits briefly, and then link to the docs if there's more info.
+* *Feature Y.* ... 
+* *Feature Z.* ...
 
 [float]
 [id="{p}-release-notes-v1.0.0-beta2-bug-fixes"]
