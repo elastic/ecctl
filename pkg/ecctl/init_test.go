@@ -307,6 +307,85 @@ func TestInitConfig(t *testing.T) {
 				"\n" + "\n" + fmt.Sprintf(validCredentialsMsg, "auser") + finalMsg + "\n",
 		},
 		{
+			name: "doesn't find a config file and user creates a new one with user/pass, GET user fails, but deployment list succeeds",
+			args: args{params: InitConfigParams{
+				Viper:    emptyViperToCreateConfigUserPass,
+				FilePath: filepath.Join(testFiles, "newConfigUserPass"),
+				Reader: io.MultiReader(
+					strings.NewReader("y\n"),
+					strings.NewReader("2\n"),
+					strings.NewReader("https://ahost\n"),
+					strings.NewReader("2\n"),
+					strings.NewReader("auser\n"),
+					strings.NewReader("1\n"),
+				),
+				Writer:    new(bytes.Buffer),
+				ErrWriter: new(bytes.Buffer),
+				PasswordReadFunc: func(int) ([]byte, error) {
+					return []byte("apassword"), nil
+				},
+				Client: mock.NewClient(
+					mock.New200Response(mock.NewStructBody(models.TokenResponse{
+						Token: ec.String("atoken"),
+					})),
+					mock.New404Response(mock.NewStructBody(models.User{
+						UserName: ec.String("auser"),
+					})),
+					mock.New200Response(mock.NewStructBody(models.DeploymentsListResponse{})),
+				),
+			}},
+			wantSettings: map[string]interface{}{
+				"host":     "https://ahost",
+				"insecure": true,
+				"output":   "text",
+				"pass":     "apassword",
+				"user":     "auser",
+			},
+			wantOutput: disclaimer + missingConfigMsg + hostChoiceMsg + "\n" + eceHostMsg +
+				authChoiceMsg + "\n" + userMsg + passMsg + "\n" + formatChoiceMsg +
+				"\n" + "\n" + validCredentialsAlternativeMsg + finalMsg + "\n",
+		},
+		{
+			name: "doesn't find a config file and user creates a new one with user/pass, and returns error on API test",
+			args: args{params: InitConfigParams{
+				Viper:    emptyViperToCreateConfigUserPass,
+				FilePath: filepath.Join(testFiles, "newConfigUserPass"),
+				Reader: io.MultiReader(
+					strings.NewReader("y\n"),
+					strings.NewReader("2\n"),
+					strings.NewReader("https://ahost\n"),
+					strings.NewReader("2\n"),
+					strings.NewReader("auser\n"),
+					strings.NewReader("1\n"),
+				),
+				Writer:    new(bytes.Buffer),
+				ErrWriter: new(bytes.Buffer),
+				PasswordReadFunc: func(int) ([]byte, error) {
+					return []byte("apassword"), nil
+				},
+				Client: mock.NewClient(
+					mock.New200Response(mock.NewStructBody(models.TokenResponse{
+						Token: ec.String("atoken"),
+					})),
+					mock.New404Response(mock.NewStructBody(models.User{
+						UserName: ec.String("auser"),
+					})),
+					mock.New404Response(mock.NewStructBody(models.DeploymentsListResponse{})),
+				),
+			}},
+			wantSettings: map[string]interface{}{
+				"host":     "https://ahost",
+				"insecure": true,
+				"output":   "text",
+				"pass":     "apassword",
+				"user":     "auser",
+			},
+			err: errors.New(invalidCredentialsMsg),
+			wantOutput: disclaimer + missingConfigMsg + hostChoiceMsg + "\n" + eceHostMsg +
+				authChoiceMsg + "\n" + userMsg + passMsg + "\n" + formatChoiceMsg +
+				"\n" + "\n",
+		},
+		{
 			name: "finds a config file and user changes the values",
 			args: args{params: InitConfigParams{
 				Viper:    userPassConfigToModify,
