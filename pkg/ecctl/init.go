@@ -105,7 +105,7 @@ const (
 
 	validCredentialsMsg            = "Your credentials seem to be valid, and show you're authenticated as \"%s\".\n\n"
 	validCredentialsAlternativeMsg = "Your credentials seem to be valid.\n\n"
-	invalidCredentialsMsg          = "Your credentials couldn't be validated, please make sure they're correct.\n\n"
+	invalidCredentialsMsg          = "your credentials couldn't be validated make sure they're correct and try again"
 )
 
 var (
