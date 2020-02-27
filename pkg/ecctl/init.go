@@ -28,6 +28,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/user"
 
 	"github.com/elastic/cloud-sdk-go/pkg/input"
@@ -102,7 +103,9 @@ const (
 	//nolint
 	passMsg = "Type in your password: "
 
-	validCredentialsMsg = "Your credentials seem to be valid, and show you're authenticated as \"%s\".\n\n"
+	validCredentialsMsg            = "Your credentials seem to be valid, and show you're authenticated as \"%s\".\n\n"
+	validCredentialsAlternativeMsg = "Your credentials seem to be valid.\n\n"
+	invalidCredentialsMsg          = "Your credentials couldn't be validated. Make sure they're correct and try again"
 )
 
 var (
@@ -166,7 +169,6 @@ Please enter a choice: `
 
 	finalMsg = `
 You're all set! Here are some commands to try:
-  $ ecctl auth user key list
   $ ecctl deployment elasticsearch list`[1:]
 
 	// Remove once we have an endpoint available to list regions.
@@ -480,7 +482,14 @@ func validateAuth(cfg Config, writer io.Writer) error {
 
 	u, err := user.GetCurrent(user.GetCurrentParams{API: a.API})
 	if err != nil {
-		return err
+		if _, e := deployment.List(deployment.ListParams{
+			API: a.API,
+		}); e != nil {
+			// nolint
+			return errors.New(invalidCredentialsMsg)
+		}
+		fmt.Fprint(writer, validCredentialsAlternativeMsg)
+		return nil
 	}
 
 	fmt.Fprintf(writer, validCredentialsMsg, *u.UserName)
