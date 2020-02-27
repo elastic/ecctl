@@ -101,6 +101,7 @@ type QueryParams struct {
 	ShowPlans        bool
 	ShowPlanDefaults bool
 	ShowPlanLogs     bool
+	ShowPlanHistory  bool
 	ShowMetadata     bool
 	ShowSettings     bool
 

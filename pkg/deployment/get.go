@@ -69,6 +69,7 @@ func Get(params GetParams) (*models.DeploymentGetResponse, error) {
 			WithShowPlans(ec.Bool(params.ShowPlans)).
 			WithShowPlanDefaults(ec.Bool(params.ShowPlanDefaults)).
 			WithShowPlanLogs(ec.Bool(params.ShowPlanLogs)).
+			WithShowPlanHistory(ec.Bool(params.ShowPlanHistory)).
 			WithShowMetadata(ec.Bool(params.ShowMetadata)).
 			WithShowSettings(ec.Bool(params.ShowSettings)).
 			WithShowSystemAlerts(systemAlerts),

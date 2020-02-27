@@ -27,6 +27,7 @@ ecctl deployment show <deployment-id> [flags]
   -h, --help            help for show
   -m, --metadata        Shows the deployment metadata
       --plan-defaults   Shows the deployment plan defaults
+      --plan-history    Shows the deployment plan history
       --plan-logs       Shows the deployment plan logs
       --plans           Shows the deployment plans
       --ref-id string   Optional deployment type RefId, if not set, the RefId will be auto-discovered
