@@ -51,10 +51,11 @@ var showCmd = &cobra.Command{
 
 		planLogs, _ := cmd.Flags().GetBool("plan-logs")
 		planDefaults, _ := cmd.Flags().GetBool("plan-defaults")
+		planHistory, _ := cmd.Flags().GetBool("plan-history")
 		metadata, _ := cmd.Flags().GetBool("metadata")
 		settings, _ := cmd.Flags().GetBool("settings")
 		plans, _ := cmd.Flags().GetBool("plans")
-		showPlans := planLogs || planDefaults || plans
+		showPlans := planLogs || planDefaults || plans || planHistory
 
 		refID, _ := cmd.Flags().GetString("ref-id")
 		getParams := deployment.GetParams{
@@ -65,6 +66,7 @@ var showCmd = &cobra.Command{
 				ShowPlans:        showPlans,
 				ShowPlanLogs:     planLogs,
 				ShowPlanDefaults: planDefaults,
+				ShowPlanHistory:  planHistory,
 				ShowMetadata:     metadata,
 				ShowSettings:     settings,
 			},
@@ -89,6 +91,7 @@ func init() {
 	showCmd.Flags().Bool("plans", false, "Shows the deployment plans")
 	showCmd.Flags().Bool("plan-logs", false, "Shows the deployment plan logs")
 	showCmd.Flags().Bool("plan-defaults", false, "Shows the deployment plan defaults")
+	showCmd.Flags().Bool("plan-history", false, "Shows the deployment plan history")
 	showCmd.Flags().BoolP("metadata", "m", false, "Shows the deployment metadata")
 	showCmd.Flags().BoolP("settings", "s", false, "Shows the deployment settings")
 }
