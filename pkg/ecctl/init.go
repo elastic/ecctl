@@ -105,7 +105,7 @@ const (
 
 	validCredentialsMsg            = "Your credentials seem to be valid, and show you're authenticated as \"%s\".\n\n"
 	validCredentialsAlternativeMsg = "Your credentials seem to be valid.\n\n"
-	invalidCredentialsMsg          = "your credentials couldn't be validated make sure they're correct and try again"
+	invalidCredentialsMsg          = "Your credentials couldn't be validated. Make sure they're correct and try again"
 )
 
 var (
@@ -485,6 +485,7 @@ func validateAuth(cfg Config, writer io.Writer) error {
 		if _, e := deployment.List(deployment.ListParams{
 			API: a.API,
 		}); e != nil {
+			// nolint
 			return errors.New(invalidCredentialsMsg)
 		}
 		fmt.Fprint(writer, validCredentialsAlternativeMsg)
