@@ -58,7 +58,7 @@ jobs:
         env:
           # elasticcloudmachine GitHub token.
           GITHUB_TOKEN: ${{ secrets.HOMEBREW_TAP_GH_TOKEN }}
-          GITHUB_USER: marclop
+          GITHUB_USER: elasticcloudmachine
           VERSION: ${{ steps.get_version.outputs.VERSION }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
