@@ -3,61 +3,7 @@
 
 This section summarizes the changes in each {n} release.
 
-* <<{p}-release-notes-v1.0.0-beta2>>
 * <<{p}-release-notes-v1.0.0-beta1>>
-
-[id="{p}-release-notes-v1.0.0-beta2"]
-=== Elastic Cloud Control (ecctl) v1.0.0-beta2
-++++
-<titleabbrev>v1.0.0-beta2</titleabbrev>
-++++
-
-<<{p}-release-notes-v1.0.0-beta2-whats-new,What's new>> | <<{p}-release-notes-v1.0.0-beta2-bug-fixes,Bug fixes>> | <<{p}-release-notes-v1.0.0-beta2-breaking-changes,Breaking changes>> | <<{p}-release-notes-v1.0.0-beta2-changelog,Changelog>>
-
-Welcome to the v1.0.0-beta2 release of {n}! This version brings new features, some breaking changes, and bug fixes. 
-
-Download the release binaries:
-
-[%hardbreaks]
-https://download.elastic.co/downloads/ecctl/1.0.0-beta2/ecctl_1.0.0-beta2_darwin_amd64.tar.gz[ecctl_1.0.0-beta2_darwin_amd64.tar.gz]
-https://download.elastic.co/downloads/ecctl/1.0.0-beta2/ecctl_1.0.0-beta2_linux_32-bit.deb[ecctl_1.0.0-beta2_linux_32-bit.deb]
-https://download.elastic.co/downloads/ecctl/1.0.0-beta2/ecctl_1.0.0-beta2_linux_32-bit.rpm[ecctl_1.0.0-beta2_linux_32-bit.rpm]
-https://download.elastic.co/downloads/ecctl/1.0.0-beta2/ecctl_1.0.0-beta2_linux_386.tar.g[ecctl_1.0.0-beta2_linux_386.tar.g]
-https://download.elastic.co/downloads/ecctl/1.0.0-beta2/ecctl_1.0.0-beta2_linux_64-bit.deb[ecctl_1.0.0-beta2_linux_64-bit.deb]
-https://download.elastic.co/downloads/ecctl/1.0.0-beta2/ecctl_1.0.0-beta2_linux_64-bit.rpm[ecctl_1.0.0-beta2_linux_64-bit.rpm]
-https://download.elastic.co/downloads/ecctl/1.0.0-beta2/ecctl_1.0.0-beta2_linux_amd64.tar.gz[ecctl_1.0.0-beta2_linux_amd64.tar.gz]
-
-[float]
-[id="{p}-release-notes-v1.0.0-beta2-whats-new"]
-==== What's new
-
-* *Feature X.* Describe feature X, explain the benefits briefly, and then link to the docs if there's more info.
-* *Feature Y.* ... 
-* *Feature Z.* ...
-
-[float]
-[id="{p}-release-notes-v1.0.0-beta2-bug-fixes"]
-==== Bug fixes
-
-This version includes fixes for the following bugs and known issues:
-
-* Bug A. Describe the symptoms of the bug and how things now work after the bug fix.
-
-[float]
-[id="{p}-release-notes-v1.0.0-beta2-breaking-changes"]
-==== Breaking changes
-
-* *Removed X command*. We removed feature X, because it is deprecated or no longer supported. If applicable, add what feature replaces it and add a link. 
-
-[float]
-[id="{p}-release-notes-v1.0.0-beta2-changelog"]
-==== Changelog
-
-[%hardbreaks]
-TBD
-
-_Release date: February 28, 2020_
-
 
 [id="{p}-release-notes-v1.0.0-beta1"]
 === Elastic Cloud Control (ecctl) v1.0.0-beta1
