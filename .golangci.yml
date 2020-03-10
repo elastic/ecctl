@@ -12,6 +12,7 @@ linters:
     - scopelint
     - funlen
     - wsl
+    - gomnd
 
 linters-settings:
   errcheck:
@@ -56,6 +57,7 @@ issues:
         - errcheck
         - dupl
         - gosec
+        - gocognit
     - path: cmd/platform/enrollment-token/command.go
       linters:
         - gosec
