@@ -34,7 +34,7 @@ type ResourceParams struct {
 	*api.API
 
 	DeploymentID string
-	Type         string
+	Kind         string
 	RefID        string
 }
 
@@ -50,8 +50,8 @@ func (params *ResourceParams) Validate() error {
 		merr = multierror.Append(merr, deputil.NewInvalidDeploymentIDError(params.DeploymentID))
 	}
 
-	if params.Type == "" {
-		merr = multierror.Append(merr, errors.New("deployment resource type cannot be empty"))
+	if params.Kind == "" {
+		merr = multierror.Append(merr, errors.New("deployment resource kind cannot be empty"))
 	}
 
 	// Ensures that RefID is either populated when the RefID isn't specified or
@@ -71,12 +71,12 @@ func (params *ResourceParams) fillDefaults() error {
 		return nil
 	}
 
-	refID, err := GetTypeRefID(GetResourceParams{
+	refID, err := GetKindRefID(GetResourceParams{
 		GetParams: GetParams{
 			API:          params.API,
 			DeploymentID: params.DeploymentID,
 		},
-		Type: params.Type,
+		Kind: params.Kind,
 	})
 
 	params.RefID = refID

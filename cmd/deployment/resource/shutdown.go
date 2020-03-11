@@ -31,18 +31,18 @@ import (
 
 // shutdownCmd is the deployment subcommand
 var shutdownCmd = &cobra.Command{
-	Use:     "shutdown <deployment id> --type <type> --ref-id <ref-id>",
-	Short:   "Shuts down a deployment resource by its type and ref-id",
+	Use:     "shutdown <deployment id> --kind <kind> --ref-id <ref-id>",
+	Short:   "Shuts down a deployment resource by its kind and ref-id",
 	Long:    shutdownLong,
 	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		resType, _ := cmd.Flags().GetString("type")
+		resKind, _ := cmd.Flags().GetString("kind")
 		refID, _ := cmd.Flags().GetString("ref-id")
 		skipSnapshot, _ := cmd.Flags().GetBool("skip-snapshot")
 		hide, _ := cmd.Flags().GetBool("hide")
 
 		force, _ := cmd.Flags().GetBool("force")
-		var msg = "This action will shut down a deployment's resource type. Do you want to continue? [y/n]: "
+		var msg = "This action will shut down a deployment's resource kind. Do you want to continue? [y/n]: "
 		if !force && !sdkcmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
 			return nil
 		}
@@ -51,7 +51,7 @@ var shutdownCmd = &cobra.Command{
 			ResourceParams: deployment.ResourceParams{
 				API:          ecctl.Get().API,
 				DeploymentID: args[0],
-				Type:         resType,
+				Kind:         resKind,
 				RefID:        refID,
 			},
 			SkipSnapshot: skipSnapshot,
@@ -63,8 +63,8 @@ var shutdownCmd = &cobra.Command{
 
 func init() {
 	Command.AddCommand(shutdownCmd)
-	cmdutil.AddTypeFlag(shutdownCmd, "Required", true)
-	shutdownCmd.MarkFlagRequired("type")
+	cmdutil.AddKindFlag(shutdownCmd, "Required", true)
+	shutdownCmd.MarkFlagRequired("kind")
 	shutdownCmd.Flags().String("ref-id", "", "Optional deployment RefId, auto-discovered if not specified")
 	shutdownCmd.Flags().Bool("skip-snapshot", false, "Optional flag to toggle skipping the resource snapshot before shutting it down")
 	shutdownCmd.Flags().Bool("hide", false, "Optionally hides the deployment resource from being listed by default")

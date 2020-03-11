@@ -64,7 +64,7 @@ func TestCancelPlan(t *testing.T) {
 			err: &multierror.Error{Errors: []error{
 				util.ErrAPIReq,
 				errors.New("id \"\" is invalid"),
-				errors.New("deployment resource type cannot be empty"),
+				errors.New("deployment resource kind cannot be empty"),
 				errors.New("failed auto-discovering the resource ref id: api reference is required for command"),
 				errors.New(`failed auto-discovering the resource ref id: id "" is invalid`),
 			}},
@@ -75,7 +75,7 @@ func TestCancelPlan(t *testing.T) {
 				ResourceParams: deployment.ResourceParams{
 					API:          api.NewMock(mock.New404Response(mock.NewStructBody(internalError))),
 					DeploymentID: util.ValidClusterID,
-					Type:         "elasticsearch",
+					Kind:         "elasticsearch",
 					RefID:        "main-elasticsearch",
 				},
 			}},
@@ -91,7 +91,7 @@ func TestCancelPlan(t *testing.T) {
 						},
 					}))),
 					DeploymentID: util.ValidClusterID,
-					Type:         "elasticsearch",
+					Kind:         "elasticsearch",
 				},
 			}},
 			err: &multierror.Error{Errors: []error{
@@ -104,7 +104,7 @@ func TestCancelPlan(t *testing.T) {
 				ResourceParams: deployment.ResourceParams{
 					API:          api.NewMock(mock.New200Response(mock.NewStringBody(""))),
 					DeploymentID: util.ValidClusterID,
-					Type:         "elasticsearch",
+					Kind:         "elasticsearch",
 					RefID:        "main-elasticsearch",
 				},
 			}},

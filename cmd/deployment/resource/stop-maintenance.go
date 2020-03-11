@@ -31,11 +31,11 @@ import (
 )
 
 var stopMaintCmd = &cobra.Command{
-	Use:     "stop-maintenance <deployment id> --type <type> [--all|--i <instance-id>,<instance-id>]",
+	Use:     "stop-maintenance <deployment id> --kind <kind> [--all|--i <instance-id>,<instance-id>]",
 	Short:   "Stops maintenance mode on a deployment resource",
 	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		resType, _ := cmd.Flags().GetString("type")
+		resKind, _ := cmd.Flags().GetString("kind")
 		refID, _ := cmd.Flags().GetString("ref-id")
 		instanceID, _ := cmd.Flags().GetStringSlice("instance-id")
 		ignoreMissing, _ := cmd.Flags().GetBool("ignore-missing")
@@ -50,7 +50,7 @@ var stopMaintCmd = &cobra.Command{
 				ResourceParams: deployment.ResourceParams{
 					API:          ecctl.Get().API,
 					DeploymentID: args[0],
-					Type:         resType,
+					Kind:         resKind,
 					RefID:        refID,
 				},
 				All: all,
@@ -69,10 +69,10 @@ var stopMaintCmd = &cobra.Command{
 
 func init() {
 	Command.AddCommand(stopMaintCmd)
-	stopMaintCmd.Flags().Bool("all", false, "Stops maintenance mode on all instances of a defined resource type")
+	stopMaintCmd.Flags().Bool("all", false, "Stops maintenance mode on all instances of a defined resource kind")
 	stopMaintCmd.Flags().Bool("ignore-missing", false, "If set and the specified instance does not exist, then quietly proceed to the next instance")
-	cmdutil.AddTypeFlag(stopMaintCmd, "Required", true)
-	stopMaintCmd.MarkFlagRequired("type")
+	cmdutil.AddKindFlag(stopMaintCmd, "Required", true)
+	stopMaintCmd.MarkFlagRequired("kind")
 	stopMaintCmd.Flags().String("ref-id", "", "Optional deployment RefId, if not set, the RefId will be auto-discovered")
 	stopMaintCmd.Flags().StringSliceP("instance-id", "i", nil, "Deployment instance IDs to use (e.g. instance-0000000001)")
 }

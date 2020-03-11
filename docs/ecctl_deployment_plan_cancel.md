@@ -7,15 +7,15 @@ Cancels a resource's pending plan
 Cancels a resource's pending plan
 
 ```
-ecctl deployment plan cancel <deployment id> --type <type> [--ref-id <ref-id>] [flags]
+ecctl deployment plan cancel <deployment id> --kind <kind> [--ref-id <ref-id>] [flags]
 ```
 
 ### Options
 
 ```
   -h, --help            help for cancel
+      --kind string     Required deployment resource kind (apm, appsearch, kibana, elasticsearch)
       --ref-id string   Optional deployment RefId, if not set, the RefId will be auto-discovered
-      --type string     Required deployment resource type (apm, appsearch, kibana, elasticsearch)
 ```
 
 ### Options inherited from parent commands

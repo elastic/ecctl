@@ -34,7 +34,7 @@ func UpgradeStateless(params deployment.ResourceParams) (*models.DeploymentResou
 
 	res, err := params.V1API.Deployments.UpgradeDeploymentStatelessResource(
 		deployments.NewUpgradeDeploymentStatelessResourceParams().
-			WithStatelessResourceKind(params.Type).
+			WithStatelessResourceKind(params.Kind).
 			WithDeploymentID(params.DeploymentID).
 			WithRefID(params.RefID),
 		params.AuthWriter,

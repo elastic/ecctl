@@ -55,7 +55,7 @@ func TestUpgradeStateless(t *testing.T) {
 			err: &multierror.Error{Errors: []error{
 				util.ErrAPIReq,
 				errors.New("id \"\" is invalid"),
-				errors.New("deployment resource type cannot be empty"),
+				errors.New("deployment resource kind cannot be empty"),
 				errors.New("failed auto-discovering the resource ref id: api reference is required for command"),
 				errors.New(`failed auto-discovering the resource ref id: id "" is invalid`),
 			}},
@@ -66,7 +66,7 @@ func TestUpgradeStateless(t *testing.T) {
 				API:          api.NewMock(mock.New404Response(mock.NewStructBody(internalError))),
 				DeploymentID: util.ValidClusterID,
 				RefID:        "main-kibana",
-				Type:         "kibana",
+				Kind:         "kibana",
 			}},
 			err: errors.New(string(internalErrorBytes)),
 		},
@@ -75,7 +75,7 @@ func TestUpgradeStateless(t *testing.T) {
 			args: args{params: deployment.ResourceParams{
 				API:          api.NewMock(mock.New202Response(mock.NewStringBody(""))),
 				DeploymentID: util.ValidClusterID,
-				Type:         "kibana",
+				Kind:         "kibana",
 				RefID:        "main-kibana",
 			}},
 			want: new(models.DeploymentResourceUpgradeResponse),
@@ -97,7 +97,7 @@ func TestUpgradeStateless(t *testing.T) {
 					mock.New200Response(mock.NewStringBody("")),
 				),
 				DeploymentID: util.ValidClusterID,
-				Type:         "elasticsearch",
+				Kind:         "elasticsearch",
 			}},
 		},
 	}

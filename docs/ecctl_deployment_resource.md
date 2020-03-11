@@ -42,7 +42,7 @@ ecctl deployment resource [flags]
 * [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
 * [ecctl deployment resource delete](ecctl_deployment_resource_delete.md)	 - Deletes a previously shut down deployment resource
 * [ecctl deployment resource restore](ecctl_deployment_resource_restore.md)	 - Restores a previously shut down deployment resource
-* [ecctl deployment resource shutdown](ecctl_deployment_resource_shutdown.md)	 - Shuts down a deployment resource by its type and ref-id
+* [ecctl deployment resource shutdown](ecctl_deployment_resource_shutdown.md)	 - Shuts down a deployment resource by its kind and ref-id
 * [ecctl deployment resource start](ecctl_deployment_resource_start.md)	 - Starts a previously stopped deployment resource
 * [ecctl deployment resource start-maintenance](ecctl_deployment_resource_start-maintenance.md)	 - Starts maintenance mode on a deployment resource
 * [ecctl deployment resource stop](ecctl_deployment_resource_stop.md)	 - Stops a deployment resource

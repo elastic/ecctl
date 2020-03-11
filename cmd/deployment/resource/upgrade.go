@@ -31,18 +31,18 @@ import (
 
 // upgradeCmd is the deployment subcommand
 var upgradeCmd = &cobra.Command{
-	Use:     "upgrade <deployment id> --type <type> --ref-id <ref-id>",
+	Use:     "upgrade <deployment id> --kind <kind> --ref-id <ref-id>",
 	Short:   "Upgrades a deployment resource",
 	Long:    upgradeLong,
 	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		resType, _ := cmd.Flags().GetString("type")
+		resKind, _ := cmd.Flags().GetString("kind")
 		refID, _ := cmd.Flags().GetString("ref-id")
 
 		res, err := depresource.UpgradeStateless(deployment.ResourceParams{
 			API:          ecctl.Get().API,
 			DeploymentID: args[0],
-			Type:         resType,
+			Kind:         resKind,
 			RefID:        refID,
 		})
 
@@ -59,7 +59,7 @@ var upgradeCmd = &cobra.Command{
 			OutputDevice: ecctl.Get().Config.OutputDevice,
 			Resources: []*models.DeploymentResource{{
 				ID:    ec.String(res.ResourceID),
-				Kind:  ec.String(resType),
+				Kind:  ec.String(resKind),
 				RefID: ec.String(refID),
 			}},
 		})
@@ -69,7 +69,7 @@ var upgradeCmd = &cobra.Command{
 func init() {
 	Command.AddCommand(upgradeCmd)
 	upgradeCmd.Flags().BoolP("track", "t", false, cmdutil.TrackFlagMessage)
-	cmdutil.AddTypeFlag(upgradeCmd, "Required", true)
-	upgradeCmd.MarkFlagRequired("type")
+	cmdutil.AddKindFlag(upgradeCmd, "Required", true)
+	upgradeCmd.MarkFlagRequired("kind")
 	upgradeCmd.Flags().String("ref-id", "", "Optional deployment RefId, if not set, the RefId will be auto-discovered")
 }

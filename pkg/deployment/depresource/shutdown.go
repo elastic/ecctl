@@ -36,14 +36,14 @@ type ShutdownParams struct {
 	Hide bool
 }
 
-// Shutdown stops all the running instances for the specified resource type ref
+// Shutdown stops all the running instances for the specified resource kind ref
 // ID on a Deployment. If no refID is specified, it tries to autodiscover it.
 func Shutdown(params ShutdownParams) error {
 	if err := params.Validate(); err != nil {
 		return err
 	}
 
-	if params.Type == "elasticsearch" {
+	if params.Kind == "elasticsearch" {
 		return util.ReturnErrOnly(
 			params.V1API.Deployments.ShutdownDeploymentEsResource(
 				deployments.NewShutdownDeploymentEsResourceParams().
@@ -61,7 +61,7 @@ func Shutdown(params ShutdownParams) error {
 			deployments.NewShutdownDeploymentStatelessResourceParams().
 				WithDeploymentID(params.DeploymentID).
 				WithSkipSnapshot(&params.SkipSnapshot).
-				WithStatelessResourceKind(params.Type).
+				WithStatelessResourceKind(params.Kind).
 				WithRefID(params.RefID).
 				WithHide(&params.Hide),
 			params.AuthWriter,

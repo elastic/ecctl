@@ -42,7 +42,7 @@ func CancelPlan(params CancelPlanParams) (*models.DeploymentResourceCrudResponse
 		deployments.NewCancelDeploymentResourcePendingPlanParams().
 			WithDeploymentID(params.DeploymentID).
 			WithForceDelete(&params.ForceDelete).
-			WithResourceKind(params.Type).
+			WithResourceKind(params.Kind).
 			WithRefID(params.RefID),
 		params.AuthWriter,
 	)

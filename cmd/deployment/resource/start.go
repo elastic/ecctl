@@ -31,11 +31,11 @@ import (
 )
 
 var startCmd = &cobra.Command{
-	Use:     "start <deployment id> --type <type> [--all|--i <instance-id>,<instance-id>]",
+	Use:     "start <deployment id> --kind <kind> [--all|--i <instance-id>,<instance-id>]",
 	Short:   "Starts a previously stopped deployment resource",
 	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		resType, _ := cmd.Flags().GetString("type")
+		resKind, _ := cmd.Flags().GetString("kind")
 		refID, _ := cmd.Flags().GetString("ref-id")
 		instanceID, _ := cmd.Flags().GetStringSlice("instance-id")
 		ignoreMissing, _ := cmd.Flags().GetBool("ignore-missing")
@@ -50,7 +50,7 @@ var startCmd = &cobra.Command{
 				ResourceParams: deployment.ResourceParams{
 					API:          ecctl.Get().API,
 					DeploymentID: args[0],
-					Type:         resType,
+					Kind:         resKind,
 					RefID:        refID,
 				},
 				All: all,
@@ -69,10 +69,10 @@ var startCmd = &cobra.Command{
 
 func init() {
 	Command.AddCommand(startCmd)
-	startCmd.Flags().Bool("all", false, "Starts all instances of a defined resource type")
+	startCmd.Flags().Bool("all", false, "Starts all instances of a defined resource kind")
 	startCmd.Flags().Bool("ignore-missing", false, "If set and the specified instance does not exist, then quietly proceed to the next instance")
-	cmdutil.AddTypeFlag(startCmd, "Required", true)
-	startCmd.MarkFlagRequired("type")
+	cmdutil.AddKindFlag(startCmd, "Required", true)
+	startCmd.MarkFlagRequired("kind")
 	startCmd.Flags().String("ref-id", "", "Optional deployment RefId, if not set, the RefId will be auto-discovered")
 	startCmd.Flags().StringSliceP("instance-id", "i", nil, "Deployment instance IDs to start (e.g. instance-0000000001)")
 }

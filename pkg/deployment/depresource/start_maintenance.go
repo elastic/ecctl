@@ -23,7 +23,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 )
 
-// StartMaintenanceMode starts maintenance mode of all instances belonging to a deployment resource type.
+// StartMaintenanceMode starts maintenance mode of all instances belonging to a deployment resource kind.
 func StartMaintenanceMode(params StartParams) (models.DeploymentResourceCommandResponse, error) {
 	if err := params.Validate(); err != nil {
 		return nil, err
@@ -32,7 +32,7 @@ func StartMaintenanceMode(params StartParams) (models.DeploymentResourceCommandR
 	res, err := params.V1API.Deployments.StartDeploymentResourceInstancesAllMaintenanceMode(
 		deployments.NewStartDeploymentResourceInstancesAllMaintenanceModeParams().
 			WithDeploymentID(params.DeploymentID).
-			WithResourceKind(params.Type).
+			WithResourceKind(params.Kind).
 			WithRefID(params.RefID),
 		params.AuthWriter,
 	)
@@ -52,7 +52,7 @@ func StartInstancesMaintenanceMode(params StartInstancesParams) (models.Deployme
 	res, err := params.V1API.Deployments.StartDeploymentResourceMaintenanceMode(
 		deployments.NewStartDeploymentResourceMaintenanceModeParams().
 			WithDeploymentID(params.DeploymentID).
-			WithResourceKind(params.Type).
+			WithResourceKind(params.Kind).
 			WithIgnoreMissing(params.IgnoreMissing).
 			WithInstanceIds(params.InstanceIDs).
 			WithRefID(params.RefID),

@@ -19,5 +19,5 @@ package cmddeploymentresource
 
 const (
 	upgradeLong = `Upgrades a stateless deployment resource so it matches the Elasticsearch
-deployment version. Only stateless resources are supported in the --type flag`
+deployment version. Only stateless resources are supported in the --kind flag`
 )

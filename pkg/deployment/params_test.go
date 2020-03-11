@@ -41,7 +41,7 @@ func TestResourceParams_Validate(t *testing.T) {
 	type fields struct {
 		API          *api.API
 		DeploymentID string
-		Type         string
+		Kind         string
 		RefID        string
 	}
 	tests := []struct {
@@ -55,7 +55,7 @@ func TestResourceParams_Validate(t *testing.T) {
 			err: &multierror.Error{Errors: []error{
 				util.ErrAPIReq,
 				deputil.NewInvalidDeploymentIDError(""),
-				errors.New("deployment resource type cannot be empty"),
+				errors.New("deployment resource kind cannot be empty"),
 				errors.New("failed auto-discovering the resource ref id: api reference is required for command"),
 				errors.New(`failed auto-discovering the resource ref id: id "" is invalid`),
 			}},
@@ -65,7 +65,7 @@ func TestResourceParams_Validate(t *testing.T) {
 			fields: fields{
 				API:          api.NewMock(),
 				DeploymentID: util.ValidClusterID,
-				Type:         "elasticsearch",
+				Kind:         "elasticsearch",
 				RefID:        "main-elasticsearch",
 			},
 		},
@@ -74,7 +74,7 @@ func TestResourceParams_Validate(t *testing.T) {
 			fields: fields{
 				API:          api.NewMock(mock.New404Response(mock.NewStructBody(error404))),
 				DeploymentID: util.ValidClusterID,
-				Type:         "elasticsearch",
+				Kind:         "elasticsearch",
 			},
 			err: &multierror.Error{Errors: []error{
 				fmt.Errorf("failed auto-discovering the resource ref id: %s", string(error404Byte)),
@@ -86,7 +86,7 @@ func TestResourceParams_Validate(t *testing.T) {
 			params := &ResourceParams{
 				API:          tt.fields.API,
 				DeploymentID: tt.fields.DeploymentID,
-				Type:         tt.fields.Type,
+				Kind:         tt.fields.Kind,
 				RefID:        tt.fields.RefID,
 			}
 

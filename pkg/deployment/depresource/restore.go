@@ -42,7 +42,7 @@ func Restore(params RestoreParams) error {
 	return util.ReturnErrOnly(params.V1API.Deployments.RestoreDeploymentResource(
 		deployments.NewRestoreDeploymentResourceParams().
 			WithRestoreSnapshot(&params.RestoreSnapshot).
-			WithResourceKind(params.Type).
+			WithResourceKind(params.Kind).
 			WithDeploymentID(params.DeploymentID).
 			WithRefID(params.RefID),
 		params.AuthWriter,

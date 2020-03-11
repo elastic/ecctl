@@ -109,7 +109,7 @@ func TestValidateBasicParams(t *testing.T) {
 			}},
 		},
 		{
-			name: "Validate fails when params have an ID type but it's of invalid type",
+			name: "Validate fails when params have an ID kind but it's of invalid kind",
 			args: args{
 				params: &idInvalidTypeParams{ID: true},
 			},

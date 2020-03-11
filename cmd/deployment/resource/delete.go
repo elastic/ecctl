@@ -31,15 +31,15 @@ import (
 
 // deleteCmd is the deployment subcommand
 var deleteCmd = &cobra.Command{
-	Use:     "delete <deployment id> --type <type> --ref-id <ref-id>",
+	Use:     "delete <deployment id> --kind <kind> --ref-id <ref-id>",
 	Short:   "Deletes a previously shut down deployment resource",
 	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		resType, _ := cmd.Flags().GetString("type")
+		resKind, _ := cmd.Flags().GetString("kind")
 		refID, _ := cmd.Flags().GetString("ref-id")
 
 		force, _ := cmd.Flags().GetBool("force")
-		var msg = "This action will delete a deployment's resource type and its configuration history. Do you want to continue? [y/n]: "
+		var msg = "This action will delete a deployment's resource kind and its configuration history. Do you want to continue? [y/n]: "
 		if !force && !sdkcmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
 			return nil
 		}
@@ -48,7 +48,7 @@ var deleteCmd = &cobra.Command{
 			ResourceParams: deployment.ResourceParams{
 				API:          ecctl.Get().API,
 				DeploymentID: args[0],
-				Type:         resType,
+				Kind:         resKind,
 				RefID:        refID,
 			},
 		})
@@ -57,7 +57,7 @@ var deleteCmd = &cobra.Command{
 
 func init() {
 	Command.AddCommand(deleteCmd)
-	cmdutil.AddTypeFlag(deleteCmd, "Required stateless", false)
-	deleteCmd.MarkFlagRequired("type")
+	cmdutil.AddKindFlag(deleteCmd, "Required stateless", false)
+	deleteCmd.MarkFlagRequired("kind")
 	deleteCmd.Flags().String("ref-id", "", "Optional deployment RefId, auto-discovered if not specified")
 }

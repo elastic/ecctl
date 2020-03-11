@@ -7,16 +7,16 @@ Restores a previously shut down deployment resource
 Restores a previously shut down deployment resource
 
 ```
-ecctl deployment resource restore <deployment id> --type <type> --ref-id <ref-id> [flags]
+ecctl deployment resource restore <deployment id> --kind <kind> --ref-id <ref-id> [flags]
 ```
 
 ### Options
 
 ```
   -h, --help               help for restore
+      --kind string        Required deployment resource kind (apm, appsearch, kibana, elasticsearch)
       --ref-id string      Optional deployment RefId, auto-discovered if not specified
       --restore-snapshot   Optional flag to toggle restoring a snapshot for an Elasticsearch resource. It has no effect for other resources
-      --type string        Required deployment resource type (apm, appsearch, kibana, elasticsearch)
 ```
 
 ### Options inherited from parent commands

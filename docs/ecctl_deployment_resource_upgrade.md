@@ -5,19 +5,19 @@ Upgrades a deployment resource
 ### Synopsis
 
 Upgrades a stateless deployment resource so it matches the Elasticsearch
-deployment version. Only stateless resources are supported in the --type flag
+deployment version. Only stateless resources are supported in the --kind flag
 
 ```
-ecctl deployment resource upgrade <deployment id> --type <type> --ref-id <ref-id> [flags]
+ecctl deployment resource upgrade <deployment id> --kind <kind> --ref-id <ref-id> [flags]
 ```
 
 ### Options
 
 ```
   -h, --help            help for upgrade
+      --kind string     Required deployment resource kind (apm, appsearch, kibana, elasticsearch)
       --ref-id string   Optional deployment RefId, if not set, the RefId will be auto-discovered
   -t, --track           Tracks the progress of the performed task
-      --type string     Required deployment resource type (apm, appsearch, kibana, elasticsearch)
 ```
 
 ### Options inherited from parent commands

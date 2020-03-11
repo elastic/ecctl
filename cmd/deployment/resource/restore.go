@@ -32,25 +32,25 @@ import (
 
 // restoreCmd is the deployment subcommand
 var restoreCmd = &cobra.Command{
-	Use:     "restore <deployment id> --type <type> --ref-id <ref-id>",
+	Use:     "restore <deployment id> --kind <kind> --ref-id <ref-id>",
 	Short:   "Restores a previously shut down deployment resource",
 	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		resType, _ := cmd.Flags().GetString("type")
+		resKind, _ := cmd.Flags().GetString("kind")
 		refID, _ := cmd.Flags().GetString("ref-id")
 		restoreSnapshot, _ := cmd.Flags().GetBool("restore-snapshot")
 
 		force, _ := cmd.Flags().GetBool("force")
-		var esType = resType == "elasticsearch"
-		var dataLoss = esType && !restoreSnapshot
+		var esKind = resKind == "elasticsearch"
+		var dataLoss = esKind && !restoreSnapshot
 		var msg = "This action restores an Elasticsearch resource without its snapshot which might incur data loss, do you want to continue? [y/n]: "
 		if dataLoss && !force && !sdkcmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
 			return nil
 		}
 
-		if restoreSnapshot && !esType {
+		if restoreSnapshot && !esKind {
 			fmt.Fprintf(ecctl.Get().Config.ErrorDevice,
-				"Using --restore-snapshot on resource type \"%s\" will have no effect\n", resType,
+				"Using --restore-snapshot on resource kind \"%s\" will have no effect\n", resKind,
 			)
 		}
 
@@ -58,7 +58,7 @@ var restoreCmd = &cobra.Command{
 			ResourceParams: deployment.ResourceParams{
 				API:          ecctl.Get().API,
 				DeploymentID: args[0],
-				Type:         resType,
+				Kind:         resKind,
 				RefID:        refID,
 			},
 			RestoreSnapshot: restoreSnapshot,
@@ -68,8 +68,8 @@ var restoreCmd = &cobra.Command{
 
 func init() {
 	Command.AddCommand(restoreCmd)
-	cmdutil.AddTypeFlag(restoreCmd, "Required", true)
-	restoreCmd.MarkFlagRequired("type")
+	cmdutil.AddKindFlag(restoreCmd, "Required", true)
+	restoreCmd.MarkFlagRequired("kind")
 	restoreCmd.Flags().String("ref-id", "", "Optional deployment RefId, auto-discovered if not specified")
 	restoreCmd.Flags().Bool("restore-snapshot", false, "Optional flag to toggle restoring a snapshot for an Elasticsearch resource. It has no effect for other resources")
 }

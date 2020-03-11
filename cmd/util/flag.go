@@ -29,7 +29,7 @@ import (
 )
 
 const (
-	compFuncTpl = `__ecctl_valid_%s_types()
+	compFuncTpl = `__ecctl_valid_%s_kinds()
 {
    COMPREPLY=( %s )
 }
@@ -42,20 +42,20 @@ const (
 )
 
 var (
-	// StatelessTypes declares the stateless deployment resource types
-	StatelessTypes = []string{"apm", "appsearch", "kibana"}
+	// StatelessKinds declares the stateless deployment resource kinds
+	StatelessKinds = []string{"apm", "appsearch", "kibana"}
 
-	// StatefulTypes declares the stateful deployment resource types (Elasticsearch).
-	StatefulTypes = []string{"elasticsearch"}
+	// StatefulKinds declares the stateful deployment resource kinds (Elasticsearch).
+	StatefulKinds = []string{"elasticsearch"}
 
-	// AllTypes is StatelessTypes appending StatefulTypes
-	AllTypes = append(StatelessTypes, StatefulTypes...)
+	// AllKinds is StatelessKinds appending StatefulKinds
+	AllKinds = append(StatelessKinds, StatefulKinds...)
 
-	// StatelessTypesCompFunc is the bash autocompletion function for stateless types.
-	StatelessTypesCompFunc = fmt.Sprintf(compFuncTpl, "stateless", strings.Join(StatelessTypes, " "))
+	// StatelessKindsCompFunc is the bash autocompletion function for stateless kinds.
+	StatelessKindsCompFunc = fmt.Sprintf(compFuncTpl, "stateless", strings.Join(StatelessKinds, " "))
 
-	// AllTypesCompFunc is the bash autocompletion function for all types.
-	AllTypesCompFunc = fmt.Sprintf(compFuncTpl, "all", strings.Join(AllTypes, " "))
+	// AllKindsCompFunc is the bash autocompletion function for all kinds.
+	AllKindsCompFunc = fmt.Sprintf(compFuncTpl, "all", strings.Join(AllKinds, " "))
 )
 
 // GetInstances tries to obtain a slice with the elasticsearch cluster
@@ -68,20 +68,20 @@ func GetInstances(cmd *cobra.Command, params util.ClusterParams, flagName string
 	return cmd.Flags().GetStringSlice(flagName)
 }
 
-// AddTypeFlag adds a type string  flag to the specified command, with the
-// resource types autocompletion function. It is intended to be used for any
+// AddKindFlag adds a kind string  flag to the specified command, with the
+// resource kinds autocompletion function. It is intended to be used for any
 // commands which call the deployment/resource APIs.
-func AddTypeFlag(cmd *cobra.Command, prefix string, all bool) *string {
-	validTypes, comp := StatelessTypes, "__ecctl_valid_stateless_types"
+func AddKindFlag(cmd *cobra.Command, prefix string, all bool) *string {
+	validKinds, comp := StatelessKinds, "__ecctl_valid_stateless_kinds"
 	if all {
-		validTypes, comp = AllTypes, "__ecctl_valid_all_types"
+		validKinds, comp = AllKinds, "__ecctl_valid_all_kinds"
 	}
 
-	s := cmd.Flags().String("type", "", fmt.Sprintf(
-		"%s deployment resource type (%s)", prefix, strings.Join(validTypes, ", "),
+	s := cmd.Flags().String("kind", "", fmt.Sprintf(
+		"%s deployment resource kind (%s)", prefix, strings.Join(validKinds, ", "),
 	))
 
-	cmd.Flag("type").Annotations = map[string][]string{cobra.BashCompCustom: {comp}}
+	cmd.Flag("kind").Annotations = map[string][]string{cobra.BashCompCustom: {comp}}
 
 	return s
 }
