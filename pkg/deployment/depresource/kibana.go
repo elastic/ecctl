@@ -18,6 +18,8 @@
 package depresource
 
 import (
+	"fmt"
+
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/platform_configuration_templates"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
@@ -54,6 +56,11 @@ func NewKibana(params NewStateless) (*models.KibanaPayload, error) {
 	)
 	if err != nil {
 		return nil, api.UnwrapError(err)
+	}
+
+	if res.Payload.ClusterTemplate.Kibana == nil {
+		return nil, fmt.Errorf("deployment: the %s template is not configured for Kibana. Please use another template if you wish to start Kibana instances",
+			params.TemplateID)
 	}
 
 	var clusterTopology = res.Payload.ClusterTemplate.Kibana.Plan.ClusterTopology

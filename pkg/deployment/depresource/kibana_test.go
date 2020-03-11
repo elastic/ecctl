@@ -54,6 +54,15 @@ var kibanaTemplateResponse = models.DeploymentTemplateInfo{
 	},
 }
 
+var invalidTemplateResponse = models.DeploymentTemplateInfo{
+	ID: "invalid",
+	ClusterTemplate: &models.DeploymentTemplateDefinitionRequest{
+		Plan: &models.ElasticsearchClusterPlan{
+			ClusterTopology: defaultESTopologies,
+		},
+	},
+}
+
 func TestNewKibana(t *testing.T) {
 	var internalError = models.BasicFailedReply{
 		Errors: []*models.BasicFailedReplyElement{
@@ -138,6 +147,18 @@ func TestNewKibana(t *testing.T) {
 				Region: "ece-region",
 			}},
 			err: errors.New(string(internalErrorBytes)),
+		},
+		{
+			name: "obtains the deployment template but it's an invalid template for kibana",
+			args: args{params: NewStateless{
+				DeploymentID: util.ValidClusterID,
+				API: api.NewMock(
+					mock.New200Response(mock.NewStructBody(getResponse)),
+					mock.New200Response(mock.NewStructBody(invalidTemplateResponse)),
+				),
+				Region: "ece-region",
+			}},
+			err: errors.New("deployment: the an ID template is not configured for Kibana. Please use another template if you wish to start Kibana instances"),
 		},
 		{
 			name: "succeeds with no argument override",
