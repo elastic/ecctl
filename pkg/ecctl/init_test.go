@@ -269,6 +269,39 @@ func TestInitConfig(t *testing.T) {
 				fmt.Sprintf(validCredentialsMsg, "anacleto") + finalMsg + "\n",
 		},
 		{
+			name: "no config file with apikey creates a new one when no public api",
+			args: args{params: InitConfigParams{
+				Viper:                emptyViperToCreateConfig,
+				FilePath:             filepath.Join(testFiles, "newConfig-ECE-NO-PUBLIC-API"),
+				PublicAPINotReleased: true,
+				Reader: io.MultiReader(
+					strings.NewReader("y\n"),
+					strings.NewReader("https://ahost\n"),
+					strings.NewReader("1\n"),
+					strings.NewReader("1\n"),
+					strings.NewReader("anapikey\n"),
+					strings.NewReader("1\n"),
+				),
+				Writer:    new(bytes.Buffer),
+				ErrWriter: new(bytes.Buffer),
+				PasswordReadFunc: func(int) ([]byte, error) {
+					return []byte("somekey"), nil
+				},
+				Client: mock.NewClient(mock.New200Response(mock.NewStructBody(models.User{
+					UserName: ec.String("anacleto"),
+				}))),
+			}},
+			wantSettings: map[string]interface{}{
+				"apikey":   "somekey",
+				"host":     "https://ahost",
+				"insecure": true,
+				"output":   "text",
+			},
+			wantOutput: disclaimer + missingConfigMsg + "\n" + eceHostMsg + authChoiceMsg +
+				"\n" + apiKeyMsg + "\n" + formatChoiceMsg + "\n" + "\n" +
+				fmt.Sprintf(validCredentialsMsg, "anacleto") + finalMsg + "\n",
+		},
+		{
 			name: "doesn't find a config file and user creates a new one with user/pass",
 			args: args{params: InitConfigParams{
 				Viper:    emptyViperToCreateConfigUserPass,

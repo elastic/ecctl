@@ -226,6 +226,10 @@ type InitConfigParams struct {
 
 	// FilePath of the configuration
 	FilePath string
+
+	// PublicAPINotReleased will be removed very soon, using it to toggle a
+	// different workflow path.
+	PublicAPINotReleased bool
 }
 
 // Validate ensures the parameters are usable.
@@ -301,7 +305,15 @@ func InitConfig(params InitConfigParams) error {
 	// endpoints with self-signed certificates.
 	cfg.Insecure = true
 
-	if err := askInfraSelection(&cfg, scanner, params.Writer, params.ErrWriter, params.PasswordReadFunc); err != nil {
+	if params.PublicAPINotReleased {
+		fmt.Fprintln(params.Writer)
+		// Set region back to empty since it'll be an ECE environment
+		cfg.Region = ""
+		cfg.Host = scanner.Scan(eceHostMsg)
+		if err := askAuthMechanism(&cfg, scanner, params.Writer, params.PasswordReadFunc); err != nil {
+			return err
+		}
+	} else if err := askInfraSelection(&cfg, scanner, params.Writer, params.ErrWriter, params.PasswordReadFunc); err != nil {
 		return err
 	}
 
