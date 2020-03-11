@@ -1,14 +1,14 @@
 ## ecctl deployment resource shutdown
 
-Shuts down a deployment resource by its type and ref-id
+Shuts down a deployment resource by its kind and ref-id
 
 ### Synopsis
 
-Shuts down a deployment resource type (APM, Appsearch, Elasticsearch, Kibana). Shutting down a
-type doesn't necessarily shut down the deployment itself but rather a specific  resource.
+Shuts down a deployment resource kind (APM, Appsearch, Elasticsearch, Kibana). Shutting down a
+kind doesn't necessarily shut down the deployment itself but rather a specific  resource.
 
 ```
-ecctl deployment resource shutdown <deployment id> --type <type> --ref-id <ref-id> [flags]
+ecctl deployment resource shutdown <deployment id> --kind <kind> --ref-id <ref-id> [flags]
 ```
 
 ### Options
@@ -16,9 +16,9 @@ ecctl deployment resource shutdown <deployment id> --type <type> --ref-id <ref-i
 ```
   -h, --help            help for shutdown
       --hide            Optionally hides the deployment resource from being listed by default
+      --kind string     Required deployment resource kind (apm, appsearch, kibana, elasticsearch)
       --ref-id string   Optional deployment RefId, auto-discovered if not specified
       --skip-snapshot   Optional flag to toggle skipping the resource snapshot before shutting it down
-      --type string     Required deployment resource type (apm, appsearch, kibana, elasticsearch)
 ```
 
 ### Options inherited from parent commands

@@ -57,7 +57,7 @@ func TestTrackResources(t *testing.T) {
 			}},
 		},
 		{
-			name: "returns with fail to track when the resource is of type appsearch",
+			name: "returns with fail to track when the resource is of kind appsearch",
 			args: args{params: TrackResourcesParams{
 				API:          api.NewMock(),
 				OutputDevice: output.NewDevice(ioutil.Discard),

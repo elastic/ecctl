@@ -23,7 +23,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 )
 
-// StopMaintenanceMode stops maintenance mode of all instances belonging to a deployment resource type.
+// StopMaintenanceMode stops maintenance mode of all instances belonging to a deployment resource kind.
 func StopMaintenanceMode(params StopParams) (models.DeploymentResourceCommandResponse, error) {
 	if err := params.Validate(); err != nil {
 		return nil, err
@@ -32,7 +32,7 @@ func StopMaintenanceMode(params StopParams) (models.DeploymentResourceCommandRes
 	res, err := params.V1API.Deployments.StopDeploymentResourceInstancesAllMaintenanceMode(
 		deployments.NewStopDeploymentResourceInstancesAllMaintenanceModeParams().
 			WithDeploymentID(params.DeploymentID).
-			WithResourceKind(params.Type).
+			WithResourceKind(params.Kind).
 			WithRefID(params.RefID),
 		params.AuthWriter,
 	)
@@ -52,7 +52,7 @@ func StopInstancesMaintenanceMode(params StopInstancesParams) (models.Deployment
 	res, err := params.V1API.Deployments.StopDeploymentResourceMaintenanceMode(
 		deployments.NewStopDeploymentResourceMaintenanceModeParams().
 			WithDeploymentID(params.DeploymentID).
-			WithResourceKind(params.Type).
+			WithResourceKind(params.Kind).
 			WithIgnoreMissing(params.IgnoreMissing).
 			WithInstanceIds(params.InstanceIDs).
 			WithRefID(params.RefID),

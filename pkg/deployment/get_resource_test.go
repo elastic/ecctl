@@ -74,7 +74,7 @@ func TestGetResource(t *testing.T) {
 					DeploymentID: "3531aaf988594efa87c1aabb7caed337",
 					RefID:        "apm",
 				},
-				Type: "apm",
+				Kind: "apm",
 			}},
 			want: &models.ApmResourceInfo{
 				ElasticsearchClusterRefID: ec.String("elasticsearch"),
@@ -106,7 +106,7 @@ func TestGetResource(t *testing.T) {
 					),
 					DeploymentID: "3531aaf988594efa87c1aabb7caed337",
 				},
-				Type: "apm",
+				Kind: "apm",
 			}},
 			want: &models.ApmResourceInfo{
 				ElasticsearchClusterRefID: ec.String("elasticsearch"),
@@ -127,7 +127,7 @@ func TestGetResource(t *testing.T) {
 					DeploymentID: "3531aaf988594efa87c1aabb7caed337",
 					RefID:        "elasticsearch",
 				},
-				Type: "elasticsearch",
+				Kind: "elasticsearch",
 			}},
 			want: &models.ElasticsearchResourceInfo{
 				ID:    ec.String("3531aaf988594efa87c1aabb7caed337"),
@@ -137,7 +137,7 @@ func TestGetResource(t *testing.T) {
 		{
 			name: "obtains an elasticsearch resource without a RefID",
 			args: args{params: GetResourceParams{
-				Type: "elasticsearch",
+				Kind: "elasticsearch",
 				GetParams: GetParams{
 					API: api.NewMock(
 						mock.New200Response(mock.NewStructBody(models.DeploymentGetResponse{
@@ -179,7 +179,7 @@ func TestGetResource(t *testing.T) {
 					DeploymentID: "3531aaf988594efa87c1aabb7caed337",
 					RefID:        "kibana",
 				},
-				Type: "kibana",
+				Kind: "kibana",
 			}},
 			want: &models.KibanaResourceInfo{
 				ElasticsearchClusterRefID: ec.String("elasticsearch"),
@@ -212,7 +212,7 @@ func TestGetResource(t *testing.T) {
 					),
 					DeploymentID: "3531aaf988594efa87c1aabb7caed337",
 				},
-				Type: "kibana",
+				Kind: "kibana",
 			}},
 			want: &models.KibanaResourceInfo{
 				ElasticsearchClusterRefID: ec.String("elasticsearch"),
@@ -234,7 +234,7 @@ func TestGetResource(t *testing.T) {
 					DeploymentID: "3531aaf988594efa87c1aabb7caed337",
 					RefID:        "appsearch",
 				},
-				Type: "appsearch",
+				Kind: "appsearch",
 			}},
 			want: &models.AppSearchResourceInfo{
 				ElasticsearchClusterRefID: ec.String("elasticsearch"),
@@ -267,7 +267,7 @@ func TestGetResource(t *testing.T) {
 					),
 					DeploymentID: "3531aaf988594efa87c1aabb7caed337",
 				},
-				Type: "appsearch",
+				Kind: "appsearch",
 			}},
 			want: &models.AppSearchResourceInfo{
 				ElasticsearchClusterRefID: ec.String("elasticsearch"),
@@ -276,7 +276,7 @@ func TestGetResource(t *testing.T) {
 			},
 		},
 		{
-			name: "obtains an invalid resource type INVALID without a RefID",
+			name: "obtains an invalid resource kind INVALID without a RefID",
 			args: args{params: GetResourceParams{
 				GetParams: GetParams{
 					API: api.NewMock(
@@ -293,9 +293,9 @@ func TestGetResource(t *testing.T) {
 					),
 					DeploymentID: "3531aaf988594efa87c1aabb7caed337",
 				},
-				Type: "INVALID",
+				Kind: "INVALID",
 			}},
-			err: errors.New("deployment get: resource type INVALID is not available"),
+			err: errors.New("deployment get: resource kind INVALID is not available"),
 		},
 		{
 			name: "returns an error when the RefID discovery fails",
@@ -308,7 +308,7 @@ func TestGetResource(t *testing.T) {
 					}))),
 					DeploymentID: "3531aaf988594efa87c1aabb7caed337",
 				},
-				Type: "INVALID",
+				Kind: "INVALID",
 			}},
 			err: errors.New(errGet500),
 		},
@@ -320,12 +320,12 @@ func TestGetResource(t *testing.T) {
 					DeploymentID: "3531aaf988594efa87c1aabb7caed337",
 					RefID:        "appsearch",
 				},
-				Type: "INVALID",
+				Kind: "INVALID",
 			}},
-			err: errors.New("deployment get: resource type INVALID is not valid"),
+			err: errors.New("deployment get: resource kind INVALID is not valid"),
 		},
 		{
-			name: "obtains the whole deployment when Type is empty",
+			name: "obtains the whole deployment when Kind is empty",
 			args: args{params: GetResourceParams{
 				GetParams: GetParams{
 					API: api.NewMock(mock.New200Response(mock.NewStructBody(

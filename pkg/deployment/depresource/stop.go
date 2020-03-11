@@ -54,7 +54,7 @@ func (params *StopInstancesParams) Validate() error {
 	return merr.ErrorOrNil()
 }
 
-// Stop stops all instances belonging to a deployment resource type.
+// Stop stops all instances belonging to a deployment resource kind.
 func Stop(params StopParams) (models.DeploymentResourceCommandResponse, error) {
 	if err := params.Validate(); err != nil {
 		return nil, err
@@ -63,7 +63,7 @@ func Stop(params StopParams) (models.DeploymentResourceCommandResponse, error) {
 	res, err := params.V1API.Deployments.StopDeploymentResourceInstancesAll(
 		deployments.NewStopDeploymentResourceInstancesAllParams().
 			WithDeploymentID(params.DeploymentID).
-			WithResourceKind(params.Type).
+			WithResourceKind(params.Kind).
 			WithRefID(params.RefID),
 		params.AuthWriter,
 	)
@@ -83,7 +83,7 @@ func StopInstances(params StopInstancesParams) (models.DeploymentResourceCommand
 	res, err := params.V1API.Deployments.StopDeploymentResourceInstances(
 		deployments.NewStopDeploymentResourceInstancesParams().
 			WithDeploymentID(params.DeploymentID).
-			WithResourceKind(params.Type).
+			WithResourceKind(params.Kind).
 			WithIgnoreMissing(params.IgnoreMissing).
 			WithInstanceIds(params.InstanceIDs).
 			WithRefID(params.RefID),

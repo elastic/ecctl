@@ -29,19 +29,19 @@ import (
 
 // cancelPlan is the deployment subcommand
 var cancelPlan = &cobra.Command{
-	Use:     "cancel <deployment id> --type <type> [--ref-id <ref-id>]",
+	Use:     "cancel <deployment id> --kind <kind> [--ref-id <ref-id>]",
 	Short:   "Cancels a resource's pending plan",
 	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		force, _ := cmd.Flags().GetBool("force")
-		resType, _ := cmd.Flags().GetString("type")
+		resKind, _ := cmd.Flags().GetString("kind")
 		refID, _ := cmd.Flags().GetString("ref-id")
 
 		_, err := depresource.CancelPlan(depresource.CancelPlanParams{
 			ResourceParams: deployment.ResourceParams{
 				API:          ecctl.Get().API,
 				DeploymentID: args[0],
-				Type:         resType,
+				Kind:         resKind,
 				RefID:        refID,
 			},
 			ForceDelete: force,
@@ -53,7 +53,7 @@ var cancelPlan = &cobra.Command{
 
 func init() {
 	Command.AddCommand(cancelPlan)
-	cmdutil.AddTypeFlag(cancelPlan, "Required", true)
-	cancelPlan.MarkFlagRequired("type")
+	cmdutil.AddKindFlag(cancelPlan, "Required", true)
+	cancelPlan.MarkFlagRequired("kind")
 	cancelPlan.Flags().String("ref-id", "", "Optional deployment RefId, if not set, the RefId will be auto-discovered")
 }

@@ -31,12 +31,12 @@ import (
 
 const showExample = `
 * Shows kibana resource information from a given deployment:
-  ecctl deployment show <deployment-id> --type kibana
+  ecctl deployment show <deployment-id> --kind kibana
 
 * Shows apm resource information from a given deployment with a specified ref-id.
-  ecctl deployment show <deployment-id> --type apm --ref-id apm-server`
+  ecctl deployment show <deployment-id> --kind apm --ref-id apm-server`
 
-var acceptedTypes = []string{"apm", "appsearch", "elasticsearch", "kibana"}
+var acceptedKinds = []string{"apm", "appsearch", "elasticsearch", "kibana"}
 
 var showCmd = &cobra.Command{
 	Use:     "show <deployment-id>",
@@ -44,9 +44,9 @@ var showCmd = &cobra.Command{
 	Example: showExample,
 	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		resourceType, _ := cmd.Flags().GetString("type")
-		if resourceType != "" && !slice.HasString(acceptedTypes, resourceType) {
-			return errors.Errorf(`"%v" is not a valid resource type. Accepted resource types are: %v`, resourceType, acceptedTypes)
+		resourceKind, _ := cmd.Flags().GetString("kind")
+		if resourceKind != "" && !slice.HasString(acceptedKinds, resourceKind) {
+			return errors.Errorf(`"%v" is not a valid resource kind. Accepted resource kinds are: %v`, resourceKind, acceptedKinds)
 		}
 
 		planLogs, _ := cmd.Flags().GetBool("plan-logs")
@@ -74,7 +74,7 @@ var showCmd = &cobra.Command{
 
 		res, err := deployment.GetResource(deployment.GetResourceParams{
 			GetParams: getParams,
-			Type:      resourceType,
+			Kind:      resourceKind,
 		})
 
 		if err != nil {
@@ -86,8 +86,8 @@ var showCmd = &cobra.Command{
 
 func init() {
 	Command.AddCommand(showCmd)
-	cmdutil.AddTypeFlag(showCmd, "Optional", true)
-	showCmd.Flags().String("ref-id", "", "Optional deployment type RefId, if not set, the RefId will be auto-discovered")
+	cmdutil.AddKindFlag(showCmd, "Optional", true)
+	showCmd.Flags().String("ref-id", "", "Optional deployment kind RefId, if not set, the RefId will be auto-discovered")
 	showCmd.Flags().Bool("plans", false, "Shows the deployment plans")
 	showCmd.Flags().Bool("plan-logs", false, "Shows the deployment plan logs")
 	showCmd.Flags().Bool("plan-defaults", false, "Shows the deployment plan defaults")

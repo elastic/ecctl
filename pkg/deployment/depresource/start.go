@@ -54,7 +54,7 @@ func (params *StartInstancesParams) Validate() error {
 	return merr.ErrorOrNil()
 }
 
-// Start starts all instances belonging to a deployment resource type.
+// Start starts all instances belonging to a deployment resource kind.
 func Start(params StartParams) (models.DeploymentResourceCommandResponse, error) {
 	if err := params.Validate(); err != nil {
 		return nil, err
@@ -63,7 +63,7 @@ func Start(params StartParams) (models.DeploymentResourceCommandResponse, error)
 	res, err := params.V1API.Deployments.StartDeploymentResourceInstancesAll(
 		deployments.NewStartDeploymentResourceInstancesAllParams().
 			WithDeploymentID(params.DeploymentID).
-			WithResourceKind(params.Type).
+			WithResourceKind(params.Kind).
 			WithRefID(params.RefID),
 		params.AuthWriter,
 	)
@@ -83,7 +83,7 @@ func StartInstances(params StartInstancesParams) (models.DeploymentResourceComma
 	res, err := params.V1API.Deployments.StartDeploymentResourceInstances(
 		deployments.NewStartDeploymentResourceInstancesParams().
 			WithDeploymentID(params.DeploymentID).
-			WithResourceKind(params.Type).
+			WithResourceKind(params.Kind).
 			WithIgnoreMissing(params.IgnoreMissing).
 			WithInstanceIds(params.InstanceIDs).
 			WithRefID(params.RefID),

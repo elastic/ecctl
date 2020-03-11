@@ -7,15 +7,15 @@ Deletes a previously shut down deployment resource
 Deletes a previously shut down deployment resource
 
 ```
-ecctl deployment resource delete <deployment id> --type <type> --ref-id <ref-id> [flags]
+ecctl deployment resource delete <deployment id> --kind <kind> --ref-id <ref-id> [flags]
 ```
 
 ### Options
 
 ```
   -h, --help            help for delete
+      --kind string     Required stateless deployment resource kind (apm, appsearch, kibana)
       --ref-id string   Optional deployment RefId, auto-discovered if not specified
-      --type string     Required stateless deployment resource type (apm, appsearch, kibana)
 ```
 
 ### Options inherited from parent commands

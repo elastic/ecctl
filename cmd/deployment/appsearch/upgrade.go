@@ -35,13 +35,13 @@ var upgradeCmd = &cobra.Command{
 	Short:   "Upgrades an AppSearch deployment to the Elasticsearch deployment version",
 	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		resType := "appsearch"
+		resKind := "appsearch"
 		refID, _ := cmd.Flags().GetString("ref-id")
 
 		res, err := depresource.UpgradeStateless(deployment.ResourceParams{
 			API:          ecctl.Get().API,
 			DeploymentID: args[0],
-			Type:         resType,
+			Kind:         resKind,
 			RefID:        refID,
 		})
 
@@ -58,7 +58,7 @@ var upgradeCmd = &cobra.Command{
 			OutputDevice: ecctl.Get().Config.OutputDevice,
 			Resources: []*models.DeploymentResource{{
 				ID:    ec.String(res.ResourceID),
-				Kind:  ec.String(resType),
+				Kind:  ec.String(resKind),
 				RefID: ec.String(refID),
 			}},
 		})

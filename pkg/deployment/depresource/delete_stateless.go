@@ -38,8 +38,8 @@ func (params *DeleteStatelessParams) Validate() error {
 
 	merr = multierror.Append(merr, params.ResourceParams.Validate())
 
-	if params.Type == "elasticsearch" {
-		merr = multierror.Append(merr, errors.New("deployment resource type \"elasticsearch\" is not supported"))
+	if params.Kind == "elasticsearch" {
+		merr = multierror.Append(merr, errors.New("deployment resource kind \"elasticsearch\" is not supported"))
 	}
 
 	return merr.ErrorOrNil()
@@ -55,7 +55,7 @@ func DeleteStateless(params DeleteStatelessParams) error {
 	return util.ReturnErrOnly(
 		params.V1API.Deployments.DeleteDeploymentStatelessResource(
 			deployments.NewDeleteDeploymentStatelessResourceParams().
-				WithStatelessResourceKind(params.Type).
+				WithStatelessResourceKind(params.Kind).
 				WithDeploymentID(params.DeploymentID).
 				WithRefID(params.RefID),
 			params.AuthWriter,

@@ -32,7 +32,7 @@ type Params struct {
 	deployment.Params
 }
 
-// Use different resource types when this is supported by the API.
+// Use different resource kinds when this is supported by the API.
 // For the time being, the notes endpoint only allows elasticsearch IDs.
 func (params *Params) fillDefaults() error {
 	esID, err := deployment.GetElasticsearchID(deployment.GetParams{

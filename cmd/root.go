@@ -52,8 +52,8 @@ var (
 {
    COMPREPLY=($(echo ${EC_REGIONS}))
 }
-` + cmdutil.StatelessTypesCompFunc + "\n" +
-		cmdutil.AllTypesCompFunc
+` + cmdutil.StatelessKindsCompFunc + "\n" +
+		cmdutil.AllKindsCompFunc
 )
 
 var (

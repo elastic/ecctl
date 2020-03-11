@@ -7,18 +7,18 @@ Starts a previously stopped deployment resource
 Starts a previously stopped deployment resource
 
 ```
-ecctl deployment resource start <deployment id> --type <type> [--all|--i <instance-id>,<instance-id>] [flags]
+ecctl deployment resource start <deployment id> --kind <kind> [--all|--i <instance-id>,<instance-id>] [flags]
 ```
 
 ### Options
 
 ```
-      --all                   Starts all instances of a defined resource type
+      --all                   Starts all instances of a defined resource kind
   -h, --help                  help for start
       --ignore-missing        If set and the specified instance does not exist, then quietly proceed to the next instance
   -i, --instance-id strings   Deployment instance IDs to start (e.g. instance-0000000001)
+      --kind string           Required deployment resource kind (apm, appsearch, kibana, elasticsearch)
       --ref-id string         Optional deployment RefId, if not set, the RefId will be auto-discovered
-      --type string           Required deployment resource type (apm, appsearch, kibana, elasticsearch)
 ```
 
 ### Options inherited from parent commands

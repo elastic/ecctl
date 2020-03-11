@@ -42,7 +42,7 @@ var showAppSearchCmd = &cobra.Command{
 			showPlans = true
 		}
 		res, err := deployment.GetResource(deployment.GetResourceParams{
-			Type: "appsearch",
+			Kind: "appsearch",
 			GetParams: deployment.GetParams{
 				API:          ecctl.Get().API,
 				DeploymentID: args[0],

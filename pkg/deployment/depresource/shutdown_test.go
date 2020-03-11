@@ -54,49 +54,49 @@ func TestShutdown(t *testing.T) {
 			err: &multierror.Error{Errors: []error{
 				util.ErrAPIReq,
 				deputil.NewInvalidDeploymentIDError(""),
-				errors.New("deployment resource type cannot be empty"),
+				errors.New("deployment resource kind cannot be empty"),
 				errors.New("failed auto-discovering the resource ref id: api reference is required for command"),
 				errors.New("failed auto-discovering the resource ref id: id \"\" is invalid"),
 			}},
 		},
 		{
-			name: "Returns error on type Elasticsearch and a received API error",
+			name: "Returns error on kind Elasticsearch and a received API error",
 			args: args{params: ShutdownParams{
 				ResourceParams: deployment.ResourceParams{
 					API:          api.NewMock(mock.New404Response(mock.NewStructBody(error404))),
 					DeploymentID: util.ValidClusterID,
 					RefID:        "elasticsearch",
-					Type:         "elasticsearch",
+					Kind:         "elasticsearch",
 				},
 			}},
 			err: errors.New(string(error404Byte)),
 		},
 		{
-			name: "Returns error on type APM and a received API error",
+			name: "Returns error on kind APM and a received API error",
 			args: args{params: ShutdownParams{
 				ResourceParams: deployment.ResourceParams{
 					API:          api.NewMock(mock.New404Response(mock.NewStructBody(error404))),
 					DeploymentID: util.ValidClusterID,
 					RefID:        "apm",
-					Type:         "apm",
+					Kind:         "apm",
 				},
 			}},
 			err: errors.New(string(error404Byte)),
 		},
 		{
-			name: "Returns error on type Kibana and a received API error",
+			name: "Returns error on kind Kibana and a received API error",
 			args: args{params: ShutdownParams{
 				ResourceParams: deployment.ResourceParams{
 					API:          api.NewMock(mock.New404Response(mock.NewStructBody(error404))),
 					DeploymentID: util.ValidClusterID,
 					RefID:        "kibana",
-					Type:         "kibana",
+					Kind:         "kibana",
 				},
 			}},
 			err: errors.New(string(error404Byte)),
 		},
 		{
-			name: "Succeeds on type Elasticsearch with autodiscover of the type",
+			name: "Succeeds on kind Elasticsearch with autodiscover of the kind",
 			args: args{params: ShutdownParams{
 				ResourceParams: deployment.ResourceParams{
 					API: api.NewMock(
@@ -113,17 +113,17 @@ func TestShutdown(t *testing.T) {
 						mock.New200Response(mock.NewStructBody(struct{}{})),
 					),
 					DeploymentID: util.ValidClusterID,
-					Type:         "elasticsearch",
+					Kind:         "elasticsearch",
 				},
 			}},
 		},
 		{
-			name: "Fails on type Elasticsearch when autodiscover returns an error",
+			name: "Fails on kind Elasticsearch when autodiscover returns an error",
 			args: args{params: ShutdownParams{
 				ResourceParams: deployment.ResourceParams{
 					API:          api.NewMock(mock.New404Response(mock.NewStructBody(error404))),
 					DeploymentID: util.ValidClusterID,
-					Type:         "elasticsearch",
+					Kind:         "elasticsearch",
 				},
 			}},
 			err: &multierror.Error{Errors: []error{
@@ -131,35 +131,35 @@ func TestShutdown(t *testing.T) {
 			}},
 		},
 		{
-			name: "Succeeds on type Elasticsearch",
+			name: "Succeeds on kind Elasticsearch",
 			args: args{params: ShutdownParams{
 				ResourceParams: deployment.ResourceParams{
 					API:          api.NewMock(mock.New200Response(mock.NewStructBody(struct{}{}))),
 					DeploymentID: util.ValidClusterID,
 					RefID:        "elasticsearch",
-					Type:         "elasticsearch",
+					Kind:         "elasticsearch",
 				},
 			}},
 		},
 		{
-			name: "Succeeds on type APM",
+			name: "Succeeds on kind APM",
 			args: args{params: ShutdownParams{
 				ResourceParams: deployment.ResourceParams{
 					API:          api.NewMock(mock.New200Response(mock.NewStructBody(struct{}{}))),
 					DeploymentID: util.ValidClusterID,
 					RefID:        "apm",
-					Type:         "apm",
+					Kind:         "apm",
 				},
 			}},
 		},
 		{
-			name: "Succeeds on type Kibana",
+			name: "Succeeds on kind Kibana",
 			args: args{params: ShutdownParams{
 				ResourceParams: deployment.ResourceParams{
 					API:          api.NewMock(mock.New200Response(mock.NewStructBody(struct{}{}))),
 					DeploymentID: util.ValidClusterID,
 					RefID:        "kibana",
-					Type:         "kibana",
+					Kind:         "kibana",
 				},
 			}},
 		},

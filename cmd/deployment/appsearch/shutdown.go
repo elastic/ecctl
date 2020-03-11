@@ -47,7 +47,7 @@ var shutdownCmd = &cobra.Command{
 			ResourceParams: deployment.ResourceParams{
 				API:          ecctl.Get().API,
 				DeploymentID: args[0],
-				Type:         "appsearch",
+				Kind:         "appsearch",
 				RefID:        refID,
 			},
 			SkipSnapshot: skipSnapshot,

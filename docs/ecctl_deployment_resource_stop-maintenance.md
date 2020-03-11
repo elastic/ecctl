@@ -7,18 +7,18 @@ Stops maintenance mode on a deployment resource
 Stops maintenance mode on a deployment resource
 
 ```
-ecctl deployment resource stop-maintenance <deployment id> --type <type> [--all|--i <instance-id>,<instance-id>] [flags]
+ecctl deployment resource stop-maintenance <deployment id> --kind <kind> [--all|--i <instance-id>,<instance-id>] [flags]
 ```
 
 ### Options
 
 ```
-      --all                   Stops maintenance mode on all instances of a defined resource type
+      --all                   Stops maintenance mode on all instances of a defined resource kind
   -h, --help                  help for stop-maintenance
       --ignore-missing        If set and the specified instance does not exist, then quietly proceed to the next instance
   -i, --instance-id strings   Deployment instance IDs to use (e.g. instance-0000000001)
+      --kind string           Required deployment resource kind (apm, appsearch, kibana, elasticsearch)
       --ref-id string         Optional deployment RefId, if not set, the RefId will be auto-discovered
-      --type string           Required deployment resource type (apm, appsearch, kibana, elasticsearch)
 ```
 
 ### Options inherited from parent commands

@@ -101,20 +101,20 @@ func TestGetInstances(t *testing.T) {
 	}
 }
 
-func TestAddTypeFlag(t *testing.T) {
+func TestAddKindFlag(t *testing.T) {
 	var wantSomethingAssert = &flag.Flag{
-		Name:  "type",
-		Usage: "Optional deployment resource type (apm, appsearch, kibana)",
+		Name:  "kind",
+		Usage: "Optional deployment resource kind (apm, appsearch, kibana)",
 		Annotations: map[string][]string{
-			cobra.BashCompCustom: {"__ecctl_valid_stateless_types"},
+			cobra.BashCompCustom: {"__ecctl_valid_stateless_kinds"},
 		},
 	}
 
 	var wantSomethingRequiredAssert = &flag.Flag{
-		Name:  "type",
-		Usage: "Required deployment resource type (apm, appsearch, kibana, elasticsearch)",
+		Name:  "kind",
+		Usage: "Required deployment resource kind (apm, appsearch, kibana, elasticsearch)",
 		Annotations: map[string][]string{
-			cobra.BashCompCustom: {"__ecctl_valid_all_types"},
+			cobra.BashCompCustom: {"__ecctl_valid_all_kinds"},
 		},
 	}
 
@@ -129,7 +129,7 @@ func TestAddTypeFlag(t *testing.T) {
 		want *flag.Flag
 	}{
 		{
-			name: "Annotates the type flag with stateless types",
+			name: "Annotates the kind flag with stateless kinds",
 			args: args{
 				cmd: &cobra.Command{
 					Use: "something",
@@ -141,7 +141,7 @@ func TestAddTypeFlag(t *testing.T) {
 			want: wantSomethingAssert,
 		},
 		{
-			name: "Annotates the type flag with all types",
+			name: "Annotates the kind flag with all kinds",
 			args: args{
 				cmd: &cobra.Command{
 					Use: "somethingrequired",
@@ -155,11 +155,11 @@ func TestAddTypeFlag(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			AddTypeFlag(tt.args.cmd, tt.args.prefix, tt.args.all)
-			got := tt.args.cmd.Flag("type")
+			AddKindFlag(tt.args.cmd, tt.args.prefix, tt.args.all)
+			got := tt.args.cmd.Flag("kind")
 			got.Value = nil
 			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("AddTypeFlag() got = \n%+v, want \n%+v", got, tt.want)
+				t.Errorf("AddKindFlag() got = \n%+v, want \n%+v", got, tt.want)
 			}
 		})
 	}

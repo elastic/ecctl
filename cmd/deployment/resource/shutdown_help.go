@@ -18,6 +18,6 @@
 package cmddeploymentresource
 
 const (
-	shutdownLong = `Shuts down a deployment resource type (APM, Appsearch, Elasticsearch, Kibana). Shutting down a
-type doesn't necessarily shut down the deployment itself but rather a specific  resource.`
+	shutdownLong = `Shuts down a deployment resource kind (APM, Appsearch, Elasticsearch, Kibana). Shutting down a
+kind doesn't necessarily shut down the deployment itself but rather a specific  resource.`
 )
