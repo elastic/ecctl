@@ -33,7 +33,7 @@ import (
 )
 
 var appsearchTemplateResponse = models.DeploymentTemplateInfo{
-	ID: "default",
+	ID: "default.appsearch",
 	ClusterTemplate: &models.DeploymentTemplateDefinitionRequest{
 		Appsearch: &models.CreateAppSearchRequest{
 			Plan: &models.AppSearchPlan{
@@ -48,6 +48,15 @@ var appsearchTemplateResponse = models.DeploymentTemplateInfo{
 				},
 			},
 		},
+		Plan: &models.ElasticsearchClusterPlan{
+			ClusterTopology: defaultESTopologies,
+		},
+	},
+}
+
+var defaultTemplateResponse = models.DeploymentTemplateInfo{
+	ID: "default",
+	ClusterTemplate: &models.DeploymentTemplateDefinitionRequest{
 		Plan: &models.ElasticsearchClusterPlan{
 			ClusterTopology: defaultESTopologies,
 		},
@@ -138,6 +147,18 @@ func TestNewAppSearch(t *testing.T) {
 				Region: "ece-region",
 			}},
 			err: errors.New(string(internalErrorBytes)),
+		},
+		{
+			name: "obtains the deployment template but it's an invalid template for appsearch",
+			args: args{params: NewStateless{
+				DeploymentID: util.ValidClusterID,
+				API: api.NewMock(
+					mock.New200Response(mock.NewStructBody(getResponse)),
+					mock.New200Response(mock.NewStructBody(defaultTemplateResponse)),
+				),
+				Region: "ece-region",
+			}},
+			err: errors.New("deployment: the an ID template is not configured for AppSearch. Please use another template if you wish to start AppSearch instances"),
 		},
 		{
 			name: "succeeds with no argument override",

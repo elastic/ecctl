@@ -18,6 +18,8 @@
 package depresource
 
 import (
+	"fmt"
+
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/platform_configuration_templates"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
@@ -54,6 +56,11 @@ func NewApm(params NewStateless) (*models.ApmPayload, error) {
 	)
 	if err != nil {
 		return nil, api.UnwrapError(err)
+	}
+
+	if res.Payload.ClusterTemplate.Apm == nil {
+		return nil, fmt.Errorf("deployment: the %s template is not configured for APM. Please use another template if you wish to start APM instances",
+			params.TemplateID)
 	}
 
 	var clusterTopology = res.Payload.ClusterTemplate.Apm.Plan.ClusterTopology

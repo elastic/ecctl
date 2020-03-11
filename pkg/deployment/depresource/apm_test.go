@@ -54,6 +54,15 @@ var apmTemplateResponse = models.DeploymentTemplateInfo{
 	},
 }
 
+var crossClusterTemplateResponse = models.DeploymentTemplateInfo{
+	ID: "cross-cluster-search",
+	ClusterTemplate: &models.DeploymentTemplateDefinitionRequest{
+		Plan: &models.ElasticsearchClusterPlan{
+			ClusterTopology: defaultESTopologies,
+		},
+	},
+}
+
 func TestNewApm(t *testing.T) {
 	var internalError = models.BasicFailedReply{
 		Errors: []*models.BasicFailedReplyElement{
@@ -138,6 +147,18 @@ func TestNewApm(t *testing.T) {
 				Region: "ece-region",
 			}},
 			err: errors.New(string(internalErrorBytes)),
+		},
+		{
+			name: "obtains the deployment template but it's an invalid template for appsearch",
+			args: args{params: NewStateless{
+				DeploymentID: util.ValidClusterID,
+				API: api.NewMock(
+					mock.New200Response(mock.NewStructBody(getResponse)),
+					mock.New200Response(mock.NewStructBody(crossClusterTemplateResponse)),
+				),
+				Region: "ece-region",
+			}},
+			err: errors.New("deployment: the an ID template is not configured for APM. Please use another template if you wish to start APM instances"),
 		},
 		{
 			name: "succeeds with no argument override",
