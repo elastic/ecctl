@@ -58,7 +58,7 @@ func TestRunShowKibanaClusterCmd(t *testing.T) {
 				cmd:  showKibanaClusterCmd,
 				args: []string{"d558cdf210dc4737960906a83b1db52c"},
 			},
-			err: `Get http://somehost/api/v1/clusters/kibana/d558cdf210dc4737960906a83b1db52c?convert_legacy_plans=false&show_metadata=false&show_plan_defaults=true&show_plan_logs=false&show_plans=false&show_settings=false: dial tcp: lookup somehost: no such host`,
+			err: `Get http://somehost/api/v1/clusters/kibana/d558cdf210dc4737960906a83b1db52c?convert_legacy_plans=false&show_metadata=false&show_plan_defaults=true&show_plan_logs=false&show_plans=false&show_settings=false`,
 		},
 	}
 
