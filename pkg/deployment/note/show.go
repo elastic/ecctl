@@ -21,7 +21,7 @@ import (
 	"errors"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
-	"github.com/elastic/cloud-sdk-go/pkg/client/deployments"
+	"github.com/elastic/cloud-sdk-go/pkg/client/deployments_notes"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	multierror "github.com/hashicorp/go-multierror"
 )
@@ -55,8 +55,8 @@ func Get(params GetParams) (*models.Note, error) {
 		return nil, err
 	}
 
-	res, err := params.API.V1API.Deployments.GetDeploymentNote(
-		deployments.NewGetDeploymentNoteParams().
+	res, err := params.V1API.DeploymentsNotes.GetDeploymentNote(
+		deployments_notes.NewGetDeploymentNoteParams().
 			WithDeploymentID(params.ID).
 			WithNoteID(params.NoteID),
 		params.AuthWriter,

@@ -107,8 +107,8 @@ func TestCreate(t *testing.T) {
 					{
 						CloudID: "my_elasticsearch_cluster:MTkyLjE2OC40NC4xMC5pcC5lcy5pbzo5MjQzJDAxZmEyODU4NzZmNTRlNjk5ZGEzZDNkNmZkOGE4NGYxJGNhOGFjNjU1NWYwZDQzZDhiYTEwNDhjOThlYTYwMjY1",
 						Credentials: &models.ClusterCredentials{
-							Password: "6n7Q5fXoFZDnpLOVPi5FnVLa",
-							Username: "elastic",
+							Password: ec.String("6n7Q5fXoFZDnpLOVPi5FnVLa"),
+							Username: ec.String("elastic"),
 						},
 						ID:     ec.String("01fa285876f54e699da3d3d6fd8a84f1"),
 						Kind:   ec.String("elasticsearch"),
@@ -154,8 +154,8 @@ func TestCreate(t *testing.T) {
 					{
 						CloudID: "my_elasticsearch_cluster:MTkyLjE2OC40NC4xMC5pcC5lcy5pbzo5MjQzJDAxZmEyODU4NzZmNTRlNjk5ZGEzZDNkNmZkOGE4NGYxJGNhOGFjNjU1NWYwZDQzZDhiYTEwNDhjOThlYTYwMjY1",
 						Credentials: &models.ClusterCredentials{
-							Password: "6n7Q5fXoFZDnpLOVPi5FnVLa",
-							Username: "elastic",
+							Password: ec.String("6n7Q5fXoFZDnpLOVPi5FnVLa"),
+							Username: ec.String("elastic"),
 						},
 						ID:     ec.String("01fa285876f54e699da3d3d6fd8a84f1"),
 						Kind:   ec.String("elasticsearch"),
@@ -201,8 +201,8 @@ func TestCreate(t *testing.T) {
 					{
 						CloudID: "my_elasticsearch_cluster:MTkyLjE2OC40NC4xMC5pcC5lcy5pbzo5MjQzJDAxZmEyODU4NzZmNTRlNjk5ZGEzZDNkNmZkOGE4NGYxJGNhOGFjNjU1NWYwZDQzZDhiYTEwNDhjOThlYTYwMjY1",
 						Credentials: &models.ClusterCredentials{
-							Password: "6n7Q5fXoFZDnpLOVPi5FnVLa",
-							Username: "elastic",
+							Password: ec.String("6n7Q5fXoFZDnpLOVPi5FnVLa"),
+							Username: ec.String("elastic"),
 						},
 						ID:     ec.String("01fa285876f54e699da3d3d6fd8a84f1"),
 						Kind:   ec.String("elasticsearch"),

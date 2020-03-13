@@ -32,15 +32,7 @@ import (
 	"github.com/elastic/ecctl/pkg/util"
 )
 
-var errGet500 = `{
-  "errors": [
-    {
-      "code": "deployment.missing",
-      "fields": null,
-      "message": null
-    }
-  ]
-}`
+var errGet500 = `{"errors":[{"code":"deployment.missing","fields":null,"message":null}]}` + "\n"
 
 func TestGetResource(t *testing.T) {
 	type args struct {

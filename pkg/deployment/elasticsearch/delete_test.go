@@ -26,6 +26,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -48,7 +49,7 @@ func TestDeleteCluster(t *testing.T) {
 						Response: http.Response{
 							StatusCode: 200,
 							Body: mock.NewStructBody(models.ElasticsearchClusterInfo{
-								Status: stoppedState,
+								Status: ec.String(stoppedState),
 							}),
 						},
 					}, mock.Response{
@@ -69,7 +70,7 @@ func TestDeleteCluster(t *testing.T) {
 						Response: http.Response{
 							StatusCode: 200,
 							Body: mock.NewStructBody(models.ElasticsearchClusterInfo{
-								Status: stoppedState,
+								Status: ec.String(stoppedState),
 							}),
 						},
 					}, mock.Response{
@@ -91,7 +92,7 @@ func TestDeleteCluster(t *testing.T) {
 						Response: http.Response{
 							StatusCode: 200,
 							Body: mock.NewStructBody(models.ElasticsearchClusterInfo{
-								Status: "started",
+								Status: ec.String("started"),
 							}),
 						},
 					}),

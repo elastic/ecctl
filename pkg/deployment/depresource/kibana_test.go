@@ -69,7 +69,8 @@ func TestNewKibana(t *testing.T) {
 			{},
 		},
 	}
-	internalErrorBytes, _ := json.MarshalIndent(internalError, "", "  ")
+	internalErrorBytes, _ := json.Marshal(internalError)
+	internalErrorBytesIndent, _ := json.MarshalIndent(internalError, "", "  ")
 
 	var getResponse = models.DeploymentGetResponse{
 		Resources: &models.DeploymentResources{
@@ -115,7 +116,7 @@ func TestNewKibana(t *testing.T) {
 				API:          api.NewMock(mock.New500Response(mock.NewStructBody(internalError))),
 				Region:       "ece-region",
 			}},
-			err: errors.New(string(internalErrorBytes)),
+			err: errors.New(string(internalErrorBytes) + "\n"),
 		},
 		{
 			name: "obtains the deployment info but fails getting the template ID info",
@@ -146,7 +147,7 @@ func TestNewKibana(t *testing.T) {
 				),
 				Region: "ece-region",
 			}},
-			err: errors.New(string(internalErrorBytes)),
+			err: errors.New(string(internalErrorBytesIndent)),
 		},
 		{
 			name: "obtains the deployment template but it's an invalid template for kibana",

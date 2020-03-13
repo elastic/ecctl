@@ -108,11 +108,6 @@ func TestGet(t *testing.T) {
   "healthy": true,
   "id": "f1d329b0fb34470ba8b18361cabdd2bc"
 }`
-
-	const getErrorResponse = `{
-  "errors": null
-}`
-
 	type args struct {
 		params GetParams
 	}
@@ -144,7 +139,7 @@ func TestGet(t *testing.T) {
 				},
 			},
 			wantErr: true,
-			err:     errors.New(getErrorResponse),
+			err:     errors.New(""),
 		},
 		{
 			name: "Get succeeds",
@@ -516,11 +511,6 @@ func TestGetElasticsearchID(t *testing.T) {
     }]
   }
 }`
-
-	const getErrorResponse = `{
-  "errors": null
-}`
-
 	type args struct {
 		params GetParams
 	}
@@ -543,7 +533,7 @@ func TestGetElasticsearchID(t *testing.T) {
 				},
 			},
 			wantErr: true,
-			err:     errors.New(getErrorResponse),
+			err:     errors.New(""),
 		},
 		{
 			name: "Get succeeds",

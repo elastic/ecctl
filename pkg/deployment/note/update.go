@@ -21,7 +21,7 @@ import (
 	"errors"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
-	"github.com/elastic/cloud-sdk-go/pkg/client/deployments"
+	"github.com/elastic/cloud-sdk-go/pkg/client/deployments_notes"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	multierror "github.com/hashicorp/go-multierror"
@@ -66,8 +66,8 @@ func Update(params UpdateParams) (*models.Note, error) {
 		return nil, err
 	}
 
-	res, err := params.API.V1API.Deployments.UpdateDeploymentNote(
-		deployments.NewUpdateDeploymentNoteParams().
+	res, err := params.API.V1API.DeploymentsNotes.UpdateDeploymentNote(
+		deployments_notes.NewUpdateDeploymentNoteParams().
 			WithDeploymentID(params.ID).
 			WithNoteID(params.NoteID).
 			WithBody(&models.Note{

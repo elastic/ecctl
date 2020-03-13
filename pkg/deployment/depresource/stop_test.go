@@ -39,15 +39,7 @@ var internalError = models.BasicFailedReply{
 	},
 }
 var internalErrorBytes, _ = json.MarshalIndent(internalError, "", "  ")
-var errGet500 = `failed auto-discovering the resource ref id: {
-  "errors": [
-    {
-      "code": "deployment.missing",
-      "fields": null,
-      "message": null
-    }
-  ]
-}`
+var errGet500 = `failed auto-discovering the resource ref id: {"errors":[{"code":"deployment.missing","fields":null,"message":null}]}` + "\n"
 
 func TestStopInstancesParams_Validate(t *testing.T) {
 	tests := []struct {

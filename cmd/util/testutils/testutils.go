@@ -34,7 +34,7 @@ func MockInitApp() error {
 		OutputDevice: output.NewDevice(os.Stdout),
 		ErrorDevice:  os.Stderr,
 		Output:       "json",
-		Host:         "http://localhost",
+		Host:         "http://somehost",
 		APIKey:       "helloiamakey",
 	}
 

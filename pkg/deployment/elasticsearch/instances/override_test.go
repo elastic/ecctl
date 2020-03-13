@@ -145,25 +145,25 @@ func TestNewOverrideRequest(t *testing.T) {
 					{
 						InstanceName: ec.String("instance-0000000008"),
 						InstanceConfiguration: &models.ClusterInstanceConfigurationInfo{
-							ID:       "aws.highio.legacy",
-							Name:     "highio.legacy",
-							Resource: "memory",
+							ID:       ec.String("aws.highio.legacy"),
+							Name:     ec.String("highio.legacy"),
+							Resource: ec.String("memory"),
 						},
 					},
 					{
 						InstanceName: ec.String("instance-0000000009"),
 						InstanceConfiguration: &models.ClusterInstanceConfigurationInfo{
-							ID:       "aws.highio.legacy",
-							Name:     "highio.legacy",
-							Resource: "memory",
+							ID:       ec.String("aws.highio.legacy"),
+							Name:     ec.String("highio.legacy"),
+							Resource: ec.String("memory"),
 						},
 					},
 					{
 						InstanceName: ec.String("instance-0000000010"),
 						InstanceConfiguration: &models.ClusterInstanceConfigurationInfo{
-							ID:       "aws.master.legacy",
-							Name:     "master.legacy",
-							Resource: "memory",
+							ID:       ec.String("aws.master.legacy"),
+							Name:     ec.String("master.legacy"),
+							Resource: ec.String("memory"),
 						},
 					},
 				},
@@ -192,25 +192,25 @@ func TestNewOverrideRequest(t *testing.T) {
 					{
 						InstanceName: ec.String("instance-0000000008"),
 						InstanceConfiguration: &models.ClusterInstanceConfigurationInfo{
-							ID:       "aws.highio.classic",
-							Name:     "highio.classic",
-							Resource: "memory",
+							ID:       ec.String("aws.highio.classic"),
+							Name:     ec.String("highio.classic"),
+							Resource: ec.String("memory"),
 						},
 					},
 					{
 						InstanceName: ec.String("instance-0000000009"),
 						InstanceConfiguration: &models.ClusterInstanceConfigurationInfo{
-							ID:       "aws.highio.classic",
-							Name:     "highio.classic",
-							Resource: "memory",
+							ID:       ec.String("aws.highio.classic"),
+							Name:     ec.String("highio.classic"),
+							Resource: ec.String("memory"),
 						},
 					},
 					{
 						InstanceName: ec.String("instance-0000000010"),
 						InstanceConfiguration: &models.ClusterInstanceConfigurationInfo{
-							ID:       "aws.master.classic",
-							Name:     "master.classic",
-							Resource: "memory",
+							ID:       ec.String("aws.master.classic"),
+							Name:     ec.String("master.classic"),
+							Resource: ec.String("memory"),
 						},
 					},
 				},

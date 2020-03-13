@@ -29,6 +29,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	"github.com/elastic/cloud-sdk-go/pkg/output"
+	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
@@ -57,7 +58,7 @@ func TestDelete(t *testing.T) {
 				ID: "d324608c97154bdba2dff97511d40368",
 				API: api.NewMock(mock.Response{Response: http.Response{
 					Body: mock.NewStructBody(models.ApmInfo{
-						Status: "started",
+						Status: ec.String("started"),
 					}),
 					StatusCode: 200,
 				}}),
@@ -71,7 +72,7 @@ func TestDelete(t *testing.T) {
 				API: api.NewMock(
 					mock.Response{Response: http.Response{
 						Body: mock.NewStructBody(models.ApmInfo{
-							Status: "stopped",
+							Status: ec.String("stopped"),
 						}),
 						StatusCode: 200,
 					}},

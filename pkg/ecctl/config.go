@@ -66,6 +66,9 @@ type Config struct {
 	Insecure bool `json:"insecure,omitempty"`
 	// SkipLogin skips loging in when user and pass are set.
 	SkipLogin bool `json:"-"`
+
+	// SkipLogin skips loging in when user and pass are set.
+	UserAgent string `json:"-"`
 }
 
 // Validate checks that the application config is a valid one

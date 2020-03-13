@@ -40,15 +40,7 @@ func TestCancelPlan(t *testing.T) {
 		},
 	}
 	internalErrorBytes, _ := json.MarshalIndent(internalError, "", "  ")
-	var errGet500 = `failed auto-discovering the resource ref id: {
-  "errors": [
-    {
-      "code": "deployment.missing",
-      "fields": null,
-      "message": null
-    }
-  ]
-}`
+	var errGet500 = `failed auto-discovering the resource ref id: {"errors":[{"code":"deployment.missing","fields":null,"message":null}]}` + "\n"
 	type args struct {
 		params CancelPlanParams
 	}

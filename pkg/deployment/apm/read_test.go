@@ -59,14 +59,14 @@ func TestList(t *testing.T) {
 								ElasticsearchCluster: &models.TargetElasticsearchCluster{
 									ElasticsearchID: ec.String("d324608c97154bdba2dff97511d40368"),
 								},
-								Status: "started",
+								Status: ec.String("started"),
 							},
 							{
 								ID: ec.String("d324608c97154bdba2dff97511d40368"),
 								ElasticsearchCluster: &models.TargetElasticsearchCluster{
 									ElasticsearchID: ec.String("86d2ec6217774eedb93ba38483141997"),
 								},
-								Status: "stopped",
+								Status: ec.String("stopped"),
 							},
 						},
 					}),
@@ -81,14 +81,14 @@ func TestList(t *testing.T) {
 						ElasticsearchCluster: &models.TargetElasticsearchCluster{
 							ElasticsearchID: ec.String("d324608c97154bdba2dff97511d40368"),
 						},
-						Status: "started",
+						Status: ec.String("started"),
 					},
 					{
 						ID: ec.String("d324608c97154bdba2dff97511d40368"),
 						ElasticsearchCluster: &models.TargetElasticsearchCluster{
 							ElasticsearchID: ec.String("86d2ec6217774eedb93ba38483141997"),
 						},
-						Status: "stopped",
+						Status: ec.String("stopped"),
 					},
 				},
 			},
@@ -135,7 +135,7 @@ func TestShow(t *testing.T) {
 						ElasticsearchCluster: &models.TargetElasticsearchCluster{
 							ElasticsearchID: ec.String("d324608c97154bdba2dff97511d40368"),
 						},
-						Status: "started",
+						Status: ec.String("started"),
 					}),
 					StatusCode: 200,
 				}}),
@@ -145,7 +145,7 @@ func TestShow(t *testing.T) {
 				ElasticsearchCluster: &models.TargetElasticsearchCluster{
 					ElasticsearchID: ec.String("d324608c97154bdba2dff97511d40368"),
 				},
-				Status: "started",
+				Status: ec.String("started"),
 			},
 		},
 		{

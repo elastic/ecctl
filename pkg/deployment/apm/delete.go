@@ -55,7 +55,7 @@ func Delete(params DeleteParams) error {
 		return api.UnwrapError(err)
 	}
 
-	if dep.Status != "stopped" {
+	if *dep.Status != "stopped" {
 		return errors.New("apm delete: deployment must be stopped")
 	}
 

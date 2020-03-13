@@ -20,7 +20,7 @@ package note
 import (
 	"errors"
 
-	"github.com/elastic/cloud-sdk-go/pkg/client/deployments"
+	"github.com/elastic/cloud-sdk-go/pkg/client/deployments_notes"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	multierror "github.com/hashicorp/go-multierror"
@@ -69,8 +69,8 @@ func Add(params AddParams) error {
 		message = params.Commentator.Message(message)
 	}
 
-	return util.ReturnErrOnly(params.V1API.Deployments.CreateDeploymentNote(
-		deployments.NewCreateDeploymentNoteParams().
+	return util.ReturnErrOnly(params.V1API.DeploymentsNotes.CreateDeploymentNote(
+		deployments_notes.NewCreateDeploymentNoteParams().
 			WithDeploymentID(params.ID).
 			WithBody(&models.Note{
 				Message: ec.String(message),

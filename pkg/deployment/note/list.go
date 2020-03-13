@@ -19,7 +19,7 @@ package note
 
 import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
-	"github.com/elastic/cloud-sdk-go/pkg/client/deployments"
+	"github.com/elastic/cloud-sdk-go/pkg/client/deployments_notes"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 )
 
@@ -38,8 +38,8 @@ func List(params Params) (*models.Notes, error) {
 		return nil, err
 	}
 
-	res, err := params.API.V1API.Deployments.GetDeploymentNotes(
-		deployments.NewGetDeploymentNotesParams().
+	res, err := params.V1API.DeploymentsNotes.GetDeploymentNotes(
+		deployments_notes.NewGetDeploymentNotesParams().
 			WithDeploymentID(params.ID),
 		params.AuthWriter,
 	)

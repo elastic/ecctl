@@ -30,6 +30,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	"github.com/elastic/cloud-sdk-go/pkg/output"
+	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
@@ -75,7 +76,7 @@ func TestDelete(t *testing.T) {
 					mock.Response{Response: http.Response{
 						StatusCode: 200,
 						Body: mock.NewStructBody(models.KibanaClusterInfo{
-							Status: "stopped",
+							Status: ec.String("stopped"),
 						}),
 					}},
 					mock.Response{Response: http.Response{
@@ -100,7 +101,7 @@ func TestDelete(t *testing.T) {
 						mock.Response{Response: http.Response{
 							StatusCode: 200,
 							Body: mock.NewStructBody(models.KibanaClusterInfo{
-								Status: "stopped",
+								Status: ec.String("stopped"),
 							}),
 						}},
 						mock.Response{Response: http.Response{
