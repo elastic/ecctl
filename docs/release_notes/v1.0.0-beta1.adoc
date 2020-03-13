@@ -1,0 +1,200 @@
+[id="{p}-release-notes-v1.0.0-beta1"]
+=== Elastic Cloud Control (ecctl) v1.0.0-beta1
+++++
+<titleabbrev>v1.0.0-beta1</titleabbrev>
+++++
+
+<<{p}-release-notes-v1.0.0-beta1-whats-new,What's new>> | <<{p}-release-notes-v1.0.0-beta1-bug-fixes,Bug fixes>> | <<{p}-release-notes-v1.0.0-beta1-breaking-changes,Breaking changes>> | <<{p}-release-notes-v1.0.0-beta1-changelog,Changelog>>
+
+Welcome to the v1.0.0-beta1 release of {n}. This version brings new features, some breaking changes, and bug fixes. 
+
+Elastic cloud control (ecctl) is Elastic’s CLI interface to manage the Elastic Cloud Enterprise platform and is now open for a public beta.
+
+Download the release binaries:
+
+[%hardbreaks]
+https://download.elastic.co/downloads/ecctl/v1.0.0-beta1/ecctl_v1.0.0-beta1_darwin_amd64.tar.gz[ecctl_v1.0.0-beta1_darwin_amd64.tar.gz]
+https://download.elastic.co/downloads/ecctl/v1.0.0-beta1/ecctl_v1.0.0-beta1_linux_32-bit.deb[ecctl_v1.0.0-beta1_linux_32-bit.deb]
+https://download.elastic.co/downloads/ecctl/v1.0.0-beta1/ecctl_v1.0.0-beta1_linux_32-bit.rpm[ecctl_v1.0.0-beta1_linux_32-bit.rpm]
+https://download.elastic.co/downloads/ecctl/v1.0.0-beta1/ecctl_v1.0.0-beta1_linux_386.tar.g[ecctl_v1.0.0-beta1_linux_386.tar.g]
+https://download.elastic.co/downloads/ecctl/v1.0.0-beta1/ecctl_v1.0.0-beta1_linux_64-bit.deb[ecctl_v1.0.0-beta1_linux_64-bit.deb]
+https://download.elastic.co/downloads/ecctl/v1.0.0-beta1/ecctl_v1.0.0-beta1_linux_64-bit.rpm[ecctl_v1.0.0-beta1_linux_64-bit.rpm]
+https://download.elastic.co/downloads/ecctl/v1.0.0-beta1/ecctl_v1.0.0-beta1_linux_amd64.tar.gz[ecctl_v1.0.0-beta1_linux_amd64.tar.gz]
+
+[float]
+[id="{p}-release-notes-v1.0.0-beta1-whats-new"]
+==== What's new
+
+* *Create Kibana and APM resources with new deployment APIs*. With the availability of our deployment APIs for ECE, we’ve switched the `ecctl deployment` command to make use of the new APIs. This change ensures better supportability and compatibility with ECE functionality and allows you to control your deployments fully. 
++
+Use the `ecctl deployment` commands to:
++
+--
+* Create, update, read, and delete deployments
+* Perform maintenance and upgrades
+* Start and stop deployments 
+--
+
+* *Improved version output*. The `ecctl version` command now returns more information:
++
+[source,sh]
+--
+$ ecctl version
+Version:               1.0.0-beta1
+Client API Version:    2.4.2
+Go version:            go1.13.5
+Git commit:            4fcde59a
+Built:                 Fri 20 Dec 05:58:12 2019
+OS/Arch:               darwin / amd64
+--
+
+* *Track resource changes with the `--track` flag*. Most commands that involve deployment plan changes now let you track the progress for your changes with the `--track` flag. The flag is available for the following commands:
++
+--
+* `deployment create`
+* `deployment update`
+* `deployment shutdown`
+--
+
+* *Override the failsafe during vacate operations with the `--override-failsafe` flag*. When using the `ecctl platform allocator vacate` command, you can now specify the `--override-failsafe` flag, which causes Elastic Cloud Enterprise to accept changes even when they are believed to lead to data loss. 
++
+WARNING: This flag is intended to help you complete a vacate operation, but it must be used with caution. Data loss is likely. 
+
+* *New Commands*. We added a number of new commands to implement API functionality:
++
+--
+* Deployment commands:
+
+`ecctl deployment create`:: Creates a deployment from a file definition, allowing certain flag overrides.
+`ecctl deployment delete`:: Deletes a previously stopped deployment from the platform.
+`ecctl deployment list`:: Lists the platform's deployments.
+`ecctl deployment restore`:: Restores a previously shut down deployment and all of its associated sub-resources.
+`ecctl deployment search`:: Performs advanced deployment search using the Elasticsearch Query DSL.
+`ecctl deployment shutdown`:: Shuts down a deployment and all of its associated sub-resources.
+`ecctl deployment upgrade`:: Updates a deployment from a file definition, allowing certain flag overrides
+
+* We also added a plan cancel for deployment resources:
++
+`ecctl deployment plan cancel`::
+
+* Deployment resource commands:
+
+`ecctl deployment resource delete`:: Deletes a previously shut down deployment resource.
+`ecctl deployment resource restore`:: Restores a previously shut down deployment resource.
+`ecctl deployment resource shutdown`:: Shuts down a deployment resource by its type and ref-id.
+`ecctl deployment resource start`:: Starts a previously stopped deployment resource.
+`ecctl deployment resource start-maintenance`:: Starts maintenance mode on a deployment resource.
+`ecctl deployment resource stop`:: Stops a deployment resource.
+`ecctl deployment resource stop-maintenance`:: Stops maintenance mode on a deployment resource.
+`ecctl deployment resource upgrade`:: Upgrades a deployment resource.
+
+* Elasticsearch keystore commands:
+
+`ecctl elasticsearch keystore show`:: Shows the Elasticsearch cluster keystore settings.
+`ecctl elasticsearch keystore set`:: Updates an Elasticsearch cluster keystore with the contents of a file.
+--
+
+* *Simpler initialization*. TLS verification has been turned off for the `init` command so that you can configure {p} against a self-signed ECE instance with greater ease.
+
+* *Improved documentation*. We now include the full {p} command reference with our official documentation. We also added auto-completion instructions to the docs.
+
+[float]
+[id="{p}-release-notes-v1.0.0-beta1-bug-fixes"]
+==== Bug fixes
+
+* The `ecctl user key show` command no longer sends faulty parameters to the API server and now works as expected.
+* The `init` command now writes the JSON configuration without returning an error. 
+* The `--timeout` flag is now honored as expected, where before a static 30s timeout was used even when `Http.Client.Timeout` was specified.
+*  API errors which previously were returned as `unknown error (status xxx)` are now unpacked as expected.
+* The `user key show` command now works as expected. Previously, the Key ID was being set instead of the User ID.
+
+[float]
+[id="{p}-release-notes-v1.0.0-beta1-breaking-changes"]
+==== Breaking changes
+
+* *Removed pluralized list commands*. We removed all plurals from {p} commands and now use only the format `ecctl <COMMAND> list`. Commands removed by this change are:
++
+--
+* `allocators`
+* `constructors`
+* `enrollment-tokens`
+* `proxies`
+* `stacks`
+* `filtered-groups`
+--
+
+* *Removed `deployment elasticsearch create` command*. We removed this command, because it does not support some future requirements related to creating deployments.
+// Specifically, an upcoming change in ECE 2.5.0 will remove the ability to create deployments that specify a custom topology and only allows the creation of deployments that include a `deployment_template_id` in the create request. And, deployment templates might specify additional required resources, such as Kibana or APM, that need to be included during deployment creation.
+
+[float]
+[id="{p}-release-notes-v1.0.0-beta1-changelog"]
+==== Changelog
+
+[%hardbreaks]
+https://github.com/elastic/ecctl/commit/97c3985[97c3985] Adding ecctl icon to repo (https://github.com/elastic/ecctl/pull/111[#111])
+https://github.com/elastic/ecctl/commit/a752cec[a752cec] Fix command wording (https://github.com/elastic/ecctl/pull/108[#108])
+https://github.com/elastic/ecctl/commit/5939798[5939798] stack: Skip returning an error on packed __MACOSX (https://github.com/elastic/ecctl/pull/105[#105])
+https://github.com/elastic/ecctl/commit/0f5a632[0f5a632] elasticsearch: Fix broken diagnostics command (https://github.com/elastic/ecctl/pull/110[#110])
+https://github.com/elastic/ecctl/commit/4945fbb[4945fbb] cmd: Add default region to APM and Kibana create (https://github.com/elastic/ecctl/pull/109[#109])
+https://github.com/elastic/ecctl/commit/398bf99[398bf99] cmd: Remove newer version check on ecctl version (https://github.com/elastic/ecctl/pull/103[#103])
+https://github.com/elastic/ecctl/commit/4fcde59[4fcde59] Add auto completion intruction to docs (https://github.com/elastic/ecctl/pull/101[#101])
+https://github.com/elastic/ecctl/commit/f3d653a[f3d653a] user: Fix key show command (https://github.com/elastic/ecctl/pull/106[#106])
+https://github.com/elastic/ecctl/commit/f8eb428[f8eb428] Convert command reference files to Asciidoctor (https://github.com/elastic/ecctl/pull/61[#61])
+https://github.com/elastic/ecctl/commit/997c7e2[997c7e2] fix refid discovery and require confirmation (https://github.com/elastic/ecctl/pull/104[#104])
+https://github.com/elastic/ecctl/commit/99b8d28[99b8d28] Update ecctl-getting-started.asciidoc (https://github.com/elastic/ecctl/pull/102[#102])
+https://github.com/elastic/ecctl/commit/0b30073[0b30073] Add timeout values to ecctl.Config (https://github.com/elastic/ecctl/pull/100[#100])
+https://github.com/elastic/ecctl/commit/35bcb95[35bcb95] dep: update cloud-sdk-go to v1.0.0-bc9 (https://github.com/elastic/ecctl/pull/98[#98])
+https://github.com/elastic/ecctl/commit/67baf3d[67baf3d] go.sum: Update hashes to the latest version (https://github.com/elastic/ecctl/pull/97[#97])
+https://github.com/elastic/ecctl/commit/ce54eda[ce54eda] cmd: Add ref-id auto-discovery to resource upgrade (https://github.com/elastic/ecctl/pull/92[#92])
+https://github.com/elastic/ecctl/commit/f3d09b3[f3d09b3] cmd: update resource params to use common struct (https://github.com/elastic/ecctl/pull/96[#96])
+https://github.com/elastic/ecctl/commit/7c2be04[7c2be04] cmd: Add deployment resource delete command (https://github.com/elastic/ecctl/pull/88[#88])
+https://github.com/elastic/ecctl/commit/bd7c910[bd7c910] Version: Change to v1.0.0-beta1 (https://github.com/elastic/ecctl/pull/94[#94])
+https://github.com/elastic/ecctl/commit/1579791[1579791] cmd: Add deployment resource restore command (https://github.com/elastic/ecctl/pull/87[#87])
+https://github.com/elastic/ecctl/commit/706b480[706b480] cmd: add deployment resource start/start-maintenance commands (https://github.com/elastic/ecctl/pull/89[#89])
+https://github.com/elastic/ecctl/commit/033f06d[033f06d] cmd: Add deployment resource stop and stop-maintenance cmds (https://github.com/elastic/ecctl/pull/81[#81])
+https://github.com/elastic/ecctl/commit/d2c27b5[d2c27b5] cmd: Add deployment resource shutdown command (https://github.com/elastic/ecctl/pull/86[#86])
+https://github.com/elastic/ecctl/commit/dbad10d[dbad10d] cmd: Remove elasticsearch create (https://github.com/elastic/ecctl/pull/93[#93])
+https://github.com/elastic/ecctl/commit/d4ee664[d4ee664] build(deps): bump github.com/go-openapi/runtime from 0.19.8 to 0.19.9 (https://github.com/elastic/ecctl/pull/85[#85])
+https://github.com/elastic/ecctl/commit/c56296c[c56296c] build(deps): bump github.com/go-openapi/strfmt from 0.19.3 to 0.19.4 (https://github.com/elastic/ecctl/pull/84[#84])
+https://github.com/elastic/ecctl/commit/e642e41[e642e41] cmd: Add --track flag to deployment commands (https://github.com/elastic/ecctl/pull/80[#80])
+https://github.com/elastic/ecctl/commit/c66d3bf[c66d3bf] cmd: Migrate apm create to deployments API (https://github.com/elastic/ecctl/pull/79[#79])
+https://github.com/elastic/ecctl/commit/bd75994[bd75994] Support vacate override failsafe (https://github.com/elastic/ecctl/pull/82[#82])
+https://github.com/elastic/ecctl/commit/73c0fac[73c0fac] cmd: Add deployment resource upgrade command (https://github.com/elastic/ecctl/pull/76[#76])
+https://github.com/elastic/ecctl/commit/d1409c8[d1409c8] build(deps): bump github.com/spf13/viper from 1.5.0 to 1.6.1 (https://github.com/elastic/ecctl/pull/75[#75])
+https://github.com/elastic/ecctl/commit/aaa5d87[aaa5d87] cmd: Migrate kibana create to deployments API (https://github.com/elastic/ecctl/pull/71[#71])
+https://github.com/elastic/ecctl/commit/88c7938[88c7938] cmd: Add deployment plan cancel (https://github.com/elastic/ecctl/pull/72[#72])
+https://github.com/elastic/ecctl/commit/520dbf8[520dbf8] docs: Remove tap pin step from brew instructions (https://github.com/elastic/ecctl/pull/70[#70])
+https://github.com/elastic/ecctl/commit/ea03569[ea03569] cmd: Move elasticsearch create to deployment API (https://github.com/elastic/ecctl/pull/67[#67])
+https://github.com/elastic/ecctl/commit/ce9bbdd[ce9bbdd] Remove ErrCatchTransport from default http client (https://github.com/elastic/ecctl/pull/66[#66])
+https://github.com/elastic/ecctl/commit/a318a5f[a318a5f] cmd: Fix init command on unexisting .ecctl folder (https://github.com/elastic/ecctl/pull/64[#64])
+https://github.com/elastic/ecctl/commit/8dcfa6e[8dcfa6e] deployment: Fix show resource type command (https://github.com/elastic/ecctl/pull/57[#57])
+https://github.com/elastic/ecctl/commit/841ddef[841ddef] elasticsearch: Add keystore management commands (https://github.com/elastic/ecctl/pull/58[#58])
+https://github.com/elastic/ecctl/commit/72fc278[72fc278] http: Add api.DefaultTransport in http.Client (https://github.com/elastic/ecctl/pull/59[#59])
+https://github.com/elastic/ecctl/commit/21176cd[21176cd] deployment: Add update command (https://github.com/elastic/ecctl/pull/55[#55])
+https://github.com/elastic/ecctl/commit/143ffe5[143ffe5] init: Remove mentions of ESS in config bootstrap (https://github.com/elastic/ecctl/pull/54[#54])
+https://github.com/elastic/ecctl/commit/c0ae026[c0ae026] docs: Remove region mentions (https://github.com/elastic/ecctl/pull/50[#50])
+https://github.com/elastic/ecctl/commit/7d63ff8[7d63ff8] version: Extend output to include ECE API Version (https://github.com/elastic/ecctl/pull/53[#53])
+https://github.com/elastic/ecctl/commit/8d72808[8d72808] init: Ensure homepath is created (https://github.com/elastic/ecctl/pull/51[#51])
+https://github.com/elastic/ecctl/commit/a4eb0ac[a4eb0ac] docs: Change the term Kibana Cluster to instance (https://github.com/elastic/ecctl/pull/49[#49])
+https://github.com/elastic/ecctl/commit/78dd825[78dd825] go.mod: Update cloud-sdk-go to version v1.0.0-bc4 (https://github.com/elastic/ecctl/pull/48[#48])
+https://github.com/elastic/ecctl/commit/7ba34cc[7ba34cc] remove plural aliases and update docs (https://github.com/elastic/ecctl/pull/47[#47])
+https://github.com/elastic/ecctl/commit/d05811e[d05811e] init: Skips TLS validation on API calls (https://github.com/elastic/ecctl/pull/39[#39])
+https://github.com/elastic/ecctl/commit/1bd7726[1bd7726] deployment: Add restore command (https://github.com/elastic/ecctl/pull/38[#38])
+https://github.com/elastic/ecctl/commit/b32c889[b32c889] deployment: Add create command (https://github.com/elastic/ecctl/pull/36[#36])
+https://github.com/elastic/ecctl/commit/f1c5258[f1c5258] deployment: Add delete command (https://github.com/elastic/ecctl/pull/35[#35])
+https://github.com/elastic/ecctl/commit/912f410[912f410] build(deps): bump github.com/spf13/viper from 1.4.0 to 1.5.0 (https://github.com/elastic/ecctl/pull/24[#24])
+https://github.com/elastic/ecctl/commit/93444fd[93444fd] build(deps): bump github.com/go-openapi/runtime from 0.19.7 to 0.19.8 (https://github.com/elastic/ecctl/pull/33[#33])
+https://github.com/elastic/ecctl/commit/fb7681b[fb7681b] deployment: Add search command (https://github.com/elastic/ecctl/pull/34[#34])
+https://github.com/elastic/ecctl/commit/ee092c6[ee092c6] deployment: Add shutdown command (https://github.com/elastic/ecctl/pull/32[#32])
+https://github.com/elastic/ecctl/commit/a01959c[a01959c] deployment: Add list command (https://github.com/elastic/ecctl/pull/30[#30])
+https://github.com/elastic/ecctl/commit/df2d729[df2d729] Add CONTIBUTING note about GitHub Actions in Forks (https://github.com/elastic/ecctl/pull/29[#29])
+https://github.com/elastic/ecctl/commit/eade2fb[eade2fb] Bump Go version to 1.13 (https://github.com/elastic/ecctl/pull/31[#31])
+https://github.com/elastic/ecctl/commit/3a3c81f[3a3c81f] Beta doc updates (https://github.com/elastic/ecctl/pull/23[#23])
+https://github.com/elastic/ecctl/commit/d994fa4[d994fa4] Improve user documentation (https://github.com/elastic/ecctl/pull/22[#22])
+https://github.com/elastic/ecctl/commit/7d10b3e[7d10b3e] trivial: fixes various typos (https://github.com/elastic/ecctl/pull/19[#19])
+https://github.com/elastic/ecctl/commit/ad77c57[ad77c57] trivial: bump golanci version to 1.21 (https://github.com/elastic/ecctl/pull/20[#20])
+https://github.com/elastic/ecctl/commit/ddafa35[ddafa35] ci: run go build action in PRs (https://github.com/elastic/ecctl/pull/21[#21])
+https://github.com/elastic/ecctl/commit/3b1b1ef[3b1b1ef] Convert the ecctl docs to Asciidoctor (https://github.com/elastic/ecctl/pull/7[#7])
+https://github.com/elastic/ecctl/commit/0472113[0472113] ci: remove uneccesary gh info (https://github.com/elastic/ecctl/pull/16[#16])
+
+_Release date: January 9, 2020_

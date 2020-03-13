@@ -51,7 +51,7 @@ endif
 
 ## Generates a changelog file in notes/$(VERSION) for the next release.
 changelog:
-	@ echo "-> Generating $(BINARY) changelog v$(VERSION)..."
+	@ echo "-> Generating $(BINARY) changelog $(VERSION)..."
 	@ ./scripts/generate-changelog.sh
 
 ## Generates a snapshot of the potential release
