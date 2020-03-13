@@ -62,7 +62,7 @@ func TestList(t *testing.T) {
 			want: &models.ConstructorOverview{
 				Constructors: []*models.ConstructorInfo{
 					{
-						ConstructorID: "192.168.44.10",
+						ConstructorID: ec.String("192.168.44.10"),
 						Status: &models.ConstructorHealthStatus{
 							Connected:       ec.Bool(true),
 							MaintenanceMode: ec.Bool(false),
@@ -136,7 +136,7 @@ func TestGet(t *testing.T) {
 				},
 			},
 			want: &models.ConstructorInfo{
-				ConstructorID: "192.168.44.10",
+				ConstructorID: ec.String("192.168.44.10"),
 				Status: &models.ConstructorHealthStatus{
 					Connected:       ec.Bool(true),
 					MaintenanceMode: ec.Bool(false),

@@ -151,7 +151,7 @@ func TestGet(t *testing.T) {
 					Healthy: ec.Bool(true),
 				},
 				Region: "us-east-1",
-				Status: "started",
+				Status: ec.String("started"),
 				Topology: &models.ClusterTopologyInfo{
 					Healthy: ec.Bool(true),
 					Instances: []*models.ClusterInstanceInfo{
@@ -160,9 +160,9 @@ func TestGet(t *testing.T) {
 							ContainerStarted: ec.Bool(true),
 							Healthy:          ec.Bool(true),
 							InstanceConfiguration: &models.ClusterInstanceConfigurationInfo{
-								ID:       "aws.kibana.r4",
-								Name:     "aws.kibana.r4",
-								Resource: "memory",
+								ID:       ec.String("aws.kibana.r4"),
+								Name:     ec.String("aws.kibana.r4"),
+								Resource: ec.String("memory"),
 							},
 							InstanceName:    ec.String("instance-0000000002"),
 							MaintenanceMode: ec.Bool(false),
@@ -243,14 +243,14 @@ func TestList(t *testing.T) {
 								ElasticsearchCluster: &models.TargetElasticsearchCluster{
 									ElasticsearchID: ec.String("d324608c97154bdba2dff97511d40368"),
 								},
-								Status: "started",
+								Status: ec.String("started"),
 							},
 							{
 								ClusterID: ec.String("d324608c97154bdba2dff97511d40368"),
 								ElasticsearchCluster: &models.TargetElasticsearchCluster{
 									ElasticsearchID: ec.String("86d2ec6217774eedb93ba38483141997"),
 								},
-								Status: "stopped",
+								Status: ec.String("stopped"),
 							},
 						},
 					}),
@@ -264,14 +264,14 @@ func TestList(t *testing.T) {
 						ElasticsearchCluster: &models.TargetElasticsearchCluster{
 							ElasticsearchID: ec.String("d324608c97154bdba2dff97511d40368"),
 						},
-						Status: "started",
+						Status: ec.String("started"),
 					},
 					{
 						ClusterID: ec.String("d324608c97154bdba2dff97511d40368"),
 						ElasticsearchCluster: &models.TargetElasticsearchCluster{
 							ElasticsearchID: ec.String("86d2ec6217774eedb93ba38483141997"),
 						},
-						Status: "stopped",
+						Status: ec.String("stopped"),
 					},
 				},
 			},

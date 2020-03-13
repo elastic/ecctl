@@ -92,7 +92,7 @@ func TestList(t *testing.T) {
 				API: api.NewMock(mock.Response{Error: errors.New("error")}),
 			},
 			wantErr: true,
-			error:   "Get https://mock-host/mock-path/platform/configuration/templates/deployments?show_hidden=false&show_instance_configurations=false: error",
+			error:   `Get "https://mock-host/mock-path/platform/configuration/templates/deployments?format=cluster&show_hidden=false&show_instance_configurations=false": error`,
 		},
 		{
 			name:    "Platform deployment templates fails with an empty API",
@@ -232,7 +232,7 @@ func TestGet(t *testing.T) {
 				},
 			},
 			wantErr: true,
-			error:   "Get https://mock-host/mock-path/platform/configuration/templates/deployments/84e0bd6d69bb44e294809d89cea88a7e?show_instance_configurations=false: error",
+			error:   `Get "https://mock-host/mock-path/platform/configuration/templates/deployments/84e0bd6d69bb44e294809d89cea88a7e?format=cluster&show_instance_configurations=false": error`,
 		},
 		{
 			name: "Platform deployment template show fails with an empty API reference",
@@ -309,7 +309,7 @@ func TestDelete(t *testing.T) {
 				},
 			},
 			wantErr: true,
-			error:   "Delete https://mock-host/mock-path/platform/configuration/templates/deployments/84e0bd6d69bb44e294809d89cea88a7e: error",
+			error:   `Delete "https://mock-host/mock-path/platform/configuration/templates/deployments/84e0bd6d69bb44e294809d89cea88a7e": error`,
 		},
 		{
 			name: "Platform deployment template delete fails with an empty API reference",
@@ -391,7 +391,7 @@ func TestCreate(t *testing.T) {
 				API:                    api.NewMock(mock.Response{Error: errors.New("error")}),
 			},
 			wantErr: true,
-			error:   "Post https://mock-host/mock-path/platform/configuration/templates/deployments: error",
+			error:   `Post "https://mock-host/mock-path/platform/configuration/templates/deployments": error`,
 		},
 		{
 			name: "Platform deployment template create fails with an empty API reference",
@@ -474,7 +474,7 @@ func TestUpdate(t *testing.T) {
 				},
 			},
 			wantErr: true,
-			error:   "Put https://mock-host/mock-path/platform/configuration/templates/deployments/84e0bd6d69bb44e294809d89cea88a7e?create_only=false: error",
+			error:   `Put "https://mock-host/mock-path/platform/configuration/templates/deployments/84e0bd6d69bb44e294809d89cea88a7e?create_only=false": error`,
 		},
 		{
 			name: "Platform deployment template update fails with an empty API reference",

@@ -47,7 +47,7 @@ func Delete(params DeploymentParams) error {
 		return err
 	}
 
-	if res.Status != stoppedState {
+	if *res.Status != stoppedState {
 		return errors.New("kibana delete: deployment must be stopped")
 	}
 

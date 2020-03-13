@@ -51,7 +51,7 @@ var startKibanaCmd = &cobra.Command{
 			return err
 		}
 
-		if c.Status == "started" {
+		if *c.Status == "started" {
 			return fmt.Errorf("cluster [%s][Kibana]: is already started", args[0])
 		}
 

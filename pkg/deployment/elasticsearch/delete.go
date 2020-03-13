@@ -48,7 +48,7 @@ func DeleteCluster(params DeleteClusterParams) error {
 
 	// Even though the cluster state can change in between querying the state
 	// and performing the shutdown, it's not that relevant and thus accepted.
-	if res.Status != stoppedState {
+	if *res.Status != stoppedState {
 		return errors.New("elasticsearch delete: deployment must be stopped")
 	}
 

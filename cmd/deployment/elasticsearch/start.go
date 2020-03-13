@@ -45,7 +45,7 @@ var startElasticsearchCmd = &cobra.Command{
 			return err
 		}
 
-		if c.Status == "started" {
+		if *c.Status == "started" {
 			return fmt.Errorf("cluster [%s][Elasticsearch]: is already started", args[0])
 		}
 

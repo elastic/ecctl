@@ -210,7 +210,7 @@ func TestCancelPlan(t *testing.T) {
 				ID: "d324608c97154bdba2dff97511d40368",
 				API: api.NewMock(mock.Response{Response: http.Response{
 					Body: mock.NewStructBody(models.ApmInfo{
-						Status: "success",
+						Status: ec.String("success"),
 					}),
 					StatusCode: 200,
 				}}),
@@ -240,7 +240,7 @@ func TestCancelPlan(t *testing.T) {
 				ID: "d324608c97154bdba2dff97511d40368",
 				API: api.NewMock(util.AppendTrackResponses(mock.Response{Response: http.Response{
 					Body: mock.NewStructBody(models.ApmInfo{
-						Status: "success",
+						Status: ec.String("success"),
 					}),
 					StatusCode: 200,
 				}})...),
@@ -363,7 +363,7 @@ func TestReapplyLatestPlanAttempt(t *testing.T) {
 			},
 			want: &models.ApmCrudResponse{
 				ApmID:       "181a0cc28c9143b5a0bda51cd65676b3",
-				SecretToken: "wPYRlBJauhJGEZU6Ug",
+				SecretToken: ec.String("wPYRlBJauhJGEZU6Ug"),
 			},
 		},
 	}

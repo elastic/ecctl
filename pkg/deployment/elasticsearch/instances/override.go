@@ -184,8 +184,8 @@ func GetSizeFromTopology(topology *models.ElasticsearchClusterTopologyElement) (
 func NewOverrideRequest(instances []*models.ClusterInstanceInfo, size TopologySize, newValue int32, filter []string) OverrideRequest {
 	var override = OverrideRequest{Capacity: newValue}
 	for _, instance := range instances {
-		legacyMatches := instance.InstanceConfiguration.Name == size.ID
-		instanceConfigMatches := instance.InstanceConfiguration.ID == size.ID
+		legacyMatches := *instance.InstanceConfiguration.Name == size.ID
+		instanceConfigMatches := *instance.InstanceConfiguration.ID == size.ID
 		if legacyMatches || instanceConfigMatches {
 			if slice.HasString(filter, *instance.InstanceName) {
 				override.Instances = append(override.Instances, *instance.InstanceName)
