@@ -339,7 +339,6 @@ func TestGetResource(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := GetResource(tt.args.params)
 			if !reflect.DeepEqual(err, tt.err) {
-
 				t.Errorf("GetResource() error = %v, wantErr %v", err, tt.err)
 				return
 			}
