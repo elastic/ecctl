@@ -51,7 +51,7 @@ https://download.elastic.co/downloads/ecctl/1.0.0-beta2/ecctl_1.0.0-beta2_linux_
 
 * *Improved documentation*. We now include the full {p} command reference with our official documentation. We also added auto-completion instructions to the docs.
 
-* *Added an `--all` flag for all `resync` commands*. Allowing to trigger a resync not only for a specific id but for all of the indexed records.
+* *Added an `--all` flag for all `resync` commands*. This flag triggers a resync not only for a specific ID but for all of the indexed records.
 
 * *Changes the default polling period for the `platform allocator vacate` operation*. Defaults to 10s instead of 1s. This change should reduce the computational impact that the `allocator vacate` operation has in both the machine running the command and the target environment where the vacate is being run.
 
