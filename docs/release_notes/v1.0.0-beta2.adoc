@@ -38,7 +38,7 @@ https://download.elastic.co/downloads/ecctl/1.0.0-beta2/ecctl_1.0.0-beta2_linux_
 `ecctl deployment appsearch shutdown`:: Shuts down an AppSearch deployment.
 `ecctl deployment appsearch upgrade`:: Upgrades an AppSearch deployment to the Elasticsearch deployment version.
 
-* We also added a few subcommands to the platform runner command:
+* We also added a few subcommands to the `platform runner` command:
 +
 
 `ecctl platform runner list`::  Lists the existing platform runners
