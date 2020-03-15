@@ -47,7 +47,7 @@ https://download.elastic.co/downloads/ecctl/1.0.0-beta2/ecctl_1.0.0-beta2_linux_
 `ecctl platform runner show`:: Shows information about the specified runner
 --
 
-* *--kind flag autocompletion*`. Commands which have a `--kind` flag, now have shell autocompletion for the allowed kinds for the command.
+* *`--kind` flag autocompletion*`. Commands which support the `--kind` flag now provide shell autocompletion for the allowed kinds for the command.
 
 * *Improved documentation*. We now include the full {p} command reference with our official documentation. We also added auto-completion instructions to the docs.
 
