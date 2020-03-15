@@ -30,7 +30,7 @@ https://download.elastic.co/downloads/ecctl/1.0.0-beta2/ecctl_1.0.0-beta2_linux_
 * *New Commands*. We added a number of new commands to implement API functionality:
 +
 --
-* Deployment appsearch commands:
+* New `deployment appsearch` commands:
 
 `ecctl deployment appsearch create`:: Creates an AppSearch instance.
 `ecctl deployment appsearch delete`:: Deletes a previously shut down AppSearch deployment resource.
