@@ -25,7 +25,7 @@ https://download.elastic.co/downloads/ecctl/1.0.0-beta2/ecctl_1.0.0-beta2_linux_
 [id="{p}-release-notes-v1.0.0-beta2-whats-new"]
 ==== What's new
 
-* *AppSearch instances included in default vacate operation* .App Search instances will now be moved with the default `platform allocator vacate` command. Although App Search workloads were supported in the previous release, support for vacating said instances was missed.
+* *AppSearch instances included in default vacate operations*. App Search instances are now moved with the default `platform allocator vacate` command. Although App Search workloads were supported in the previous release, support for vacating these instances was not included.
 
 * *New Commands*. We added a number of new commands to implement API functionality:
 +
