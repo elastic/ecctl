@@ -55,7 +55,7 @@ https://download.elastic.co/downloads/ecctl/1.0.0-beta2/ecctl_1.0.0-beta2_linux_
 
 * *Changed the default polling period for the `platform allocator vacate` operation*. The polling period now defaults to 10s instead of 1s. This change should reduce the computational impact that the `allocator vacate` operation has on both the machine running the command and the target environment where the vacate is being run.
 
-* *Adds --max-poll-retries and --poll-frequency flags to `platform allocator vacate`*. Allowing users to configure these settings if needed.
+* *Adds a couple of flags to modify the behavior of the `platform allocator vacate` plan poller. This is used to monitor a deployment's change via the pending plan. The `max-poll-retries` flag modifies the amount of API failures to tolerate (e.g. a 404 error due to a pending plan that has finished or there have been some network errors). The `--poll-frequency` flag controls how often the pending plan is obtained and then streamed to the user's terminal output.
 
 * *Added a `--plan-history` flag to the `deployment show` command*. This flag lets you obtain the deployment plan history for a specific deployment.
 
