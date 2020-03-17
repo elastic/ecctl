@@ -8,6 +8,8 @@ fi
 git fetch
 PREV_TAG=$(git tag -l | tail -1)
 CHANGELOGFILE=notes/${VERSION}.md
+ADOC_CHANGELOG=docs/release_notes/${VERSION}.adoc
+ADOC_CHANGELOG_HISTORY=docs/ecctl-release-notes.asciidoc
 
 if [[ -z ${PREV_TAG} ]]; then echo "-> Exiting changelog generation since there's no previous tag"; exit 0; fi
 
@@ -16,16 +18,25 @@ read -p "=> Previous release was ${PREV_TAG}, is that correct? " -n 1 -r
 
 if [[ ${REPLY} =~ ^[Yy]$ ]]; then
     echo ""
-    cp scripts/changelog.tpl.md ${CHANGELOGFILE}
-    git -c log.showSignature=false log --pretty="* %h %s" --no-decorate --no-color tags/${PREV_TAG}...master >> ${CHANGELOGFILE}
+    sed "s/VERSION_REPLACE/$(echo ${VERSION}| sed 's/^v//')/g" scripts/changelog.tpl.md > ${CHANGELOGFILE}
+    sed "s/VERSION_REPLACE/$(echo ${VERSION}| sed 's/^v//')/g" scripts/changelog.tpl.adoc > ${ADOC_CHANGELOG}
     
+    git -c log.showSignature=false log --pretty="https://github.com/elastic/ecctl/commit/%h[%h] %s" --no-decorate --no-color tags/${PREV_TAG}..master |\
+    sed 's|#\(.*\))|https://github.com/elastic/ecctl/pull/\1\[\#\1\])|' >> ${ADOC_CHANGELOG}
+    date "+%n_Release date: %B %d, %Y_" >> ${ADOC_CHANGELOG}
+
+    sed "5i\\
+|* <<{p}-release-notes-${VERSION}>>" ${ADOC_CHANGELOG_HISTORY} | tr '|' '\n' > ${ADOC_CHANGELOG_HISTORY}.copy
+    echo "include::release_notes/${VERSION}.adoc[]" >> ${ADOC_CHANGELOG_HISTORY}.copy
+    mv ${ADOC_CHANGELOG_HISTORY}.copy ${ADOC_CHANGELOG_HISTORY}
+
     echo "=> Changelog generated."
     VISUAL="${VISUAL:-"${EDITOR:-vim}"}"
-    read -p "==> The changelog will be opened with ${VISUAL}, press enter to continue or specify your desired editor: " -r
+    read -p "==> The changelog (${ADOC_CHANGELOG}) will be opened with ${VISUAL}, press enter to continue or specify your desired editor: " -r
     if [[ ${REPLY} != "" ]]; then
         VISUAL=${REPLY}
     fi
-    "${VISUAL}" "${CHANGELOGFILE}"
+    "${VISUAL}" "${ADOC_CHANGELOG}"
 fi
 
 
