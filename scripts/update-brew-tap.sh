@@ -28,6 +28,6 @@ hub fork --no-remote
 hub remote add fork https://github.com/${GITHUB_USER}/homebrew-tap
 hub add Formula/ecctl.rb
 hub checkout -b f/update-ecctl-formula-to-${VERSION}
-hub commit -m "(TEST) Update ecctl version to ${VERSION}"
+hub commit -m "Update ecctl version to ${VERSION}"
 hub push fork f/update-ecctl-formula-to-${VERSION}
 hub pull-request -m "Update ecctl version to ${VERSION}" -m "Created through automation by update-brew-tap.sh"
