@@ -44,6 +44,32 @@ Updating Homebrew...
 
 NOTE: To get autocompletions working make sure to run `source <(ecctl generate completions)`. If you prefer to add to your shell interpreter configuration file run `echo "source <(ecctl generate completions)" >> ~/.bash_profile` or `echo "source <(ecctl generate completions)" >> ~/.zshrc`.
 
+[float]
+[id="{p}-upgrading-macos"]
+=== Upgrade on macOS
+
+To upgrade {p} via brew, it's very simple to do so:
+
+[source]
+----
+$ brew upgrade ecctl
+
+Updating Homebrew...
+==> Auto-updated Homebrew!
+Updated 1 tap (elastic/tap).
+No changes to formulae.
+==> Upgrading ecctl from elastic/tap
+...
+==> Caveats
+To get autocompletions working make sure to run "source <(ecctl generate completions)".
+If you prefer to add to your shell interpreter configuration file run, for bash or zsh respectively:
+* `echo "source <(ecctl generate completions)" >> ~/.bash_profile`
+* `echo "source <(ecctl generate completions)" >> ~/.zshrc`.
+==> Summary
+🍺  /usr/local/Cellar/ecctl/1.0.0-beta2: 5 files, 22.7MB, built in 21 seconds
+Removing: /usr/local/Cellar/ecctl/1.0.0-beta1... (5 files, 21.3MB)
+----
+
 ////
 [float]
 [id="{p}-installing-linux"]
