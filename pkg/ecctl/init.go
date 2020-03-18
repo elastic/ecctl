@@ -169,7 +169,7 @@ Please enter a choice: `
 
 	finalMsg = `
 You're all set! Here are some commands to try:
-  $ ecctl deployment elasticsearch list`[1:]
+  $ ecctl deployment list`[1:]
 
 	// Remove once we have an endpoint available to list regions.
 	essRegions = map[int]string{
