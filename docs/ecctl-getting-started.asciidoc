@@ -44,6 +44,18 @@ Updating Homebrew...
 
 NOTE: To get autocompletions working make sure to run `source <(ecctl generate completions)`. If you prefer to add to your shell interpreter configuration file run `echo "source <(ecctl generate completions)" >> ~/.bash_profile` or `echo "source <(ecctl generate completions)" >> ~/.zshrc`.
 
+[float]
+[id="{p}-upgrading-macos"]
+=== Upgrade on macOS
+
+To upgrade {p} via brew:
+
+[source]
+----
+$ brew upgrade ecctl
+
+----
+
 ////
 [float]
 [id="{p}-installing-linux"]
