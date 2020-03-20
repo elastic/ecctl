@@ -30,7 +30,7 @@ import (
 type NewStateless struct {
 	*api.API
 
-	// Required: DeploymentID.
+	// Optional DeploymentID.
 	DeploymentID string
 
 	// Required region name.
@@ -65,7 +65,7 @@ func (params *NewStateless) Validate() error {
 		merr = multierror.Append(merr, util.ErrAPIReq)
 	}
 
-	if len(params.DeploymentID) != 32 {
+	if params.DeploymentID != "" && len(params.DeploymentID) != 32 {
 		merr = multierror.Append(merr, util.ErrDeploymentID)
 	}
 
