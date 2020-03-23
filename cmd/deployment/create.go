@@ -79,82 +79,33 @@ var createCmd = &cobra.Command{
 		}
 
 		if payload == nil {
-			esPayload, err := depresource.ParseElasticsearchInput(depresource.ParseElasticsearchInputParams{
-				NewElasticsearchParams: depresource.NewElasticsearchParams{
-					API:        ecctl.Get().API,
-					RefID:      esRefID,
-					Version:    version,
-					Plugins:    plugin,
-					Region:     region,
-					TemplateID: dt,
-				},
-				Size:             size,
-				ZoneCount:        zoneCount,
-				Writer:           ecctl.Get().Config.ErrorDevice,
-				TopologyElements: te,
+			var err error
+			payload, err = depresource.New(depresource.NewParams{
+				API:                    ecctl.Get().API,
+				Name:                   name,
+				DeploymentTemplateID:   dt,
+				Version:                version,
+				Region:                 region,
+				ElasticsearchRefID:     esRefID,
+				KibanaRefID:            kibanaRefID,
+				ApmRefID:               apmRefID,
+				AppsearchRefID:         appsearchRefID,
+				ElasticsearchSize:      size,
+				ElasticsearchZoneCount: zoneCount,
+				Writer:                 ecctl.Get().Config.ErrorDevice,
+				Plugins:                plugin,
+				TopologyElements:       te,
+				KibanaSize:             kibanaSize,
+				KibanaZoneCount:        kibanaZoneCount,
+				ApmSize:                apmSize,
+				ApmZoneCount:           apmZoneCount,
+				AppsearchSize:          appsearchSize,
+				AppsearchZoneCount:     appsearchZoneCount,
+				ApmEnable:              apmEnable,
+				AppsearchEnable:        appsearchEnable,
 			})
 			if err != nil {
 				return err
-			}
-
-			kibanaPayload, err := depresource.NewKibana(depresource.NewStateless{
-				ElasticsearchRefID: esRefID,
-				API:                ecctl.Get().API,
-				RefID:              kibanaRefID,
-				Version:            version,
-				Region:             region,
-				TemplateID:         dt,
-				Size:               kibanaSize,
-				ZoneCount:          kibanaZoneCount,
-			})
-			if err != nil {
-				return err
-			}
-
-			resources := models.DeploymentCreateResources{
-				Elasticsearch: []*models.ElasticsearchPayload{esPayload},
-				Kibana:        []*models.KibanaPayload{kibanaPayload},
-			}
-
-			if apmEnable {
-				apmPayload, err := depresource.NewApm(depresource.NewStateless{
-					ElasticsearchRefID: esRefID,
-					API:                ecctl.Get().API,
-					RefID:              apmRefID,
-					Version:            version,
-					Region:             region,
-					TemplateID:         dt,
-					Size:               apmSize,
-					ZoneCount:          apmZoneCount,
-				})
-				if err != nil {
-					return err
-				}
-
-				resources.Apm = []*models.ApmPayload{apmPayload}
-			}
-
-			if appsearchEnable {
-				appsearchPayload, err := depresource.NewAppSearch(depresource.NewStateless{
-					ElasticsearchRefID: esRefID,
-					API:                ecctl.Get().API,
-					RefID:              appsearchRefID,
-					Version:            version,
-					Region:             region,
-					TemplateID:         dt,
-					Size:               appsearchSize,
-					ZoneCount:          appsearchZoneCount,
-				})
-				if err != nil {
-					return err
-				}
-
-				resources.Appsearch = []*models.AppSearchPayload{appsearchPayload}
-			}
-
-			payload = &models.DeploymentCreateRequest{
-				Name:      name,
-				Resources: &resources,
 			}
 		}
 
