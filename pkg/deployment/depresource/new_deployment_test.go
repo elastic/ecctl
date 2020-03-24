@@ -113,12 +113,12 @@ func TestNew(t *testing.T) {
 			args: args{params: NewParams{
 				Version: "7.6.1",
 				Region:  "ece-region",
-				ElasticsearchInstance: ResourceInstanceParams{
+				ElasticsearchInstance: InstanceParams{
 					RefID:     "main-elasticsearch",
 					Size:      1024,
 					ZoneCount: 1,
 				},
-				KibanaInstance: ResourceInstanceParams{
+				KibanaInstance: InstanceParams{
 					RefID:     "main-kibana",
 					Size:      1024,
 					ZoneCount: 1,
@@ -135,12 +135,12 @@ func TestNew(t *testing.T) {
 			args: args{params: NewParams{
 				Version: "7.6.1",
 				Region:  "ece-region",
-				ElasticsearchInstance: ResourceInstanceParams{
+				ElasticsearchInstance: InstanceParams{
 					RefID:     "main-elasticsearch",
 					Size:      1024,
 					ZoneCount: 1,
 				},
-				KibanaInstance: ResourceInstanceParams{
+				KibanaInstance: InstanceParams{
 					RefID:     "main-kibana",
 					Size:      1024,
 					ZoneCount: 1,
@@ -158,17 +158,17 @@ func TestNew(t *testing.T) {
 			args: args{params: NewParams{
 				Version: "7.6.1",
 				Region:  "ece-region",
-				ElasticsearchInstance: ResourceInstanceParams{
+				ElasticsearchInstance: InstanceParams{
 					RefID:     "main-elasticsearch",
 					Size:      1024,
 					ZoneCount: 1,
 				},
-				KibanaInstance: ResourceInstanceParams{
+				KibanaInstance: InstanceParams{
 					RefID:     "main-kibana",
 					Size:      1024,
 					ZoneCount: 1,
 				},
-				ApmInstance: ResourceInstanceParams{
+				ApmInstance: InstanceParams{
 					RefID:     "main-apm",
 					Size:      1024,
 					ZoneCount: 1,
@@ -188,17 +188,17 @@ func TestNew(t *testing.T) {
 			args: args{params: NewParams{
 				Version: "7.6.1",
 				Region:  "ece-region",
-				ElasticsearchInstance: ResourceInstanceParams{
+				ElasticsearchInstance: InstanceParams{
 					RefID:     "main-elasticsearch",
 					Size:      1024,
 					ZoneCount: 1,
 				},
-				KibanaInstance: ResourceInstanceParams{
+				KibanaInstance: InstanceParams{
 					RefID:     "main-kibana",
 					Size:      1024,
 					ZoneCount: 1,
 				},
-				AppsearchInstance: ResourceInstanceParams{
+				AppsearchInstance: InstanceParams{
 					RefID:     "main-appsearch",
 					Size:      1024,
 					ZoneCount: 1,
@@ -218,12 +218,12 @@ func TestNew(t *testing.T) {
 			args: args{params: NewParams{
 				Version: "7.6.1",
 				Region:  "ece-region",
-				ElasticsearchInstance: ResourceInstanceParams{
+				ElasticsearchInstance: InstanceParams{
 					RefID:     "main-elasticsearch",
 					Size:      1024,
 					ZoneCount: 1,
 				},
-				KibanaInstance: ResourceInstanceParams{
+				KibanaInstance: InstanceParams{
 					RefID:     "main-kibana",
 					Size:      1024,
 					ZoneCount: 1,
@@ -284,17 +284,17 @@ func TestNew(t *testing.T) {
 			args: args{params: NewParams{
 				Version: "7.6.1",
 				Region:  "ece-region",
-				ElasticsearchInstance: ResourceInstanceParams{
+				ElasticsearchInstance: InstanceParams{
 					RefID:     "main-elasticsearch",
 					Size:      1024,
 					ZoneCount: 1,
 				},
-				KibanaInstance: ResourceInstanceParams{
+				KibanaInstance: InstanceParams{
 					RefID:     "main-kibana",
 					Size:      1024,
 					ZoneCount: 1,
 				},
-				ApmInstance: ResourceInstanceParams{
+				ApmInstance: InstanceParams{
 					RefID:     "main-apm",
 					Size:      1024,
 					ZoneCount: 1,
@@ -376,17 +376,17 @@ func TestNew(t *testing.T) {
 			args: args{params: NewParams{
 				Version: "7.6.1",
 				Region:  "ece-region",
-				ElasticsearchInstance: ResourceInstanceParams{
+				ElasticsearchInstance: InstanceParams{
 					RefID:     "main-elasticsearch",
 					Size:      1024,
 					ZoneCount: 1,
 				},
-				KibanaInstance: ResourceInstanceParams{
+				KibanaInstance: InstanceParams{
 					RefID:     "main-kibana",
 					Size:      1024,
 					ZoneCount: 1,
 				},
-				AppsearchInstance: ResourceInstanceParams{
+				AppsearchInstance: InstanceParams{
 					RefID:     "main-appsearch",
 					Size:      1024,
 					ZoneCount: 1,

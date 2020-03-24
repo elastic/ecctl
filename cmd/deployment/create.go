@@ -81,28 +81,36 @@ var createCmd = &cobra.Command{
 		if payload == nil {
 			var err error
 			payload, err = depresource.New(depresource.NewParams{
-				API:                    ecctl.Get().API,
-				Name:                   name,
-				DeploymentTemplateID:   dt,
-				Version:                version,
-				Region:                 region,
-				ElasticsearchRefID:     esRefID,
-				KibanaRefID:            kibanaRefID,
-				ApmRefID:               apmRefID,
-				AppsearchRefID:         appsearchRefID,
-				ElasticsearchSize:      size,
-				ElasticsearchZoneCount: zoneCount,
-				Writer:                 ecctl.Get().Config.ErrorDevice,
-				Plugins:                plugin,
-				TopologyElements:       te,
-				KibanaSize:             kibanaSize,
-				KibanaZoneCount:        kibanaZoneCount,
-				ApmSize:                apmSize,
-				ApmZoneCount:           apmZoneCount,
-				AppsearchSize:          appsearchSize,
-				AppsearchZoneCount:     appsearchZoneCount,
-				ApmEnable:              apmEnable,
-				AppsearchEnable:        appsearchEnable,
+				API:                  ecctl.Get().API,
+				Name:                 name,
+				DeploymentTemplateID: dt,
+				Version:              version,
+				Region:               region,
+				Writer:               ecctl.Get().Config.ErrorDevice,
+				Plugins:              plugin,
+				TopologyElements:     te,
+				ApmEnable:            apmEnable,
+				AppsearchEnable:      appsearchEnable,
+				ElasticsearchInstance: depresource.InstanceParams{
+					RefID:     esRefID,
+					Size:      size,
+					ZoneCount: zoneCount,
+				},
+				KibanaInstance: depresource.InstanceParams{
+					RefID:     kibanaRefID,
+					Size:      kibanaSize,
+					ZoneCount: kibanaZoneCount,
+				},
+				ApmInstance: depresource.InstanceParams{
+					RefID:     apmRefID,
+					Size:      apmSize,
+					ZoneCount: apmZoneCount,
+				},
+				AppsearchInstance: depresource.InstanceParams{
+					RefID:     appsearchRefID,
+					Size:      appsearchSize,
+					ZoneCount: appsearchZoneCount,
+				},
 			})
 			if err != nil {
 				return err

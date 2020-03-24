@@ -24,8 +24,8 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 )
 
-// ResourceInstanceParams holds the common instance fields
-type ResourceInstanceParams struct {
+// InstanceParams holds the common instance fields for a resource
+type InstanceParams struct {
 	Size      int32
 	ZoneCount int32
 	RefID     string
@@ -44,10 +44,10 @@ type NewParams struct {
 	Writer                io.Writer
 	Plugins               []string
 	TopologyElements      []string
-	ElasticsearchInstance ResourceInstanceParams
-	KibanaInstance        ResourceInstanceParams
-	ApmInstance           ResourceInstanceParams
-	AppsearchInstance     ResourceInstanceParams
+	ElasticsearchInstance InstanceParams
+	KibanaInstance        InstanceParams
+	ApmInstance           InstanceParams
+	AppsearchInstance     InstanceParams
 }
 
 // New creates the payload for a deployment
