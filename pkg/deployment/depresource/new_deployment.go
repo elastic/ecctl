@@ -24,31 +24,30 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 )
 
+// ResourceInstanceParams holds the common instance fields
+type ResourceInstanceParams struct {
+	Size      int32
+	ZoneCount int32
+	RefID     string
+}
+
 // NewParams is consumed by New()
 type NewParams struct {
 	*api.API
 
-	Name                   string
-	Version                string
-	DeploymentTemplateID   string
-	Region                 string
-	ElasticsearchRefID     string
-	KibanaRefID            string
-	ApmRefID               string
-	AppsearchRefID         string
-	ElasticsearchSize      int32
-	ElasticsearchZoneCount int32
-	KibanaSize             int32
-	KibanaZoneCount        int32
-	ApmSize                int32
-	ApmZoneCount           int32
-	AppsearchSize          int32
-	AppsearchZoneCount     int32
-	ApmEnable              bool
-	AppsearchEnable        bool
-	Writer                 io.Writer
-	Plugins                []string
-	TopologyElements       []string
+	Name                  string
+	Version               string
+	DeploymentTemplateID  string
+	Region                string
+	ApmEnable             bool
+	AppsearchEnable       bool
+	Writer                io.Writer
+	Plugins               []string
+	TopologyElements      []string
+	ElasticsearchInstance ResourceInstanceParams
+	KibanaInstance        ResourceInstanceParams
+	ApmInstance           ResourceInstanceParams
+	AppsearchInstance     ResourceInstanceParams
 }
 
 // New creates the payload for a deployment
@@ -56,14 +55,14 @@ func New(params NewParams) (*models.DeploymentCreateRequest, error) {
 	esPayload, err := ParseElasticsearchInput(ParseElasticsearchInputParams{
 		NewElasticsearchParams: NewElasticsearchParams{
 			API:        params.API,
-			RefID:      params.ElasticsearchRefID,
+			RefID:      params.ElasticsearchInstance.RefID,
 			Version:    params.Version,
 			Plugins:    params.Plugins,
 			Region:     params.Region,
 			TemplateID: params.DeploymentTemplateID,
 		},
-		Size:             params.ElasticsearchSize,
-		ZoneCount:        params.ElasticsearchZoneCount,
+		Size:             params.ElasticsearchInstance.Size,
+		ZoneCount:        params.ElasticsearchInstance.ZoneCount,
 		Writer:           params.Writer,
 		TopologyElements: params.TopologyElements,
 	})
@@ -72,14 +71,14 @@ func New(params NewParams) (*models.DeploymentCreateRequest, error) {
 	}
 
 	kibanaPayload, err := NewKibana(NewStateless{
-		ElasticsearchRefID: params.ElasticsearchRefID,
+		ElasticsearchRefID: params.ElasticsearchInstance.RefID,
 		API:                params.API,
-		RefID:              params.KibanaRefID,
+		RefID:              params.KibanaInstance.RefID,
 		Version:            params.Version,
 		Region:             params.Region,
 		TemplateID:         params.DeploymentTemplateID,
-		Size:               params.KibanaSize,
-		ZoneCount:          params.KibanaZoneCount,
+		Size:               params.KibanaInstance.Size,
+		ZoneCount:          params.KibanaInstance.ZoneCount,
 	})
 	if err != nil {
 		return nil, err
@@ -92,14 +91,14 @@ func New(params NewParams) (*models.DeploymentCreateRequest, error) {
 
 	if params.ApmEnable {
 		apmPayload, err := NewApm(NewStateless{
-			ElasticsearchRefID: params.ElasticsearchRefID,
+			ElasticsearchRefID: params.ElasticsearchInstance.RefID,
 			API:                params.API,
-			RefID:              params.ApmRefID,
+			RefID:              params.ApmInstance.RefID,
 			Version:            params.Version,
 			Region:             params.Region,
 			TemplateID:         params.DeploymentTemplateID,
-			Size:               params.ApmSize,
-			ZoneCount:          params.ApmZoneCount,
+			Size:               params.ApmInstance.Size,
+			ZoneCount:          params.ApmInstance.ZoneCount,
 		})
 		if err != nil {
 			return nil, err
@@ -110,14 +109,14 @@ func New(params NewParams) (*models.DeploymentCreateRequest, error) {
 
 	if params.AppsearchEnable {
 		appsearchPayload, err := NewAppSearch(NewStateless{
-			ElasticsearchRefID: params.ElasticsearchRefID,
+			ElasticsearchRefID: params.ElasticsearchInstance.RefID,
 			API:                params.API,
-			RefID:              params.AppsearchRefID,
+			RefID:              params.AppsearchInstance.RefID,
 			Version:            params.Version,
 			Region:             params.Region,
 			TemplateID:         params.DeploymentTemplateID,
-			Size:               params.AppsearchSize,
-			ZoneCount:          params.AppsearchZoneCount,
+			Size:               params.AppsearchInstance.Size,
+			ZoneCount:          params.AppsearchInstance.ZoneCount,
 		})
 		if err != nil {
 			return nil, err
@@ -126,10 +125,10 @@ func New(params NewParams) (*models.DeploymentCreateRequest, error) {
 		resources.Appsearch = []*models.AppSearchPayload{appsearchPayload}
 	}
 
-	payload := &models.DeploymentCreateRequest{
+	payload := models.DeploymentCreateRequest{
 		Name:      params.Name,
 		Resources: &resources,
 	}
 
-	return payload, nil
+	return &payload, nil
 }
