@@ -102,7 +102,7 @@ func TestNewApm(t *testing.T) {
 	}{
 		{
 			name: "fails due to parameter validation",
-			args: args{params: NewStateless{}},
+			args: args{params: NewStateless{DeploymentID: "invalidID"}},
 			err: &multierror.Error{Errors: []error{
 				util.ErrAPIReq,
 				util.ErrDeploymentID,

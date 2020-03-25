@@ -32,136 +32,108 @@ import (
 	"github.com/elastic/ecctl/pkg/util"
 )
 
-const createLong = `Creates a deployment from a file definition with an automatically generated idempotency token.
-On creation failure, please use the displayed idempotency token to retry the cluster creation with --request-id=<token>.
-To track the creation of the resources toggle the --track flag.
-
-Read more about the deployment definition in https://www.elastic.co/guide/en/cloud-enterprise/current/Deployment_-_CRUD.html`
-
-var createExample = `
-$ cat deployment_example.json
-{
-    "name": "my example cluster",
-    "resources": {
-        "apm": [
-            {
-                "display_name": "my apm instance",
-                "ref_id": "my-apm-instance",
-                "elasticsearch_cluster_ref_id": "my-es-cluster",
-                "plan": {
-                    "apm": {
-                        "version": "6.8.4"
-                    },
-                    "cluster_topology": [{
-                        "instance_configuration_id": "apm",
-                        "size": {
-                            "resource": "memory",
-                            "value": 512
-                        },
-                        "zone_count": 1
-                    }]
-                }
-            }
-        ],
-        "elasticsearch": [
-            {
-                "display_name": "my elasticsearch cluster",
-                "ref_id": "my-es-cluster",
-                "plan": {
-                    "deployment_template": {
-                        "id": "default"
-                    },
-                    "elasticsearch": {
-                        "version": "6.8.4"
-                    },
-                    "cluster_topology": [
-                        {
-                            "instance_configuration_id": "data.default",
-                            "memory_per_node": 1024,
-                            "node_count_per_zone": 1,
-                            "node_type": {
-                                "data": true,
-                                "ingest": true,
-                                "master": true,
-                                "ml": false
-                            },
-                            "zone_count": 1
-                        }
-                    ]
-                }
-            }
-        ],
-        "kibana": [
-            {
-                "display_name": "my kibana instance",
-                "ref_id": "my-kibana-instance",
-                "elasticsearch_cluster_ref_id": "my-es-cluster",
-                "plan": {
-                    "kibana": {
-                        "version": "6.8.4"
-                    },
-                    "cluster_topology": [
-                        {
-                            "instance_configuration_id": "kibana",
-                            "memory_per_node": 1024,
-                            "node_count_per_zone": 1,
-                            "zone_count": 1
-                        }
-                    ]
-                }
-            }
-        ]
-    }
-}
-$ ecctl deployment create -f deployment_example.json --version=7.4.1
-[...]
-
-## If the previous deployment creation failed
-$ ecctl deployment create -f deployment_example.json --name adeploy --version=7.4.1
-The deployment creation returned with an error, please use the displayed idempotency token
-to recreate the deployment resources
-Idempotency token: GMZPMRrcMYqHdmxjIQkHbdjnhPIeBElcwrHwzVlhGUSMXrEIzVXoBykSVRsKncNb
-unknown error (status 500)
-$ ecctl deployment create -f deployment_example.json --name adeploy --version=7.4.1 --request-id=GMZPMRrcMYqHdmxjIQkHbdjnhPIeBElcwrHwzVlhGUSMXrEIzVXoBykSVRsKncNb
-[...]`[1:]
-
 var createCmd = &cobra.Command{
-	Use:     `create -f <file definition.json>`,
-	Short:   "Creates a deployment from a file definition, allowing certain flag overrides",
+	Use:     "create {--file | --size <int> --zones <string> | --topology-element <obj>}",
+	Short:   "Creates a deployment",
+	PreRunE: cobra.MaximumNArgs(0),
 	Long:    createLong,
 	Example: createExample,
-	PreRunE: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		filename, _ := cmd.Flags().GetString("file")
-		var r models.DeploymentCreateRequest
-		if err := sdkcmdutil.DecodeFile(filename, &r); err != nil {
-			return err
-		}
+		var track, _ = cmd.Flags().GetBool("track")
+		var generatePayload, _ = cmd.Flags().GetBool("generate-payload")
+		var name, _ = cmd.Flags().GetString("name")
+		var version, _ = cmd.Flags().GetString("version")
+		var dt, _ = cmd.Flags().GetString("deployment-template")
 
-		var region = ecctl.Get().Config.Region
-		if ecctl.Get().Config.Region == "" {
+		var zoneCount, _ = cmd.Flags().GetInt32("zones")
+		var size, _ = cmd.Flags().GetInt32("size")
+		var esRefID, _ = cmd.Flags().GetString("ref-id")
+		var te, _ = cmd.Flags().GetStringArray("topology-element")
+		var plugin, _ = cmd.Flags().GetStringSlice("plugin")
+
+		var kibanaZoneCount, _ = cmd.Flags().GetInt32("kibana-zones")
+		var kibanaSize, _ = cmd.Flags().GetInt32("kibana-size")
+		var kibanaRefID, _ = cmd.Flags().GetString("kibana-ref-id")
+
+		var apmEnable, _ = cmd.Flags().GetBool("apm")
+		var apmZoneCount, _ = cmd.Flags().GetInt32("apm-zones")
+		var apmSize, _ = cmd.Flags().GetInt32("apm-size")
+		var apmRefID, _ = cmd.Flags().GetString("apm-ref-id")
+
+		var appsearchEnable, _ = cmd.Flags().GetBool("appsearch")
+		var appsearchZoneCount, _ = cmd.Flags().GetInt32("appsearch-zones")
+		var appsearchSize, _ = cmd.Flags().GetInt32("appsearch-size")
+		var appsearchRefID, _ = cmd.Flags().GetString("appsearch-ref-id")
+
+		region := ecctl.Get().Config.Region
+		if region == "" {
 			region = cmdutil.DefaultECERegion
 		}
 
-		name, _ := cmd.Flags().GetString("name")
-		version, _ := cmd.Flags().GetString("version")
+		var payload *models.DeploymentCreateRequest
+		if err := sdkcmdutil.FileOrStdin(cmd, "file"); err == nil {
+			err := sdkcmdutil.DecodeDefinition(cmd, "file", &payload)
+			if err != nil && err != sdkcmdutil.ErrNodefinitionLoaded {
+				return err
+			}
+		}
+
+		if payload == nil {
+			var err error
+			payload, err = depresource.New(depresource.NewParams{
+				API:                  ecctl.Get().API,
+				Name:                 name,
+				DeploymentTemplateID: dt,
+				Version:              version,
+				Region:               region,
+				Writer:               ecctl.Get().Config.ErrorDevice,
+				Plugins:              plugin,
+				TopologyElements:     te,
+				ApmEnable:            apmEnable,
+				AppsearchEnable:      appsearchEnable,
+				ElasticsearchInstance: depresource.InstanceParams{
+					RefID:     esRefID,
+					Size:      size,
+					ZoneCount: zoneCount,
+				},
+				KibanaInstance: depresource.InstanceParams{
+					RefID:     kibanaRefID,
+					Size:      kibanaSize,
+					ZoneCount: kibanaZoneCount,
+				},
+				ApmInstance: depresource.InstanceParams{
+					RefID:     apmRefID,
+					Size:      apmSize,
+					ZoneCount: apmZoneCount,
+				},
+				AppsearchInstance: depresource.InstanceParams{
+					RefID:     appsearchRefID,
+					Size:      appsearchSize,
+					ZoneCount: appsearchZoneCount,
+				},
+			})
+			if err != nil {
+				return err
+			}
+		}
+
+		// Returns the DeploymentCreateRequest skipping the creation of the resources.
+		if generatePayload {
+			return ecctl.Get().Formatter.Format("", payload)
+		}
 
 		reqID, _ := cmd.Flags().GetString("request-id")
 		if reqID == "" {
 			reqID = util.RandomString(64)
 		}
 
-		res, err := deployment.Create(deployment.CreateParams{
+		var createParams = deployment.CreateParams{
 			API:       ecctl.Get().API,
 			RequestID: reqID,
-			Request:   &r,
-			Overrides: &deployment.PayloadOverrides{
-				Name:    name,
-				Region:  region,
-				Version: version,
-			},
-		})
+			Request:   payload,
+		}
 
+		res, err := deployment.Create(createParams)
 		if err != nil {
 			fmt.Fprintln(os.Stderr,
 				"The deployment creation returned with an error, please use the displayed idempotency token to recreate the deployment resources",
@@ -170,27 +142,52 @@ var createCmd = &cobra.Command{
 			return err
 		}
 
-		var track, _ = cmd.Flags().GetBool("track")
-		return cmdutil.Track(cmdutil.TrackParams{
-			TrackResourcesParams: depresource.TrackResourcesParams{
-				API:          ecctl.Get().API,
-				Resources:    res.Resources,
-				OutputDevice: ecctl.Get().Config.OutputDevice,
-			},
-			Formatter: ecctl.Get().Formatter,
-			Track:     track,
-			Response:  res,
+		if err := ecctl.Get().Formatter.Format("", res); err != nil {
+			if !track {
+				return err
+			}
+			fmt.Fprintln(ecctl.Get().Config.OutputDevice, err)
+		}
+
+		if !track {
+			return nil
+		}
+
+		return depresource.TrackResources(depresource.TrackResourcesParams{
+			API:          ecctl.Get().API,
+			Resources:    res.Resources,
+			OutputDevice: ecctl.Get().Config.OutputDevice,
 		})
 	},
 }
 
 func init() {
 	Command.AddCommand(createCmd)
+	createCmd.Flags().StringP("file", "f", "", "DeploymentCreateRequest file definition. See help for more information")
+	createCmd.Flags().String("deployment-template", "default", "Deployment template ID on which to base the deployment from")
+	createCmd.Flags().String("version", "", "Version to use, if not specified, the latest available stack version will be used")
+	createCmd.Flags().String("name", "", "Optional name for the deployment")
 	createCmd.Flags().BoolP("track", "t", false, cmdutil.TrackFlagMessage)
-	createCmd.Flags().String("name", "", "Overrides the deployment name")
-	createCmd.Flags().String("version", "", "Overrides all the deployment's resources to the specified version")
+	createCmd.Flags().Bool("generate-payload", false, "Returns the deployment payload without actually creating the deployment resources")
 	createCmd.Flags().String("request-id", "", "Optional idempotency token - Can be found in the Stderr device when a previous deployment creation failed, for more information see the examples in the help command page")
-	createCmd.Flags().StringP("file", "f", "", "JSON file that contains JSON-style domain-specific deployment definition")
-	createCmd.MarkFlagRequired("file")
-	createCmd.MarkFlagFilename("file", "*.json")
+
+	createCmd.Flags().String("ref-id", "main-elasticsearch", "Optional RefId for the Elasticsearch deployment")
+	createCmd.Flags().Int32("zones", 1, "Number of zones the Elasticsearch instances will span")
+	createCmd.Flags().Int32("size", 4096, "Memory (RAM) in MB that each of the Elasticsearch instances will have")
+	createCmd.Flags().StringArrayP("topology-element", "e", nil, "Optional Elasticsearch topology element definition. See help for more information")
+	createCmd.Flags().StringSlice("plugin", nil, "Additional plugins to add to the Elasticsearch deployment")
+
+	createCmd.Flags().String("kibana-ref-id", "main-kibana", "Optional RefId for the Kibana deployment")
+	createCmd.Flags().Int32("kibana-zones", 1, "Number of zones the Kibana instances will span")
+	createCmd.Flags().Int32("kibana-size", 1024, "Memory (RAM) in MB that each of the Kibana instances will have")
+
+	createCmd.Flags().Bool("apm", false, "Enables APM for the deployment")
+	createCmd.Flags().String("apm-ref-id", "main-apm", "Optional RefId for the APM deployment")
+	createCmd.Flags().Int32("apm-zones", 1, "Number of zones the APM instances will span")
+	createCmd.Flags().Int32("apm-size", 512, "Memory (RAM) in MB that each of the APM instances will have")
+
+	createCmd.Flags().Bool("appsearch", false, "Enables AppSearch for the deployment")
+	createCmd.Flags().String("appsearch-ref-id", "main-appsearch", "Optional RefId for the AppSearch deployment")
+	createCmd.Flags().Int32("appsearch-zones", 1, "Number of zones the AppSearch instances will span")
+	createCmd.Flags().Int32("appsearch-size", 2048, "Memory (RAM) in MB that each of the AppSearch instances will have")
 }
