@@ -1,10 +1,10 @@
 ## ecctl deployment delete
 
-Deletes a previously stopped deployment from the platform
+Deletes a previously shutdown deployment (Available for ECE only)
 
 ### Synopsis
 
-Deletes a previously stopped deployment from the platform
+Deletes a previously shutdown deployment (Available for ECE only)
 
 ```
 ecctl deployment delete <deployment-id> [flags]
