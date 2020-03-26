@@ -1,10 +1,10 @@
 ## ecctl platform deployment-template
 
-Manages deployment templates
+Manages deployment templates (Available for ECE only)
 
 ### Synopsis
 
-Manages deployment templates
+Manages deployment templates (Available for ECE only)
 
 ```
 ecctl platform deployment-template [flags]

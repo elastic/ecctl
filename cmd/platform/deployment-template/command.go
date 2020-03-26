@@ -26,10 +26,11 @@ import (
 
 	"github.com/elastic/cloud-sdk-go/pkg/input"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 	"github.com/elastic/ecctl/pkg/platform/deployment"
 )
@@ -43,7 +44,7 @@ const (
 // Command represents the top level deployment-template command.
 var Command = &cobra.Command{
 	Use:     "deployment-template",
-	Short:   "Manages deployment templates",
+	Short:   cmdutil.AdminReqDescription("Manages deployment templates"),
 	PreRunE: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
@@ -122,7 +123,7 @@ var platformDeploymentTemplateCreateCmd = &cobra.Command{
 	Short:   "Creates a platform deployment template",
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if err := cmdutil.FileOrStdin(cmd, "file-template"); err != nil {
+		if err := sdkcmdutil.FileOrStdin(cmd, "file-template"); err != nil {
 			return err
 		}
 
@@ -155,7 +156,7 @@ var platformDeploymentTemplateUpdateCmd = &cobra.Command{
 	Short:   "Updates a platform deployment template",
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if err := cmdutil.FileOrStdin(cmd, "file-template"); err != nil {
+		if err := sdkcmdutil.FileOrStdin(cmd, "file-template"); err != nil {
 			return err
 		}
 		tc, err := parseTemplateFile(cmd.Flag("file-template").Value.String())
