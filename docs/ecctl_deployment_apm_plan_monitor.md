@@ -14,8 +14,8 @@ ecctl deployment apm plan monitor <cluster id> [flags]
 
 ```
   -h, --help                     help for monitor
-      --poll-interval duration   Monitor poll interval (default 2s)
-      --retries uint8            Number of times monitoring will be retried. Meaning it accepts an N number of API errors (default 3)
+      --poll-interval duration   Monitor poll interval (default 10s)
+      --retries uint8            Number of times monitoring will be retried. Meaning it accepts an N number of API errors (default 2)
 ```
 
 ### Options inherited from parent commands

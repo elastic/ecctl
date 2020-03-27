@@ -14,7 +14,7 @@ ecctl deployment kibana plan monitor <cluster id> [flags]
 
 ```
   -h, --help                     help for monitor
-      --poll-interval duration   Monitor poll interval (default 2s)
+      --poll-interval duration   Monitor poll interval (default 5s)
       --retries uint8            Number of times monitoring will be retried. Meaning it accepts an N number of API errors (default 3)
 ```
 
