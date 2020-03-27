@@ -26,10 +26,10 @@ import (
 
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	"github.com/elastic/cloud-sdk-go/pkg/output"
+	"github.com/elastic/cloud-sdk-go/pkg/plan/planutil"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/hashicorp/go-multierror"
 
-	"github.com/elastic/ecctl/pkg/deployment/depresource"
 	"github.com/elastic/ecctl/pkg/formatter"
 )
 
@@ -93,15 +93,16 @@ func TestTrack(t *testing.T) {
 			}, buf: secondOutputBuf},
 			wantOut: wantOutTokenValue,
 			err: &multierror.Error{Errors: []error{
-				errors.New("api reference is required for command"),
-				errors.New("resource track: output device cannot be nil"),
+				errors.New("plan track change: API cannot be nil"),
+				errors.New("plan track change: one of DeploymentID or ResourceID must be specified"),
+				errors.New("plan track change: Kind cannot be empty"),
 			}},
 		},
 		{
 			name: "prints the first error when track is set to true and also returns the formatter errors",
 			args: args{params: TrackParams{
-				TrackResourcesParams: depresource.TrackResourcesParams{
-					OutputDevice: output.NewDevice(thirdOutputBuf),
+				TrackChangeParams: planutil.TrackChangeParams{
+					Writer: output.NewDevice(thirdOutputBuf),
 				},
 				Track: true,
 				Formatter: formatter.NewText(&formatter.TextConfig{
@@ -113,7 +114,9 @@ func TestTrack(t *testing.T) {
 			}, buf: thirdOutputBuf},
 			wantOut: `template: no template "default" associated with template "text"` + "\n",
 			err: &multierror.Error{Errors: []error{
-				errors.New("api reference is required for command"),
+				errors.New("plan track change: API cannot be nil"),
+				errors.New("plan track change: one of DeploymentID or ResourceID must be specified"),
+				errors.New("plan track change: Kind cannot be empty"),
 			}},
 		},
 	}

@@ -20,7 +20,7 @@ package kibana
 import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/clusters_kibana"
-	"github.com/elastic/cloud-sdk-go/pkg/plan"
+	"github.com/elastic/cloud-sdk-go/pkg/plan/planutil"
 	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
@@ -61,14 +61,7 @@ func Stop(params StopParams) error {
 		return nil
 	}
 
-	return util.TrackCluster(util.TrackClusterParams{
-		Output: params.Output,
-		TrackParams: plan.TrackParams{
-			API:           params.API,
-			PollFrequency: params.PollFrequency,
-			MaxRetries:    params.MaxRetries,
-			ID:            params.ID,
-			Kind:          "kibana",
-		},
-	})
+	return planutil.TrackChange(util.SetClusterTracking(
+		params.TrackChangeParams, params.ID, util.Kibana,
+	))
 }

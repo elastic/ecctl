@@ -18,17 +18,13 @@
 package elasticsearch
 
 import (
-	"bytes"
 	"errors"
-	"net/http"
 	"reflect"
 	"testing"
-	"time"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	"github.com/elastic/cloud-sdk-go/pkg/output"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	multierror "github.com/hashicorp/go-multierror"
 
@@ -51,13 +47,11 @@ func TestReallocate(t *testing.T) {
 			}},
 			err: &multierror.Error{Errors: []error{
 				errors.New("cluster id should have a length of 32 characters"),
-				errors.New("output device cannot be nil"),
 			}},
 		},
 		{
 			name: "Fails obtaining the Elasticsearch instances",
 			args: args{params: ReallocateParams{
-				OutputDevice: output.NewDevice(new(bytes.Buffer)),
 				ClusterParams: util.ClusterParams{
 					ClusterID: util.ValidClusterID,
 					API:       api.NewMock(mock.New500Response(mock.NewStringBody(`{"error": "failed obtaining instances"}`))),
@@ -68,23 +62,19 @@ func TestReallocate(t *testing.T) {
 		{
 			name: "Fails performing the move operation",
 			args: args{params: ReallocateParams{
-				OutputDevice: output.NewDevice(new(bytes.Buffer)),
+				TrackChangeParams: util.NewMockTrackChangeParams(""),
 				ClusterParams: util.ClusterParams{
 					ClusterID: util.ValidClusterID,
-					API: api.NewMock(mock.Response{
-						Response: http.Response{
-							StatusCode: 200,
-							Body: mock.NewStructBody(models.ElasticsearchClusterInfo{
-								Topology: &models.ClusterTopologyInfo{
-									Instances: []*models.ClusterInstanceInfo{
-										{InstanceName: ec.String("instance-00000001")},
-									},
+					API: api.NewMock(
+						mock.New200StructResponse(models.ElasticsearchClusterInfo{
+							Topology: &models.ClusterTopologyInfo{
+								Instances: []*models.ClusterInstanceInfo{
+									{InstanceName: ec.String("instance-00000001")},
 								},
-							}),
-						},
-					}, mock.New500Response( // MOVE
-						mock.NewStringBody(`{"error": "failed moving instances"}`),
-					)),
+							},
+						}),
+						mock.New500Response(mock.NewStringBody(`{"error": "failed moving instances"}`)),
+					),
 				},
 			}},
 			err: errors.New(`{"error": "failed moving instances"}`),
@@ -92,52 +82,19 @@ func TestReallocate(t *testing.T) {
 		{
 			name: "Succeeds when no instances are specified",
 			args: args{params: ReallocateParams{
-				OutputDevice:  output.NewDevice(new(bytes.Buffer)),
-				MaxRetries:    1,
-				PollFrequency: time.Nanosecond,
+				TrackChangeParams: util.NewMockTrackChangeParams(""),
 				ClusterParams: util.ClusterParams{
 					ClusterID: util.ValidClusterID,
-					API: api.NewMock(mock.Response{
-						Response: http.Response{
-							StatusCode: 200,
-							Body: mock.NewStructBody(models.ElasticsearchClusterInfo{
-								Topology: &models.ClusterTopologyInfo{
-									Instances: []*models.ClusterInstanceInfo{
-										{InstanceName: ec.String("instance-00000001")},
-									},
+					API: api.NewMock(
+						mock.New200StructResponse(models.ElasticsearchClusterInfo{
+							Topology: &models.ClusterTopologyInfo{
+								Instances: []*models.ClusterInstanceInfo{
+									{InstanceName: ec.String("instance-00000001")},
 								},
-							}),
-						},
-					}, mock.Response{ // MOVE
-						Response: http.Response{
-							StatusCode: 202,
-							Body:       mock.NewStringBody(`{}`),
-						},
-					}, mock.Response{ // Tracking
-						Response: http.Response{
-							StatusCode: 404,
-							Body:       mock.NewStringBody(`{}`),
-						},
-					}, mock.Response{ // Tracking
-						Response: http.Response{
-							StatusCode: 404,
-							Body:       mock.NewStringBody(`{}`),
-						},
-					}, mock.Response{ // Tracking
-						Response: http.Response{
-							StatusCode: 200,
-							Body: mock.NewStructBody(models.ElasticsearchClusterPlansInfo{
-								Current: &models.ElasticsearchClusterPlanInfo{
-									PlanAttemptLog: []*models.ClusterPlanStepInfo{
-										{
-											StepID: ec.String("an id"),
-											Status: ec.String("success"),
-										},
-									},
-								},
-							}),
-						},
-					}),
+							},
+						}),
+						mock.New202Response(mock.NewStringBody("")),
+					),
 				},
 			}},
 		},

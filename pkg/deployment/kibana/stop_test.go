@@ -18,17 +18,14 @@
 package kibana
 
 import (
-	"bytes"
 	"errors"
 	"net/http"
 	"net/url"
 	"reflect"
 	"testing"
-	"time"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
-	"github.com/elastic/cloud-sdk-go/pkg/output"
 	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
@@ -141,13 +138,9 @@ func TestStop(t *testing.T) {
 			args: args{params: StopParams{
 				Hide: true,
 				DeploymentParams: DeploymentParams{
-					ID: "2c221bd86b7f48959a59ee3128d5c5e8",
-					TrackParams: util.TrackParams{
-						Track:         true,
-						Output:        output.NewDevice(new(bytes.Buffer)),
-						PollFrequency: time.Millisecond,
-						MaxRetries:    1,
-					},
+					ID:                "2c221bd86b7f48959a59ee3128d5c5e8",
+					TrackChangeParams: util.NewMockTrackChangeParams(""),
+					Track:             true,
 					API: api.NewMock(util.AppendTrackResponses(
 						mock.Response{Response: http.Response{
 							StatusCode: 202,

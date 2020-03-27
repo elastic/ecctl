@@ -142,22 +142,12 @@ var createCmd = &cobra.Command{
 			return err
 		}
 
-		if err := ecctl.Get().Formatter.Format("", res); err != nil {
-			if !track {
-				return err
-			}
-			fmt.Fprintln(ecctl.Get().Config.OutputDevice, err)
-		}
-
-		if !track {
-			return nil
-		}
-
-		return depresource.TrackResources(depresource.TrackResourcesParams{
-			API:          ecctl.Get().API,
-			Resources:    res.Resources,
-			OutputDevice: ecctl.Get().Config.OutputDevice,
-		})
+		return cmdutil.Track(cmdutil.NewTrackParams(cmdutil.TrackParamsConfig{
+			App:          ecctl.Get(),
+			DeploymentID: *res.ID,
+			Track:        track,
+			Response:     res,
+		}))
 	},
 }
 

@@ -28,6 +28,8 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/sync/pool"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	multierror "github.com/hashicorp/go-multierror"
+
+	"github.com/elastic/ecctl/pkg/util"
 )
 
 func TestVacateParamsValidate(t *testing.T) {
@@ -86,7 +88,7 @@ func TestVacateParamsValidate(t *testing.T) {
 			fields: fields{
 				API:         new(api.API),
 				Allocators:  []string{"an allocator"},
-				KindFilter:  "apm",
+				KindFilter:  util.Apm,
 				Concurrency: 1,
 				Output:      new(output.Device),
 			},

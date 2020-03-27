@@ -36,13 +36,16 @@ var stopApmCmd = &cobra.Command{
 		track, _ := cmd.Flags().GetBool("track")
 		hide, _ := cmd.Flags().GetBool("hide")
 		return apm.Shutdown(apm.ShutdownParams{
-			API:  ecctl.Get().API,
-			ID:   args[0],
-			Hide: hide,
-			TrackParams: util.TrackParams{
-				Track:  track,
-				Output: ecctl.Get().Config.OutputDevice,
-			},
+			API:   ecctl.Get().API,
+			ID:    args[0],
+			Hide:  hide,
+			Track: track,
+			TrackChangeParams: cmdutil.NewTrackParams(cmdutil.TrackParamsConfig{
+				App:        ecctl.Get(),
+				ResourceID: args[0],
+				Kind:       util.Apm,
+				Track:      track,
+			}).TrackChangeParams,
 		})
 	},
 }

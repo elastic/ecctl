@@ -18,8 +18,6 @@
 package cmdapmplan
 
 import (
-	"fmt"
-
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
@@ -35,20 +33,17 @@ var cancelPlanCmd = &cobra.Command{
 	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		track, _ := cmd.Flags().GetBool("track")
-		err := apm.CancelPlan(apm.PlanParams{
-			API: ecctl.Get().API,
-			ID:  args[0],
-			TrackParams: util.TrackParams{
-				Track:  track,
-				Output: ecctl.Get().Config.OutputDevice,
-			},
+		return apm.CancelPlan(apm.PlanParams{
+			API:   ecctl.Get().API,
+			ID:    args[0],
+			Track: track,
+			TrackChangeParams: cmdutil.NewTrackParams(cmdutil.TrackParamsConfig{
+				App:        ecctl.Get(),
+				ResourceID: args[0],
+				Kind:       util.Apm,
+				Track:      track,
+			}).TrackChangeParams,
 		})
-		if err != nil {
-			return err
-		}
-
-		fmt.Printf("Cluster [%s][Apm]: pending plan canceled\n", args[0])
-		return nil
 	},
 }
 

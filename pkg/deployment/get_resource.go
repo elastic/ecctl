@@ -19,6 +19,8 @@ package deployment
 
 import (
 	"fmt"
+
+	"github.com/elastic/ecctl/pkg/util"
 )
 
 // GetResourceParams is consumed by GetResource.
@@ -47,13 +49,13 @@ func GetResource(params GetResourceParams) (interface{}, error) {
 	}
 
 	switch params.Kind {
-	case "apm":
+	case util.Apm:
 		return GetApm(params.GetParams)
-	case "kibana":
+	case util.Kibana:
 		return GetKibana(params.GetParams)
-	case "elasticsearch":
+	case util.Elasticsearch:
 		return GetElasticsearch(params.GetParams)
-	case "appsearch":
+	case util.Appsearch:
 		return GetAppSearch(params.GetParams)
 	default:
 		// If the is specified but not supported, return an error.
@@ -76,19 +78,19 @@ func GetKindRefID(params GetResourceParams) (string, error) {
 
 	var refID string
 	switch params.Kind {
-	case "apm":
+	case util.Apm:
 		for _, resource := range res.Resources.Apm {
 			refID = *resource.RefID
 		}
-	case "kibana":
+	case util.Kibana:
 		for _, resource := range res.Resources.Kibana {
 			refID = *resource.RefID
 		}
-	case "elasticsearch":
+	case util.Elasticsearch:
 		for _, resource := range res.Resources.Elasticsearch {
 			refID = *resource.RefID
 		}
-	case "appsearch":
+	case util.Appsearch:
 		for _, resource := range res.Resources.Appsearch {
 			refID = *resource.RefID
 		}

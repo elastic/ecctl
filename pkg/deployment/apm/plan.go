@@ -24,12 +24,12 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/clusters_apm"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	"github.com/elastic/cloud-sdk-go/pkg/plan"
+	"github.com/elastic/cloud-sdk-go/pkg/plan/planutil"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/deployment/deputil"
-	"github.com/elastic/ecctl/pkg/deployment/planutil"
+	deploymentplanutil "github.com/elastic/ecctl/pkg/deployment/planutil"
 	"github.com/elastic/ecctl/pkg/util"
 )
 
@@ -39,14 +39,15 @@ type PlanParams struct {
 	// ID represents the deployment ID.
 	ID           string
 	PlanDefaults bool
-	util.TrackParams
+
+	Track bool
+	planutil.TrackChangeParams
 }
 
 // Validate ensures that the parameters are usable by the consuming function.
 func (params PlanParams) Validate() error {
 	var err = multierror.Append(new(multierror.Error),
 		deputil.ValidateParams(&params),
-		params.TrackParams.Validate(),
 	)
 	return err.ErrorOrNil()
 }
@@ -71,16 +72,9 @@ func GetPlan(params PlanParams) (*models.ApmPlansInfo, error) {
 		return res.Payload, nil
 	}
 
-	return res.Payload, util.TrackCluster(util.TrackClusterParams{
-		Output: params.Output,
-		TrackParams: plan.TrackParams{
-			API:           params.API,
-			PollFrequency: params.PollFrequency,
-			MaxRetries:    params.MaxRetries,
-			ID:            params.ID,
-			Kind:          "apm",
-		},
-	})
+	return res.Payload, planutil.TrackChange(util.SetClusterTracking(
+		params.TrackChangeParams, params.ID, util.Apm,
+	))
 }
 
 // CancelPlan cancels the pending plan on the specified cluster.
@@ -102,16 +96,9 @@ func CancelPlan(params PlanParams) error {
 		return nil
 	}
 
-	return util.TrackCluster(util.TrackClusterParams{
-		Output: params.Output,
-		TrackParams: plan.TrackParams{
-			API:           params.API,
-			PollFrequency: params.PollFrequency,
-			MaxRetries:    params.MaxRetries,
-			ID:            params.ID,
-			Kind:          "apm",
-		},
-	})
+	return planutil.TrackChange(util.SetClusterTracking(
+		params.TrackChangeParams, params.ID, util.Apm,
+	))
 }
 
 // ListPlanHistory returns the historic plan list
@@ -133,13 +120,13 @@ func newDefaultTransientPlanConfiguration() *models.ApmPlanControlConfiguration 
 
 type computeTransientParams struct {
 	plan      models.ApmPlan
-	transient planutil.ReapplyParams
+	transient deploymentplanutil.ReapplyParams
 }
 
 // ReapplyLatestPlanAttempt will obtain the latest plan attempt and reapply it
 // resetting all of the transient settings, Any setting can be overridden if
 // specified in the params.
-func ReapplyLatestPlanAttempt(params PlanParams, reparams planutil.ReapplyParams) (*models.ApmCrudResponse, error) {
+func ReapplyLatestPlanAttempt(params PlanParams, reparams deploymentplanutil.ReapplyParams) (*models.ApmCrudResponse, error) {
 	if err := reparams.Validate(); err != nil {
 		return nil, err
 	}
@@ -159,7 +146,7 @@ func ReapplyLatestPlanAttempt(params PlanParams, reparams planutil.ReapplyParams
 		transient: reparams,
 	})
 	if !reparams.HidePlan {
-		enc := json.NewEncoder(params.TrackParams.Output)
+		enc := json.NewEncoder(params.TrackChangeParams.Writer)
 		enc.SetIndent("", "  ")
 
 		if err := enc.Encode(latestAttempt); err != nil {
@@ -181,16 +168,9 @@ func ReapplyLatestPlanAttempt(params PlanParams, reparams planutil.ReapplyParams
 		return res.Payload, nil
 	}
 
-	return res.Payload, util.TrackCluster(util.TrackClusterParams{
-		Output: params.Output,
-		TrackParams: plan.TrackParams{
-			API:           params.API,
-			PollFrequency: params.PollFrequency,
-			MaxRetries:    params.MaxRetries,
-			ID:            res.Payload.ApmID,
-			Kind:          "apm",
-		},
-	})
+	return res.Payload, planutil.TrackChange(util.SetClusterTracking(
+		params.TrackChangeParams, params.ID, util.Apm,
+	))
 }
 
 // computeTransientSettings resets the transient.PlanConfiguration to a set of

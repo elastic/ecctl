@@ -65,17 +65,20 @@ The plan must be a valid ElasticsearchClusterPlan and will be validated against 
 			ID:           args[0],
 			ValidateOnly: validate,
 			Plan:         planModel,
-			TrackParams: util.TrackParams{
-				Track:  track,
-				Output: ecctl.Get().Config.OutputDevice,
-			},
+			Track:        track,
+			TrackChangeParams: cmdutil.NewTrackParams(cmdutil.TrackParamsConfig{
+				App:        ecctl.Get(),
+				ResourceID: args[0],
+				Kind:       util.Elasticsearch,
+				Track:      track,
+			}).TrackChangeParams,
 		})
 		if err != nil {
 			return err
 		}
 
 		return ecctl.Get().Formatter.Format(
-			filepath.Join("elasticsearch", "update"),
+			filepath.Join(util.Elasticsearch, "update"),
 			p,
 		)
 	},

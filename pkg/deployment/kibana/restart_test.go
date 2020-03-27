@@ -18,17 +18,14 @@
 package kibana
 
 import (
-	"bytes"
 	"errors"
 	"net/http"
 	"net/url"
 	"reflect"
 	"testing"
-	"time"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
-	"github.com/elastic/cloud-sdk-go/pkg/output"
 	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
@@ -78,13 +75,9 @@ func TestRestart(t *testing.T) {
 		{
 			name: "Succeeds restarting with tracking",
 			args: args{params: DeploymentParams{
-				TrackParams: util.TrackParams{
-					Track:         true,
-					Output:        output.NewDevice(new(bytes.Buffer)),
-					PollFrequency: time.Millisecond,
-					MaxRetries:    1,
-				},
-				ID: "d324608c97154bdba2dff97511d40368",
+				TrackChangeParams: util.NewMockTrackChangeParams(""),
+				Track:             true,
+				ID:                "d324608c97154bdba2dff97511d40368",
 				API: api.NewMock(util.AppendTrackResponses(mock.Response{Response: http.Response{
 					StatusCode: 202,
 					Body:       mock.NewStringBody(`{}`),

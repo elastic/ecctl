@@ -27,7 +27,6 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	"github.com/elastic/cloud-sdk-go/pkg/output"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	multierror "github.com/hashicorp/go-multierror"
 
@@ -381,42 +380,7 @@ func TestReapply(t *testing.T) {
 			args: args{params: ReapplyParams{}},
 			err: &multierror.Error{Errors: []error{
 				util.ErrAPIReq,
-				errors.New("output cannot be nil when hide is false"),
 				errors.New("cluster id cannot be empty"),
-			}},
-		},
-		{
-			name: "Fails due to parameter validation (missing Writer)",
-			args: args{params: ReapplyParams{
-				API:           new(api.API),
-				ReapplyParams: planutil.ReapplyParams{ID: "8b43ed5e277f7ea6f13606fcf4027f9c"},
-			}},
-			err: &multierror.Error{Errors: []error{
-				errors.New("output cannot be nil when hide is false"),
-			}},
-		},
-		{
-			name: "Fails due to parameter validation (missing Cluster ID)",
-			args: args{params: ReapplyParams{
-				API: new(api.API),
-				TrackParams: util.TrackParams{
-					Output: output.NewDevice(new(bytes.Buffer)),
-				},
-			}},
-			err: &multierror.Error{Errors: []error{
-				errors.New("cluster id cannot be empty"),
-			}},
-		},
-		{
-			name: "Fails due to parameter validation (missing API)",
-			args: args{params: ReapplyParams{
-				TrackParams: util.TrackParams{
-					Output: output.NewDevice(new(bytes.Buffer)),
-				},
-				ReapplyParams: planutil.ReapplyParams{ID: "8b43ed5e277f7ea6f13606fcf4027f9c"},
-			}},
-			err: &multierror.Error{Errors: []error{
-				util.ErrAPIReq,
 			}},
 		},
 		{
@@ -429,17 +393,11 @@ func TestReapply(t *testing.T) {
 						Status:     http.StatusText(http.StatusOK),
 						Body: mock.NewStructBody(models.ElasticsearchClusterPlansInfo{
 							History: []*models.ElasticsearchClusterPlanInfo{
-								{
-									PlanAttemptID: "someID",
-								},
+								{PlanAttemptID: "someID"},
 							},
 						}),
 					}},
 				),
-				TrackParams: util.TrackParams{
-					Output: output.NewDevice(new(bytes.Buffer)),
-					Track:  false,
-				},
 				ReapplyParams: planutil.ReapplyParams{
 					ID:      "b786acd298292c2d521c0e8741761b4d",
 					Default: true,
@@ -448,22 +406,20 @@ func TestReapply(t *testing.T) {
 			err: errors.New("unable to obtain latest plan attempt"),
 		},
 		{
-			name: "Succeeds without Tracking",
+			name: "Succeeds with Tracking",
 			args: args{params: ReapplyParams{
-				SkipSnapshot: true,
+				Output:            new(bytes.Buffer),
+				Track:             true,
+				TrackChangeParams: util.NewMockTrackChangeParams(""),
+				SkipSnapshot:      true,
 				API: api.NewMock(
 					mock.Response{Response: http.Response{
 						StatusCode: http.StatusOK,
 						Status:     http.StatusText(http.StatusOK),
 						Body: mock.NewStructBody(models.ElasticsearchClusterPlansInfo{
 							History: []*models.ElasticsearchClusterPlanInfo{
-								{
-									PlanAttemptID: "someID",
-								},
-								{
-									PlanAttemptID: "someID",
-									Plan:          &models.ElasticsearchClusterPlan{},
-								},
+								{PlanAttemptID: "someID"},
+								{PlanAttemptID: "someID", Plan: &models.ElasticsearchClusterPlan{}},
 							},
 						}),
 					}},
@@ -475,10 +431,6 @@ func TestReapply(t *testing.T) {
 						}),
 					}},
 				),
-				TrackParams: util.TrackParams{
-					Output: output.NewDevice(new(bytes.Buffer)),
-					Track:  false,
-				},
 				ReapplyParams: planutil.ReapplyParams{
 					ID:      "b786acd298292c2d521c0e8741761b4d",
 					Default: true,

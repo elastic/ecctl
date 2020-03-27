@@ -65,6 +65,7 @@ func TestVacate(t *testing.T) {
 									plan: []*models.ClusterPlanStepInfo{
 										newPlanStep("step1", "success"),
 										newPlanStep("step2", "success"),
+										newPlanStep("plan-completed", "success"),
 									},
 								},
 							},
@@ -73,8 +74,8 @@ func TestVacate(t *testing.T) {
 				}),
 			},
 			want: newOutputResponses(
-				"Cluster [3ee11eb40eda22cac0cce259625c6734][Elasticsearch]: running step \"step2\" (Plan duration )...",
-				"\x1b[92;mCluster [3ee11eb40eda22cac0cce259625c6734][Elasticsearch]: finished running all the plan steps\x1b[0m (Total plan duration )",
+				"Deployment [DISCOVERED_DEPLOYMENT_ID] - [Elasticsearch][3ee11eb40eda22cac0cce259625c6734]: running step \"step2\" (Plan duration )...",
+				"\x1b[92;mDeployment [DISCOVERED_DEPLOYMENT_ID] - [Elasticsearch][3ee11eb40eda22cac0cce259625c6734]: finished running all the plan steps\x1b[0m (Total plan duration )",
 			),
 		},
 		{
@@ -97,6 +98,7 @@ func TestVacate(t *testing.T) {
 									plan: []*models.ClusterPlanStepInfo{
 										newPlanStep("step1", "success"),
 										newPlanStep("step2", "success"),
+										newPlanStep("plan-completed", "success"),
 									},
 								},
 							},
@@ -105,8 +107,8 @@ func TestVacate(t *testing.T) {
 				}),
 			},
 			want: newOutputResponses(
-				"Cluster [3ee11eb40eda22cac0cce259625c6734][Kibana]: running step \"step2\" (Plan duration )...",
-				"\x1b[92;mCluster [3ee11eb40eda22cac0cce259625c6734][Kibana]: finished running all the plan steps\x1b[0m (Total plan duration )",
+				"Deployment [DISCOVERED_DEPLOYMENT_ID] - [Kibana][3ee11eb40eda22cac0cce259625c6734]: running step \"step2\" (Plan duration )...",
+				"\x1b[92;mDeployment [DISCOVERED_DEPLOYMENT_ID] - [Kibana][3ee11eb40eda22cac0cce259625c6734]: finished running all the plan steps\x1b[0m (Total plan duration )",
 			),
 		},
 		{
@@ -129,6 +131,7 @@ func TestVacate(t *testing.T) {
 									plan: []*models.ClusterPlanStepInfo{
 										newPlanStep("step1", "success"),
 										newPlanStep("step2", "success"),
+										newPlanStep("plan-completed", "success"),
 									},
 								},
 							},
@@ -137,8 +140,8 @@ func TestVacate(t *testing.T) {
 				}),
 			},
 			want: newOutputResponses(
-				"Cluster [3ee11eb40eda22cac0cce259625c6734][Apm]: running step \"step2\" (Plan duration )...",
-				"\x1b[92;mCluster [3ee11eb40eda22cac0cce259625c6734][Apm]: finished running all the plan steps\x1b[0m (Total plan duration )",
+				"Deployment [DISCOVERED_DEPLOYMENT_ID] - [Apm][3ee11eb40eda22cac0cce259625c6734]: running step \"step2\" (Plan duration )...",
+				"\x1b[92;mDeployment [DISCOVERED_DEPLOYMENT_ID] - [Apm][3ee11eb40eda22cac0cce259625c6734]: finished running all the plan steps\x1b[0m (Total plan duration )",
 			),
 		},
 		{
@@ -162,6 +165,7 @@ func TestVacate(t *testing.T) {
 									plan: []*models.ClusterPlanStepInfo{
 										newPlanStep("step1", "success"),
 										newPlanStep("step2", "success"),
+										newPlanStep("plan-completed", "success"),
 									},
 								},
 							},
@@ -171,7 +175,7 @@ func TestVacate(t *testing.T) {
 			},
 		},
 		{
-			name: "Succeeds moving a single Appsearch cluster from a single allocator, but returns error due to unsupported tracking type",
+			name: "Succeeds moving a single Appsearch cluster from a single allocator",
 			args: args{
 				buf: sdkSync.NewBuffer(),
 				params: newVacateTestCase(t, vacateCase{
@@ -190,6 +194,7 @@ func TestVacate(t *testing.T) {
 									plan: []*models.ClusterPlanStepInfo{
 										newPlanStep("step1", "success"),
 										newPlanStep("step2", "success"),
+										newPlanStep("plan-completed", "success"),
 									},
 								},
 							},
@@ -197,10 +202,10 @@ func TestVacate(t *testing.T) {
 					},
 				}),
 			},
-			err: `1 error occurred:
-	* allocator allocatorID: cluster [3ee11eb40eda22cac0cce259625c6734][appsearch]: instance is being moved but tracking is not supported, please check the vacate progress from the UI
-
-`,
+			want: newOutputResponses(
+				"Deployment [DISCOVERED_DEPLOYMENT_ID] - [Appsearch][3ee11eb40eda22cac0cce259625c6734]: running step \"step2\" (Plan duration )...",
+				"\x1b[92;mDeployment [DISCOVERED_DEPLOYMENT_ID] - [Appsearch][3ee11eb40eda22cac0cce259625c6734]: finished running all the plan steps\x1b[0m (Total plan duration )",
+			),
 		},
 		{
 			name: "Succeeds moving a multiple clusters from a single allocator",
@@ -221,6 +226,7 @@ func TestVacate(t *testing.T) {
 								plan: []*models.ClusterPlanStepInfo{
 									newPlanStep("step1", "success"),
 									newPlanStep("step2", "success"),
+									newPlanStep("plan-completed", "success"),
 								},
 							},
 						},
@@ -236,6 +242,7 @@ func TestVacate(t *testing.T) {
 								plan: []*models.ClusterPlanStepInfo{
 									newPlanStep("step1", "success"),
 									newPlanStep("step2", "success"),
+									newPlanStep("plan-completed", "success"),
 								},
 							},
 						},
@@ -243,10 +250,10 @@ func TestVacate(t *testing.T) {
 				}}),
 			},
 			want: newOutputResponses(
-				"Cluster [3ee11eb40eda22cac0cce259625c6734][Elasticsearch]: running step \"step2\" (Plan duration )...",
-				"\x1b[92;mCluster [3ee11eb40eda22cac0cce259625c6734][Elasticsearch]: finished running all the plan steps\x1b[0m (Total plan duration )",
-				"Cluster [2ee11eb40eda22cac0cce259625c6734][Kibana]: running step \"step2\" (Plan duration )...",
-				"\x1b[92;mCluster [2ee11eb40eda22cac0cce259625c6734][Kibana]: finished running all the plan steps\x1b[0m (Total plan duration )",
+				"Deployment [DISCOVERED_DEPLOYMENT_ID] - [Elasticsearch][3ee11eb40eda22cac0cce259625c6734]: running step \"step2\" (Plan duration )...",
+				"\x1b[92;mDeployment [DISCOVERED_DEPLOYMENT_ID] - [Elasticsearch][3ee11eb40eda22cac0cce259625c6734]: finished running all the plan steps\x1b[0m (Total plan duration )",
+				"Deployment [DISCOVERED_DEPLOYMENT_ID] - [Kibana][2ee11eb40eda22cac0cce259625c6734]: running step \"step2\" (Plan duration )...",
+				"\x1b[92;mDeployment [DISCOVERED_DEPLOYMENT_ID] - [Kibana][2ee11eb40eda22cac0cce259625c6734]: finished running all the plan steps\x1b[0m (Total plan duration )",
 			),
 		},
 		{
@@ -268,6 +275,7 @@ func TestVacate(t *testing.T) {
 								plan: []*models.ClusterPlanStepInfo{
 									newPlanStep("step1", "success"),
 									newPlanStep("step2", "success"),
+									newPlanStep("plan-completed", "success"),
 								},
 							},
 						},
@@ -283,6 +291,7 @@ func TestVacate(t *testing.T) {
 								plan: []*models.ClusterPlanStepInfo{
 									newPlanStep("step1", "success"),
 									newPlanStep("step2", "success"),
+									newPlanStep("plan-completed", "success"),
 								},
 							},
 						},
@@ -301,6 +310,7 @@ func TestVacate(t *testing.T) {
 								plan: []*models.ClusterPlanStepInfo{
 									newPlanStep("step1", "success"),
 									newPlanStep("step2", "success"),
+									newPlanStep("plan-completed", "success"),
 								},
 							},
 						},
@@ -316,6 +326,7 @@ func TestVacate(t *testing.T) {
 								plan: []*models.ClusterPlanStepInfo{
 									newPlanStep("step1", "success"),
 									newPlanStep("step2", "success"),
+									newPlanStep("plan-completed", "success"),
 								},
 							},
 						},
@@ -323,14 +334,14 @@ func TestVacate(t *testing.T) {
 				}}),
 			},
 			want: newOutputResponses(
-				"Cluster [3ee11eb40eda22cac0cce259625c6734][Elasticsearch]: running step \"step2\" (Plan duration )...",
-				"\x1b[92;mCluster [3ee11eb40eda22cac0cce259625c6734][Elasticsearch]: finished running all the plan steps\x1b[0m (Total plan duration )",
-				"Cluster [2ee11eb40eda22cac0cce259625c6734][Kibana]: running step \"step2\" (Plan duration )...",
-				"\x1b[92;mCluster [2ee11eb40eda22cac0cce259625c6734][Kibana]: finished running all the plan steps\x1b[0m (Total plan duration )",
-				"Cluster [5ee11eb40eda22cac0cce259625c6734][Elasticsearch]: running step \"step2\" (Plan duration )...",
-				"\x1b[92;mCluster [5ee11eb40eda22cac0cce259625c6734][Elasticsearch]: finished running all the plan steps\x1b[0m (Total plan duration )",
-				"Cluster [4ee11eb40eda22cac0cce259625c6734][Kibana]: running step \"step2\" (Plan duration )...",
-				"\x1b[92;mCluster [4ee11eb40eda22cac0cce259625c6734][Kibana]: finished running all the plan steps\x1b[0m (Total plan duration )",
+				"Deployment [DISCOVERED_DEPLOYMENT_ID] - [Elasticsearch][3ee11eb40eda22cac0cce259625c6734]: running step \"step2\" (Plan duration )...",
+				"\x1b[92;mDeployment [DISCOVERED_DEPLOYMENT_ID] - [Elasticsearch][3ee11eb40eda22cac0cce259625c6734]: finished running all the plan steps\x1b[0m (Total plan duration )",
+				"Deployment [DISCOVERED_DEPLOYMENT_ID] - [Kibana][2ee11eb40eda22cac0cce259625c6734]: running step \"step2\" (Plan duration )...",
+				"\x1b[92;mDeployment [DISCOVERED_DEPLOYMENT_ID] - [Kibana][2ee11eb40eda22cac0cce259625c6734]: finished running all the plan steps\x1b[0m (Total plan duration )",
+				"Deployment [DISCOVERED_DEPLOYMENT_ID] - [Elasticsearch][5ee11eb40eda22cac0cce259625c6734]: running step \"step2\" (Plan duration )...",
+				"\x1b[92;mDeployment [DISCOVERED_DEPLOYMENT_ID] - [Elasticsearch][5ee11eb40eda22cac0cce259625c6734]: finished running all the plan steps\x1b[0m (Total plan duration )",
+				"Deployment [DISCOVERED_DEPLOYMENT_ID] - [Kibana][4ee11eb40eda22cac0cce259625c6734]: running step \"step2\" (Plan duration )...",
+				"\x1b[92;mDeployment [DISCOVERED_DEPLOYMENT_ID] - [Kibana][4ee11eb40eda22cac0cce259625c6734]: finished running all the plan steps\x1b[0m (Total plan duration )",
 			),
 		},
 		{
@@ -352,6 +363,7 @@ func TestVacate(t *testing.T) {
 								plan: []*models.ClusterPlanStepInfo{
 									newPlanStep("step1", "success"),
 									newPlanStep("step2", "success"),
+									newPlanStep("plan-completed", "success"),
 								},
 							},
 						},
@@ -367,6 +379,7 @@ func TestVacate(t *testing.T) {
 								plan: []*models.ClusterPlanStepInfo{
 									newPlanStep("step1", "success"),
 									newPlanStep("step2", "success"),
+									newPlanStep("plan-completed", "success"),
 								},
 							},
 						},
@@ -410,6 +423,7 @@ func TestVacate(t *testing.T) {
 								plan: []*models.ClusterPlanStepInfo{
 									newPlanStep("step1", "success"),
 									newPlanStep("step2", "success"),
+									newPlanStep("plan-completed", "success"),
 								},
 							},
 						},
@@ -417,18 +431,18 @@ func TestVacate(t *testing.T) {
 				}}),
 			},
 			want: newOutputResponses(
-				"Cluster [3ee11eb40eda22cac0cce259625c6734][Elasticsearch]: running step \"step2\" (Plan duration )...",
-				"\x1b[92;mCluster [3ee11eb40eda22cac0cce259625c6734][Elasticsearch]: finished running all the plan steps\x1b[0m (Total plan duration )",
-				"Cluster [2ee11eb40eda22cac0cce259625c6734][Kibana]: running step \"step2\" (Plan duration )...",
-				"\x1b[92;mCluster [2ee11eb40eda22cac0cce259625c6734][Kibana]: finished running all the plan steps\x1b[0m (Total plan duration )",
-				"Cluster [5ee11eb40eda22cac0cce259625c6734][Elasticsearch]: running step \"step2\" (Plan duration )...",
-				"Cluster [5ee11eb40eda22cac0cce259625c6734][Elasticsearch]: running step \"step3\" caught error: \"Unexpected error during step: [perform-snapshot]: [no.found.constructor.models.TimeoutException: Timeout]\" (Plan duration )...",
-				"\x1b[91;1mCluster [5ee11eb40eda22cac0cce259625c6734][Elasticsearch]: caught error: \"Unexpected error during step: [perform-snapshot]: [no.found.constructor.models.TimeoutException: Timeout]\"\x1b[0m (Total plan duration )",
-				"Cluster [4ee11eb40eda22cac0cce259625c6734][Kibana]: running step \"step2\" (Plan duration )...",
-				"\x1b[92;mCluster [4ee11eb40eda22cac0cce259625c6734][Kibana]: finished running all the plan steps\x1b[0m (Total plan duration )",
+				"Deployment [DISCOVERED_DEPLOYMENT_ID] - [Elasticsearch][3ee11eb40eda22cac0cce259625c6734]: running step \"step2\" (Plan duration )...",
+				"\x1b[92;mDeployment [DISCOVERED_DEPLOYMENT_ID] - [Elasticsearch][3ee11eb40eda22cac0cce259625c6734]: finished running all the plan steps\x1b[0m (Total plan duration )",
+				"Deployment [DISCOVERED_DEPLOYMENT_ID] - [Kibana][2ee11eb40eda22cac0cce259625c6734]: running step \"step2\" (Plan duration )...",
+				"\x1b[92;mDeployment [DISCOVERED_DEPLOYMENT_ID] - [Kibana][2ee11eb40eda22cac0cce259625c6734]: finished running all the plan steps\x1b[0m (Total plan duration )",
+				"Deployment [DISCOVERED_DEPLOYMENT_ID] - [Elasticsearch][5ee11eb40eda22cac0cce259625c6734]: running step \"step2\" (Plan duration )...",
+				`Deployment [DISCOVERED_DEPLOYMENT_ID] - [Elasticsearch][5ee11eb40eda22cac0cce259625c6734]: running step "step3" caught error: "Unexpected error during step: [perform-snapshot]: [no.found.constructor.models.TimeoutException: Timeout]" (Plan duration )...`,
+				`Deployment [DISCOVERED_DEPLOYMENT_ID] - [Elasticsearch][5ee11eb40eda22cac0cce259625c6734]: running step "last step" caught error: "Unexpected error during step: [perform-snapshot]: [no.found.constructor.models.TimeoutException: Timeout]" (Plan duration )...`,
+				"Deployment [DISCOVERED_DEPLOYMENT_ID] - [Kibana][4ee11eb40eda22cac0cce259625c6734]: running step \"step2\" (Plan duration )...",
+				"\x1b[92;mDeployment [DISCOVERED_DEPLOYMENT_ID] - [Kibana][4ee11eb40eda22cac0cce259625c6734]: finished running all the plan steps\x1b[0m (Total plan duration )",
 			),
 			err: `1 error occurred:
-	* cluster [5ee11eb40eda22cac0cce259625c6734][elasticsearch] Unexpected error during step: [perform-snapshot]: [no.found.constructor.models.TimeoutException: Timeout]
+	* resource id [5ee11eb40eda22cac0cce259625c6734][elasticsearch] Unexpected error during step: [perform-snapshot]: [no.found.constructor.models.TimeoutException: Timeout]
 
 `,
 		},
@@ -457,6 +471,7 @@ func TestVacate(t *testing.T) {
 								plan: []*models.ClusterPlanStepInfo{
 									newPlanStep("step1", "success"),
 									newPlanStep("step2", "success"),
+									newPlanStep("plan-completed", "success"),
 								},
 							},
 						},
@@ -485,6 +500,9 @@ func TestVacate(t *testing.T) {
 									newPlanStepWithDetails("step3", "error", []*models.ClusterPlanStepLogMessageInfo{{
 										Message: ec.String(planStepLogErrorMessage),
 									}}),
+									newPlanStepWithDetails("plan-completed", "error", []*models.ClusterPlanStepLogMessageInfo{{
+										Message: ec.String(planStepLogErrorMessage),
+									}}),
 								},
 							},
 						},
@@ -500,6 +518,7 @@ func TestVacate(t *testing.T) {
 								plan: []*models.ClusterPlanStepInfo{
 									newPlanStep("step1", "success"),
 									newPlanStep("step2", "success"),
+									newPlanStep("plan-completed", "success"),
 								},
 							},
 						},
@@ -507,17 +526,17 @@ func TestVacate(t *testing.T) {
 				}}),
 			},
 			want: newOutputResponses(
-				"Cluster [2ee11eb40eda22cac0cce259625c6734][Kibana]: running step \"step2\" (Plan duration )...",
-				"\x1b[92;mCluster [2ee11eb40eda22cac0cce259625c6734][Kibana]: finished running all the plan steps\x1b[0m (Total plan duration )",
-				"Cluster [5ee11eb40eda22cac0cce259625c6734][Elasticsearch]: running step \"step2\" (Plan duration )...",
-				"Cluster [5ee11eb40eda22cac0cce259625c6734][Elasticsearch]: running step \"step3\" caught error: \"Unexpected error during step: [perform-snapshot]: [no.found.constructor.models.TimeoutException: Timeout]\" (Plan duration )...",
-				"\x1b[91;1mCluster [5ee11eb40eda22cac0cce259625c6734][Elasticsearch]: caught error: \"Unexpected error during step: [perform-snapshot]: [no.found.constructor.models.TimeoutException: Timeout]\"\x1b[0m (Total plan duration )",
-				"Cluster [4ee11eb40eda22cac0cce259625c6734][Kibana]: running step \"step2\" (Plan duration )...",
-				"\x1b[92;mCluster [4ee11eb40eda22cac0cce259625c6734][Kibana]: finished running all the plan steps\x1b[0m (Total plan duration )",
+				"Deployment [DISCOVERED_DEPLOYMENT_ID] - [Kibana][2ee11eb40eda22cac0cce259625c6734]: running step \"step2\" (Plan duration )...",
+				"\x1b[92;mDeployment [DISCOVERED_DEPLOYMENT_ID] - [Kibana][2ee11eb40eda22cac0cce259625c6734]: finished running all the plan steps\x1b[0m (Total plan duration )",
+				"Deployment [DISCOVERED_DEPLOYMENT_ID] - [Elasticsearch][5ee11eb40eda22cac0cce259625c6734]: running step \"step2\" (Plan duration )...",
+				`Deployment [DISCOVERED_DEPLOYMENT_ID] - [Elasticsearch][5ee11eb40eda22cac0cce259625c6734]: running step "step3" caught error: "Unexpected error during step: [perform-snapshot]: [no.found.constructor.models.TimeoutException: Timeout]" (Plan duration )...`,
+				"\x1b[91;1mDeployment [DISCOVERED_DEPLOYMENT_ID] - [Elasticsearch][5ee11eb40eda22cac0cce259625c6734]: caught error: \"Unexpected error during step: [perform-snapshot]: [no.found.constructor.models.TimeoutException: Timeout]\"\x1b[0m (Total plan duration )",
+				"Deployment [DISCOVERED_DEPLOYMENT_ID] - [Kibana][4ee11eb40eda22cac0cce259625c6734]: running step \"step2\" (Plan duration )...",
+				"\x1b[92;mDeployment [DISCOVERED_DEPLOYMENT_ID] - [Kibana][4ee11eb40eda22cac0cce259625c6734]: finished running all the plan steps\x1b[0m (Total plan duration )",
 			),
 			err: `2 errors occurred:
-	* cluster [3ee11eb40eda22cac0cce259625c6734][elasticsearch] failed vacating, reason: code: a code, message: a message
-	* cluster [5ee11eb40eda22cac0cce259625c6734][elasticsearch] Unexpected error during step: [perform-snapshot]: [no.found.constructor.models.TimeoutException: Timeout]
+	* resource id [3ee11eb40eda22cac0cce259625c6734][elasticsearch] failed vacating, reason: code: a code, message: a message
+	* deployment [DISCOVERED_DEPLOYMENT_ID] - [elasticsearch][5ee11eb40eda22cac0cce259625c6734]: caught error: "Unexpected error during step: [perform-snapshot]: [no.found.constructor.models.TimeoutException: Timeout]"
 
 `,
 		},
@@ -537,7 +556,7 @@ func TestVacate(t *testing.T) {
 				},
 			},
 			err: `1 error occurred:
-	* cluster [3ee11eb40eda22cac0cce259625c6734][kibana] failed vacating, reason: code: some code, message: failed for reason
+	* resource id [3ee11eb40eda22cac0cce259625c6734][kibana] failed vacating, reason: code: some code, message: failed for reason
 
 `,
 		},
@@ -641,14 +660,14 @@ func TestVacateInterrupt(t *testing.T) {
 				}}),
 			},
 			want: newOutputResponses(
-				"Cluster [3ee11eb40eda22cac0cce259625c6734][Elasticsearch]: running step \"step2\" (Plan duration )...",
+				"Deployment [DISCOVERED_DEPLOYMENT_ID] - [Elasticsearch][3ee11eb40eda22cac0cce259625c6734]: running step \"step2\" (Plan duration )...",
 				"pool: received interrupt, stopping pool...",
-				"Cluster [3ee11eb40eda22cac0cce259625c6734][Elasticsearch]: running step \"step3\" (Plan duration )...",
-				"Cluster [3ee11eb40eda22cac0cce259625c6734][Elasticsearch]: running step \"step4\" (Plan duration )...",
-				"\x1b[92;mCluster [3ee11eb40eda22cac0cce259625c6734][Elasticsearch]: finished running all the plan steps\x1b[0m (Total plan duration )",
+				"Deployment [DISCOVERED_DEPLOYMENT_ID] - [Elasticsearch][3ee11eb40eda22cac0cce259625c6734]: running step \"step3\" (Plan duration )...",
+				"Deployment [DISCOVERED_DEPLOYMENT_ID] - [Elasticsearch][3ee11eb40eda22cac0cce259625c6734]: running step \"step4\" (Plan duration )...",
+				"\x1b[92;mDeployment [DISCOVERED_DEPLOYMENT_ID] - [Elasticsearch][3ee11eb40eda22cac0cce259625c6734]: finished running all the plan steps\x1b[0m (Total plan duration )",
 			),
 			err: `1 error occurred:
-	* allocator allocatorID: cluster [2ee11eb40eda22cac0cce259625c6734][kibana]: was either cancelled or not processed, follow up accordingly
+	* allocator allocatorID: resource id [2ee11eb40eda22cac0cce259625c6734][kibana]: was either cancelled or not processed, follow up accordingly
 
 `,
 		},

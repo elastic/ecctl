@@ -18,9 +18,10 @@
 package cmdelasticsearch
 
 import (
-	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/deployment/elasticsearch"
 	"github.com/elastic/ecctl/pkg/ecctl"
 	"github.com/elastic/ecctl/pkg/util"
@@ -30,14 +31,14 @@ var reallocateESClusterCmd = &cobra.Command{
 	Use:     "reallocate <cluster id>",
 	Short:   "Reallocates the Elasticsearch cluster nodes",
 	Long:    "Reallocates the Elasticsearch cluster nodes. If no \"--instances\" are specified all of the nodes will be restarted",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		instances, err := cmd.Flags().GetStringSlice("instances")
 		if err != nil {
 			return err
 		}
 
-		instancesDown, err := cmdutil.ParseBoolP(cmd, "instances-down")
+		instancesDown, err := sdkcmdutil.ParseBoolP(cmd, "instances-down")
 		if err != nil {
 			return err
 		}
@@ -50,14 +51,18 @@ var reallocateESClusterCmd = &cobra.Command{
 			User:          ecctl.Get().Config.User,
 			InstancesDown: instancesDown,
 			Instances:     instances,
-			OutputDevice:  ecctl.Get().Config.OutputDevice,
+			TrackChangeParams: cmdutil.NewTrackParams(cmdutil.TrackParamsConfig{
+				App:        ecctl.Get(),
+				ResourceID: args[0],
+				Kind:       util.Elasticsearch,
+				Track:      true,
+			}).TrackChangeParams,
 		})
 	},
 }
 
 func init() {
 	Command.AddCommand(reallocateESClusterCmd)
-
 	reallocateESClusterCmd.Flags().StringSliceP("instances", "i", nil, "Reallocates only specific instances")
 	reallocateESClusterCmd.Flags().String("instances-down", "", "Overwrites the default if set to [true|false], marking the instances as 'down'")
 }

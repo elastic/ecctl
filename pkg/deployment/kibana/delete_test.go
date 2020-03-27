@@ -18,18 +18,15 @@
 package kibana
 
 import (
-	"bytes"
 	"errors"
 	"net/http"
 	"net/url"
 	"reflect"
 	"testing"
-	"time"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	"github.com/elastic/cloud-sdk-go/pkg/output"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	multierror "github.com/hashicorp/go-multierror"
 
@@ -89,13 +86,9 @@ func TestDelete(t *testing.T) {
 		{
 			name: "succeeds deleting with tracking",
 			args: args{params: DeploymentParams{
-				ID: "2c221bd86b7f48959a59ee3128d5c5e8",
-				TrackParams: util.TrackParams{
-					Track:         true,
-					Output:        output.NewDevice(new(bytes.Buffer)),
-					PollFrequency: time.Millisecond,
-					MaxRetries:    1,
-				},
+				ID:                "2c221bd86b7f48959a59ee3128d5c5e8",
+				Track:             true,
+				TrackChangeParams: util.NewMockTrackChangeParams(""),
 				API: api.NewMock(
 					util.AppendTrackResponses(
 						mock.Response{Response: http.Response{

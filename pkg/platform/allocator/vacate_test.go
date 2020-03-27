@@ -580,7 +580,7 @@ func TestCheckVacateFailures(t *testing.T) {
 				},
 			},
 			err: &multierror.Error{Errors: []error{
-				errors.New("cluster [123456789][elasticsearch] failed vacating, reason: code: unknown, message: a message"),
+				errors.New("resource id [123456789][elasticsearch] failed vacating, reason: code: unknown, message: a message"),
 			}},
 		},
 		{
@@ -601,7 +601,7 @@ func TestCheckVacateFailures(t *testing.T) {
 				},
 			},
 			err: &multierror.Error{Errors: []error{
-				errors.New("cluster [123456789][kibana] failed vacating, reason: code: unknown, message: a kibana error message"),
+				errors.New("resource id [123456789][kibana] failed vacating, reason: code: unknown, message: a kibana error message"),
 			}},
 		},
 		{
@@ -622,7 +622,7 @@ func TestCheckVacateFailures(t *testing.T) {
 				},
 			},
 			err: &multierror.Error{Errors: []error{
-				errors.New("cluster [123456789][apm] failed vacating, reason: code: unknown, message: an apm error message"),
+				errors.New("resource id [123456789][apm] failed vacating, reason: code: unknown, message: an apm error message"),
 			}},
 		},
 		{
@@ -643,7 +643,7 @@ func TestCheckVacateFailures(t *testing.T) {
 				},
 			},
 			err: &multierror.Error{Errors: []error{
-				errors.New("cluster [123456789][appsearch] failed vacating, reason: code: unknown, message: an apm error message"),
+				errors.New("resource id [123456789][appsearch] failed vacating, reason: code: unknown, message: an apm error message"),
 			}},
 		},
 		{
@@ -675,8 +675,8 @@ func TestCheckVacateFailures(t *testing.T) {
 				},
 			},
 			err: &multierror.Error{Errors: []error{
-				errors.New("cluster [123456789][elasticsearch] failed vacating, reason: code: unknown, message: a message"),
-				errors.New("cluster [123456789][kibana] failed vacating, reason: code: unknown, message: a kibana error message"),
+				errors.New("resource id [123456789][elasticsearch] failed vacating, reason: code: unknown, message: a message"),
+				errors.New("resource id [123456789][kibana] failed vacating, reason: code: unknown, message: a kibana error message"),
 			}},
 		},
 		{
@@ -704,7 +704,7 @@ func TestCheckVacateFailures(t *testing.T) {
 				},
 			},
 			err: &multierror.Error{Errors: []error{
-				errors.New("cluster [1234567890][elasticsearch] failed vacating, reason: code: unknown, message: a message"),
+				errors.New("resource id [1234567890][elasticsearch] failed vacating, reason: code: unknown, message: a message"),
 			}},
 		},
 	}
@@ -718,7 +718,7 @@ func TestCheckVacateFailures(t *testing.T) {
 }
 
 func TestVacateCluster(t *testing.T) {
-	var errEmptyParams = `allocator : cluster [][]: parameter validation: 5 errors occurred:
+	var errEmptyParams = `allocator : resource id [][]: parameter validation: 5 errors occurred:
 	* api reference is required for command
 	* vacate cluster: invalid allocator ID 
 	* vacate cluster: invalid cluster ID 
@@ -726,7 +726,7 @@ func TestVacateCluster(t *testing.T) {
 	* output device cannot be nil
 
 `
-	var errInvalidParams = `allocator someID: cluster [3ee11eb40eda22cac0cce259625c6734][somethingweird]: parameter validation: 3 errors occurred:
+	var errInvalidParams = `allocator someID: resource id [3ee11eb40eda22cac0cce259625c6734][somethingweird]: parameter validation: 3 errors occurred:
 	* api reference is required for command
 	* vacate cluster: invalid kind somethingweird
 	* output device cannot be nil
@@ -775,6 +775,7 @@ func TestVacateCluster(t *testing.T) {
 					Kind:           "elasticsearch",
 					Output:         new(output.Device),
 					TrackFrequency: time.Nanosecond,
+					OutputFormat:   "text",
 					MaxPollRetries: 1,
 					API: discardResponses(newElasticsearchVacateMove(t, "someID", vacateCaseClusterConfig{
 						ID: "3ee11eb40eda22cac0cce259625c6734",
@@ -787,13 +788,14 @@ func TestVacateCluster(t *testing.T) {
 						plan: []*models.ClusterPlanStepInfo{
 							newPlanStep("step1", "success"),
 							newPlanStep("step2", "success"),
+							newPlanStep("plan-completed", "success"),
 						},
 					})),
 				},
 			},
 			want: newOutputResponses(
-				"Cluster [3ee11eb40eda22cac0cce259625c6734][Elasticsearch]: running step \"step2\" (Plan duration )...",
-				"\x1b[92;mCluster [3ee11eb40eda22cac0cce259625c6734][Elasticsearch]: finished running all the plan steps\x1b[0m (Total plan duration )",
+				`Deployment [DISCOVERED_DEPLOYMENT_ID] - [Elasticsearch][3ee11eb40eda22cac0cce259625c6734]: running step "step2" (Plan duration )...`,
+				"\x1b[92;mDeployment [DISCOVERED_DEPLOYMENT_ID] - [Elasticsearch][3ee11eb40eda22cac0cce259625c6734]: finished running all the plan steps\x1b[0m (Total plan duration )",
 			),
 		},
 		{
@@ -824,6 +826,7 @@ func TestVacateCluster(t *testing.T) {
 					Kind:           "kibana",
 					Output:         new(output.Device),
 					TrackFrequency: time.Nanosecond,
+					OutputFormat:   "text",
 					MaxPollRetries: 1,
 					API: discardResponses(newKibanaVacateMove(t, "someID", vacateCaseClusterConfig{
 						ID: "2ee11eb40eda22cac0cce259625c6734",
@@ -842,14 +845,15 @@ func TestVacateCluster(t *testing.T) {
 							newPlanStep("step1", "success"),
 							newPlanStep("step2", "success"),
 							newPlanStep("step3", "success"),
+							newPlanStep("plan-completed", "success"),
 						},
 					})),
 				},
 			},
 			want: newOutputResponses(
-				"Cluster [2ee11eb40eda22cac0cce259625c6734][Kibana]: running step \"step2\" (Plan duration )...",
-				"Cluster [2ee11eb40eda22cac0cce259625c6734][Kibana]: running step \"step3\" (Plan duration )...",
-				"\x1b[92;mCluster [2ee11eb40eda22cac0cce259625c6734][Kibana]: finished running all the plan steps\x1b[0m (Total plan duration )",
+				"Deployment [DISCOVERED_DEPLOYMENT_ID] - [Kibana][2ee11eb40eda22cac0cce259625c6734]: running step \"step2\" (Plan duration )...",
+				"Deployment [DISCOVERED_DEPLOYMENT_ID] - [Kibana][2ee11eb40eda22cac0cce259625c6734]: running step \"step3\" (Plan duration )...",
+				"\x1b[92;mDeployment [DISCOVERED_DEPLOYMENT_ID] - [Kibana][2ee11eb40eda22cac0cce259625c6734]: finished running all the plan steps\x1b[0m (Total plan duration )",
 			),
 		},
 		{
@@ -906,7 +910,7 @@ func TestVacateCluster(t *testing.T) {
 				},
 			},
 			err: newMultierror(
-				errors.New("cluster [2ee11eb40eda22cac0cce259625c6734][kibana] failed vacating, reason: code: a code, message: a message"),
+				errors.New("resource id [2ee11eb40eda22cac0cce259625c6734][kibana] failed vacating, reason: code: a code, message: a message"),
 			),
 		},
 	}
@@ -953,7 +957,7 @@ func Test_fillVacateClusterParams(t *testing.T) {
 					Output:    output.NewDevice(new(bytes.Buffer)),
 				},
 			},
-			err: errors.New(`allocator allocator-1: cluster [3ee11eb40eda22cac0cce259625c6734][elasticsearch]: allocator health autodiscovery: Get https://mock-host/mock-path/platform/infrastructure/allocators/allocator-1: unauthorized`),
+			err: errors.New(`allocator allocator-1: resource id [3ee11eb40eda22cac0cce259625c6734][elasticsearch]: allocator health autodiscovery: Get https://mock-host/mock-path/platform/infrastructure/allocators/allocator-1: unauthorized`),
 		},
 		{
 			name: "sets defaults on parameters that aren't specified",
@@ -1053,7 +1057,7 @@ func Test_newMoveClusterParams(t *testing.T) {
 				Kind:      "elasticsearch",
 				Output:    output.NewDevice(new(bytes.Buffer)),
 			}},
-			err: errors.New(`allocator allocator-1: cluster [3ee11eb40eda22cac0cce259625c6734][elasticsearch]: validate_only: Post https://mock-host/mock-path/platform/infrastructure/allocators/allocator-1/clusters/_move?force_update=false&validate_only=true: unauthorized`),
+			err: errors.New(`allocator allocator-1: resource id [3ee11eb40eda22cac0cce259625c6734][elasticsearch]: validate_only: Post https://mock-host/mock-path/platform/infrastructure/allocators/allocator-1/clusters/_move?force_update=false&validate_only=true: unauthorized`),
 		},
 		{
 			name: "elasticsearch move succeeds to get parameters",
@@ -1098,13 +1102,13 @@ func Test_newMoveClusterParams(t *testing.T) {
 				}}),
 				ID:            "allocator-1",
 				ClusterID:     "3ee11eb40eda22cac0cce259625c6734",
-				Kind:          "apm",
+				Kind:          util.Apm,
 				Output:        output.NewDevice(new(bytes.Buffer)),
 				AllocatorDown: ec.Bool(false),
 			}},
 			want: platform_infrastructure.NewMoveClustersByTypeParams().
 				WithAllocatorID("allocator-1").
-				WithClusterType(ec.String("apm")).
+				WithClusterType(ec.String(util.Apm)).
 				WithAllocatorDown(ec.Bool(false)).
 				WithBody(&models.MoveClustersRequest{
 					ApmClusters: []*models.MoveApmClusterConfiguration{
@@ -1358,7 +1362,7 @@ func Test_addAllocatorMovesToPool(t *testing.T) {
 					})
 					return p
 				}(),
-				VacateParams: &VacateParams{KindFilter: "apm"},
+				VacateParams: &VacateParams{KindFilter: util.Apm},
 				Moves: &models.MoveClustersDetails{
 					ElasticsearchClusters: []*models.MoveElasticsearchClusterDetails{
 						{

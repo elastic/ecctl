@@ -18,17 +18,14 @@
 package apm
 
 import (
-	"bytes"
 	"errors"
 	"net/http"
 	"reflect"
 	"testing"
-	"time"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	"github.com/elastic/cloud-sdk-go/pkg/output"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	multierror "github.com/hashicorp/go-multierror"
 
@@ -73,13 +70,8 @@ func TestUpgrade(t *testing.T) {
 		{
 			name: "Succeeds with tracking",
 			args: args{params: UpgradeParams{
-				TrackParams: util.TrackParams{
-					Track:         true,
-					Output:        output.NewDevice(new(bytes.Buffer)),
-					PollFrequency: time.Millisecond,
-					MaxRetries:    1,
-				},
-				ID: "d324608c97154bdba2dff97511d40368",
+				TrackChangeParams: util.NewMockTrackChangeParams("d324608c97154bdba2dff97511d40368"),
+				ID:                "d324608c97154bdba2dff97511d40368",
 				API: api.NewMock(util.AppendTrackResponses(mock.Response{Response: http.Response{
 					Body: mock.NewStructBody(models.ClusterUpgradeInfo{
 						ClusterID:      ec.String("d324608c97154bdba2dff97511d40368"),

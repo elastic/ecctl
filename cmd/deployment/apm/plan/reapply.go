@@ -35,27 +35,30 @@ var reapplyLatestPlanCmd = &cobra.Command{
 	Short:   "Reapplies the latest plan attempt, resetting all transient settings",
 	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		var reparams = &planutil.ReapplyParams{ID: args[0]}
+		var reparams = planutil.ReapplyParams{ID: args[0]}
 		// Obtains the parameter's value and sets it in params
 		for name := range util.FieldsOfStruct(reparams) {
 			val, err := cmd.Flags().GetBool(name)
 			if err != nil {
 				return err
 			}
-			util.Set(reparams, name, val)
+			util.Set(&reparams, name, val)
 		}
 
 		track, _ := cmd.Flags().GetBool("track")
 		p, err := apm.ReapplyLatestPlanAttempt(
 			apm.PlanParams{
-				TrackParams: util.TrackParams{
-					Track:  track,
-					Output: ecctl.Get().Config.OutputDevice,
-				},
+				Track: track,
+				TrackChangeParams: cmdutil.NewTrackParams(cmdutil.TrackParamsConfig{
+					App:        ecctl.Get(),
+					ResourceID: args[0],
+					Kind:       util.Apm,
+					Track:      track,
+				}).TrackChangeParams,
 				API: ecctl.Get().API,
 				ID:  args[0],
 			},
-			*reparams,
+			reparams,
 		)
 		if err != nil {
 			return err

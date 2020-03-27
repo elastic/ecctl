@@ -18,13 +18,19 @@
 package util
 
 import (
+	"bytes"
 	"fmt"
 	"net/http"
 	"reflect"
 	"testing"
+	"time"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/output"
+	"github.com/elastic/cloud-sdk-go/pkg/plan"
+	"github.com/elastic/cloud-sdk-go/pkg/plan/planutil"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/go-openapi/strfmt"
 )
@@ -47,17 +53,44 @@ var (
 	}}
 )
 
-// NewSuccessfulPlan returns a mocked response from a successful plan.
-func NewSuccessfulPlan() mock.Response {
+// NewSuccessfulCurrentPlan returns a mocked response from a successful plan.
+func NewSuccessfulCurrentPlan(currentTime ...time.Time) mock.Response {
+	var now strfmt.DateTime
+	if len(currentTime) > 0 {
+		now = strfmt.DateTime(currentTime[0])
+	}
 	return mock.Response{Response: http.Response{
 		StatusCode: 200,
-		Body: mock.NewStructBody(&models.ElasticsearchClusterPlansInfo{
-			Current: &models.ElasticsearchClusterPlanInfo{
-				PlanAttemptLog: []*models.ClusterPlanStepInfo{
-					{
-						Status: ec.String("success"),
-						StepID: ec.String("step-1"),
-					},
+		Body: mock.NewStructBody(&models.DeploymentGetResponse{
+			ID: ec.String("DEPLOYMENT_TEST_ID"),
+			Resources: &models.DeploymentResources{
+				Apm: []*models.ApmResourceInfo{
+					{ID: ec.String(ValidClusterID), RefID: ec.String("main-apm"), Info: &models.ApmInfo{PlanInfo: &models.ApmPlansInfo{
+						Current: &models.ApmPlanInfo{PlanAttemptLog: []*models.ClusterPlanStepInfo{
+							{Status: ec.String("success"), StepID: ec.String("plan-completed"), Started: &now},
+						}},
+					}}},
+				},
+				Appsearch: []*models.AppSearchResourceInfo{
+					{ID: ec.String(ValidClusterID), RefID: ec.String("main-appsearch"), Info: &models.AppSearchInfo{PlanInfo: &models.AppSearchPlansInfo{
+						Current: &models.AppSearchPlanInfo{PlanAttemptLog: []*models.ClusterPlanStepInfo{
+							{Status: ec.String("success"), StepID: ec.String("plan-completed"), Started: &now},
+						}},
+					}}},
+				},
+				Elasticsearch: []*models.ElasticsearchResourceInfo{
+					{ID: ec.String(ValidClusterID), RefID: ec.String("main-elasticsearch"), Info: &models.ElasticsearchClusterInfo{PlanInfo: &models.ElasticsearchClusterPlansInfo{
+						Current: &models.ElasticsearchClusterPlanInfo{PlanAttemptLog: []*models.ClusterPlanStepInfo{
+							{Status: ec.String("success"), StepID: ec.String("plan-completed"), Started: &now},
+						}},
+					}}},
+				},
+				Kibana: []*models.KibanaResourceInfo{
+					{ID: ec.String(ValidClusterID), RefID: ec.String("main-kibana"), Info: &models.KibanaClusterInfo{PlanInfo: &models.KibanaClusterPlansInfo{
+						Current: &models.KibanaClusterPlanInfo{PlanAttemptLog: []*models.ClusterPlanStepInfo{
+							{Status: ec.String("success"), StepID: ec.String("plan-completed"), Started: &now},
+						}},
+					}}},
 				},
 			},
 		}),
@@ -86,12 +119,32 @@ func NewFailedPlanUnknown() mock.Response {
 // by the client.
 func AppendTrackResponses(res ...mock.Response) []mock.Response {
 	var response = append(res,
-		PlanNotFound,
-		PlanNotFound,
-		NewSuccessfulPlan(),
+		NewSuccessfulCurrentPlan(),
+		NewSuccessfulCurrentPlan(),
+		NewSuccessfulCurrentPlan(),
 	)
 
 	return response
+}
+
+// NewMockTrackChangeParams creates new tracking params for test purposes.
+func NewMockTrackChangeParams(id string) planutil.TrackChangeParams {
+	var res = AppendTrackResponses()
+	if id == "" {
+		res = AppendTrackResponses(mock.New200Response(mock.NewStructBody(models.DeploymentsSearchResponse{
+			Deployments: []*models.DeploymentSearchResponse{
+				{ID: ec.String("cbb4bc6c09684c86aa5de54c05ea1d38")},
+			},
+		})))
+	}
+	return planutil.TrackChangeParams{
+		TrackChangeParams: plan.TrackChangeParams{
+			API:          api.NewMock(res...),
+			DeploymentID: id,
+		},
+		Writer: output.NewDevice(new(bytes.Buffer)),
+		Format: "text",
+	}
 }
 
 // CheckErrType receives two errors, if either one is not nil, it triggers a

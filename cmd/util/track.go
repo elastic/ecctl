@@ -21,15 +21,15 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/elastic/cloud-sdk-go/pkg/plan/planutil"
 	"github.com/hashicorp/go-multierror"
 
-	"github.com/elastic/ecctl/pkg/deployment/depresource"
 	"github.com/elastic/ecctl/pkg/formatter"
 )
 
 // TrackParams is consumed by Track.
 type TrackParams struct {
-	depresource.TrackResourcesParams
+	planutil.TrackChangeParams
 
 	// Formatter used to print the structure.
 	Formatter formatter.Formatter
@@ -67,8 +67,8 @@ func Track(params TrackParams) error {
 		if !params.Track {
 			return err
 		}
-		if params.TrackResourcesParams.OutputDevice != nil {
-			fmt.Fprintln(params.OutputDevice, err)
+		if params.TrackChangeParams.Writer != nil {
+			fmt.Fprintln(params.Writer, err)
 		}
 	}
 
@@ -76,5 +76,5 @@ func Track(params TrackParams) error {
 		return nil
 	}
 
-	return depresource.TrackResources(params.TrackResourcesParams)
+	return planutil.TrackChange(params.TrackChangeParams)
 }

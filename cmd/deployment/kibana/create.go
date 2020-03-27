@@ -106,17 +106,12 @@ var createKibanaCmd = &cobra.Command{
 			return err
 		}
 
-		return cmdutil.Track(cmdutil.TrackParams{
-			TrackResourcesParams: depresource.TrackResourcesParams{
-				API:          ecctl.Get().API,
-				Resources:    res.Resources,
-				Orphaned:     res.ShutdownResources,
-				OutputDevice: ecctl.Get().Config.OutputDevice,
-			},
-			Formatter: ecctl.Get().Formatter,
-			Track:     track,
-			Response:  res,
-		})
+		return cmdutil.Track(cmdutil.NewTrackParams(cmdutil.TrackParamsConfig{
+			App:          ecctl.Get(),
+			DeploymentID: *res.ID,
+			Track:        track,
+			Response:     res,
+		}))
 	},
 }
 

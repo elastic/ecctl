@@ -18,22 +18,19 @@
 package apm
 
 import (
-	"bytes"
 	"errors"
 	"net/http"
 	"net/url"
 	"reflect"
 	"testing"
-	"time"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	"github.com/elastic/cloud-sdk-go/pkg/output"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	multierror "github.com/hashicorp/go-multierror"
 
-	"github.com/elastic/ecctl/pkg/deployment/planutil"
+	depplanutil "github.com/elastic/ecctl/pkg/deployment/planutil"
 	"github.com/elastic/ecctl/pkg/util"
 )
 
@@ -131,19 +128,14 @@ func TestGetPlan(t *testing.T) {
 		{
 			name: "Succeeds getting plan with tracking",
 			args: args{params: PlanParams{
-				TrackParams: util.TrackParams{
-					Track:         true,
-					Output:        output.NewDevice(new(bytes.Buffer)),
-					PollFrequency: time.Millisecond,
-					MaxRetries:    1,
-				},
-				ID: "86d2ec6217774eedb93ba38483141997",
-				API: api.NewMock(util.AppendTrackResponses(mock.Response{Response: http.Response{
+				TrackChangeParams: util.NewMockTrackChangeParams("86d2ec6217774eedb93ba38483141997"),
+				ID:                "86d2ec6217774eedb93ba38483141997",
+				API: api.NewMock(mock.Response{Response: http.Response{
 					Body: mock.NewStructBody(models.ApmPlansInfo{
 						Healthy: ec.Bool(true),
 					}),
 					StatusCode: 200,
-				}})...),
+				}}),
 			}},
 			want: &models.ApmPlansInfo{
 				Healthy: ec.Bool(true),
@@ -231,13 +223,8 @@ func TestCancelPlan(t *testing.T) {
 		{
 			name: "Succeeds with tracking",
 			args: args{params: PlanParams{
-				TrackParams: util.TrackParams{
-					Track:         true,
-					Output:        output.NewDevice(new(bytes.Buffer)),
-					PollFrequency: time.Millisecond,
-					MaxRetries:    1,
-				},
-				ID: "d324608c97154bdba2dff97511d40368",
+				TrackChangeParams: util.NewMockTrackChangeParams("d324608c97154bdba2dff97511d40368"),
+				ID:                "d324608c97154bdba2dff97511d40368",
 				API: api.NewMock(util.AppendTrackResponses(mock.Response{Response: http.Response{
 					Body: mock.NewStructBody(models.ApmInfo{
 						Status: ec.String("success"),
@@ -324,7 +311,7 @@ func TestListPlanHistory(t *testing.T) {
 func TestReapplyLatestPlanAttempt(t *testing.T) {
 	type args struct {
 		params   PlanParams
-		reparams planutil.ReapplyParams
+		reparams depplanutil.ReapplyParams
 	}
 	tests := []struct {
 		name    string
@@ -351,7 +338,7 @@ func TestReapplyLatestPlanAttempt(t *testing.T) {
 					}},
 				),
 			},
-				reparams: planutil.ReapplyParams{
+				reparams: depplanutil.ReapplyParams{
 					ID:                   "181a0cc28c9143b5a0bda51cd65676b3",
 					Default:              true,
 					Rolling:              false,
@@ -469,7 +456,7 @@ func TestComputeTransientSettings(t *testing.T) {
 			args: args{
 				params: computeTransientParams{
 					plan: models.ApmPlan{},
-					transient: planutil.ReapplyParams{
+					transient: depplanutil.ReapplyParams{
 						ExtendedMaintenance: true,
 					},
 				},
@@ -508,7 +495,7 @@ func TestComputeTransientSettings(t *testing.T) {
 					plan: models.ApmPlan{
 						Transient: &models.TransientApmPlanConfiguration{},
 					},
-					transient: planutil.ReapplyParams{
+					transient: depplanutil.ReapplyParams{
 						ExtendedMaintenance: true,
 					},
 				},
@@ -533,7 +520,7 @@ func TestComputeTransientSettings(t *testing.T) {
 							},
 						},
 					},
-					transient: planutil.ReapplyParams{
+					transient: depplanutil.ReapplyParams{
 						ExtendedMaintenance: true,
 					},
 				},

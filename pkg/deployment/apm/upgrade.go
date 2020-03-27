@@ -21,7 +21,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/clusters_apm"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	"github.com/elastic/cloud-sdk-go/pkg/plan"
+	"github.com/elastic/cloud-sdk-go/pkg/plan/planutil"
 	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/deployment/deputil"
@@ -33,14 +33,14 @@ type UpgradeParams struct {
 	*api.API
 	ID string
 
-	util.TrackParams
+	Track bool
+	planutil.TrackChangeParams
 }
 
 // Validate ensures that the parameters are usable by the consuming function.
 func (params UpgradeParams) Validate() error {
 	var err = multierror.Append(new(multierror.Error),
 		deputil.ValidateParams(&params),
-		params.TrackParams.Validate(),
 	)
 	return err.ErrorOrNil()
 }
@@ -64,14 +64,7 @@ func Upgrade(params UpgradeParams) (*models.ClusterUpgradeInfo, error) {
 		return res.Payload, nil
 	}
 
-	return res.Payload, util.TrackCluster(util.TrackClusterParams{
-		Output: params.Output,
-		TrackParams: plan.TrackParams{
-			API:           params.API,
-			PollFrequency: params.PollFrequency,
-			MaxRetries:    params.MaxRetries,
-			ID:            params.ID,
-			Kind:          "apm",
-		},
-	})
+	return res.Payload, planutil.TrackChange(util.SetClusterTracking(
+		params.TrackChangeParams, params.ID, util.Apm,
+	))
 }

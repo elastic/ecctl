@@ -18,9 +18,10 @@
 package cmdapm
 
 import (
-	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/deployment/apm"
 	"github.com/elastic/ecctl/pkg/ecctl"
 	"github.com/elastic/ecctl/pkg/util"
@@ -29,16 +30,19 @@ import (
 var deleteApmCmd = &cobra.Command{
 	Use:     "delete <apm deployment id>",
 	Short:   "Deletes an APM deployment",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if stop, _ := cmd.Flags().GetBool("stop"); stop {
 			err := apm.Shutdown(apm.ShutdownParams{
-				API: ecctl.Get().API,
-				ID:  args[0],
-				TrackParams: util.TrackParams{
-					Track:  true,
-					Output: ecctl.Get().Config.OutputDevice,
-				},
+				API:   ecctl.Get().API,
+				ID:    args[0],
+				Track: true,
+				TrackChangeParams: cmdutil.NewTrackParams(cmdutil.TrackParamsConfig{
+					App:        ecctl.Get(),
+					ResourceID: args[0],
+					Kind:       util.Apm,
+					Track:      true,
+				}).TrackChangeParams,
 			})
 			if err != nil {
 				return err

@@ -79,6 +79,17 @@ func newBody(t *testing.T, v interface{}) string {
 	return string(b)
 }
 
+func newDeploymentDiscovery() mock.Response {
+	return mock.Response{Response: http.Response{
+		StatusCode: 200,
+		Body: mock.NewStructBody(models.DeploymentsSearchResponse{
+			Deployments: []*models.DeploymentSearchResponse{
+				{ID: ec.String("DISCOVERED_DEPLOYMENT_ID")},
+			},
+		}),
+	}}
+}
+
 func newElasticsearchMove(t *testing.T, clusterID, allocator string) io.ReadCloser {
 	return ioutil.NopCloser(strings.NewReader(newBody(t,
 		models.MoveClustersCommandResponse{
@@ -259,23 +270,75 @@ func newMulipleMoves(t *testing.T, allocator string, es, kibana, apm, appsearch 
 	return ioutil.NopCloser(strings.NewReader(newBody(t, res)))
 }
 
-func newPollerBody(t *testing.T, pending, current *models.ElasticsearchClusterPlanInfo) io.ReadCloser {
-	payload := &models.ElasticsearchClusterPlansInfo{Pending: pending, Current: current}
+func newPollerBody(t *testing.T, id string, pending, current *models.ElasticsearchClusterPlanInfo) io.ReadCloser {
+	payload := models.DeploymentGetResponse{
+		ID: ec.String("DISCOVERED_DEPLOYMENT_ID"),
+		Resources: &models.DeploymentResources{
+			Elasticsearch: []*models.ElasticsearchResourceInfo{
+				{
+					ID:    &id,
+					RefID: ec.String("main-elasticsearch"),
+					Info: &models.ElasticsearchClusterInfo{PlanInfo: &models.ElasticsearchClusterPlansInfo{
+						Current: current, Pending: pending,
+					}},
+				},
+			},
+		},
+	}
 	return newPayloadFromStruct(t, payload)
 }
 
-func newApmPollerBody(t *testing.T, pending, current *models.ApmPlanInfo) io.ReadCloser {
-	payload := &models.ApmPlansInfo{Pending: pending, Current: current}
+func newApmPollerBody(t *testing.T, id string, pending, current *models.ApmPlanInfo) io.ReadCloser {
+	payload := models.DeploymentGetResponse{
+		ID: ec.String("DISCOVERED_DEPLOYMENT_ID"),
+		Resources: &models.DeploymentResources{
+			Apm: []*models.ApmResourceInfo{
+				{
+					ID:    &id,
+					RefID: ec.String("main-apm"),
+					Info: &models.ApmInfo{PlanInfo: &models.ApmPlansInfo{
+						Current: current, Pending: pending,
+					}},
+				},
+			},
+		},
+	}
 	return newPayloadFromStruct(t, payload)
 }
 
-func newAppSearchPollerBody(t *testing.T, pending, current *models.AppSearchPlanInfo) io.ReadCloser {
-	payload := &models.AppSearchPlansInfo{Pending: pending, Current: current}
+func newAppSearchPollerBody(t *testing.T, id string, pending, current *models.AppSearchPlanInfo) io.ReadCloser {
+	payload := models.DeploymentGetResponse{
+		ID: ec.String("DISCOVERED_DEPLOYMENT_ID"),
+		Resources: &models.DeploymentResources{
+			Appsearch: []*models.AppSearchResourceInfo{
+				{
+					ID:    &id,
+					RefID: ec.String("main-apm"),
+					Info: &models.AppSearchInfo{PlanInfo: &models.AppSearchPlansInfo{
+						Current: current, Pending: pending,
+					}},
+				},
+			},
+		},
+	}
 	return newPayloadFromStruct(t, payload)
 }
 
-func newKibanaPollerBody(t *testing.T, pending, current *models.KibanaClusterPlanInfo) io.ReadCloser {
-	payload := &models.KibanaClusterPlansInfo{Pending: pending, Current: current}
+func newKibanaPollerBody(t *testing.T, id string, pending, current *models.KibanaClusterPlanInfo) io.ReadCloser {
+	payload := models.DeploymentGetResponse{
+		ID: ec.String("DISCOVERED_DEPLOYMENT_ID"),
+		Resources: &models.DeploymentResources{
+			Kibana: []*models.KibanaResourceInfo{
+				{
+					ID:    &id,
+					RefID: ec.String("main-kibana"),
+					Info: &models.KibanaClusterInfo{PlanInfo: &models.KibanaClusterPlansInfo{
+						Current: current, Pending: pending,
+					}},
+				},
+			},
+		},
+	}
 	return newPayloadFromStruct(t, payload)
 }
 
@@ -458,6 +521,7 @@ func newVacateTestCase(t *testing.T, tc vacateCase) *VacateParams {
 		Output:         output.NewDevice(sdkSync.NewBuffer()),
 		Allocators:     allocators,
 		API:            api.NewMock(responses...),
+		OutputFormat:   "text",
 		Concurrency:    1,
 		MaxPollRetries: 1,
 		TrackFrequency: time.Nanosecond,
@@ -467,7 +531,7 @@ func newVacateTestCase(t *testing.T, tc vacateCase) *VacateParams {
 func newAPMVacateMove(t *testing.T, alloc string, move vacateCaseClusterConfig) (*api.API, []mock.Response) {
 	var responses = make([]mock.Response, 0, 4)
 	responses = append(responses, mock.Response{Response: http.Response{
-		Body:       newAllocator(t, alloc, move.ID, "apm"),
+		Body:       newAllocator(t, alloc, move.ID, util.Apm),
 		StatusCode: 200,
 	}}, mock.Response{Response: http.Response{
 		Body:       newApmMove(t, move.ID, alloc),
@@ -505,14 +569,14 @@ func newAPMVacateMove(t *testing.T, alloc string, move vacateCaseClusterConfig) 
 	responses = append(responses, mock.Response{Response: http.Response{
 		Body:       newApmMove(t, move.ID, alloc),
 		StatusCode: 202,
-	}})
+	}}, newDeploymentDiscovery())
 
 	// Define steps
 	for iii := range move.steps {
 		var step = move.steps[iii]
 		responses = append(responses, mock.Response{Response: http.Response{
 			StatusCode: 200,
-			Body: newApmPollerBody(t,
+			Body: newApmPollerBody(t, move.ID,
 				&models.ApmPlanInfo{PlanAttemptLog: step},
 				nil,
 			),
@@ -525,7 +589,7 @@ func newAPMVacateMove(t *testing.T, alloc string, move vacateCaseClusterConfig) 
 		util.PlanNotFound,
 		mock.Response{Response: http.Response{
 			StatusCode: 200,
-			Body: newApmPollerBody(t,
+			Body: newApmPollerBody(t, move.ID,
 				nil,
 				&models.ApmPlanInfo{PlanAttemptLog: move.plan},
 			),
@@ -577,14 +641,14 @@ func newKibanaVacateMove(t *testing.T, alloc string, move vacateCaseClusterConfi
 	responses = append(responses, mock.Response{Response: http.Response{
 		Body:       newKibanaMove(t, move.ID, alloc),
 		StatusCode: 202,
-	}})
+	}}, newDeploymentDiscovery())
 
 	// Define steps
 	for iii := range move.steps {
 		var step = move.steps[iii]
 		responses = append(responses, mock.Response{Response: http.Response{
 			StatusCode: 200,
-			Body: newKibanaPollerBody(t,
+			Body: newKibanaPollerBody(t, move.ID,
 				&models.KibanaClusterPlanInfo{PlanAttemptLog: step},
 				nil,
 			),
@@ -596,7 +660,7 @@ func newKibanaVacateMove(t *testing.T, alloc string, move vacateCaseClusterConfi
 		util.PlanNotFound,
 		mock.Response{Response: http.Response{
 			StatusCode: 200,
-			Body: newKibanaPollerBody(t,
+			Body: newKibanaPollerBody(t, move.ID,
 				nil,
 				&models.KibanaClusterPlanInfo{PlanAttemptLog: move.plan},
 			),
@@ -646,14 +710,14 @@ func newElasticsearchVacateMove(t *testing.T, alloc string, move vacateCaseClust
 	responses = append(responses, mock.Response{Response: http.Response{
 		Body:       newElasticsearchMove(t, move.ID, alloc),
 		StatusCode: 202,
-	}})
+	}}, newDeploymentDiscovery())
 
 	// Define steps
 	for iii := range move.steps {
 		var step = move.steps[iii]
 		responses = append(responses, mock.Response{Response: http.Response{
 			StatusCode: 200,
-			Body: newPollerBody(t,
+			Body: newPollerBody(t, move.ID,
 				&models.ElasticsearchClusterPlanInfo{PlanAttemptLog: step},
 				nil,
 			),
@@ -666,7 +730,7 @@ func newElasticsearchVacateMove(t *testing.T, alloc string, move vacateCaseClust
 		util.PlanNotFound,
 		mock.Response{Response: http.Response{
 			StatusCode: 200,
-			Body: newPollerBody(t,
+			Body: newPollerBody(t, move.ID,
 				nil,
 				&models.ElasticsearchClusterPlanInfo{PlanAttemptLog: move.plan},
 			),
@@ -717,14 +781,14 @@ func newAppsearchVacateMove(t *testing.T, alloc string, move vacateCaseClusterCo
 	responses = append(responses, mock.Response{Response: http.Response{
 		Body:       newAppsearchMove(t, move.ID, alloc),
 		StatusCode: 202,
-	}})
+	}}, newDeploymentDiscovery())
 
 	// Define steps
 	for iii := range move.steps {
 		var step = move.steps[iii]
 		responses = append(responses, mock.Response{Response: http.Response{
 			StatusCode: 200,
-			Body: newAppSearchPollerBody(t,
+			Body: newAppSearchPollerBody(t, move.ID,
 				&models.AppSearchPlanInfo{PlanAttemptLog: step},
 				nil,
 			),
@@ -737,7 +801,7 @@ func newAppsearchVacateMove(t *testing.T, alloc string, move vacateCaseClusterCo
 		util.PlanNotFound,
 		mock.Response{Response: http.Response{
 			StatusCode: 200,
-			Body: newAppSearchPollerBody(t,
+			Body: newAppSearchPollerBody(t, move.ID,
 				nil,
 				&models.AppSearchPlanInfo{PlanAttemptLog: move.plan},
 			),

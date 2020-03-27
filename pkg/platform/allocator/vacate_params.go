@@ -40,7 +40,7 @@ var (
 	errOutputDeviceCannotBeNil      = errors.New("output device cannot be nil")
 	errCannotOverrideAllocatorDown  = errors.New("cannot set the AllocatorDown when multiple allocators are specified")
 
-	allowedClusterKinds = []string{"apm", "elasticsearch", "kibana", "appsearch"}
+	allowedClusterKinds = []string{util.Apm, util.Elasticsearch, util.Kibana, util.Appsearch}
 )
 
 // VacateParams used to vacate N allocators or clusters.
@@ -67,6 +67,9 @@ type VacateParams struct {
 
 	// Output device where the progress will be sent.
 	Output *output.Device
+
+	// OutputFormat to use
+	OutputFormat string
 
 	// Maximum number of errors to allow the plan status poller to tolerate.
 	MaxPollRetries uint8
@@ -151,6 +154,7 @@ type VacateClusterParams struct {
 	AllocatorDown  *bool
 	MoveOnly       *bool
 	Output         *output.Device
+	OutputFormat   string
 	MaxPollRetries uint8
 	SkipTracking   bool
 }

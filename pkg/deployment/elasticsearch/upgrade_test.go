@@ -18,17 +18,14 @@
 package elasticsearch
 
 import (
-	"bytes"
 	"errors"
 	"net/http"
 	"reflect"
 	"testing"
-	"time"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	"github.com/elastic/cloud-sdk-go/pkg/output"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	multierror "github.com/hashicorp/go-multierror"
 
@@ -121,34 +118,18 @@ func TestUpgrade(t *testing.T) {
 		{
 			name: "succeeds with tracking",
 			args: args{params: UpgradeParams{
-				TrackParams: util.TrackParams{
-					Track:         true,
-					Output:        output.NewDevice(new(bytes.Buffer)),
-					PollFrequency: time.Millisecond,
-					MaxRetries:    1,
-				},
-				Version: "5.0.0",
+				TrackChangeParams: util.NewMockTrackChangeParams(""),
+				Version:           "5.0.0",
 				ClusterParams: util.ClusterParams{
 					ClusterID: util.ValidClusterID,
-					API: api.NewMock(util.AppendTrackResponses(
-						mock.Response{
-							Response: http.Response{
-								StatusCode: 200,
-								Body: mock.NewStructBody(
-									newElasticSearchClusterInfoFromVersion("2.4.5"),
-								),
-							},
-						},
-						mock.Response{
-							Response: http.Response{
-								StatusCode: 202,
-								Body: mock.NewStructBody(models.ClusterCrudResponse{
-									ElasticsearchClusterID: util.ValidClusterID,
-								}),
-							},
-						},
-						util.PlanNotFound,
-					)...),
+					API: api.NewMock(
+						mock.New200StructResponse(
+							newElasticSearchClusterInfoFromVersion("2.4.5"),
+						),
+						mock.New202Response(mock.NewStructBody(models.ClusterCrudResponse{
+							ElasticsearchClusterID: util.ValidClusterID,
+						})),
+					),
 				},
 			}},
 			want: &models.ClusterCrudResponse{

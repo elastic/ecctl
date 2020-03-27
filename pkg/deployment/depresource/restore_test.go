@@ -77,8 +77,8 @@ func TestRestore(t *testing.T) {
 				ResourceParams: deployment.ResourceParams{
 					API:          api.NewMock(mock.New404Response(mock.NewStructBody(internalError))),
 					DeploymentID: util.ValidClusterID,
-					RefID:        "apm",
-					Kind:         "apm",
+					RefID:        util.Apm,
+					Kind:         util.Apm,
 				},
 			}},
 			err: errors.New(string(internalErrorBytes)),
@@ -112,8 +112,8 @@ func TestRestore(t *testing.T) {
 				ResourceParams: deployment.ResourceParams{
 					API:          api.NewMock(mock.New200Response(mock.NewStringBody(""))),
 					DeploymentID: util.ValidClusterID,
-					RefID:        "apm",
-					Kind:         "apm",
+					RefID:        util.Apm,
+					Kind:         util.Apm,
 				},
 			}},
 		},

@@ -18,17 +18,14 @@
 package kibana
 
 import (
-	"bytes"
 	"errors"
 	"net/http"
 	"net/url"
 	"reflect"
 	"testing"
-	"time"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
-	"github.com/elastic/cloud-sdk-go/pkg/output"
 	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
@@ -48,7 +45,6 @@ func TestReallocateParams_Validate(t *testing.T) {
 				Errors: []error{
 					errors.New(`api reference is required for command`),
 					errors.New(`id "" is invalid`),
-					errors.New(`track: Output cannot be empty`),
 				},
 			},
 			wantErr: true,
@@ -60,7 +56,6 @@ func TestReallocateParams_Validate(t *testing.T) {
 					ID:  "5c641576747442eba0ebd67944ccbe10",
 					API: &api.API{},
 				},
-				Output: new(output.Device),
 			},
 			wantErr: false,
 		},
@@ -143,7 +138,6 @@ func TestReallocate(t *testing.T) {
 				Errors: []error{
 					errors.New(`api reference is required for command`),
 					errors.New(`id "" is invalid`),
-					errors.New(`track: Output cannot be empty`),
 				},
 			},
 			wantErr: true,
@@ -157,7 +151,6 @@ func TestReallocate(t *testing.T) {
 						Error: errors.New("kibana not found"),
 					}),
 				},
-				Output: new(output.Device),
 			},
 			wantErr: true,
 			err: &url.Error{
@@ -181,7 +174,6 @@ func TestReallocate(t *testing.T) {
 						},
 					),
 				},
-				Output: new(output.Device),
 			},
 			wantErr: true,
 			err: &url.Error{
@@ -194,13 +186,9 @@ func TestReallocate(t *testing.T) {
 			name: "tracking is enabled",
 			params: ReallocateParams{
 				DeploymentParams: DeploymentParams{
-					ID: "853cfe89c4a74fb6a6477574d3c03771",
-					TrackParams: util.TrackParams{
-						Track:         true,
-						Output:        output.NewDevice(new(bytes.Buffer)),
-						PollFrequency: time.Millisecond,
-						MaxRetries:    1,
-					},
+					ID:                "853cfe89c4a74fb6a6477574d3c03771",
+					TrackChangeParams: util.NewMockTrackChangeParams(""),
+					Track:             true,
 					API: api.NewMock(util.AppendTrackResponses(
 						mock.Response{Response: http.Response{
 							StatusCode: 200,
@@ -211,7 +199,6 @@ func TestReallocate(t *testing.T) {
 						},
 					)...),
 				},
-				Output: new(output.Device),
 			},
 			wantErr: true,
 			err: &url.Error{

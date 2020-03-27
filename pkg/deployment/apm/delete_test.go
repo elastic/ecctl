@@ -18,17 +18,14 @@
 package apm
 
 import (
-	"bytes"
 	"errors"
 	"net/http"
 	"reflect"
 	"testing"
-	"time"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	"github.com/elastic/cloud-sdk-go/pkg/output"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	multierror "github.com/hashicorp/go-multierror"
 
@@ -123,17 +120,13 @@ func TestShutdown(t *testing.T) {
 		{
 			name: "Succeeds with tracking",
 			args: args{params: ShutdownParams{
-				TrackParams: util.TrackParams{
-					Track:         true,
-					Output:        output.NewDevice(new(bytes.Buffer)),
-					PollFrequency: time.Millisecond,
-					MaxRetries:    1,
-				},
-				ID: "d324608c97154bdba2dff97511d40368",
-				API: api.NewMock(util.AppendTrackResponses(mock.Response{Response: http.Response{
+				Track:             true,
+				TrackChangeParams: util.NewMockTrackChangeParams(""),
+				ID:                "d324608c97154bdba2dff97511d40368",
+				API: api.NewMock(mock.Response{Response: http.Response{
 					Body:       mock.NewStructBody(models.ClusterCommandResponse{}),
 					StatusCode: 202,
-				}})...),
+				}}),
 			}},
 		},
 	}

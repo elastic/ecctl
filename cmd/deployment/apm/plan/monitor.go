@@ -18,9 +18,6 @@
 package cmdapmplan
 
 import (
-	"time"
-
-	"github.com/elastic/cloud-sdk-go/pkg/plan"
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
@@ -35,18 +32,16 @@ var monitorPlanCmd = &cobra.Command{
 	Short:   "Monitors the pending plan",
 	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		return util.TrackCluster(util.TrackClusterParams{
-			TrackParams: plan.TrackParams{
-				ID:   args[0],
-				API:  ecctl.Get().API,
-				Kind: "apm",
-			},
-			Output: ecctl.Get().Config.OutputDevice,
-		})
+		return cmdutil.Track(cmdutil.NewTrackParams(cmdutil.TrackParamsConfig{
+			App:          ecctl.Get(),
+			DeploymentID: args[0],
+			Kind:         "apm",
+			Track:        true,
+		}))
 	},
 }
 
 func init() {
-	monitorPlanCmd.Flags().Duration("poll-interval", time.Second*2, "Monitor poll interval")
-	monitorPlanCmd.Flags().Uint8("retries", 3, cmdutil.PlanRetriesFlagMessage)
+	monitorPlanCmd.Flags().Duration("poll-interval", util.DefaultPollFrequency, "Monitor poll interval")
+	monitorPlanCmd.Flags().Uint8("retries", util.DefaultRetries, cmdutil.PlanRetriesFlagMessage)
 }

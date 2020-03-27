@@ -63,6 +63,7 @@ func TestCheckErrType(t *testing.T) {
 }
 
 func TestAppendTrackResponses(t *testing.T) {
+	var success = NewSuccessfulCurrentPlan()
 	type args struct {
 		res []mock.Response
 	}
@@ -76,12 +77,10 @@ func TestAppendTrackResponses(t *testing.T) {
 			args: args{res: []mock.Response{
 				{Error: errors.New("someerror")},
 			}},
-			want: append(
-				[]mock.Response{{Error: errors.New("someerror")}},
-				PlanNotFound,
-				PlanNotFound,
-				NewSuccessfulPlan(),
-			),
+			want: []mock.Response{
+				{Error: errors.New("someerror")},
+				success, success, success,
+			},
 		},
 		{
 			name: "appends multiple responses",
@@ -89,15 +88,11 @@ func TestAppendTrackResponses(t *testing.T) {
 				{Error: errors.New("someerror")},
 				{Error: errors.New("someothererror")},
 			}},
-			want: append(
-				[]mock.Response{
-					{Error: errors.New("someerror")},
-					{Error: errors.New("someothererror")},
-				},
-				PlanNotFound,
-				PlanNotFound,
-				NewSuccessfulPlan(),
-			),
+			want: []mock.Response{
+				{Error: errors.New("someerror")},
+				{Error: errors.New("someothererror")},
+				success, success, success,
+			},
 		},
 	}
 	for _, tt := range tests {

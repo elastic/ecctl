@@ -24,9 +24,10 @@ import (
 	"github.com/blang/semver"
 	"github.com/elastic/cloud-sdk-go/pkg/client/clusters_elasticsearch"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/plan/planutil"
 	multierror "github.com/hashicorp/go-multierror"
 
-	"github.com/elastic/ecctl/pkg/deployment/planutil"
+	depplanutil "github.com/elastic/ecctl/pkg/deployment/planutil"
 	"github.com/elastic/ecctl/pkg/util"
 )
 
@@ -47,16 +48,17 @@ const (
 // UpgradeParams is consumed by Upgrade.
 type UpgradeParams struct {
 	util.ClusterParams
-	util.TrackParams
 
 	Version string
+
+	Track bool
+	planutil.TrackChangeParams
 }
 
 // Validate ensures that the parameters are usable by Upgrade.
 func (params UpgradeParams) Validate() error {
 	var merr = new(multierror.Error)
 	merr = multierror.Append(merr, params.ClusterParams.Validate())
-	merr = multierror.Append(merr, params.TrackParams.Validate())
 
 	if _, e := semver.Parse(params.Version); e != nil {
 		merr = multierror.Append(merr, errors.New(strings.ToLower(e.Error())))
@@ -97,11 +99,10 @@ func Upgrade(params UpgradeParams) (*models.ClusterCrudResponse, error) {
 	)
 
 	return util.ParseCUResponse(util.ParseCUResponseParams{
-		API:            params.API,
-		UpdateResponse: res2,
-		CreateResponse: res,
-		Err:            err,
-		TrackParams:    params.TrackParams,
+		UpdateResponse:    res2,
+		CreateResponse:    res,
+		Err:               err,
+		TrackChangeParams: params.TrackChangeParams,
 	})
 }
 
@@ -112,7 +113,7 @@ func getUpgradePlan(cluster *models.ElasticsearchClusterInfo, version string) *m
 
 	// Default Plan for Minor upgrades
 	newPlan.Transient = &models.TransientElasticsearchPlanConfiguration{
-		Strategy: planutil.DefaultPlanStrategy,
+		Strategy: depplanutil.DefaultPlanStrategy,
 	}
 
 	previousVer := semver.MustParse(currentVersion)
@@ -121,7 +122,7 @@ func getUpgradePlan(cluster *models.ElasticsearchClusterInfo, version string) *m
 	// The only valid Strategy for Major version upgrades is all performing the
 	// change to all instances at the same time, resulting in downtime
 	if previousVer.Major != nextVersion.Major {
-		newPlan.Transient.Strategy = planutil.MajorUpgradeStrategy
+		newPlan.Transient.Strategy = depplanutil.MajorUpgradeStrategy
 		// This part ensures that upgrades from 2.x to 5.x succeed. The setting
 		// is enforced from the API to be unused, else it would error.
 		if newPlan.Elasticsearch.SystemSettings != nil {
@@ -161,7 +162,7 @@ func getUpgradePlan(cluster *models.ElasticsearchClusterInfo, version string) *m
 		// Asserts wether it complies with the criteria
 		needsRollingStrategyGroupedByName := memoryPressureThresholdExceeded || percentageDiskThresholdExceeded || hardDiskThresholdExceeded
 		if needsRollingStrategyGroupedByName {
-			newPlan.Transient.Strategy = planutil.RollingByNameStrategy
+			newPlan.Transient.Strategy = depplanutil.RollingByNameStrategy
 		}
 	}
 	return newPlan

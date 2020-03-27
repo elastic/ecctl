@@ -27,10 +27,10 @@ import (
 var (
 	// ValidTypes exposes a list of the valid Elastic Cloud workload Types.
 	ValidTypes = []string{
-		"elasticsearch",
-		"kibana",
-		"apm",
-		"appsearch",
+		Elasticsearch,
+		Kibana,
+		Apm,
+		Appsearch,
 	}
 )
 

@@ -18,16 +18,13 @@
 package elasticsearch
 
 import (
-	"bytes"
 	"errors"
 	"net/http"
 	"reflect"
 	"testing"
-	"time"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
-	"github.com/elastic/cloud-sdk-go/pkg/output"
 	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
@@ -59,12 +56,7 @@ func TestShutdownCluster(t *testing.T) {
 		{
 			name: "succeeds with tracking",
 			args: args{params: ShutdownClusterParams{
-				TrackParams: util.TrackParams{
-					Track:         true,
-					PollFrequency: time.Nanosecond,
-					MaxRetries:    1,
-					Output:        output.NewDevice(new(bytes.Buffer)),
-				},
+				TrackChangeParams: util.NewMockTrackChangeParams(""),
 				ClusterParams: util.ClusterParams{
 					ClusterID: util.ValidClusterID,
 					API: api.NewMock(util.AppendTrackResponses(mock.Response{
@@ -100,19 +92,6 @@ func TestShutdownCluster(t *testing.T) {
 			}},
 			err: &multierror.Error{Errors: []error{
 				util.ErrAPIReq,
-			}},
-		},
-		{
-			name: "fails due to parameter validation (track params)",
-			args: args{params: ShutdownClusterParams{
-				ClusterParams: util.ClusterParams{
-					ClusterID: util.ValidClusterID,
-					API:       new(api.API),
-				},
-				TrackParams: util.TrackParams{Track: true},
-			}},
-			err: &multierror.Error{Errors: []error{
-				errors.New("track params: output device cannot be empty"),
 			}},
 		},
 	}

@@ -18,15 +18,12 @@
 package elasticsearch
 
 import (
-	"errors"
 	"fmt"
 	"strings"
-	"time"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/clusters_elasticsearch"
-	"github.com/elastic/cloud-sdk-go/pkg/output"
-	"github.com/elastic/cloud-sdk-go/pkg/plan"
+	"github.com/elastic/cloud-sdk-go/pkg/plan/planutil"
 	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/deployment"
@@ -45,18 +42,13 @@ type ReallocateParams struct {
 	// Commenting user
 	User          string
 	InstancesDown *bool
-	OutputDevice  *output.Device
-	PollFrequency time.Duration
-	MaxRetries    uint8
+
+	planutil.TrackChangeParams
 }
 
 // Validate ensures that the parameters are usable by the consuming function.
 func (params ReallocateParams) Validate() error {
 	var err = multierror.Append(new(multierror.Error), params.ClusterParams.Validate())
-
-	if params.OutputDevice == nil {
-		err = multierror.Append(err, errors.New("output device cannot be nil"))
-	}
 
 	return err.ErrorOrNil()
 }
@@ -90,10 +82,10 @@ func Reallocate(params ReallocateParams) error {
 	//nolint
 	note.Add(note.AddParams{
 		Params: note.Params{
-		Params: deployment.Params{
-			API:         params.API,
-			ID:          params.ClusterID,
-		}},
+			Params: deployment.Params{
+				API: params.API,
+				ID:  params.ClusterID,
+			}},
 		Message:     fmt.Sprintf(reallocateMessage, "elasticsearch", strings.Join(params.Instances, " ")),
 		UserID:      params.User,
 		Commentator: ecctl.GetOperationInstance(),
@@ -109,14 +101,7 @@ func Reallocate(params ReallocateParams) error {
 		return api.UnwrapError(err)
 	}
 
-	return util.TrackCluster(util.TrackClusterParams{
-		Output: params.OutputDevice,
-		TrackParams: plan.TrackParams{
-			API:           params.API,
-			ID:            params.ClusterID,
-			Kind:          "elasticsearch",
-			PollFrequency: params.PollFrequency,
-			MaxRetries:    params.MaxRetries,
-		},
-	})
+	return planutil.TrackChange(util.SetClusterTracking(
+		params.TrackChangeParams, params.ClusterID, util.Elasticsearch,
+	))
 }

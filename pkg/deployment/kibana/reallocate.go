@@ -18,13 +18,9 @@
 package kibana
 
 import (
-	"errors"
-
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/clusters_kibana"
-	"github.com/elastic/cloud-sdk-go/pkg/output"
-	"github.com/elastic/cloud-sdk-go/pkg/plan"
-	multierror "github.com/hashicorp/go-multierror"
+	"github.com/elastic/cloud-sdk-go/pkg/plan/planutil"
 
 	"github.com/elastic/ecctl/pkg/deployment/deputil"
 	"github.com/elastic/ecctl/pkg/util"
@@ -34,19 +30,6 @@ import (
 type ReallocateParams struct {
 	DeploymentParams
 	Instances []string
-	Output    *output.Device
-}
-
-// Validate ensures that the parameters are usable by the consuming function.
-func (params ReallocateParams) Validate() error {
-	var merr = new(multierror.Error)
-
-	merr = multierror.Append(merr, params.DeploymentParams.Validate())
-
-	if params.Output == nil {
-		merr = multierror.Append(merr, errors.New("track: Output cannot be empty"))
-	}
-	return merr.ErrorOrNil()
 }
 
 // Reallocate will reallocate the Kibana instance instances, if no
@@ -87,12 +70,7 @@ func Reallocate(params ReallocateParams) error {
 		return api.UnwrapError(err)
 	}
 
-	return util.TrackCluster(util.TrackClusterParams{
-		Output: params.Output,
-		TrackParams: plan.TrackParams{
-			API:  params.API,
-			ID:   params.ID,
-			Kind: "kibana",
-		},
-	})
+	return planutil.TrackChange(util.SetClusterTracking(
+		params.TrackChangeParams, params.ID, util.Kibana,
+	))
 }
