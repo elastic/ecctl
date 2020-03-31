@@ -25,6 +25,7 @@ import (
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
+	"github.com/elastic/ecctl/pkg/util"
 )
 
 var monitorPlanCmd = &cobra.Command{

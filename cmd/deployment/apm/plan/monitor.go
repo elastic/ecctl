@@ -35,7 +35,7 @@ var monitorPlanCmd = &cobra.Command{
 		return cmdutil.Track(cmdutil.NewTrackParams(cmdutil.TrackParamsConfig{
 			App:          ecctl.Get(),
 			DeploymentID: args[0],
-			Kind:       util.Apm,
+			Kind:         util.Apm,
 			Track:        true,
 		}))
 	},

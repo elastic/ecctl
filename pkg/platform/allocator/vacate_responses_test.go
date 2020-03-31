@@ -37,6 +37,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	multierror "github.com/hashicorp/go-multierror"
 
+	"github.com/elastic/ecctl/pkg/deployment/depresource"
 	"github.com/elastic/ecctl/pkg/util"
 )
 
@@ -277,7 +278,7 @@ func newPollerBody(t *testing.T, id string, pending, current *models.Elasticsear
 			Elasticsearch: []*models.ElasticsearchResourceInfo{
 				{
 					ID:    &id,
-					RefID: ec.String("main-elasticsearch"),
+					RefID: ec.String(depresource.DefaultElasticsearchRefID),
 					Info: &models.ElasticsearchClusterInfo{PlanInfo: &models.ElasticsearchClusterPlansInfo{
 						Current: current, Pending: pending,
 					}},
@@ -295,7 +296,7 @@ func newApmPollerBody(t *testing.T, id string, pending, current *models.ApmPlanI
 			Apm: []*models.ApmResourceInfo{
 				{
 					ID:    &id,
-					RefID: ec.String("main-apm"),
+					RefID: ec.String(depresource.DefaultApmRefID),
 					Info: &models.ApmInfo{PlanInfo: &models.ApmPlansInfo{
 						Current: current, Pending: pending,
 					}},
@@ -313,7 +314,7 @@ func newAppSearchPollerBody(t *testing.T, id string, pending, current *models.Ap
 			Appsearch: []*models.AppSearchResourceInfo{
 				{
 					ID:    &id,
-					RefID: ec.String("main-apm"),
+					RefID: ec.String(depresource.DefaultAppSearchRefID),
 					Info: &models.AppSearchInfo{PlanInfo: &models.AppSearchPlansInfo{
 						Current: current, Pending: pending,
 					}},
@@ -331,7 +332,7 @@ func newKibanaPollerBody(t *testing.T, id string, pending, current *models.Kiban
 			Kibana: []*models.KibanaResourceInfo{
 				{
 					ID:    &id,
-					RefID: ec.String("main-kibana"),
+					RefID: ec.String(depresource.DefaultKibanaRefID),
 					Info: &models.KibanaClusterInfo{PlanInfo: &models.KibanaClusterPlansInfo{
 						Current: current, Pending: pending,
 					}},

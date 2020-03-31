@@ -172,7 +172,6 @@ var updateCmd = &cobra.Command{
 			DeploymentID: args[0],
 			Track:        track,
 			Response:     res,
-			Template:     "deployment/shutdown",
 		}))
 	},
 }
