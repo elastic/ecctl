@@ -3,7 +3,7 @@
 
 beta[]
 
-{p} is the CLI on steroids for the Elasticsearch Service and Elastic Cloud Enterprise APIs. 
+{p} is the CLI for the Elasticsearch Service and Elastic Cloud Enterprise APIs. 
 It wraps typical operations commonly needed by operators within a single command line tool.
 
 Benefits of {p}:
