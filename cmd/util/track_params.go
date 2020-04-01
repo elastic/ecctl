@@ -50,6 +50,10 @@ func NewTrackParams(params TrackParamsConfig) TrackParams {
 		params.FrequencyConfig = &DefaultTrackFrequencyConfig
 	}
 
+	if params.App == nil {
+		params.App = ecctl.Get()
+	}
+
 	return TrackParams{
 		TrackChangeParams: planutil.TrackChangeParams{
 			Writer: params.App.Config.OutputDevice,
