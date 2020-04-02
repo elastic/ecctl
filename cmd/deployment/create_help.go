@@ -18,6 +18,7 @@
 package cmddeployment
 
 const (
+	// nolint
 	createLong = `Creates a deployment which can be defined through flags or from a file definition.
 Sane default values are provided, making the command work out of the box even when no parameters are set. 
 When version is not specified, the latest available stack version will automatically be used. 
@@ -38,6 +39,7 @@ These are the available options:
 As an option "--generate-payload" can be used in order to obtain the generated payload that would be sent as a request. 
 Save it, update or extend the topology and create a deployment using the saved payload with the "--file" flag.`
 
+	// nolint
 	createExample = `## Create a deployment with the default values for Elasticsearch, a Kibana instance with a modified size, 
 and a default APM instance. While Elasticsearch and Kibana come enabled by default, both APM and AppSearch need to be 
 enabled by using the "--apm" and "--appsearch" flags. The command will exit after the API response has been returned, without 
@@ -48,8 +50,8 @@ $ ecctl deployment create --name my-deployment --zones 2 --kibana-size 2048 --ap
 the current stage on which the deployment resources are in.
 $ deployment create --name my-deployment --track
 [...]
-Cluster [38e0ff5b58a9483c96a98c923b22194e][Elasticsearch]: finished running all the plan steps (Total plan duration: 1m0.911628175s)
-Cluster [51178ffc645d48b7859dbf17388a6c35][Kibana]: finished running all the plan steps (Total plan duration: 1m11.246662764s)
+Deployment [b6ecbea3d5c84124b7dca457f2892086] - [Elasticsearch][b6ecbea3d5c84124b7dca457f2892086]: finished running all the plan steps (Total plan duration: 5m11.s)
+Deployment [91c4d60acb804ba0a27651fac02780ec] - [Kibana][8a9d9916cd6e46a7bb0912211d76e2af]: finished running all the plan steps (Total plan duration: 4m29.58s)
 
 ## Additionally, a more advanced topology for Elasticsearch can be created through "--topology-element" or shorthand "-e".
 The following command will create a deployment with two 1GB Elasticsearch instances of the type "data" and 
@@ -84,8 +86,8 @@ You can create a definition by using the sample JSON seen here:
 the current stage on which the deployment resources are in.
 $ deployment create --file create_example.json --track
 [...]
-Cluster [38e0ff5b58a9483c96a98c923b22194e][Elasticsearch]: finished running all the plan steps (Total plan duration: 1m0.911628175s)
-Cluster [51178ffc645d48b7859dbf17388a6c35][Kibana]: finished running all the plan steps (Total plan duration: 1m11.246662764s)
+Deployment [b6ecbea3d5c84124b7dca457f2892086] - [Elasticsearch][b6ecbea3d5c84124b7dca457f2892086]: finished running all the plan steps (Total plan duration: 5m11.s)
+Deployment [91c4d60acb804ba0a27651fac02780ec] - [Kibana][8a9d9916cd6e46a7bb0912211d76e2af]: finished running all the plan steps (Total plan duration: 4m29.58s)
 
 ## To retry a when the previous deployment creation failed:
 $ ecctl deployment create --file create_example.json

@@ -20,8 +20,8 @@ ecctl deployment create {--file | --size <int> --zones <string> | --topology-ele
 the current stage on which the deployment resources are in.
 $ deployment create --file create_example.json --track
 [...]
-Cluster [38e0ff5b58a9483c96a98c923b22194e][Elasticsearch]: finished running all the plan steps (Total plan duration: 1m0.911628175s)
-Cluster [51178ffc645d48b7859dbf17388a6c35][Kibana]: finished running all the plan steps (Total plan duration: 1m11.246662764s)
+Deployment [b6ecbea3d5c84124b7dca457f2892086] - [Elasticsearch][b6ecbea3d5c84124b7dca457f2892086]: finished running all the plan steps (Total plan duration: 5m11.s)
+Deployment [91c4d60acb804ba0a27651fac02780ec] - [Kibana][8a9d9916cd6e46a7bb0912211d76e2af]: finished running all the plan steps (Total plan duration: 4m29.58s)
 
 ## To retry a when the previous deployment creation failed:
 $ ecctl deployment create --file create_example.json
