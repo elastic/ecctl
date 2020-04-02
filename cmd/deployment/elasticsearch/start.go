@@ -33,7 +33,6 @@ var startElasticsearchCmd = &cobra.Command{
 	Use:     "start <cluster id>",
 	Short:   "Starts a stopped Elasticsearch cluster",
 	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
-
 	RunE: func(cmd *cobra.Command, args []string) error {
 		c, err := elasticsearch.GetCluster(elasticsearch.GetClusterParams{
 			ClusterParams: util.ClusterParams{
@@ -55,10 +54,13 @@ var startElasticsearchCmd = &cobra.Command{
 				ClusterID: args[0],
 				API:       ecctl.Get().API,
 			},
-			TrackParams: util.TrackParams{
-				Track:  track,
-				Output: ecctl.Get().Config.OutputDevice,
-			},
+			Track: track,
+			TrackChangeParams: cmdutil.NewTrackParams(cmdutil.TrackParamsConfig{
+				App:        ecctl.Get(),
+				ResourceID: args[0],
+				Kind:       util.Elasticsearch,
+				Track:      track,
+			}).TrackChangeParams,
 		}); err != nil {
 			return err
 		}

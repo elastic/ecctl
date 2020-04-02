@@ -39,10 +39,13 @@ var restartApmCmd = &cobra.Command{
 			API:   ecctl.Get().API,
 			ID:    args[0],
 			Force: force,
-			TrackParams: util.TrackParams{
-				Track:  track,
-				Output: ecctl.Get().Config.OutputDevice,
-			},
+			Track: track,
+			TrackChangeParams: cmdutil.NewTrackParams(cmdutil.TrackParamsConfig{
+				App:        ecctl.Get(),
+				ResourceID: args[0],
+				Kind:       util.Apm,
+				Track:      track,
+			}).TrackChangeParams,
 		})
 	},
 }

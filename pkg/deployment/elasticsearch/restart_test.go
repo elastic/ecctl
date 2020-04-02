@@ -18,17 +18,13 @@
 package elasticsearch
 
 import (
-	"bytes"
 	"errors"
 	"net/http"
 	"reflect"
 	"testing"
-	"time"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
-	"github.com/elastic/cloud-sdk-go/pkg/models"
-	"github.com/elastic/cloud-sdk-go/pkg/output"
 	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
@@ -60,12 +56,8 @@ func TestRestartCluster(t *testing.T) {
 		{
 			name: "succeeds with tracking",
 			args: args{params: RestartClusterParams{
-				TrackParams: util.TrackParams{
-					Track:         true,
-					PollFrequency: time.Nanosecond,
-					MaxRetries:    1,
-					Output:        output.NewDevice(new(bytes.Buffer)),
-				},
+				Track:             true,
+				TrackChangeParams: util.NewMockTrackChangeParams(""),
 				ClusterParams: util.ClusterParams{
 					ClusterID: util.ValidClusterID,
 					API: api.NewMock(mock.Response{
@@ -73,20 +65,7 @@ func TestRestartCluster(t *testing.T) {
 							StatusCode: 202,
 							Body:       mock.NewStringBody(`{}`),
 						},
-					}, mock.Response{Response: http.Response{
-						StatusCode: 404,
-						Body:       mock.NewStringBody(`{}`),
-					}}, mock.Response{Response: http.Response{
-						StatusCode: 404,
-						Body:       mock.NewStringBody(`{}`),
-					}}, mock.Response{Response: http.Response{
-						StatusCode: 200,
-						Body: mock.NewStructBody(&models.ElasticsearchClusterPlansInfo{
-							Current: &models.ElasticsearchClusterPlanInfo{
-								PlanAttemptLog: []*models.ClusterPlanStepInfo{},
-							},
-						}),
-					}}),
+					}),
 				},
 			}},
 		},
@@ -114,19 +93,6 @@ func TestRestartCluster(t *testing.T) {
 			}},
 			err: &multierror.Error{Errors: []error{
 				util.ErrAPIReq,
-			}},
-		},
-		{
-			name: "fails due to parameter validation (track params)",
-			args: args{params: RestartClusterParams{
-				ClusterParams: util.ClusterParams{
-					ClusterID: util.ValidClusterID,
-					API:       new(api.API),
-				},
-				TrackParams: util.TrackParams{Track: true},
-			}},
-			err: &multierror.Error{Errors: []error{
-				errors.New("track params: output device cannot be empty"),
 			}},
 		},
 	}

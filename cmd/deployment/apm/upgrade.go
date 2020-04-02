@@ -36,17 +36,20 @@ var upgradeApmCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		track, _ := cmd.Flags().GetBool("track")
 		res, err := apm.Upgrade(apm.UpgradeParams{
-			API: ecctl.Get().API,
-			ID:  args[0],
-			TrackParams: util.TrackParams{
-				Track:  track,
-				Output: ecctl.Get().Config.OutputDevice,
-			},
+			API:   ecctl.Get().API,
+			ID:    args[0],
+			Track: track,
+			TrackChangeParams: cmdutil.NewTrackParams(cmdutil.TrackParamsConfig{
+				App:        ecctl.Get(),
+				ResourceID: args[0],
+				Kind:       util.Apm,
+				Track:      track,
+			}).TrackChangeParams,
 		})
 		if err != nil {
 			return err
 		}
-		return ecctl.Get().Formatter.Format(filepath.Join("apm", "upgrade"), res)
+		return ecctl.Get().Formatter.Format(filepath.Join(util.Apm, "upgrade"), res)
 	},
 }
 

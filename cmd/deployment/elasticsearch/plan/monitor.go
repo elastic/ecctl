@@ -20,7 +20,6 @@ package cmdelasticsearchplan
 import (
 	"time"
 
-	"github.com/elastic/cloud-sdk-go/pkg/plan"
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
@@ -35,14 +34,12 @@ var monitorPlanCmd = &cobra.Command{
 	Short:   "Monitors the pending plan",
 	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		return util.TrackCluster(util.TrackClusterParams{
-			TrackParams: plan.TrackParams{
-				ID:   args[0],
-				API:  ecctl.Get().API,
-				Kind: "elasticsearch",
-			},
-			Output: ecctl.Get().Config.OutputDevice,
-		})
+		return cmdutil.Track(cmdutil.NewTrackParams(cmdutil.TrackParamsConfig{
+			App:          ecctl.Get(),
+			DeploymentID: args[0],
+			Kind:         util.Elasticsearch,
+			Track:        true,
+		}))
 	},
 }
 

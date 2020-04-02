@@ -35,16 +35,18 @@ var stopKibanaCmd = &cobra.Command{
 		track, _ := cmd.Flags().GetBool("track")
 		return kibana.Stop(kibana.StopParams{
 			DeploymentParams: kibana.DeploymentParams{
-				API: ecctl.Get().API,
-				ID:  args[0],
-				TrackParams: util.TrackParams{
-					Track:  track,
-					Output: ecctl.Get().Config.OutputDevice,
-				},
+				API:   ecctl.Get().API,
+				ID:    args[0],
+				Track: track,
+				TrackChangeParams: cmdutil.NewTrackParams(cmdutil.TrackParamsConfig{
+					App:        ecctl.Get(),
+					ResourceID: args[0],
+					Kind:       util.Kibana,
+					Track:      track,
+				}).TrackChangeParams,
 			},
 			Hide: false,
-		},
-		)
+		})
 	},
 }
 

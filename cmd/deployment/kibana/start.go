@@ -24,7 +24,6 @@ import (
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
-	"github.com/elastic/ecctl/pkg/deployment/deputil"
 	"github.com/elastic/ecctl/pkg/deployment/kibana"
 	"github.com/elastic/ecctl/pkg/ecctl"
 	"github.com/elastic/ecctl/pkg/util"
@@ -38,15 +37,9 @@ var startKibanaCmd = &cobra.Command{
 		c, err := kibana.Get(kibana.ClusterParams{
 			DeploymentParams: kibana.DeploymentParams{
 				API: ecctl.Get().API,
-				ID:  args[0]},
-			QueryParams: deputil.QueryParams{
-				ShowMetadata:     false,
-				ShowPlanDefaults: false,
-				ShowPlans:        false,
-				ShowPlanLogs:     false,
-				ShowSettings:     false,
-			}},
-		)
+				ID:  args[0],
+			},
+		})
 		if err != nil {
 			return err
 		}
@@ -57,12 +50,15 @@ var startKibanaCmd = &cobra.Command{
 
 		track, _ := cmd.Flags().GetBool("track")
 		return kibana.Restart(kibana.DeploymentParams{
-			API: ecctl.Get().API,
-			ID:  args[0],
-			TrackParams: util.TrackParams{
-				Track:  track,
-				Output: ecctl.Get().Config.OutputDevice,
-			},
+			API:   ecctl.Get().API,
+			ID:    args[0],
+			Track: track,
+			TrackChangeParams: cmdutil.NewTrackParams(cmdutil.TrackParamsConfig{
+				App:        ecctl.Get(),
+				ResourceID: args[0],
+				Kind:       util.Kibana,
+				Track:      track,
+			}).TrackChangeParams,
 		})
 	},
 }

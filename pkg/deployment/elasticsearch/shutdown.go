@@ -20,7 +20,7 @@ package elasticsearch
 import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/clusters_elasticsearch"
-	"github.com/elastic/cloud-sdk-go/pkg/plan"
+	"github.com/elastic/cloud-sdk-go/pkg/plan/planutil"
 	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
@@ -29,11 +29,13 @@ import (
 // ShutdownClusterParams used to shut down an elasticsearch cluster.
 type ShutdownClusterParams struct {
 	util.ClusterParams
-	util.TrackParams
 
 	// Hides the cluster from the user console if specified.
 	Hide         bool
 	SkipSnapshot bool
+
+	Track bool
+	planutil.TrackChangeParams
 }
 
 // Validate ensures the parameters are usable by ShutdownCluster.
@@ -41,7 +43,6 @@ func (params ShutdownClusterParams) Validate() error {
 	var err = new(multierror.Error)
 
 	err = multierror.Append(err, params.ClusterParams.Validate())
-	err = multierror.Append(err, params.TrackParams.Validate())
 
 	return err.ErrorOrNil()
 }
@@ -67,14 +68,7 @@ func ShutdownCluster(params ShutdownClusterParams) error {
 		return nil
 	}
 
-	return util.TrackCluster(util.TrackClusterParams{
-		Output: params.Output,
-		TrackParams: plan.TrackParams{
-			API:           params.API,
-			ID:            params.ClusterID,
-			PollFrequency: params.PollFrequency,
-			MaxRetries:    params.MaxRetries,
-			Kind:          "elasticsearch",
-		},
-	})
+	return planutil.TrackChange(util.SetClusterTracking(
+		params.TrackChangeParams, params.ClusterID, util.Elasticsearch,
+	))
 }

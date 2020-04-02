@@ -106,17 +106,12 @@ var createApmCmd = &cobra.Command{
 		}
 
 		var track, _ = cmd.Flags().GetBool("track")
-		return cmdutil.Track(cmdutil.TrackParams{
-			TrackResourcesParams: depresource.TrackResourcesParams{
-				API:          ecctl.Get().API,
-				Resources:    res.Resources,
-				Orphaned:     res.ShutdownResources,
-				OutputDevice: ecctl.Get().Config.OutputDevice,
-			},
-			Formatter: ecctl.Get().Formatter,
-			Track:     track,
-			Response:  res,
-		})
+		return cmdutil.Track(cmdutil.NewTrackParams(cmdutil.TrackParamsConfig{
+			App:          ecctl.Get(),
+			DeploymentID: id,
+			Track:        track,
+			Response:     res,
+		}))
 	},
 }
 

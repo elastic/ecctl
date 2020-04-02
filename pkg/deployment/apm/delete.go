@@ -22,7 +22,7 @@ import (
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/clusters_apm"
-	"github.com/elastic/cloud-sdk-go/pkg/plan"
+	"github.com/elastic/cloud-sdk-go/pkg/plan/planutil"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	multierror "github.com/hashicorp/go-multierror"
 
@@ -74,7 +74,8 @@ type ShutdownParams struct {
 	// Stops the cluster and hides it from the user.
 	Hide bool
 
-	util.TrackParams
+	Track bool
+	planutil.TrackChangeParams
 }
 
 // Validate ensures that the parameters are usable by the consuming function.
@@ -88,7 +89,6 @@ func (params ShutdownParams) Validate() error {
 		merr = multierror.Append(merr, deputil.NewInvalidDeploymentIDError(params.ID))
 	}
 
-	merr = multierror.Append(merr, params.TrackParams.Validate())
 	return merr.ErrorOrNil()
 }
 
@@ -112,14 +112,7 @@ func Shutdown(params ShutdownParams) error {
 		return nil
 	}
 
-	return util.TrackCluster(util.TrackClusterParams{
-		Output: params.Output,
-		TrackParams: plan.TrackParams{
-			API:           params.API,
-			PollFrequency: params.PollFrequency,
-			MaxRetries:    params.MaxRetries,
-			ID:            params.ID,
-			Kind:          "apm",
-		},
-	})
+	return planutil.TrackChange(util.SetClusterTracking(
+		params.TrackChangeParams, params.ID, util.Apm,
+	))
 }

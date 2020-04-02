@@ -34,12 +34,15 @@ var restartKibanaCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		track, _ := cmd.Flags().GetBool("track")
 		return kibana.Restart(kibana.DeploymentParams{
-			API: ecctl.Get().API,
-			ID:  args[0],
-			TrackParams: util.TrackParams{
-				Track:  track,
-				Output: ecctl.Get().Config.OutputDevice,
-			},
+			API:   ecctl.Get().API,
+			ID:    args[0],
+			Track: track,
+			TrackChangeParams: cmdutil.NewTrackParams(cmdutil.TrackParamsConfig{
+				App:        ecctl.Get(),
+				ResourceID: args[0],
+				Kind:       util.Kibana,
+				Track:      track,
+			}).TrackChangeParams,
 		})
 	},
 }

@@ -18,9 +18,10 @@
 package cmdelasticsearch
 
 import (
-	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/deployment/elasticsearch"
 	"github.com/elastic/ecctl/pkg/ecctl"
 	"github.com/elastic/ecctl/pkg/util"
@@ -29,8 +30,7 @@ import (
 var deleteElasticsearchCmd = &cobra.Command{
 	Use:     "delete <cluster id>",
 	Short:   "Deletes an Elasticsearch cluster",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
-
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if stop, _ := cmd.Flags().GetBool("stop"); stop {
 			skipSnapshot, _ := cmd.Flags().GetBool("skip-snapshot")
@@ -39,10 +39,13 @@ var deleteElasticsearchCmd = &cobra.Command{
 					ClusterID: args[0],
 					API:       ecctl.Get().API,
 				},
-				TrackParams: util.TrackParams{
-					Track:  true,
-					Output: ecctl.Get().Config.OutputDevice,
-				},
+				Track: true,
+				TrackChangeParams: cmdutil.NewTrackParams(cmdutil.TrackParamsConfig{
+					App:        ecctl.Get(),
+					ResourceID: args[0],
+					Kind:       util.Elasticsearch,
+					Track:      true,
+				}).TrackChangeParams,
 				SkipSnapshot: skipSnapshot,
 			})
 			if err != nil {

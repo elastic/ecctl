@@ -22,6 +22,7 @@ import (
 
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/deployment/elasticsearch/plan"
 	"github.com/elastic/ecctl/pkg/deployment/planutil"
 	"github.com/elastic/ecctl/pkg/ecctl"
@@ -32,7 +33,6 @@ var reapplyLatestElasticsearchPlanCmd = &cobra.Command{
 	Use:     "reapply <cluster id>",
 	Short:   "Reapplies the latest plan attempt, resetting all transient settings",
 	PreRunE: cobra.MinimumNArgs(1),
-
 	RunE: func(cmd *cobra.Command, args []string) error {
 		commonParams := &planutil.ReapplyParams{ID: args[0]}
 		for name := range util.FieldsOfStruct(commonParams) {
@@ -46,10 +46,14 @@ var reapplyLatestElasticsearchPlanCmd = &cobra.Command{
 		var params = &plan.ReapplyParams{
 			ReapplyParams: *commonParams,
 			API:           ecctl.Get().API,
-			TrackParams: util.TrackParams{
-				Track:  true,
-				Output: ecctl.Get().Config.OutputDevice,
-			},
+			Output:        cmd.OutOrStdout(),
+			Track:         true,
+			TrackChangeParams: cmdutil.NewTrackParams(cmdutil.TrackParamsConfig{
+				App:        ecctl.Get(),
+				ResourceID: args[0],
+				Kind:       util.Elasticsearch,
+				Track:      true,
+			}).TrackChangeParams,
 		}
 		for name := range util.FieldsOfStruct(params) {
 			val, err := cmd.Flags().GetBool(name)

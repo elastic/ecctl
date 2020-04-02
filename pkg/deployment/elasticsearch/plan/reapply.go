@@ -21,14 +21,16 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/clusters_elasticsearch"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/plan/planutil"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	multierror "github.com/hashicorp/go-multierror"
 
-	"github.com/elastic/ecctl/pkg/deployment/planutil"
+	depplanutil "github.com/elastic/ecctl/pkg/deployment/planutil"
 	"github.com/elastic/ecctl/pkg/util"
 )
 
@@ -39,9 +41,11 @@ var (
 // ReapplyParams contains the parameters required to call a plan reapply action
 type ReapplyParams struct {
 	*api.API
-	planutil.ReapplyParams
-	util.TrackParams
+	depplanutil.ReapplyParams
 
+	Output io.Writer
+	planutil.TrackChangeParams
+	Track                bool
 	SkipSnapshot         bool `kebabcase:"Skips snapshot on the reapplied plan"`
 	SkipDataMigration    bool `kebabcase:"Bypasses the need to wait for data to be migrated from old instances to new instances before continuing the plan (potentially deleting the old instances and losing data)"`
 	SkipPostUpgradeSteps bool `kebabcase:"Bypasses 2.x->5.x operations for any plan change ending with a 5.x cluster (eg apply a cluster license, ensure Monitoring is configured)"`
@@ -53,10 +57,6 @@ func (params ReapplyParams) Validate() error {
 	var err = new(multierror.Error)
 	if params.API == nil {
 		err = multierror.Append(err, util.ErrAPIReq)
-	}
-
-	if params.TrackParams.Output == nil && !params.ReapplyParams.HidePlan {
-		err = multierror.Append(err, errors.New("output cannot be nil when hide is false"))
 	}
 
 	err = multierror.Append(err, params.ReapplyParams.Validate())
@@ -122,7 +122,7 @@ func Reapply(params ReapplyParams) (*models.ClusterCrudResponse, error) {
 	}
 
 	if !params.HidePlan {
-		enc := json.NewEncoder(params.TrackParams.Output)
+		enc := json.NewEncoder(params.Output)
 		enc.SetIndent("", "  ")
 		if err := enc.Encode(body); err != nil {
 			return nil, err
@@ -137,11 +137,11 @@ func Reapply(params ReapplyParams) (*models.ClusterCrudResponse, error) {
 	)
 
 	return util.ParseCUResponse(util.ParseCUResponseParams{
-		API:            params.API,
-		UpdateResponse: res2,
-		CreateResponse: res,
-		Err:            err,
-		TrackParams:    params.TrackParams,
+		UpdateResponse:    res2,
+		CreateResponse:    res,
+		Err:               err,
+		Track:             params.Track,
+		TrackChangeParams: params.TrackChangeParams,
 	})
 }
 

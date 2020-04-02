@@ -18,11 +18,9 @@
 package util
 
 import (
-	"errors"
 	"time"
 
-	"github.com/elastic/cloud-sdk-go/pkg/output"
-	"github.com/elastic/cloud-sdk-go/pkg/plan"
+	"github.com/elastic/cloud-sdk-go/pkg/plan/planutil"
 )
 
 const (
@@ -40,55 +38,11 @@ const (
 	DefaultPollFrequency = time.Second * 10
 )
 
-// TrackParams are intended to be used as a field in other params structs
-// that aim to perform plan tracking.
-type TrackParams struct {
-	Output        *output.Device
-	PollFrequency time.Duration
-	Track         bool
-	MaxRetries    uint8
-}
-
-// TrackClusterParams is consumed by TrackCluster
-type TrackClusterParams struct {
-	plan.TrackParams
-	Output *output.Device
-}
-
-// Validate ensures that the parameters are usable by the consuming function.
-func (params TrackClusterParams) Validate() error {
-	if params.Output == nil {
-		return errors.New("track: Output cannot be empty")
-	}
-	return params.TrackParams.Validate()
-}
-
-// Validate ensures that the parameters are usable by the consuming function.
-func (params TrackParams) Validate() error {
-	if params.Track && params.Output == nil {
-		return errors.New("track params: output device cannot be empty")
-	}
-	return nil
-}
-
-// TrackCluster tracks a cluster by its ID and kind to a specified output.
-func TrackCluster(params TrackClusterParams) error {
-	if params.MaxRetries == 0 {
-		params.MaxRetries = DefaultRetries
-	}
-
-	if params.PollFrequency.Nanoseconds() == 0 {
-		params.PollFrequency = DefaultPollFrequency
-	}
-
-	if err := params.Validate(); err != nil {
-		return err
-	}
-
-	c, err := plan.Track(params.TrackParams)
-	if err != nil {
-		return err
-	}
-
-	return plan.Stream(c, params.Output)
+// SetClusterTracking modifies the TrackChangeParams to track a specific id and
+// kind ignoring downstream changes.
+func SetClusterTracking(params planutil.TrackChangeParams, id, kind string) planutil.TrackChangeParams {
+	params.TrackChangeParams.ResourceID = id
+	params.TrackChangeParams.Kind = kind
+	params.TrackChangeParams.IgnoreDownstream = true
+	return params
 }

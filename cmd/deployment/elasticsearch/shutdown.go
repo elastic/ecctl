@@ -43,10 +43,13 @@ var shutdownElasticsearchCmd = &cobra.Command{
 				ClusterID: args[0],
 				API:       ecctl.Get().API,
 			},
-			TrackParams: util.TrackParams{
-				Track:  track,
-				Output: ecctl.Get().Config.OutputDevice,
-			},
+			Track: track,
+			TrackChangeParams: cmdutil.NewTrackParams(cmdutil.TrackParamsConfig{
+				App:        ecctl.Get(),
+				ResourceID: args[0],
+				Kind:       util.Elasticsearch,
+				Track:      track,
+			}).TrackChangeParams,
 			Hide:         hide,
 			SkipSnapshot: skipSnapshot,
 		})

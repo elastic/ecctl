@@ -34,7 +34,6 @@ var restartElasticsearchCmd = &cobra.Command{
 	Use:     "restart <cluster id>",
 	Short:   "Restarts an Elasticsearch cluster",
 	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
-
 	RunE: func(cmd *cobra.Command, args []string) error {
 		track, _ := cmd.Flags().GetBool("track")
 		rollingByName, _ := cmd.Flags().GetBool("rolling-by-name")
@@ -46,10 +45,13 @@ var restartElasticsearchCmd = &cobra.Command{
 				ClusterID: args[0],
 				API:       ecctl.Get().API,
 			},
-			TrackParams: util.TrackParams{
-				Track:  track,
-				Output: ecctl.Get().Config.OutputDevice,
-			},
+			Track: track,
+			TrackChangeParams: cmdutil.NewTrackParams(cmdutil.TrackParamsConfig{
+				App:        ecctl.Get(),
+				ResourceID: args[0],
+				Kind:       util.Elasticsearch,
+				Track:      track,
+			}).TrackChangeParams,
 			RollingByName:     rollingByName,
 			RollingByZone:     rollingByZone,
 			SkipSnapshot:      skipSnapshot,

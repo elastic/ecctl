@@ -22,22 +22,24 @@ import (
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/clusters_elasticsearch"
-	"github.com/elastic/cloud-sdk-go/pkg/plan"
+	"github.com/elastic/cloud-sdk-go/pkg/plan/planutil"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	multierror "github.com/hashicorp/go-multierror"
 
-	"github.com/elastic/ecctl/pkg/deployment/planutil"
+	depplanutil "github.com/elastic/ecctl/pkg/deployment/planutil"
 	"github.com/elastic/ecctl/pkg/util"
 )
 
 // RestartClusterParams is used to restart clusters with specific parameters / options
 type RestartClusterParams struct {
 	util.ClusterParams
-	util.TrackParams
 
 	ShardInitWaitTime time.Duration
 
 	RollingByName, RollingByZone, SkipSnapshot, RestoreSnapshot bool
+
+	Track bool
+	planutil.TrackChangeParams
 }
 
 // Validate ensures the parameters are usable by ShutdownCluster.
@@ -45,7 +47,6 @@ func (params RestartClusterParams) Validate() error {
 	var err = new(multierror.Error)
 
 	err = multierror.Append(err, params.ClusterParams.Validate())
-	err = multierror.Append(err, params.TrackParams.Validate())
 
 	return err.ErrorOrNil()
 }
@@ -59,12 +60,12 @@ func RestartCluster(params RestartClusterParams) error {
 		return err
 	}
 
-	groupingStrategy := planutil.AllGroupAttribute
+	groupingStrategy := depplanutil.AllGroupAttribute
 	if params.RollingByName {
-		groupingStrategy = planutil.NameGroupAttribute
+		groupingStrategy = depplanutil.NameGroupAttribute
 	}
 	if params.RollingByZone {
-		groupingStrategy = planutil.ZoneGroupAttribute
+		groupingStrategy = depplanutil.ZoneGroupAttribute
 	}
 
 	shardInitWaitTime := int64(params.ShardInitWaitTime.Seconds())
@@ -85,14 +86,7 @@ func RestartCluster(params RestartClusterParams) error {
 		return nil
 	}
 
-	return util.TrackCluster(util.TrackClusterParams{
-		Output: params.Output,
-		TrackParams: plan.TrackParams{
-			API:           params.API,
-			ID:            params.ClusterID,
-			MaxRetries:    params.MaxRetries,
-			PollFrequency: params.PollFrequency,
-			Kind:          "elasticsearch",
-		},
-	})
+	return planutil.TrackChange(util.SetClusterTracking(
+		params.TrackChangeParams, params.ClusterID, util.Elasticsearch,
+	))
 }

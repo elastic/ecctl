@@ -23,17 +23,17 @@ import (
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	"github.com/elastic/cloud-sdk-go/pkg/plan"
+	"github.com/elastic/cloud-sdk-go/pkg/plan/planutil"
 	multierror "github.com/hashicorp/go-multierror"
 )
 
 // ParseCUResponseParams is used by ParseCUResponse.
 type ParseCUResponseParams struct {
-	*api.API
 	CreateResponse interface{}
 	UpdateResponse interface{}
 	Err            error
-	TrackParams
+	Track          bool
+	planutil.TrackChangeParams
 }
 
 // Validate ensures that the parameters are usable by the consuming function.
@@ -43,17 +43,13 @@ func (params ParseCUResponseParams) Validate() error {
 	}
 
 	var merr = new(multierror.Error)
-	if params.API == nil {
-		merr = multierror.Append(merr, errors.New("parse response: API cannot be empty"))
-	}
-
 	if params.CreateResponse == nil && params.UpdateResponse == nil {
 		merr = multierror.Append(merr,
 			errors.New("parse response: One of Create or Update response must be populated"),
 		)
 	}
 
-	return multierror.Append(merr, params.TrackParams.Validate()).ErrorOrNil()
+	return merr.ErrorOrNil()
 }
 
 // ParseCUResponse parses the create / update response
@@ -81,20 +77,17 @@ func ParseCUResponse(params ParseCUResponseParams) (*models.ClusterCrudResponse,
 		return response, nil
 	}
 
-	var id, kind = response.ElasticsearchClusterID, "elasticsearch"
+	var id, kind = response.ElasticsearchClusterID, Elasticsearch
 	if id == "" {
 		id = response.KibanaClusterID
-		kind = "kibana"
+		kind = Kibana
 	}
 
-	return response, TrackCluster(TrackClusterParams{
-		Output: params.Output,
-		TrackParams: plan.TrackParams{
-			API:           params.API,
-			PollFrequency: params.PollFrequency,
-			MaxRetries:    params.MaxRetries,
-			ID:            id,
-			Kind:          kind,
-		},
-	})
+	if !params.Track {
+		return response, nil
+	}
+
+	return response, planutil.TrackChange(SetClusterTracking(
+		params.TrackChangeParams, id, kind,
+	))
 }

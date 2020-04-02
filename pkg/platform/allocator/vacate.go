@@ -25,6 +25,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/client/platform_infrastructure"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	"github.com/elastic/cloud-sdk-go/pkg/plan"
+	"github.com/elastic/cloud-sdk-go/pkg/plan/planutil"
 	"github.com/elastic/cloud-sdk-go/pkg/sync/pool"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/elastic/cloud-sdk-go/pkg/util/slice"
@@ -164,7 +165,7 @@ func waitVacateCompletion(p *pool.Pool, hasWork bool) error {
 	for _, lover := range leftovers {
 		if params, ok := lover.(*VacateClusterParams); ok {
 			errs = multierror.Append(errs, fmt.Errorf(
-				"allocator %s: cluster [%s][%s]: %s",
+				"allocator %s: resource id [%s][%s]: %s",
 				params.ID, params.ClusterID, params.Kind,
 				"was either cancelled or not processed, follow up accordingly",
 			))
@@ -191,7 +192,7 @@ func addAllocatorMovesToPool(params addAllocatorMovesToPoolParams) ([]pool.Valid
 			continue
 		}
 
-		var kind = "elasticsearch"
+		var kind = util.Elasticsearch
 		if kindFilter != "" && kind != kindFilter {
 			break
 		}
@@ -203,7 +204,7 @@ func addAllocatorMovesToPool(params addAllocatorMovesToPoolParams) ([]pool.Valid
 			continue
 		}
 
-		var kind = "kibana"
+		var kind = util.Kibana
 		if kindFilter != "" && kind != kindFilter {
 			break
 		}
@@ -215,7 +216,7 @@ func addAllocatorMovesToPool(params addAllocatorMovesToPoolParams) ([]pool.Valid
 			continue
 		}
 
-		var kind = "apm"
+		var kind = util.Apm
 		if kindFilter != "" && kind != kindFilter {
 			break
 		}
@@ -227,7 +228,7 @@ func addAllocatorMovesToPool(params addAllocatorMovesToPoolParams) ([]pool.Valid
 			continue
 		}
 
-		var kind = "appsearch"
+		var kind = util.Appsearch
 		if kindFilter != "" && kind != kindFilter {
 			break
 		}
@@ -253,6 +254,7 @@ func newVacateClusterParams(params addAllocatorMovesToPoolParams, id, kind strin
 		MaxPollRetries:      params.VacateParams.MaxPollRetries,
 		TrackFrequency:      params.VacateParams.TrackFrequency,
 		Output:              params.VacateParams.Output,
+		OutputFormat:        params.VacateParams.OutputFormat,
 		MoveOnly:            params.VacateParams.MoveOnly,
 		PlanOverrides:       params.VacateParams.PlanOverrides,
 	}
@@ -287,7 +289,20 @@ func VacateCluster(params *VacateClusterParams) error {
 		return nil
 	}
 
-	return trackMovedCluster(params)
+	return planutil.TrackChange(planutil.TrackChangeParams{
+		TrackChangeParams: plan.TrackChangeParams{
+			API:              params.API,
+			ResourceID:       params.ClusterID,
+			Kind:             params.Kind,
+			IgnoreDownstream: true,
+			Config: plan.TrackFrequencyConfig{
+				PollFrequency: params.TrackFrequency,
+				MaxRetries:    int(params.MaxPollRetries),
+			},
+		},
+		Writer: params.Output,
+		Format: params.OutputFormat,
+	})
 }
 
 // fillVacateClusterParams validates the parameters and fills any missing
@@ -307,7 +322,9 @@ func fillVacateClusterParams(params *VacateClusterParams) (*VacateClusterParams,
 		if err != nil {
 			return nil, errors.Wrap(err, vacateWrapMessage(params, "allocator health autodiscovery"))
 		}
-		params.AllocatorDown = ec.Bool(!*alloc.Status.Connected || !*alloc.Status.Healthy)
+		if alloc.Status != nil {
+			params.AllocatorDown = ec.Bool(!*alloc.Status.Connected || !*alloc.Status.Healthy)
+		}
 	}
 
 	if params.MaxPollRetries == 0 {
@@ -326,7 +343,7 @@ func vacateWrapMessage(params *VacateClusterParams, ctx string) string {
 	if params == nil {
 		return ""
 	}
-	return fmt.Sprintf("allocator %s: cluster [%s][%s]: %s",
+	return fmt.Sprintf("allocator %s: resource id [%s][%s]: %s",
 		params.ID, params.ClusterID, params.Kind, ctx,
 	)
 }
@@ -357,19 +374,19 @@ func newMoveClusterParams(params *VacateClusterParams) (*platform_infrastructure
 		WithBody(req)
 
 	if len(req.ElasticsearchClusters) > 0 {
-		moveParams.SetClusterType(ec.String("elasticsearch"))
+		moveParams.SetClusterType(ec.String(util.Elasticsearch))
 	}
 
 	if len(req.KibanaClusters) > 0 {
-		moveParams.SetClusterType(ec.String("kibana"))
+		moveParams.SetClusterType(ec.String(util.Kibana))
 	}
 
 	if len(req.ApmClusters) > 0 {
-		moveParams.SetClusterType(ec.String("apm"))
+		moveParams.SetClusterType(ec.String(util.Apm))
 	}
 
 	if len(req.AppsearchClusters) > 0 {
-		moveParams.SetClusterType(ec.String("appsearch"))
+		moveParams.SetClusterType(ec.String(util.Appsearch))
 	}
 
 	return moveParams, nil
@@ -388,32 +405,10 @@ func moveClusterByType(params *VacateClusterParams) error {
 	)
 
 	if err != nil {
-		return errors.Wrap(api.UnwrapError(err), vacateWrapMessage(params, "cluster move"))
+		return errors.Wrap(api.UnwrapError(err), vacateWrapMessage(params, "resource move"))
 	}
 
 	return CheckVacateFailures(res.Payload.Failures, params.ClusterFilter)
-}
-
-func trackMovedCluster(params *VacateClusterParams) error {
-	channel, err := plan.Track(plan.TrackParams{
-		API:           params.API,
-		ID:            params.ClusterID,
-		Kind:          params.Kind,
-		PollFrequency: params.TrackFrequency,
-		MaxRetries:    params.MaxPollRetries,
-	})
-	if err != nil {
-		// Remove this after AppSearch is supported in the plan tracker
-		// https://github.com/elastic/cloud-sdk-go/issues/34
-		if params.Kind == "appsearch" {
-			wrapMessage := "instance is being moved but tracking is not supported, please check the vacate progress from the UI"
-			return errors.New(vacateWrapMessage(params, wrapMessage))
-		}
-		wrapMessage := "plan tracker returned an error but vacate is in progress"
-		return errors.Wrap(err, vacateWrapMessage(params, wrapMessage))
-	}
-
-	return plan.Stream(channel, params.Output)
 }
 
 // CheckVacateFailures iterates over the list of failures returning
@@ -438,7 +433,7 @@ func CheckVacateFailures(failures *models.MoveClustersDetails, filter []string) 
 		}
 		if !strings.Contains(ferr.Error(), PlanPendingMessage) {
 			merr = multierror.Append(merr,
-				fmt.Errorf("cluster [%s][elasticsearch] failed vacating, reason: %s", *failure.ClusterID, ferr),
+				fmt.Errorf("resource id [%s][elasticsearch] failed vacating, reason: %s", *failure.ClusterID, ferr),
 			)
 		}
 	}
@@ -456,7 +451,7 @@ func CheckVacateFailures(failures *models.MoveClustersDetails, filter []string) 
 
 		if !strings.Contains(ferr.Error(), PlanPendingMessage) {
 			merr = multierror.Append(merr,
-				fmt.Errorf("cluster [%s][kibana] failed vacating, reason: %s", *failure.ClusterID, ferr),
+				fmt.Errorf("resource id [%s][kibana] failed vacating, reason: %s", *failure.ClusterID, ferr),
 			)
 		}
 	}
@@ -474,7 +469,7 @@ func CheckVacateFailures(failures *models.MoveClustersDetails, filter []string) 
 
 		if !strings.Contains(ferr.Error(), PlanPendingMessage) {
 			merr = multierror.Append(merr,
-				fmt.Errorf("cluster [%s][apm] failed vacating, reason: %s", *failure.ClusterID, ferr),
+				fmt.Errorf("resource id [%s][apm] failed vacating, reason: %s", *failure.ClusterID, ferr),
 			)
 		}
 	}
@@ -492,7 +487,7 @@ func CheckVacateFailures(failures *models.MoveClustersDetails, filter []string) 
 
 		if !strings.Contains(ferr.Error(), PlanPendingMessage) {
 			merr = multierror.Append(merr,
-				fmt.Errorf("cluster [%s][appsearch] failed vacating, reason: %s", *failure.ClusterID, ferr),
+				fmt.Errorf("resource id [%s][appsearch] failed vacating, reason: %s", *failure.ClusterID, ferr),
 			)
 		}
 	}

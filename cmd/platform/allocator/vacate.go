@@ -165,6 +165,7 @@ var vacateAllocatorCmd = &cobra.Command{
 			KindFilter:          kind,
 			Concurrency:         uint16(concurrency),
 			Output:              ecctl.Get().Config.OutputDevice,
+			OutputFormat:        ecctl.Get().Config.Output,
 			MoveOnly:            ec.Bool(moveOnly),
 			SkipTracking:        skipTracking,
 			PlanOverrides: allocator.PlanOverrides{

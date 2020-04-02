@@ -77,8 +77,8 @@ func TestShutdown(t *testing.T) {
 				ResourceParams: deployment.ResourceParams{
 					API:          api.NewMock(mock.New404Response(mock.NewStructBody(error404))),
 					DeploymentID: util.ValidClusterID,
-					RefID:        "apm",
-					Kind:         "apm",
+					RefID:        util.Apm,
+					Kind:         util.Apm,
 				},
 			}},
 			err: errors.New(string(error404Byte)),
@@ -147,8 +147,8 @@ func TestShutdown(t *testing.T) {
 				ResourceParams: deployment.ResourceParams{
 					API:          api.NewMock(mock.New200Response(mock.NewStructBody(struct{}{}))),
 					DeploymentID: util.ValidClusterID,
-					RefID:        "apm",
-					Kind:         "apm",
+					RefID:        util.Apm,
+					Kind:         util.Apm,
 				},
 			}},
 		},

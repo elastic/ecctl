@@ -13,8 +13,7 @@ ecctl deployment apm plan history <cluster id> [flags]
 ### Options
 
 ```
-  -h, --help    help for history
-      --track   Tracks the progress of the performed task
+  -h, --help   help for history
 ```
 
 ### Options inherited from parent commands

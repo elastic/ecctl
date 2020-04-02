@@ -18,26 +18,34 @@
 package cmdkibana
 
 import (
-	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/deployment/kibana"
 	"github.com/elastic/ecctl/pkg/ecctl"
+	"github.com/elastic/ecctl/pkg/util"
 )
 
 var reallocateKibanaClusterCmd = &cobra.Command{
 	Use:     "reallocate <cluster id>",
 	Short:   "Reallocates Kibana instances",
 	Long:    "Reallocates Kibana instances. If no \"--instances\" are specified all of the nodes will be restarted",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		instances, _ := cmd.Flags().GetStringSlice("instances")
 		return kibana.Reallocate(kibana.ReallocateParams{
 			DeploymentParams: kibana.DeploymentParams{
-				ID:  args[0],
-				API: ecctl.Get().API,
+				ID:    args[0],
+				API:   ecctl.Get().API,
+				Track: true,
+				TrackChangeParams: cmdutil.NewTrackParams(cmdutil.TrackParamsConfig{
+					App:        ecctl.Get(),
+					ResourceID: args[0],
+					Kind:       util.Kibana,
+					Track:      true,
+				}).TrackChangeParams,
 			},
-			Output:    ecctl.Get().Config.OutputDevice,
 			Instances: instances,
 		})
 	},

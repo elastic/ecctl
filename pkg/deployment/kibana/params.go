@@ -19,10 +19,10 @@ package kibana
 
 import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
+	"github.com/elastic/cloud-sdk-go/pkg/plan/planutil"
 	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/deployment/deputil"
-	"github.com/elastic/ecctl/pkg/util"
 )
 
 // stoppedState represents the stopped state string for a cluster
@@ -33,14 +33,15 @@ type DeploymentParams struct {
 	API *api.API
 	// ID represents the deployment ID.
 	ID string
-	util.TrackParams
+
+	Track bool
+	planutil.TrackChangeParams
 }
 
 // Validate ensures that the parameters are usable by the consuming function.
 func (params *DeploymentParams) Validate() error {
 	var err = multierror.Append(new(multierror.Error),
 		deputil.ValidateParams(params),
-		params.TrackParams.Validate(),
 	)
 	return err.ErrorOrNil()
 }

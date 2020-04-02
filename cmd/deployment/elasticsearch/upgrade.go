@@ -28,24 +28,24 @@ import (
 )
 
 var upgradeElasticsearchVersionCmd = &cobra.Command{
-	Use:   "upgrade <cluster id> --version=<version>",
-	Short: "Upgrades the cluster to the specified version",
-
+	Use:     "upgrade <cluster id> --version=<version>",
+	Short:   "Upgrades the cluster to the specified version",
 	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		version := cmd.Flag("version").Value.String()
 		track, _ := cmd.Flags().GetBool("track")
-
 		_, err := elasticsearch.Upgrade(elasticsearch.UpgradeParams{
 			ClusterParams: util.ClusterParams{
 				ClusterID: args[0],
 				API:       ecctl.Get().API,
 			},
-			TrackParams: util.TrackParams{
-				Track:  track,
-				Output: ecctl.Get().Config.OutputDevice,
-			},
-
+			Track: track,
+			TrackChangeParams: cmdutil.NewTrackParams(cmdutil.TrackParamsConfig{
+				App:        ecctl.Get(),
+				ResourceID: args[0],
+				Kind:       util.Elasticsearch,
+				Track:      track,
+			}).TrackChangeParams,
 			Version: version,
 		})
 
@@ -55,7 +55,6 @@ var upgradeElasticsearchVersionCmd = &cobra.Command{
 
 func init() {
 	Command.AddCommand(upgradeElasticsearchVersionCmd)
-
 	upgradeElasticsearchVersionCmd.Flags().StringP("version", "v", "", "Version to upgrade to (required)")
 	upgradeElasticsearchVersionCmd.Flags().BoolP("track", "t", false, cmdutil.TrackFlagMessage)
 	cobra.MarkFlagRequired(upgradeElasticsearchVersionCmd.Flags(), "version")

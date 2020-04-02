@@ -15,37 +15,18 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package cmdapmplan
+package util
 
-import (
-	"fmt"
-	"path/filepath"
+const (
+	// Apm kind
+	Apm = "apm"
 
-	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
-	"github.com/spf13/cobra"
+	// Appsearch kind
+	Appsearch = "appsearch"
 
-	"github.com/elastic/ecctl/pkg/deployment/apm"
-	"github.com/elastic/ecctl/pkg/ecctl"
+	// Elasticsearch kind
+	Elasticsearch = "elasticsearch"
+
+	// Kibana kind
+	Kibana = "kibana"
 )
-
-var listPlansCmd = &cobra.Command{
-	Use:     "history <cluster id>",
-	Short:   "Lists the plan history",
-	Aliases: []string{"attempts"},
-	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
-	RunE: func(cmd *cobra.Command, args []string) error {
-		p, err := apm.ListPlanHistory(apm.PlanParams{
-			API: ecctl.Get().API,
-			ID:  args[0],
-		})
-		if err != nil {
-			return nil
-		}
-
-		return ecctl.Get().Formatter.Format(
-			filepath.Join("apm",
-				fmt.Sprintf("%s%s", cmd.Parent().Name(), cmd.Name())),
-			p,
-		)
-	},
-}

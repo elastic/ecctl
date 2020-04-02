@@ -20,7 +20,7 @@ package apm
 import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/clusters_apm"
-	"github.com/elastic/cloud-sdk-go/pkg/plan"
+	"github.com/elastic/cloud-sdk-go/pkg/plan/planutil"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	multierror "github.com/hashicorp/go-multierror"
 
@@ -35,14 +35,15 @@ type RestartParams struct {
 
 	// Force cancels any pending plans that might be in progress.
 	Force bool
-	util.TrackParams
+
+	Track bool
+	planutil.TrackChangeParams
 }
 
 // Validate ensures that the parameters are usable by the consuming function.
 func (params RestartParams) Validate() error {
 	var err = multierror.Append(new(multierror.Error),
 		deputil.ValidateParams(&params),
-		params.TrackParams.Validate(),
 	)
 	return err.ErrorOrNil()
 }
@@ -69,14 +70,7 @@ func Restart(params RestartParams) error {
 		return nil
 	}
 
-	return util.TrackCluster(util.TrackClusterParams{
-		Output: params.Output,
-		TrackParams: plan.TrackParams{
-			Kind:          "apm",
-			API:           params.API,
-			ID:            params.ID,
-			PollFrequency: params.PollFrequency,
-			MaxRetries:    params.MaxRetries,
-		},
-	})
+	return planutil.TrackChange(util.SetClusterTracking(
+		params.TrackChangeParams, params.ID, util.Apm,
+	))
 }

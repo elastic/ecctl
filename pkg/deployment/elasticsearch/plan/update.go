@@ -21,7 +21,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/clusters_elasticsearch"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	"github.com/elastic/cloud-sdk-go/pkg/plan"
+	"github.com/elastic/cloud-sdk-go/pkg/plan/planutil"
 	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/deployment/deputil"
@@ -30,19 +30,18 @@ import (
 
 // UpdateParams is consumed by Update
 type UpdateParams struct {
+	planutil.TrackChangeParams
+	Plan models.ElasticsearchClusterPlan
 	*api.API
 	ID           string
 	ValidateOnly bool
-	Plan         models.ElasticsearchClusterPlan
-
-	util.TrackParams
+	Track        bool
 }
 
 // Validate ensures that the parameters are usable by the consuming function.
 func (params UpdateParams) Validate() error {
 	var err = multierror.Append(new(multierror.Error),
 		deputil.ValidateParams(&params),
-		params.TrackParams.Validate(),
 	)
 	return err.ErrorOrNil()
 }
@@ -73,14 +72,7 @@ func Update(params UpdateParams) (*models.ClusterCrudResponse, error) {
 		return planAccepted.Payload, nil
 	}
 
-	return planAccepted.Payload, util.TrackCluster(util.TrackClusterParams{
-		Output: params.Output,
-		TrackParams: plan.TrackParams{
-			API:           params.API,
-			PollFrequency: params.PollFrequency,
-			MaxRetries:    params.MaxRetries,
-			ID:            params.ID,
-			Kind:          "elasticsearch",
-		},
-	})
+	return planAccepted.Payload, planutil.TrackChange(util.SetClusterTracking(
+		params.TrackChangeParams, params.ID, util.Elasticsearch,
+	))
 }

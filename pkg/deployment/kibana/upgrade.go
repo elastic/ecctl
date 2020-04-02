@@ -21,7 +21,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/clusters_kibana"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	"github.com/elastic/cloud-sdk-go/pkg/plan"
+	"github.com/elastic/cloud-sdk-go/pkg/plan/planutil"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -45,14 +45,7 @@ func Upgrade(params DeploymentParams) (*models.ClusterUpgradeInfo, error) {
 		return res.Payload, nil
 	}
 
-	return res.Payload, util.TrackCluster(util.TrackClusterParams{
-		Output: params.Output,
-		TrackParams: plan.TrackParams{
-			API:           params.API,
-			PollFrequency: params.PollFrequency,
-			MaxRetries:    params.MaxRetries,
-			ID:            params.ID,
-			Kind:          "kibana",
-		},
-	})
+	return res.Payload, planutil.TrackChange(util.SetClusterTracking(
+		params.TrackChangeParams, params.ID, util.Kibana,
+	))
 }

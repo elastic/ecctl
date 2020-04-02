@@ -18,9 +18,7 @@
 package cmdappsearch
 
 import (
-	"github.com/elastic/cloud-sdk-go/pkg/models"
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
-	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -49,19 +47,13 @@ var upgradeCmd = &cobra.Command{
 			return err
 		}
 
-		if track, _ := cmd.Flags().GetBool("track"); !track {
-			return nil
-		}
-
-		return depresource.TrackResources(depresource.TrackResourcesParams{
-			API:          ecctl.Get().API,
-			OutputDevice: ecctl.Get().Config.OutputDevice,
-			Resources: []*models.DeploymentResource{{
-				ID:    ec.String(res.ResourceID),
-				Kind:  ec.String(resKind),
-				RefID: ec.String(refID),
-			}},
-		})
+		track, _ := cmd.Flags().GetBool("track")
+		return cmdutil.Track(cmdutil.NewTrackParams(cmdutil.TrackParamsConfig{
+			App:          ecctl.Get(),
+			DeploymentID: args[0],
+			Track:        track,
+			Response:     res,
+		}))
 	},
 }
 

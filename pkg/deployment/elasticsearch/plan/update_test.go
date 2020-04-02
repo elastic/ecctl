@@ -18,17 +18,14 @@
 package plan
 
 import (
-	"bytes"
 	"errors"
 	"net/http"
 	"reflect"
 	"testing"
-	"time"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	"github.com/elastic/cloud-sdk-go/pkg/output"
 	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
@@ -71,14 +68,10 @@ func TestUpdate(t *testing.T) {
 		{
 			name: "Successfully validates a plan, ignores requested tracking",
 			args: args{params: UpdateParams{
-				ID:           "d324608c97154bdba2dff97511d40368",
-				ValidateOnly: true,
-				TrackParams: util.TrackParams{
-					Track:         true,
-					Output:        output.NewDevice(new(bytes.Buffer)),
-					PollFrequency: time.Millisecond,
-					MaxRetries:    1,
-				},
+				ID:                "d324608c97154bdba2dff97511d40368",
+				ValidateOnly:      true,
+				Track:             true,
+				TrackChangeParams: util.NewMockTrackChangeParams(""),
 				API: api.NewMock(mock.Response{Response: http.Response{
 					Body: mock.NewStructBody(models.ClusterCrudResponse{
 						ElasticsearchClusterID: "d324608c97154bdba2dff97511d40368",
@@ -108,13 +101,9 @@ func TestUpdate(t *testing.T) {
 		{
 			name: "Successfully submits the new plan with tracking",
 			args: args{params: UpdateParams{
-				ID: "d324608c97154bdba2dff97511d40368",
-				TrackParams: util.TrackParams{
-					Track:         true,
-					Output:        output.NewDevice(new(bytes.Buffer)),
-					PollFrequency: time.Millisecond,
-					MaxRetries:    1,
-				},
+				ID:                "d324608c97154bdba2dff97511d40368",
+				Track:             true,
+				TrackChangeParams: util.NewMockTrackChangeParams(""),
 				API: api.NewMock(util.AppendTrackResponses(mock.Response{Response: http.Response{
 					Body: mock.NewStructBody(models.ClusterCrudResponse{
 						ElasticsearchClusterID: "d324608c97154bdba2dff97511d40368",
