@@ -75,7 +75,7 @@ unknown error (status 500)
 $ ecctl deployment create --request-id=GMZPMRrcMYqHdmxjIQkHbdjnhPIeBElcwrHwzVlhGUSMXrEIzVXoBykSVRsKncNb`
 
 	// Remove temporary constants when reads for deployment templates are available on ESS
-	createLongTemp = `Creates a deployment which can be defined from a file definition with the --file=<file path> (shorthand: -f) flag.
+	createLongTemp = `Creates a deployment which is defined from a file definition using the --file=<file path> (shorthand: -f) flag.
 
 You can create a definition by using the sample JSON seen here:
   https://elastic.co/guide/en/cloud/current/ec-api-deployment-crud.html#ec_create_a_deployment`
