@@ -18,7 +18,7 @@ cd docs
 
 # Convert the Markdown files to Asciidoctor
 docker run --rm -v $(pwd):/documents ${KRAMDOC_DOCKER_IMAGE} find ./ -name "*.md" -type f -exec sh -c 'kramdoc {}' \;
-if [[ ! -z ${GITHUB_ACTION} ]]; then
+if [[ ! -z ${GITHUB_ACTIONS} ]]; then
     sudo chown -R $(id -u):$(id -g) .
 fi
 
