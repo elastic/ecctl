@@ -1,4 +1,3 @@
-include::ecctl-command-reference-index.adoc[]
 include::ecctl.adoc[]
 include::ecctl_auth.adoc[]
 include::ecctl_auth_key.adoc[]
