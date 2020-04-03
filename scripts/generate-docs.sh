@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 KRAMDOC_DOCKER_IMAGE=asciidoctor/docker-asciidoctor
 
 # Delete the docs
@@ -28,11 +30,13 @@ for file in ecctl*.adoc; do
 done
 
 # Strip extraneous .adoc out of section IDs and xrefs
-sed -i '' -e 's/\.adoc//g' ecctl*.adoc
+sed -i'.bak' -e 's/\.adoc//g' ecctl*.adoc
 
 # Add [float] tags to H3 sections to keep content together
-sed -i '' -e 's/===/\[float]\
+sed -i'.bak' -e 's/===/\[float]\
 &/g' ecctl*.adoc
+
+rm -f *.bak
 
 # Generate the index file for imbedding the command reference content and sort it
 for file in ecctl*.adoc; do
