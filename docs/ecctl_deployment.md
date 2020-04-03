@@ -40,7 +40,6 @@ ecctl deployment [flags]
 ### SEE ALSO
 
 * [ecctl](ecctl.md)	 - Elastic Cloud Control
-* [ecctl deployment apm](ecctl_deployment_apm.md)	 - Manages APM deployments
 * [ecctl deployment create](ecctl_deployment_create.md)	 - Creates a deployment
 * [ecctl deployment delete](ecctl_deployment_delete.md)	 - Deletes a previously shutdown deployment (Available for ECE only)
 * [ecctl deployment elasticsearch](ecctl_deployment_elasticsearch.md)	 - Manages Elasticsearch clusters
