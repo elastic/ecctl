@@ -1,122 +1,48 @@
 [#ecctl_deployment_create]
 == ecctl deployment create
 
-Creates a deployment from a file definition, allowing certain flag overrides
+Creates a deployment
 
 [float]
 === Synopsis
 
-Creates a deployment from a file definition with an automatically generated idempotency token.
-On creation failure, please use the displayed idempotency token to retry the cluster creation with --request-id=+++<token>+++. To track the creation of the resources toggle the --track flag.+++</token>+++
+Creates a deployment which is defined from a file definition using the --file=+++<file path="">+++(shorthand: -f) flag.+++</file>+++
 
-Read more about the deployment definition in https://www.elastic.co/guide/en/cloud-enterprise/current/Deployment_-_CRUD.html
+You can create a definition by using the sample JSON seen here:
+  https://elastic.co/guide/en/cloud/current/ec-api-deployment-crud.html#ec_create_a_deployment
 
 ----
-ecctl deployment create -f <file definition.json> [flags]
+ecctl deployment create {--file | --size <int> --zones <string> | --topology-element <obj>} [flags]
 ----
 
 [float]
 === Examples
 
-[source,console]
 ----
-$ cat deployment_example.json
-{
-    "name": "my example cluster",
-    "resources": {
-        "apm": [
-            {
-                "display_name": "my apm instance",
-                "ref_id": "my-apm-instance",
-                "elasticsearch_cluster_ref_id": "my-es-cluster",
-                "plan": {
-                    "apm": {
-                        "version": "6.8.4"
-                    },
-                    "cluster_topology": [{
-                        "instance_configuration_id": "apm",
-                        "size": {
-                            "resource": "memory",
-                            "value": 512
-                        },
-                        "zone_count": 1
-                    }]
-                }
-            }
-        ],
-        "elasticsearch": [
-            {
-                "display_name": "my elasticsearch cluster",
-                "ref_id": "my-es-cluster",
-                "plan": {
-                    "deployment_template": {
-                        "id": "default"
-                    },
-                    "elasticsearch": {
-                        "version": "6.8.4"
-                    },
-                    "cluster_topology": [
-                        {
-                            "instance_configuration_id": "data.default",
-                            "memory_per_node": 1024,
-                            "node_count_per_zone": 1,
-                            "node_type": {
-                                "data": true,
-                                "ingest": true,
-                                "master": true,
-                                "ml": false
-                            },
-                            "zone_count": 1
-                        }
-                    ]
-                }
-            }
-        ],
-        "kibana": [
-            {
-                "display_name": "my kibana instance",
-                "ref_id": "my-kibana-instance",
-                "elasticsearch_cluster_ref_id": "my-es-cluster",
-                "plan": {
-                    "kibana": {
-                        "version": "6.8.4"
-                    },
-                    "cluster_topology": [
-                        {
-                            "instance_configuration_id": "kibana",
-                            "memory_per_node": 1024,
-                            "node_count_per_zone": 1,
-                            "zone_count": 1
-                        }
-                    ]
-                }
-            }
-        ]
-    }
-}
-$ ecctl deployment create -f deployment_example.json --version=7.4.1
+## To make the command wait until the resources have been created use the "--track" flag, which will output
+the current stage on which the deployment resources are in.
+$ deployment create --file create_example.json --track
 [...]
+Deployment [b6ecbea3d5c84124b7dca457f2892086] - [Elasticsearch][b6ecbea3d5c84124b7dca457f2892086]: finished running all the plan steps (Total plan duration: 5m11.s)
+Deployment [91c4d60acb804ba0a27651fac02780ec] - [Kibana][8a9d9916cd6e46a7bb0912211d76e2af]: finished running all the plan steps (Total plan duration: 4m29.58s)
 
-## If the previous deployment creation failed
-$ ecctl deployment create -f deployment_example.json --name adeploy --version=7.4.1
+## To retry a when the previous deployment creation failed:
+$ ecctl deployment create --file create_example.json
 The deployment creation returned with an error, please use the displayed idempotency token
 to recreate the deployment resources
 Idempotency token: GMZPMRrcMYqHdmxjIQkHbdjnhPIeBElcwrHwzVlhGUSMXrEIzVXoBykSVRsKncNb
 unknown error (status 500)
-$ ecctl deployment create -f deployment_example.json --name adeploy --version=7.4.1 --request-id=GMZPMRrcMYqHdmxjIQkHbdjnhPIeBElcwrHwzVlhGUSMXrEIzVXoBykSVRsKncNb
-[...]
+$ ecctl deployment create --file create_example.json --request-id=GMZPMRrcMYqHdmxjIQkHbdjnhPIeBElcwrHwzVlhGUSMXrEIzVXoBykSVRsKncNb
 ----
 
 [float]
 === Options
 
 ----
-  -f, --file string         JSON file that contains JSON-style domain-specific deployment definition
+  -f, --file string         DeploymentCreateRequest file definition. See help for more information
   -h, --help                help for create
-      --name string         Overrides the deployment name
       --request-id string   Optional idempotency token - Can be found in the Stderr device when a previous deployment creation failed, for more information see the examples in the help command page
   -t, --track               Tracks the progress of the performed task
-      --version string      Overrides all the deployment's resources to the specified version
 ----
 
 [float]
@@ -134,6 +60,7 @@ $ ecctl deployment create -f deployment_example.json --name adeploy --version=7.
       --pass string        Password to use to authenticate (If empty will look for EC_PASS environment variable)
       --pprof              Enables pprofing and saves the profile to pprof-20060102150405
   -q, --quiet              Suppresses the configuration file used for the run, if any
+      --region string      Elasticsearch Service region
       --timeout duration   Timeout to use on all HTTP calls (default 30s)
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
@@ -141,6 +68,6 @@ $ ecctl deployment create -f deployment_example.json --name adeploy --version=7.
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_deployment[ecctl deployment]	 - Manages deployments

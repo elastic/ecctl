@@ -1,12 +1,12 @@
 [#ecctl_platform_stack_delete]
 == ecctl platform stack delete
 
-Deletes an Elastic StackPack
+Deletes an Elastic StackPack (Available for ECE only)
 
 [float]
 === Synopsis
 
-Deletes an Elastic StackPack
+Deletes an Elastic StackPack (Available for ECE only)
 
 ----
 ecctl platform stack delete [flags]
@@ -34,6 +34,7 @@ ecctl platform stack delete [flags]
       --pass string        Password to use to authenticate (If empty will look for EC_PASS environment variable)
       --pprof              Enables pprofing and saves the profile to pprof-20060102150405
   -q, --quiet              Suppresses the configuration file used for the run, if any
+      --region string      Elasticsearch Service region
       --timeout duration   Timeout to use on all HTTP calls (default 30s)
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
@@ -41,6 +42,6 @@ ecctl platform stack delete [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_platform_stack[ecctl platform stack]	 - Manages Elastic StackPacks

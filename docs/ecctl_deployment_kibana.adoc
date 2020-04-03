@@ -34,6 +34,7 @@ ecctl deployment kibana [flags]
       --pass string        Password to use to authenticate (If empty will look for EC_PASS environment variable)
       --pprof              Enables pprofing and saves the profile to pprof-20060102150405
   -q, --quiet              Suppresses the configuration file used for the run, if any
+      --region string      Elasticsearch Service region
       --timeout duration   Timeout to use on all HTTP calls (default 30s)
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
@@ -41,7 +42,7 @@ ecctl deployment kibana [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
 * xref:ecctl_deployment_kibana_create[ecctl deployment kibana create]	 - Creates a Kibana instance
@@ -50,7 +51,7 @@ ecctl deployment kibana [flags]
 * xref:ecctl_deployment_kibana_plan[ecctl deployment kibana plan]	 - Manages Kibana plans
 * xref:ecctl_deployment_kibana_reallocate[ecctl deployment kibana reallocate]	 - Reallocates Kibana instances
 * xref:ecctl_deployment_kibana_restart[ecctl deployment kibana restart]	 - Restarts a Kibana instance
-* xref:ecctl_deployment_kibana_resync[ecctl deployment kibana resync]	 - Resynchronizes the search index and cache for the selected Kibana instance
+* xref:ecctl_deployment_kibana_resync[ecctl deployment kibana resync]	 - Resynchronizes the search index and cache for the selected Kibana instance or all instances
 * xref:ecctl_deployment_kibana_show[ecctl deployment kibana show]	 - Returns the cluster information
 * xref:ecctl_deployment_kibana_start[ecctl deployment kibana start]	 - Starts a Kibana instance
 * xref:ecctl_deployment_kibana_stop[ecctl deployment kibana stop]	 - Downscales a Kibana instance
