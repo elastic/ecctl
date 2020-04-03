@@ -1,16 +1,16 @@
 [#ecctl_deployment_resource_shutdown]
 == ecctl deployment resource shutdown
 
-Shuts down a deployment resource by its type and ref-id
+Shuts down a deployment resource by its kind and ref-id
 
 [float]
 === Synopsis
 
-Shuts down a deployment resource type (APM, Appsearch, Elasticsearch, Kibana). Shutting down a
-type doesn't necessarily shut down the deployment itself but rather a specific  resource.
+Shuts down a deployment resource kind (APM, Appsearch, Elasticsearch, Kibana). Shutting down a
+kind doesn't necessarily shut down the deployment itself but rather a specific  resource.
 
 ----
-ecctl deployment resource shutdown <deployment id> --type <type> --ref-id <ref-id> [flags]
+ecctl deployment resource shutdown <deployment id> --kind <kind> --ref-id <ref-id> [flags]
 ----
 
 [float]
@@ -19,9 +19,9 @@ ecctl deployment resource shutdown <deployment id> --type <type> --ref-id <ref-i
 ----
   -h, --help            help for shutdown
       --hide            Optionally hides the deployment resource from being listed by default
+      --kind string     Required deployment resource kind (apm, appsearch, kibana, elasticsearch)
       --ref-id string   Optional deployment RefId, auto-discovered if not specified
       --skip-snapshot   Optional flag to toggle skipping the resource snapshot before shutting it down
-      --type string     Required deployment resource type (apm, appsearch, kibana, elasticsearch)
 ----
 
 [float]
@@ -39,6 +39,7 @@ ecctl deployment resource shutdown <deployment id> --type <type> --ref-id <ref-i
       --pass string        Password to use to authenticate (If empty will look for EC_PASS environment variable)
       --pprof              Enables pprofing and saves the profile to pprof-20060102150405
   -q, --quiet              Suppresses the configuration file used for the run, if any
+      --region string      Elasticsearch Service region
       --timeout duration   Timeout to use on all HTTP calls (default 30s)
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
@@ -46,6 +47,6 @@ ecctl deployment resource shutdown <deployment id> --type <type> --ref-id <ref-i
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_deployment_resource[ecctl deployment resource]	 - Manages deployment resources

@@ -1,21 +1,22 @@
 [#ecctl_deployment_kibana_resync]
 == ecctl deployment kibana resync
 
-Resynchronizes the search index and cache for the selected Kibana instance
+Resynchronizes the search index and cache for the selected Kibana instance or all instances
 
 [float]
 === Synopsis
 
-Resynchronizes the search index and cache for the selected Kibana instance
+Resynchronizes the search index and cache for the selected Kibana instance or all instances
 
 ----
-ecctl deployment kibana resync <cluster id> [flags]
+ecctl deployment kibana resync {<deployment id> | --all} [flags]
 ----
 
 [float]
 === Options
 
 ----
+      --all    Resynchronizes the search index for all Kibana instances
   -h, --help   help for resync
 ----
 
@@ -34,6 +35,7 @@ ecctl deployment kibana resync <cluster id> [flags]
       --pass string        Password to use to authenticate (If empty will look for EC_PASS environment variable)
       --pprof              Enables pprofing and saves the profile to pprof-20060102150405
   -q, --quiet              Suppresses the configuration file used for the run, if any
+      --region string      Elasticsearch Service region
       --timeout duration   Timeout to use on all HTTP calls (default 30s)
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
@@ -41,6 +43,6 @@ ecctl deployment kibana resync <cluster id> [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_deployment_kibana[ecctl deployment kibana]	 - Manages Kibana instances

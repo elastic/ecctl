@@ -37,6 +37,7 @@ ecctl platform proxy filtered-group update <filtered group id> --filters <key1=v
       --pass string        Password to use to authenticate (If empty will look for EC_PASS environment variable)
       --pprof              Enables pprofing and saves the profile to pprof-20060102150405
   -q, --quiet              Suppresses the configuration file used for the run, if any
+      --region string      Elasticsearch Service region
       --timeout duration   Timeout to use on all HTTP calls (default 30s)
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
@@ -44,6 +45,6 @@ ecctl platform proxy filtered-group update <filtered group id> --filters <key1=v
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_platform_proxy_filtered-group[ecctl platform proxy filtered-group]	 - Manages proxies filtered group

@@ -24,6 +24,7 @@ Elastic Cloud Control
       --pass string        Password to use to authenticate (If empty will look for EC_PASS environment variable)
       --pprof              Enables pprofing and saves the profile to pprof-20060102150405
   -q, --quiet              Suppresses the configuration file used for the run, if any
+      --region string      Elasticsearch Service region
       --timeout duration   Timeout to use on all HTTP calls (default 30s)
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
@@ -31,12 +32,12 @@ Elastic Cloud Control
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_auth[ecctl auth]	 - Manages the platform auth
 * xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
 * xref:ecctl_generate[ecctl generate]	 - Generates completions and docs
 * xref:ecctl_init[ecctl init]	 - Creates an initial configuration file.
 * xref:ecctl_platform[ecctl platform]	 - Manages the platform
-* xref:ecctl_user[ecctl user]	 - Manages the platform users
+* xref:ecctl_user[ecctl user]	 - Manages the platform users (Available for ECE only)
 * xref:ecctl_version[ecctl version]	 - Shows ecctl version

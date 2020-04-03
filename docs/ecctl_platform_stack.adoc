@@ -34,6 +34,7 @@ ecctl platform stack [flags]
       --pass string        Password to use to authenticate (If empty will look for EC_PASS environment variable)
       --pprof              Enables pprofing and saves the profile to pprof-20060102150405
   -q, --quiet              Suppresses the configuration file used for the run, if any
+      --region string      Elasticsearch Service region
       --timeout duration   Timeout to use on all HTTP calls (default 30s)
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
@@ -41,10 +42,10 @@ ecctl platform stack [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_platform[ecctl platform]	 - Manages the platform
-* xref:ecctl_platform_stack_delete[ecctl platform stack delete]	 - Deletes an Elastic StackPack
+* xref:ecctl_platform_stack_delete[ecctl platform stack delete]	 - Deletes an Elastic StackPack (Available for ECE only)
 * xref:ecctl_platform_stack_list[ecctl platform stack list]	 - Lists Elastic StackPacks
 * xref:ecctl_platform_stack_show[ecctl platform stack show]	 - Shows information about an Elastic StackPack
-* xref:ecctl_platform_stack_upload[ecctl platform stack upload]	 - Uploads an Elastic StackPack
+* xref:ecctl_platform_stack_upload[ecctl platform stack upload]	 - Uploads an Elastic StackPack (Available for ECE only)

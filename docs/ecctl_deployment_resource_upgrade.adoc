@@ -7,10 +7,10 @@ Upgrades a deployment resource
 === Synopsis
 
 Upgrades a stateless deployment resource so it matches the Elasticsearch
-deployment version. Only stateless resources are supported in the --type flag
+deployment version. Only stateless resources are supported in the --kind flag
 
 ----
-ecctl deployment resource upgrade <deployment id> --type <type> --ref-id <ref-id> [flags]
+ecctl deployment resource upgrade <deployment id> --kind <kind> --ref-id <ref-id> [flags]
 ----
 
 [float]
@@ -18,9 +18,9 @@ ecctl deployment resource upgrade <deployment id> --type <type> --ref-id <ref-id
 
 ----
   -h, --help            help for upgrade
+      --kind string     Required deployment resource kind (apm, appsearch, kibana, elasticsearch)
       --ref-id string   Optional deployment RefId, if not set, the RefId will be auto-discovered
   -t, --track           Tracks the progress of the performed task
-      --type string     Required deployment resource type (apm, appsearch, kibana, elasticsearch)
 ----
 
 [float]
@@ -38,6 +38,7 @@ ecctl deployment resource upgrade <deployment id> --type <type> --ref-id <ref-id
       --pass string        Password to use to authenticate (If empty will look for EC_PASS environment variable)
       --pprof              Enables pprofing and saves the profile to pprof-20060102150405
   -q, --quiet              Suppresses the configuration file used for the run, if any
+      --region string      Elasticsearch Service region
       --timeout duration   Timeout to use on all HTTP calls (default 30s)
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
@@ -45,6 +46,6 @@ ecctl deployment resource upgrade <deployment id> --type <type> --ref-id <ref-id
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_deployment_resource[ecctl deployment resource]	 - Manages deployment resources

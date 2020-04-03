@@ -1,12 +1,12 @@
 [#ecctl_platform_allocator]
 == ecctl platform allocator
 
-Manages allocators
+Manages allocators (Available for ECE only)
 
 [float]
 === Synopsis
 
-Manages allocators
+Manages allocators (Available for ECE only)
 
 ----
 ecctl platform allocator [flags]
@@ -34,6 +34,7 @@ ecctl platform allocator [flags]
       --pass string        Password to use to authenticate (If empty will look for EC_PASS environment variable)
       --pprof              Enables pprofing and saves the profile to pprof-20060102150405
   -q, --quiet              Suppresses the configuration file used for the run, if any
+      --region string      Elasticsearch Service region
       --timeout duration   Timeout to use on all HTTP calls (default 30s)
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
@@ -41,7 +42,7 @@ ecctl platform allocator [flags]
 ----
 
 [float]
-=== See also
+=== SEE ALSO
 
 * xref:ecctl_platform[ecctl platform]	 - Manages the platform
 * xref:ecctl_platform_allocator_list[ecctl platform allocator list]	 - Returns all allocators that have instances or are connected to the platform. Use --all flag or --output json to show all. Use --query to match any of the allocators properties.
