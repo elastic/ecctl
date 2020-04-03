@@ -20,7 +20,6 @@ package cmddeployment
 import (
 	"github.com/spf13/cobra"
 
-	cmdappsearch "github.com/elastic/ecctl/cmd/deployment/appsearch"
 	cmdelasticsearch "github.com/elastic/ecctl/cmd/deployment/elasticsearch"
 	cmdkibana "github.com/elastic/ecctl/cmd/deployment/kibana"
 	cmddeploymentnote "github.com/elastic/ecctl/cmd/deployment/note"
@@ -43,7 +42,6 @@ func init() {
 		cmddeploymentnote.Command,
 		cmdelasticsearch.Command,
 		cmdkibana.Command,
-		cmdappsearch.Command,
 		cmddeploymentplan.Command,
 		cmddeploymentresource.Command,
 	)
