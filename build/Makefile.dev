@@ -68,11 +68,7 @@ check-changes:
 ## Re-generates the documentation.
 .PHONY: docs
 docs:
-	@ echo "-> Deleting docs"
-	@ rm -rf docs/*.md
-	@ echo "-> Regenerating docs"
-	@ go run main.go generate docs
-	@ echo "-> Checking for changes"
+	@ ./scripts/generate-docs.sh
 	@ $(MAKE) check-changes
 
 ## Removes all temporary files and artifacts.

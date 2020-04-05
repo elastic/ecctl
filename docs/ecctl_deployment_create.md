@@ -6,8 +6,8 @@ Creates a deployment
 
 Creates a deployment which is defined from a file definition using the --file=<file path> (shorthand: -f) flag.
 
-You can create a definition by using the sample JSON seen here:
-  https://elastic.co/guide/en/cloud/current/ec-api-deployment-crud.html#ec_create_a_deployment
+//You can create a definition by using the sample JSON seen here:
+//  https://elastic.co/guide/en/cloud/current/ec-api-deployment-crud.html#ec_create_a_deployment
 
 ```
 ecctl deployment create {--file | --size <int> --zones <string> | --topology-element <obj>} [flags]
