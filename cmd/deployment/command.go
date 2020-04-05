@@ -21,7 +21,6 @@ import (
 	"github.com/spf13/cobra"
 
 	cmdelasticsearch "github.com/elastic/ecctl/cmd/deployment/elasticsearch"
-	cmdkibana "github.com/elastic/ecctl/cmd/deployment/kibana"
 	cmddeploymentnote "github.com/elastic/ecctl/cmd/deployment/note"
 	cmddeploymentplan "github.com/elastic/ecctl/cmd/deployment/plan"
 	cmddeploymentresource "github.com/elastic/ecctl/cmd/deployment/resource"
@@ -41,7 +40,6 @@ func init() {
 	Command.AddCommand(
 		cmddeploymentnote.Command,
 		cmdelasticsearch.Command,
-		cmdkibana.Command,
 		cmddeploymentplan.Command,
 		cmddeploymentresource.Command,
 	)
