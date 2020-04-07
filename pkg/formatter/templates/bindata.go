@@ -26,9 +26,6 @@
 // text/deployment/notelist.gotmpl
 // text/deployment/search.gotmpl
 // text/deployment-template/list.gotmpl
-// text/elasticsearch/list.gotmpl
-// text/elasticsearch/overridecapacity.gotmpl
-// text/elasticsearch/planhistory.gotmpl
 // text/filtered-group/list.gotmpl
 // text/instance-configuration/create.gotmpl
 // text/instance-configuration/list.gotmpl
@@ -296,66 +293,6 @@ func textDeploymentTemplateListGotmpl() (*asset, error) {
 	}
 
 	info := bindataFileInfo{name: "text/deployment-template/list.gotmpl", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
-	a := &asset{bytes: bytes, info: info}
-	return a, nil
-}
-
-var _textElasticsearchListGotmpl = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\xa4\x52\x41\x6e\xdb\x30\x10\xbc\xe7\x15\x0b\xa2\x01\xec\x83\xf9\x80\x02\x3d\x30\xb2\x02\x0b\x76\x24\x23\x54\x02\xb4\x37\xc6\x5c\xd9\x44\x69\x52\x20\x57\x6d\x03\xc1\x7f\x2f\x2c\xc9\x49\x18\x20\xe9\xa1\x27\x2d\x67\x77\x66\xb8\x43\xf5\xfd\x02\x34\x36\xc6\x21\x30\xff\x0b\x43\x30\x1a\x19\x9c\x4e\x7d\x0f\x41\xb9\x3d\x02\xcf\xad\x8a\x64\x76\x11\x55\xd8\x1d\x32\xdb\x45\xc2\x10\x87\x09\xfc\x83\xbb\x8e\xb0\xc6\x63\x6b\x15\x21\xf0\xd3\xe9\xaa\xef\x01\x9d\x1e\x05\x5e\x8a\x8b\x81\xc6\x46\x75\x96\xce\xfa\x57\x67\x63\x96\x6d\x1e\x64\x9d\xdf\x43\xb1\x1c\x3d\x49\x3d\x0d\x04\x56\x8a\xbb\x9c\xbd\x41\x98\xac\x45\xfd\x20\x13\xe8\x31\xbf\x97\x45\x55\x26\xd8\xba\xb8\x11\xa5\x48\x20\xb1\xbd\x63\x93\xdf\x05\xca\xc4\x56\x64\x45\xfd\x9d\x25\x9e\x3f\xaa\x32\x97\xc9\x3d\x98\x2c\xc5\x56\xae\xaa\x1a\x8a\xf2\xb6\x4a\x54\x57\xb9\xd8\xd4\xab\x44\x81\x6d\xaa\x6c\x9d\x2f\x2f\x66\xff\x88\xef\x9c\x14\x9f\xce\xc5\x32\xd9\x7e\x8f\x34\x35\x4a\x75\x1c\x62\x7d\xed\x71\x49\x8a\xba\x98\xcc\xcf\xf6\x48\xb9\xcc\xba\x10\xd0\x51\x15\xb6\xe8\xb4\x71\xfb\xad\x55\x0e\xf8\x9c\x9f\xbf\xe9\x2d\xf8\x23\x86\x68\xbc\x4b\x53\x59\x80\x69\x80\x8b\x18\xfd\xce\x28\x42\xbd\x36\x4f\xca\xa9\xe4\xc1\x19\x85\x0e\x87\x95\xd1\x46\x1c\x90\x46\xd9\x38\x41\x4e\x7f\x2e\x28\xda\xe3\x7f\xa9\x35\x3e\x1c\x15\xd5\xbe\xf5\xd6\xef\x9f\x0b\xd7\x78\xe0\xf0\x7e\xe8\xb7\xa1\x03\x7c\x89\x4e\xb5\xf1\xe0\xe9\x76\xa0\xc0\xd7\x6f\xd0\x06\xe3\xa8\x01\x76\x4d\x30\xbb\xd6\x73\x06\x33\x8d\x01\x9b\x1b\xef\x2d\x70\x39\x8d\x47\xbe\x42\x65\xe9\xf0\x3c\x9f\xda\x85\xa3\xb7\xdd\xcc\x77\x8e\xe6\xe3\x3f\xfd\xde\xe3\x93\x08\x26\xd1\x81\xf6\x72\x82\xd7\xc5\x17\x1f\x32\x37\x7e\xf7\x13\xf5\xf8\xf0\x63\xfd\x11\xed\x52\x8d\xdf\xbf\x01\x00\x00\xff\xff\x44\xdd\x04\x97\xd6\x03\x00\x00")
-
-func textElasticsearchListGotmplBytes() ([]byte, error) {
-	return bindataRead(
-		_textElasticsearchListGotmpl,
-		"text/elasticsearch/list.gotmpl",
-	)
-}
-
-func textElasticsearchListGotmpl() (*asset, error) {
-	bytes, err := textElasticsearchListGotmplBytes()
-	if err != nil {
-		return nil, err
-	}
-
-	info := bindataFileInfo{name: "text/elasticsearch/list.gotmpl", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
-	a := &asset{bytes: bytes, info: info}
-	return a, nil
-}
-
-var _textElasticsearchOverridecapacityGotmpl = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x6c\x8f\xc1\x6a\xc3\x30\x10\x44\xef\xf9\x8a\xc5\xf4\x1a\x7f\x40\xa1\x07\x63\x4c\x11\x24\x69\x88\xd5\x43\x8f\x1b\x6b\x1d\x04\xaa\x62\xe4\x75\x69\x11\xfa\xf7\x22\x2b\x8a\x09\xf1\xc9\x3b\xb3\xde\x37\x23\xef\xb7\xa0\xa8\xd7\x96\xa0\xb8\xfe\x90\x73\x5a\x51\x01\x21\x78\x0f\x0e\xed\x85\xa0\x4c\x82\x7e\xa9\x9b\x98\x24\x7d\x0f\x06\x99\xa0\x0c\x61\x13\x6d\xab\x6e\xfb\x3c\x64\x98\xa2\x1e\x27\xc3\x91\xb5\x89\x21\x85\x38\xb4\xb2\x3a\xd4\x4d\x7b\xc3\x33\x9e\xd3\x50\xd4\xd5\xb1\xaa\x85\xfc\x4a\x0b\xc6\x73\xb2\x5b\xf9\x71\xaa\xde\x1b\xd8\x7f\xee\xa4\x38\xee\x44\x73\xba\xc3\x96\x6a\xb3\x7c\xa9\x71\xc0\x4e\xf3\x1f\xbc\xbe\x41\x99\x45\x5e\xb6\x7c\x75\x78\xa1\xfd\x64\x58\x0f\x46\x93\x9b\xff\x7a\x72\x1f\xd1\xc2\x8e\x8c\xb6\xa3\x31\xbd\xf3\x1e\x95\x5b\xeb\x7e\x49\x9d\xeb\x2e\x1d\xa2\x24\x33\x52\x08\x5b\xef\xc9\xaa\xe5\x32\x1f\xae\x64\x47\xc2\xaa\xbd\x42\x7a\x9e\xd2\xf7\x3f\x00\x00\xff\xff\x4a\x3d\x54\x0f\xcc\x01\x00\x00")
-
-func textElasticsearchOverridecapacityGotmplBytes() ([]byte, error) {
-	return bindataRead(
-		_textElasticsearchOverridecapacityGotmpl,
-		"text/elasticsearch/overridecapacity.gotmpl",
-	)
-}
-
-func textElasticsearchOverridecapacityGotmpl() (*asset, error) {
-	bytes, err := textElasticsearchOverridecapacityGotmplBytes()
-	if err != nil {
-		return nil, err
-	}
-
-	info := bindataFileInfo{name: "text/elasticsearch/overridecapacity.gotmpl", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
-	a := &asset{bytes: bytes, info: info}
-	return a, nil
-}
-
-var _textElasticsearchPlanhistoryGotmpl = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x64\x90\xc1\x6e\xf3\x20\x10\x84\xef\x79\x0a\x94\xfb\xcf\x3b\xa0\x1f\x22\x59\x4a\x5c\x2b\xa6\xb9\x53\xd8\xb8\x48\x18\x5b\x78\x5d\x55\x42\x7e\xf7\x0a\x9c\xa6\xc1\x3e\x19\xb3\x33\xdf\xcc\x12\xe3\x3f\x62\xe0\x6e\x3d\x90\xe3\xf0\x05\x21\x58\x03\x47\xb2\x2c\x31\x92\xa0\x7c\x07\x84\xe6\x1f\xf8\x06\x3d\x23\x48\xe8\x47\xa7\x10\x08\x5d\x96\x43\x8c\x04\xbc\x59\xb5\xcf\xc3\x2f\xcb\xc0\x5d\xcd\x0e\x13\xea\x90\x32\x8e\x4c\x4a\x71\x69\x24\xa9\xf8\x8a\x47\xf5\x91\x0d\xcf\x41\xcd\x2e\x62\x33\xba\x89\x6b\x5b\xbd\xd5\x9b\xdb\x56\x8a\xa6\xdd\xdc\xf1\xf7\x2b\x93\x0f\x69\xce\xdb\xe1\x45\xcd\x89\xac\x76\x11\x27\x56\x9d\x05\x27\x89\xb9\xed\xf5\xbf\x00\xfe\xbd\x46\x5a\x9c\x36\x4e\x79\x86\x08\xfd\x88\x15\x2f\x8c\xaf\xa3\x5a\xf5\xb0\x1f\x52\xe1\xd4\x84\x56\x4f\xa0\x82\xfe\xa4\x37\x08\x93\x1d\x7c\xa1\x73\xe0\x0b\xd0\x79\xe8\xb6\x9b\xe9\xa1\x1f\x67\x84\x24\xe2\x73\x50\x98\x10\xb4\xc8\x7a\x78\x85\x37\xd2\x96\x3d\x3a\xc0\x93\xb2\x0e\x4c\x72\xb7\x08\x63\x2e\xfa\xea\xa6\xed\x30\x07\x0d\x94\x69\x5c\xbb\xe5\x6c\xf0\x26\x9f\xd6\xef\x4f\x00\x00\x00\xff\xff\xf5\x81\x36\xf0\x3c\x02\x00\x00")
-
-func textElasticsearchPlanhistoryGotmplBytes() ([]byte, error) {
-	return bindataRead(
-		_textElasticsearchPlanhistoryGotmpl,
-		"text/elasticsearch/planhistory.gotmpl",
-	)
-}
-
-func textElasticsearchPlanhistoryGotmpl() (*asset, error) {
-	bytes, err := textElasticsearchPlanhistoryGotmplBytes()
-	if err != nil {
-		return nil, err
-	}
-
-	info := bindataFileInfo{name: "text/elasticsearch/planhistory.gotmpl", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -712,33 +649,30 @@ func AssetNames() []string {
 
 // _bindata is a table, holding each asset generator, mapped to its name.
 var _bindata = map[string]func() (*asset, error){
-	"bindata.go":                                 bindataGo,
-	"text/allocator/list.gotmpl":                 textAllocatorListGotmpl,
-	"text/allocator/listmetadata.gotmpl":         textAllocatorListmetadataGotmpl,
-	"text/allocator/show.gotmpl":                 textAllocatorShowGotmpl,
-	"text/allocator/showmetadata.gotmpl":         textAllocatorShowmetadataGotmpl,
-	"text/deployment/list.gotmpl":                textDeploymentListGotmpl,
-	"text/deployment/notelist.gotmpl":            textDeploymentNotelistGotmpl,
-	"text/deployment/search.gotmpl":              textDeploymentSearchGotmpl,
-	"text/deployment-template/list.gotmpl":       textDeploymentTemplateListGotmpl,
-	"text/elasticsearch/list.gotmpl":             textElasticsearchListGotmpl,
-	"text/elasticsearch/overridecapacity.gotmpl": textElasticsearchOverridecapacityGotmpl,
-	"text/elasticsearch/planhistory.gotmpl":      textElasticsearchPlanhistoryGotmpl,
-	"text/filtered-group/list.gotmpl":            textFilteredGroupListGotmpl,
-	"text/instance-configuration/create.gotmpl":  textInstanceConfigurationCreateGotmpl,
-	"text/instance-configuration/list.gotmpl":    textInstanceConfigurationListGotmpl,
-	"text/metadata/show.gotmpl":                  textMetadataShowGotmpl,
-	"text/platform/repositorylist.gotmpl":        textPlatformRepositorylistGotmpl,
-	"text/proxy/list.gotmpl":                     textProxyListGotmpl,
-	"text/roles/list.gotmpl":                     textRolesListGotmpl,
-	"text/runner/list.gotmpl":                    textRunnerListGotmpl,
-	"text/stack/list.gotmpl":                     textStackListGotmpl,
-	"text/token/create.gotmpl":                   textTokenCreateGotmpl,
-	"text/token/list.gotmpl":                     textTokenListGotmpl,
-	"text/user/key-details.gotmpl":               textUserKeyDetailsGotmpl,
-	"text/user/keys-details.gotmpl":              textUserKeysDetailsGotmpl,
-	"text/user/list.gotmpl":                      textUserListGotmpl,
-	"text/user/user-details.gotmpl":              textUserUserDetailsGotmpl,
+	"bindata.go":                                bindataGo,
+	"text/allocator/list.gotmpl":                textAllocatorListGotmpl,
+	"text/allocator/listmetadata.gotmpl":        textAllocatorListmetadataGotmpl,
+	"text/allocator/show.gotmpl":                textAllocatorShowGotmpl,
+	"text/allocator/showmetadata.gotmpl":        textAllocatorShowmetadataGotmpl,
+	"text/deployment/list.gotmpl":               textDeploymentListGotmpl,
+	"text/deployment/notelist.gotmpl":           textDeploymentNotelistGotmpl,
+	"text/deployment/search.gotmpl":             textDeploymentSearchGotmpl,
+	"text/deployment-template/list.gotmpl":      textDeploymentTemplateListGotmpl,
+	"text/filtered-group/list.gotmpl":           textFilteredGroupListGotmpl,
+	"text/instance-configuration/create.gotmpl": textInstanceConfigurationCreateGotmpl,
+	"text/instance-configuration/list.gotmpl":   textInstanceConfigurationListGotmpl,
+	"text/metadata/show.gotmpl":                 textMetadataShowGotmpl,
+	"text/platform/repositorylist.gotmpl":       textPlatformRepositorylistGotmpl,
+	"text/proxy/list.gotmpl":                    textProxyListGotmpl,
+	"text/roles/list.gotmpl":                    textRolesListGotmpl,
+	"text/runner/list.gotmpl":                   textRunnerListGotmpl,
+	"text/stack/list.gotmpl":                    textStackListGotmpl,
+	"text/token/create.gotmpl":                  textTokenCreateGotmpl,
+	"text/token/list.gotmpl":                    textTokenListGotmpl,
+	"text/user/key-details.gotmpl":              textUserKeyDetailsGotmpl,
+	"text/user/keys-details.gotmpl":             textUserKeysDetailsGotmpl,
+	"text/user/list.gotmpl":                     textUserListGotmpl,
+	"text/user/user-details.gotmpl":             textUserUserDetailsGotmpl,
 }
 
 // AssetDir returns the file names below a certain
@@ -797,11 +731,6 @@ var _bintree = &bintree{nil, map[string]*bintree{
 		}},
 		"deployment-template": &bintree{nil, map[string]*bintree{
 			"list.gotmpl": &bintree{textDeploymentTemplateListGotmpl, map[string]*bintree{}},
-		}},
-		"elasticsearch": &bintree{nil, map[string]*bintree{
-			"list.gotmpl":             &bintree{textElasticsearchListGotmpl, map[string]*bintree{}},
-			"overridecapacity.gotmpl": &bintree{textElasticsearchOverridecapacityGotmpl, map[string]*bintree{}},
-			"planhistory.gotmpl":      &bintree{textElasticsearchPlanhistoryGotmpl, map[string]*bintree{}},
 		}},
 		"filtered-group": &bintree{nil, map[string]*bintree{
 			"list.gotmpl": &bintree{textFilteredGroupListGotmpl, map[string]*bintree{}},
