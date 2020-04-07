@@ -1,9 +1,0 @@
-{{- define "override" }}{{ range . }}{{executeTemplate .}}
-{{ end }}{{ end }}{{ define "default" }}
-{{- "ATTEMPT ID" }}{{tab}}{{ "ATTEMPT NAME" }}{{tab}}{{ "VERSION" }}{{tab}}{{ "STEPS" }}{{tab}}{{ "DURATION" }}
-{{- tab}}{{ "ATTEMPT END TIME" }}{{tab}}{{ "FAILED STEP" }}{{tab}}{{ "ACTION" }}
-{{- range . }}
-{{ .PlanAttemptID }}{{tab}}{{ .PlanAttemptName }}{{tab}}{{ .Plan.Elasticsearch.Version }}{{tab}}{{ len .PlanAttemptLog }}
-{{- tab}}{{ computePlanDuration .}}{{tab}}{{ .AttemptEndTime }}{{tab}}{{getFailedPlanStepName .}}{{tab}}{{.Source.Action }}
-{{- end}}
-{{end}}

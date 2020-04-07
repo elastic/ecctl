@@ -30,7 +30,7 @@ import (
 	"github.com/spf13/viper"
 
 	cmddeployment "github.com/elastic/ecctl/cmd/deployment"
-	cmdelasticsearch "github.com/elastic/ecctl/cmd/deployment/elasticsearch"
+	cmddeploymentplan "github.com/elastic/ecctl/cmd/deployment/plan"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
@@ -268,25 +268,17 @@ func TestGetCommand(t *testing.T) {
 			name: "Get a 2nd level command",
 			args: args{
 				command: RootCmd,
-				path:    []string{"deployment", "elasticsearch"},
+				path:    []string{"deployment", "plan"},
 			},
-			want: cmdelasticsearch.Command,
+			want: cmddeploymentplan.Command,
 		},
 		{
 			name: "Get a 3rd level command",
 			args: args{
 				command: RootCmd,
-				path:    []string{"deployment", "elasticsearch", "plan"},
+				path:    []string{"deployment", "plan", "cancel"},
 			},
-			want: GetCommand(cmdelasticsearch.Command, "plan"),
-		},
-		{
-			name: "Get a 4th level command",
-			args: args{
-				command: RootCmd,
-				path:    []string{"deployment", "elasticsearch", "plan", "history"},
-			},
-			want: GetCommand(cmdelasticsearch.Command, "plan", "history"),
+			want: GetCommand(cmddeploymentplan.Command, "cancel"),
 		},
 	}
 	for _, tt := range tests {
