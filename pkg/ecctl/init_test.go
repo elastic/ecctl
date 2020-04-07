@@ -32,10 +32,9 @@ import (
 
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/spf13/viper"
-
-	multierror "github.com/hashicorp/go-multierror"
 )
 
 var emptyPassFunc = func(int) ([]byte, error) { return nil, nil }
@@ -158,14 +157,14 @@ func TestInitConfig(t *testing.T) {
 	}{
 		{
 			name: "fail on parameter validation",
-			err: &multierror.Error{Errors: []error{
-				errors.New("init: viper instance cannot be nil"),
-				errors.New("init: input reader cannot be nil"),
-				errors.New("init: output writer cannot be nil"),
-				errors.New("init: error writer cannot be nil"),
-				errors.New("init: password read function cannot be nil"),
-				errors.New("init: http client cannot be nil"),
-			}},
+			err: multierror.NewPrefixed("invalid init configuration",
+				errors.New("viper instance cannot be nil"),
+				errors.New("input reader cannot be nil"),
+				errors.New("output writer cannot be nil"),
+				errors.New("error writer cannot be nil"),
+				errors.New("password read function cannot be nil"),
+				errors.New("http client cannot be nil"),
+			),
 		},
 		{
 			name: "doesn't find a config file and user skips the creation of one",

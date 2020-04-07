@@ -23,9 +23,9 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/output"
 	"github.com/elastic/cloud-sdk-go/pkg/util/slice"
-	multierror "github.com/hashicorp/go-multierror"
 )
 
 const (
@@ -64,6 +64,7 @@ type Config struct {
 	Verbose  bool `json:"verbose,omitempty"`
 	Force    bool `json:"force,omitempty"`
 	Insecure bool `json:"insecure,omitempty"`
+
 	// SkipLogin skips loging in when user and pass are set.
 	SkipLogin bool `json:"-"`
 
@@ -73,31 +74,31 @@ type Config struct {
 
 // Validate checks that the application config is a valid one
 func (c *Config) Validate() error {
-	var err = new(multierror.Error)
+	var err = multierror.NewPrefixed("invalid configuration options specified")
 	if !slice.HasString([]string{JSONOutput, TextOutput}, c.Output) {
-		err = multierror.Append(err, errInvalidOutputFormat)
+		err = err.Append(errInvalidOutputFormat)
 	}
 
 	var allCreds = c.APIKey != "" && (c.User != "" || c.Pass != "")
 	if allCreds {
-		err = multierror.Append(err, errInvalidBothAuthenticaitonSettings)
+		err = err.Append(errInvalidBothAuthenticaitonSettings)
 	}
 
 	var emptyCreds = c.APIKey == "" && (c.User == "" || c.Pass == "")
 	if emptyCreds {
-		err = multierror.Append(err, errInvalidEmptyAuthenticaitonSettings)
+		err = err.Append(errInvalidEmptyAuthenticaitonSettings)
 	}
 
 	if c.Output == JSONOutput && c.Format != "" {
-		err = multierror.Append(err, errCannotSpecifyJSONOutputAndCustomFormat)
+		err = err.Append(errCannotSpecifyJSONOutputAndCustomFormat)
 	}
 
 	if c.OutputDevice == nil {
-		err = multierror.Append(err, errInvalidOutputDevice)
+		err = err.Append(errInvalidOutputDevice)
 	}
 
 	if c.ErrorDevice == nil {
-		err = multierror.Append(err, errInvalidErrorDevice)
+		err = err.Append(errInvalidErrorDevice)
 	}
 
 	return err.ErrorOrNil()
