@@ -26,6 +26,7 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
@@ -171,10 +172,27 @@ func TestInitApp(t *testing.T) {
 				v: viper.New(),
 			},
 		},
+		{
+			name: "initialises rootCmd app with invalid config and empty file returns an error",
+			args: args{
+				cmd:    RootCmd,
+				client: new(http.Client),
+				v:      viper.New(),
+			},
+			err: multierror.NewPrefixed(
+				`missing ecctl config file, please use the "ecctl init" command to initialize ecctl`,
+				multierror.NewPrefixed(
+					"invalid configuration options specified",
+					errors.New("output must be one either json or text"),
+					errors.New("apikey or user and pass must be specified"),
+				),
+			),
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if tt.args.config != nil {
+				defer ecctl.Cleanup()
 				c := new(bytes.Buffer)
 				if err := json.NewEncoder(c).Encode(tt.args.config); err != nil {
 					t.Error(err)

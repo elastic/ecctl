@@ -28,13 +28,13 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/elastic/cloud-sdk-go/pkg/input"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
+	"github.com/elastic/cloud-sdk-go/pkg/output"
+	"github.com/spf13/viper"
+
 	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/user"
-
-	"github.com/elastic/cloud-sdk-go/pkg/input"
-	"github.com/elastic/cloud-sdk-go/pkg/output"
-	multierror "github.com/hashicorp/go-multierror"
-	"github.com/spf13/viper"
 )
 
 const (
@@ -234,29 +234,29 @@ type InitConfigParams struct {
 
 // Validate ensures the parameters are usable.
 func (params InitConfigParams) Validate() error {
-	var merr = new(multierror.Error)
+	var merr = multierror.NewPrefixed("invalid init configuration")
 	if params.Viper == nil {
-		merr = multierror.Append(merr, errors.New("init: viper instance cannot be nil"))
+		merr = merr.Append(errors.New("viper instance cannot be nil"))
 	}
 
 	if params.Reader == nil {
-		merr = multierror.Append(merr, errors.New("init: input reader cannot be nil"))
+		merr = merr.Append(errors.New("input reader cannot be nil"))
 	}
 
 	if params.Writer == nil {
-		merr = multierror.Append(merr, errors.New("init: output writer cannot be nil"))
+		merr = merr.Append(errors.New("output writer cannot be nil"))
 	}
 
 	if params.ErrWriter == nil {
-		merr = multierror.Append(merr, errors.New("init: error writer cannot be nil"))
+		merr = merr.Append(errors.New("error writer cannot be nil"))
 	}
 
 	if params.PasswordReadFunc == nil {
-		merr = multierror.Append(merr, errors.New("init: password read function cannot be nil"))
+		merr = merr.Append(errors.New("password read function cannot be nil"))
 	}
 
 	if params.Client == nil {
-		merr = multierror.Append(merr, errors.New("init: http client cannot be nil"))
+		merr = merr.Append(errors.New("http client cannot be nil"))
 	}
 
 	return merr.ErrorOrNil()

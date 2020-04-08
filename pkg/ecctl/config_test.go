@@ -24,8 +24,8 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/output"
-	multierror "github.com/hashicorp/go-multierror"
 )
 
 func TestConfigValidate(t *testing.T) {
@@ -54,11 +54,11 @@ func TestConfigValidate(t *testing.T) {
 				Output: "INVALID OUTPUT",
 				APIKey: "dummy",
 			},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("invalid configuration options specified",
 				errInvalidOutputFormat,
 				errInvalidOutputDevice,
 				errInvalidErrorDevice,
-			}},
+			),
 		},
 		{
 			name: "Validate fails when output = json and custom format",
@@ -67,11 +67,11 @@ func TestConfigValidate(t *testing.T) {
 				Format: "{{ .Field }}",
 				APIKey: "dummy",
 			},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("invalid configuration options specified",
 				errCannotSpecifyJSONOutputAndCustomFormat,
 				errInvalidOutputDevice,
 				errInvalidErrorDevice,
-			}},
+			),
 		},
 		{
 			name: "Validate fails due to specifying both user / pass and APIKey",
@@ -83,10 +83,10 @@ func TestConfigValidate(t *testing.T) {
 				Pass:         "dummypass",
 				OutputDevice: output.NewDevice(new(bytes.Buffer)),
 			},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("invalid configuration options specified",
 				errInvalidBothAuthenticaitonSettings,
 				errInvalidErrorDevice,
-			}},
+			),
 		},
 		{
 			name: "Validate fails due to empty credentials",
@@ -95,10 +95,10 @@ func TestConfigValidate(t *testing.T) {
 				Region:       "ece-region",
 				OutputDevice: output.NewDevice(new(bytes.Buffer)),
 			},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("invalid configuration options specified",
 				errInvalidEmptyAuthenticaitonSettings,
 				errInvalidErrorDevice,
-			}},
+			),
 		},
 		{
 			name: "Validate succeeds",

@@ -25,8 +25,8 @@ import (
 	"path/filepath"
 	"time"
 
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/output"
-	multierror "github.com/hashicorp/go-multierror"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
@@ -183,19 +183,29 @@ func initApp(cmd *cobra.Command, client *http.Client, v *viper.Viper) error {
 		return err
 	}
 
-	return util.ReturnErrOnly(ecctl.Instance(c))
+	err := util.ReturnErrOnly(ecctl.Instance(c))
+	// When no config file has been read and initApp returns an error, tell
+	// the user how to initialize the application.
+	if err != nil && defaultViper.ConfigFileUsed() == "" {
+		return multierror.NewPrefixed(
+			`missing ecctl config file, please use the "ecctl init" command to initialize ecctl`, err,
+		)
+	}
+
+	return err
 }
 
 func checkPreRunE(command *cobra.Command) error {
-	var err = new(multierror.Error)
+	var err = multierror.NewPrefixed("")
 	for _, c := range command.Commands() {
 		if command.HasSubCommands() {
-			err = multierror.Append(err, checkPreRunE(c))
+			err = err.Append(checkPreRunE(c))
 		}
 		if c.PreRunE == nil {
 			var message = fmt.Sprintf(messageErrHasNoPreRunCheck, command.Name(), c.Name())
-			err = multierror.Append(err, errors.New(message))
+			err = err.Append(errors.New(message))
 		}
 	}
+
 	return err.ErrorOrNil()
 }
