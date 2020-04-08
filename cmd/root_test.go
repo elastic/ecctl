@@ -26,10 +26,10 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
-	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	cmddeployment "github.com/elastic/ecctl/cmd/deployment"
 	cmddeploymentplan "github.com/elastic/ecctl/cmd/deployment/plan"
 	"github.com/elastic/ecctl/pkg/ecctl"
