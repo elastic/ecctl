@@ -19,87 +19,16 @@ package cmdutil
 
 import (
 	"errors"
-	"net/http"
 	"reflect"
 	"strconv"
 	"testing"
 	"time"
 
-	"github.com/elastic/cloud-sdk-go/pkg/api"
-	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
-	"github.com/elastic/cloud-sdk-go/pkg/models"
-	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/spf13/cobra"
 	flag "github.com/spf13/pflag"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
-
-func TestGetInstances(t *testing.T) {
-	cmdWithSliceFlag := &cobra.Command{
-		Use: "something",
-		Run: func(cmd *cobra.Command, args []string) {},
-	}
-	cmdWithSliceFlag.Flags().StringSlice("instance", []string{"1", "2", "3"}, "instance")
-	cmdWithSliceFlag.Flags().Bool("all", false, "all")
-	cmdWithAllFlag := &cobra.Command{
-		Use: "something",
-		Run: func(cmd *cobra.Command, args []string) {},
-	}
-	cmdWithAllFlag.Flags().Bool("all", true, "all")
-	type args struct {
-		cmd      *cobra.Command
-		params   util.ClusterParams
-		flagName string
-	}
-	tests := []struct {
-		name string
-		args args
-		want []string
-		err  error
-	}{
-		{
-			name: "obtains the instances explicitly set",
-			args: args{
-				cmd:      cmdWithSliceFlag,
-				flagName: "instance",
-			},
-			want: []string{"1", "2", "3"},
-		},
-		{
-			name: "obtains the instances from the cluster topology",
-			args: args{
-				cmd: cmdWithAllFlag,
-				params: util.ClusterParams{
-					ClusterID: util.ValidClusterID,
-					API: api.NewMock(mock.Response{Response: http.Response{
-						StatusCode: 200,
-						Body: mock.NewStructBody(models.ElasticsearchClusterInfo{
-							Topology: &models.ClusterTopologyInfo{
-								Instances: []*models.ClusterInstanceInfo{
-									{InstanceName: ec.String("instance-000000")},
-								},
-							},
-						}),
-					}}),
-				},
-			},
-			want: []string{"instance-000000"},
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := GetInstances(tt.args.cmd, tt.args.params, tt.args.flagName)
-			if !reflect.DeepEqual(err, tt.err) {
-				t.Errorf("GetInstances() error = %v, wantErr %v", err, tt.err)
-				return
-			}
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("GetInstances() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
 
 func TestAddKindFlag(t *testing.T) {
 	var wantSomethingAssert = &flag.Flag{
