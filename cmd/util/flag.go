@@ -24,7 +24,6 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/elastic/ecctl/pkg/deployment/elasticsearch/instances"
 	"github.com/elastic/ecctl/pkg/util"
 )
 
@@ -57,16 +56,6 @@ var (
 	// AllKindsCompFunc is the bash autocompletion function for all kinds.
 	AllKindsCompFunc = fmt.Sprintf(compFuncTpl, "all", strings.Join(AllKinds, " "))
 )
-
-// GetInstances tries to obtain a slice with the elasticsearch cluster
-// instance names either from the current cluster topology or from the
-// specified --instance flag in the cobra.Command.
-func GetInstances(cmd *cobra.Command, params util.ClusterParams, flagName string) ([]string, error) {
-	if all, _ := cmd.Flags().GetBool("all"); all {
-		return instances.List(params)
-	}
-	return cmd.Flags().GetStringSlice(flagName)
-}
 
 // AddKindFlag adds a kind string  flag to the specified command, with the
 // resource kinds autocompletion function. It is intended to be used for any

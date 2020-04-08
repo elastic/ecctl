@@ -19,8 +19,6 @@ package util
 
 import (
 	"errors"
-
-	"github.com/elastic/cloud-sdk-go/pkg/api"
 )
 
 const (
@@ -35,8 +33,6 @@ const (
 var (
 	// ErrAPIReq is the message returned when API reference is required for a command
 	ErrAPIReq = errors.New("api reference is required for command")
-	// ErrClusterLength is the message returned when a provided cluster id is not of the expected length (32 chars)
-	ErrClusterLength = errors.New("cluster id should have a length of 32 characters")
 	// ErrDeploymentID is the message returned when a provided cluster id is not of the expected length (32 chars)
 	ErrDeploymentID = errors.New("deployment id should have a length of 32 characters")
 	// ErrIDCannotBeEmpty is the message returned when an ID field is empty
@@ -48,28 +44,3 @@ var (
 		"X-Found-Bypass-Maintenance": "true",
 	}
 )
-
-// ClusterParams is the generic parameter of elasticsearch subcommands
-type ClusterParams struct {
-	*api.API
-	ClusterID string
-}
-
-// AuthenticationParams is the generic parameter of most elasticsearch subcommands
-type AuthenticationParams struct {
-	User, Pass string
-	Insecure   bool
-}
-
-// Validate is the implementation for the ecctl.Validator interface
-func (cp *ClusterParams) Validate() error {
-	if len(cp.ClusterID) != 32 {
-		return ErrClusterLength
-	}
-
-	if cp.API == nil {
-		return ErrAPIReq
-	}
-
-	return nil
-}
