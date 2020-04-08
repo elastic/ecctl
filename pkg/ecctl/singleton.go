@@ -38,3 +38,6 @@ func Instance(c Config) (*App, error) {
 
 	return application, err
 }
+
+// Cleanup resets the singleton to nil.
+func Cleanup() { application = nil }

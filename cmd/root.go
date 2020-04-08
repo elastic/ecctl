@@ -78,16 +78,7 @@ var RootCmd = &cobra.Command{
 			return err
 		}
 
-		err := initApp(cmd, defaultClient, defaultViper)
-		// When no config file has been read and initApp returns an error, tell
-		// the user how to initialize the application.
-		if err != nil && defaultViper.ConfigFileUsed() == "" {
-			return multierror.NewPrefixed(
-				`missing ecctl config file, please use "ecctl init" to initialize it`, err,
-			)
-		}
-
-		return err
+		return initApp(cmd, defaultClient, defaultViper)
 	},
 }
 
@@ -192,7 +183,16 @@ func initApp(cmd *cobra.Command, client *http.Client, v *viper.Viper) error {
 		return err
 	}
 
-	return util.ReturnErrOnly(ecctl.Instance(c))
+	err := util.ReturnErrOnly(ecctl.Instance(c))
+	// When no config file has been read and initApp returns an error, tell
+	// the user how to initialize the application.
+	if err != nil && defaultViper.ConfigFileUsed() == "" {
+		return multierror.NewPrefixed(
+			`missing ecctl config file, please use the "ecctl init" command to initialize ecctl`, err,
+		)
+	}
+
+	return err
 }
 
 func checkPreRunE(command *cobra.Command) error {
