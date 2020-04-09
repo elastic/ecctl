@@ -184,7 +184,7 @@ func TestNew(t *testing.T) {
 			wantErr: errors.New("deployment: the default template is not configured for APM. Please use another template if you wish to start APM instances"),
 		},
 		{
-			name: "Fails to create a deployment payload with ES, Kibana and Appsearch instances",
+			name: "Fails to create a deployment payload with ES, Kibana and App Search instances",
 			args: args{params: NewParams{
 				Version: "7.6.1",
 				Region:  "ece-region",
@@ -211,7 +211,7 @@ func TestNew(t *testing.T) {
 					mock.New200Response(mock.NewStructBody(apmKibanaTemplateResponse)),
 				),
 			}},
-			wantErr: errors.New("deployment: the default template is not configured for AppSearch. Please use another template if you wish to start AppSearch instances"),
+			wantErr: errors.New("deployment: the default template is not configured for App Search. Please use another template if you wish to start App Search instances"),
 		},
 		{
 			name: "Succeeds to create a deployment payload with ES and Kibana instances",

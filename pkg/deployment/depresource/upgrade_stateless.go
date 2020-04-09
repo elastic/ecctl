@@ -26,7 +26,7 @@ import (
 )
 
 // UpgradeStateless upgrades a stateless deployment resource like APM, Kibana
-// and AppSearch.
+// and App Search.
 func UpgradeStateless(params deployment.ResourceParams) (*models.DeploymentResourceUpgradeResponse, error) {
 	if err := params.Validate(); err != nil {
 		return nil, err

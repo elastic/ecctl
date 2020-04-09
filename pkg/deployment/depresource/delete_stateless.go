@@ -46,7 +46,7 @@ func (params *DeleteStatelessParams) Validate() error {
 }
 
 // DeleteStateless deletes a stateless deployment resource like APM, Kibana
-// and AppSearch.
+// and App Search.
 func DeleteStateless(params DeleteStatelessParams) error {
 	if err := params.Validate(); err != nil {
 		return err

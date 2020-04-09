@@ -59,7 +59,7 @@ func NewAppSearch(params NewStateless) (*models.AppSearchPayload, error) {
 	}
 
 	if res.Payload.ClusterTemplate.Appsearch == nil {
-		return nil, fmt.Errorf("deployment: the %s template is not configured for AppSearch. Please use another template if you wish to start AppSearch instances",
+		return nil, fmt.Errorf("deployment: the %s template is not configured for App Search. Please use another template if you wish to start App Search instances",
 			params.TemplateID)
 	}
 

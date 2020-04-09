@@ -24,7 +24,7 @@ Sane default values are provided, making the command work out of the box even wh
 When version is not specified, the latest available stack version will automatically be used. 
 These are the available options:
 
-  * Simplified flags to set size and zone count for each instance type (Elasticsearch, Kibana, APM and AppSearch). 
+  * Simplified flags to set size and zone count for each instance type (Elasticsearch, Kibana, APM and App Search). 
   * Advanced flag for different Elasticsearch node types: --topology-element <json obj> (shorthand: -e).
     Note that the flag can be specified multiple times for complex topologies.
     The JSON object has the following format:
@@ -41,7 +41,7 @@ Save it, update or extend the topology and create a deployment using the saved p
 
 	// nolint
 	createExample = `## Create a deployment with the default values for Elasticsearch, a Kibana instance with a modified size, 
-and a default APM instance. While Elasticsearch and Kibana come enabled by default, both APM and AppSearch need to be 
+and a default APM instance. While Elasticsearch and Kibana come enabled by default, both APM and App Search need to be 
 enabled by using the "--apm" and "--appsearch" flags. The command will exit after the API response has been returned, without 
 waiting until the deployment resources have been created. 
 $ ecctl deployment create --name my-deployment --zones 2 --kibana-size 2048 --apm --apm-size 1024
