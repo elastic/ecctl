@@ -57,7 +57,7 @@ type vacateCaseClusters struct {
 	kibana []vacateCaseClusterConfig
 	// APM clusters that will be simulated
 	apm []vacateCaseClusterConfig
-	// AppSearch clusters that will be simulated
+	// App Search clusters that will be simulated
 	appsearch []vacateCaseClusterConfig
 }
 

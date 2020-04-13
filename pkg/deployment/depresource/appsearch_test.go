@@ -159,7 +159,7 @@ func TestNewAppSearch(t *testing.T) {
 				),
 				Region: "ece-region",
 			}},
-			err: errors.New("deployment: the an ID template is not configured for AppSearch. Please use another template if you wish to start AppSearch instances"),
+			err: errors.New("deployment: the an ID template is not configured for App Search. Please use another template if you wish to start App Search instances"),
 		},
 		{
 			name: "succeeds with no argument override",

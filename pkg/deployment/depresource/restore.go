@@ -33,7 +33,7 @@ type RestoreParams struct {
 }
 
 // Restore upgrades a stateless deployment resource like APM, Kibana
-// and AppSearch.
+// and App Search.
 func Restore(params RestoreParams) error {
 	if err := params.Validate(); err != nil {
 		return err

@@ -179,10 +179,10 @@ func init() {
 	createCmd.Flags().Int32("apm-zones", 1, "Number of zones the APM instances will span")
 	createCmd.Flags().Int32("apm-size", 512, "Memory (RAM) in MB that each of the APM instances will have")
 
-	createCmd.Flags().Bool("appsearch", false, "Enables AppSearch for the deployment")
-	createCmd.Flags().String("appsearch-ref-id", "main-appsearch", "Optional RefId for the AppSearch deployment")
-	createCmd.Flags().Int32("appsearch-zones", 1, "Number of zones the AppSearch instances will span")
-	createCmd.Flags().Int32("appsearch-size", 2048, "Memory (RAM) in MB that each of the AppSearch instances will have")
+	createCmd.Flags().Bool("appsearch", false, "Enables App Search for the deployment")
+	createCmd.Flags().String("appsearch-ref-id", "main-appsearch", "Optional RefId for the App Search deployment")
+	createCmd.Flags().Int32("appsearch-zones", 1, "Number of zones the App Search instances will span")
+	createCmd.Flags().Int32("appsearch-size", 2048, "Memory (RAM) in MB that each of the App Search instances will have")
 
 	// The following flags will remain hidden until reads for deployment templates are available on ESS
 	createCmd.Flags().MarkHidden("deployment-template")

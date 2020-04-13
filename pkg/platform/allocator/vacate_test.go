@@ -626,7 +626,7 @@ func TestCheckVacateFailures(t *testing.T) {
 			}},
 		},
 		{
-			name: "Returns an error on AppSearch vacate failure",
+			name: "Returns an error on App Search vacate failure",
 			args: args{
 				failures: &models.MoveClustersDetails{
 					AppsearchClusters: []*models.MoveAppSearchDetails{
@@ -1227,7 +1227,7 @@ func Test_addAllocatorMovesToPool(t *testing.T) {
 			wantMoved:     true,
 		},
 		{
-			name: "Move clusters when no filter is specified (AppSearch)",
+			name: "Move clusters when no filter is specified (App Search)",
 			args: args{params: addAllocatorMovesToPoolParams{
 				ID: "allocator-1",
 				Pool: func() *pool.Pool {
@@ -1324,7 +1324,7 @@ func Test_addAllocatorMovesToPool(t *testing.T) {
 			wantMoved:     true,
 		},
 		{
-			name: "Move clusters when no filter is specified (AppSearch)",
+			name: "Move clusters when no filter is specified (App Search)",
 			args: args{params: addAllocatorMovesToPoolParams{
 				ID: "allocator-1",
 				Pool: func() *pool.Pool {
