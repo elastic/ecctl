@@ -10,7 +10,7 @@ Benefits of {p}:
 
 * Easier to use than the Cloud UI or using the RESTful API directly
 * Helps you automate the deployment lifecycle
-* Provides a foundation for integration with other tools, such as Terraform and Ansible
+* Provides a foundation for integration with other tools
 
 [id="{p}-installing"]
 == Installing
