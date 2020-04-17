@@ -59,15 +59,19 @@ const (
 const (
 	_ = iota
 	gcpUsCentral1Choice
+	gcpUsEast1Choice
 	gcpUsEast4Choice
 	gcpUsWest1Choice
 	gcpNorthamericaNortheast1Choice
+	gcpSouthamericaEast1Choice
 	gcpAustraliaSoutheast1Choice
 	gcpEuropeWest1Choice
 	gcpEuropeWest2Choice
 	gcpEuropeWest3Choice
 	gcpAsiaNortheast1Choice
 	gcpAsiaSouth1Choice
+	gcpAsiaSoutheast1Choice
+
 	awsUsEast1Choice
 	awsUsWest1Choice
 	awsUsWest2Choice
@@ -78,9 +82,11 @@ const (
 	awsApSoutheast1Choice
 	awsApSoutheast2Choice
 	awsSaEast1Choice
+
 	azureEastUs2Choice
 	azureWestUs2Choice
 	azureWestEuropeChoice
+	azureUkSouthChoice
 	azureJapanEastChoice
 	azureSouthEastAsiaChoice
 )
@@ -122,34 +128,38 @@ Select a region you would like to have as default:
   
   GCP
   [1] us-central1 (Iowa)
-  [2] us-east4 (N. Virginia)
-  [3] us-west1 (Oregon)
-  [4] northamerica-northeast1 (Montreal)
-  [5] australia-southeast1 (Sydney)
-  [6] europe-west1 (Belgium)
-  [7] europe-west2 (London)
-  [8] europe-west3 (Frankfurt)
-  [9] asia-northeast1 (Tokyo)
-  [10] asia-south1 (Mumbai)
+  [2] us-east1 (S. Carolina)
+  [3] us-east4 (N. Virginia)
+  [4] us-west1 (Oregon)
+  [5] northamerica-northeast1 (Montreal)
+  [6] southamerica-east1 (São Paulo)
+  [7] australia-southeast1 (Sydney)
+  [8] europe-west1 (Belgium)
+  [9] europe-west2 (London)
+  [10] europe-west3 (Frankfurt)
+  [11] asia-northeast1 (Tokyo)
+  [12] asia-south1 (Mumbai)
+  [13] asia-southeast1 (Singapore)
 
   AWS
-  [11] us-east-1 (N. Virginia)
-  [12] us-west-1 (N. California)
-  [13] us-west-2 (Oregon)
-  [14] eu-central-1 (Frankfurt)
-  [15] eu-west-2 (London)
-  [16] eu-west-1 (Ireland)
-  [17] ap-northeast-1 (Tokyo)
-  [18] ap-southeast-1 (Singapore)
-  [19] ap-southeast-2 (Sydney)
-  [20] sa-east-1 (São Paulo)
+  [14] us-east-1 (N. Virginia)
+  [15] us-west-1 (N. California)
+  [16] us-west-2 (Oregon)
+  [17] eu-central-1 (Frankfurt)
+  [18] eu-west-2 (London)
+  [19] eu-west-1 (Ireland)
+  [20] ap-northeast-1 (Tokyo)
+  [21] ap-southeast-1 (Singapore)
+  [22] ap-southeast-2 (Sydney)
+  [23] sa-east-1 (São Paulo)
 
   Azure
-  [21] eastus2 (Virginia)
-  [22] westus2 (Washington)
-  [23] westeurope (Netherlands)
-  [24] japaneast (Tokyo)
-  [25] southeastasia (Singapore)
+  [24] eastus2 (Virginia)
+  [25] westus2 (Washington)
+  [26] westeurope (Netherlands)
+  [27] uksouth (London)
+  [28] japaneast (Tokyo)
+  [29] southeastasia (Singapore)
 
 Please enter your choice: `
 
@@ -174,30 +184,36 @@ You're all set! Here are some commands to try:
 	// Remove once we have an endpoint available to list regions.
 	essRegions = map[int]string{
 		gcpUsCentral1Choice:             "gcp-us-central1",
+		gcpUsEast1Choice:                "gcp-us-east1",
 		gcpUsEast4Choice:                "gcp-us-east4",
 		gcpUsWest1Choice:                "gcp-us-west1",
 		gcpNorthamericaNortheast1Choice: "gcp-northamerica-northeast1",
+		gcpSouthamericaEast1Choice:      "gcp-southamerica-east1",
 		gcpAustraliaSoutheast1Choice:    "gcp-australia-southeast1",
 		gcpEuropeWest1Choice:            "gcp-europe-west1",
 		gcpEuropeWest2Choice:            "gcp-europe-west2",
 		gcpEuropeWest3Choice:            "gcp-europe-west3",
 		gcpAsiaNortheast1Choice:         "gcp-asia-northeast1",
 		gcpAsiaSouth1Choice:             "gcp-asia-south1",
-		awsUsEast1Choice:                "us-east-1",
-		awsUsWest1Choice:                "us-west-1",
-		awsUsWest2Choice:                "us-west-2",
-		awsEuCentral1Choice:             "aws-eu-central-1",
-		awsEuWest2Choice:                "aws-eu-west-2",
-		awsEuWest1Choice:                "eu-west-1",
-		awsApNortheast1Choice:           "ap-northeast-1",
-		awsApSoutheast1Choice:           "ap-southeast-1",
-		awsApSoutheast2Choice:           "ap-southeast-2",
-		awsSaEast1Choice:                "sa-east-1",
-		azureEastUs2Choice:              "azure-eastus2",
-		azureWestUs2Choice:              "azure-westus2",
-		azureWestEuropeChoice:           "azure-westeurope",
-		azureJapanEastChoice:            "azure-japaneast",
-		azureSouthEastAsiaChoice:        "azure-southeastasia",
+		gcpAsiaSoutheast1Choice:         "gcp-asia-southeast1",
+
+		awsUsEast1Choice:      "us-east-1",
+		awsUsWest1Choice:      "us-west-1",
+		awsUsWest2Choice:      "us-west-2",
+		awsEuCentral1Choice:   "aws-eu-central-1",
+		awsEuWest2Choice:      "aws-eu-west-2",
+		awsEuWest1Choice:      "eu-west-1",
+		awsApNortheast1Choice: "ap-northeast-1",
+		awsApSoutheast1Choice: "ap-southeast-1",
+		awsApSoutheast2Choice: "ap-southeast-2",
+		awsSaEast1Choice:      "sa-east-1",
+
+		azureEastUs2Choice:       "azure-eastus2",
+		azureWestUs2Choice:       "azure-westus2",
+		azureWestEuropeChoice:    "azure-westeurope",
+		azureUkSouthChoice:       "azure-uksouth",
+		azureJapanEastChoice:     "azure-japaneast",
+		azureSouthEastAsiaChoice: "azure-southeastasia",
 	}
 )
 
@@ -226,10 +242,6 @@ type InitConfigParams struct {
 
 	// FilePath of the configuration
 	FilePath string
-
-	// PublicAPINotReleased will be removed very soon, using it to toggle a
-	// different workflow path.
-	PublicAPINotReleased bool
 }
 
 // Validate ensures the parameters are usable.
@@ -305,15 +317,7 @@ func InitConfig(params InitConfigParams) error {
 	// endpoints with self-signed certificates.
 	cfg.Insecure = true
 
-	if params.PublicAPINotReleased {
-		fmt.Fprintln(params.Writer)
-		// Set region back to empty since it'll be an ECE environment
-		cfg.Region = ""
-		cfg.Host = scanner.Scan(eceHostMsg)
-		if err := askAuthMechanism(&cfg, scanner, params.Writer, params.PasswordReadFunc); err != nil {
-			return err
-		}
-	} else if err := askInfraSelection(&cfg, scanner, params.Writer, params.ErrWriter, params.PasswordReadFunc); err != nil {
+	if err := askInfraSelection(&cfg, scanner, params.Writer, params.ErrWriter, params.PasswordReadFunc); err != nil {
 		return err
 	}
 
