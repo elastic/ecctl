@@ -7,7 +7,7 @@ Moves all the resources from the specified allocator
 Moves all the resources from the specified allocator
 
 ```
-ecctl platform allocator vacate <source> [flags]
+ecctl platform allocator vacate <allocator-id> [flags]
 ```
 
 ### Examples

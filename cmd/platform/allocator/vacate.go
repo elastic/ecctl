@@ -68,7 +68,7 @@ const vacateExamples = `  ecctl platform allocator vacate i-05e245252362f7f1d
 `
 
 var vacateAllocatorCmd = &cobra.Command{
-	Use:     "vacate <source>",
+	Use:     "vacate <allocator-id>",
 	Short:   "Moves all the resources from the specified allocator",
 	Example: vacateExamples,
 	PreRunE: cobra.MinimumNArgs(1),
