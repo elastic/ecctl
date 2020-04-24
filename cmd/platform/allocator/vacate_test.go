@@ -24,8 +24,8 @@ import (
 
 func TestValidateSkipDataMigration(t *testing.T) {
 	type args struct {
-		clusters []string
-		moveOnly bool
+		resources []string
+		moveOnly  bool
 	}
 	tests := []struct {
 		name    string
@@ -34,35 +34,35 @@ func TestValidateSkipDataMigration(t *testing.T) {
 		err     error
 	}{
 		{
-			name: "Succeeds if a cluster has been set and moveOnly is set to true",
+			name: "Succeeds if a resource has been set and moveOnly is set to true",
 			args: args{
-				clusters: []string{"0f32fa44e"},
-				moveOnly: true,
+				resources: []string{"0f32fa44e"},
+				moveOnly:  true,
 			},
 			wantErr: false,
 		},
 		{
-			name: "Returns an error if a cluster has been set and moveOnly is set to false",
+			name: "Returns an error if a resource has been set and moveOnly is set to false",
 			args: args{
-				clusters: []string{"0f32fa44e"},
-				moveOnly: false,
+				resources: []string{"0f32fa44e"},
+				moveOnly:  false,
 			},
 			wantErr: true,
-			err:     errors.New("skip data migration is not available if there are no cluster IDs specified or move-only is set to false"),
+			err:     errors.New("skip data migration is not available if there are no resource IDs specified or move-only is set to false"),
 		},
 		{
-			name: "Returns an error if no cluster has been set and moveOnly is set to true",
+			name: "Returns an error if no resource has been set and moveOnly is set to true",
 			args: args{
-				clusters: []string{},
-				moveOnly: true,
+				resources: []string{},
+				moveOnly:  true,
 			},
 			wantErr: true,
-			err:     errors.New("skip data migration is not available if there are no cluster IDs specified or move-only is set to false"),
+			err:     errors.New("skip data migration is not available if there are no resource IDs specified or move-only is set to false"),
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			err := validateSkipDataMigration(tt.args.clusters, tt.args.moveOnly)
+			err := validateSkipDataMigration(tt.args.resources, tt.args.moveOnly)
 
 			if (err != nil) != tt.wantErr {
 				t.Errorf("validateSkipDataMigration() error = %v, wantErr %v", err, tt.wantErr)

@@ -50,4 +50,4 @@ ecctl platform allocator [flags]
 * xref:ecctl_platform_allocator_metadata[ecctl platform allocator metadata]	 - Manages an allocator's metadata
 * xref:ecctl_platform_allocator_search[ecctl platform allocator search]	 - Performs advanced allocator searching
 * xref:ecctl_platform_allocator_show[ecctl platform allocator show]	 - Returns information about the allocator
-* xref:ecctl_platform_allocator_vacate[ecctl platform allocator vacate]	 - Moves all the clusters from the specified allocator
+* xref:ecctl_platform_allocator_vacate[ecctl platform allocator vacate]	 - Moves all the resources from the specified allocator
