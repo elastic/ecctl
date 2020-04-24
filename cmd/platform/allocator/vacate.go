@@ -33,43 +33,43 @@ import (
 	"github.com/elastic/ecctl/pkg/platform/allocator"
 )
 
-const vacateExamples = `  ecctl [globalFlags] allocator vacate i-05e245252362f7f1d
+const vacateExamples = `  ecctl platform allocator vacate i-05e245252362f7f1d
   # Move everything from multiple allocators
-  ecctl [globalFlags] allocator vacate i-05e245252362f7f1d i-2362f7f1d252362f7
+  ecctl platform allocator vacate i-05e245252362f7f1d i-2362f7f1d252362f7
 
-  # filter by a cluster kind
-  ecctl [globalFlags] allocator vacate -k kibana i-05e245252362f7f1d
+  # filter by a resource kind
+  ecctl platform allocator vacate -k kibana i-05e245252362f7f1d
 
-  # Only move specific cluster IDs
-  ecctl [globalFlags] allocator vacate -c f521dedb07194c478fbbc6624f3bbf8f -c f404eea372cc4ea5bd553d47a09705cd i-05e245252362f7f1d
+  # Only move specific resource IDs
+  ecctl platform allocator vacate -r f521dedb07194c478fbbc6624f3bbf8f -r f404eea372cc4ea5bd553d47a09705cd i-05e245252362f7f1d
 
   # Specify multiple allocator targets
-  ecctl [globalFlags] allocator vacate -t i-05e245252362f7f2d -t i-2362f7f1d252362f7 i-05e245252362f7f1d
-  ecctl [globalFlags] allocator vacate --target i-05e245252362f7f2d --target i-2362f7f1d252362f7 --kind kibana i-05e245252362f7f1d
+  ecctl platform allocator vacate -t i-05e245252362f7f2d -t i-2362f7f1d252362f7 i-05e245252362f7f1d
+  ecctl platform allocator vacate --target i-05e245252362f7f2d --target i-2362f7f1d252362f7 --kind kibana i-05e245252362f7f1d
 
   # Set the allocators to maintenance mode before vacating them
-  ecctl [globalFlags] allocator vacate --maintenance -t i-05e245252362f7f2d -t i-2362f7f1d252362f7 i-05e245252362f7f1d
+  ecctl platform allocator vacate --maintenance -t i-05e245252362f7f2d -t i-2362f7f1d252362f7 i-05e245252362f7f1d
 
   # Set the amount of maximum moves to happen at any time
-  ecctl [globalFlags] allocator vacate --concurrency 10 i-05e245252362f7f1d
+  ecctl platform allocator vacate --concurrency 10 i-05e245252362f7f1d
 
   # Override the allocator health auto discovery
-  ecctl [globalFlags] allocator vacate --allocator-down=true i-05e245252362f7f1d
+  ecctl platform allocator vacate --allocator-down=true i-05e245252362f7f1d
 
   # Override the skip_snapshot setting
-  ecctl [globalFlags] allocator vacate --skip-snapshot=true i-05e245252362f7f1d -c f521dedb07194c478fbbc6624f3bbf8f
+  ecctl platform allocator vacate --skip-snapshot=true i-05e245252362f7f1d -r f521dedb07194c478fbbc6624f3bbf8f
 
   # Override the skip_data_migration setting
-  ecctl [globalFlags] allocator vacate --skip-data-migration=true i-05e245252362f7f1d -c f521dedb07194c478fbbc6624f3bbf8f
+  ecctl platform allocator vacate --skip-data-migration=true i-05e245252362f7f1d -r f521dedb07194c478fbbc6624f3bbf8f
   
   # Skips tracking the vacate progress which will cause the command to return almost immediately.
   # Not recommended since it can lead to failed vacates without the operator knowing about them.
-  ecctl [globalFlags] allocator vacate --skip-tracking i-05e245252362f7f1d
+  ecctl platform allocator vacate --skip-tracking i-05e245252362f7f1d
 `
 
 var vacateAllocatorCmd = &cobra.Command{
 	Use:     "vacate <source>",
-	Short:   "Moves all the clusters from the specified allocator",
+	Short:   "Moves all the resources from the specified allocator",
 	Example: vacateExamples,
 	PreRunE: cobra.MinimumNArgs(1),
 	Aliases: []string{"move-nodes"},
@@ -89,7 +89,7 @@ var vacateAllocatorCmd = &cobra.Command{
 			return err
 		}
 
-		clusters, err := cmd.Flags().GetStringArray("cluster")
+		resources, err := cmd.Flags().GetStringArray("resource-id")
 		if err != nil {
 			return err
 		}
@@ -121,7 +121,7 @@ var vacateAllocatorCmd = &cobra.Command{
 			return err
 		}
 
-		err = validateSkipDataMigration(clusters, moveOnly)
+		err = validateSkipDataMigration(resources, moveOnly)
 		if err != nil && skipDataMigrationRaw != "" {
 			return err
 		}
@@ -161,7 +161,7 @@ var vacateAllocatorCmd = &cobra.Command{
 			API:                 ecctl.Get().API,
 			Allocators:          args,
 			PreferredAllocators: target,
-			ClusterFilter:       clusters,
+			ClusterFilter:       resources,
 			KindFilter:          kind,
 			Concurrency:         uint16(concurrency),
 			Output:              ecctl.Get().Config.OutputDevice,
@@ -184,9 +184,9 @@ var vacateAllocatorCmd = &cobra.Command{
 	},
 }
 
-func validateSkipDataMigration(clusters []string, moveOnly bool) error {
-	if len(clusters) < 1 || !moveOnly {
-		return errors.New("skip data migration is not available if there are no cluster IDs specified or move-only is set to false")
+func validateSkipDataMigration(resources []string, moveOnly bool) error {
+	if len(resources) < 1 || !moveOnly {
+		return errors.New("skip data migration is not available if there are no resource IDs specified or move-only is set to false")
 	}
 
 	return nil
@@ -196,14 +196,14 @@ func init() {
 	Command.AddCommand(vacateAllocatorCmd)
 	vacateAllocatorCmd.Flags().Bool("skip-tracking", false, "Skips tracking the vacate progress causing the command to return after the move operation has been executed. Not recommended.")
 	vacateAllocatorCmd.Flags().StringP("kind", "k", "", "Kind of workload to vacate (elasticsearch|kibana)")
-	vacateAllocatorCmd.Flags().StringArrayP("cluster", "c", nil, "Cluster IDs to include in the vacate")
+	vacateAllocatorCmd.Flags().StringArrayP("resource-id", "r", nil, "Resource IDs to include in the vacate")
 	vacateAllocatorCmd.Flags().StringArrayP("target", "t", nil, "Target allocator(s) on which to place the vacated workload")
 	vacateAllocatorCmd.Flags().BoolP("maintenance", "m", false, "Whether to set the allocator(s) in maintenance before performing the vacate")
 	vacateAllocatorCmd.Flags().Uint("concurrency", 8, "Maximum number of concurrent moves to perform at any time")
 	vacateAllocatorCmd.Flags().String("allocator-down", "", "Disables the allocator health auto-discovery, setting the allocator-down to either [true|false]")
-	vacateAllocatorCmd.Flags().Bool("move-only", true, "Keeps the cluster in its current -possibly broken- state and just does the bare minimum to move the requested instances across to another allocator. [true|false]")
+	vacateAllocatorCmd.Flags().Bool("move-only", true, "Keeps the resource in its current -possibly broken- state and just does the bare minimum to move the requested instances across to another allocator. [true|false]")
 	vacateAllocatorCmd.Flags().Bool("override-failsafe", false, "If false (the default) then the plan will fail out if it believes the requested sequence of operations can result in data loss - this flag will override some of these restraints. [true|false]")
-	vacateAllocatorCmd.Flags().String("skip-snapshot", "", "Skips the snapshot operation on the specified cluster IDs. ONLY available when the cluster IDs are specified. [true|false]")
-	vacateAllocatorCmd.Flags().String("skip-data-migration", "", "Skips the data-migration operation on the specified cluster IDs. ONLY available when the cluster IDs are specified and --move-only is true. [true|false]")
+	vacateAllocatorCmd.Flags().String("skip-snapshot", "", "Skips the snapshot operation on the specified resource IDs. ONLY available when the resource IDs are specified. [true|false]")
+	vacateAllocatorCmd.Flags().String("skip-data-migration", "", "Skips the data-migration operation on the specified resource IDs. ONLY available when the resource IDs are specified and --move-only is true. [true|false]")
 	cmdutil.AddTrackFlags(vacateAllocatorCmd)
 }
