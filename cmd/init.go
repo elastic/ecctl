@@ -49,8 +49,6 @@ var initCmd = &cobra.Command{
 			ErrWriter:        defaultError,
 			PasswordReadFunc: terminal.ReadPassword,
 			FilePath:         filepath.Join(fp, defaultViper.GetString("config")),
-			// Feature toggle to display slightly different information.
-			PublicAPINotReleased: true,
 		})
 		if err != nil {
 			return err
