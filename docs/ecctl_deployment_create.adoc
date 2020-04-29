@@ -8,7 +8,7 @@ Creates a deployment
 
 Creates a deployment which is defined from a file definition using the --file=+++<file path="">+++(shorthand: -f) flag.+++</file>+++
 
-You can create a definition by using the sample JSON seen here:
+You can create a definition by using the sample JSON:
   https://elastic.co/guide/en/cloud/current/ec-api-deployment-crud.html#ec_create_a_deployment
 
 ----

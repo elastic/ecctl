@@ -79,7 +79,7 @@ $ ecctl deployment create --request-id=GMZPMRrcMYqHdmxjIQkHbdjnhPIeBElcwrHwzVlhG
 	// Remove temporary constants when reads for deployment templates are available on ESS
 	createLongTemp = `Creates a deployment which is defined from a file definition using the --file=<file path> (shorthand: -f) flag.
 
-You can create a definition by using the sample JSON seen here:
+You can create a definition by using the sample JSON:
   https://elastic.co/guide/en/cloud/current/ec-api-deployment-crud.html#ec_create_a_deployment`
 
 	createExampleTemp = `## To make the command wait until the resources have been created use the "--track" flag, which will output 
