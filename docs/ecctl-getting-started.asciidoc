@@ -252,6 +252,174 @@ https://golang.org/pkg/text/template/[`text/templates`] on demand.
 [id="{p}-examples"]
 == Usage examples
 
+Once you've <<{p}-installing,installed>> and <<{p}-configuring,configured>> {p} you're ready to take it for a test drive. Here are some examples for you to try, demonstrating basic Create, Read, Update and Delete operations using {p}:
+
+* <<{p}-example-list-deployments,A first {p} command: What deployments are there?>>
+* <<{p}-example-create-deployment,Create a deployment>>
+
+
+
+If you would like to compare the {p} commands against their API equivalents, see the {cloud}/ec-api-examples.html[API examples].
+
+
+
+[id="{p}-example-list-deployments"]
+=== A First {p} command: What deployments are there?
+
+As a first example, let's use the <<ecctl_deployment_list,{p} deployment list>> command to retrieve information about existing deployments. If you have any deployments already created, they'll be listed in the results.
+
+[source, sh]
+--
+ecctl deployment list
+--
+
+[source, sh]
+--
+ID                                 NAME            ELASTICSEARCH                      KIBANA                             APM                                APPSEARCH
+00be03849b6a49c1a6541e3ccb5958d2   marvin          00be03849b6a49c1a6541e3ccb5958d2   266e456acf257588a9cde6fb4569d4a0   78c096c22e12408b878083b2d5ff6bcf   -
+147cdeace6404c3e4b5018e1401647e4   biggerdata      147cdeace6404c3e4b5018e1401647e4   443a9df7b33952f45921c5823cbad4bc   4678ce52d45547e463455ede663cb4a4   -
+--
+
+[id="{p}-example-create-deployment"]
+=== Create a deployment
+
+Let's create a basic deployment. Elasticsearch Service supports {cloud}/ec-getting-started-templates.html[deployment templates], which pre-configure the Elastic Stack components in your deployment to best suit your particular use case. For this example, we'll use Google Cloud Platform (GCP) to host the deployment in region `US Central 1 (Iowa)`. For a full list of regions available on each platform, see {cloud}/ec-reference-regions.html[Elasticsearch Service regions].
+
+Copy the following JSON payload and save it as file `create-deployment.json`.
+
+[source, json]
+--
+{
+  "name": "My first ecctl deployment",
+  "resources": {
+    "elasticsearch": [
+      {
+        "region": "gcp-us-central1",
+        "ref_id": "main-elasticsearch",
+        "plan": {
+          "cluster_topology": [
+            {
+              "node_type": {
+                "master": true,
+                "data": true,
+                "ingest": true
+              },
+              "instance_configuration_id": "gcp.data.highio.1",
+              "zone_count": 2,
+              "size": {
+                "resource": "memory",
+                "value": 2048
+              }
+            }
+          ],
+          "elasticsearch": {
+            "version": "7.6.0"
+          },
+          "deployment_template": {
+            "id": "gcp-io-optimized"
+          }
+        }
+      }
+    ],
+    "kibana": [
+      {
+        "region": "gcp-us-central1",
+        "elasticsearch_cluster_ref_id": "main-elasticsearch",
+        "ref_id": "main-kibana",
+        "plan": {
+          "cluster_topology": [
+            {
+              "instance_configuration_id": "gcp.kibana.1",
+              "zone_count": 1,
+              "size": {
+                "resource": "memory",
+                "value": 1024
+              }
+            }
+          ],
+          "kibana": {
+            "version": "7.6.0"
+          }
+        }
+      }
+    ],
+    "apm": [
+      {
+        "region": "gcp-us-central1",
+        "elasticsearch_cluster_ref_id": "main-elasticsearch",
+        "ref_id": "main-apm",
+        "plan": {
+          "cluster_topology": [
+            {
+              "instance_configuration_id": "gcp.apm.1",
+              "zone_count": 1,
+              "size": {
+                "resource": "memory",
+                "value": 512
+              }
+            }
+          ],
+          "apm": {
+            "version": "7.6.0"
+          }
+        }
+      }
+    ]
+  }
+}
+--
+
+
+This JSON contains the settings for a highly available Elasticsearch cluster deployed across two availability zones, a single instance of Kibana, and a single APM server.
+
+Run the <<ecctl_deployment_create,{p} deployment create>> command with `create-deployment.json` as a parameter. For this and other commands, you can add an optional `--track` parameter to monitor the progress.
+
+[source, sh]
+--
+ecctl deployment create -f create-deployment.json
+--
+
+[source, sh]
+--
+{
+  "created": true,
+  "id": "7229888e7bf8350c7e4d07d7374171c0",
+  "name": "My first ecctl deployment",
+  "resources": [
+    {
+      "cloud_id": "My_first_ecctl_deployment:dXMtY2VudHJhbDEuZ2NwLmZvdW5kaXQubm8kYjFlZWVjOGQ0YWVlNGY3ZDgxNTM2Zjc1ZjZhN2Y1MDgkM2ViZTAzNmI0NDhkNDc3Y2E2ZTJjZTQ5NmE4ZDQ5ODA=",
+      "credentials": {
+        "password": "qIJuMbL8BFfgoNq5bpjQhDRC",
+        "username": "elastic"
+      },
+      "id": "b1eeec8d4aee4f7d81536f75f6a7f508",
+      "kind": "elasticsearch",
+      "ref_id": "main-elasticsearch",
+      "region": "gcp-us-central1"
+    },
+    {
+      "elasticsearch_cluster_ref_id": "main-elasticsearch",
+      "id": "3ebe036b448d477ca6e2ce496a8d4980",
+      "kind": "kibana",
+      "ref_id": "main-kibana",
+      "region": "gcp-us-central1"
+    },
+    {
+      "elasticsearch_cluster_ref_id": "main-elasticsearch",
+      "id": "5a03472f6dfe4f17acbe62622823b9cb",
+      "kind": "apm",
+      "ref_id": "main-apm",
+      "region": "gcp-us-central1",
+      "secret_token": "zfufcfe15eCVJk78b5"
+    }
+  ]
+}
+--
+
+The response indicates that the request was submitted successfully. It includes the `elastic` user password, which you can use to log in to Kibana or to access the Elasticsearch REST API. Make a note of the deployment ID, which we will use in the next step.
+
+
+////
 To create your first deployment, use the `ecctl deployment create` command, which accepts https://github.com/elastic/ecctl/blob/master/docs/ecctl_deployment_create.md#examples[a deployment description in the form of a JSON file] and a stack version and name as inputs.
 
 [source,sh]
@@ -293,6 +461,8 @@ ecctl deployment create --file ./deployment.json --name=my-new-deployment --vers
 --
 
 There’s much more you can use ecctl for. You can  explore ecctl and its various commands by issuing `ecctl <command> <help>` to see the different options that we support. 
+
+////
 
 // NR as per Omer, ecctl elasticsearch is no longer supported (do we need to mention this in the release notes for beta1?)
 ////
