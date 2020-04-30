@@ -1,7 +1,7 @@
 ---
 name: Generic Question
 about: Not a Bug Report or a Feature Request? Ask a question.
-labels: area:tooling
+labels: area:delivery
 
 ---
 <!--- Thank you for taking the time to ask us a question! -->
