@@ -8,7 +8,7 @@
 
 Welcome to the v1.0.0-beta3 release of {n}. This version brings new features, some breaking changes, and bug fixes.
 
-Elastic cloud control (ecctl) is Elastic’s CLI interface to manage Elasticsearch Service (ESS) and Elastic Cloud Enterprise (ECE). It is now open for a public beta.
+Elastic cloud control (ecctl) is Elastic’s CLI to manage Elasticsearch Service (ESS) and Elastic Cloud Enterprise (ECE). It is now open for a public beta.
 
 Download the release binaries:
 
@@ -25,7 +25,7 @@ https://download.elastic.co/downloads/ecctl/1.0.0-beta3/ecctl_1.0.0-beta3_linux_
 [id="{p}-release-notes-v1.0.0-beta3-whats-new"]
 ==== What's new
 
-* *The `ecctl init` command supports ESS and ESSP users.* You will see a few new options in the init flow. These include the ability to choose your Elastic Cloud offering, and region if you are an Elasticsearch Service customer.
+* *The `ecctl init` command supports ESS and Elasticsearch Service Private users.* You will see a few new options in the init flow. These include the ability to choose your Elastic Cloud offering, and region if you are an Elasticsearch Service customer.
 
 
 [float]
@@ -47,7 +47,7 @@ https://download.elastic.co/downloads/ecctl/1.0.0-beta3/ecctl_1.0.0-beta3_linux_
 * `ecctl deployment appsearch`
 --
 
-* *Deployment create command behavior change.* This command no longer supports overriding json template fields with flags.
+* *Deployment create command behavior change.* This command no longer supports overriding JSON template fields with flags.
 
 [float]
 [id="{p}-release-notes-v1.0.0-beta3-changelog"]
