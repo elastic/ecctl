@@ -1,7 +1,7 @@
 ---
 name: Feature Request
 about: Suggest an idea for this project.
-labels: area:tooling
+labels: area:delivery
 
 ---
 <!--- Thank you for taking the time to open a Feature Request -->

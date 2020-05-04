@@ -1,7 +1,7 @@
 ---
 name: Bug Report
 about: Create a report to help us improve.
-labels: area:tooling
+labels: area:delivery
 
 ---
 <!--- Thank you for taking the time to create a Bug Report! -->
