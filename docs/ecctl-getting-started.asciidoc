@@ -257,7 +257,7 @@ Once you've <<{p}-installing,installed>> and <<{p}-configuring,configured>> {p} 
 * <<{p}-example-list-deployments,List deploymments>>
 * <<{p}-example-create-deployment,Create a deployment>>
 * <<{p}-example-update-deployment,Update a deployment>>
-
+* <<{p}-example-delete-deployment,Delete a deployment>>
 
 
 If you would like to compare the {p} commands against their API equivalents, see the {cloud}/ec-api-examples.html[API examples].
@@ -315,10 +315,10 @@ Copy the following JSON payload and save it as file `create-deployment.json`.
             }
           ],
           "elasticsearch": {
-            "version": "7.6.0"
+            "version": "7.6.0" <5>
           },
           "deployment_template": {
-            "id": "gcp-io-optimized" <5>
+            "id": "gcp-io-optimized" <6>
           }
         }
       }
@@ -332,15 +332,15 @@ Copy the following JSON payload and save it as file `create-deployment.json`.
           "cluster_topology": [
             {
               "instance_configuration_id": "gcp.kibana.1",
-              "zone_count": 1, <6>
+              "zone_count": 1, <7>
               "size": {
                 "resource": "memory",
-                "value": 1024 <7>
+                "value": 1024 <8>
               }
             }
           ],
           "kibana": {
-            "version": "7.6.0"
+            "version": "7.6.0" <9>
           }
         }
       }
@@ -354,15 +354,15 @@ Copy the following JSON payload and save it as file `create-deployment.json`.
           "cluster_topology": [
             {
               "instance_configuration_id": "gcp.apm.1",
-              "zone_count": 1, <8>
+              "zone_count": 1, <10>
               "size": {
                 "resource": "memory",
-                "value": 512 <9>
+                "value": 512 <11>
               }
             }
           ],
           "apm": {
-            "version": "7.6.0"
+            "version": "7.6.0" <12>
           }
         }
       }
@@ -374,11 +374,14 @@ Copy the following JSON payload and save it as file `create-deployment.json`.
 <2> Instance configuration ID
 <3> The number of availability zones for the Elasticsearch cluster
 <4> The amount of memory allocated for each Elasticsearch node
-<5> The template on which to base the deployment
-<6> The number of availability zones for Kibana
-<7> The amount of memory allocated for Kibana
-<8> The number of availability zones for APM
-<9> The amount of memory allocated for APM
+<5> The version of the Elasticsearch cluster
+<6> The template on which to base the deployment
+<7> The number of availability zones for Kibana
+<8> The amount of memory allocated for Kibana
+<9> The version of the Kibana instance
+<10> The number of availability zones for APM
+<11> The amount of memory allocated for APM
+<12> The version of the APM instance
 
 This JSON contains the settings for a highly available Elasticsearch cluster deployed across two availability zones, a single instance of Kibana, and a single APM server.
 
@@ -487,7 +490,7 @@ In this example, prune_orphans is set to `false`, so the Kibana and APM instance
 --
 ecctl deployment update $DEPLOYMENT_ID -f update-deployment.json
 --
-where `$DEPLOYMENT_ID` is the ID for the deployment that was created in the previous <<{p}-example-create-deployment,create a deployment>> example.
+* `$DEPLOYMENT_ID` is the ID for the deployment that was created in the previous <<{p}-example-create-deployment,create a deployment>> example.
 
 [source, json]
 --
@@ -520,52 +523,21 @@ where `$DEPLOYMENT_ID` is the ID for the deployment that was created in the prev
 }
 --
 
+[id="{p}-example-delete-deployment"]
+=== Delete a deployment
 
+In this last example, you can use the <<ecctl_deployment_shutdown,{p} deployment shutdown>> command to delete the deployment that you created.
 
-////
-To create your first deployment, use the `ecctl deployment create` command, which accepts https://github.com/elastic/ecctl/blob/master/docs/ecctl_deployment_create.md#examples[a deployment description in the form of a JSON file] and a stack version and name as inputs.
-
-[source,sh]
+[source, json]
 --
-ecctl deployment create --file ./deployment.json --name=my-new-deployment --version=7.4.1
-{
-  "created": true,
-  "id": "c44ad3fa558a237d0c17d0f4273801df",
-  "name": "my example cluster",
-  "resources": [
-    {
-      "cloud_id": "my_elasticsearch_cluster:REDACTED",
-      "credentials": {
-        "password": "REDACTED",
-        "username": "elastic"
-      },
-      "id": "edd8b0bf7ece46dab47acc7074a7f191",
-      "kind": "elasticsearch",
-      "ref_id": "my-es-cluster",
-      "region": "ece-region"
-    },
-    {
-      "elasticsearch_cluster_ref_id": "my-es-cluster",
-      "id": "44dd3575894b4fc89bd600f56d1c130d",
-      "kind": "kibana",
-      "ref_id": "my-kibana-instance",
-      "region": "ece-region"
-    },
-    {
-      "elasticsearch_cluster_ref_id": "my-es-cluster",
-      "id": "9868cd370bdc469a8364ece4fe0db16d",
-      "kind": "apm",
-      "ref_id": "my-apm-instance",
-      "region": "ece-region",
-      "secret_token": "REDACTED"
-    }
-  ]
-}
+ecctl deployment shutdown $DEPLOYMENT_ID
 --
+* `$DEPLOYMENT_ID` is the ID for the deployment that was created in the previous <<{p}-example-create-deployment,create a deployment>> example.
 
-There’s much more you can use ecctl for. You can  explore ecctl and its various commands by issuing `ecctl <command> <help>` to see the different options that we support. 
+On running this and other destructive commands, {p} prompts you with a confirmation message. You can use the `--force` option to skip the confirmation step, which can be useful if you are using {p} for automation.
 
-////
+There’s much more you can use {p} for. You can explore its various commands by issuing `ecctl <command> <help>` to see the different options that we support.
+
 
 // NR as per Omer, ecctl elasticsearch is no longer supported (do we need to mention this in the release notes for beta1?)
 ////
