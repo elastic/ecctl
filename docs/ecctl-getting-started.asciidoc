@@ -536,7 +536,7 @@ ecctl deployment shutdown $DEPLOYMENT_ID
 
 On running this and other destructive commands, {p} prompts you with a confirmation message. Use the `--force` option to skip the confirmation step, if you are using {p} for automation.
 
-There’s much more you can use {p} for. You can explore its various commands by issuing `ecctl <command> <help>` to see the different options that we support.
+To see the different options that {p} supports, run `ecctl <command> <help>`.
 
 
 // NR as per Omer, ecctl elasticsearch is no longer supported (do we need to mention this in the release notes for beta1?)
