@@ -1,7 +1,7 @@
 ---
 name: Release Checklist
 about: Items to be completed in every release.
-labels: area:delivery
+labels: Team:Delivery
 
 ---
 <!-- Before starting the release process please make sure you've -->
