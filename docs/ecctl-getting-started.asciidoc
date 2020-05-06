@@ -534,7 +534,7 @@ ecctl deployment shutdown $DEPLOYMENT_ID
 --
 * `$DEPLOYMENT_ID` is the ID for the deployment that was created in the previous <<{p}-example-create-deployment,create a deployment>> example.
 
-On running this and other destructive commands, {p} prompts you with a confirmation message. You can use the `--force` option to skip the confirmation step, which can be useful if you are using {p} for automation.
+On running this and other destructive commands, {p} prompts you with a confirmation message. Use the `--force` option to skip the confirmation step, if you are using {p} for automation.
 
 There’s much more you can use {p} for. You can explore its various commands by issuing `ecctl <command> <help>` to see the different options that we support.
 
