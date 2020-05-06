@@ -252,7 +252,7 @@ https://golang.org/pkg/text/template/[`text/templates`] on demand.
 [id="{p}-examples"]
 == Usage examples
 
-Once you've <<{p}-installing,installed>> and <<{p}-configuring,configured>> {p} you're ready to take it for a test drive. Here are some examples for you to try, demonstrating basic Create, Read, Update and Delete operations using {p}:
+Once you've <<{p}-installing,installed>> and <<{p}-configuring,configured>> {p} you're ready to take it for a test drive. Try these examples with basic Create, Read, Update and Delete operations using {p}:
 
 * <<{p}-example-list-deployments,List deploymments>>
 * <<{p}-example-create-deployment,Create a deployment>>
