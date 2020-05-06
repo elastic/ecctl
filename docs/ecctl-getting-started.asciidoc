@@ -267,7 +267,7 @@ If you would like to compare the {p} commands against their API equivalents, see
 [id="{p}-example-list-deployments"]
 === List deployments
 
-As a first example of using {p}, let's run the <<ecctl_deployment_list,{p} deployment list>> command to retrieve information about existing deployments. This is a good way to confirm that {p} is configured correctly. If you have any deployments already created, they'll be listed in the results.
+As a first example of using {p}, run the <<ecctl_deployment_list,{p} deployment list>> command to retrieve information about existing deployments. This is a good way to check if {p} is configured correctly and if you have any deployments already created.
 
 [source, sh]
 --
