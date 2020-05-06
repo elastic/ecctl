@@ -260,7 +260,7 @@ Once you've <<{p}-installing,installed>> and <<{p}-configuring,configured>> {p} 
 * <<{p}-example-delete-deployment,Delete a deployment>>
 
 
-If you would like to compare the {p} commands against their API equivalents, see the {cloud}/ec-api-examples.html[API examples].
+To compare the {p} commands against their API equivalents, see the {cloud}/ec-api-examples.html[API examples].
 
 
 
