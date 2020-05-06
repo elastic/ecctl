@@ -429,7 +429,7 @@ ecctl deployment create -f create-deployment.json
 }
 --
 
-The response indicates that the request was submitted successfully. It includes the `elastic` user password, which you can use to log in to Kibana or to access the Elasticsearch REST API. Make a note of the deployment ID, which we will use in the next example.
+The response indicates that the request was submitted successfully. It includes the `elastic` user password, which you can use to log in to Kibana or to access the Elasticsearch REST API. Make a note of the deployment ID, which you will use in the next example.
 
 [id="{p}-example-update-deployment"]
 === Update a deployment
