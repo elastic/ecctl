@@ -3,7 +3,7 @@
 
 beta[]
 
-{p} is the CLI for the Elasticsearch Service and Elastic Cloud Enterprise APIs.
+{p} is the CLI for the Elastic Cloud Enterprise API. 
 It wraps typical operations commonly needed by operators within a single command line tool.
 
 Benefits of {p}:
@@ -252,47 +252,292 @@ https://golang.org/pkg/text/template/[`text/templates`] on demand.
 [id="{p}-examples"]
 == Usage examples
 
-To create your first deployment, use the `ecctl deployment create` command, which accepts https://github.com/elastic/ecctl/blob/master/docs/ecctl_deployment_create.md#examples[a deployment description in the form of a JSON file] and a stack version and name as inputs.
+Once you've <<{p}-installing,installed>> and <<{p}-configuring,configured>> {p} you're ready to take it for a test drive. Try these examples with basic Create, Read, Update and Delete operations using {p}:
 
-[source,sh]
+* <<{p}-example-list-deployments,List deploymments>>
+* <<{p}-example-create-deployment,Create a deployment>>
+* <<{p}-example-update-deployment,Update a deployment>>
+* <<{p}-example-delete-deployment,Delete a deployment>>
+
+
+To compare the {p} commands against their API equivalents, see the {cloud}/ec-api-examples.html[API examples].
+
+
+
+[id="{p}-example-list-deployments"]
+=== List deployments
+
+As a first example of using {p}, run the <<ecctl_deployment_list,{p} deployment list>> command to retrieve information about existing deployments. This is a good way to check if {p} is configured correctly and if you have any deployments already created.
+
+[source, sh]
 --
-ecctl deployment create --file ./deployment.json --name=my-new-deployment --version=7.4.1
+ecctl deployment list
+--
+
+[source, sh]
+--
+ID                                 NAME            ELASTICSEARCH                      KIBANA                             APM                                APPSEARCH
+00be03849b6a49c1a6541e3ccb5958d2   marvin          00be03849b6a49c1a6541e3ccb5958d2   266e456acf257588a9cde6fb4569d4a0   78c096c22e12408b878083b2d5ff6bcf   -
+147cdeace6404c3e4b5018e1401647e4   biggerdata      147cdeace6404c3e4b5018e1401647e4   443a9df7b33952f45921c5823cbad4bc   4678ce52d45547e463455ede663cb4a4   -
+--
+
+[id="{p}-example-create-deployment"]
+=== Create a deployment
+
+Let's create a basic deployment. Elasticsearch Service supports {cloud}/ec-getting-started-templates.html[deployment templates], which pre-configure the Elastic Stack components in your deployment to best suit your particular use case. For this example, use Google Cloud Platform (GCP) to host the deployment in region `US Central 1 (Iowa)`. To know which deployment options are available by platform, see {cloud}/ec-regions-templates-instances.html[available regions, deployment templates and instance configurations].
+
+Copy the following JSON payload and save it as file `create-deployment.json`.
+
+[source, json]
+--
+{
+  "name": "My first ecctl deployment",
+  "resources": {
+    "elasticsearch": [
+      {
+        "region": "gcp-us-central1", <1>
+        "ref_id": "main-elasticsearch",
+        "plan": {
+          "cluster_topology": [
+            {
+              "node_type": {
+                "master": true,
+                "data": true,
+                "ingest": true,
+                "ml": false                
+              },
+              "instance_configuration_id": "gcp.data.highio.1", <2>
+              "zone_count": 2, <3>
+              "size": {
+                "resource": "memory",
+                "value": 2048 <4>
+              }
+            }
+          ],
+          "elasticsearch": {
+            "version": "7.6.0" <5>
+          },
+          "deployment_template": {
+            "id": "gcp-io-optimized" <6>
+          }
+        }
+      }
+    ],
+    "kibana": [
+      {
+        "region": "gcp-us-central1",
+        "elasticsearch_cluster_ref_id": "main-elasticsearch",
+        "ref_id": "main-kibana",
+        "plan": {
+          "cluster_topology": [
+            {
+              "instance_configuration_id": "gcp.kibana.1",
+              "zone_count": 1, <7>
+              "size": {
+                "resource": "memory",
+                "value": 1024 <8>
+              }
+            }
+          ],
+          "kibana": {
+            "version": "7.6.0" <9>
+          }
+        }
+      }
+    ],
+    "apm": [
+      {
+        "region": "gcp-us-central1",
+        "elasticsearch_cluster_ref_id": "main-elasticsearch",
+        "ref_id": "main-apm",
+        "plan": {
+          "cluster_topology": [
+            {
+              "instance_configuration_id": "gcp.apm.1",
+              "zone_count": 1, <10>
+              "size": {
+                "resource": "memory",
+                "value": 512 <11>
+              }
+            }
+          ],
+          "apm": {
+            "version": "7.6.0" <12>
+          }
+        }
+      }
+    ]
+  }
+}
+--
+<1> The region for the Elasticsearch cluster
+<2> Instance configuration ID
+<3> The number of availability zones for the Elasticsearch cluster
+<4> The amount of memory allocated for each Elasticsearch node
+<5> The version of the Elasticsearch cluster
+<6> The template on which to base the deployment
+<7> The number of availability zones for Kibana
+<8> The amount of memory allocated for Kibana
+<9> The version of the Kibana instance
+<10> The number of availability zones for APM
+<11> The amount of memory allocated for APM
+<12> The version of the APM instance
+
+This JSON contains the settings for a highly available Elasticsearch cluster deployed across two availability zones, a single instance of Kibana, and a single APM server.
+
+Run the <<ecctl_deployment_create,{p} deployment create>> command with `create-deployment.json` as a parameter. For this and other commands, you can add an optional `--track` parameter to monitor the progress.
+
+[source, sh]
+--
+ecctl deployment create -f create-deployment.json
+--
+
+[source, sh]
+--
 {
   "created": true,
-  "id": "c44ad3fa558a237d0c17d0f4273801df",
-  "name": "my example cluster",
+  "id": "7229888e7bf8350c7e4d07d7374171c0",
+  "name": "My first ecctl deployment",
   "resources": [
     {
-      "cloud_id": "my_elasticsearch_cluster:REDACTED",
+      "cloud_id": "My_first_ecctl_deployment:dXMtY2VudHJhbDEuZ2NwLmZvdW5kaXQubm8kYjFlZWVjOGQ0YWVlNGY3ZDgxNTM2Zjc1ZjZhN2Y1MDgkM2ViZTAzNmI0NDhkNDc3Y2E2ZTJjZTQ5NmE4ZDQ5ODA=",
       "credentials": {
-        "password": "REDACTED",
+        "password": "qIJuMbL8BFfgoNq5bpjQhDRC",
         "username": "elastic"
       },
-      "id": "edd8b0bf7ece46dab47acc7074a7f191",
+      "id": "b1eeec8d4aee4f7d81536f75f6a7f508",
       "kind": "elasticsearch",
-      "ref_id": "my-es-cluster",
-      "region": "ece-region"
+      "ref_id": "main-elasticsearch",
+      "region": "gcp-us-central1"
     },
     {
-      "elasticsearch_cluster_ref_id": "my-es-cluster",
-      "id": "44dd3575894b4fc89bd600f56d1c130d",
+      "elasticsearch_cluster_ref_id": "main-elasticsearch",
+      "id": "3ebe036b448d477ca6e2ce496a8d4980",
       "kind": "kibana",
-      "ref_id": "my-kibana-instance",
-      "region": "ece-region"
+      "ref_id": "main-kibana",
+      "region": "gcp-us-central1"
     },
     {
-      "elasticsearch_cluster_ref_id": "my-es-cluster",
-      "id": "9868cd370bdc469a8364ece4fe0db16d",
+      "elasticsearch_cluster_ref_id": "main-elasticsearch",
+      "id": "5a03472f6dfe4f17acbe62622823b9cb",
       "kind": "apm",
-      "ref_id": "my-apm-instance",
-      "region": "ece-region",
-      "secret_token": "REDACTED"
+      "ref_id": "main-apm",
+      "region": "gcp-us-central1",
+      "secret_token": "zfufcfe15eCVJk78b5"
     }
   ]
 }
 --
 
-There’s much more you can use ecctl for. You can  explore ecctl and its various commands by issuing `ecctl <command> <help>` to see the different options that we support. 
+The response indicates that the request was submitted successfully. It includes the `elastic` user password, which you can use to log in to Kibana or to access the Elasticsearch REST API. Make a note of the deployment ID, which you will use in the next example.
+
+[id="{p}-example-update-deployment"]
+=== Update a deployment
+
+Now that you have used {p} to create a deployment, you can scale it up, by increasing the size of the Elasticsearch data nodes from 4096 to 8192 MB.
+
+Copy the following JSON payload and save it as file `update-deployment.json`.
+
+[source, json]
+--
+{
+  "prune_orphans": false,
+  "resources": {
+    "elasticsearch": [
+      {
+        "region": "gcp-us-central1",
+        "ref_id": "main-elasticsearch",
+        "plan": {
+          "cluster_topology": [
+            {
+              "node_type": {
+                "master": true,
+                "data": true,
+                "ingest": true,
+                "ml": false
+              },
+              "instance_configuration_id": "gcp.data.highio.1",
+              "zone_count": 2,
+              "size": {
+                "resource": "memory",
+                "value": 4096
+              }
+            }
+          ],
+          "elasticsearch": {
+            "version": "7.6.0"
+          },
+          "deployment_template": {
+            "id": "gcp-io-optimized"
+          }
+        }
+      }
+    ]
+  }
+}
+--
+
+The JSON body is similar to what we used to create the deployment, with the following differences:
+
+- The name of the deployment can be modified or it will stay the same if not specified.
+- A `prune_orphans` parameter is added. This important parameter specifies how resources not included in the JSON should be handled:
+   * if `true`, those resources not included are removed
+   * if `false`, those resources not included are kept intact
+
+In this example, prune_orphans is set to `false`, so the Kibana and APM instances are not changed or removed, while the Elasticsearch resource is modified according to the configuration specified in the JSON file.
+
+[source, json]
+--
+ecctl deployment update $DEPLOYMENT_ID -f update-deployment.json
+--
+* `$DEPLOYMENT_ID` is the ID for the deployment that was created in the previous <<{p}-example-create-deployment,create a deployment>> example.
+
+[source, json]
+--
+{
+  "id": "20e174f6800c55261e4dfcc278b6a004",
+  "name": "My second ecctl deployment",
+  "resources": [
+    {
+      "cloud_id": "My_second_ecctl_deployment:dXMtY2VudHJhbDEuZ2NwLmZvdW5kaXQubm8kYjc0OWU2ZWExN2Y4NDg5Yzg4Y2UyOTVjZTA4ZDVjNWUkNTliZWJiYjE3ZmFkNDk2MWEwMmNkMDRmNzYyOWYxMTk=",
+      "id": "b749e6ea17f8489c88ce295ce08d5c5e",
+      "kind": "elasticsearch",
+      "ref_id": "main-elasticsearch",
+      "region": "gcp-us-central1"
+    },
+    {
+      "elasticsearch_cluster_ref_id": "main-elasticsearch",
+      "id": "59bebbb17fad4961a02cd04f7629f119",
+      "kind": "kibana",
+      "ref_id": "main-kibana",
+      "region": "gcp-us-central1"
+    },
+    {
+      "elasticsearch_cluster_ref_id": "main-elasticsearch",
+      "id": "1ec19461253c4175a2cea6b3ccc399a8",
+      "kind": "apm",
+      "ref_id": "main-apm",
+      "region": "gcp-us-central1"
+    }
+  ]
+}
+--
+
+[id="{p}-example-delete-deployment"]
+=== Delete a deployment
+
+In this last example, you can use the <<ecctl_deployment_shutdown,{p} deployment shutdown>> command to delete the deployment that you created.
+
+[source, json]
+--
+ecctl deployment shutdown $DEPLOYMENT_ID
+--
+* `$DEPLOYMENT_ID` is the ID for the deployment that was created in the previous <<{p}-example-create-deployment,create a deployment>> example.
+
+On running this and other destructive commands, {p} prompts you with a confirmation message. Use the `--force` option to skip the confirmation step, if you are using {p} for automation.
+
+To see the different options that {p} supports, run `ecctl <command> <help>`.
+
 
 // NR as per Omer, ecctl elasticsearch is no longer supported (do we need to mention this in the release notes for beta1?)
 ////
