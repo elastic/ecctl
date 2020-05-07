@@ -17,7 +17,6 @@ ecctl deployment shutdown <deployment-id> [flags]
 
 ----
   -h, --help            help for shutdown
-      --hide            Hides the deployment and its resources after it has been shut down
       --skip-snapshot   Skips taking an Elasticsearch snapshot prior to shutting down the deployment
   -t, --track           Tracks the progress of the performed task
 ----

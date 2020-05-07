@@ -40,13 +40,11 @@ var shutdownCmd = &cobra.Command{
 		}
 
 		skipSnapshot, _ := cmd.Flags().GetBool("skip-snapshot")
-		hide, _ := cmd.Flags().GetBool("hide")
 
 		res, err := deployment.Shutdown(deployment.ShutdownParams{
 			API:          ecctl.Get().API,
 			DeploymentID: args[0],
 			SkipSnapshot: skipSnapshot,
-			Hide:         hide,
 		})
 		if err != nil {
 			return err
@@ -67,5 +65,4 @@ func init() {
 	Command.AddCommand(shutdownCmd)
 	shutdownCmd.Flags().BoolP("track", "t", false, cmdutil.TrackFlagMessage)
 	shutdownCmd.Flags().Bool("skip-snapshot", false, "Skips taking an Elasticsearch snapshot prior to shutting down the deployment")
-	shutdownCmd.Flags().Bool("hide", false, "Hides the deployment and its resources after it has been shut down")
 }
