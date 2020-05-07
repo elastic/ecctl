@@ -137,7 +137,7 @@ var createCmd = &cobra.Command{
 		res, err := deployment.Create(createParams)
 		if err != nil {
 			fmt.Fprintln(os.Stderr,
-				"The deployment creation returned with an error. Please use the displayed request ID to recreate the deployment resources",
+				"The deployment creation returned with an error. Use the displayed request ID to recreate the deployment resources",
 			)
 			fmt.Fprintln(os.Stderr, "Request ID:", reqID)
 			return err
@@ -162,7 +162,7 @@ func init() {
 	createCmd.Flags().String("name", "", "Optional name for the deployment")
 	createCmd.Flags().BoolP("track", "t", false, cmdutil.TrackFlagMessage)
 	createCmd.Flags().Bool("generate-payload", false, "Returns the deployment payload without actually creating the deployment resources")
-	createCmd.Flags().String("request-id", "", "Optional request ID - Can be found in the Stderr device when a previous deployment creation failed, for more information see the examples in the help command page")
+	createCmd.Flags().String("request-id", "", "Optional request ID - Can be found in the Stderr device when a previous deployment creation failed. For more information see the examples in the help command page")
 
 	createCmd.Flags().String("es-ref-id", "main-elasticsearch", "Optional RefId for the Elasticsearch deployment")
 	createCmd.Flags().Int32("es-zones", 1, "Number of zones the Elasticsearch instances will span")
