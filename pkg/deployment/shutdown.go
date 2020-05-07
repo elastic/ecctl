@@ -33,7 +33,6 @@ type ShutdownParams struct {
 	DeploymentID string
 
 	SkipSnapshot bool
-	Hide         bool
 }
 
 // Validate ensures the parameters are usable by Shutdown.
@@ -61,8 +60,7 @@ func Shutdown(params ShutdownParams) (*models.DeploymentShutdownResponse, error)
 	res, err := params.V1API.Deployments.ShutdownDeployment(
 		deployments.NewShutdownDeploymentParams().
 			WithDeploymentID(params.DeploymentID).
-			WithSkipSnapshot(ec.Bool(params.SkipSnapshot)).
-			WithHide(ec.Bool(params.Hide)),
+			WithSkipSnapshot(ec.Bool(params.SkipSnapshot)),
 		params.AuthWriter,
 	)
 	if err != nil {
