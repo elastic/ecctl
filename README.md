@@ -8,8 +8,6 @@ NOTE: **You are looking at the documentation for a beta release. Please keep in 
 
 The goal of this project is to provide an easier way to interact with the Elasticsearch Service and Elastic Cloud Enterprise APIs, ensuring each one of the provided commands is thoroughly tested.
 
-Note that, right now, `ecctl` targets ECE installations only. There are, however, plans to support public Elasticsearch Service API in the future.
-
 To get started with Elastic Cloud Control, see the [official documentation](https://www.elastic.co/guide/en/ecctl/current/index.html).
 
 ## Contributing
