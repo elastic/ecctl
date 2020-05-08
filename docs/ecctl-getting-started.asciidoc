@@ -402,7 +402,7 @@ ecctl deployment create -f create-deployment.json
     {
       "cloud_id": "My_first_ecctl_deployment:dXMtY2VudHJhbDEuZ2NwLmZvdW5kaXQubm8kYjFlZWVjOGQ0YWVlNGY3ZDgxNTM2Zjc1ZjZhN2Y1MDgkM2ViZTAzNmI0NDhkNDc3Y2E2ZTJjZTQ5NmE4ZDQ5ODA=",
       "credentials": {
-        "password": "qIJuMbL8BFfgoNq5bpjQhDRC",
+        "password": "REDACTED",
         "username": "elastic"
       },
       "id": "b1eeec8d4aee4f7d81536f75f6a7f508",
