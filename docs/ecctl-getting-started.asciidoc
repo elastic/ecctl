@@ -434,7 +434,7 @@ The response indicates that the request was submitted successfully. It includes 
 [id="{p}-example-update-deployment"]
 === Update a deployment
 
-Now that you have used {p} to create a deployment, you can scale it up, by increasing the size of the Elasticsearch data nodes from 4096 to 8192 MB.
+Now that you have used {p} to create a deployment, you can scale it up, by increasing the size of the Elasticsearch data nodes from 1024 to 4096 MB.
 
 Copy the following JSON payload and save it as file `update-deployment.json`.
 
