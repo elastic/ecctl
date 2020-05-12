@@ -16,15 +16,18 @@ for f in dist/*.{tar.gz,deb,rpm,txt}; do
     ${f} s3://download.elasticsearch.org/downloads/ecctl/$(echo ${VERSION}| sed 's/^v//')/
 done
 
+# If in the CI environment and the user credentials aren't set, set them.
+if [[ ${CI} ]]; then
+    if [[ -z $(git config --get user.email) ]]; then
+        git config user.email "cloud-delivery@elastic.co"
+    fi
+
+    if [[ -z $(git config --get user.name) ]]; then
+        git config user.name "elasticcloudmachine"
+    fi
+fi
+
 # Create the actual Github Release.
-if [[ -z $(git config --get user.email) ]]; then
-    git config user.email "cloud-delivery@elastic.co"
-fi
-
-if [[ -z $(git config --get user.name) ]]; then
-    git config user.name "elasticcloudmachine"
-fi
-
 hub release create -F notes/${VERSION}.md ${VERSION}
 
 # Update the brew tap formula
