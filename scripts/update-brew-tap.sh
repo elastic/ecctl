@@ -28,11 +28,12 @@ mv /tmp/ecctl.rb ${FORMULA_FILE}
 # If in the CI environment and the user credentials aren't set, set them.
 if [[ ${CI} ]]; then
     if [[ -z $(git config --get user.email) ]]; then
-        git config user.email "cloud-delivery@elastic.co"
+        export GIT_AUTHOR_EMAIL="cloud-delivery@elastic.co"
+        export GIT_COMMITTER_EMAIL="cloud-delivery@elastic.co"
     fi
 
     if [[ -z $(git config --get user.name) ]]; then
-        git config user.name "elasticcloudmachine"
+        export GIT_AUTHOR_NAME="${GITHUB_USER}"
     fi
 fi
 
