@@ -1,3 +1,5 @@
+vVERSION_REPLACE
+
 # Changelog
 
 Download the release binaries:
