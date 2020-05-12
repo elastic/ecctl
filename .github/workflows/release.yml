@@ -62,3 +62,6 @@ jobs:
           VERSION: ${{ steps.get_version.outputs.VERSION }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          GIT_COMMITTER_EMAIL: cloud-delivery@elastic.co
+          GIT_AUTHOR_EMAIL: cloud-delivery@elastic.co
+          GIT_AUTHOR_NAME: elasticcloudmachine

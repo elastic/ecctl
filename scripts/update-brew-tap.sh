@@ -25,18 +25,6 @@ OLD_VERSION=$(grep 'version \"' ${FORMULA_FILE} | awk '{print $2}' | tr -d '"' |
 sed "s/${OLD_VERSION}/${VERSION}/g" ${FORMULA_FILE} | sed "s/${OLD_DARWIN_CHECKSUM}/${DARWIN_CHECKSUM}/" | sed "s/${OLD_LINUX_CHECKSUM}/${LINUX_CHECKSUM}/" > /tmp/ecctl.rb
 mv /tmp/ecctl.rb ${FORMULA_FILE}
 
-# If in the CI environment and the user credentials aren't set, set them.
-if [[ ${CI} ]]; then
-    if [[ -z $(git config --get user.email) ]]; then
-        export GIT_AUTHOR_EMAIL="cloud-delivery@elastic.co"
-        export GIT_COMMITTER_EMAIL="cloud-delivery@elastic.co"
-    fi
-
-    if [[ -z $(git config --get user.name) ]]; then
-        export GIT_AUTHOR_NAME="${GITHUB_USER}"
-    fi
-fi
-
 cd /tmp/homebrew-tap
 hub fork --no-remote
 hub remote add fork https://github.com/${GITHUB_USER}/homebrew-tap
