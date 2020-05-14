@@ -28,11 +28,11 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/client/clusters_elasticsearch"
 	"github.com/elastic/cloud-sdk-go/pkg/client/clusters_kibana"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/output"
 	"github.com/elastic/cloud-sdk-go/pkg/plan"
 	"github.com/elastic/cloud-sdk-go/pkg/plan/planutil"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
-	multierror "github.com/hashicorp/go-multierror"
 )
 
 func TestParseCUResponseParams_Validate(t *testing.T) {
@@ -56,9 +56,9 @@ func TestParseCUResponseParams_Validate(t *testing.T) {
 		{
 			name:   "Empty fields trigger error",
 			fields: fields{},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("plan tracking",
 				errors.New("parse response: One of Create or Update response must be populated"),
-			}},
+			),
 		},
 		{
 			name: "Correct parameter validation with CreateResponse returns no error",

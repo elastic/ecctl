@@ -24,7 +24,7 @@ import (
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
-	multierror "github.com/hashicorp/go-multierror"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -41,10 +41,10 @@ func TestDelete(t *testing.T) {
 		{
 			name: "fails on parameter validation",
 			args: args{},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("role delete",
 				util.ErrAPIReq,
-				errors.New("role delete: id cannot be empty"),
-			}},
+				errors.New("id cannot be empty"),
+			),
 		},
 		{
 			name: "fails creating the role",

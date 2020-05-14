@@ -29,8 +29,8 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
-	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -361,12 +361,12 @@ func TestSet(t *testing.T) {
 					Config: new(S3Config),
 				},
 			},
-			wantErr: multierror.Append(nil, []error{
+			wantErr: multierror.NewPrefixed("s3 configuration", multierror.NewPrefixed("required setting",
 				errRegionCannotBeEmpty,
 				errBucketCannotBeEmpty,
 				errAccessKeyCannotBeEmpty,
 				errSecretKeyCannotBeEmpty,
-			}...),
+			)),
 		},
 	}
 	for _, tt := range tests {

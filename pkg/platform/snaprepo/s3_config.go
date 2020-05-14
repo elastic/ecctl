@@ -25,8 +25,8 @@ import (
 	"time"
 
 	"github.com/asaskevich/govalidator"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/ghodss/yaml"
-	multierror "github.com/hashicorp/go-multierror"
 	"github.com/pkg/errors"
 )
 
@@ -125,51 +125,51 @@ type S3TypeConfig struct {
 
 // Validate ensures that S3Config is
 func (c S3Config) Validate() error {
-	var merr = new(multierror.Error)
+	var merr = multierror.NewPrefixed("s3 configuration")
 	if err := validateRequiredSettings(c); err != nil {
-		merr = multierror.Append(merr, err)
+		merr = merr.Append(err)
 	}
 	if e := validateOptionalSettings(c); e != nil {
-		merr = multierror.Append(merr, e)
+		merr = merr.Append(e)
 	}
 
 	return merr.ErrorOrNil()
 }
 
 func validateRequiredSettings(c S3Config) error {
-	var err = new(multierror.Error)
+	var merr = multierror.NewPrefixed("required setting")
 	if c.Region == "" {
-		err = multierror.Append(err, errRegionCannotBeEmpty)
+		merr = merr.Append(errRegionCannotBeEmpty)
 	}
 	if c.Bucket == "" {
-		err = multierror.Append(err, errBucketCannotBeEmpty)
+		merr = merr.Append(errBucketCannotBeEmpty)
 	}
 	if c.AccessKey == "" {
-		err = multierror.Append(err, errAccessKeyCannotBeEmpty)
+		merr = merr.Append(errAccessKeyCannotBeEmpty)
 	}
 	if c.SecretKey == "" {
-		err = multierror.Append(err, errSecretKeyCannotBeEmpty)
+		merr = merr.Append(errSecretKeyCannotBeEmpty)
 	}
 
-	return err.ErrorOrNil()
+	return merr.ErrorOrNil()
 }
 
 func validateOptionalSettings(c S3Config) error {
-	var err = new(multierror.Error)
+	var merr = multierror.NewPrefixed("optional setting")
 	if c.StorageClass != "" && !stringInSlice(c.StorageClass, validStorageClasses) {
-		err = multierror.Append(err, errInvalidStorageClass)
+		merr = merr.Append(errInvalidStorageClass)
 	}
 	if c.CannedACL != "" && !stringInSlice(c.CannedACL, validCannedACLs) {
-		err = multierror.Append(err, errInvalidCannedACL)
+		merr = merr.Append(errInvalidCannedACL)
 	}
 	if c.Endpoint != "" && !govalidator.IsURL(c.Endpoint) {
-		err = multierror.Append(err, errInvalidEndpoint)
+		merr = merr.Append(errInvalidEndpoint)
 	}
 	if c.Protocol != "" && !stringInSlice(c.Protocol, validProtocols) {
-		err = multierror.Append(err, errInvalidProtocol)
+		merr = merr.Append(errInvalidProtocol)
 	}
 
-	return err.ErrorOrNil()
+	return merr.ErrorOrNil()
 }
 
 func stringInSlice(a string, list []string) bool {

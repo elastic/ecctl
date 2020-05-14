@@ -21,7 +21,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/platform_infrastructure"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	"github.com/hashicorp/go-multierror"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -34,14 +34,13 @@ type ResyncParams struct {
 
 // Validate ensures the parameters are usable by the consuming function.
 func (params ResyncParams) Validate() error {
-	var merr = new(multierror.Error)
-
+	var merr = multierror.NewPrefixed("constructor resync")
 	if params.API == nil {
-		merr = multierror.Append(merr, errAPICannotBeNil)
+		merr = merr.Append(errAPICannotBeNil)
 	}
 
 	if params.ID == "" {
-		merr = multierror.Append(merr, errIDCannotBeEmpty)
+		merr = merr.Append(errIDCannotBeEmpty)
 	}
 
 	return merr.ErrorOrNil()

@@ -22,7 +22,7 @@ import (
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/platform_infrastructure"
-	multierror "github.com/hashicorp/go-multierror"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -35,13 +35,13 @@ type DeleteParams struct {
 
 // Validate ensures the parameters are usable.
 func (params DeleteParams) Validate() error {
-	var merr = new(multierror.Error)
+	var merr = multierror.NewPrefixed("role delete")
 	if params.API == nil {
-		merr = multierror.Append(merr, util.ErrAPIReq)
+		merr = merr.Append(util.ErrAPIReq)
 	}
 
 	if params.ID == "" {
-		merr = multierror.Append(merr, errors.New("role delete: id cannot be empty"))
+		merr = merr.Append(errors.New("id cannot be empty"))
 	}
 
 	return merr.ErrorOrNil()

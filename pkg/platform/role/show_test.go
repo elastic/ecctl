@@ -25,8 +25,8 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
-	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -44,10 +44,10 @@ func TestShow(t *testing.T) {
 		{
 			name: "fails on parameter validation",
 			args: args{},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("role show",
 				util.ErrAPIReq,
-				errors.New("role show: id cannot be empty"),
-			}},
+				errors.New("id cannot be empty"),
+			),
 		},
 		{
 			name: "fails on api error",

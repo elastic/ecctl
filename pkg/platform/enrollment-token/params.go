@@ -24,7 +24,7 @@ import (
 	"time"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
-	multierror "github.com/hashicorp/go-multierror"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -39,20 +39,19 @@ type CreateParams struct {
 // Validate ensures that there's no errors prior to performing the Create API
 // call.
 func (params CreateParams) Validate() error {
-	var err = new(multierror.Error)
-
+	var merr = multierror.NewPrefixed("enrollment-token create")
 	if params.API == nil {
-		err = multierror.Append(err, util.ErrAPIReq)
+		merr = merr.Append(util.ErrAPIReq)
 	}
 
 	validity := int64(params.Duration.Seconds())
 	if validity > math.MaxInt32 {
-		err = multierror.Append(err,
+		merr = merr.Append(
 			fmt.Errorf("validity value %d exceeds max allowed %d value in seconds", validity, math.MaxInt32),
 		)
 	}
 
-	return err.ErrorOrNil()
+	return merr.ErrorOrNil()
 }
 
 // DeleteParams is consumed by Delete
@@ -64,17 +63,16 @@ type DeleteParams struct {
 // Validate ensures that there's no errors prior to performing the Delete API
 // call.
 func (params DeleteParams) Validate() error {
-	var err = new(multierror.Error)
-
+	var merr = multierror.NewPrefixed("enrollment-token delete")
 	if params.API == nil {
-		err = multierror.Append(err, util.ErrAPIReq)
+		merr = merr.Append(util.ErrAPIReq)
 	}
 
 	if params.Token == "" {
-		err = multierror.Append(err, errors.New("token cannot be empty"))
+		merr = merr.Append(errors.New("token cannot be empty"))
 	}
 
-	return err.ErrorOrNil()
+	return merr.ErrorOrNil()
 }
 
 // ListParams is consumed by List

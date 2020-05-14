@@ -25,7 +25,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	multierror "github.com/hashicorp/go-multierror"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -42,10 +42,10 @@ func TestCreate(t *testing.T) {
 		{
 			name: "fails on parameter validation",
 			args: args{},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("role create",
 				util.ErrAPIReq,
-				errors.New("role create: role definition cannot be empty"),
-			}},
+				errors.New("role definition cannot be empty"),
+			),
 		},
 		{
 			name: "fails creating the role",

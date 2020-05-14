@@ -23,7 +23,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/platform_infrastructure"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	multierror "github.com/hashicorp/go-multierror"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -39,21 +39,21 @@ type AddBlessingParams struct {
 
 // Validate ensures the parameters are usable.
 func (params AddBlessingParams) Validate() error {
-	var merr = new(multierror.Error)
+	var merr = multierror.NewPrefixed("role add blessing")
 	if params.API == nil {
-		merr = multierror.Append(merr, util.ErrAPIReq)
+		merr = merr.Append(util.ErrAPIReq)
 	}
 
 	if params.Blessing == nil {
-		merr = multierror.Append(merr, errors.New("role add blessing: blessing definition cannot be empty"))
+		merr = merr.Append(errors.New("blessing definition cannot be empty"))
 	}
 
 	if params.ID == "" {
-		merr = multierror.Append(merr, errors.New("role add blessing: id cannot be empty"))
+		merr = merr.Append(errors.New("id cannot be empty"))
 	}
 
 	if params.RunnerID == "" {
-		merr = multierror.Append(merr, errors.New("role add blessing: runner id cannot be empty"))
+		merr = merr.Append(errors.New("runner id cannot be empty"))
 	}
 
 	return merr.ErrorOrNil()

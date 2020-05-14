@@ -48,24 +48,23 @@ Adding many `if err` checks will make the code a little bit noisy so we can igno
 
 ### API Errors
 
-API errors should always be encapsulated with `api.UnwrapError()`, this function tries to break down and inspect the encapsulated and multi-layer wraps that the API errors contain.
+API errors should always be encapsulated with `apierr.Unwrap()`, this function tries to break down and inspect the encapsulated and multi-layer wraps that the API errors contain.
 
 ### Multiple errors
 
-When multiple errors can be returned, it is preferable to use the `mutlierror` package to return all of them if possible.
+When multiple errors can be returned, it is preferable to use the `mutlierror.Prefixed` type to return all the possible errors with a prefixed string to include some context.
 
 yes! :smile:
 
 ```go
 func (params StopParams) Validate() error {
-    var merr = new(multierror.Error)
-
+    var merr = multierror.NewPrefixed("stop operation")
     if params.ID == "" {
-        merr = multierror.Append(merr, errors.New("ID cannot be empty"))
+        merr = merr.Append(errors.New("ID cannot be empty"))
     }
 
     if params.API == nil {
-        merr = multierror.Append(merr, errors.New("api reference is required"))
+        merr = merr.Append(errors.New("api reference is required"))
     }
 
    return merr.ErrorOrNil()

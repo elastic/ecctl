@@ -27,8 +27,8 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
-	multierror "github.com/hashicorp/go-multierror"
 )
 
 func TestShow(t *testing.T) {
@@ -88,12 +88,10 @@ func TestShow(t *testing.T) {
 				params: ShowParams{},
 			},
 			want: nil,
-			wantErr: &multierror.Error{
-				Errors: []error{
-					errors.New("id field cannot be empty"),
-					errors.New("api reference is required for command"),
-				},
-			},
+			wantErr: multierror.NewPrefixed("runner show",
+				errors.New("id field cannot be empty"),
+				errors.New("api reference is required for command"),
+			),
 		},
 	}
 	for _, tt := range tests {

@@ -21,8 +21,8 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/platform_infrastructure"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/go-openapi/strfmt"
-	"github.com/hashicorp/go-multierror"
 )
 
 // SearchParams contains parameters used to search runner's data using Query DSL
@@ -33,11 +33,11 @@ type SearchParams struct {
 
 // Validate is the implementation for the ecctl.Validator interface
 func (params SearchParams) Validate() error {
-	var merr = new(multierror.Error)
+	var merr = multierror.NewPrefixed("runner search")
 
-	merr = multierror.Append(merr, params.Params.Validate())
+	merr = merr.Append(params.Params.Validate())
 
-	merr = multierror.Append(merr, params.Request.Validate(strfmt.Default))
+	merr = merr.Append(params.Request.Validate(strfmt.Default))
 
 	return merr.ErrorOrNil()
 }
