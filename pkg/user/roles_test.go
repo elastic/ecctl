@@ -22,7 +22,7 @@ import (
 	"reflect"
 	"testing"
 
-	multierror "github.com/hashicorp/go-multierror"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 )
 
 func TestValidateRoles(t *testing.T) {
@@ -35,21 +35,17 @@ func TestValidateRoles(t *testing.T) {
 		{
 			name: "validate should return an error when ece_platform_admin is used along other roles",
 			arg:  []string{platformAdminRole, platformViewerRole},
-			err: &multierror.Error{
-				Errors: []error{
-					errors.New("user: ece_platform_admin cannot be used in conjunction with other roles"),
-				},
-			},
+			err: multierror.NewPrefixed("user",
+				errors.New("ece_platform_admin cannot be used in conjunction with other roles"),
+			),
 			wantErr: true,
 		},
 		{
 			name: "validate should return an error when ece_platform_admin is used along other roles",
 			arg:  []string{deploymentsManagerRole, deploymentsViewerRole},
-			err: &multierror.Error{
-				Errors: []error{
-					errors.New("user: only one of ece_deployment_manager or ece_deployment_viewer can be chosen"),
-				},
-			},
+			err: multierror.NewPrefixed("user",
+				errors.New("only one of ece_deployment_manager or ece_deployment_viewer can be chosen"),
+			),
 			wantErr: true,
 		},
 		{

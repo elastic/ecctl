@@ -27,7 +27,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	multierror "github.com/hashicorp/go-multierror"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 )
 
 func TestResync(t *testing.T) {
@@ -42,19 +42,19 @@ func TestResync(t *testing.T) {
 		{
 			name: "Fails due to parameter validation (Cluster ID)",
 			args: args{},
-			wantErr: &multierror.Error{Errors: []error{
+			wantErr: multierror.NewPrefixed("runner resync",
 				errors.New("id field cannot be empty"),
 				errors.New("api reference is required for command"),
-			}},
+			),
 		},
 		{
 			name: "Fails due to parameter validation (API)",
 			args: args{params: ResyncParams{
 				ID: "d324608c97154bdba2dff97511d40368",
 			}},
-			wantErr: &multierror.Error{Errors: []error{
+			wantErr: multierror.NewPrefixed("runner resync",
 				errors.New("api reference is required for command"),
-			}},
+			),
 		},
 		{
 			name: "Fails due to unknown API response",

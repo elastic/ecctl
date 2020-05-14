@@ -18,14 +18,14 @@
 package cmddeployment
 
 import (
+	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi"
+	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/deputil"
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/elastic/cloud-sdk-go/pkg/util/slice"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
-	"github.com/elastic/ecctl/pkg/deployment"
-	"github.com/elastic/ecctl/pkg/deployment/deputil"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
@@ -58,7 +58,7 @@ var showCmd = &cobra.Command{
 		showPlans := planLogs || planDefaults || plans || planHistory
 
 		refID, _ := cmd.Flags().GetString("ref-id")
-		getParams := deployment.GetParams{
+		getParams := deploymentapi.GetParams{
 			API:          ecctl.Get().API,
 			DeploymentID: args[0],
 			RefID:        refID,
@@ -72,7 +72,7 @@ var showCmd = &cobra.Command{
 			},
 		}
 
-		res, err := deployment.GetResource(deployment.GetResourceParams{
+		res, err := deploymentapi.GetResource(deploymentapi.GetResourceParams{
 			GetParams: getParams,
 			Kind:      resourceKind,
 		})

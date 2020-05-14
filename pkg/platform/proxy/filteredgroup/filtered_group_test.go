@@ -28,13 +28,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
-	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
 
-func TestShow(t *testing.T) {
+func TestGet(t *testing.T) {
 	var proxiesFilteredGroup = `
 	{
       "expected_proxies_count": 5,
@@ -90,9 +90,9 @@ func TestShow(t *testing.T) {
 				API: nil,
 				ID:  "test1",
 			}},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("filtered group",
 				util.ErrAPIReq,
-			}},
+			),
 		},
 	}
 	for _, tt := range tests {
@@ -191,9 +191,9 @@ func TestCreate(t *testing.T) {
 				},
 				ExpectedProxiesCount: 0,
 			}},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("filtered group",
 				errExpectedProxiesCountCannotBeLesserThanZero,
-			}},
+			),
 		},
 		{
 			name: "Proxies filtered group create empty filters fails",
@@ -209,9 +209,9 @@ func TestCreate(t *testing.T) {
 				Filters:              map[string]string{},
 				ExpectedProxiesCount: 15,
 			}},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("filtered group",
 				errFiltersCannotBeEmpty,
-			}},
+			),
 		},
 		{
 			name: "Proxies filtered group create fails due to empty API",
@@ -225,9 +225,9 @@ func TestCreate(t *testing.T) {
 				},
 				ExpectedProxiesCount: 15,
 			}},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("filtered group",
 				util.ErrAPIReq,
-			}},
+			),
 		},
 	}
 	for _, tt := range tests {
@@ -280,9 +280,9 @@ func TestDelete(t *testing.T) {
 				API: nil,
 				ID:  "test1",
 			}},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("filtered group",
 				util.ErrAPIReq,
-			}},
+			),
 		},
 	}
 	for _, tt := range tests {
@@ -390,9 +390,9 @@ func TestUpdate(t *testing.T) {
 				Version: 1,
 			},
 			},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("filtered group",
 				errExpectedProxiesCountCannotBeLesserThanZero,
-			}},
+			),
 		},
 		{
 			name: "Proxies filtered group update empty filters fails",
@@ -413,9 +413,9 @@ func TestUpdate(t *testing.T) {
 				Version: 1,
 			},
 			},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("filtered group",
 				errFiltersCannotBeEmpty,
-			}},
+			),
 		},
 		{
 			name: "Proxies filtered group update version less than 0 fails",
@@ -437,9 +437,9 @@ func TestUpdate(t *testing.T) {
 				Version: -1,
 			},
 			},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("filtered group",
 				errVersionCannotBeLesserTahZero,
-			}},
+			),
 		},
 		{
 			name: "Proxies filtered group update fails due to empty API",
@@ -458,9 +458,9 @@ func TestUpdate(t *testing.T) {
 				Version: 1,
 			},
 			},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("filtered group",
 				util.ErrAPIReq,
-			}},
+			),
 		},
 	}
 	for _, tt := range tests {
@@ -610,9 +610,9 @@ func TestList(t *testing.T) {
 				API: nil,
 				ID:  "all",
 			}},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("filtered group",
 				util.ErrAPIReq,
-			}},
+			),
 		},
 	}
 	for _, tt := range tests {

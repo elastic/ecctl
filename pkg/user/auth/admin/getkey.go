@@ -23,7 +23,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/authentication"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	multierror "github.com/hashicorp/go-multierror"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -38,17 +38,17 @@ type GetKeyParams struct {
 
 // Validate ensures the parameters are usable by the consuming function.
 func (params GetKeyParams) Validate() error {
-	var merr = new(multierror.Error)
+	var merr = multierror.NewPrefixed("user auth admin")
 	if params.API == nil {
-		merr = multierror.Append(merr, util.ErrAPIReq)
+		merr = merr.Append(util.ErrAPIReq)
 	}
 
 	if params.ID == "" {
-		merr = multierror.Append(merr, errors.New("userauthadmin: get key requires a key id"))
+		merr = merr.Append(errors.New("get key requires a key id"))
 	}
 
 	if params.UserID == "" {
-		merr = multierror.Append(merr, errors.New("userauthadmin: get key requires a user id"))
+		merr = merr.Append(errors.New("get key requires a user id"))
 	}
 
 	return merr.ErrorOrNil()

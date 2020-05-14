@@ -23,7 +23,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/users"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	multierror "github.com/hashicorp/go-multierror"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -37,13 +37,13 @@ type GetParams struct {
 
 // Validate ensures the parameters are usable by the consuming function.
 func (params GetParams) Validate() error {
-	var merr = new(multierror.Error)
+	var merr = multierror.NewPrefixed("user")
 	if params.API == nil {
-		merr = multierror.Append(merr, util.ErrAPIReq)
+		merr = merr.Append(util.ErrAPIReq)
 	}
 
 	if params.UserName == "" {
-		merr = multierror.Append(merr, errors.New("user: get requires a username"))
+		merr = merr.Append(errors.New("get requires a username"))
 	}
 
 	return merr.ErrorOrNil()

@@ -20,11 +20,11 @@ package cmddeployment
 import (
 	"os"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi"
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
-	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
@@ -41,7 +41,7 @@ var shutdownCmd = &cobra.Command{
 
 		skipSnapshot, _ := cmd.Flags().GetBool("skip-snapshot")
 
-		res, err := deployment.Shutdown(deployment.ShutdownParams{
+		res, err := deploymentapi.Shutdown(deploymentapi.ShutdownParams{
 			API:          ecctl.Get().API,
 			DeploymentID: args[0],
 			SkipSnapshot: skipSnapshot,

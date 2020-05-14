@@ -25,8 +25,8 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
-	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -44,37 +44,24 @@ func TestGetKey(t *testing.T) {
 		{
 			name: "fails due to parameter validation",
 			args: args{},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("user auth admin",
 				util.ErrAPIReq,
-				errors.New("userauthadmin: get key requires a key id"),
-				errors.New("userauthadmin: get key requires a user id"),
-			}},
+				errors.New("get key requires a key id"),
+				errors.New("get key requires a user id"),
+			),
 		},
 		{
 			name: "fails due to API error",
 			args: args{params: GetKeyParams{
-				API: api.NewMock(
-					mock.New404Response(mock.NewStructBody(
-						&models.BasicFailedReply{Errors: []*models.BasicFailedReplyElement{
-							{
-								Code:    ec.String("key.not_found"),
-								Message: ec.String("key not found"),
-							},
-						}},
-					)),
-				),
+				API: api.NewMock(mock.NewErrorResponse(404, mock.APIError{
+					Code: "key.not_found", Message: "key not found",
+				})),
 				ID:     "somekey",
 				UserID: "someid",
 			}},
-			err: errors.New(`{
-  "errors": [
-    {
-      "code": "key.not_found",
-      "fields": null,
-      "message": "key not found"
-    }
-  ]
-}`),
+			err: multierror.NewPrefixed("api error",
+				errors.New("key.not_found: key not found"),
+			),
 		},
 		{
 			name: "succeeds",

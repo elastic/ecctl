@@ -26,9 +26,9 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/stack"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/go-openapi/runtime"
-	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -89,7 +89,7 @@ func Upload(params UploadParams) error {
 		return api.UnwrapError(err)
 	}
 
-	var merr = new(multierror.Error)
+	var merr = multierror.NewPrefixed("stack upload")
 	for _, e := range res.Payload.Errors {
 		for _, ee := range e.Errors.Errors {
 			// ECE stack packs seem to have a __MACOSX packed file which is
@@ -97,9 +97,7 @@ func Upload(params UploadParams) error {
 			// This version cannot be parsed: [__MACOSX] because:
 			// Unknown version string: [__MACOSX]
 			if !strings.Contains(*ee.Message, "__MACOSX") {
-				merr = multierror.Append(merr,
-					fmt.Errorf("%s: %s", *ee.Code, *ee.Message),
-				)
+				merr = merr.Append(fmt.Errorf("%s: %s", *ee.Code, *ee.Message))
 			}
 		}
 	}

@@ -18,32 +18,24 @@
 package userauth
 
 import (
-	"encoding/json"
 	"errors"
-	"net/http"
 	"reflect"
 	"testing"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
-	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
 
 func TestCreateKey(t *testing.T) {
-	invalidPassErrType := &models.BasicFailedReply{Errors: []*models.BasicFailedReplyElement{
-		{
-			Code:    ec.String("auth.invalid_password"),
-			Fields:  []string{"body.password"},
-			Message: ec.String("request password doesn't match the user's password"),
-		},
-	}}
-	byteError, err := json.MarshalIndent(invalidPassErrType, "", "  ")
-	if err != nil {
-		t.Error(err)
+	invalidPassErrType := mock.APIError{
+		Code:    "auth.invalid_password",
+		Fields:  []string{"body.password"},
+		Message: "request password doesn't match the user's password",
 	}
 
 	securityTokenResponse := models.ReAuthenticationResponse{
@@ -65,11 +57,11 @@ func TestCreateKey(t *testing.T) {
 		{
 			name: "fails due to parameter validation",
 			args: args{},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("user auth",
 				util.ErrAPIReq,
-				errors.New("userauth: reauthenticate requires a password"),
-				errors.New("userauth: create key requires a key description"),
-			}},
+				errors.New("reauthenticate requires a password"),
+				errors.New("create key requires a key description"),
+			),
 		},
 		{
 			name: "fails due to reauthenticate API error",
@@ -77,17 +69,12 @@ func TestCreateKey(t *testing.T) {
 				Description: "some description",
 				ReAuthenticateParams: ReAuthenticateParams{
 					Password: []byte("somepass"),
-					API: api.NewMock(
-						mock.Response{
-							Response: http.Response{
-								StatusCode: 400,
-								Body:       mock.NewStructBody(invalidPassErrType),
-							},
-						},
-					),
+					API:      api.NewMock(mock.NewErrorResponse(400, invalidPassErrType)),
 				},
 			}},
-			err: errors.New(string(byteError)),
+			err: multierror.NewPrefixed("api error",
+				errors.New("auth.invalid_password: request password doesn't match the user's password (body.password)"),
+			),
 		},
 		{
 			name: "fails due to create API error",
@@ -97,16 +84,13 @@ func TestCreateKey(t *testing.T) {
 					Password: []byte("somepass"),
 					API: api.NewMock(
 						mock.New200Response(mock.NewStructBody(securityTokenResponse)),
-						mock.Response{
-							Response: http.Response{
-								StatusCode: 400,
-								Body:       mock.NewStructBody(invalidPassErrType),
-							},
-						},
+						mock.NewErrorResponse(400, invalidPassErrType),
 					),
 				},
 			}},
-			err: errors.New(string(byteError)),
+			err: multierror.NewPrefixed("api error",
+				errors.New("auth.invalid_password: request password doesn't match the user's password (body.password)"),
+			),
 		},
 		{
 			name: "succeeds",

@@ -23,7 +23,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/platform_infrastructure"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	multierror "github.com/hashicorp/go-multierror"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -56,14 +56,13 @@ type UpdateParams struct {
 
 // Validate parameters for get and delete functions
 func (params CommonParams) Validate() error {
-	var merr = new(multierror.Error)
-
+	var merr = multierror.NewPrefixed("filtered group")
 	if params.ID == "" {
-		merr = multierror.Append(merr, errIDCannotBeEmpty)
+		merr = merr.Append(errIDCannotBeEmpty)
 	}
 
 	if params.API == nil {
-		merr = multierror.Append(merr, util.ErrAPIReq)
+		merr = merr.Append(util.ErrAPIReq)
 	}
 
 	return merr.ErrorOrNil()
@@ -71,15 +70,15 @@ func (params CommonParams) Validate() error {
 
 // Validate parameters for Create function
 func (params CreateParams) Validate() error {
-	var merr = new(multierror.Error)
-	merr = multierror.Append(merr, params.CommonParams.Validate())
+	var merr = multierror.NewPrefixed("filtered group")
+	merr = merr.Append(params.CommonParams.Validate())
 
 	if len(params.Filters) < 1 {
-		merr = multierror.Append(merr, errFiltersCannotBeEmpty)
+		merr = merr.Append(errFiltersCannotBeEmpty)
 	}
 
 	if params.ExpectedProxiesCount < 1 {
-		merr = multierror.Append(merr, errExpectedProxiesCountCannotBeLesserThanZero)
+		merr = merr.Append(errExpectedProxiesCountCannotBeLesserThanZero)
 	}
 
 	return merr.ErrorOrNil()
@@ -87,11 +86,11 @@ func (params CreateParams) Validate() error {
 
 // Validate parameters for Update function
 func (params UpdateParams) Validate() error {
-	var merr = new(multierror.Error)
-	merr = multierror.Append(merr, params.CreateParams.Validate())
+	var merr = multierror.NewPrefixed("filtered group")
+	merr = merr.Append(params.CreateParams.Validate())
 
 	if params.Version < 0 {
-		merr = multierror.Append(merr, errVersionCannotBeLesserTahZero)
+		merr = merr.Append(errVersionCannotBeLesserTahZero)
 	}
 
 	return merr.ErrorOrNil()

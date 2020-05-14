@@ -24,7 +24,7 @@ import (
 
 	"github.com/blang/semver"
 	"github.com/elastic/cloud-sdk-go/pkg/api"
-	multierror "github.com/hashicorp/go-multierror"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -38,16 +38,16 @@ type GetParams struct {
 // Validate ensures that the parameters are usable by the consuming
 // function
 func (params GetParams) Validate() error {
-	var err = new(multierror.Error)
+	var merr = multierror.NewPrefixed("stack get")
 	if params.API == nil {
-		err = multierror.Append(err, util.ErrAPIReq)
+		merr = merr.Append(util.ErrAPIReq)
 	}
 
 	if _, e := semver.Parse(params.Version); e != nil {
-		err = multierror.Append(err, errors.New(strings.ToLower(e.Error())))
+		merr = merr.Append(errors.New(strings.ToLower(e.Error())))
 	}
 
-	return err.ErrorOrNil()
+	return merr.ErrorOrNil()
 }
 
 // ListParams is consumed by List
@@ -75,16 +75,16 @@ type UploadParams struct {
 // Validate ensures that the parameters are usable by the consuming
 // function
 func (params UploadParams) Validate() error {
-	var err = new(multierror.Error)
+	var merr = multierror.NewPrefixed("stack upload")
 	if params.API == nil {
-		err = multierror.Append(err, util.ErrAPIReq)
+		merr = merr.Append(util.ErrAPIReq)
 	}
 
 	if params.StackPack == nil {
-		err = multierror.Append(err, errors.New("stackpack cannot be empty"))
+		merr = merr.Append(errors.New("stackpack cannot be empty"))
 	}
 
-	return err.ErrorOrNil()
+	return merr.ErrorOrNil()
 }
 
 // DeleteParams is consumed by Delete
@@ -96,14 +96,14 @@ type DeleteParams struct {
 // Validate ensures that the parameters are usable by the consuming
 // function
 func (params DeleteParams) Validate() error {
-	var err = new(multierror.Error)
+	var merr = multierror.NewPrefixed("stack delete")
 	if params.API == nil {
-		err = multierror.Append(err, util.ErrAPIReq)
+		merr = merr.Append(util.ErrAPIReq)
 	}
 
 	if _, e := semver.Parse(params.Version); e != nil {
-		err = multierror.Append(err, errors.New(strings.ToLower(e.Error())))
+		merr = merr.Append(errors.New(strings.ToLower(e.Error())))
 	}
 
-	return err.ErrorOrNil()
+	return merr.ErrorOrNil()
 }

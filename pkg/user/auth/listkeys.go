@@ -21,7 +21,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/authentication"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	multierror "github.com/hashicorp/go-multierror"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -33,9 +33,9 @@ type ListKeysParams struct {
 
 // Validate ensures the parameters are usable by the consuming function.
 func (params ListKeysParams) Validate() error {
-	var merr = new(multierror.Error)
+	var merr = multierror.NewPrefixed("user auth")
 	if params.API == nil {
-		merr = multierror.Append(merr, util.ErrAPIReq)
+		merr = merr.Append(util.ErrAPIReq)
 	}
 
 	return merr.ErrorOrNil()

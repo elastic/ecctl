@@ -28,12 +28,12 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi"
 	"github.com/elastic/cloud-sdk-go/pkg/input"
 	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/output"
 	"github.com/spf13/viper"
 
-	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/user"
 )
 
@@ -498,7 +498,7 @@ func validateAuth(cfg Config, writer io.Writer) error {
 
 	u, err := user.GetCurrent(user.GetCurrentParams{API: a.API})
 	if err != nil {
-		if _, e := deployment.List(deployment.ListParams{
+		if _, e := deploymentapi.List(deploymentapi.ListParams{
 			API: a.API,
 		}); e != nil {
 			// nolint

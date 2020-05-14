@@ -24,9 +24,7 @@ import (
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
-	"github.com/elastic/cloud-sdk-go/pkg/models"
-	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
-	multierror "github.com/hashicorp/go-multierror"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -43,35 +41,22 @@ func TestDeleteKey(t *testing.T) {
 		{
 			name: "fails due to parameter validation",
 			args: args{},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("user auth",
 				util.ErrAPIReq,
-				errors.New("userauth: delete key requires a key id"),
-			}},
+				errors.New("delete key requires a key id"),
+			),
 		},
 		{
 			name: "fails due to API error",
 			args: args{params: DeleteKeyParams{
-				API: api.NewMock(
-					mock.New404Response(mock.NewStructBody(
-						&models.BasicFailedReply{Errors: []*models.BasicFailedReplyElement{
-							{
-								Code:    ec.String("key.not_found"),
-								Message: ec.String("key not found"),
-							},
-						}},
-					)),
-				),
+				API: api.NewMock(mock.NewErrorResponse(404, mock.APIError{
+					Code: "key.not_found", Message: "key not found",
+				})),
 				ID: "somekey",
 			}},
-			err: errors.New(`{
-  "errors": [
-    {
-      "code": "key.not_found",
-      "fields": null,
-      "message": "key not found"
-    }
-  ]
-}`),
+			err: multierror.NewPrefixed("api error",
+				errors.New("key.not_found: key not found"),
+			),
 		},
 		{
 			name: "succeeds",

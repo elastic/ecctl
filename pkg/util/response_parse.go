@@ -23,8 +23,8 @@ import (
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/plan/planutil"
-	multierror "github.com/hashicorp/go-multierror"
 )
 
 // ParseCUResponseParams is used by ParseCUResponse.
@@ -42,9 +42,9 @@ func (params ParseCUResponseParams) Validate() error {
 		return api.UnwrapError(params.Err)
 	}
 
-	var merr = new(multierror.Error)
+	var merr = multierror.NewPrefixed("plan tracking")
 	if params.CreateResponse == nil && params.UpdateResponse == nil {
-		merr = multierror.Append(merr,
+		merr = merr.Append(
 			errors.New("parse response: One of Create or Update response must be populated"),
 		)
 	}

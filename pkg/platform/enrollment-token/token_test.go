@@ -28,9 +28,8 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
-
-	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -51,16 +50,16 @@ func TestCreate(t *testing.T) {
 				API:      new(api.API),
 				Duration: time.Hour * 999999,
 			}},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("enrollment-token create",
 				errors.New("validity value 3599996400 exceeds max allowed 2147483647 value in seconds"),
-			}},
+			),
 		},
 		{
 			name: "Create fails due to missing API",
 			args: args{params: CreateParams{}},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("enrollment-token create",
 				util.ErrAPIReq,
-			}},
+			),
 		},
 		{
 			name: "Create Succeeds with persistent token",
@@ -122,18 +121,18 @@ func TestDelete(t *testing.T) {
 			args: args{params: DeleteParams{
 				API: new(api.API),
 			}},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("enrollment-token delete",
 				errors.New("token cannot be empty"),
-			}},
+			),
 		},
 		{
 			name: "Create fails due to missing API",
 			args: args{params: DeleteParams{
 				Token: "token",
 			}},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("enrollment-token delete",
 				util.ErrAPIReq,
-			}},
+			),
 		},
 		{
 			name: "Delete fails due to API error",

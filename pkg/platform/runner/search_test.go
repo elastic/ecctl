@@ -26,8 +26,8 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
-	"github.com/hashicorp/go-multierror"
 )
 
 func TestSearch(t *testing.T) {
@@ -62,10 +62,10 @@ field in body is required`
 				Request: models.SearchRequest{Query: &models.QueryContainer{Exists: &models.ExistsQuery{Field: nil}}},
 			}},
 			wantErr: true,
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("runner search",
 				errors.New("api reference is required for command"),
 				errors.New(searchReqErr),
-			}},
+			),
 		},
 		{
 			name: "fails if search api call fails",

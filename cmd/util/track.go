@@ -21,8 +21,8 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/plan/planutil"
-	"github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/formatter"
 )
@@ -47,10 +47,9 @@ type TrackParams struct {
 
 // Validate ensures the parameters are usable by the consuming function.
 func (params TrackParams) Validate() error {
-	var merr = new(multierror.Error)
-
+	var merr = multierror.NewPrefixed("plan tracker")
 	if params.Formatter == nil {
-		merr = multierror.Append(merr, errors.New("track: formatter cannot be nil"))
+		merr = merr.Append(merr, errors.New("formatter cannot be nil"))
 	}
 
 	return merr.ErrorOrNil()

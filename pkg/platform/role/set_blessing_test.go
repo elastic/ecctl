@@ -25,7 +25,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	multierror "github.com/hashicorp/go-multierror"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -42,11 +42,11 @@ func TestSetBlessings(t *testing.T) {
 		{
 			name: "fails on parameter validation",
 			args: args{},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("role set blessing",
 				util.ErrAPIReq,
-				errors.New("role set blessing: blessing definitions cannot be empty"),
-				errors.New("role set blessing: id cannot be empty"),
-			}},
+				errors.New("blessing definitions cannot be empty"),
+				errors.New("id cannot be empty"),
+			),
 		},
 		{
 			name: "fails updating the role",

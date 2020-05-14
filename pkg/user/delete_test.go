@@ -25,7 +25,7 @@ import (
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
-	multierror "github.com/hashicorp/go-multierror"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -44,10 +44,10 @@ func TestDelete(t *testing.T) {
 			name:    "Delete fails due to parameter validation failure",
 			args:    args{},
 			wantErr: true,
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("user",
 				util.ErrAPIReq,
-				errors.New("user: delete requires a username"),
-			}},
+				errors.New("delete requires a username"),
+			),
 		},
 		{
 			name: "Delete fails due to API failure",

@@ -20,13 +20,12 @@ package cmddeploymentresource
 import (
 	"fmt"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/depresourceapi"
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
-	"github.com/elastic/ecctl/pkg/deployment"
-	"github.com/elastic/ecctl/pkg/deployment/depresource"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
@@ -45,9 +44,9 @@ var stopMaintCmd = &cobra.Command{
 			fmt.Fprintln(cmd.OutOrStderr(), err)
 		}
 
-		_, err := depresource.StopMaintenanceModeAllOrSpecified(depresource.StopInstancesParams{
-			StopParams: depresource.StopParams{
-				ResourceParams: deployment.ResourceParams{
+		_, err := depresourceapi.StopMaintenanceModeAllOrSpecified(depresourceapi.StopInstancesParams{
+			StopParams: depresourceapi.StopParams{
+				Params: depresourceapi.Params{
 					API:          ecctl.Get().API,
 					DeploymentID: args[0],
 					Kind:         resKind,

@@ -18,11 +18,11 @@
 package cmddeployment
 
 import (
+	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi"
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
-	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
@@ -31,7 +31,7 @@ var deleteCmd = &cobra.Command{
 	Short:   cmdutil.AdminReqDescription("Deletes a previously shutdown deployment"),
 	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, err := deployment.Delete(deployment.DeleteParams{
+		res, err := deploymentapi.Delete(deploymentapi.DeleteParams{
 			API:          ecctl.Get().API,
 			DeploymentID: args[0],
 		})

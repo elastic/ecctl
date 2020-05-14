@@ -21,7 +21,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/platform_infrastructure"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	multierror "github.com/hashicorp/go-multierror"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -34,13 +34,12 @@ type ShowParams struct {
 
 // Validate checks the parameters
 func (params ShowParams) Validate() error {
-	var merr = new(multierror.Error)
-
+	var merr = multierror.NewPrefixed("runner show")
 	if params.ID == "" {
-		merr = multierror.Append(merr, util.ErrIDCannotBeEmpty)
+		merr = merr.Append(util.ErrIDCannotBeEmpty)
 	}
 
-	merr = multierror.Append(merr, params.Params.Validate())
+	merr = merr.Append(params.Params.Validate())
 
 	return merr.ErrorOrNil()
 }

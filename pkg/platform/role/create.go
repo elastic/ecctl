@@ -23,7 +23,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/platform_infrastructure"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	multierror "github.com/hashicorp/go-multierror"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -37,13 +37,13 @@ type CreateParams struct {
 
 // Validate ensures the parameters are usable
 func (params CreateParams) Validate() error {
-	var merr = new(multierror.Error)
+	var merr = multierror.NewPrefixed("role create")
 	if params.API == nil {
-		merr = multierror.Append(merr, util.ErrAPIReq)
+		merr = merr.Append(util.ErrAPIReq)
 	}
 
 	if params.Role == nil {
-		merr = multierror.Append(merr, errors.New("role create: role definition cannot be empty"))
+		merr = merr.Append(errors.New("role definition cannot be empty"))
 	}
 
 	return merr.ErrorOrNil()

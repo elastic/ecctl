@@ -18,10 +18,10 @@
 package cmddeployment
 
 import (
+	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi"
 	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
-	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
@@ -51,7 +51,7 @@ var searchCmd = &cobra.Command{
 			return err
 		}
 
-		res, err := deployment.Search(deployment.SearchParams{
+		res, err := deploymentapi.Search(deploymentapi.SearchParams{
 			API:     ecctl.Get().API,
 			Request: &sr,
 		})
