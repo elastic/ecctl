@@ -7,7 +7,9 @@ VERSION=$(echo ${1}| sed 's/^v//')
 
 # Globals
 FORMULA_FILE=/tmp/homebrew-tap/Formula/ecctl.rb
-GITHUB_USER=marclop
+if [[ -z ${GITHUB_USER} ]]; then
+    export GITHUB_USER=elasticcloudmachine
+fi
 
 # Execution
 
