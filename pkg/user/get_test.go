@@ -18,6 +18,7 @@
 package user
 
 import (
+	"errors"
 	"net/http"
 	"reflect"
 	"testing"
@@ -25,9 +26,8 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
-	multierror "github.com/hashicorp/go-multierror"
-	"github.com/pkg/errors"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -42,12 +42,10 @@ func TestGetParams_Validate(t *testing.T) {
 		{
 			name:   "validate should return all possible errors",
 			params: GetParams{},
-			err: &multierror.Error{
-				Errors: []error{
-					errors.New("api reference is required for command"),
-					errors.New("user: get requires a username"),
-				},
-			},
+			err: multierror.NewPrefixed("user",
+				errors.New("api reference is required for command"),
+				errors.New("get requires a username"),
+			),
 			wantErr: true,
 		},
 		{
@@ -99,10 +97,10 @@ func TestGet(t *testing.T) {
 			name:    "Get fails due to parameter validation failure",
 			args:    args{},
 			wantErr: true,
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("user",
 				util.ErrAPIReq,
-				errors.New("user: get requires a username"),
-			}},
+				errors.New("get requires a username"),
+			),
 		},
 		{
 			name: "Get fails due to API failure",
@@ -197,10 +195,6 @@ func TestGetCurrent(t *testing.T) {
     "builtin": true
 }`
 
-	const getErrorResponse = `{
-  "errors": null
-}`
-
 	type args struct {
 		params GetCurrentParams
 	}
@@ -221,14 +215,11 @@ func TestGetCurrent(t *testing.T) {
 			name: "Get fails due to API failure",
 			args: args{
 				params: GetCurrentParams{
-					API: api.NewMock(mock.Response{Response: http.Response{
-						Body:       mock.NewStringBody(""),
-						StatusCode: 500,
-					}}),
+					API: api.NewMock(mock.SampleInternalError()),
 				},
 			},
 			wantErr: true,
-			err:     errors.New(getErrorResponse),
+			err:     mock.MultierrorInternalError,
 		},
 		{
 			name: "Get succeeds",

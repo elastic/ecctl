@@ -22,8 +22,8 @@ import (
 	"sync"
 	"time"
 
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
-	multierror "github.com/hashicorp/go-multierror"
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
@@ -42,19 +42,19 @@ var deleteCmd = &cobra.Command{
 			}
 		}
 
-		var merr = new(multierror.Error)
+		var merr = multierror.NewPrefixed("delete key")
 		var wg sync.WaitGroup
 		for i := range args {
 			wg.Add(1)
-			go func(index int, err *multierror.Error) {
-				merr = multierror.Append(err,
+			go func(index int) {
+				merr = merr.Append(
 					userauth.DeleteKey(userauth.DeleteKeyParams{
 						API: ecctl.Get().API,
 						ID:  args[index],
 					}),
 				)
 				wg.Done()
-			}(i, merr)
+			}(i)
 
 			// Only delete a key per second
 			<-time.After(time.Second)

@@ -23,8 +23,8 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/authentication"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
-	multierror "github.com/hashicorp/go-multierror"
 )
 
 // CreateKeyParams is consumed by CreateKey
@@ -36,12 +36,11 @@ type CreateKeyParams struct {
 
 // Validate ensures the parameters are usable by the consuming function.
 func (params CreateKeyParams) Validate() error {
-	var merr = multierror.Append(
-		new(multierror.Error), params.ReAuthenticateParams.Validate(),
-	)
+	var merr = multierror.NewPrefixed("user auth")
+	merr = merr.Append(params.ReAuthenticateParams.Validate())
 
 	if params.Description == "" {
-		merr = multierror.Append(merr, errors.New("userauth: create key requires a key description"))
+		merr = merr.Append(errors.New("create key requires a key description"))
 	}
 
 	return merr.ErrorOrNil()

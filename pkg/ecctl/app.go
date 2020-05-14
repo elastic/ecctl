@@ -37,7 +37,9 @@ func NewApplication(c Config) (*App, error) {
 		return nil, err
 	}
 
-	authWriter, err := newAuthWriter(c)
+	authWriter, err := auth.NewAuthWriter(auth.Config{
+		APIKey: c.APIKey, Username: c.User, Password: c.Pass,
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -53,12 +55,10 @@ func NewApplication(c Config) (*App, error) {
 			Verbose: c.Verbose,
 			Device:  c.OutputDevice,
 		},
+		SkipLogin:   c.SkipLogin,
+		ErrorDevice: c.ErrorDevice,
 	})
 	if err != nil {
-		return nil, err
-	}
-
-	if err := loginUser(authWriter, apiInstance, c); err != nil {
 		return nil, err
 	}
 
@@ -78,29 +78,4 @@ func NewApplication(c Config) (*App, error) {
 		Formatter: fmter,
 		Config:    c,
 	}, nil
-}
-
-// newAuthWriter instantiates the authenticating object from the config.
-func newAuthWriter(c Config) (api.AuthWriter, error) {
-	if c.APIKey != "" {
-		return auth.NewAPIKey(c.APIKey)
-	}
-
-	return auth.NewUserLogin(c.User, c.Pass)
-}
-
-func loginUser(authWriter api.AuthWriter, apiInstance *api.API, c Config) error {
-	aw, ok := authWriter.(*auth.UserLogin)
-	if !ok || c.SkipLogin {
-		return nil
-	}
-
-	if err := aw.Login(apiInstance.V1API); err != nil {
-		return api.UnwrapError(err)
-	}
-
-	return api.UnwrapError(aw.RefreshToken(auth.RefreshTokenParams{
-		Client:      apiInstance.V1API,
-		ErrorDevice: c.ErrorDevice,
-	}))
 }

@@ -20,10 +20,10 @@ package cmddeployment
 import (
 	"fmt"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi"
 	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
-	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
@@ -36,7 +36,7 @@ var resyncDeploymentCmd = &cobra.Command{
 
 		if all {
 			fmt.Println("Resynchronizing all deployments")
-			res, err := deployment.ResyncAll(deployment.ResyncAllParams{
+			res, err := deploymentapi.ResyncAll(deploymentapi.ResyncAllParams{
 				API: ecctl.Get().API,
 			})
 			if err != nil {
@@ -47,7 +47,7 @@ var resyncDeploymentCmd = &cobra.Command{
 		}
 
 		fmt.Printf("Resynchronizing deployment: %s\n", args[0])
-		return deployment.Resync(deployment.ResyncParams{
+		return deploymentapi.Resync(deploymentapi.ResyncParams{
 			API: ecctl.Get().API,
 			ID:  args[0],
 		})

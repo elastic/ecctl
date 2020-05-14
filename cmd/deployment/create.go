@@ -21,15 +21,14 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi"
+	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/depresourceapi"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
-	"github.com/elastic/ecctl/pkg/deployment"
-	"github.com/elastic/ecctl/pkg/deployment/depresource"
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/util"
 )
 
 var createCmd = &cobra.Command{
@@ -81,7 +80,7 @@ var createCmd = &cobra.Command{
 
 		if payload == nil {
 			var err error
-			payload, err = depresource.New(depresource.NewParams{
+			payload, err = depresourceapi.New(depresourceapi.NewParams{
 				API:                  ecctl.Get().API,
 				Name:                 name,
 				DeploymentTemplateID: dt,
@@ -92,22 +91,22 @@ var createCmd = &cobra.Command{
 				TopologyElements:     te,
 				ApmEnable:            apmEnable,
 				AppsearchEnable:      appsearchEnable,
-				ElasticsearchInstance: depresource.InstanceParams{
+				ElasticsearchInstance: depresourceapi.InstanceParams{
 					RefID:     esRefID,
 					Size:      esSize,
 					ZoneCount: esZoneCount,
 				},
-				KibanaInstance: depresource.InstanceParams{
+				KibanaInstance: depresourceapi.InstanceParams{
 					RefID:     kibanaRefID,
 					Size:      kibanaSize,
 					ZoneCount: kibanaZoneCount,
 				},
-				ApmInstance: depresource.InstanceParams{
+				ApmInstance: depresourceapi.InstanceParams{
 					RefID:     apmRefID,
 					Size:      apmSize,
 					ZoneCount: apmZoneCount,
 				},
-				AppsearchInstance: depresource.InstanceParams{
+				AppsearchInstance: depresourceapi.InstanceParams{
 					RefID:     appsearchRefID,
 					Size:      appsearchSize,
 					ZoneCount: appsearchZoneCount,
@@ -124,17 +123,15 @@ var createCmd = &cobra.Command{
 		}
 
 		reqID, _ := cmd.Flags().GetString("request-id")
-		if reqID == "" {
-			reqID = util.RandomString(64)
-		}
+		reqID = deploymentapi.RequestID(reqID)
 
-		var createParams = deployment.CreateParams{
+		var createParams = deploymentapi.CreateParams{
 			API:       ecctl.Get().API,
 			RequestID: reqID,
 			Request:   payload,
 		}
 
-		res, err := deployment.Create(createParams)
+		res, err := deploymentapi.Create(createParams)
 		if err != nil {
 			fmt.Fprintln(os.Stderr,
 				"The deployment creation returned with an error. Use the displayed request ID to recreate the deployment resources",

@@ -25,10 +25,10 @@ import (
 	"testing"
 
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/output"
 	"github.com/elastic/cloud-sdk-go/pkg/plan/planutil"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
-	"github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/formatter"
 )
@@ -54,9 +54,9 @@ func TestTrack(t *testing.T) {
 		{
 			name: "returns an error when Formatter is not specified",
 			args: args{params: TrackParams{}},
-			err: &multierror.Error{Errors: []error{
-				errors.New("track: formatter cannot be nil"),
-			}},
+			err: multierror.NewPrefixed("plan tracker",
+				errors.New("formatter cannot be nil"),
+			),
 		},
 		{
 			name: "returns a formatted structure when track is set to false",
@@ -92,11 +92,11 @@ func TestTrack(t *testing.T) {
 				},
 			}, buf: secondOutputBuf},
 			wantOut: wantOutTokenValue,
-			err: &multierror.Error{Errors: []error{
-				errors.New("plan track change: API cannot be nil"),
-				errors.New("plan track change: one of DeploymentID or ResourceID must be specified"),
-				errors.New("plan track change: Kind cannot be empty"),
-			}},
+			err: multierror.NewPrefixed("plan track change",
+				errors.New("API cannot be nil"),
+				errors.New("one of DeploymentID or ResourceID must be specified"),
+				errors.New("kind cannot be empty"),
+			),
 		},
 		{
 			name: "prints the first error when track is set to true and also returns the formatter errors",
@@ -113,11 +113,11 @@ func TestTrack(t *testing.T) {
 				},
 			}, buf: thirdOutputBuf},
 			wantOut: `template: no template "default" associated with template "text"` + "\n",
-			err: &multierror.Error{Errors: []error{
-				errors.New("plan track change: API cannot be nil"),
-				errors.New("plan track change: one of DeploymentID or ResourceID must be specified"),
-				errors.New("plan track change: Kind cannot be empty"),
-			}},
+			err: multierror.NewPrefixed("plan track change",
+				errors.New("API cannot be nil"),
+				errors.New("one of DeploymentID or ResourceID must be specified"),
+				errors.New("kind cannot be empty"),
+			),
 		},
 	}
 	for _, tt := range tests {

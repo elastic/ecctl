@@ -23,7 +23,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/users"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	multierror "github.com/hashicorp/go-multierror"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -39,28 +39,26 @@ type UpdateParams struct {
 
 // Validate ensures the parameters are usable by the consuming function.
 func (params UpdateParams) Validate() error {
-	var merr = new(multierror.Error)
-
+	var merr = multierror.NewPrefixed("user")
 	if params.UserName == "" {
-		merr = multierror.Append(merr, errors.New("user: update requires a username"))
+		merr = merr.Append(errors.New("update requires a username"))
 	}
 
 	if params.API == nil {
-		merr = multierror.Append(merr, util.ErrAPIReq)
+		merr = merr.Append(util.ErrAPIReq)
 	}
 
 	if params.Password != nil && len(params.Password) < minPasswordLength {
-		merr = multierror.Append(merr, errors.New("user: update requires a password with a minimum of 8 characters"))
+		merr = merr.Append(errors.New("update requires a password with a minimum of 8 characters"))
 	}
 
 	if params.Email != "" {
 		if err := util.ValidateEmail("user", params.Email); err != nil {
-			merr = multierror.Append(merr, err)
+			merr = merr.Append(err)
 		}
 	}
 
-	merr = multierror.Append(merr, ValidateRoles(params.Roles))
-
+	merr = merr.Append(ValidateRoles(params.Roles))
 	return merr.ErrorOrNil()
 }
 

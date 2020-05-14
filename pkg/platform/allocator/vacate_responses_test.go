@@ -29,6 +29,7 @@ import (
 	"time"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
+	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/depresourceapi"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	"github.com/elastic/cloud-sdk-go/pkg/output"
@@ -37,7 +38,6 @@ import (
 	"github.com/go-openapi/strfmt"
 	multierror "github.com/hashicorp/go-multierror"
 
-	"github.com/elastic/ecctl/pkg/deployment/depresource"
 	"github.com/elastic/ecctl/pkg/util"
 )
 
@@ -278,7 +278,7 @@ func newPollerBody(t *testing.T, id string, pending, current *models.Elasticsear
 			Elasticsearch: []*models.ElasticsearchResourceInfo{
 				{
 					ID:    &id,
-					RefID: ec.String(depresource.DefaultElasticsearchRefID),
+					RefID: ec.String(depresourceapi.DefaultElasticsearchRefID),
 					Info: &models.ElasticsearchClusterInfo{PlanInfo: &models.ElasticsearchClusterPlansInfo{
 						Current: current, Pending: pending,
 					}},
@@ -296,7 +296,7 @@ func newApmPollerBody(t *testing.T, id string, pending, current *models.ApmPlanI
 			Apm: []*models.ApmResourceInfo{
 				{
 					ID:    &id,
-					RefID: ec.String(depresource.DefaultApmRefID),
+					RefID: ec.String(depresourceapi.DefaultApmRefID),
 					Info: &models.ApmInfo{PlanInfo: &models.ApmPlansInfo{
 						Current: current, Pending: pending,
 					}},
@@ -314,7 +314,7 @@ func newAppSearchPollerBody(t *testing.T, id string, pending, current *models.Ap
 			Appsearch: []*models.AppSearchResourceInfo{
 				{
 					ID:    &id,
-					RefID: ec.String(depresource.DefaultAppSearchRefID),
+					RefID: ec.String(depresourceapi.DefaultAppSearchRefID),
 					Info: &models.AppSearchInfo{PlanInfo: &models.AppSearchPlansInfo{
 						Current: current, Pending: pending,
 					}},
@@ -332,7 +332,7 @@ func newKibanaPollerBody(t *testing.T, id string, pending, current *models.Kiban
 			Kibana: []*models.KibanaResourceInfo{
 				{
 					ID:    &id,
-					RefID: ec.String(depresource.DefaultKibanaRefID),
+					RefID: ec.String(depresourceapi.DefaultKibanaRefID),
 					Info: &models.KibanaClusterInfo{PlanInfo: &models.KibanaClusterPlansInfo{
 						Current: current, Pending: pending,
 					}},

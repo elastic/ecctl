@@ -21,13 +21,12 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/depresourceapi"
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
-	"github.com/elastic/ecctl/pkg/deployment"
-	"github.com/elastic/ecctl/pkg/deployment/depresource"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
@@ -52,9 +51,9 @@ var startMaintCmd = &cobra.Command{
 			return nil
 		}
 
-		_, err := depresource.StartMaintenanceModeAllOrSpecified(depresource.StartInstancesParams{
-			StartParams: depresource.StartParams{
-				ResourceParams: deployment.ResourceParams{
+		_, err := depresourceapi.StartMaintenanceModeAllOrSpecified(depresourceapi.StartInstancesParams{
+			StartParams: depresourceapi.StartParams{
+				Params: depresourceapi.Params{
 					API:          ecctl.Get().API,
 					DeploymentID: args[0],
 					Kind:         resKind,

@@ -20,11 +20,10 @@ package cmddeploymentnote
 import (
 	"path/filepath"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/noteapi"
 	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
-	"github.com/elastic/ecctl/pkg/deployment"
-	"github.com/elastic/ecctl/pkg/deployment/note"
 	"github.com/elastic/ecctl/pkg/ecctl"
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -44,12 +43,11 @@ var deploymentNoteCreateCmd = &cobra.Command{
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		comment, _ := cmd.Flags().GetString("comment")
-		return note.Add(note.AddParams{
-			Params: note.Params{
-				Params: deployment.Params{
-					API: ecctl.Get().API,
-					ID:  args[0],
-				}},
+		return noteapi.Add(noteapi.AddParams{
+			Params: noteapi.Params{
+				API: ecctl.Get().API,
+				ID:  args[0],
+			},
 			Message: comment,
 			UserID:  ecctl.Get().Config.User,
 		})
@@ -61,11 +59,9 @@ var deploymentNoteListCmd = &cobra.Command{
 	Short:   "Lists the deployment notes",
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, err := note.List(note.Params{
-			Params: deployment.Params{
-				API: ecctl.Get().API,
-				ID:  args[0],
-			},
+		res, err := noteapi.List(noteapi.Params{
+			API: ecctl.Get().API,
+			ID:  args[0],
 		})
 		if err != nil {
 			return err
@@ -83,15 +79,13 @@ var deploymentNoteUpdateCmd = &cobra.Command{
 		comment, _ := cmd.Flags().GetString("comment")
 		noteID, _ := cmd.Flags().GetString("id")
 		return util.ReturnErrOnly(
-			note.Update(note.UpdateParams{
+			noteapi.Update(noteapi.UpdateParams{
 				Message: comment,
 				UserID:  ecctl.Get().Config.User,
 				NoteID:  noteID,
-				Params: note.Params{
-					Params: deployment.Params{
-						API: ecctl.Get().API,
-						ID:  args[0],
-					},
+				Params: noteapi.Params{
+					API: ecctl.Get().API,
+					ID:  args[0],
 				},
 			}),
 		)
@@ -104,13 +98,11 @@ var deploymentNoteShowCmd = &cobra.Command{
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		noteID, _ := cmd.Flags().GetString("id")
-		res, err := note.Get(note.GetParams{
+		res, err := noteapi.Get(noteapi.GetParams{
 			NoteID: noteID,
-			Params: note.Params{
-				Params: deployment.Params{
-					API: ecctl.Get().API,
-					ID:  args[0],
-				},
+			Params: noteapi.Params{
+				API: ecctl.Get().API,
+				ID:  args[0],
 			},
 		})
 		if err != nil {

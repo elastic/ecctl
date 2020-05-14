@@ -20,12 +20,11 @@ package cmddeploymentresource
 import (
 	"os"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/depresourceapi"
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
-	"github.com/elastic/ecctl/pkg/deployment"
-	"github.com/elastic/ecctl/pkg/deployment/depresource"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
@@ -44,8 +43,8 @@ var deleteCmd = &cobra.Command{
 			return nil
 		}
 
-		return depresource.DeleteStateless(depresource.DeleteStatelessParams{
-			ResourceParams: deployment.ResourceParams{
+		return depresourceapi.DeleteStateless(depresourceapi.DeleteStatelessParams{
+			Params: depresourceapi.Params{
 				API:          ecctl.Get().API,
 				DeploymentID: args[0],
 				Kind:         resKind,

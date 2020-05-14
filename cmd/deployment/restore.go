@@ -18,10 +18,10 @@
 package cmddeployment
 
 import (
+	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi"
 	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
-	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
@@ -43,7 +43,7 @@ var restoreCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		restoreSnapshot, _ := cmd.Flags().GetBool("restore-snapshot")
 
-		res, err := deployment.Restore(deployment.RestoreParams{
+		res, err := deploymentapi.Restore(deploymentapi.RestoreParams{
 			API:             ecctl.Get().API,
 			DeploymentID:    args[0],
 			RestoreSnapshot: restoreSnapshot,

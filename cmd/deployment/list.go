@@ -18,9 +18,9 @@
 package cmddeployment
 
 import (
+	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi"
 	"github.com/spf13/cobra"
 
-	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
@@ -29,7 +29,7 @@ var listCmd = &cobra.Command{
 	Short:   "Lists the platform's deployments",
 	PreRunE: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, err := deployment.List(deployment.ListParams{
+		res, err := deploymentapi.List(deploymentapi.ListParams{
 			API: ecctl.Get().API,
 		})
 		if err != nil {

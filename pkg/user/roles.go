@@ -18,8 +18,8 @@
 package user
 
 import (
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/util/slice"
-	multierror "github.com/hashicorp/go-multierror"
 	"github.com/pkg/errors"
 )
 
@@ -31,15 +31,15 @@ const deploymentsViewerRole = "ece_deployment_viewer"
 
 // ValidateRoles ensures the parameters are usable by the consuming function.
 func ValidateRoles(roles []string) error {
-	var merr = new(multierror.Error)
-
+	var merr = multierror.NewPrefixed("user")
 	if len(roles) > 1 && slice.HasString(roles, platformAdminRole) {
-		merr = multierror.Append(merr, errors.Errorf("user: %v cannot be used in conjunction with other roles", platformAdminRole))
+		merr = merr.Append(errors.Errorf("%v cannot be used in conjunction with other roles", platformAdminRole))
 	}
 
 	if hasBothDeploymentRoles(roles) {
-		merr = multierror.Append(merr, errors.Errorf("user: only one of %v or %v can be chosen",
-			deploymentsManagerRole, deploymentsViewerRole))
+		merr = merr.Append(errors.Errorf("only one of %v or %v can be chosen",
+			deploymentsManagerRole, deploymentsViewerRole),
+		)
 	}
 
 	return merr.ErrorOrNil()

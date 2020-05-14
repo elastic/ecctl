@@ -26,8 +26,8 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
-	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -44,15 +44,13 @@ func TestCreateParams_Validate(t *testing.T) {
 			params: CreateParams{
 				Email: "hi",
 			},
-			err: &multierror.Error{
-				Errors: []error{
-					errors.New("api reference is required for command"),
-					errors.New("user: create requires a username"),
-					errors.New("user: create requires a password with a minimum of 8 characters"),
-					errors.New("user: create requires at least 1 role"),
-					errors.New("user: hi is not a valid email address format"),
-				},
-			},
+			err: multierror.NewPrefixed("user",
+				errors.New("api reference is required for command"),
+				errors.New("create requires a username"),
+				errors.New("create requires a password with a minimum of 8 characters"),
+				errors.New("create requires at least 1 role"),
+				errors.New("user: hi is not a valid email address format"),
+			),
 			wantErr: true,
 		},
 		{
@@ -63,11 +61,9 @@ func TestCreateParams_Validate(t *testing.T) {
 				Password: []byte("pass"),
 				Roles:    []string{platformAdminRole},
 			},
-			err: &multierror.Error{
-				Errors: []error{
-					errors.New("user: create requires a password with a minimum of 8 characters"),
-				},
-			},
+			err: multierror.NewPrefixed("user",
+				errors.New("create requires a password with a minimum of 8 characters"),
+			),
 			wantErr: true,
 		},
 		{
@@ -78,11 +74,9 @@ func TestCreateParams_Validate(t *testing.T) {
 				Password: []byte("supersecretpass"),
 				Roles:    []string{platformAdminRole, platformViewerRole},
 			},
-			err: &multierror.Error{
-				Errors: []error{
-					errors.New("user: ece_platform_admin cannot be used in conjunction with other roles"),
-				},
-			},
+			err: multierror.NewPrefixed("user",
+				errors.New("ece_platform_admin cannot be used in conjunction with other roles"),
+			),
 			wantErr: true,
 		},
 		{
@@ -93,11 +87,9 @@ func TestCreateParams_Validate(t *testing.T) {
 				Password: []byte("supersecretpass"),
 				Roles:    []string{deploymentsManagerRole, deploymentsViewerRole},
 			},
-			err: &multierror.Error{
-				Errors: []error{
-					errors.New("user: only one of ece_deployment_manager or ece_deployment_viewer can be chosen"),
-				},
-			},
+			err: multierror.NewPrefixed("user",
+				errors.New("only one of ece_deployment_manager or ece_deployment_viewer can be chosen"),
+			),
 			wantErr: true,
 		},
 		{
@@ -164,9 +156,9 @@ func TestCreate(t *testing.T) {
 				},
 			},
 			wantErr: true,
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("user",
 				util.ErrAPIReq,
-			}},
+			),
 		},
 		{
 			name: "Create fails due to API failure",

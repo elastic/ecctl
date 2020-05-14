@@ -26,8 +26,8 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
-	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -42,12 +42,10 @@ func TestUpdateParams_Validate(t *testing.T) {
 		{
 			name:   "validate should return all possible errors",
 			params: UpdateParams{},
-			err: &multierror.Error{
-				Errors: []error{
-					errors.New("user: update requires a username"),
-					errors.New("api reference is required for command"),
-				},
-			},
+			err: multierror.NewPrefixed("user",
+				errors.New("update requires a username"),
+				errors.New("api reference is required for command"),
+			),
 			wantErr: true,
 		},
 		{
@@ -57,11 +55,9 @@ func TestUpdateParams_Validate(t *testing.T) {
 				API:      &api.API{},
 				Email:    "hi",
 			},
-			err: &multierror.Error{
-				Errors: []error{
-					errors.New("user: hi is not a valid email address format"),
-				},
-			},
+			err: multierror.NewPrefixed("user",
+				errors.New("user: hi is not a valid email address format"),
+			),
 			wantErr: true,
 		},
 		{
@@ -72,11 +68,9 @@ func TestUpdateParams_Validate(t *testing.T) {
 				Password: []byte("pass"),
 				Roles:    []string{platformAdminRole},
 			},
-			err: &multierror.Error{
-				Errors: []error{
-					errors.New("user: update requires a password with a minimum of 8 characters"),
-				},
-			},
+			err: multierror.NewPrefixed("user",
+				errors.New("update requires a password with a minimum of 8 characters"),
+			),
 			wantErr: true,
 		},
 		{
@@ -87,11 +81,9 @@ func TestUpdateParams_Validate(t *testing.T) {
 				Password: []byte("supersecretpass"),
 				Roles:    []string{platformAdminRole, platformViewerRole},
 			},
-			err: &multierror.Error{
-				Errors: []error{
-					errors.New("user: ece_platform_admin cannot be used in conjunction with other roles"),
-				},
-			},
+			err: multierror.NewPrefixed("user",
+				errors.New("ece_platform_admin cannot be used in conjunction with other roles"),
+			),
 			wantErr: true,
 		},
 		{
@@ -102,11 +94,9 @@ func TestUpdateParams_Validate(t *testing.T) {
 				Password: []byte("supersecretpass"),
 				Roles:    []string{deploymentsManagerRole, deploymentsViewerRole},
 			},
-			err: &multierror.Error{
-				Errors: []error{
-					errors.New("user: only one of ece_deployment_manager or ece_deployment_viewer can be chosen"),
-				},
-			},
+			err: multierror.NewPrefixed("user",
+				errors.New("only one of ece_deployment_manager or ece_deployment_viewer can be chosen"),
+			),
 			wantErr: true,
 		},
 		{
@@ -153,10 +143,6 @@ func TestUpdate(t *testing.T) {
   "user_name": "fulgencio"
 }`
 
-	const updateErrorResponse = `{
-  "errors": null
-}`
-
 	type args struct {
 		params UpdateParams
 	}
@@ -173,10 +159,10 @@ func TestUpdate(t *testing.T) {
 				params: UpdateParams{},
 			},
 			wantErr: true,
-			err: &multierror.Error{Errors: []error{
-				errors.New("user: update requires a username"),
+			err: multierror.NewPrefixed("user",
+				errors.New("update requires a username"),
 				util.ErrAPIReq,
-			}},
+			),
 		},
 		{
 			name: "Update fails due to API failure",
@@ -185,14 +171,11 @@ func TestUpdate(t *testing.T) {
 					UserName: "fulgencio",
 					Password: []byte("supersecretpass"),
 					Roles:    []string{"ece_platform_admin"},
-					API: api.NewMock(mock.Response{Response: http.Response{
-						Body:       mock.NewStringBody(""),
-						StatusCode: 404,
-					}}),
+					API:      api.NewMock(mock.SampleInternalError()),
 				},
 			},
 			wantErr: true,
-			err:     errors.New(updateErrorResponse),
+			err:     mock.MultierrorInternalError,
 		},
 		{
 			name: "Update succeeds",
@@ -251,10 +234,6 @@ func TestUpdateCurrent(t *testing.T) {
   }
 }`
 
-	const updateErrorResponse = `{
-  "errors": null
-}`
-
 	type args struct {
 		params UpdateParams
 	}
@@ -271,9 +250,9 @@ func TestUpdateCurrent(t *testing.T) {
 				params: UpdateParams{UserName: "xochitl"},
 			},
 			wantErr: true,
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("user",
 				util.ErrAPIReq,
-			}},
+			),
 		},
 		{
 			name: "Update fails due to API failure",
@@ -282,14 +261,11 @@ func TestUpdateCurrent(t *testing.T) {
 					UserName: "xochitl",
 					Password: []byte("supersecretpass"),
 					Roles:    []string{"ece_platform_admin"},
-					API: api.NewMock(mock.Response{Response: http.Response{
-						Body:       mock.NewStringBody(""),
-						StatusCode: 404,
-					}}),
+					API:      api.NewMock(mock.SampleInternalError()),
 				},
 			},
 			wantErr: true,
-			err:     errors.New(updateErrorResponse),
+			err:     mock.MultierrorInternalError,
 		},
 		{
 			name: "Update succeeds",

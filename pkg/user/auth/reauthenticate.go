@@ -23,8 +23,8 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/client/authentication"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
-	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -37,13 +37,13 @@ type ReAuthenticateParams struct {
 
 // Validate ensures the parameters are usable by the consuming function.
 func (params ReAuthenticateParams) Validate() error {
-	var merr = new(multierror.Error)
+	var merr = multierror.NewPrefixed("user auth")
 	if params.API == nil {
-		merr = multierror.Append(merr, util.ErrAPIReq)
+		merr = merr.Append(util.ErrAPIReq)
 	}
 
 	if len(params.Password) == 0 {
-		merr = multierror.Append(merr, errors.New("userauth: reauthenticate requires a password"))
+		merr = merr.Append(errors.New("reauthenticate requires a password"))
 	}
 
 	return merr.ErrorOrNil()

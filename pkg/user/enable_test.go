@@ -26,8 +26,8 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
-	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -42,12 +42,10 @@ func TestEnableParams_Validate(t *testing.T) {
 		{
 			name:   "validate should return all possible errors",
 			params: EnableParams{},
-			err: &multierror.Error{
-				Errors: []error{
-					errors.New("user: enable requires a username"),
-					errors.New("api reference is required for command"),
-				},
-			},
+			err: multierror.NewPrefixed("user",
+				errors.New("enable requires a username"),
+				errors.New("api reference is required for command"),
+			),
 			wantErr: true,
 		},
 		{
@@ -56,11 +54,9 @@ func TestEnableParams_Validate(t *testing.T) {
 				API:     &api.API{},
 				Enabled: true,
 			},
-			err: &multierror.Error{
-				Errors: []error{
-					errors.New("user: enable requires a username"),
-				},
-			},
+			err: multierror.NewPrefixed("user",
+				errors.New("enable requires a username"),
+			),
 			wantErr: true,
 		},
 		{
@@ -69,11 +65,9 @@ func TestEnableParams_Validate(t *testing.T) {
 				UserName: "tiburcio",
 				Enabled:  false,
 			},
-			err: &multierror.Error{
-				Errors: []error{
-					errors.New("api reference is required for command"),
-				},
-			},
+			err: multierror.NewPrefixed("user",
+				errors.New("api reference is required for command"),
+			),
 			wantErr: true,
 		},
 		{
@@ -118,10 +112,6 @@ func TestEnable(t *testing.T) {
   "user_name": "tiburcio"
 }`
 
-	const enableErrorResponse = `{
-  "errors": null
-}`
-
 	type args struct {
 		params EnableParams
 	}
@@ -138,10 +128,10 @@ func TestEnable(t *testing.T) {
 				params: EnableParams{},
 			},
 			wantErr: true,
-			err: &multierror.Error{Errors: []error{
-				errors.New("user: enable requires a username"),
+			err: multierror.NewPrefixed("user",
+				errors.New("enable requires a username"),
 				util.ErrAPIReq,
-			}},
+			),
 		},
 		{
 			name: "Enable fails due to API failure",
@@ -149,14 +139,11 @@ func TestEnable(t *testing.T) {
 				params: EnableParams{
 					UserName: "tiburcio",
 					Enabled:  true,
-					API: api.NewMock(mock.Response{Response: http.Response{
-						Body:       mock.NewStringBody(""),
-						StatusCode: 404,
-					}}),
+					API:      api.NewMock(mock.SampleNotFoundError()),
 				},
 			},
 			wantErr: true,
-			err:     errors.New(enableErrorResponse),
+			err:     mock.MultierrorNotFound,
 		},
 		{
 			name: "Enable succeeds",

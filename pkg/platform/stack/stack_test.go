@@ -28,8 +28,8 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
-	multierror "github.com/hashicorp/go-multierror"
 
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -153,26 +153,26 @@ func TestGet(t *testing.T) {
 			args: args{params: GetParams{
 				Version: "6.0.0",
 			}},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("stack get",
 				util.ErrAPIReq,
-			}},
+			),
 		},
 		{
 			name: "Get fails due to missing version",
 			args: args{params: GetParams{
 				API: new(api.API),
 			}},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("stack get",
 				errors.New("version string empty"),
-			}},
+			),
 		},
 		{
 			name: "Get fails due to empty parameters",
 			args: args{params: GetParams{}},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("stack get",
 				util.ErrAPIReq,
 				errors.New("version string empty"),
-			}},
+			),
 		},
 	}
 	for _, tt := range tests {
@@ -384,10 +384,10 @@ func TestUpload(t *testing.T) {
 		{
 			name: "Upload fails due to empty parameters",
 			args: args{params: UploadParams{}},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("stack upload",
 				util.ErrAPIReq,
 				errors.New("stackpack cannot be empty"),
-			}},
+			),
 		},
 		{
 			name: "Upload fails due to stackpack upload error",
@@ -411,17 +411,17 @@ func TestUpload(t *testing.T) {
 					},
 				}),
 			}},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("stack upload",
 				errors.New("some.code.error: some message"),
-			}},
+			),
 		},
 		{
 			name: "Upload fails due to empty parameters",
 			args: args{params: UploadParams{}},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("stack upload",
 				util.ErrAPIReq,
 				errors.New("stackpack cannot be empty"),
-			}},
+			),
 		},
 	}
 	for _, tt := range tests {
@@ -474,26 +474,26 @@ func TestDelete(t *testing.T) {
 			args: args{params: DeleteParams{
 				Version: "5.0.0",
 			}},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("stack delete",
 				util.ErrAPIReq,
-			}},
+			),
 		},
 		{
 			name: "Delete fails due to empty version",
 			args: args{params: DeleteParams{
 				API: new(api.API),
 			}},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("stack delete",
 				errors.New("version string empty"),
-			}},
+			),
 		},
 		{
 			name: "Delete fails due to empty parameters",
 			args: args{params: DeleteParams{}},
-			err: &multierror.Error{Errors: []error{
+			err: multierror.NewPrefixed("stack delete",
 				util.ErrAPIReq,
 				errors.New("version string empty"),
-			}},
+			),
 		},
 	}
 	for _, tt := range tests {

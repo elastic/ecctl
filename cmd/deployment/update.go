@@ -20,12 +20,12 @@ package cmddeployment
 import (
 	"os"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
-	"github.com/elastic/ecctl/pkg/deployment"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
@@ -153,7 +153,7 @@ var updateCmd = &cobra.Command{
 			region = cmdutil.DefaultECERegion
 		}
 
-		res, err := deployment.Update(deployment.UpdateParams{
+		res, err := deploymentapi.Update(deploymentapi.UpdateParams{
 			DeploymentID:      args[0],
 			API:               ecctl.Get().API,
 			Region:            region,

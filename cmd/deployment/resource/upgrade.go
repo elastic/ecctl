@@ -18,12 +18,11 @@
 package cmddeploymentresource
 
 import (
+	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/depresourceapi"
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
-	"github.com/elastic/ecctl/pkg/deployment"
-	"github.com/elastic/ecctl/pkg/deployment/depresource"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
@@ -37,7 +36,7 @@ var upgradeCmd = &cobra.Command{
 		resKind, _ := cmd.Flags().GetString("kind")
 		refID, _ := cmd.Flags().GetString("ref-id")
 
-		res, err := depresource.UpgradeStateless(deployment.ResourceParams{
+		res, err := depresourceapi.UpgradeStateless(depresourceapi.Params{
 			API:          ecctl.Get().API,
 			DeploymentID: args[0],
 			Kind:         resKind,
