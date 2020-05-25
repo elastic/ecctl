@@ -6,7 +6,7 @@ require (
 	github.com/asaskevich/govalidator v0.0.0-20190424111038-f61b66f89f4a
 	github.com/blang/semver v3.5.1+incompatible
 	github.com/davecgh/go-spew v1.1.1
-	github.com/elastic/cloud-sdk-go v1.0.0-beta3.0.20200511231735-9389cc7ba3ee
+	github.com/elastic/cloud-sdk-go v1.0.0-beta3.0.20200519010333-60b0cbb62d5e
 	github.com/ghodss/yaml v1.0.0
 	github.com/go-openapi/runtime v0.19.15
 	github.com/go-openapi/strfmt v0.19.5

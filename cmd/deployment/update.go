@@ -154,9 +154,11 @@ var updateCmd = &cobra.Command{
 		}
 
 		res, err := deploymentapi.Update(deploymentapi.UpdateParams{
-			DeploymentID:      args[0],
-			API:               ecctl.Get().API,
-			Region:            region,
+			DeploymentID: args[0],
+			API:          ecctl.Get().API,
+			Overrides: deploymentapi.PayloadOverrides{
+				Region: region,
+			},
 			Request:           &r,
 			SkipSnapshot:      skipSnapshot,
 			HidePrunedOrphans: hidePrunedOrphans,
