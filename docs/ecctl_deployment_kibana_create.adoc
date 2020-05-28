@@ -6,13 +6,13 @@ Creates a Kibana instance
 [float]
 === Synopsis
 
-Creates a Kibana deployment, limitting the creation scope to Kibana resources.
+Creates a Kibana deployment, limiting the creation scope to Kibana resources.
 There's a few ways to create an Kibana deployment, sane default values are provided, making
 the command work out of the box even when no parameters are set. When version is not specified,
 the matching elasticsearch deployment version will be used. These are the available options:
 
 * Simplified flags: --zones +++<zone count="">+++--size +++<node memory="" in="" MB="">++++++</node>++++++</zone>+++
-* File definition: --file=+++<file path="">+++(shorthand: -f). The definition can be found in: https://www.elastic.co/guide/en/cloud-enterprise/current/definitions.html#KibanaPayload+++</file>+++
+* File definition: --file=+++<file path="">+++(shorthand: -f). The definition can be found in: https://www.elastic.co/guide/en/cloud-enterprise/current/KibanaPayload.html+++</file>+++
 
 As an option "--generate-payload" can be used in order to obtain the generated KibanaPayload
 that would be sent as a request, save it, update or extend the topology and create an Kibana
