@@ -12,7 +12,7 @@ the command work out of the box even when no parameters are set. When version is
 the matching elasticsearch deployment version will be used. These are the available options:
 
 * Simplified flags: --zones +++<zone count="">+++--size +++<node memory="" in="" MB="">++++++</node>++++++</zone>+++
-* File definition: --file=+++<file path="">+++(shorthand: -f).+++</file>+++
+* File definition: --file=+++<file path="">+++(shorthand: -f)+++</file>+++
 
 As an option "--generate-payload" can be used in order to obtain the generated KibanaPayload
 that would be sent as a request, save it, update or extend the topology and create an Kibana
