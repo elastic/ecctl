@@ -19,10 +19,7 @@ package util
 
 import (
 	"bytes"
-	"fmt"
 	"net/http"
-	"reflect"
-	"testing"
 	"time"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
@@ -36,21 +33,12 @@ import (
 )
 
 const (
-	formatErrType = "got error type = %+v, want %+v"
 	// ValidClusterID holds a valid cluster id value
 	ValidClusterID = "320b7b540dfc967a7a649c18e2fce4ed"
 	// InvalidClusterID holds an invalid valid cluster id value
 	InvalidClusterID = "!23"
 	// ValidDuration holds a valid duration value
 	ValidDuration = "3 seconds"
-)
-
-var (
-	// PlanNotFound represents a mocked response resulting from a plan not found.
-	PlanNotFound = mock.Response{Response: http.Response{
-		StatusCode: 404,
-		Body:       mock.NewStringBody(`{}`),
-	}}
 )
 
 // NewSuccessfulCurrentPlan returns a mocked response from a successful plan.
@@ -145,28 +133,4 @@ func NewMockTrackChangeParams(id string) planutil.TrackChangeParams {
 		Writer: output.NewDevice(new(bytes.Buffer)),
 		Format: "text",
 	}
-}
-
-// CheckErrType receives two errors, if either one is not nil, it triggers a
-// comparison between the two, returning an error if the errors are not equal
-// This function is useful for testing to ensure specific error types.
-func CheckErrType(got, want error) error {
-	var emptyErrors = want == nil && got == nil
-
-	if !emptyErrors && !reflect.DeepEqual(got, want) {
-		return fmt.Errorf(formatErrType, got, want)
-	}
-	return nil
-}
-
-// ParseDate parses a string to date and if parsing generates an error,
-// it fails the given testing suite, otherwise it returns the
-// strfmt.Datetime parsed value
-func ParseDate(t *testing.T, date string) strfmt.DateTime {
-	dt, err := strfmt.ParseDateTime(date)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	return dt
 }

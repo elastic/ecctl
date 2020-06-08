@@ -28,7 +28,7 @@ import (
 
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 
-	"github.com/elastic/ecctl/pkg/platform/snaprepo"
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/snaprepo"
 )
 
 const (

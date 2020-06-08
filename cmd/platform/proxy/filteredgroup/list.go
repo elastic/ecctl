@@ -22,8 +22,9 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/proxy/filteredgroup"
+
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/platform/proxy/filteredgroup"
 )
 
 const (

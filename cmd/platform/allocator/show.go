@@ -22,8 +22,9 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/allocator"
+
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/platform/allocator"
 )
 
 func showAllocator(cmd *cobra.Command, args []string) error {

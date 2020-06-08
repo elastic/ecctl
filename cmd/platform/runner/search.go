@@ -26,9 +26,10 @@ import (
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/runner"
+
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/platform/runner"
 )
 
 // Command represents the runner search command.

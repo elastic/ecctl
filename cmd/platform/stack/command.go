@@ -23,9 +23,10 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/stack"
+
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/platform/stack"
 )
 
 // Command is the top level stack command.

@@ -20,8 +20,9 @@ package cmdrole
 import (
 	"github.com/spf13/cobra"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/role"
+
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/platform/role"
 )
 
 var listCmd = &cobra.Command{

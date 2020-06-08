@@ -23,9 +23,10 @@ import (
 
 	"github.com/spf13/cobra"
 
+	enrollmenttoken "github.com/elastic/cloud-sdk-go/pkg/api/platformapi/enrollment-token"
+
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
-	enrollmenttoken "github.com/elastic/ecctl/pkg/platform/enrollment-token"
 )
 
 const (
