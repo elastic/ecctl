@@ -20,9 +20,8 @@ package cmdfilteredgroup
 import (
 	"path/filepath"
 
-	"github.com/spf13/cobra"
-
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/proxy/filteredgroup"
+	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
 )

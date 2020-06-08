@@ -24,13 +24,12 @@ import (
 	"path"
 	"path/filepath"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/deployment"
 	"github.com/elastic/cloud-sdk-go/pkg/input"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-
-	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/deployment"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"

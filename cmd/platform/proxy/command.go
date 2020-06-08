@@ -20,9 +20,8 @@ package cmdproxy
 import (
 	"path/filepath"
 
-	"github.com/spf13/cobra"
-
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/proxy"
+	"github.com/spf13/cobra"
 
 	cmdfilteredgroup "github.com/elastic/ecctl/cmd/platform/proxy/filteredgroup"
 	cmdutil "github.com/elastic/ecctl/cmd/util"

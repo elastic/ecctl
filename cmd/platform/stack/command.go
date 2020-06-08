@@ -21,9 +21,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/spf13/cobra"
-
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/stack"
+	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"

@@ -21,9 +21,8 @@ import (
 	"fmt"
 	"path/filepath"
 
-	"github.com/spf13/cobra"
-
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/constructor"
+	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"

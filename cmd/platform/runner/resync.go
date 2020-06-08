@@ -20,10 +20,9 @@ package cmdrunner
 import (
 	"fmt"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/runner"
 	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
-
-	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/runner"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
 )

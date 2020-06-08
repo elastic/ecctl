@@ -18,9 +18,8 @@
 package cmdrole
 
 import (
-	"github.com/spf13/cobra"
-
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/role"
+	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
 )

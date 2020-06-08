@@ -22,9 +22,8 @@ import (
 	"path/filepath"
 	"strconv"
 
-	"github.com/spf13/cobra"
-
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/allocator"
+	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
