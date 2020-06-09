@@ -389,7 +389,7 @@ Run the <<ecctl_deployment_create,{p} deployment create>> command with `create-d
 
 [source, sh]
 --
-ecctl deployment create -f create-deployment.json
+ecctl deployment create [--track] -f create-deployment.json
 --
 
 [source, sh]
@@ -486,9 +486,11 @@ The JSON body is similar to what we used to create the deployment, with the foll
 
 In this example, prune_orphans is set to `false`, so the Kibana and APM instances are not changed or removed, while the Elasticsearch resource is modified according to the configuration specified in the JSON file.
 
-[source, json]
+To monitor the progress, use the `--track` flag.
+
+[source, sh]
 --
-ecctl deployment update $DEPLOYMENT_ID -f update-deployment.json
+ecctl deployment update [--track] $DEPLOYMENT_ID -f update-deployment.json
 --
 * `$DEPLOYMENT_ID` is the ID for the deployment that was created in the previous <<{p}-example-create-deployment,create a deployment>> example.
 
@@ -528,13 +530,15 @@ ecctl deployment update $DEPLOYMENT_ID -f update-deployment.json
 
 In this last example, you can use the <<ecctl_deployment_shutdown,{p} deployment shutdown>> command to delete the deployment that you created.
 
-[source, json]
+[source, sh]
 --
-ecctl deployment shutdown $DEPLOYMENT_ID
+ecctl deployment shutdown [--track] $DEPLOYMENT_ID
 --
 * `$DEPLOYMENT_ID` is the ID for the deployment that was created in the previous <<{p}-example-create-deployment,create a deployment>> example.
 
 On running this and other destructive commands, {p} prompts you with a confirmation message. Use the `--force` option to skip the confirmation step, if you are using {p} for automation.
+
+To monitor the progress, use the `--track` flag.
 
 To see the different options that {p} supports, run `ecctl <command> <help>`.
 
