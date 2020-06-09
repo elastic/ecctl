@@ -20,7 +20,7 @@ package cmdfilteredgroup
 import (
 	"path/filepath"
 
-	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/proxy/filteredgroup"
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/proxyapi/filteredgroupapi"
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
@@ -31,7 +31,7 @@ const (
 )
 
 func listProxyFilteredGroups(cmd *cobra.Command, args []string) error {
-	response, err := filteredgroup.List(filteredgroup.CommonParams{
+	response, err := filteredgroupapi.List(filteredgroupapi.CommonParams{
 		API: ecctl.Get().API,
 		ID:  "all",
 	})

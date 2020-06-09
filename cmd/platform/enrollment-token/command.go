@@ -21,7 +21,7 @@ import (
 	"fmt"
 	"path/filepath"
 
-	enrollmenttoken "github.com/elastic/cloud-sdk-go/pkg/api/platformapi/enrollment-token"
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/enrollmenttokenapi"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -57,7 +57,7 @@ var createTokenCmd = &cobra.Command{
 		roles, _ := cmd.Flags().GetStringArray(roleFlag)
 		validity, _ := cmd.Flags().GetDuration(validityFlag)
 
-		res, err := enrollmenttoken.Create(enrollmenttoken.CreateParams{
+		res, err := enrollmenttokenapi.Create(enrollmenttokenapi.CreateParams{
 			API:      ecctl.Get().API,
 			Roles:    roles,
 			Duration: validity,
@@ -74,7 +74,7 @@ var deleteTokenCmd = &cobra.Command{
 	Short:   "Deletes an enrollment token",
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		err := enrollmenttoken.Delete(enrollmenttoken.DeleteParams{
+		err := enrollmenttokenapi.Delete(enrollmenttokenapi.DeleteParams{
 			API:   ecctl.Get().API,
 			Token: args[0],
 		})
@@ -87,7 +87,7 @@ var deleteTokenCmd = &cobra.Command{
 }
 
 func listTokens(cmd *cobra.Command, args []string) error {
-	res, err := enrollmenttoken.List(enrollmenttoken.ListParams{
+	res, err := enrollmenttokenapi.List(enrollmenttokenapi.ListParams{
 		API: ecctl.Get().API,
 	})
 	if err != nil {

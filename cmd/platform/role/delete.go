@@ -18,7 +18,7 @@
 package cmdrole
 
 import (
-	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/role"
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/roleapi"
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
@@ -29,7 +29,7 @@ var deleteCmd = &cobra.Command{
 	Short:   "Deletes an existing platform role",
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		return role.Delete(role.DeleteParams{
+		return roleapi.Delete(roleapi.DeleteParams{
 			API: ecctl.Get().API,
 			ID:  args[0],
 		})

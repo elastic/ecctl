@@ -18,7 +18,7 @@
 package cmdrole
 
 import (
-	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/role"
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/roleapi"
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
@@ -29,7 +29,7 @@ var listCmd = &cobra.Command{
 	Short:   "Lists the existing platform roles",
 	PreRunE: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, err := role.List(role.ListParams{API: ecctl.Get().API})
+		res, err := roleapi.List(roleapi.ListParams{API: ecctl.Get().API})
 		if err != nil {
 			return err
 		}

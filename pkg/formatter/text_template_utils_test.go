@@ -21,7 +21,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/snaprepo"
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/snaprepoapi"
 )
 
 func Test_rpadTrim(t *testing.T) {
@@ -79,7 +79,7 @@ func Test_toS3TypeConfig(t *testing.T) {
 	tests := []struct {
 		name string
 		args args
-		want snaprepo.S3TypeConfig
+		want snaprepoapi.S3TypeConfig
 	}{
 		{
 			name: "Parses an interface that complies",
@@ -91,9 +91,9 @@ func Test_toS3TypeConfig(t *testing.T) {
 					},
 				},
 			},
-			want: snaprepo.S3TypeConfig{
+			want: snaprepoapi.S3TypeConfig{
 				Type: "s3",
-				Settings: snaprepo.S3Config{
+				Settings: snaprepoapi.S3Config{
 					Region: "us-east-1",
 				},
 			},
@@ -103,7 +103,7 @@ func Test_toS3TypeConfig(t *testing.T) {
 			args: args{
 				"omg what is this thing",
 			},
-			want: snaprepo.S3TypeConfig{},
+			want: snaprepoapi.S3TypeConfig{},
 		},
 	}
 	for _, tt := range tests {

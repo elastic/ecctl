@@ -20,7 +20,7 @@ package cmdfilteredgroup
 import (
 	"path/filepath"
 
-	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/proxy/filteredgroup"
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/proxyapi/filteredgroupapi"
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
@@ -41,7 +41,7 @@ var platformProxyFilteredGroupShowCmd = &cobra.Command{
 	Short:   "Shows details for proxies filtered group",
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		response, err := filteredgroup.Get(filteredgroup.CommonParams{
+		response, err := filteredgroupapi.Get(filteredgroupapi.CommonParams{
 			API: ecctl.Get().API,
 			ID:  args[0],
 		})
@@ -63,8 +63,8 @@ var platformProxyFilteredGroupCreateCmd = &cobra.Command{
 		filters, _ := cmd.Flags().GetStringToString("filters")
 		expectedProxiesCount, _ := cmd.Flags().GetInt32("expected-proxies-count")
 
-		response, err := filteredgroup.Create(filteredgroup.CreateParams{
-			CommonParams: filteredgroup.CommonParams{
+		response, err := filteredgroupapi.Create(filteredgroupapi.CreateParams{
+			CommonParams: filteredgroupapi.CommonParams{
 				API: ecctl.Get().API,
 				ID:  args[0],
 			},
@@ -85,7 +85,7 @@ var platformProxyFilteredGroupDeleteCmd = &cobra.Command{
 	Short:   "Deletes proxies filtered group",
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		return filteredgroup.Delete(filteredgroup.CommonParams{
+		return filteredgroupapi.Delete(filteredgroupapi.CommonParams{
 			API: ecctl.Get().API,
 			ID:  args[0],
 		})
@@ -102,9 +102,9 @@ var platformProxyFilteredGroupUpdateCmd = &cobra.Command{
 		expectedProxiesCount, _ := cmd.Flags().GetInt32("expected-proxies-count")
 		version, _ := cmd.Flags().GetInt64("version")
 
-		response, err := filteredgroup.Update(filteredgroup.UpdateParams{
-			CreateParams: filteredgroup.CreateParams{
-				CommonParams: filteredgroup.CommonParams{
+		response, err := filteredgroupapi.Update(filteredgroupapi.UpdateParams{
+			CreateParams: filteredgroupapi.CreateParams{
+				CommonParams: filteredgroupapi.CommonParams{
 					API: ecctl.Get().API,
 					ID:  args[0],
 				},

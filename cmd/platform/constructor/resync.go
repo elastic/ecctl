@@ -20,7 +20,7 @@ package cmdconstructor
 import (
 	"fmt"
 
-	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/constructor"
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/constructorapi"
 	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
@@ -36,7 +36,7 @@ var resyncConstructorCmd = &cobra.Command{
 
 		if all {
 			fmt.Println("Resynchronizing all constructors")
-			res, err := constructor.ResyncAll(constructor.Params{
+			res, err := constructorapi.ResyncAll(constructorapi.Params{
 				API: ecctl.Get().API,
 			})
 			if err != nil {
@@ -47,7 +47,7 @@ var resyncConstructorCmd = &cobra.Command{
 		}
 
 		fmt.Printf("Resynchronizing constructor: %s\n", args[0])
-		return constructor.Resync(constructor.ResyncParams{
+		return constructorapi.Resync(constructorapi.ResyncParams{
 			API: ecctl.Get().API,
 			ID:  args[0],
 		})

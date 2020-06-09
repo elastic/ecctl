@@ -20,7 +20,7 @@ package cmdrunner
 import (
 	"fmt"
 
-	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/runner"
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/runnerapi"
 	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
@@ -36,7 +36,7 @@ var resyncRunnerCmd = &cobra.Command{
 
 		if all {
 			fmt.Println("Resynchronizing all runners")
-			res, err := runner.ResyncAll(runner.Params{
+			res, err := runnerapi.ResyncAll(runnerapi.Params{
 				API: ecctl.Get().API,
 			})
 			if err != nil {
@@ -47,8 +47,8 @@ var resyncRunnerCmd = &cobra.Command{
 		}
 
 		fmt.Printf("Resynchronizing runner: %s\n", args[0])
-		return runner.Resync(runner.ResyncParams{
-			Params: runner.Params{
+		return runnerapi.Resync(runnerapi.ResyncParams{
+			Params: runnerapi.Params{
 				API: ecctl.Get().API,
 			},
 			ID: args[0],

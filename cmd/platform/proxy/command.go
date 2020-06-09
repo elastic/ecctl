@@ -20,7 +20,7 @@ package cmdproxy
 import (
 	"path/filepath"
 
-	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/proxy"
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/proxyapi"
 	"github.com/spf13/cobra"
 
 	cmdfilteredgroup "github.com/elastic/ecctl/cmd/platform/proxy/filteredgroup"
@@ -44,7 +44,7 @@ var Command = &cobra.Command{
 }
 
 func listProxies(cmd *cobra.Command, args []string) error {
-	a, err := proxy.List(proxy.Params{
+	a, err := proxyapi.List(proxyapi.Params{
 		API: ecctl.Get().API,
 	})
 	if err != nil {
@@ -59,8 +59,8 @@ var showProxyCmd = &cobra.Command{
 	Short:   proxyShowMessage,
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		a, err := proxy.Get(proxy.GetParams{
-			Params: proxy.Params{
+		a, err := proxyapi.Get(proxyapi.GetParams{
+			Params: proxyapi.Params{
 				API: ecctl.Get().API,
 			},
 			ID: args[0],

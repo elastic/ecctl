@@ -21,7 +21,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/instanceconfig"
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/instanceconfigapi"
 	"github.com/elastic/cloud-sdk-go/pkg/input"
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
@@ -43,7 +43,7 @@ var platformInstanceConfigurationListCmd = &cobra.Command{
 	Short:   "Lists the instance configurations",
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, err := instanceconfig.List(instanceconfig.ListParams{
+		res, err := instanceconfigapi.List(instanceconfigapi.ListParams{
 			API: ecctl.Get().API,
 		})
 
@@ -71,7 +71,7 @@ var platformInstanceConfigurationCreateCmd = &cobra.Command{
 		}
 		defer file.Close()
 
-		config, err := instanceconfig.NewConfig(file)
+		config, err := instanceconfigapi.NewConfig(file)
 		if err != nil {
 			return err
 		}
@@ -80,7 +80,7 @@ var platformInstanceConfigurationCreateCmd = &cobra.Command{
 			config.ID = id
 		}
 
-		res, err := instanceconfig.Create(instanceconfig.CreateParams{
+		res, err := instanceconfigapi.Create(instanceconfigapi.CreateParams{
 			API:    ecctl.Get().API,
 			Config: config,
 		})
@@ -98,7 +98,7 @@ var platformInstanceConfigurationShowCmd = &cobra.Command{
 	Short:   "Shows an instance configuration",
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, err := instanceconfig.Get(instanceconfig.GetParams{
+		res, err := instanceconfigapi.Get(instanceconfigapi.GetParams{
 			API: ecctl.Get().API,
 			ID:  args[0],
 		})
@@ -116,7 +116,7 @@ var platformInstanceConfigurationDeleteCmd = &cobra.Command{
 	Short:   "Deletes an instance configuration",
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		return instanceconfig.Delete(instanceconfig.DeleteParams{
+		return instanceconfigapi.Delete(instanceconfigapi.DeleteParams{
 			API: ecctl.Get().API,
 			ID:  args[0],
 		})
@@ -138,12 +138,12 @@ var platformInstanceConfigurationUpdateCmd = &cobra.Command{
 		}
 		defer file.Close()
 
-		config, err := instanceconfig.NewConfig(file)
+		config, err := instanceconfigapi.NewConfig(file)
 		if err != nil {
 			return err
 		}
 
-		return instanceconfig.Update(instanceconfig.UpdateParams{
+		return instanceconfigapi.Update(instanceconfigapi.UpdateParams{
 			API:    ecctl.Get().API,
 			ID:     args[0],
 			Config: config,
@@ -158,7 +158,7 @@ var platformInstanceConfigurationPullCmd = &cobra.Command{
 
 	RunE: func(cmd *cobra.Command, args []string) error {
 
-		return instanceconfig.PullToFolder(instanceconfig.PullToFolderParams{
+		return instanceconfigapi.PullToFolder(instanceconfigapi.PullToFolderParams{
 			API:    ecctl.Get().API,
 			Folder: cmd.Flag("path").Value.String(),
 		})

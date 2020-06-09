@@ -24,7 +24,7 @@ import (
 	"path"
 	"path/filepath"
 
-	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/deployment"
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/deploymentapi"
 	"github.com/elastic/cloud-sdk-go/pkg/input"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
@@ -60,7 +60,7 @@ var platformDeploymentTemplateListCmd = &cobra.Command{
 		stackVersion, _ := cmd.Flags().GetString(stackVersion)
 		metadataFilter, _ := cmd.Flags().GetString(filter)
 
-		res, err := deployment.ListTemplates(deployment.ListTemplateParams{
+		res, err := deploymentapi.ListTemplates(deploymentapi.ListTemplateParams{
 			API:                ecctl.Get().API,
 			ShowInstanceConfig: showInstanceConfig,
 			StackVersion:       stackVersion,
@@ -81,8 +81,8 @@ var platformDeploymentTemplateShowCmd = &cobra.Command{
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		show, _ := cmd.Flags().GetBool("show-instance-configurations")
-		res, err := deployment.GetTemplate(deployment.GetTemplateParams{
-			TemplateParams: deployment.TemplateParams{
+		res, err := deploymentapi.GetTemplate(deploymentapi.GetTemplateParams{
+			TemplateParams: deploymentapi.TemplateParams{
 				API: ecctl.Get().API,
 				ID:  args[0],
 			},
@@ -102,8 +102,8 @@ var platformDeploymentTemplateDeleteCmd = &cobra.Command{
 	Short:   "Deletes a specific platform deployment template",
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		err := deployment.DeleteTemplate(deployment.GetTemplateParams{
-			TemplateParams: deployment.TemplateParams{
+		err := deploymentapi.DeleteTemplate(deploymentapi.GetTemplateParams{
+			TemplateParams: deploymentapi.TemplateParams{
 				API: ecctl.Get().API,
 				ID:  args[0],
 			},
@@ -136,7 +136,7 @@ var platformDeploymentTemplateCreateCmd = &cobra.Command{
 			tc.ID = id
 		}
 
-		tid, err := deployment.CreateTemplate(deployment.CreateTemplateParams{
+		tid, err := deploymentapi.CreateTemplate(deploymentapi.CreateTemplateParams{
 			DeploymentTemplateInfo: tc,
 			API:                    ecctl.Get().API,
 		})
@@ -163,9 +163,9 @@ var platformDeploymentTemplateUpdateCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		if err := deployment.UpdateTemplate(
-			deployment.UpdateTemplateParams{
-				TemplateParams: deployment.TemplateParams{
+		if err := deploymentapi.UpdateTemplate(
+			deploymentapi.UpdateTemplateParams{
+				TemplateParams: deploymentapi.TemplateParams{
 					API: ecctl.Get().API,
 					ID:  args[0],
 				},
@@ -188,8 +188,8 @@ var platformDeploymentTemplatePullCmd = &cobra.Command{
 	PreRunE: cobra.MaximumNArgs(0),
 
 	RunE: func(cmd *cobra.Command, args []string) error {
-		return deployment.PullToFolder(deployment.PullTemplateToFolderParams{
-			TemplateToFolderParams: deployment.TemplateToFolderParams{
+		return deploymentapi.PullToFolder(deploymentapi.PullTemplateToFolderParams{
+			TemplateToFolderParams: deploymentapi.TemplateToFolderParams{
 				API:    ecctl.Get().API,
 				Folder: cmd.Flag("path").Value.String(),
 			},

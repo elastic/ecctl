@@ -22,7 +22,7 @@ import (
 	"path/filepath"
 	"strconv"
 
-	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/allocator"
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/allocatorapi"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
@@ -73,8 +73,8 @@ var searchAllocatorCmd = &cobra.Command{
 			return err
 		}
 
-		r, err := allocator.Search(
-			allocator.SearchParams{
+		r, err := allocatorapi.Search(
+			allocatorapi.SearchParams{
 				API:     ecctl.Get().API,
 				Request: sr,
 			})

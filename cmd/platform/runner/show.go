@@ -18,7 +18,7 @@
 package cmdrunner
 
 import (
-	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/runner"
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/runnerapi"
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
@@ -29,8 +29,8 @@ var showCmd = &cobra.Command{
 	Short:   "Shows information about the specified runner",
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, err := runner.Show(runner.ShowParams{
-			Params: runner.Params{
+		res, err := runnerapi.Show(runnerapi.ShowParams{
+			Params: runnerapi.Params{
 				API: ecctl.Get().API,
 			},
 			ID: args[0],
