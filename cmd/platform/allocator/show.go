@@ -28,8 +28,9 @@ import (
 
 func showAllocator(cmd *cobra.Command, args []string) error {
 	a, err := allocatorapi.Get(allocatorapi.GetParams{
-		API: ecctl.Get().API,
-		ID:  args[0],
+		API:    ecctl.Get().API,
+		ID:     args[0],
+		Region: ecctl.Get().Config.Region,
 	})
 	if err != nil {
 		return err

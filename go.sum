@@ -61,6 +61,8 @@ github.com/docker/go-units v0.3.3/go.mod h1:fgPhTUdO+D/Jk86RDLlptpiXQzgHJF7gydDD
 github.com/docker/go-units v0.4.0/go.mod h1:fgPhTUdO+D/Jk86RDLlptpiXQzgHJF7gydDDbaIK4Dk=
 github.com/elastic/cloud-sdk-go v1.0.0-beta3.0.20200610014412-d8bc0d1b9b30 h1:KlJmjQ5ZehOnYtffQ4/7vspv8rg47cckF2+etZ7MAgY=
 github.com/elastic/cloud-sdk-go v1.0.0-beta3.0.20200610014412-d8bc0d1b9b30/go.mod h1:+0Q5izB9Upzmolj6Pq4AkTsBwgDbQnNpODp3qFK7erQ=
+github.com/elastic/cloud-sdk-go v1.0.0-beta3.0.20200610061007-5771a049905a h1:Kt6uMlo1rtMXpHEHZBrkI1BGnTcHQhLyXloCj+jWKqI=
+github.com/elastic/cloud-sdk-go v1.0.0-beta3.0.20200610061007-5771a049905a/go.mod h1:+0Q5izB9Upzmolj6Pq4AkTsBwgDbQnNpODp3qFK7erQ=
 github.com/fatih/color v1.7.0/go.mod h1:Zm6kSWBoL9eyXnKyktHP6abPY2pDugNf5KwzbycvMj4=
 github.com/fatih/color v1.9.0/go.mod h1:eQcE1qtQxscV5RaZvpXrrb8Drkc3/DdQ+uUYCNjL+zU=
 github.com/fsnotify/fsnotify v1.4.7 h1:IXs+QLmnXW2CcXuY+8Mzv/fWEsPGWxqefPtCP5CnV9I=

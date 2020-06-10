@@ -44,7 +44,6 @@ var searchAllocatorCmd = &cobra.Command{
 	Long:    queryExamples,
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
-
 		file, _ := cmd.Flags().GetString(fileArg)
 		query, _ := cmd.Flags().GetString(queryArg)
 
@@ -73,11 +72,11 @@ var searchAllocatorCmd = &cobra.Command{
 			return err
 		}
 
-		r, err := allocatorapi.Search(
-			allocatorapi.SearchParams{
-				API:     ecctl.Get().API,
-				Request: sr,
-			})
+		r, err := allocatorapi.Search(allocatorapi.SearchParams{
+			API:     ecctl.Get().API,
+			Request: sr,
+			Region:  ecctl.Get().Config.Region,
+		})
 		if err != nil {
 			return err
 		}

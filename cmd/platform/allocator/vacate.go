@@ -23,12 +23,11 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/allocatorapi"
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/hashicorp/go-multierror"
 	"github.com/spf13/cobra"
-
-	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/allocatorapi"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
@@ -176,6 +175,7 @@ var vacateAllocatorCmd = &cobra.Command{
 			},
 			MaxPollRetries: uint8(maxRetries),
 			TrackFrequency: pollFrequency,
+			Region:         ecctl.Get().Config.Region,
 		}
 		if len(args) == 1 && allocatorDownRaw != "" {
 			params.AllocatorDown = &allocatorDown
