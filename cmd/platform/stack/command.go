@@ -52,6 +52,7 @@ var stackShowCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		s, err := stackapi.Get(stackapi.GetParams{
 			API:     ecctl.Get().API,
+			Region:  ecctl.Get().Config.Region,
 			Version: args[0],
 		})
 		if err != nil {
@@ -66,6 +67,7 @@ func listStackPacks(cmd *cobra.Command, args []string) error {
 	deleted, _ := cmd.Flags().GetBool("deleted")
 	s, err := stackapi.List(stackapi.ListParams{
 		API:     ecctl.Get().API,
+		Region:  ecctl.Get().Config.Region,
 		Deleted: deleted,
 	})
 	if err != nil {
@@ -89,6 +91,7 @@ var stackUploadCmd = &cobra.Command{
 
 		return stackapi.Upload(stackapi.UploadParams{
 			API:       ecctl.Get().API,
+			Region:    ecctl.Get().Config.Region,
 			StackPack: f,
 		})
 	},
@@ -102,6 +105,7 @@ var stackDeleteCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		return stackapi.Delete(stackapi.DeleteParams{
 			API:     ecctl.Get().API,
+			Region:  ecctl.Get().Config.Region,
 			Version: args[0],
 		})
 	},
