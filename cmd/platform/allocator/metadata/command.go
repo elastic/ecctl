@@ -20,10 +20,10 @@ package cmdallocatormetadata
 import (
 	"path/filepath"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/allocatorapi"
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/platform/allocator"
 )
 
 // Command represents the allocator metadata command.
@@ -40,13 +40,13 @@ var allocatorMetadataSetCmd = &cobra.Command{
 	PreRunE: cobra.MinimumNArgs(3),
 	RunE: func(cmd *cobra.Command, args []string) error {
 
-		var params = &allocator.MetadataSetParams{
+		var params = &allocatorapi.MetadataSetParams{
 			API:   ecctl.Get().API,
 			ID:    args[0],
 			Key:   args[1],
 			Value: args[2],
 		}
-		err := allocator.SetAllocatorMetadataItem(*params)
+		err := allocatorapi.SetAllocatorMetadataItem(*params)
 
 		if err != nil {
 			return err
@@ -61,12 +61,12 @@ var allocatorMetadataDeleteCmd = &cobra.Command{
 	PreRunE: cobra.MinimumNArgs(2),
 	RunE: func(cmd *cobra.Command, args []string) error {
 
-		var params = &allocator.MetadataDeleteParams{
+		var params = &allocatorapi.MetadataDeleteParams{
 			API: ecctl.Get().API,
 			ID:  args[0],
 			Key: args[1],
 		}
-		err := allocator.DeleteAllocatorMetadataItem(*params)
+		err := allocatorapi.DeleteAllocatorMetadataItem(*params)
 
 		if err != nil {
 			return err
@@ -80,11 +80,11 @@ var allocatorMetadataShowCmd = &cobra.Command{
 	Short:   "Shows allocator metadata",
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		var params = allocator.MetadataGetParams{
+		var params = allocatorapi.MetadataGetParams{
 			API: ecctl.Get().API,
 			ID:  args[0],
 		}
-		res, err := allocator.GetAllocatorMetadata(params)
+		res, err := allocatorapi.GetAllocatorMetadata(params)
 
 		if err != nil {
 			return err

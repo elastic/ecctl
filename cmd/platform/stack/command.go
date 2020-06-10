@@ -21,11 +21,11 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/stackapi"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/platform/stack"
 )
 
 // Command is the top level stack command.
@@ -50,7 +50,7 @@ var stackShowCmd = &cobra.Command{
 	Short:   "Shows information about an Elastic StackPack",
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		s, err := stack.Get(stack.GetParams{
+		s, err := stackapi.Get(stackapi.GetParams{
 			API:     ecctl.Get().API,
 			Version: args[0],
 		})
@@ -64,7 +64,7 @@ var stackShowCmd = &cobra.Command{
 
 func listStackPacks(cmd *cobra.Command, args []string) error {
 	deleted, _ := cmd.Flags().GetBool("deleted")
-	s, err := stack.List(stack.ListParams{
+	s, err := stackapi.List(stackapi.ListParams{
 		API:     ecctl.Get().API,
 		Deleted: deleted,
 	})
@@ -87,7 +87,7 @@ var stackUploadCmd = &cobra.Command{
 		}
 		defer f.Close()
 
-		return stack.Upload(stack.UploadParams{
+		return stackapi.Upload(stackapi.UploadParams{
 			API:       ecctl.Get().API,
 			StackPack: f,
 		})
@@ -100,7 +100,7 @@ var stackDeleteCmd = &cobra.Command{
 	PreRunE: cobra.MinimumNArgs(1),
 
 	RunE: func(cmd *cobra.Command, args []string) error {
-		return stack.Delete(stack.DeleteParams{
+		return stackapi.Delete(stackapi.DeleteParams{
 			API:     ecctl.Get().API,
 			Version: args[0],
 		})

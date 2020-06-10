@@ -19,48 +19,11 @@ package util
 
 import (
 	"errors"
-	"fmt"
 	"reflect"
 	"testing"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 )
-
-func TestCheckErrType(t *testing.T) {
-	type args struct {
-		got  error
-		want error
-	}
-	tests := []struct {
-		name    string
-		args    args
-		wantErr error
-	}{
-		{
-			name: "different error types return an error",
-			args: args{
-				got:  errors.New("ERROR"),
-				want: errors.New("WANT THIS ERROR"),
-			},
-			wantErr: fmt.Errorf(formatErrType, errors.New("ERROR"), errors.New("WANT THIS ERROR")),
-		},
-		{
-			name: "equal error types return nil",
-			args: args{
-				got:  errors.New("ERROR"),
-				want: errors.New("ERROR"),
-			},
-			wantErr: nil,
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if err := CheckErrType(tt.args.got, tt.args.want); (err != nil) != (tt.wantErr != nil) {
-				t.Errorf("CheckErrType() error = %v, wantErr %v", err, tt.wantErr)
-			}
-		})
-	}
-}
 
 func TestAppendTrackResponses(t *testing.T) {
 	var success = NewSuccessfulCurrentPlan()

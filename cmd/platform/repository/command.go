@@ -22,13 +22,13 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/snaprepoapi"
 	"github.com/elastic/cloud-sdk-go/pkg/input"
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/platform/snaprepo"
 	"github.com/elastic/ecctl/pkg/util"
 )
 
@@ -81,8 +81,8 @@ var platformSnapshotShowCmd = &cobra.Command{
 	Short:   "Obtains a snapshot repository config",
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		repo, err := snaprepo.Get(snaprepo.GetParams{
-			Params: snaprepo.Params{
+		repo, err := snaprepoapi.Get(snaprepoapi.GetParams{
+			Params: snaprepoapi.Params{
 				API: ecctl.Get().API,
 			},
 			Name: args[0],
@@ -100,7 +100,7 @@ var platformSnapshotListCmd = &cobra.Command{
 	Short:   "Lists all the snapshot repositories",
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		repos, err := snaprepo.List(snaprepo.Params{
+		repos, err := snaprepoapi.List(snaprepoapi.Params{
 			API: ecctl.Get().API,
 		})
 		if err != nil {
@@ -119,8 +119,8 @@ var platformSnapshotDeleteCmd = &cobra.Command{
 	PreRunE: cobra.MinimumNArgs(1),
 
 	RunE: func(cmd *cobra.Command, args []string) error {
-		return snaprepo.Delete(snaprepo.DeleteParams{
-			Params: snaprepo.Params{
+		return snaprepoapi.Delete(snaprepoapi.DeleteParams{
+			Params: snaprepoapi.Params{
 				API: ecctl.Get().API,
 			},
 			Name: args[0],
@@ -164,8 +164,8 @@ func setSnapshot(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	return snaprepo.Set(snaprepo.SetParams{
-		Params: snaprepo.Params{
+	return snaprepoapi.Set(snaprepoapi.SetParams{
+		Params: snaprepoapi.Params{
 			API: ecctl.Get().API,
 		},
 		Name:   args[0],
@@ -177,9 +177,9 @@ func setSnapshot(cmd *cobra.Command, args []string) error {
 func parseRepoSettingsByType(r io.Reader, t string) (util.Validator, error) {
 	switch t {
 	case "s3":
-		return snaprepo.ParseS3Config(r)
+		return snaprepoapi.ParseS3Config(r)
 	default:
-		return snaprepo.ParseGenericConfig(r)
+		return snaprepoapi.ParseGenericConfig(r)
 	}
 }
 

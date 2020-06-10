@@ -18,12 +18,12 @@
 package cmdrole
 
 import (
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/roleapi"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/platform/role"
 )
 
 const (
@@ -41,7 +41,7 @@ var createCmd = &cobra.Command{
 			return err
 		}
 
-		return role.Create(role.CreateParams{
+		return roleapi.Create(roleapi.CreateParams{
 			API:  ecctl.Get().API,
 			Role: &r,
 		})

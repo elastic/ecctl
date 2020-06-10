@@ -20,14 +20,14 @@ package cmdallocator
 import (
 	"path/filepath"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/allocatorapi"
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/platform/allocator"
 )
 
 func showAllocator(cmd *cobra.Command, args []string) error {
-	a, err := allocator.Get(allocator.GetParams{
+	a, err := allocatorapi.Get(allocatorapi.GetParams{
 		API: ecctl.Get().API,
 		ID:  args[0],
 	})

@@ -28,7 +28,7 @@ import (
 
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 
-	"github.com/elastic/ecctl/pkg/platform/snaprepo"
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/snaprepoapi"
 )
 
 const (
@@ -225,9 +225,9 @@ func rpadTrim(s string, n int) string {
 
 // toS3TypeConfig receives an interface and returns an toS3TypeConfig
 // the empty values will be transformed to "-"
-func toS3TypeConfig(i interface{}) snaprepo.S3TypeConfig {
+func toS3TypeConfig(i interface{}) snaprepoapi.S3TypeConfig {
 	var buf = new(bytes.Buffer)
-	var typeconfig snaprepo.S3TypeConfig
+	var typeconfig snaprepoapi.S3TypeConfig
 	// nolint
 	json.NewEncoder(buf).Encode(i)
 	// nolint

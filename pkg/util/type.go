@@ -17,13 +17,6 @@
 
 package util
 
-import (
-	"reflect"
-
-	"github.com/davecgh/go-spew/spew"
-	"github.com/pmezard/go-difflib/difflib"
-)
-
 var (
 	// ValidTypes exposes a list of the valid Elastic Cloud workload Types.
 	ValidTypes = []string{
@@ -39,26 +32,4 @@ var (
 // expensive external calls
 type Validator interface {
 	Validate() error
-}
-
-// CompareStructs two structs and return the differences
-func CompareStructs(a, b interface{}) (equals bool, diff string, err error) {
-	var spewConfig = spew.ConfigState{
-		Indent:                  " ",
-		DisablePointerAddresses: true,
-		DisableCapacities:       true,
-		SortKeys:                true,
-	}
-
-	if reflect.DeepEqual(a, b) {
-		return true, "", nil
-	}
-
-	r, l := spewConfig.Sdump(b), spewConfig.Sdump(a)
-	diff, err = difflib.GetUnifiedDiffString(difflib.UnifiedDiff{
-		A:       difflib.SplitLines(l),
-		B:       difflib.SplitLines(r),
-		Context: 0,
-	})
-	return false, diff, err
 }

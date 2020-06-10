@@ -18,10 +18,10 @@
 package cmdrunner
 
 import (
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/runnerapi"
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/platform/runner"
 )
 
 var listCmd = &cobra.Command{
@@ -29,7 +29,7 @@ var listCmd = &cobra.Command{
 	Short:   "Lists the existing platform runners",
 	PreRunE: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, err := runner.List(runner.Params{API: ecctl.Get().API})
+		res, err := runnerapi.List(runnerapi.Params{API: ecctl.Get().API})
 		if err != nil {
 			return err
 		}

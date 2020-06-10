@@ -22,10 +22,10 @@ import (
 	"path/filepath"
 	"strconv"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/allocatorapi"
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/platform/allocator"
 )
 
 const (
@@ -59,11 +59,11 @@ Filter and query flags can be used in combination.
 func listAllocators(cmd *cobra.Command, args []string) error {
 	var queryString = cmd.Flag("query").Value.String()
 	if unhealthy, _ := cmd.Flags().GetBool("unhealthy"); unhealthy {
-		queryString = allocator.UnhealthyQuery
+		queryString = allocatorapi.UnhealthyQuery
 	}
 
 	allFlag, _ := strconv.ParseBool(cmd.Flag("all").Value.String())
-	a, err := allocator.List(allocator.ListParams{
+	a, err := allocatorapi.List(allocatorapi.ListParams{
 		API:        ecctl.Get().API,
 		Query:      queryString,
 		FilterTags: cmd.Flag("filter").Value.String(),

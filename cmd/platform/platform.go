@@ -18,6 +18,7 @@
 package cmdplatform
 
 import (
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi"
 	"github.com/spf13/cobra"
 
 	cmdallocator "github.com/elastic/ecctl/cmd/platform/allocator"
@@ -32,7 +33,6 @@ import (
 	cmdstack "github.com/elastic/ecctl/cmd/platform/stack"
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/platform"
 )
 
 // Command is the platform subcommand
@@ -50,7 +50,7 @@ var infoCmd = &cobra.Command{
 	Short:   cmdutil.AdminReqDescription("Shows information about the platform"),
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		p, err := platform.GetInfo(platform.GetInfoParams{
+		p, err := platformapi.GetInfo(platformapi.GetInfoParams{
 			API: ecctl.Get().API,
 		})
 		if err != nil {

@@ -28,9 +28,10 @@ import (
 	"github.com/hashicorp/go-multierror"
 	"github.com/spf13/cobra"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/allocatorapi"
+
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/platform/allocator"
 )
 
 const vacateExamples = `  ecctl platform allocator vacate i-05e245252362f7f1d
@@ -142,11 +143,11 @@ var vacateAllocatorCmd = &cobra.Command{
 		// Only sets the allocator to maintenance mode when the flag is specified
 		if setAllocatorMaintenance {
 			for _, id := range args {
-				var params = allocator.MaintenanceParams{
+				var params = allocatorapi.MaintenanceParams{
 					API: ecctl.Get().API,
 					ID:  id,
 				}
-				if err := allocator.StartMaintenance(params); err != nil {
+				if err := allocatorapi.StartMaintenance(params); err != nil {
 					merr = multierror.Append(merr, err)
 				}
 			}
@@ -157,7 +158,7 @@ var vacateAllocatorCmd = &cobra.Command{
 		}
 
 		maxRetries, pollFrequency := cmdutil.GetTrackSettings(cmd)
-		var params = &allocator.VacateParams{
+		var params = &allocatorapi.VacateParams{
 			API:                 ecctl.Get().API,
 			Allocators:          args,
 			PreferredAllocators: target,
@@ -168,7 +169,7 @@ var vacateAllocatorCmd = &cobra.Command{
 			OutputFormat:        ecctl.Get().Config.Output,
 			MoveOnly:            ec.Bool(moveOnly),
 			SkipTracking:        skipTracking,
-			PlanOverrides: allocator.PlanOverrides{
+			PlanOverrides: allocatorapi.PlanOverrides{
 				SkipSnapshot:      skipSnapshot,
 				SkipDataMigration: skipDataMigration,
 				OverrideFailsafe:  ec.Bool(overrideFailsafe),
@@ -180,7 +181,7 @@ var vacateAllocatorCmd = &cobra.Command{
 			params.AllocatorDown = &allocatorDown
 		}
 
-		return allocator.Vacate(params)
+		return allocatorapi.Vacate(params)
 	},
 }
 

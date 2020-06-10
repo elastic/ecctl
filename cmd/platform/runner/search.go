@@ -22,13 +22,13 @@ import (
 	"path/filepath"
 	"strconv"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/runnerapi"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/platform/runner"
 )
 
 // Command represents the runner search command.
@@ -65,9 +65,9 @@ var searchCmd = &cobra.Command{
 			return err
 		}
 
-		r, err := runner.Search(
-			runner.SearchParams{
-				Params: runner.Params{
+		r, err := runnerapi.Search(
+			runnerapi.SearchParams{
+				Params: runnerapi.Params{
 					API: ecctl.Get().API,
 				},
 				Request: sr,

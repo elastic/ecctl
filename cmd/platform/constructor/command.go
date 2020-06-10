@@ -21,11 +21,11 @@ import (
 	"fmt"
 	"path/filepath"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/constructorapi"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/platform/constructor"
 )
 
 const (
@@ -45,7 +45,7 @@ var Command = &cobra.Command{
 }
 
 func listConstructors(cmd *cobra.Command, args []string) error {
-	a, err := constructor.List(constructor.Params{
+	a, err := constructorapi.List(constructorapi.Params{
 		API: ecctl.Get().API,
 	})
 	if err != nil {
@@ -60,8 +60,8 @@ var showConstructorCmd = &cobra.Command{
 	Short:   constructorShowMessage,
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		a, err := constructor.Get(constructor.GetParams{
-			Params: constructor.Params{
+		a, err := constructorapi.Get(constructorapi.GetParams{
+			Params: constructorapi.Params{
 				API: ecctl.Get().API,
 			},
 			ID: args[0],
@@ -81,17 +81,17 @@ var maintenanceConstructorCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		unset, _ := cmd.Flags().GetBool("unset")
 		fmt.Printf("Setting contructor %s maintenance to %t\n", args[0], !unset)
-		var params = constructor.MaintenanceParams{
-			Params: constructor.Params{
+		var params = constructorapi.MaintenanceParams{
+			Params: constructorapi.Params{
 				API: ecctl.Get().API,
 			},
 			ID: args[0],
 		}
 
 		if unset {
-			return constructor.DisableMaintenance(params)
+			return constructorapi.DisableMaintenance(params)
 		}
-		return constructor.EnableMaintenace(params)
+		return constructorapi.EnableMaintenace(params)
 	},
 }
 

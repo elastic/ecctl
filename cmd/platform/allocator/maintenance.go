@@ -20,10 +20,10 @@ package cmdallocator
 import (
 	"fmt"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/allocatorapi"
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/platform/allocator"
 )
 
 var maintenanceAllocatorCmd = &cobra.Command{
@@ -34,15 +34,15 @@ var maintenanceAllocatorCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		unset, _ := cmd.Flags().GetBool("unset")
 		fmt.Printf("Setting allocator %s maintenance to %t\n", args[0], !unset)
-		var params = allocator.MaintenanceParams{
+		var params = allocatorapi.MaintenanceParams{
 			API: ecctl.Get().API,
 			ID:  args[0],
 		}
 
 		if unset {
-			return allocator.StopMaintenance(params)
+			return allocatorapi.StopMaintenance(params)
 		}
-		return allocator.StartMaintenance(params)
+		return allocatorapi.StartMaintenance(params)
 	},
 }
 
