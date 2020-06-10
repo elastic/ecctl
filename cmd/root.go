@@ -25,6 +25,7 @@ import (
 	"path/filepath"
 	"time"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/output"
 	"github.com/spf13/cobra"
@@ -181,6 +182,10 @@ func initApp(cmd *cobra.Command, client *http.Client, v *viper.Viper) error {
 	}
 	if err := v.Unmarshal(&c); err != nil {
 		return err
+	}
+
+	if c.Region == "" && c.Host != api.ESSEndpoint {
+		c.Region = cmdutil.DefaultECERegion
 	}
 
 	err := util.ReturnErrOnly(ecctl.Instance(c))

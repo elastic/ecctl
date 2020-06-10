@@ -35,8 +35,9 @@ var maintenanceAllocatorCmd = &cobra.Command{
 		unset, _ := cmd.Flags().GetBool("unset")
 		fmt.Printf("Setting allocator %s maintenance to %t\n", args[0], !unset)
 		var params = allocatorapi.MaintenanceParams{
-			API: ecctl.Get().API,
-			ID:  args[0],
+			API:    ecctl.Get().API,
+			ID:     args[0],
+			Region: ecctl.Get().Config.Region,
 		}
 
 		if unset {
