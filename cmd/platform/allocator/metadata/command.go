@@ -41,10 +41,11 @@ var allocatorMetadataSetCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 
 		var params = &allocatorapi.MetadataSetParams{
-			API:   ecctl.Get().API,
-			ID:    args[0],
-			Key:   args[1],
-			Value: args[2],
+			API:    ecctl.Get().API,
+			ID:     args[0],
+			Key:    args[1],
+			Value:  args[2],
+			Region: ecctl.Get().Config.Region,
 		}
 		err := allocatorapi.SetAllocatorMetadataItem(*params)
 

@@ -68,6 +68,7 @@ func listAllocators(cmd *cobra.Command, args []string) error {
 		Query:      queryString,
 		FilterTags: cmd.Flag("filter").Value.String(),
 		ShowAll:    allFlag,
+		Region:     ecctl.Get().Config.Region,
 	})
 	if err != nil {
 		return err
