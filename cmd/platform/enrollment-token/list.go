@@ -18,17 +18,32 @@
 package cmdenrollmenttoken
 
 import (
+	"path/filepath"
+
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/enrollmenttokenapi"
 	"github.com/spf13/cobra"
 
-	cmdutil "github.com/elastic/ecctl/cmd/util"
+	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
-// Command represents the enrollment-token subcomand.
-var Command = &cobra.Command{
-	Use:     "enrollment-token",
-	Short:   cmdutil.AdminReqDescription("Manages tokens"),
+var listTokensCmd = &cobra.Command{
+	Use:     "list",
+	Short:   "Retrieves a list of persistent enrollment tokens",
 	PreRunE: cobra.NoArgs,
-	Run: func(cmd *cobra.Command, args []string) {
-		cmd.Help()
-	},
+	RunE:    listTokens,
+}
+
+func listTokens(cmd *cobra.Command, args []string) error {
+	res, err := enrollmenttokenapi.List(enrollmenttokenapi.ListParams{
+		API:    ecctl.Get().API,
+		Region: ecctl.Get().Config.Region,
+	})
+	if err != nil {
+		return err
+	}
+	return ecctl.Get().Formatter.Format(filepath.Join("token", "list"), res)
+}
+
+func init() {
+	Command.AddCommand(listTokensCmd)
 }
