@@ -18,22 +18,33 @@
 package cmdconstructor
 
 import (
+	"path/filepath"
+
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/constructorapi"
 	"github.com/spf13/cobra"
 
-	cmdutil "github.com/elastic/ecctl/cmd/util"
+	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
-const (
-	constructorShowMessage        = `Returns information about the constructor with given ID`
-	constructorMaintenanceMessage = `Sets/un-sets a constructor's maintenance mode`
-)
-
-// Command represents the constructor command
-var Command = &cobra.Command{
-	Use:     "constructor",
-	Short:   cmdutil.AdminReqDescription("Manages constructors"),
+var listConstructorsCmd = &cobra.Command{
+	Use:     "list",
+	Short:   `Returns all of the constructors in the platform`,
 	PreRunE: cobra.NoArgs,
-	Run: func(cmd *cobra.Command, args []string) {
-		cmd.Help()
-	},
+	RunE:    listConstructors,
+}
+
+func listConstructors(cmd *cobra.Command, args []string) error {
+	a, err := constructorapi.List(constructorapi.ListParams{
+		API:    ecctl.Get().API,
+		Region: ecctl.Get().Config.Region,
+	})
+	if err != nil {
+		return err
+	}
+
+	return ecctl.Get().Formatter.Format(filepath.Join("constructor", "list"), a)
+}
+
+func init() {
+	Command.AddCommand(listConstructorsCmd)
 }
