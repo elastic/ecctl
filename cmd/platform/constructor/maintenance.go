@@ -21,42 +21,34 @@ import (
 	"fmt"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/constructorapi"
-	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
-var resyncConstructorCmd = &cobra.Command{
-	Use:     "resync {<constructor id> | --all}",
-	Short:   "Resynchronizes the search index and cache for the selected constructor or all",
-	PreRunE: cmdutil.CheckInputHas1ArgsOr0ArgAndAll,
+var maintenanceConstructorCmd = &cobra.Command{
+	Use:     "maintenance <constructor id>",
+	Short:   constructorMaintenanceMessage,
+	PreRunE: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		all, _ := cmd.Flags().GetBool("all")
-
-		if all {
-			fmt.Println("Resynchronizing all constructors")
-			res, err := constructorapi.ResyncAll(constructorapi.ResyncAllParams{
-				API:    ecctl.Get().API,
-				Region: ecctl.Get().Config.Region,
-			})
-			if err != nil {
-				return err
-			}
-
-			return ecctl.Get().Formatter.Format("", res)
-		}
-
-		fmt.Printf("Resynchronizing constructor: %s\n", args[0])
-		return constructorapi.Resync(constructorapi.ResyncParams{
+		unset, _ := cmd.Flags().GetBool("unset")
+		fmt.Printf("Setting contructor %s maintenance to %t\n", args[0], !unset)
+		var params = constructorapi.MaintenanceParams{
 			API:    ecctl.Get().API,
 			Region: ecctl.Get().Config.Region,
 			ID:     args[0],
-		})
+		}
+
+		if unset {
+			return constructorapi.DisableMaintenance(params)
+		}
+		return constructorapi.EnableMaintenace(params)
 	},
 }
 
 func init() {
-	Command.AddCommand(resyncConstructorCmd)
-	resyncConstructorCmd.Flags().Bool("all", false, "Resynchronizes the search index for all constructors")
+	Command.AddCommand(
+		maintenanceConstructorCmd,
+	)
+	maintenanceConstructorCmd.Flags().Bool("unset", false, "Unset constructor maintenance mode")
 }
