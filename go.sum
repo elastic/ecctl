@@ -59,8 +59,12 @@ github.com/dgrijalva/jwt-go v3.2.0+incompatible/go.mod h1:E3ru+11k8xSBh+hMPgOLZm
 github.com/dgryski/go-sip13 v0.0.0-20181026042036-e10d5fee7954/go.mod h1:vAd38F8PWV+bWy6jNmig1y/TA+kYO4g3RSRF0IAv0no=
 github.com/docker/go-units v0.3.3/go.mod h1:fgPhTUdO+D/Jk86RDLlptpiXQzgHJF7gydDDbaIK4Dk=
 github.com/docker/go-units v0.4.0/go.mod h1:fgPhTUdO+D/Jk86RDLlptpiXQzgHJF7gydDDbaIK4Dk=
-github.com/elastic/cloud-sdk-go v1.0.0-beta3.0.20200611022835-af13daa69099 h1:XwJFBtYATU/27Ro++EydUUdOW40qTgFAKXwmkXttCDw=
-github.com/elastic/cloud-sdk-go v1.0.0-beta3.0.20200611022835-af13daa69099/go.mod h1:+0Q5izB9Upzmolj6Pq4AkTsBwgDbQnNpODp3qFK7erQ=
+github.com/elastic/cloud-sdk-go v1.0.0-beta3.0.20200610014412-d8bc0d1b9b30 h1:KlJmjQ5ZehOnYtffQ4/7vspv8rg47cckF2+etZ7MAgY=
+github.com/elastic/cloud-sdk-go v1.0.0-beta3.0.20200610014412-d8bc0d1b9b30/go.mod h1:+0Q5izB9Upzmolj6Pq4AkTsBwgDbQnNpODp3qFK7erQ=
+github.com/elastic/cloud-sdk-go v1.0.0-beta3.0.20200610061007-5771a049905a h1:Kt6uMlo1rtMXpHEHZBrkI1BGnTcHQhLyXloCj+jWKqI=
+github.com/elastic/cloud-sdk-go v1.0.0-beta3.0.20200610061007-5771a049905a/go.mod h1:+0Q5izB9Upzmolj6Pq4AkTsBwgDbQnNpODp3qFK7erQ=
+github.com/elastic/cloud-sdk-go v1.0.0-beta3.0.20200611025421-9b8340580ba3 h1:SdgBG2g5oH05SogNFHvJIRtjfye9Ay4GcEaDIr9n5YE=
+github.com/elastic/cloud-sdk-go v1.0.0-beta3.0.20200611025421-9b8340580ba3/go.mod h1:+0Q5izB9Upzmolj6Pq4AkTsBwgDbQnNpODp3qFK7erQ=
 github.com/fatih/color v1.7.0/go.mod h1:Zm6kSWBoL9eyXnKyktHP6abPY2pDugNf5KwzbycvMj4=
 github.com/fatih/color v1.9.0/go.mod h1:eQcE1qtQxscV5RaZvpXrrb8Drkc3/DdQ+uUYCNjL+zU=
 github.com/fsnotify/fsnotify v1.4.7 h1:IXs+QLmnXW2CcXuY+8Mzv/fWEsPGWxqefPtCP5CnV9I=
