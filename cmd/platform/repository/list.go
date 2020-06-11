@@ -18,27 +18,33 @@
 package cmdrepository
 
 import (
+	"path/filepath"
+
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/snaprepoapi"
 	"github.com/spf13/cobra"
 
-	cmdutil "github.com/elastic/ecctl/cmd/util"
+	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
-var (
-	snapshotShortHelp = cmdutil.AdminReqDescription("Manages snapshot repositories")
-
-	snapshotLongHelp = `
-Manages snapshot repositories that are used by Elasticsearch clusters
-to perform snapshot operations.
-`[1:]
-)
-
-// Command represents the top level repository command.
-var Command = &cobra.Command{
-	Use:     "repository",
-	Short:   snapshotShortHelp,
-	Long:    snapshotLongHelp,
+var platformSnapshotListCmd = &cobra.Command{
+	Use:     "list",
+	Short:   "Lists all the snapshot repositories",
 	PreRunE: cobra.MaximumNArgs(0),
-	Run: func(cmd *cobra.Command, args []string) {
-		cmd.Help()
+	RunE: func(cmd *cobra.Command, args []string) error {
+		repos, err := snaprepoapi.List(snaprepoapi.ListParams{
+			API:    ecctl.Get().API,
+			Region: ecctl.Get().Config.Region,
+		})
+		if err != nil {
+			return err
+		}
+
+		return ecctl.Get().Formatter.Format(
+			filepath.Join("platform", "repositorylist"), repos,
+		)
 	},
+}
+
+func init() {
+	Command.AddCommand(platformSnapshotListCmd)
 }

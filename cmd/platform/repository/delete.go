@@ -18,27 +18,26 @@
 package cmdrepository
 
 import (
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/snaprepoapi"
 	"github.com/spf13/cobra"
 
-	cmdutil "github.com/elastic/ecctl/cmd/util"
+	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
-var (
-	snapshotShortHelp = cmdutil.AdminReqDescription("Manages snapshot repositories")
+var platformSnapshotDeleteCmd = &cobra.Command{
+	Use:     "delete <repository name>",
+	Short:   "Deletes a snapshot repositories",
+	PreRunE: cobra.MinimumNArgs(1),
 
-	snapshotLongHelp = `
-Manages snapshot repositories that are used by Elasticsearch clusters
-to perform snapshot operations.
-`[1:]
-)
-
-// Command represents the top level repository command.
-var Command = &cobra.Command{
-	Use:     "repository",
-	Short:   snapshotShortHelp,
-	Long:    snapshotLongHelp,
-	PreRunE: cobra.MaximumNArgs(0),
-	Run: func(cmd *cobra.Command, args []string) {
-		cmd.Help()
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return snaprepoapi.Delete(snaprepoapi.DeleteParams{
+			API:    ecctl.Get().API,
+			Region: ecctl.Get().Config.Region,
+			Name:   args[0],
+		})
 	},
+}
+
+func init() {
+	Command.AddCommand(platformSnapshotDeleteCmd)
 }
