@@ -29,7 +29,10 @@ var listCmd = &cobra.Command{
 	Short:   "Lists the existing platform roles",
 	PreRunE: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, err := roleapi.List(roleapi.ListParams{API: ecctl.Get().API})
+		res, err := roleapi.List(roleapi.ListParams{
+			API:    ecctl.Get().API,
+			Region: ecctl.Get().Config.Region,
+		})
 		if err != nil {
 			return err
 		}

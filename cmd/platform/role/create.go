@@ -42,8 +42,9 @@ var createCmd = &cobra.Command{
 		}
 
 		return roleapi.Create(roleapi.CreateParams{
-			API:  ecctl.Get().API,
-			Role: &r,
+			API:    ecctl.Get().API,
+			Role:   &r,
+			Region: ecctl.Get().Config.Region,
 		})
 	},
 }
