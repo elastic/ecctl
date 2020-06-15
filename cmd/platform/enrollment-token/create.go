@@ -31,6 +31,7 @@ const (
 	validityFlag = "validity"
 )
 
+// nolint for G101: Potential hardcoded credentials
 const tokenCreateExamples = `  ecctl [globalFlags] enrollment-token create --role coordinator
   ecctl [globalFlags] enrollment-token create --role coordinator --role proxy
   ecctl [globalFlags] enrollment-token create --role allocator --validity 120s
