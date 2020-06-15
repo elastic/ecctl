@@ -3,9 +3,9 @@ module github.com/elastic/ecctl
 go 1.12
 
 require (
-	github.com/asaskevich/govalidator v0.0.0-20190424111038-f61b66f89f4a
+	github.com/asaskevich/govalidator v0.0.0-20200428143746-21a406dcc535
 	github.com/elastic/cloud-sdk-go v1.0.0-beta3.0.20200612072516-470a54b2a398
-	github.com/go-openapi/runtime v0.19.15
+	github.com/go-openapi/runtime v0.19.16
 	github.com/go-openapi/strfmt v0.19.5
 	github.com/pkg/errors v0.9.1
 	github.com/spf13/cobra v0.0.7
