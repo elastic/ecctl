@@ -24,9 +24,9 @@ import (
 	"strconv"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/allocatorapi"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
-	"github.com/hashicorp/go-multierror"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -138,7 +138,7 @@ var vacateAllocatorCmd = &cobra.Command{
 
 		setAllocatorMaintenance, _ := cmd.Flags().GetBool("maintenance")
 
-		var merr error
+		var merr = multierror.NewPrefixed("failed setting allocator to maintenance mode")
 		// Only sets the allocator to maintenance mode when the flag is specified
 		if setAllocatorMaintenance {
 			for _, id := range args {
@@ -147,13 +147,13 @@ var vacateAllocatorCmd = &cobra.Command{
 					ID:  id,
 				}
 				if err := allocatorapi.StartMaintenance(params); err != nil {
-					merr = multierror.Append(merr, err)
+					merr = merr.Append(err)
 				}
 			}
 		}
 
-		if merr != nil {
-			fmt.Fprint(ecctl.Get().Config.OutputDevice, merr)
+		if err := merr.ErrorOrNil(); err != nil {
+			fmt.Fprint(ecctl.Get().Config.OutputDevice, err.Error())
 		}
 
 		maxRetries, pollFrequency := cmdutil.GetTrackSettings(cmd)
