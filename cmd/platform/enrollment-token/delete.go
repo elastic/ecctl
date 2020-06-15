@@ -18,17 +18,32 @@
 package cmdenrollmenttoken
 
 import (
+	"fmt"
+
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/enrollmenttokenapi"
 	"github.com/spf13/cobra"
 
-	cmdutil "github.com/elastic/ecctl/cmd/util"
+	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
-// Command represents the enrollment-token subcomand.
-var Command = &cobra.Command{
-	Use:     "enrollment-token",
-	Short:   cmdutil.AdminReqDescription("Manages tokens"),
-	PreRunE: cobra.NoArgs,
-	Run: func(cmd *cobra.Command, args []string) {
-		cmd.Help()
+var deleteTokenCmd = &cobra.Command{
+	Use:     "delete <enrollment-token>",
+	Short:   "Deletes an enrollment token",
+	PreRunE: cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		err := enrollmenttokenapi.Delete(enrollmenttokenapi.DeleteParams{
+			API:    ecctl.Get().API,
+			Region: ecctl.Get().Config.Region,
+			Token:  args[0],
+		})
+		if err != nil {
+			return err
+		}
+		fmt.Printf("Token %s deleted.\n", args[0])
+		return nil
 	},
+}
+
+func init() {
+	Command.AddCommand(deleteTokenCmd)
 }
