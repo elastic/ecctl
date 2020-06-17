@@ -30,10 +30,9 @@ var showCmd = &cobra.Command{
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		res, err := runnerapi.Show(runnerapi.ShowParams{
-			Params: runnerapi.Params{
-				API: ecctl.Get().API,
-			},
-			ID: args[0],
+			API:    ecctl.Get().API,
+			Region: ecctl.Get().Config.Region,
+			ID:     args[0],
 		})
 		if err != nil {
 			return err

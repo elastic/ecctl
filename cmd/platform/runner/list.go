@@ -29,7 +29,10 @@ var listCmd = &cobra.Command{
 	Short:   "Lists the existing platform runners",
 	PreRunE: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, err := runnerapi.List(runnerapi.Params{API: ecctl.Get().API})
+		res, err := runnerapi.List(runnerapi.ListParams{
+			API:    ecctl.Get().API,
+			Region: ecctl.Get().Config.Region,
+		})
 		if err != nil {
 			return err
 		}
