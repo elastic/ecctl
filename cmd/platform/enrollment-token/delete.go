@@ -15,33 +15,35 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package cmdrunner
+package cmdenrollmenttoken
 
 import (
-	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/runnerapi"
+	"fmt"
+
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/enrollmenttokenapi"
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
-var showCmd = &cobra.Command{
-	Use:     "show <runner id>",
-	Short:   "Shows information about the specified runner",
-	PreRunE: cobra.MinimumNArgs(1),
+var deleteTokenCmd = &cobra.Command{
+	Use:     "delete <enrollment-token>",
+	Short:   "Deletes an enrollment token",
+	PreRunE: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, err := runnerapi.Show(runnerapi.ShowParams{
+		err := enrollmenttokenapi.Delete(enrollmenttokenapi.DeleteParams{
 			API:    ecctl.Get().API,
 			Region: ecctl.Get().Config.Region,
-			ID:     args[0],
+			Token:  args[0],
 		})
 		if err != nil {
 			return err
 		}
-
-		return ecctl.Get().Formatter.Format("", res)
+		fmt.Printf("Token %s deleted.\n", args[0])
+		return nil
 	},
 }
 
 func init() {
-	Command.AddCommand(showCmd)
+	Command.AddCommand(deleteTokenCmd)
 }

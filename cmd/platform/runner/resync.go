@@ -36,8 +36,9 @@ var resyncRunnerCmd = &cobra.Command{
 
 		if all {
 			fmt.Println("Resynchronizing all runners")
-			res, err := runnerapi.ResyncAll(runnerapi.Params{
-				API: ecctl.Get().API,
+			res, err := runnerapi.ResyncAll(runnerapi.ResyncAllParams{
+				API:    ecctl.Get().API,
+				Region: ecctl.Get().Config.Region,
 			})
 			if err != nil {
 				return err
@@ -48,10 +49,9 @@ var resyncRunnerCmd = &cobra.Command{
 
 		fmt.Printf("Resynchronizing runner: %s\n", args[0])
 		return runnerapi.Resync(runnerapi.ResyncParams{
-			Params: runnerapi.Params{
-				API: ecctl.Get().API,
-			},
-			ID: args[0],
+			API:    ecctl.Get().API,
+			Region: ecctl.Get().Config.Region,
+			ID:     args[0],
 		})
 	},
 }

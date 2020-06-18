@@ -67,9 +67,8 @@ var searchCmd = &cobra.Command{
 
 		r, err := runnerapi.Search(
 			runnerapi.SearchParams{
-				Params: runnerapi.Params{
-					API: ecctl.Get().API,
-				},
+				API:     ecctl.Get().API,
+				Region:  ecctl.Get().Config.Region,
 				Request: sr,
 			})
 		if err != nil {

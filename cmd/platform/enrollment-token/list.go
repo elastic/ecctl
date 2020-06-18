@@ -15,33 +15,35 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package cmdrunner
+package cmdenrollmenttoken
 
 import (
-	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/runnerapi"
+	"path/filepath"
+
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/enrollmenttokenapi"
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
-var showCmd = &cobra.Command{
-	Use:     "show <runner id>",
-	Short:   "Shows information about the specified runner",
-	PreRunE: cobra.MinimumNArgs(1),
-	RunE: func(cmd *cobra.Command, args []string) error {
-		res, err := runnerapi.Show(runnerapi.ShowParams{
-			API:    ecctl.Get().API,
-			Region: ecctl.Get().Config.Region,
-			ID:     args[0],
-		})
-		if err != nil {
-			return err
-		}
+var listTokensCmd = &cobra.Command{
+	Use:     "list",
+	Short:   "Retrieves a list of persistent enrollment tokens",
+	PreRunE: cobra.NoArgs,
+	RunE:    listTokens,
+}
 
-		return ecctl.Get().Formatter.Format("", res)
-	},
+func listTokens(cmd *cobra.Command, args []string) error {
+	res, err := enrollmenttokenapi.List(enrollmenttokenapi.ListParams{
+		API:    ecctl.Get().API,
+		Region: ecctl.Get().Config.Region,
+	})
+	if err != nil {
+		return err
+	}
+	return ecctl.Get().Formatter.Format(filepath.Join("token", "list"), res)
 }
 
 func init() {
-	Command.AddCommand(showCmd)
+	Command.AddCommand(listTokensCmd)
 }
