@@ -18,12 +18,7 @@
 package cmdfilteredgroup
 
 import (
-	"path/filepath"
-
-	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/proxyapi/filteredgroupapi"
 	"github.com/spf13/cobra"
-
-	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 // Command represents the top level filtered-group command.
@@ -34,104 +29,4 @@ var Command = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
 	},
-}
-
-var platformProxyFilteredGroupShowCmd = &cobra.Command{
-	Use:     "show <filtered group id>",
-	Short:   "Shows details for proxies filtered group",
-	PreRunE: cobra.MinimumNArgs(1),
-	RunE: func(cmd *cobra.Command, args []string) error {
-		response, err := filteredgroupapi.Get(filteredgroupapi.CommonParams{
-			API: ecctl.Get().API,
-			ID:  args[0],
-		})
-
-		if err != nil {
-			return err
-		}
-
-		return ecctl.Get().Formatter.Format(filepath.Join("filtered-group", "show"), response)
-	},
-}
-
-var platformProxyFilteredGroupCreateCmd = &cobra.Command{
-	Use:     "create <filtered group id> --filters <key1=value1,key2=value2> --expected-proxies-count <int>",
-	Short:   "Creates proxies filtered group",
-	PreRunE: cobra.MinimumNArgs(1),
-	RunE: func(cmd *cobra.Command, args []string) error {
-
-		filters, _ := cmd.Flags().GetStringToString("filters")
-		expectedProxiesCount, _ := cmd.Flags().GetInt32("expected-proxies-count")
-
-		response, err := filteredgroupapi.Create(filteredgroupapi.CreateParams{
-			CommonParams: filteredgroupapi.CommonParams{
-				API: ecctl.Get().API,
-				ID:  args[0],
-			},
-			Filters:              filters,
-			ExpectedProxiesCount: expectedProxiesCount,
-		})
-
-		if err != nil {
-			return err
-		}
-
-		return ecctl.Get().Formatter.Format(filepath.Join("filtered-group", "create"), response)
-	},
-}
-
-var platformProxyFilteredGroupDeleteCmd = &cobra.Command{
-	Use:     "delete <filtered group id>",
-	Short:   "Deletes proxies filtered group",
-	PreRunE: cobra.MinimumNArgs(1),
-	RunE: func(cmd *cobra.Command, args []string) error {
-		return filteredgroupapi.Delete(filteredgroupapi.CommonParams{
-			API: ecctl.Get().API,
-			ID:  args[0],
-		})
-	},
-}
-
-var platformProxyFilteredGroupUpdateCmd = &cobra.Command{
-	Use:     "update <filtered group id> --filters <key1=value1,key2=value2> --expected-proxies-count <int> --version <int>",
-	Short:   "Updates proxies filtered group",
-	PreRunE: cobra.MinimumNArgs(1),
-	RunE: func(cmd *cobra.Command, args []string) error {
-
-		filters, _ := cmd.Flags().GetStringToString("filters")
-		expectedProxiesCount, _ := cmd.Flags().GetInt32("expected-proxies-count")
-		version, _ := cmd.Flags().GetInt64("version")
-
-		response, err := filteredgroupapi.Update(filteredgroupapi.UpdateParams{
-			CreateParams: filteredgroupapi.CreateParams{
-				CommonParams: filteredgroupapi.CommonParams{
-					API: ecctl.Get().API,
-					ID:  args[0],
-				},
-				Filters:              filters,
-				ExpectedProxiesCount: expectedProxiesCount,
-			},
-			Version: version,
-		})
-
-		if err != nil {
-			return err
-		}
-
-		return ecctl.Get().Formatter.Format(filepath.Join("filtered-group", "update"), response)
-	},
-}
-
-func init() {
-	Command.AddCommand(
-		platformProxyFilteredGroupShowCmd,
-		platformProxyFilteredGroupCreateCmd,
-		platformProxyFilteredGroupDeleteCmd,
-		platformProxyFilteredGroupUpdateCmd,
-	)
-	platformProxyFilteredGroupCreateCmd.Flags().StringToString("filters", make(map[string]string), "Filters for proxies group")
-	platformProxyFilteredGroupCreateCmd.Flags().Int32("expected-proxies-count", 1, "Expected proxies count in filtered group")
-	platformProxyFilteredGroupUpdateCmd.Flags().StringToString("filters", make(map[string]string), "fFlters for proxies group")
-	platformProxyFilteredGroupUpdateCmd.Flags().Int32("expected-proxies-count", 1, "Expected proxies count in filtered group")
-	platformProxyFilteredGroupUpdateCmd.Flags().Int64("version", 0, "Version update for filtered group")
 }
