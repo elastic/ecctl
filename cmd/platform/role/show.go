@@ -30,8 +30,9 @@ var showCmd = &cobra.Command{
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		res, err := roleapi.Show(roleapi.ShowParams{
-			API: ecctl.Get().API,
-			ID:  args[0],
+			API:    ecctl.Get().API,
+			ID:     args[0],
+			Region: ecctl.Get().Config.Region,
 		})
 		if err != nil {
 			return err
