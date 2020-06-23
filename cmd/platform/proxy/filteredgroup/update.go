@@ -37,14 +37,12 @@ var platformProxyFilteredGroupUpdateCmd = &cobra.Command{
 		version, _ := cmd.Flags().GetInt64("version")
 
 		response, err := filteredgroupapi.Update(filteredgroupapi.UpdateParams{
-			CreateParams: filteredgroupapi.CreateParams{
-				API:                  ecctl.Get().API,
-				ID:                   args[0],
-				Region:               ecctl.Get().Config.Region,
-				Filters:              filters,
-				ExpectedProxiesCount: expectedProxiesCount,
-			},
-			Version: version,
+			API:                  ecctl.Get().API,
+			ID:                   args[0],
+			Region:               ecctl.Get().Config.Region,
+			Filters:              filters,
+			ExpectedProxiesCount: expectedProxiesCount,
+			Version:              version,
 		})
 
 		if err != nil {
