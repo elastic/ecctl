@@ -18,19 +18,10 @@
 package cmdproxy
 
 import (
-	"path/filepath"
-
-	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/proxyapi"
 	"github.com/spf13/cobra"
 
 	cmdfilteredgroup "github.com/elastic/ecctl/cmd/platform/proxy/filteredgroup"
 	cmdutil "github.com/elastic/ecctl/cmd/util"
-	"github.com/elastic/ecctl/pkg/ecctl"
-)
-
-const (
-	proxyListMessage = `Returns all of the proxies in the platform`
-	proxyShowMessage = `Returns information about the proxy with given id`
 )
 
 // Command represents the proxy command
@@ -43,46 +34,6 @@ var Command = &cobra.Command{
 	},
 }
 
-func listProxies(cmd *cobra.Command, args []string) error {
-	a, err := proxyapi.List(proxyapi.Params{
-		API: ecctl.Get().API,
-	})
-	if err != nil {
-		return err
-	}
-
-	return ecctl.Get().Formatter.Format(filepath.Join("proxy", "list"), a)
-}
-
-var showProxyCmd = &cobra.Command{
-	Use:     "show <proxy id>",
-	Short:   proxyShowMessage,
-	PreRunE: cobra.MinimumNArgs(1),
-	RunE: func(cmd *cobra.Command, args []string) error {
-		a, err := proxyapi.Get(proxyapi.GetParams{
-			Params: proxyapi.Params{
-				API: ecctl.Get().API,
-			},
-			ID: args[0],
-		})
-		if err != nil {
-			return err
-		}
-		return ecctl.Get().Formatter.Format(filepath.Join("proxy", "show"), a)
-	},
-}
-
-var listProxiesCmd = &cobra.Command{
-	Use:     "list",
-	Short:   proxyListMessage,
-	PreRunE: cobra.MaximumNArgs(0),
-	RunE:    listProxies,
-}
-
 func init() {
-	Command.AddCommand(
-		listProxiesCmd,
-		showProxyCmd,
-		cmdfilteredgroup.Command,
-	)
+	Command.AddCommand(cmdfilteredgroup.Command)
 }
