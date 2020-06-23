@@ -18,39 +18,25 @@
 package cmdfilteredgroup
 
 import (
-	"path/filepath"
-
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/proxyapi/filteredgroupapi"
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
-const (
-	filteredGroupsUse = `Returns all proxies filtered groups in the platform`
-)
-
-func listProxyFilteredGroups(cmd *cobra.Command, args []string) error {
-	response, err := filteredgroupapi.List(filteredgroupapi.ListParams{
-		API:    ecctl.Get().API,
-		Region: ecctl.Get().Config.Region,
-	})
-	if err != nil {
-		return err
-	}
-
-	return ecctl.Get().Formatter.Format(filepath.Join("filtered-group", "list"), response)
-}
-
-var platformProxyFilteredGroupsListCmd = &cobra.Command{
-	Use:     "list",
-	Short:   filteredGroupsUse,
-	PreRunE: cobra.MaximumNArgs(0),
-	RunE:    listProxyFilteredGroups,
+var platformProxyFilteredGroupDeleteCmd = &cobra.Command{
+	Use:     "delete <filtered group id>",
+	Short:   "Deletes proxies filtered group",
+	PreRunE: cobra.MinimumNArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return filteredgroupapi.Delete(filteredgroupapi.DeleteParams{
+			API:    ecctl.Get().API,
+			ID:     args[0],
+			Region: ecctl.Get().Config.Region,
+		})
+	},
 }
 
 func init() {
-	Command.AddCommand(
-		platformProxyFilteredGroupsListCmd,
-	)
+	Command.AddCommand(platformProxyFilteredGroupDeleteCmd)
 }
