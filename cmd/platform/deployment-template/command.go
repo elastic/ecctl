@@ -19,20 +19,15 @@ package cmddeploymentdemplate
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 	"path"
-	"path/filepath"
 
-	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/configurationtemplateapi"
 	"github.com/elastic/cloud-sdk-go/pkg/input"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
-	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 const (
@@ -45,155 +40,9 @@ const (
 var Command = &cobra.Command{
 	Use:     "deployment-template",
 	Short:   cmdutil.AdminReqDescription("Manages deployment templates"),
-	PreRunE: cobra.MaximumNArgs(0),
+	PreRunE: cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
-	},
-}
-
-var platformDeploymentTemplateListCmd = &cobra.Command{
-	Use:     "list",
-	Short:   "Lists the platform deployment templates",
-	PreRunE: cobra.MaximumNArgs(0),
-	RunE: func(cmd *cobra.Command, args []string) error {
-		showInstanceConfig, _ := cmd.Flags().GetBool(showInstanceConfigurations)
-		stackVersion, _ := cmd.Flags().GetString(stackVersion)
-		metadataFilter, _ := cmd.Flags().GetString(filter)
-
-		res, err := configurationtemplateapi.ListTemplates(configurationtemplateapi.ListTemplateParams{
-			API:                ecctl.Get().API,
-			ShowInstanceConfig: showInstanceConfig,
-			StackVersion:       stackVersion,
-			Metadata:           metadataFilter,
-		})
-
-		if err != nil {
-			return err
-		}
-
-		return ecctl.Get().Formatter.Format(filepath.Join("deployment-template", "list"), res)
-	},
-}
-
-var platformDeploymentTemplateShowCmd = &cobra.Command{
-	Use:     "show <template id>",
-	Short:   "Shows information about a specific platform deployment template",
-	PreRunE: cobra.MinimumNArgs(1),
-	RunE: func(cmd *cobra.Command, args []string) error {
-		show, _ := cmd.Flags().GetBool("show-instance-configurations")
-		res, err := configurationtemplateapi.GetTemplate(configurationtemplateapi.GetTemplateParams{
-			TemplateParams: configurationtemplateapi.TemplateParams{
-				API: ecctl.Get().API,
-				ID:  args[0],
-			},
-			ShowInstanceConfig: show,
-		})
-
-		if err != nil {
-			return err
-		}
-
-		return ecctl.Get().Formatter.Format(filepath.Join("deployment-template", "show"), res)
-	},
-}
-
-var platformDeploymentTemplateDeleteCmd = &cobra.Command{
-	Use:     "delete <template id>",
-	Short:   "Deletes a specific platform deployment template",
-	PreRunE: cobra.MinimumNArgs(1),
-	RunE: func(cmd *cobra.Command, args []string) error {
-		err := configurationtemplateapi.DeleteTemplate(configurationtemplateapi.GetTemplateParams{
-			TemplateParams: configurationtemplateapi.TemplateParams{
-				API: ecctl.Get().API,
-				ID:  args[0],
-			},
-		})
-
-		if err != nil {
-			return err
-		}
-
-		fmt.Printf("Successfully deleted deployment template %v \n", args[0])
-		return nil
-	},
-}
-
-var platformDeploymentTemplateCreateCmd = &cobra.Command{
-	Use:     "create -f <template file>.json",
-	Short:   "Creates a platform deployment template",
-	PreRunE: cobra.MaximumNArgs(0),
-	RunE: func(cmd *cobra.Command, args []string) error {
-		if err := sdkcmdutil.FileOrStdin(cmd, "file-template"); err != nil {
-			return err
-		}
-
-		tc, err := parseTemplateFile(cmd.Flag("file-template").Value.String())
-		if err != nil {
-			return err
-		}
-
-		if id := cmd.Flag("id").Value.String(); id != "" {
-			tc.ID = id
-		}
-
-		tid, err := configurationtemplateapi.CreateTemplate(configurationtemplateapi.CreateTemplateParams{
-			DeploymentTemplateInfo: tc,
-			API:                    ecctl.Get().API,
-		})
-
-		if err != nil {
-			return err
-		}
-
-		fmt.Printf("Successfully created deployment template %v \n", tid)
-		return nil
-
-	},
-}
-
-var platformDeploymentTemplateUpdateCmd = &cobra.Command{
-	Use:     "update <template id> -f <template file>.json",
-	Short:   "Updates a platform deployment template",
-	PreRunE: cobra.MinimumNArgs(1),
-	RunE: func(cmd *cobra.Command, args []string) error {
-		if err := sdkcmdutil.FileOrStdin(cmd, "file-template"); err != nil {
-			return err
-		}
-		tc, err := parseTemplateFile(cmd.Flag("file-template").Value.String())
-		if err != nil {
-			return err
-		}
-		if err := configurationtemplateapi.UpdateTemplate(
-			configurationtemplateapi.UpdateTemplateParams{
-				TemplateParams: configurationtemplateapi.TemplateParams{
-					API: ecctl.Get().API,
-					ID:  args[0],
-				},
-
-				DeploymentTemplateInfo: tc,
-			},
-		); err != nil {
-			return err
-		}
-
-		fmt.Printf("Successfully updated deployment template %v \n", args[0])
-		return nil
-
-	},
-}
-
-var platformDeploymentTemplatePullCmd = &cobra.Command{
-	Use:     "pull --path <path>",
-	Short:   "Downloads deployment template into a local folder",
-	PreRunE: cobra.MaximumNArgs(0),
-
-	RunE: func(cmd *cobra.Command, args []string) error {
-		return configurationtemplateapi.PullToFolder(configurationtemplateapi.PullTemplateToFolderParams{
-			TemplateToFolderParams: configurationtemplateapi.TemplateToFolderParams{
-				API:    ecctl.Get().API,
-				Folder: cmd.Flag("path").Value.String(),
-			},
-		})
 	},
 }
 
@@ -216,29 +65,4 @@ func parseTemplateFile(fp string) (*models.DeploymentTemplateInfo, error) {
 	}
 
 	return &templateConfiguration, nil
-}
-
-func init() {
-	Command.AddCommand(
-		platformDeploymentTemplateListCmd,
-		platformDeploymentTemplateShowCmd,
-		platformDeploymentTemplateDeleteCmd,
-		platformDeploymentTemplateCreateCmd,
-		platformDeploymentTemplateUpdateCmd,
-		platformDeploymentTemplatePullCmd,
-	)
-
-	platformDeploymentTemplateShowCmd.Flags().BoolP(showInstanceConfigurations, "", false, "Shows instance configurations")
-
-	platformDeploymentTemplateListCmd.Flags().BoolP(showInstanceConfigurations, "", false, "Shows instance configurations - only visible when using the JSON output")
-	platformDeploymentTemplateListCmd.Flags().String(stackVersion, "", "If present, it will cause the returned deployment templates to be adapted to return only the elements allowed in that version.")
-	platformDeploymentTemplateListCmd.Flags().String(filter, "", "Optional key/value pair in the form of key:value that will act as a filter and exclude any templates that do not have a matching metadata item associated")
-
-	platformDeploymentTemplateCreateCmd.Flags().StringP("file-template", "f", "", "YAML or JSON file that contains the deployment template configuration")
-	platformDeploymentTemplateCreateCmd.Flags().String("id", "", "Optional ID to set for the deployment template (Overrides ID if present)")
-
-	platformDeploymentTemplateUpdateCmd.Flags().StringP("file-template", "f", "", "YAML or JSON file that contains the deployment template configuration")
-
-	platformDeploymentTemplatePullCmd.Flags().StringP("path", "p", "", "Local path where to store deployment templates")
-	platformDeploymentTemplatePullCmd.MarkFlagRequired("path")
 }
