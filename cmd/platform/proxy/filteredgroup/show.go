@@ -26,31 +26,25 @@ import (
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
-const (
-	filteredGroupsUse = `Returns all proxies filtered groups in the platform`
-)
+var platformProxyFilteredGroupShowCmd = &cobra.Command{
+	Use:     "show <filtered group id>",
+	Short:   "Shows details for proxies filtered group",
+	PreRunE: cobra.MinimumNArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		response, err := filteredgroupapi.Get(filteredgroupapi.GetParams{
+			API:    ecctl.Get().API,
+			ID:     args[0],
+			Region: ecctl.Get().Config.Region,
+		})
 
-func listProxyFilteredGroups(cmd *cobra.Command, args []string) error {
-	response, err := filteredgroupapi.List(filteredgroupapi.ListParams{
-		API:    ecctl.Get().API,
-		Region: ecctl.Get().Config.Region,
-	})
-	if err != nil {
-		return err
-	}
+		if err != nil {
+			return err
+		}
 
-	return ecctl.Get().Formatter.Format(filepath.Join("filtered-group", "list"), response)
-}
-
-var platformProxyFilteredGroupsListCmd = &cobra.Command{
-	Use:     "list",
-	Short:   filteredGroupsUse,
-	PreRunE: cobra.MaximumNArgs(0),
-	RunE:    listProxyFilteredGroups,
+		return ecctl.Get().Formatter.Format(filepath.Join("filtered-group", "show"), response)
+	},
 }
 
 func init() {
-	Command.AddCommand(
-		platformProxyFilteredGroupsListCmd,
-	)
+	Command.AddCommand(platformProxyFilteredGroupShowCmd)
 }
