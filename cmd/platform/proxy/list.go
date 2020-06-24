@@ -34,7 +34,7 @@ var listProxiesCmd = &cobra.Command{
 }
 
 func listProxies(cmd *cobra.Command, args []string) error {
-	a, err := proxyapi.List(proxyapi.Params{
+	a, err := proxyapi.List(proxyapi.ListParams{
 		API:    ecctl.Get().API,
 		Region: ecctl.Get().Config.Region,
 	})
