@@ -18,22 +18,31 @@
 package cmdproxy
 
 import (
+	"path/filepath"
+
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/proxyapi"
 	"github.com/spf13/cobra"
 
-	cmdfilteredgroup "github.com/elastic/ecctl/cmd/platform/proxy/filteredgroup"
-	cmdutil "github.com/elastic/ecctl/cmd/util"
+	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
-// Command represents the proxy command
-var Command = &cobra.Command{
-	Use:     "proxy",
-	Short:   cmdutil.AdminReqDescription("Manages proxies"),
-	PreRunE: cobra.MaximumNArgs(0),
-	Run: func(cmd *cobra.Command, args []string) {
-		cmd.Help()
+var showProxyCmd = &cobra.Command{
+	Use:     "show <proxy id>",
+	Short:   "Returns information about the proxy with given id",
+	PreRunE: cobra.MinimumNArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		a, err := proxyapi.Get(proxyapi.GetParams{
+			API:    ecctl.Get().API,
+			Region: ecctl.Get().Config.Region,
+			ID:     args[0],
+		})
+		if err != nil {
+			return err
+		}
+		return ecctl.Get().Formatter.Format(filepath.Join("proxy", "show"), a)
 	},
 }
 
 func init() {
-	Command.AddCommand(cmdfilteredgroup.Command)
+	Command.AddCommand(showProxyCmd)
 }
