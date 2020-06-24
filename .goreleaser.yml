@@ -34,10 +34,14 @@ archives:
     - README*
     - docs/*
 snapshot:
-  name_template: SNAPSHOT-{{ .Commit }}
+  name_template: "{{ .Version }}_SNAPSHOT_{{ .ShortCommit }}"
 nfpms:
   - file_name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
     license: Apache 2.0
+    maintainer: Elastic Cloud
+    vendor: Elastic
+    description: ecctl is the CLI for the Elasticsearch Service and Elastic Cloud Enterprise APIs.
+    homepage: https://www.elastic.co/guide/en/ecctl/current/index.html
     replacements:
       amd64: 64-bit
       "386": 32-bit

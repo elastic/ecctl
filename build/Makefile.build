@@ -40,14 +40,14 @@ endif
 	@ git push -u $(REMOTE) $(VERSION)
 
 ## Releases a new version of ecctl, use SKIP_TAG=true to skip publishing a tag.
-release:
+release: deps
 	@ test -s notes/$(VERSION).md || (echo "-> changelog file is missing, please create it with 'make changelog'"; exit 2)
 ifneq ($(SKIP_TAG),true)
 	@ $(MAKE) tag
 endif
 	@ echo "-> Releasing $(BINARY) $(VERSION)..."
 	@ okta-awscli
-	@ ./scripts/goreleaser release --skip-validate --rm-dist --release-notes=notes/$(VERSION).md
+	@ $(GOBIN)/goreleaser release --skip-validate --rm-dist --release-notes=notes/$(VERSION).md
 
 ## Generates a changelog file in notes/$(VERSION) for the next release.
 changelog:
@@ -55,5 +55,5 @@ changelog:
 	@ ./scripts/generate-changelog.sh
 
 ## Generates a snapshot of the potential release
-snapshot:
-	@ ./scripts/goreleaser release --rm-dist --snapshot --skip-validate
+snapshot: deps
+	@ $(GOBIN)/goreleaser release --rm-dist --snapshot --skip-validate
