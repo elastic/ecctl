@@ -61,7 +61,6 @@ $(GOBIN)/go-bindata: $(GOBIN)/gobin $(VERSION_DIR)/.version-go-bindata-$(VERSION
 	@ echo "-> Installing go-bindata..."
 	@ $(GOBIN)/gobin github.com/go-bindata/go-bindata/go-bindata@$(VERSION_GOBINDATA)
 
-
 $(VERSION_DIR)/.version-goreleaser-$(VERSION_GORELEASER): | $(VERSION_DIR)
 	@ rm -f $(VERSION_DIR)/.version-goreleaser-*
 	@ echo $(VERSION_GORELEASER) > $(VERSION_DIR)/.version-goreleaser-$(VERSION_GORELEASER)
