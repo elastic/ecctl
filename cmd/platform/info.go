@@ -21,29 +21,9 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi"
 	"github.com/spf13/cobra"
 
-	cmdallocator "github.com/elastic/ecctl/cmd/platform/allocator"
-	cmdconstructor "github.com/elastic/ecctl/cmd/platform/constructor"
-	cmddeploymentdemplate "github.com/elastic/ecctl/cmd/platform/deployment-template"
-	cmdenrollmenttoken "github.com/elastic/ecctl/cmd/platform/enrollment-token"
-	cmdinstanceconfig "github.com/elastic/ecctl/cmd/platform/instance-configuration"
-	cmdproxy "github.com/elastic/ecctl/cmd/platform/proxy"
-	cmdrepository "github.com/elastic/ecctl/cmd/platform/repository"
-	cmdrole "github.com/elastic/ecctl/cmd/platform/role"
-	cmdrunner "github.com/elastic/ecctl/cmd/platform/runner"
-	cmdstack "github.com/elastic/ecctl/cmd/platform/stack"
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
-
-// Command is the platform subcommand
-var Command = &cobra.Command{
-	Use:     "platform",
-	Short:   "Manages the platform",
-	PreRunE: cobra.MaximumNArgs(0),
-	Run: func(cmd *cobra.Command, args []string) {
-		cmd.Help()
-	},
-}
 
 var infoCmd = &cobra.Command{
 	Use:     "info",
@@ -51,7 +31,8 @@ var infoCmd = &cobra.Command{
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		p, err := platformapi.GetInfo(platformapi.GetInfoParams{
-			API: ecctl.Get().API,
+			API:    ecctl.Get().API,
+			Region: ecctl.Get().Config.Region,
 		})
 		if err != nil {
 			return err
@@ -62,18 +43,5 @@ var infoCmd = &cobra.Command{
 }
 
 func init() {
-	Command.AddCommand(
-		cmdallocator.Command,
-		cmdconstructor.Command,
-		cmddeploymentdemplate.Command,
-		cmdenrollmenttoken.Command,
-		cmdinstanceconfig.Command,
-		cmdproxy.Command,
-		cmdrepository.Command,
-		cmdrole.Command,
-		cmdstack.Command,
-		cmdrunner.Command,
-	)
-
 	Command.AddCommand(infoCmd)
 }
