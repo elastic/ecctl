@@ -18,11 +18,11 @@
 package cmduser
 
 import (
+	"github.com/elastic/cloud-sdk-go/pkg/api/userapi"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/user"
 )
 
 const createExample = `
@@ -45,7 +45,7 @@ var createCmd = &cobra.Command{
 
 		role, _ := cmd.Flags().GetStringSlice("role")
 
-		res, err := user.Create(user.CreateParams{
+		res, err := userapi.Create(userapi.CreateParams{
 			API:      ecctl.Get().API,
 			Password: password,
 			UserName: cmd.Flag("username").Value.String(),

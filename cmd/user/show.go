@@ -20,10 +20,10 @@ package cmduser
 import (
 	"fmt"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/userapi"
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/user"
 )
 
 var showCmd = &cobra.Command{
@@ -32,7 +32,7 @@ var showCmd = &cobra.Command{
 	PreRunE: checkInputHas1ArgOr0ArgAndCurrent,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if current, _ := cmd.Flags().GetBool("current"); current {
-			res, err := user.GetCurrent(user.GetCurrentParams{
+			res, err := userapi.GetCurrent(userapi.GetCurrentParams{
 				API: ecctl.Get().API,
 			})
 			if err != nil {
@@ -41,7 +41,7 @@ var showCmd = &cobra.Command{
 			return ecctl.Get().Formatter.Format("user/user-details", res)
 		}
 
-		res, err := user.Get(user.GetParams{
+		res, err := userapi.Get(userapi.GetParams{
 			API:      ecctl.Get().API,
 			UserName: args[0],
 		})

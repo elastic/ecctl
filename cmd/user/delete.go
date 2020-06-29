@@ -22,12 +22,12 @@ import (
 	"sync"
 	"time"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api/userapi"
 	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/user"
 )
 
 var deleteCmd = &cobra.Command{
@@ -48,7 +48,7 @@ var deleteCmd = &cobra.Command{
 			wg.Add(1)
 			go func(index int) {
 				merr = merr.Append(
-					user.Delete(user.DeleteParams{
+					userapi.Delete(userapi.DeleteParams{
 						API:      ecctl.Get().API,
 						UserName: args[index],
 					}),
