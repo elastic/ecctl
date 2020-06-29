@@ -18,15 +18,25 @@
 package cmdinstanceconfig
 
 import (
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/instanceconfigapi"
 	"github.com/spf13/cobra"
 
-	cmdutil "github.com/elastic/ecctl/cmd/util"
+	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
-// Command is the top instance-config subcommand.
-var Command = &cobra.Command{
-	Use:     "instance-configuration",
-	Short:   cmdutil.AdminReqDescription("Manages instance configurations"),
-	PreRunE: cobra.NoArgs,
-	Run:     func(cmd *cobra.Command, args []string) { cmd.Help() },
+var deleteCmd = &cobra.Command{
+	Use:     "delete <config id>",
+	Short:   "Deletes an instance configuration",
+	PreRunE: cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return instanceconfigapi.Delete(instanceconfigapi.DeleteParams{
+			API:    ecctl.Get().API,
+			Region: ecctl.Get().Config.Region,
+			ID:     args[0],
+		})
+	},
+}
+
+func init() {
+	Command.AddCommand(deleteCmd)
 }

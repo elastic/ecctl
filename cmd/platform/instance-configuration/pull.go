@@ -18,15 +18,28 @@
 package cmdinstanceconfig
 
 import (
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/instanceconfigapi"
 	"github.com/spf13/cobra"
 
-	cmdutil "github.com/elastic/ecctl/cmd/util"
+	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
-// Command is the top instance-config subcommand.
-var Command = &cobra.Command{
-	Use:     "instance-configuration",
-	Short:   cmdutil.AdminReqDescription("Manages instance configurations"),
+var pullCmd = &cobra.Command{
+	Use:     "pull --path <path>",
+	Short:   "Downloads instance configuration into a local folder",
 	PreRunE: cobra.NoArgs,
-	Run:     func(cmd *cobra.Command, args []string) { cmd.Help() },
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return instanceconfigapi.PullToDirectory(instanceconfigapi.PullToDirectoryParams{
+			API:       ecctl.Get().API,
+			Region:    ecctl.Get().Config.Region,
+			Directory: cmd.Flag("path").Value.String(),
+		})
+	},
+}
+
+func init() {
+	Command.AddCommand(pullCmd)
+
+	pullCmd.Flags().StringP("path", "p", "", "Local path with instance configuration.")
+	pullCmd.MarkFlagRequired("path")
 }
