@@ -29,12 +29,11 @@ import (
 	"strings"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi"
+	"github.com/elastic/cloud-sdk-go/pkg/api/userapi"
 	"github.com/elastic/cloud-sdk-go/pkg/input"
 	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/output"
 	"github.com/spf13/viper"
-
-	"github.com/elastic/ecctl/pkg/user"
 )
 
 const (
@@ -496,7 +495,7 @@ func validateAuth(cfg Config, writer io.Writer) error {
 		return err
 	}
 
-	u, err := user.GetCurrent(user.GetCurrentParams{API: a.API})
+	u, err := userapi.GetCurrent(userapi.GetCurrentParams{API: a.API})
 	if err != nil {
 		if _, e := deploymentapi.List(deploymentapi.ListParams{
 			API: a.API,

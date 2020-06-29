@@ -18,10 +18,10 @@
 package cmduser
 
 import (
+	"github.com/elastic/cloud-sdk-go/pkg/api/userapi"
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/user"
 )
 
 var disableCmd = &cobra.Command{
@@ -29,7 +29,7 @@ var disableCmd = &cobra.Command{
 	Short:   "Disables a platform user",
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, err := user.Enable(user.EnableParams{
+		res, err := userapi.Enable(userapi.EnableParams{
 			UserName: args[0],
 			Enabled:  false,
 			API:      ecctl.Get().API,

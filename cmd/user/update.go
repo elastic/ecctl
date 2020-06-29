@@ -18,11 +18,11 @@
 package cmduser
 
 import (
+	"github.com/elastic/cloud-sdk-go/pkg/api/userapi"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/user"
 )
 
 const updateExample = `
@@ -57,14 +57,14 @@ var updateCmd = &cobra.Command{
 		}
 
 		if current, _ := cmd.Flags().GetBool("current"); current {
-			userInfo, err := user.GetCurrent(user.GetCurrentParams{
+			userInfo, err := userapi.GetCurrent(userapi.GetCurrentParams{
 				API: ecctl.Get().API,
 			})
 			if err != nil {
 				return err
 			}
 
-			res, err := user.UpdateCurrent(user.UpdateParams{
+			res, err := userapi.UpdateCurrent(userapi.UpdateParams{
 				UserName: *userInfo.UserName,
 				API:      ecctl.Get().API,
 				Password: password,
@@ -79,7 +79,7 @@ var updateCmd = &cobra.Command{
 			return ecctl.Get().Formatter.Format("user/user-details", res)
 		}
 
-		res, err := user.Update(user.UpdateParams{
+		res, err := userapi.Update(userapi.UpdateParams{
 			UserName: args[0],
 			API:      ecctl.Get().API,
 			Password: password,

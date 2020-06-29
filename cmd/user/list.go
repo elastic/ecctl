@@ -18,10 +18,10 @@
 package cmduser
 
 import (
+	"github.com/elastic/cloud-sdk-go/pkg/api/userapi"
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/user"
 )
 
 var listCmd = &cobra.Command{
@@ -29,7 +29,7 @@ var listCmd = &cobra.Command{
 	Short:   "Lists all platform users",
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, err := user.List(user.ListParams{
+		res, err := userapi.List(userapi.ListParams{
 			API: ecctl.Get().API,
 		})
 		if err != nil {

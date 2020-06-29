@@ -18,10 +18,10 @@
 package cmduserkey
 
 import (
+	userauthadminapi "github.com/elastic/cloud-sdk-go/pkg/api/userapi/authapi/adminapi"
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
-	userauthadmin "github.com/elastic/ecctl/pkg/user/auth/admin"
 )
 
 var showCmd = &cobra.Command{
@@ -30,7 +30,7 @@ var showCmd = &cobra.Command{
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		user, _ := cmd.Flags().GetString("user")
-		res, err := userauthadmin.GetKey(userauthadmin.GetKeyParams{
+		res, err := userauthadminapi.GetKey(userauthadminapi.GetKeyParams{
 			UserID: user,
 			API:    ecctl.Get().API,
 			ID:     args[0],

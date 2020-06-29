@@ -18,10 +18,10 @@
 package cmdauthkey
 
 import (
+	userauthapi "github.com/elastic/cloud-sdk-go/pkg/api/userapi/authapi"
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
-	userauth "github.com/elastic/ecctl/pkg/user/auth"
 )
 
 var listCmd = &cobra.Command{
@@ -29,7 +29,7 @@ var listCmd = &cobra.Command{
 	Short:   "Lists the API keys for the current authenticated user",
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		res, err := userauth.ListKeys(userauth.ListKeysParams{
+		res, err := userauthapi.ListKeys(userauthapi.ListKeysParams{
 			API: ecctl.Get().API,
 		})
 		if err != nil {
