@@ -18,9 +18,8 @@
 package cmduserkey
 
 import (
-	"github.com/spf13/cobra"
-
 	userauthadminapi "github.com/elastic/cloud-sdk-go/pkg/api/userapi/authapi/adminapi"
+	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
 )

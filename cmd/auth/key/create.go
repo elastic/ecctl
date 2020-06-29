@@ -18,11 +18,11 @@
 package cmdauthkey
 
 import (
+	userauthapi "github.com/elastic/cloud-sdk-go/pkg/api/userapi/authapi"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
-	userauth "github.com/elastic/ecctl/pkg/user/auth"
 )
 
 var createCmd = &cobra.Command{
@@ -37,8 +37,8 @@ var createCmd = &cobra.Command{
 			return err
 		}
 
-		res, err := userauth.CreateKey(userauth.CreateKeyParams{
-			ReAuthenticateParams: userauth.ReAuthenticateParams{
+		res, err := userauthapi.CreateKey(userauthapi.CreateKeyParams{
+			ReAuthenticateParams: userauthapi.ReAuthenticateParams{
 				API:      ecctl.Get().API,
 				Password: password,
 			},
