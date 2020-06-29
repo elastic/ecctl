@@ -48,7 +48,6 @@ func NewApplication(c Config) (*App, error) {
 		Client:        c.Client,
 		Host:          c.Host,
 		AuthWriter:    authWriter,
-		Region:        c.Region,
 		SkipTLSVerify: c.Insecure,
 		Timeout:       c.Timeout,
 		VerboseSettings: api.VerboseSettings{
