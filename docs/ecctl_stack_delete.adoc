@@ -1,5 +1,5 @@
-[#ecctl_platform_stack_delete]
-== ecctl platform stack delete
+[#ecctl_stack_delete]
+== ecctl stack delete
 
 Deletes an Elastic StackPack (Available for ECE only)
 
@@ -9,7 +9,7 @@ Deletes an Elastic StackPack (Available for ECE only)
 Deletes an Elastic StackPack (Available for ECE only)
 
 ----
-ecctl platform stack delete [flags]
+ecctl stack delete [flags]
 ----
 
 [float]
@@ -44,4 +44,4 @@ ecctl platform stack delete [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_stack[ecctl platform stack]	 - Manages Elastic StackPacks
+* xref:ecctl_stack[ecctl stack]	 - Manages Elastic StackPacks

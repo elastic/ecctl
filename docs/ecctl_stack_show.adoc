@@ -1,22 +1,22 @@
-[#ecctl_platform_stack_upload]
-== ecctl platform stack upload
+[#ecctl_stack_show]
+== ecctl stack show
 
-Uploads an Elastic StackPack (Available for ECE only)
+Shows information about an Elastic StackPack
 
 [float]
 === Synopsis
 
-Uploads an Elastic StackPack (Available for ECE only)
+Shows information about an Elastic StackPack
 
 ----
-ecctl platform stack upload [flags]
+ecctl stack show [flags]
 ----
 
 [float]
 === Options
 
 ----
-  -h, --help   help for upload
+  -h, --help   help for show
 ----
 
 [float]
@@ -44,4 +44,4 @@ ecctl platform stack upload [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_stack[ecctl platform stack]	 - Manages Elastic StackPacks
+* xref:ecctl_stack[ecctl stack]	 - Manages Elastic StackPacks

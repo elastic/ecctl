@@ -158,9 +158,9 @@ var platformInstanceConfigurationPullCmd = &cobra.Command{
 
 	RunE: func(cmd *cobra.Command, args []string) error {
 
-		return instanceconfigapi.PullToFolder(instanceconfigapi.PullToFolderParams{
-			API:    ecctl.Get().API,
-			Folder: cmd.Flag("path").Value.String(),
+		return instanceconfigapi.PullToDirectory(instanceconfigapi.PullToDirectoryParams{
+			API:       ecctl.Get().API,
+			Directory: cmd.Flag("path").Value.String(),
 		})
 	},
 }

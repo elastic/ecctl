@@ -1,29 +1,24 @@
-[#ecctl_platform_stack_list]
-== ecctl platform stack list
+## ecctl stack show
 
-Lists Elastic StackPacks
+Shows information about an Elastic StackPack
 
-[float]
-=== Synopsis
+### Synopsis
 
-Lists Elastic StackPacks
+Shows information about an Elastic StackPack
 
-----
-ecctl platform stack list [flags]
-----
+```
+ecctl stack show [flags]
+```
 
-[float]
-=== Options
+### Options
 
-----
-  -d, --deleted   Shows deleted stackpacks
-  -h, --help      help for list
-----
+```
+  -h, --help   help for show
+```
 
-[float]
-=== Options inherited from parent commands
+### Options inherited from parent commands
 
-----
+```
       --apikey string      API key to use to authenticate (If empty will look for EC_APIKEY environment variable)
       --config string      Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
       --force              Do not ask for confirmation
@@ -40,9 +35,9 @@ ecctl platform stack list [flags]
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
       --verbose            Enable verbose mode
-----
+```
 
-[float]
-=== SEE ALSO
+### SEE ALSO
 
-* xref:ecctl_platform_stack[ecctl platform stack]	 - Manages Elastic StackPacks
+* [ecctl stack](ecctl_stack.md)	 - Manages Elastic StackPacks
+
