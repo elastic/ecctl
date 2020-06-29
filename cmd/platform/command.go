@@ -29,7 +29,6 @@ import (
 	cmdrepository "github.com/elastic/ecctl/cmd/platform/repository"
 	cmdrole "github.com/elastic/ecctl/cmd/platform/role"
 	cmdrunner "github.com/elastic/ecctl/cmd/platform/runner"
-	cmdstack "github.com/elastic/ecctl/cmd/platform/stack"
 )
 
 // Command is the platform subcommand
@@ -52,7 +51,6 @@ func init() {
 		cmdproxy.Command,
 		cmdrepository.Command,
 		cmdrole.Command,
-		cmdstack.Command,
 		cmdrunner.Command,
 	)
 }

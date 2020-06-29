@@ -15,22 +15,37 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package cmd
+package cmdstack
 
 import (
-	cmdauth "github.com/elastic/ecctl/cmd/auth"
-	cmddeployment "github.com/elastic/ecctl/cmd/deployment"
-	cmdplatform "github.com/elastic/ecctl/cmd/platform"
-	cmdstack "github.com/elastic/ecctl/cmd/stack"
-	cmduser "github.com/elastic/ecctl/cmd/user"
+	"path/filepath"
+
+	"github.com/elastic/cloud-sdk-go/pkg/api/stackapi"
+	"github.com/spf13/cobra"
+
+	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
+var stackShowCmd = &cobra.Command{
+	Use:     "show",
+	Short:   "Shows information about an Elastic StackPack",
+	PreRunE: cobra.MinimumNArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		s, err := stackapi.Get(stackapi.GetParams{
+			API:     ecctl.Get().API,
+			Region:  ecctl.Get().Config.Region,
+			Version: args[0],
+		})
+		if err != nil {
+			return err
+		}
+
+		return ecctl.Get().Formatter.Format(filepath.Join("stack", "show"), s)
+	},
+}
+
 func init() {
-	RootCmd.AddCommand(
-		cmdauth.Command,
-		cmddeployment.Command,
-		cmdplatform.Command,
-		cmduser.Command,
-		cmdstack.Command,
+	Command.AddCommand(
+		stackShowCmd,
 	)
 }

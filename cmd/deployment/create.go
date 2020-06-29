@@ -65,11 +65,6 @@ var createCmd = &cobra.Command{
 		var appsearchSize, _ = cmd.Flags().GetInt32("appsearch-size")
 		var appsearchRefID, _ = cmd.Flags().GetString("appsearch-ref-id")
 
-		region := ecctl.Get().Config.Region
-		if region == "" {
-			region = cmdutil.DefaultECERegion
-		}
-
 		var payload *models.DeploymentCreateRequest
 		if err := sdkcmdutil.FileOrStdin(cmd, "file"); err == nil {
 			err := sdkcmdutil.DecodeDefinition(cmd, "file", &payload)
@@ -85,7 +80,7 @@ var createCmd = &cobra.Command{
 				Name:                 name,
 				DeploymentTemplateID: dt,
 				Version:              version,
-				Region:               region,
+				Region:               ecctl.Get().Config.Region,
 				Writer:               ecctl.Get().Config.ErrorDevice,
 				Plugins:              plugin,
 				TopologyElements:     te,

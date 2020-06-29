@@ -184,6 +184,7 @@ func initApp(cmd *cobra.Command, client *http.Client, v *viper.Viper) error {
 		return err
 	}
 
+	// Set the default region to `ece-region` when the endpoint is not the ESS endpoint.
 	if c.Region == "" && c.Host != api.ESSEndpoint {
 		c.Region = cmdutil.DefaultECERegion
 	}
