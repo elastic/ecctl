@@ -15,22 +15,41 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package cmd
+package cmdstack
 
 import (
-	cmdauth "github.com/elastic/ecctl/cmd/auth"
-	cmddeployment "github.com/elastic/ecctl/cmd/deployment"
-	cmdplatform "github.com/elastic/ecctl/cmd/platform"
-	cmdstack "github.com/elastic/ecctl/cmd/stack"
-	cmduser "github.com/elastic/ecctl/cmd/user"
+	"path/filepath"
+
+	"github.com/elastic/cloud-sdk-go/pkg/api/stackapi"
+	"github.com/elastic/ecctl/pkg/ecctl"
+	"github.com/spf13/cobra"
 )
 
+var stackListCmd = &cobra.Command{
+	Use:     "list",
+	Short:   "Lists Elastic StackPacks",
+	PreRunE: cobra.MaximumNArgs(0),
+	RunE:    listStackPacks,
+}
+
+func listStackPacks(cmd *cobra.Command, args []string) error {
+	deleted, _ := cmd.Flags().GetBool("deleted")
+	s, err := stackapi.List(stackapi.ListParams{
+		API:     ecctl.Get().API,
+		Region:  ecctl.Get().Config.Region,
+		Deleted: deleted,
+	})
+	if err != nil {
+		return err
+	}
+
+	return ecctl.Get().Formatter.Format(filepath.Join("stack", "list"), s)
+}
+
 func init() {
-	RootCmd.AddCommand(
-		cmdauth.Command,
-		cmddeployment.Command,
-		cmdplatform.Command,
-		cmduser.Command,
-		cmdstack.Command,
+	Command.AddCommand(
+		stackListCmd,
 	)
+
+	stackListCmd.Flags().BoolP("deleted", "d", false, "Shows deleted stackpacks")
 }

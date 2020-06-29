@@ -15,22 +15,18 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package cmd
+package cmdstack
 
 import (
-	cmdauth "github.com/elastic/ecctl/cmd/auth"
-	cmddeployment "github.com/elastic/ecctl/cmd/deployment"
-	cmdplatform "github.com/elastic/ecctl/cmd/platform"
-	cmdstack "github.com/elastic/ecctl/cmd/stack"
-	cmduser "github.com/elastic/ecctl/cmd/user"
+	"github.com/spf13/cobra"
 )
 
-func init() {
-	RootCmd.AddCommand(
-		cmdauth.Command,
-		cmddeployment.Command,
-		cmdplatform.Command,
-		cmduser.Command,
-		cmdstack.Command,
-	)
+// Command is the top level stack command.
+var Command = &cobra.Command{
+	Use:     "stack",
+	Short:   "Manages Elastic StackPacks",
+	PreRunE: cobra.MaximumNArgs(0),
+	Run: func(cmd *cobra.Command, args []string) {
+		cmd.Help()
+	},
 }

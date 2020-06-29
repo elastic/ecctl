@@ -1,19 +1,19 @@
-## ecctl platform stack show
+## ecctl stack upload
 
-Shows information about an Elastic StackPack
+Uploads an Elastic StackPack (Available for ECE only)
 
 ### Synopsis
 
-Shows information about an Elastic StackPack
+Uploads an Elastic StackPack (Available for ECE only)
 
 ```
-ecctl platform stack show [flags]
+ecctl stack upload [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for show
+  -h, --help   help for upload
 ```
 
 ### Options inherited from parent commands
@@ -39,5 +39,5 @@ ecctl platform stack show [flags]
 
 ### SEE ALSO
 
-* [ecctl platform stack](ecctl_platform_stack.md)	 - Manages Elastic StackPacks
+* [ecctl stack](ecctl_stack.md)	 - Manages Elastic StackPacks
 

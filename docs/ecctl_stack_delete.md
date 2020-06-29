@@ -1,20 +1,19 @@
-## ecctl platform stack list
+## ecctl stack delete
 
-Lists Elastic StackPacks
+Deletes an Elastic StackPack (Available for ECE only)
 
 ### Synopsis
 
-Lists Elastic StackPacks
+Deletes an Elastic StackPack (Available for ECE only)
 
 ```
-ecctl platform stack list [flags]
+ecctl stack delete [flags]
 ```
 
 ### Options
 
 ```
-  -d, --deleted   Shows deleted stackpacks
-  -h, --help      help for list
+  -h, --help   help for delete
 ```
 
 ### Options inherited from parent commands
@@ -40,5 +39,5 @@ ecctl platform stack list [flags]
 
 ### SEE ALSO
 
-* [ecctl platform stack](ecctl_platform_stack.md)	 - Manages Elastic StackPacks
+* [ecctl stack](ecctl_stack.md)	 - Manages Elastic StackPacks
 

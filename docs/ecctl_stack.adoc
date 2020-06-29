@@ -1,24 +1,28 @@
-## ecctl platform stack upload
+[#ecctl_stack]
+== ecctl stack
 
-Uploads an Elastic StackPack (Available for ECE only)
+Manages Elastic StackPacks
 
-### Synopsis
+[float]
+=== Synopsis
 
-Uploads an Elastic StackPack (Available for ECE only)
+Manages Elastic StackPacks
 
-```
-ecctl platform stack upload [flags]
-```
+----
+ecctl stack [flags]
+----
 
-### Options
+[float]
+=== Options
 
-```
-  -h, --help   help for upload
-```
+----
+  -h, --help   help for stack
+----
 
-### Options inherited from parent commands
+[float]
+=== Options inherited from parent commands
 
-```
+----
       --apikey string      API key to use to authenticate (If empty will look for EC_APIKEY environment variable)
       --config string      Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
       --force              Do not ask for confirmation
@@ -35,9 +39,13 @@ ecctl platform stack upload [flags]
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
       --verbose            Enable verbose mode
-```
+----
 
-### SEE ALSO
+[float]
+=== SEE ALSO
 
-* [ecctl platform stack](ecctl_platform_stack.md)	 - Manages Elastic StackPacks
-
+* xref:ecctl[ecctl]	 - Elastic Cloud Control
+* xref:ecctl_stack_delete[ecctl stack delete]	 - Deletes an Elastic StackPack (Available for ECE only)
+* xref:ecctl_stack_list[ecctl stack list]	 - Lists Elastic StackPacks
+* xref:ecctl_stack_show[ecctl stack show]	 - Shows information about an Elastic StackPack
+* xref:ecctl_stack_upload[ecctl stack upload]	 - Uploads an Elastic StackPack (Available for ECE only)

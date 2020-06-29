@@ -55,4 +55,3 @@ ecctl platform [flags]
 * xref:ecctl_platform_repository[ecctl platform repository]	 - Manages snapshot repositories (Available for ECE only)
 * xref:ecctl_platform_role[ecctl platform role]	 - Manages platform roles (Available for ECE only)
 * xref:ecctl_platform_runner[ecctl platform runner]	 - Manages platform runners (Available for ECE only)
-* xref:ecctl_platform_stack[ecctl platform stack]	 - Manages Elastic StackPacks
