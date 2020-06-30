@@ -18,15 +18,32 @@
 package cmdinstanceconfig
 
 import (
+	"path/filepath"
+
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/instanceconfigapi"
 	"github.com/spf13/cobra"
 
-	cmdutil "github.com/elastic/ecctl/cmd/util"
+	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
-// Command is the top instance-config subcommand.
-var Command = &cobra.Command{
-	Use:     "instance-configuration",
-	Short:   cmdutil.AdminReqDescription("Manages instance configurations"),
-	PreRunE: cobra.NoArgs,
-	Run:     func(cmd *cobra.Command, args []string) { cmd.Help() },
+var listCmd = &cobra.Command{
+	Use:     "list",
+	Short:   "Lists the instance configurations",
+	PreRunE: cobra.MaximumNArgs(0),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		res, err := instanceconfigapi.List(instanceconfigapi.ListParams{
+			API:    ecctl.Get().API,
+			Region: ecctl.Get().Config.Region,
+		})
+
+		if err != nil {
+			return err
+		}
+
+		return ecctl.Get().Formatter.Format(filepath.Join("instance-configuration", "list"), res)
+	},
+}
+
+func init() {
+	Command.AddCommand(listCmd)
 }
