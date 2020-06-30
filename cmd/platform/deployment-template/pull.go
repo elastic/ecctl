@@ -30,10 +30,13 @@ var pullCmd = &cobra.Command{
 	Short:   "Downloads deployment template into a local folder",
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
+		format, _ := cmd.Flags().GetString(format)
+
 		return configurationtemplateapi.PullToFolder(configurationtemplateapi.PullToFolderParams{
 			API:    ecctl.Get().API,
 			Region: ecctl.Get().Config.Region,
 			Folder: cmd.Flag("path").Value.String(),
+			Format: format,
 		})
 	},
 }
@@ -42,4 +45,5 @@ func init() {
 	Command.AddCommand(pullCmd)
 	pullCmd.Flags().StringP("path", "p", "", "Local path where to store deployment templates")
 	pullCmd.MarkFlagRequired("path")
+	pullCmd.Flags().String(format, "deployment", "If deployment is specified deployment_template is populated in the response, If cluster is specified cluster_template is populated in the response. (Defaults to deployment)")
 }
