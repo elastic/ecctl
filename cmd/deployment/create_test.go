@@ -238,7 +238,6 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 					errors.New("invalid argument"),
 					errors.New("could not read the specified file, please make sure it exists"),
 				),
-				Stderr: `http transport warning: failed converting *mock.RoundTripper to *http.Transport` + "\n",
 			},
 		},
 		{
@@ -270,7 +269,6 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 				}},
 			},
 			want: testutils.Assertion{
-				Stderr: `http transport warning: failed converting *mock.RoundTripper to *http.Transport` + "\n",
 				Stdout: string(azureCreateResponseBytes) + "\n",
 			},
 		},
@@ -285,7 +283,6 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 				Cfg: testutils.MockCfg{Responses: awsCreateResponses, OutputFormat: "text"},
 			},
 			want: testutils.Assertion{
-				Stderr: `http transport warning: failed converting *mock.RoundTripper to *http.Transport` + "\n",
 				Stdout: string(awsCreateResponseBytes) + "\n" + awsTrackOutput,
 			},
 		},
@@ -321,8 +318,7 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 			},
 			want: testutils.Assertion{
 				Err: errors.New(`{"error": "some"}`),
-				Stderr: `http transport warning: failed converting *mock.RoundTripper to *http.Transport` + "\n" +
-					"The deployment creation returned with an error. Use the displayed request ID to recreate the deployment resources" +
+				Stderr: "The deployment creation returned with an error. Use the displayed request ID to recreate the deployment resources" +
 					"\n" + "Request ID: some_request_id" + "\n",
 			},
 		},
