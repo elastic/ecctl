@@ -72,6 +72,7 @@ func Test_createCmd(t *testing.T) {
 	var awsDeploymentID = ec.RandomResourceID()
 	var awsESID = ec.RandomResourceID()
 	var awsKibanaID = ec.RandomResourceID()
+	var awsAPMID = ec.RandomResourceID()
 	var awsCreateResponse = models.DeploymentCreateResponse{
 		Created: ec.Bool(true),
 		ID:      ec.String(awsDeploymentID),
@@ -93,6 +94,13 @@ func Test_createCmd(t *testing.T) {
 				RefID:  ec.String("main-kibana"),
 				Region: ec.String("us-east-1"),
 			},
+			{
+				ID:          ec.String(awsAPMID),
+				Kind:        ec.String("apm"),
+				RefID:       ec.String("main-apm"),
+				Region:      ec.String("us-east-1"),
+				SecretToken: "some-secret-token",
+			},
 		},
 	}
 	awsCreateResponseBytes, err := json.MarshalIndent(awsCreateResponse, "", "  ")
@@ -101,11 +109,13 @@ func Test_createCmd(t *testing.T) {
 	}
 
 	var awsTrackOutput = fmt.Sprintf(`Deployment [%s] - [Elasticsearch][%s]: running step "waiting-for-some-step" (Plan duration )...
-Deployment [%s] - [Kibana][%s]: running step "waiting-for-some-step" (Plan duration )...`+"\n"+
+Deployment [%s] - [Kibana][%s]: running step "waiting-for-some-step" (Plan duration )...
+Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration )...`+"\n"+
 		"\x1b[92;mDeployment [%s] - [Elasticsearch][%s]: finished running all the plan steps\x1b[0m (Total plan duration )\n"+
-		"\x1b[92;mDeployment [%s] - [Kibana][%s]: finished running all the plan steps\x1b[0m (Total plan duration )\n",
-		awsDeploymentID, awsESID, awsDeploymentID, awsKibanaID,
-		awsDeploymentID, awsESID, awsDeploymentID, awsKibanaID,
+		"\x1b[92;mDeployment [%s] - [Kibana][%s]: finished running all the plan steps\x1b[0m (Total plan duration )\n"+
+		"\x1b[92;mDeployment [%s] - [Apm][%s]: finished running all the plan steps\x1b[0m (Total plan duration )\n",
+		awsDeploymentID, awsESID, awsDeploymentID, awsKibanaID, awsDeploymentID, awsAPMID,
+		awsDeploymentID, awsESID, awsDeploymentID, awsKibanaID, awsDeploymentID, awsAPMID,
 	)
 
 	var awsCreateResponses = []mock.Response{
@@ -117,7 +127,7 @@ Deployment [%s] - [Kibana][%s]: running step "waiting-for-some-step" (Plan durat
 			Assert: &mock.RequestAssertion{
 				Method: "POST",
 				Header: api.DefaultWriteMockHeaders,
-				Body:   mock.NewStringBody(`{"name":"test-create-aws","resources":{"apm":null,"appsearch":null,"elasticsearch":[{"plan":{"cluster_topology":[{"instance_configuration_id":"aws.data.highio.i3","node_type":{"data":true,"ingest":true,"master":true},"size":{"resource":"memory","value":1024},"zone_count":2}],"deployment_template":{"id":"aws-io-optimized"},"elasticsearch":{"version":"7.8.0"}},"ref_id":"main-elasticsearch","region":"us-east-1","settings":{"dedicated_masters_threshold":6}}],"enterprise_search":null,"kibana":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"instance_configuration_id":"aws.kibana.r4","size":{"resource":"memory","value":1024},"zone_count":1}],"kibana":{"version":"7.8.0"}},"ref_id":"main-kibana","region":"us-east-1"}]}}` + "\n"),
+				Body:   mock.NewStringBody(`{"name":"test-create-aws","resources":{"apm":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"apm":{"version":"7.8.0"},"cluster_topology":[{"instance_configuration_id":"aws.apm.r4","size":{"resource":"memory","value":512},"zone_count":1}]},"ref_id":"main-apm","region":"us-east-1"}],"appsearch":null,"elasticsearch":[{"plan":{"cluster_topology":[{"instance_configuration_id":"aws.data.highio.i3","node_type":{"data":true,"ingest":true,"master":true},"size":{"resource":"memory","value":1024},"zone_count":2}],"deployment_template":{"id":"aws-io-optimized"},"elasticsearch":{"version":"7.8.0"}},"ref_id":"main-elasticsearch","region":"us-east-1","settings":{"dedicated_masters_threshold":6}}],"enterprise_search":null,"kibana":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"instance_configuration_id":"aws.kibana.r4","size":{"resource":"memory","value":1024},"zone_count":1}],"kibana":{"version":"7.8.0"}},"ref_id":"main-kibana","region":"us-east-1"}]}}` + "\n"),
 				Path:   "/api/v1/deployments",
 				Host:   api.DefaultMockHost,
 				Query: url.Values{
@@ -144,6 +154,14 @@ Deployment [%s] - [Kibana][%s]: running step "waiting-for-some-step" (Plan durat
 					),
 				},
 			},
+			Apm: []planmock.GeneratedResourceConfig{
+				{
+					ID: awsAPMID,
+					PendingLog: planmock.NewPlanStepLog(
+						planmock.NewPlanStep("waiting-for-some-step", "pending"),
+					),
+				},
+			},
 		})),
 		mock.New500Response(mock.NewStringBody("some error")),
 		mock.New200StructResponse(planmock.Generate(planmock.GenerateConfig{
@@ -164,6 +182,14 @@ Deployment [%s] - [Kibana][%s]: running step "waiting-for-some-step" (Plan durat
 					),
 				},
 			},
+			Apm: []planmock.GeneratedResourceConfig{
+				{
+					ID: awsAPMID,
+					CurrentLog: planmock.NewPlanStepLog(
+						planmock.NewPlanStep("plan-completed", "success"),
+					),
+				},
+			},
 		})),
 		mock.New200StructResponse(planmock.Generate(planmock.GenerateConfig{
 			ID: awsDeploymentID,
@@ -178,6 +204,14 @@ Deployment [%s] - [Kibana][%s]: running step "waiting-for-some-step" (Plan durat
 			Kibana: []planmock.GeneratedResourceConfig{
 				{
 					ID: awsKibanaID,
+					CurrentLog: planmock.NewPlanStepLog(
+						planmock.NewPlanStep("plan-completed", "success"),
+					),
+				},
+			},
+			Apm: []planmock.GeneratedResourceConfig{
+				{
+					ID: awsAPMID,
 					CurrentLog: planmock.NewPlanStepLog(
 						planmock.NewPlanStep("plan-completed", "success"),
 					),
@@ -295,7 +329,7 @@ Deployment [%s] - [Kibana][%s]: running step "waiting-for-some-step" (Plan durat
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			testutils.TestCommand(t, tt.args, tt.want)
+			testutils.RunCmdAssertion(t, tt.args, tt.want)
 		})
 	}
 }

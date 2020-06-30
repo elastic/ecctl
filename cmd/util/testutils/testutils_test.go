@@ -88,7 +88,7 @@ func Test_newConfig(t *testing.T) {
 }
 
 func TestMockApp(t *testing.T) {
-	cleanup := MockApp(t, MockCfg{})
+	cleanup := mockApp(t, MockCfg{})
 	assert.NotNil(t, ecctl.Get())
 	cleanup()
 	assert.Nil(t, ecctl.Get())

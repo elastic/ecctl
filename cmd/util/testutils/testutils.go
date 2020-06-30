@@ -85,8 +85,8 @@ func newConfig(cfg MockCfg) ecctl.Config {
 	}
 }
 
-// MockApp initiates a mocked app from a MockCfg.
-func MockApp(t *testing.T, cfg MockCfg) func() {
+// mockApp initiates a mocked app from a MockCfg.
+func mockApp(t *testing.T, cfg MockCfg) func() {
 	if _, err := ecctl.Instance(newConfig(cfg)); err != nil {
 		t.Error(err)
 	}

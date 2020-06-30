@@ -46,14 +46,14 @@ type Assertion struct {
 	Stderr string
 }
 
-// TestCommand tests a `*cobra.Command` and uses the testing.T struct to
+// RunCmdAssertion tests a `*cobra.Command` and uses the testing.T struct to
 // return any unmatched assertions.
-func TestCommand(t *testing.T, args Args, assertion Assertion) {
+func RunCmdAssertion(t *testing.T, args Args, assertion Assertion) {
 	cfg := fillDefaults(args.Cfg)
 	cfg.Out = new(bytes.Buffer)
 	cfg.Err = new(bytes.Buffer)
 
-	defer MockApp(t, cfg)()
+	defer mockApp(t, cfg)()
 
 	// Set the command arguments.
 	args.Cmd.Root().SetArgs(args.Args)
@@ -66,8 +66,16 @@ func TestCommand(t *testing.T, args Args, assertion Assertion) {
 	args.Cmd.SetOutput(cfg.Out)
 	args.Cmd.SetErr(cfg.Err)
 
-	if err := args.Cmd.Execute(); !assert.Equal(t, assertion.Err, err) {
-		t.Error(err)
+	err := args.Cmd.Execute()
+
+	assertCmd(t, args, assertion, err,
+		strings.Contains(strings.Join(args.Args, " "), "--track"),
+	)
+}
+
+func assertCmd(t *testing.T, args Args, want Assertion, execErr error, track bool) {
+	if !assert.Equal(t, want.Err, execErr) {
+		t.Error(execErr)
 	}
 
 	if buf, ok := args.Cmd.OutOrStdout().(*bytes.Buffer); ok {
@@ -75,20 +83,20 @@ func TestCommand(t *testing.T, args Args, assertion Assertion) {
 
 		// When the output contains the `--track` flag, removes the non-
 		// assertable duration time.
-		if strings.Contains(strings.Join(args.Args, " "), "--track") {
+		if track {
 			got = regexp.MustCompile(durationExpr).ReplaceAllString(
 				got, durationRepl,
 			)
 		}
 
-		if got != assertion.Stdout {
-			t.Errorf(`"Got stdout "%s" != want "%s"`, got, assertion.Stdout)
+		if got != want.Stdout {
+			t.Errorf(`"Got stdout "%s" != want "%s"`, got, want.Stdout)
 		}
 	}
 
 	if buf, ok := args.Cmd.ErrOrStderr().(*bytes.Buffer); ok {
-		if got := buf.String(); got != assertion.Stderr {
-			t.Errorf(`"Got stderr "%s" != want "%s"`, got, assertion.Stderr)
+		if got := buf.String(); got != want.Stderr {
+			t.Errorf(`"Got stderr "%s" != want "%s"`, got, want.Stderr)
 		}
 	}
 }
