@@ -34,7 +34,7 @@ const (
 	showInstanceConfigurations = "show-instance-configurations"
 	stackVersion               = "stack-version"
 	filter                     = "filter"
-	format                     = "format"
+	format                     = "template-format"
 )
 
 // Command represents the top level deployment-template command.

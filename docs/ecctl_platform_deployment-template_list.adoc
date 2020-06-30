@@ -20,6 +20,7 @@ ecctl platform deployment-template list [flags]
   -h, --help                           help for list
       --show-instance-configurations   Shows instance configurations - only visible when using the JSON output
       --stack-version string           If present, it will cause the returned deployment templates to be adapted to return only the elements allowed in that version.
+      --template-format string         If deployment is specified deployment_template is populated in the response, If cluster is specified cluster_template is populated in the response. (Defaults to deployment) (default "deployment")
 ----
 
 [float]

@@ -48,7 +48,7 @@ func Test_showCmd(t *testing.T) {
 			args: testutils.Args{
 				Cmd: showCmd,
 				Args: []string{
-					"show", "default", "--format=hi",
+					"show", "default", "--template-format=hi",
 				},
 			},
 			want: testutils.Assertion{
