@@ -34,6 +34,7 @@ var listCmd = &cobra.Command{
 		showInstanceConfig, _ := cmd.Flags().GetBool(showInstanceConfigurations)
 		stackVersion, _ := cmd.Flags().GetString(stackVersion)
 		metadataFilter, _ := cmd.Flags().GetString(filter)
+		format, _ := cmd.Flags().GetString(format)
 
 		res, err := configurationtemplateapi.ListTemplates(configurationtemplateapi.ListTemplateParams{
 			API:                ecctl.Get().API,
@@ -41,6 +42,7 @@ var listCmd = &cobra.Command{
 			ShowInstanceConfig: showInstanceConfig,
 			StackVersion:       stackVersion,
 			Metadata:           metadataFilter,
+			Format:             format,
 		})
 
 		if err != nil {
@@ -55,5 +57,6 @@ func init() {
 	Command.AddCommand(listCmd)
 	listCmd.Flags().BoolP(showInstanceConfigurations, "", false, "Shows instance configurations - only visible when using the JSON output")
 	listCmd.Flags().String(stackVersion, "", "If present, it will cause the returned deployment templates to be adapted to return only the elements allowed in that version.")
-	listCmd.Flags().String(filter, "", "Optional key/value pair in the form of key:value that will act as a filter and exclude any templates that do not have a matching metadata item associated")
+	listCmd.Flags().String(filter, "", "Optional key/value pair in the form of key:value that will act as a filter and exclude any templates that do not have a matching metadata item associated.")
+	listCmd.Flags().String(format, "deployment", "If deployment is specified deployment_template is populated in the response, If cluster is specified cluster_template is populated in the response. (Defaults to deployment)")
 }
