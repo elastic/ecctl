@@ -18,12 +18,13 @@
 package cmddeployment
 
 import (
+	"errors"
 	"fmt"
-	"os"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi"
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/depresourceapi"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
@@ -34,7 +35,7 @@ import (
 var createCmd = &cobra.Command{
 	Use:     "create {--file | --size <int> --zones <string> | --topology-element <obj>}",
 	Short:   "Creates a deployment",
-	PreRunE: cobra.MaximumNArgs(0),
+	PreRunE: cobra.NoArgs,
 	// Switch back to non-temp constants when reads for deployment templates are available on ESS
 	Long:    createLongTemp,
 	Example: createExampleTemp,
@@ -65,12 +66,19 @@ var createCmd = &cobra.Command{
 		var appsearchSize, _ = cmd.Flags().GetInt32("appsearch-size")
 		var appsearchRefID, _ = cmd.Flags().GetString("appsearch-ref-id")
 
+		var skipFlagBased = cmd.Flag("deployment-template").Hidden
+
 		var payload *models.DeploymentCreateRequest
-		if err := sdkcmdutil.FileOrStdin(cmd, "file"); err == nil {
-			err := sdkcmdutil.DecodeDefinition(cmd, "file", &payload)
-			if err != nil && err != sdkcmdutil.ErrNodefinitionLoaded {
-				return err
-			}
+		if err := sdkcmdutil.FileOrStdin(cmd, "file"); err != nil && skipFlagBased {
+			return err
+		}
+
+		err := sdkcmdutil.DecodeDefinition(cmd, "file", &payload)
+		if err := returnErrOnHidden(err, skipFlagBased); err != nil {
+			merr := multierror.NewPrefixed("failed reading the file definition")
+			return merr.Append(err,
+				errors.New("could not read the specified file, please make sure it exists"),
+			)
 		}
 
 		if payload == nil {
@@ -128,10 +136,10 @@ var createCmd = &cobra.Command{
 
 		res, err := deploymentapi.Create(createParams)
 		if err != nil {
-			fmt.Fprintln(os.Stderr,
+			fmt.Fprintln(cmd.ErrOrStderr(),
 				"The deployment creation returned with an error. Use the displayed request ID to recreate the deployment resources",
 			)
-			fmt.Fprintln(os.Stderr, "Request ID:", reqID)
+			fmt.Fprintln(cmd.ErrOrStderr(), "Request ID:", reqID)
 			return err
 		}
 
@@ -142,6 +150,16 @@ var createCmd = &cobra.Command{
 			Response:     res,
 		}))
 	},
+}
+
+func returnErrOnHidden(err error, hidden bool) error {
+	if hidden {
+		return err
+	}
+	if err != nil && err != sdkcmdutil.ErrNodefinitionLoaded {
+		return err
+	}
+	return nil
 }
 
 func init() {

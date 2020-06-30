@@ -18,8 +18,10 @@
 package cmdutil
 
 import (
+	"strings"
 	"time"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/plan"
 	"github.com/elastic/cloud-sdk-go/pkg/plan/planutil"
 
@@ -30,6 +32,12 @@ import (
 var DefaultTrackFrequencyConfig = plan.TrackFrequencyConfig{
 	PollFrequency: time.Second * 5,
 	MaxRetries:    3,
+}
+
+// DefaultTestFrequency provides sane defaults for testing Plan change tracking.
+var DefaultTestFrequency = plan.TrackFrequencyConfig{
+	PollFrequency: time.Millisecond,
+	MaxRetries:    1,
 }
 
 // TrackParamsConfig is used to create TrackParams which print the output / track.
@@ -52,6 +60,10 @@ func NewTrackParams(params TrackParamsConfig) TrackParams {
 
 	if params.App == nil {
 		params.App = ecctl.Get()
+	}
+
+	if strings.Contains(params.App.Config.Host, api.DefaultMockHost) {
+		params.FrequencyConfig = &DefaultTestFrequency
 	}
 
 	return TrackParams{
