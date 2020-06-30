@@ -16,5 +16,3 @@ require (
 )
 
 replace sourcegraph.com/sourcegraph/go-diff v0.5.1 => github.com/sourcegraph/go-diff v0.5.1
-
-replace github.com/elastic/cloud-sdk-go => ../cloud-sdk-go
