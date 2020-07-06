@@ -22,6 +22,7 @@ import (
 	"testing"
 
 	"github.com/elastic/cloud-sdk-go/pkg/multierror"
+
 	"github.com/elastic/ecctl/cmd/util/testutils"
 )
 
