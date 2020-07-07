@@ -75,6 +75,7 @@ func newConfig(cfg MockCfg) ecctl.Config {
 	return ecctl.Config{
 		Client:       mock.NewClient(cfg.Responses...),
 		OutputDevice: output.NewDevice(cfg.Out),
+		Region:       cfg.Region,
 		ErrorDevice:  cfg.Err,
 		Output:       cfg.OutputFormat,
 		Format:       cfg.Format,
