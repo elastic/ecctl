@@ -53,5 +53,5 @@ var showCmd = &cobra.Command{
 func init() {
 	Command.AddCommand(showCmd)
 	showCmd.Flags().BoolP(showInstanceConfigurations, "", false, "Shows instance configurations")
-	showCmd.Flags().String(format, "deployment", "If deployment is specified deployment_template is populated in the response, If cluster is specified cluster_template is populated in the response. (Defaults to deployment)")
+	showCmd.Flags().String(format, "cluster", "If 'deployment' is specified, the deployment_template is populated in the response. If 'cluster' is specified, the cluster_template is populated in the response.")
 }

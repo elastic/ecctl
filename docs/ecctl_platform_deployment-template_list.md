@@ -13,11 +13,11 @@ ecctl platform deployment-template list [flags]
 ### Options
 
 ```
-      --filter string                  Optional key/value pair in the form of key:value that will act as a filter and exclude any templates that do not have a matching metadata item associated.
+      --filter string                  Optional key:value pair that acts as a filter and excludes any template that does not have a matching metadata item associated.
   -h, --help                           help for list
       --show-instance-configurations   Shows instance configurations - only visible when using the JSON output
       --stack-version string           If present, it will cause the returned deployment templates to be adapted to return only the elements allowed in that version.
-      --template-format string         If deployment is specified deployment_template is populated in the response, If cluster is specified cluster_template is populated in the response. (Defaults to deployment) (default "deployment")
+      --template-format string         If 'deployment' is specified, the deployment_template is populated in the response. If 'cluster' is specified, the cluster_template is populated in the response. (default "cluster")
 ```
 
 ### Options inherited from parent commands
