@@ -68,7 +68,7 @@ func Test_listCmd(t *testing.T) {
 		want testutils.Assertion
 	}{
 		{
-			name: "succeeds showing deployment template",
+			name: "succeeds listing deployment template",
 			args: testutils.Args{
 				Cmd: showCmd,
 				Args: []string{
