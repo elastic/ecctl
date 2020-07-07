@@ -16,8 +16,9 @@ ecctl platform deployment-template pull --path <path> [flags]
 === Options
 
 ----
-  -h, --help          help for pull
-  -p, --path string   Local path where to store deployment templates
+  -h, --help                     help for pull
+  -p, --path string              Local path where to store deployment templates
+      --template-format string   If deployment is specified deployment_template is populated in the response, If cluster is specified cluster_template is populated in the response. (Defaults to deployment) (default "deployment")
 ----
 
 [float]

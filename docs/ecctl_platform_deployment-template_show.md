@@ -15,6 +15,7 @@ ecctl platform deployment-template show <template id> [flags]
 ```
   -h, --help                           help for show
       --show-instance-configurations   Shows instance configurations
+      --template-format string         If 'deployment' is specified, the deployment_template is populated in the response. If 'cluster' is specified, the cluster_template is populated in the response. (default "cluster")
 ```
 
 ### Options inherited from parent commands

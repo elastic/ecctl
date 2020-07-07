@@ -32,11 +32,14 @@ var showCmd = &cobra.Command{
 	PreRunE: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		show, _ := cmd.Flags().GetBool("show-instance-configurations")
+		format, _ := cmd.Flags().GetString(format)
+
 		res, err := configurationtemplateapi.GetTemplate(configurationtemplateapi.GetTemplateParams{
 			API:                ecctl.Get().API,
 			Region:             ecctl.Get().Config.Region,
 			ID:                 args[0],
 			ShowInstanceConfig: show,
+			Format:             format,
 		})
 
 		if err != nil {
@@ -50,4 +53,5 @@ var showCmd = &cobra.Command{
 func init() {
 	Command.AddCommand(showCmd)
 	showCmd.Flags().BoolP(showInstanceConfigurations, "", false, "Shows instance configurations")
+	showCmd.Flags().String(format, "cluster", "If 'deployment' is specified, the deployment_template is populated in the response. If 'cluster' is specified, the cluster_template is populated in the response.")
 }
