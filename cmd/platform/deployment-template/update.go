@@ -21,7 +21,6 @@ import (
 	"fmt"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/configurationtemplateapi"
-	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
@@ -32,9 +31,6 @@ var updateCmd = &cobra.Command{
 	Short:   "Updates a platform deployment template",
 	PreRunE: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if err := sdkcmdutil.FileOrStdin(cmd, "file-template"); err != nil {
-			return err
-		}
 		tc, err := parseTemplateFile(cmd.Flag("file-template").Value.String())
 		if err != nil {
 			return err

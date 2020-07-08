@@ -69,9 +69,6 @@ var createCmd = &cobra.Command{
 		var skipFlagBased = cmd.Flag("deployment-template").Hidden
 
 		var payload *models.DeploymentCreateRequest
-		if err := sdkcmdutil.FileOrStdin(cmd, "file"); err != nil && skipFlagBased {
-			return err
-		}
 
 		err := sdkcmdutil.DecodeDefinition(cmd, "file", &payload)
 		if err := returnErrOnHidden(err, skipFlagBased); err != nil {

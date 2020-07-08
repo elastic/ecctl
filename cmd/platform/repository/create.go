@@ -24,7 +24,6 @@ import (
 
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/snaprepoapi"
 	"github.com/elastic/cloud-sdk-go/pkg/input"
-	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
@@ -75,10 +74,6 @@ func setSnapshot(cmd *cobra.Command, args []string) error {
 		if err != nil {
 			return err
 		}
-	}
-
-	if err := sdkcmdutil.FileOrStdin(cmd, "settings"); err != nil {
-		return err
 	}
 
 	f, err := input.NewFileOrReader(os.Stdin, configFile)
