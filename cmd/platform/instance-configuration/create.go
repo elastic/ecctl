@@ -67,5 +67,4 @@ func init() {
 
 	createCmd.Flags().StringP("file", "f", "", "Instance configuration JSON file definition")
 	createCmd.Flags().String("id", "", "Optional ID to set for the instance configuration (Overrides id if present)")
-	createCmd.MarkFlagRequired("file")
 }

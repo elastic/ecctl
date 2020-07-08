@@ -56,5 +56,4 @@ func init() {
 	Command.AddCommand(updateCmd)
 
 	updateCmd.Flags().StringP("file", "f", "", "Instance configuration JSON file definition")
-	updateCmd.MarkFlagRequired("file")
 }
