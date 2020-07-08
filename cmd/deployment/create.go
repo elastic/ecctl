@@ -69,9 +69,6 @@ var createCmd = &cobra.Command{
 		var skipFlagBased = cmd.Flag("deployment-template").Hidden
 
 		var payload *models.DeploymentCreateRequest
-		if err := sdkcmdutil.FileOrStdin(cmd, "file"); err != nil && skipFlagBased {
-			return err
-		}
 
 		err := sdkcmdutil.DecodeDefinition(cmd, "file", &payload)
 		if err := returnErrOnHidden(err, skipFlagBased); err != nil {
@@ -166,7 +163,6 @@ func init() {
 	Command.AddCommand(createCmd)
 	createCmd.Flags().StringP("file", "f", "", "DeploymentCreateRequest file definition. See help for more information")
 	// Remove when reads for deployment templates are available on ESS
-	createCmd.MarkFlagRequired("file")
 	createCmd.Flags().String("deployment-template", "default", "Deployment template ID on which to base the deployment from")
 	createCmd.Flags().String("version", "", "Version to use, if not specified, the latest available stack version will be used")
 	createCmd.Flags().String("name", "", "Optional name for the deployment")
