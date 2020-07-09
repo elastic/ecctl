@@ -16,10 +16,17 @@ go run main.go generate docs
 
 
 echo "-> Regenerating Asciidoc..."
-cd docs
 
 # Convert the Markdown files to Asciidoctor
-docker run --rm -v $(pwd):/documents ${KRAMDOC_DOCKER_IMAGE} find ./ -name "*.md" -type f -exec sh -c 'kramdoc {}' \;
+DOCS_VOL=$(docker volume create docs-vol)
+DOCS_HELPER=$(docker create -v ${DOCS_VOL}:/documents alpine true)
+docker cp $(pwd)/docs ${DOCS_HELPER}:/documents/docs
+docker run --rm -v ${DOCS_VOL}:/documents ${KRAMDOC_DOCKER_IMAGE} find ./ -name "*.md" -type f -exec sh -c 'kramdoc {}' \;
+docker cp ${DOCS_HELPER}:/documents/docs $(pwd)
+docker rm ${DOCS_HELPER}
+docker volume rm ${DOCS_VOL}
+
+cd docs
 if [[ ! -z ${GITHUB_ACTIONS} ]]; then
     sudo chown -R $(id -u):$(id -g) .
 fi
