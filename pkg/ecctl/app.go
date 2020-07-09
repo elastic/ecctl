@@ -56,6 +56,7 @@ func NewApplication(c Config) (*App, error) {
 		},
 		SkipLogin:   c.SkipLogin,
 		ErrorDevice: c.ErrorDevice,
+		UserAgent:   c.UserAgent,
 	})
 	if err != nil {
 		return nil, err

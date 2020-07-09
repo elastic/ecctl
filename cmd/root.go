@@ -23,6 +23,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
@@ -179,6 +180,7 @@ func initApp(cmd *cobra.Command, client *http.Client, v *viper.Viper) error {
 		Client:       client,
 		OutputDevice: output.NewDevice(defaultOutput),
 		ErrorDevice:  defaultError,
+		UserAgent:    strings.Join([]string{"ecctl", versionInfo.Version}, "/"),
 	}
 	if err := v.Unmarshal(&c); err != nil {
 		return err
