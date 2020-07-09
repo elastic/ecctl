@@ -57,7 +57,7 @@ ecctl platform allocator vacate <allocator-id> [flags]
       --allocator-down string        Disables the allocator health auto-discovery, setting the allocator-down to either [true|false]
       --concurrency uint             Maximum number of concurrent moves to perform at any time (default 8)
   -h, --help                         help for vacate
-  -k, --kind string                  Kind of workload to vacate (elasticsearch|kibana)
+  -k, --kind string                  Kind of workload to vacate (elasticsearch|kibana|apm|appsearch|enterprise_search)
   -m, --maintenance                  Whether to set the allocator(s) in maintenance before performing the vacate
       --max-poll-retries int         Optional maximum plan tracking retries (default 2)
       --move-only                    Keeps the resource in its current -possibly broken- state and just does the bare minimum to move the requested instances across to another allocator. [true|false] (default true)

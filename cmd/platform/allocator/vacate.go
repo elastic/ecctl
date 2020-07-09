@@ -196,7 +196,7 @@ func validateSkipDataMigration(resources []string, moveOnly bool) error {
 func init() {
 	Command.AddCommand(vacateAllocatorCmd)
 	vacateAllocatorCmd.Flags().Bool("skip-tracking", false, "Skips tracking the vacate progress causing the command to return after the move operation has been executed. Not recommended.")
-	vacateAllocatorCmd.Flags().StringP("kind", "k", "", "Kind of workload to vacate (elasticsearch|kibana)")
+	vacateAllocatorCmd.Flags().StringP("kind", "k", "", "Kind of workload to vacate (elasticsearch|kibana|apm|appsearch|enterprise_search)")
 	vacateAllocatorCmd.Flags().StringArrayP("resource-id", "r", nil, "Resource IDs to include in the vacate")
 	vacateAllocatorCmd.Flags().StringArrayP("target", "t", nil, "Target allocator(s) on which to place the vacated workload")
 	vacateAllocatorCmd.Flags().BoolP("maintenance", "m", false, "Whether to set the allocator(s) in maintenance before performing the vacate")
