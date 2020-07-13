@@ -27,8 +27,10 @@ import (
 	"testing"
 
 	"github.com/elastic/cloud-sdk-go/pkg/multierror"
+	"github.com/elastic/cloud-sdk-go/pkg/output"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"github.com/stretchr/testify/assert"
 
 	cmddeployment "github.com/elastic/ecctl/cmd/deployment"
 	cmddeploymentplan "github.com/elastic/ecctl/cmd/deployment/plan"
@@ -105,6 +107,10 @@ func TestPopulateValidArgs(t *testing.T) {
 }
 
 func TestInitApp(t *testing.T) {
+	vorig := versionInfo
+	defer func() { versionInfo = vorig }()
+
+	versionInfo.Version = "v2.6.0"
 	type args struct {
 		cmd    *cobra.Command
 		client *http.Client
@@ -112,9 +118,10 @@ func TestInitApp(t *testing.T) {
 		v      *viper.Viper
 	}
 	tests := []struct {
-		name string
-		args args
-		err  error
+		name       string
+		args       args
+		err        error
+		wantConfig ecctl.Config
 	}{
 		{
 			name: "version command skips ecctl.Get() bootstrapping",
@@ -171,6 +178,15 @@ func TestInitApp(t *testing.T) {
 				},
 				v: viper.New(),
 			},
+			wantConfig: ecctl.Config{
+				Output:       "json",
+				Host:         "http://localhost",
+				APIKey:       "some",
+				Region:       "ece-region",
+				UserAgent:    "ecctl/v2.6.0",
+				OutputDevice: output.NewDevice(defaultOutput),
+				ErrorDevice:  defaultError,
+			},
 		},
 		{
 			name: "initialises rootCmd app with invalid config and empty file returns an error",
@@ -206,6 +222,12 @@ func TestInitApp(t *testing.T) {
 
 			if err := initApp(tt.args.cmd, tt.args.client, tt.args.v); !reflect.DeepEqual(err, tt.err) {
 				t.Errorf("initApp() error = %v, wantErr %v", err, tt.err)
+			}
+
+			if tt.args.config != nil {
+				cfg := ecctl.Get().Config
+				cfg.Client = nil
+				assert.Equal(t, tt.wantConfig, cfg)
 			}
 		})
 	}
