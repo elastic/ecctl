@@ -70,20 +70,4 @@ $ ecctl deployment create --file create_example.json --track
 
 ## To retry a deployment when the previous deployment creation failed, use the request ID provided in the error response of the previous command:
 $ ecctl deployment create --request-id=GMZPMRrcMYqHdmxjIQkHbdjnhPIeBElcwrHwzVlhGUSMXrEIzVXoBykSVRsKncNb`
-
-	// Remove temporary constants when reads for deployment templates are available on ESS
-	createLongTemp = `Creates a deployment which is defined from a file definition using the --file=<file path> (shorthand: -f) flag.
-
-You can create a definition by using the sample JSON:
-  https://elastic.co/guide/en/cloud/current/ec-api-deployment-crud.html#ec_create_a_deployment`
-
-	createExampleTemp = `## To make the command wait until the resources have been created use the "--track" flag, which will output 
-the current stage on which the deployment resources are in.
-$ deployment create --file create_example.json --track
-[...]
-Deployment [b6ecbea3d5c84124b7dca457f2892086] - [Elasticsearch][b6ecbea3d5c84124b7dca457f2892086]: finished running all the plan steps (Total plan duration: 5m11.s)
-Deployment [91c4d60acb804ba0a27651fac02780ec] - [Kibana][8a9d9916cd6e46a7bb0912211d76e2af]: finished running all the plan steps (Total plan duration: 4m29.58s)
-
-## To retry a deployment when the previous deployment creation failed, use the request ID provided in the error response of the previous command:
-$ ecctl deployment create --file create_example.json --request-id=GMZPMRrcMYqHdmxjIQkHbdjnhPIeBElcwrHwzVlhGUSMXrEIzVXoBykSVRsKncNb`
 )

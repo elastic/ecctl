@@ -33,13 +33,13 @@ import (
 )
 
 var createCmd = &cobra.Command{
-	Use:     "create {--file | --size <int> --zones <string> | --topology-element <obj>}",
+	Use:     "create {--file | --es-size <int> --es-zones <int> | --topology-element <obj>}",
 	Short:   "Creates a deployment",
 	PreRunE: cobra.NoArgs,
-	// Switch back to non-temp constants when reads for deployment templates are available on ESS
-	Long:    createLongTemp,
-	Example: createExampleTemp,
+	Long:    createLong,
+	Example: createExample,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		var file, _ = cmd.Flags().GetString("file")
 		var track, _ = cmd.Flags().GetBool("track")
 		var generatePayload, _ = cmd.Flags().GetBool("generate-payload")
 		var name, _ = cmd.Flags().GetString("name")
@@ -66,16 +66,16 @@ var createCmd = &cobra.Command{
 		var appsearchSize, _ = cmd.Flags().GetInt32("appsearch-size")
 		var appsearchRefID, _ = cmd.Flags().GetString("appsearch-ref-id")
 
-		var skipFlagBased = cmd.Flag("deployment-template").Hidden
-
 		var payload *models.DeploymentCreateRequest
 
-		err := sdkcmdutil.DecodeDefinition(cmd, "file", &payload)
-		if err := returnErrOnHidden(err, skipFlagBased); err != nil {
-			merr := multierror.NewPrefixed("failed reading the file definition")
-			return merr.Append(err,
-				errors.New("could not read the specified file, please make sure it exists"),
-			)
+		if file != "" {
+			err := sdkcmdutil.DecodeDefinition(cmd, "file", &payload)
+			if err != nil {
+				merr := multierror.NewPrefixed("failed reading the file definition")
+				return merr.Append(err,
+					errors.New("could not read the specified file, please make sure it exists"),
+				)
+			}
 		}
 
 		if payload == nil {
@@ -149,20 +149,9 @@ var createCmd = &cobra.Command{
 	},
 }
 
-func returnErrOnHidden(err error, hidden bool) error {
-	if hidden {
-		return err
-	}
-	if err != nil && err != sdkcmdutil.ErrNodefinitionLoaded {
-		return err
-	}
-	return nil
-}
-
 func init() {
 	Command.AddCommand(createCmd)
 	createCmd.Flags().StringP("file", "f", "", "DeploymentCreateRequest file definition. See help for more information")
-	// Remove when reads for deployment templates are available on ESS
 	createCmd.Flags().String("deployment-template", "default", "Deployment template ID on which to base the deployment from")
 	createCmd.Flags().String("version", "", "Version to use, if not specified, the latest available stack version will be used")
 	createCmd.Flags().String("name", "", "Optional name for the deployment")
@@ -190,25 +179,8 @@ func init() {
 	createCmd.Flags().Int32("appsearch-zones", 1, "Number of zones the App Search instances will span")
 	createCmd.Flags().Int32("appsearch-size", 2048, "Memory (RAM) in MB that each of the App Search instances will have")
 
-	// The following flags will remain hidden until reads for deployment templates are available on ESS
-	createCmd.Flags().MarkHidden("deployment-template")
-	createCmd.Flags().MarkHidden("version")
-	createCmd.Flags().MarkHidden("name")
-	createCmd.Flags().MarkHidden("generate-payload")
-	createCmd.Flags().MarkHidden("es-ref-id")
-	createCmd.Flags().MarkHidden("es-zones")
-	createCmd.Flags().MarkHidden("es-size")
-	createCmd.Flags().MarkHidden("topology-element")
-	createCmd.Flags().MarkHidden("plugin")
-	createCmd.Flags().MarkHidden("kibana-ref-id")
-	createCmd.Flags().MarkHidden("kibana-zones")
-	createCmd.Flags().MarkHidden("kibana-size")
-	createCmd.Flags().MarkHidden("apm")
-	createCmd.Flags().MarkHidden("apm-ref-id")
-	createCmd.Flags().MarkHidden("apm-zones")
-	createCmd.Flags().MarkHidden("apm-size")
-	createCmd.Flags().MarkHidden("appsearch")
-	createCmd.Flags().MarkHidden("appsearch-ref-id")
-	createCmd.Flags().MarkHidden("appsearch-zones")
-	createCmd.Flags().MarkHidden("appsearch-size")
+	createCmd.Flags().Bool("enterprise-search", false, "Enables Enterprise Search for the deployment")
+	createCmd.Flags().String("enterprise-search-ref-id", "main-enterprise-search", "Optional RefId for the Enterprise Search deployment")
+	createCmd.Flags().Int32("enterprise-search-zones", 1, "Number of zones the Enterprise Search instances will span")
+	createCmd.Flags().Int32("enterprise-search-size", 4096, "Memory (RAM) in MB that each of the Enterprise Search instances will have")
 }
