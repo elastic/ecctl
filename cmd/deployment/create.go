@@ -156,7 +156,7 @@ var createCmd = &cobra.Command{
 func init() {
 	Command.AddCommand(createCmd)
 	createCmd.Flags().StringP("file", "f", "", "DeploymentCreateRequest file definition. See help for more information")
-	createCmd.Flags().String("deployment-template", "default", "Deployment template ID on which to base the deployment from")
+	createCmd.Flags().String("deployment-template", "", "Deployment template ID on which to base the deployment from")
 	createCmd.Flags().String("version", "", "Version to use, if not specified, the latest available stack version will be used")
 	createCmd.Flags().String("name", "", "Optional name for the deployment")
 	createCmd.Flags().BoolP("track", "t", false, cmdutil.TrackFlagMessage)

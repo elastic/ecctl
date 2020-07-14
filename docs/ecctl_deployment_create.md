@@ -74,7 +74,7 @@ $ ecctl deployment create --request-id=GMZPMRrcMYqHdmxjIQkHbdjnhPIeBElcwrHwzVlhG
       --appsearch-ref-id string           Optional RefId for the App Search deployment (default "main-appsearch")
       --appsearch-size int32              Memory (RAM) in MB that each of the App Search instances will have (default 2048)
       --appsearch-zones int32             Number of zones the App Search instances will span (default 1)
-      --deployment-template string        Deployment template ID on which to base the deployment from (default "default")
+      --deployment-template string        Deployment template ID on which to base the deployment from
       --enterprise-search                 Enables Enterprise Search for the deployment
       --enterprise-search-ref-id string   Optional RefId for the Enterprise Search deployment (default "main-enterprise-search")
       --enterprise-search-size int32      Memory (RAM) in MB that each of the Enterprise Search instances will have (default 4096)
