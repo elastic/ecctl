@@ -20,6 +20,7 @@ package cmddeployment
 import (
 	"errors"
 	"fmt"
+	"strings"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi"
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/depresourceapi"
@@ -45,6 +46,7 @@ var createCmd = &cobra.Command{
 		var name, _ = cmd.Flags().GetString("name")
 		var version, _ = cmd.Flags().GetString("version")
 		var dt, _ = cmd.Flags().GetString("deployment-template")
+		var region = ecctl.Get().Config.Region
 
 		var esZoneCount, _ = cmd.Flags().GetInt32("es-zones")
 		var esSize, _ = cmd.Flags().GetInt32("es-size")
@@ -78,6 +80,8 @@ var createCmd = &cobra.Command{
 			}
 		}
 
+		dt = setDefaultTemplate(region, dt)
+
 		if payload == nil {
 			var err error
 			payload, err = depresourceapi.New(depresourceapi.NewParams{
@@ -85,7 +89,7 @@ var createCmd = &cobra.Command{
 				Name:                 name,
 				DeploymentTemplateID: dt,
 				Version:              version,
-				Region:               ecctl.Get().Config.Region,
+				Region:               region,
 				Writer:               ecctl.Get().Config.ErrorDevice,
 				Plugins:              plugin,
 				TopologyElements:     te,
@@ -183,4 +187,27 @@ func init() {
 	createCmd.Flags().String("enterprise-search-ref-id", "main-enterprise-search", "Optional RefId for the Enterprise Search deployment")
 	createCmd.Flags().Int32("enterprise-search-zones", 1, "Number of zones the Enterprise Search instances will span")
 	createCmd.Flags().Int32("enterprise-search-size", 4096, "Memory (RAM) in MB that each of the Enterprise Search instances will have")
+}
+
+func setDefaultTemplate(region, dt string) string {
+	if strings.Contains(region, "azure") {
+		region = "azure"
+	}
+
+	if strings.Contains(region, "gcp") {
+		region = "gcp"
+	}
+
+	switch region {
+	case "azure":
+		dt = "azure-io-optimized"
+	case "gcp":
+		dt = "gcp-io-optimized"
+	case "ece-region":
+		dt = "default"
+	default:
+		dt = "aws-io-optimized-v2"
+	}
+
+	return dt
 }
