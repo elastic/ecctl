@@ -23,6 +23,7 @@ import (
 
 	"github.com/elastic/cloud-sdk-go/pkg/plan"
 	"github.com/elastic/cloud-sdk-go/pkg/plan/planutil"
+	"github.com/elastic/cloud-sdk-go/pkg/util"
 )
 
 func TestSetClusterTracking(t *testing.T) {
@@ -37,26 +38,42 @@ func TestSetClusterTracking(t *testing.T) {
 		want planutil.TrackChangeParams
 	}{
 		{
-			args: args{id: "123", kind: Elasticsearch},
+			args: args{id: "123", kind: util.Elasticsearch},
 			want: planutil.TrackChangeParams{TrackChangeParams: plan.TrackChangeParams{
 				ResourceID:       "123",
-				Kind:             Elasticsearch,
+				Kind:             util.Elasticsearch,
 				IgnoreDownstream: true,
 			}},
 		},
 		{
-			args: args{id: "123", kind: Kibana},
+			args: args{id: "123", kind: util.Kibana},
 			want: planutil.TrackChangeParams{TrackChangeParams: plan.TrackChangeParams{
 				ResourceID:       "123",
-				Kind:             Kibana,
+				Kind:             util.Kibana,
 				IgnoreDownstream: true,
 			}},
 		},
 		{
-			args: args{id: "123", kind: Apm},
+			args: args{id: "123", kind: util.Apm},
 			want: planutil.TrackChangeParams{TrackChangeParams: plan.TrackChangeParams{
 				ResourceID:       "123",
-				Kind:             Apm,
+				Kind:             util.Apm,
+				IgnoreDownstream: true,
+			}},
+		},
+		{
+			args: args{id: "123", kind: util.EnterpriseSearch},
+			want: planutil.TrackChangeParams{TrackChangeParams: plan.TrackChangeParams{
+				ResourceID:       "123",
+				Kind:             util.EnterpriseSearch,
+				IgnoreDownstream: true,
+			}},
+		},
+		{
+			args: args{id: "123", kind: util.Appsearch},
+			want: planutil.TrackChangeParams{TrackChangeParams: plan.TrackChangeParams{
+				ResourceID:       "123",
+				Kind:             util.Appsearch,
 				IgnoreDownstream: true,
 			}},
 		},

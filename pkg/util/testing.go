@@ -73,6 +73,13 @@ func NewSuccessfulCurrentPlan(currentTime ...time.Time) mock.Response {
 						}},
 					}}},
 				},
+				EnterpriseSearch: []*models.EnterpriseSearchResourceInfo{
+					{ID: ec.String(ValidClusterID), RefID: ec.String("main-appsearch"), Info: &models.EnterpriseSearchInfo{PlanInfo: &models.EnterpriseSearchPlansInfo{
+						Current: &models.EnterpriseSearchPlanInfo{PlanAttemptLog: []*models.ClusterPlanStepInfo{
+							{Status: ec.String("success"), StepID: ec.String("plan-completed"), Started: &now},
+						}},
+					}}},
+				},
 				Kibana: []*models.KibanaResourceInfo{
 					{ID: ec.String(ValidClusterID), RefID: ec.String("main-kibana"), Info: &models.KibanaClusterInfo{PlanInfo: &models.KibanaClusterPlansInfo{
 						Current: &models.KibanaClusterPlanInfo{PlanAttemptLog: []*models.ClusterPlanStepInfo{
