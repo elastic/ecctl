@@ -17,16 +17,6 @@
 
 package util
 
-var (
-	// ValidTypes exposes a list of the valid Elastic Cloud workload Types.
-	ValidTypes = []string{
-		Elasticsearch,
-		Kibana,
-		Apm,
-		Appsearch,
-	}
-)
-
 // Validator interface is mostly used for parameter structures that
 // need to check a set of conditions and act as a gate before running
 // expensive external calls
