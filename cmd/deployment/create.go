@@ -86,7 +86,7 @@ var createCmd = &cobra.Command{
 		}
 
 		if dt == "" {
-			dt = setDefaultTemplate(region, dt)
+			dt = setDefaultTemplate(region)
 		}
 
 		if payload == nil {
@@ -202,7 +202,7 @@ func init() {
 	createCmd.Flags().Int32("enterprise-search-size", 4096, "Memory (RAM) in MB that each of the Enterprise Search instances will have")
 }
 
-func setDefaultTemplate(region, dt string) string {
+func setDefaultTemplate(region string) string {
 	if strings.Contains(region, "azure") {
 		region = "azure"
 	}
@@ -211,6 +211,7 @@ func setDefaultTemplate(region, dt string) string {
 		region = "gcp"
 	}
 
+	var dt string
 	switch region {
 	case "azure":
 		dt = "azure-io-optimized"
