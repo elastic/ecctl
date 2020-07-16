@@ -27,8 +27,10 @@
 // text/deployment/search.gotmpl
 // text/deployment-template/list.gotmpl
 // text/filtered-group/list.gotmpl
+// text/id.gotmpl
 // text/instance-configuration/create.gotmpl
 // text/instance-configuration/list.gotmpl
+// text/legacy-deployment-template/list.gotmpl
 // text/metadata/show.gotmpl
 // text/platform/repositorylist.gotmpl
 // text/proxy/list.gotmpl
@@ -277,7 +279,7 @@ func textDeploymentSearchGotmpl() (*asset, error) {
 	return a, nil
 }
 
-var _textDeploymentTemplateListGotmpl = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x64\x8e\xcd\x4e\x87\x30\x10\xc4\xef\xff\xa7\xd8\xf4\x6e\xdf\xc1\x58\x0e\x3d\xf0\x11\xcb\xc5\x63\xa5\x83\x69\x02\x85\x94\xa2\x92\xa6\xef\x6e\x00\xd1\xa4\x9c\x76\x32\xbb\xfb\x9b\x89\xf1\x89\x0c\x7a\xeb\x40\x6c\xfa\x84\xf7\xd6\x80\x51\x4a\x31\x92\xd7\xee\x03\xc4\x1b\xbd\x0d\x93\x36\x87\x87\x6f\x74\x6b\x40\x8b\x71\x1e\x74\x00\xf1\x94\x1e\x31\x12\xdc\xb9\xfe\x17\x17\xd2\xa0\xd7\xeb\x10\x76\xe2\x63\x8f\x22\x26\xc5\x2f\x3e\xe8\xf7\x53\x10\xab\x9e\xcb\x22\x77\x99\x7a\x53\x6d\x51\xde\x6c\x51\xa8\x97\x57\xd9\xb4\xb2\xae\xfe\xa8\xb7\xa6\x7b\x29\x2e\x45\xf6\xcb\x2b\x3d\x22\x0f\xe7\x6a\x5b\x02\xc6\xfa\xcb\xc1\xe4\xf7\x02\x4b\xe7\xed\x1c\xec\xe4\xae\x28\x38\x73\xa8\x73\xfe\x04\x00\x00\xff\xff\x7d\x8a\x96\xef\x3e\x01\x00\x00")
+var _textDeploymentTemplateListGotmpl = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x64\x8e\xcf\x6e\x84\x20\x18\xc4\xef\x3e\xc5\x17\xee\xe5\x1d\x9a\xe2\x81\x83\xda\x14\x2f\x3d\x52\x19\x1b\x12\x45\x83\xd8\x3f\x21\xbc\xfb\x46\x5d\xdd\x84\x3d\x31\x4c\xe6\xfb\xcd\xc4\xf8\x42\x06\xbd\x75\x20\x36\xfd\xc0\x7b\x6b\xc0\x28\xa5\x18\xc9\x6b\xf7\x0d\xe2\xfb\x07\x7f\xe8\xd6\x80\x16\xe3\x3c\xe8\x00\xe2\x29\x15\x31\x12\x9c\x39\xb2\x97\x38\x59\x06\xbd\x5e\x87\xb0\xa1\x8a\xad\x83\x98\x14\x77\x6e\xd0\x5f\x87\x20\x56\xbf\x56\x65\xee\x32\xf5\xa9\xda\xb2\x7a\xb2\x45\xa9\xde\x3e\xe4\x7b\x2b\x9b\xfa\xa2\x3e\x26\x6e\x6b\xb8\x14\xd9\x11\xaf\xf5\x88\xbc\x95\xab\xff\x25\x60\x6c\x7e\x1d\x4c\x9e\x17\x58\x3a\x6f\xe7\x60\x27\x77\x76\xc0\x99\x5d\x1d\xef\x2d\x00\x00\xff\xff\x41\xd7\xa0\xa1\x30\x01\x00\x00")
 
 func textDeploymentTemplateListGotmplBytes() ([]byte, error) {
 	return bindataRead(
@@ -313,6 +315,26 @@ func textFilteredGroupListGotmpl() (*asset, error) {
 	}
 
 	info := bindataFileInfo{name: "text/filtered-group/list.gotmpl", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _textIdGotmpl = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\xaa\xae\xd6\x55\x48\x49\x4d\xcb\xcc\x4b\x55\x50\xca\x2f\x4b\x2d\x2a\xca\x4c\x49\x55\x52\xa8\xad\xad\xae\x4e\xad\x48\x4d\x2e\x2d\x49\x0d\x49\xcd\x2d\xc8\x49\x2c\x49\x55\xd0\xab\xad\xe5\xaa\xae\x56\x48\xcd\x4b\x01\x4b\xc3\x75\xa5\xa4\xa6\x25\x96\xe6\x94\x80\x34\x71\x81\x4c\x53\x50\xf2\x74\x81\x72\x14\xf4\x3c\x5d\x20\xac\xd4\xbc\x94\xda\x5a\x2e\x40\x00\x00\x00\xff\xff\xd4\x02\xc4\xbf\x6d\x00\x00\x00")
+
+func textIdGotmplBytes() ([]byte, error) {
+	return bindataRead(
+		_textIdGotmpl,
+		"text/id.gotmpl",
+	)
+}
+
+func textIdGotmpl() (*asset, error) {
+	bytes, err := textIdGotmplBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "text/id.gotmpl", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -353,6 +375,26 @@ func textInstanceConfigurationListGotmpl() (*asset, error) {
 	}
 
 	info := bindataFileInfo{name: "text/instance-configuration/list.gotmpl", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _textLegacyDeploymentTemplateListGotmpl = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x64\x8e\xcd\x4e\x87\x30\x10\xc4\xef\xff\xa7\xd8\xf4\x6e\xdf\xc1\x58\x0e\x3d\xf0\x11\xcb\xc5\x63\xa5\x83\x69\x02\x85\x94\xa2\x92\xa6\xef\x6e\x00\xd1\xa4\x9c\x76\x32\xbb\xfb\x9b\x89\xf1\x89\x0c\x7a\xeb\x40\x6c\xfa\x84\xf7\xd6\x80\x51\x4a\x31\x92\xd7\xee\x03\xc4\x1b\xbd\x0d\x93\x36\x87\x87\x6f\x74\x6b\x40\x8b\x71\x1e\x74\x00\xf1\x94\x1e\x31\x12\xdc\xb9\xfe\x17\x17\xd2\xa0\xd7\xeb\x10\x76\xe2\x63\x8f\x22\x26\xc5\x2f\x3e\xe8\xf7\x53\x10\xab\x9e\xcb\x22\x77\x99\x7a\x53\x6d\x51\xde\x6c\x51\xa8\x97\x57\xd9\xb4\xb2\xae\xfe\xa8\xb7\xa6\x7b\x29\x2e\x45\xf6\xcb\x2b\x3d\x22\x0f\xe7\x6a\x5b\x02\xc6\xfa\xcb\xc1\xe4\xf7\x02\x4b\xe7\xed\x1c\xec\xe4\xae\x28\x38\x73\xa8\x73\xfe\x04\x00\x00\xff\xff\x7d\x8a\x96\xef\x3e\x01\x00\x00")
+
+func textLegacyDeploymentTemplateListGotmplBytes() ([]byte, error) {
+	return bindataRead(
+		_textLegacyDeploymentTemplateListGotmpl,
+		"text/legacy-deployment-template/list.gotmpl",
+	)
+}
+
+func textLegacyDeploymentTemplateListGotmpl() (*asset, error) {
+	bytes, err := textLegacyDeploymentTemplateListGotmplBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "text/legacy-deployment-template/list.gotmpl", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -649,30 +691,32 @@ func AssetNames() []string {
 
 // _bindata is a table, holding each asset generator, mapped to its name.
 var _bindata = map[string]func() (*asset, error){
-	"bindata.go":                                bindataGo,
-	"text/allocator/list.gotmpl":                textAllocatorListGotmpl,
-	"text/allocator/listmetadata.gotmpl":        textAllocatorListmetadataGotmpl,
-	"text/allocator/show.gotmpl":                textAllocatorShowGotmpl,
-	"text/allocator/showmetadata.gotmpl":        textAllocatorShowmetadataGotmpl,
-	"text/deployment/list.gotmpl":               textDeploymentListGotmpl,
-	"text/deployment/notelist.gotmpl":           textDeploymentNotelistGotmpl,
-	"text/deployment/search.gotmpl":             textDeploymentSearchGotmpl,
-	"text/deployment-template/list.gotmpl":      textDeploymentTemplateListGotmpl,
-	"text/filtered-group/list.gotmpl":           textFilteredGroupListGotmpl,
-	"text/instance-configuration/create.gotmpl": textInstanceConfigurationCreateGotmpl,
-	"text/instance-configuration/list.gotmpl":   textInstanceConfigurationListGotmpl,
-	"text/metadata/show.gotmpl":                 textMetadataShowGotmpl,
-	"text/platform/repositorylist.gotmpl":       textPlatformRepositorylistGotmpl,
-	"text/proxy/list.gotmpl":                    textProxyListGotmpl,
-	"text/roles/list.gotmpl":                    textRolesListGotmpl,
-	"text/runner/list.gotmpl":                   textRunnerListGotmpl,
-	"text/stack/list.gotmpl":                    textStackListGotmpl,
-	"text/token/create.gotmpl":                  textTokenCreateGotmpl,
-	"text/token/list.gotmpl":                    textTokenListGotmpl,
-	"text/user/key-details.gotmpl":              textUserKeyDetailsGotmpl,
-	"text/user/keys-details.gotmpl":             textUserKeysDetailsGotmpl,
-	"text/user/list.gotmpl":                     textUserListGotmpl,
-	"text/user/user-details.gotmpl":             textUserUserDetailsGotmpl,
+	"bindata.go":                                  bindataGo,
+	"text/allocator/list.gotmpl":                  textAllocatorListGotmpl,
+	"text/allocator/listmetadata.gotmpl":          textAllocatorListmetadataGotmpl,
+	"text/allocator/show.gotmpl":                  textAllocatorShowGotmpl,
+	"text/allocator/showmetadata.gotmpl":          textAllocatorShowmetadataGotmpl,
+	"text/deployment/list.gotmpl":                 textDeploymentListGotmpl,
+	"text/deployment/notelist.gotmpl":             textDeploymentNotelistGotmpl,
+	"text/deployment/search.gotmpl":               textDeploymentSearchGotmpl,
+	"text/deployment-template/list.gotmpl":        textDeploymentTemplateListGotmpl,
+	"text/filtered-group/list.gotmpl":             textFilteredGroupListGotmpl,
+	"text/id.gotmpl":                              textIdGotmpl,
+	"text/instance-configuration/create.gotmpl":   textInstanceConfigurationCreateGotmpl,
+	"text/instance-configuration/list.gotmpl":     textInstanceConfigurationListGotmpl,
+	"text/legacy-deployment-template/list.gotmpl": textLegacyDeploymentTemplateListGotmpl,
+	"text/metadata/show.gotmpl":                   textMetadataShowGotmpl,
+	"text/platform/repositorylist.gotmpl":         textPlatformRepositorylistGotmpl,
+	"text/proxy/list.gotmpl":                      textProxyListGotmpl,
+	"text/roles/list.gotmpl":                      textRolesListGotmpl,
+	"text/runner/list.gotmpl":                     textRunnerListGotmpl,
+	"text/stack/list.gotmpl":                      textStackListGotmpl,
+	"text/token/create.gotmpl":                    textTokenCreateGotmpl,
+	"text/token/list.gotmpl":                      textTokenListGotmpl,
+	"text/user/key-details.gotmpl":                textUserKeyDetailsGotmpl,
+	"text/user/keys-details.gotmpl":               textUserKeysDetailsGotmpl,
+	"text/user/list.gotmpl":                       textUserListGotmpl,
+	"text/user/user-details.gotmpl":               textUserUserDetailsGotmpl,
 }
 
 // AssetDir returns the file names below a certain
@@ -735,9 +779,13 @@ var _bintree = &bintree{nil, map[string]*bintree{
 		"filtered-group": &bintree{nil, map[string]*bintree{
 			"list.gotmpl": &bintree{textFilteredGroupListGotmpl, map[string]*bintree{}},
 		}},
+		"id.gotmpl": &bintree{textIdGotmpl, map[string]*bintree{}},
 		"instance-configuration": &bintree{nil, map[string]*bintree{
 			"create.gotmpl": &bintree{textInstanceConfigurationCreateGotmpl, map[string]*bintree{}},
 			"list.gotmpl":   &bintree{textInstanceConfigurationListGotmpl, map[string]*bintree{}},
+		}},
+		"legacy-deployment-template": &bintree{nil, map[string]*bintree{
+			"list.gotmpl": &bintree{textLegacyDeploymentTemplateListGotmpl, map[string]*bintree{}},
 		}},
 		"metadata": &bintree{nil, map[string]*bintree{
 			"show.gotmpl": &bintree{textMetadataShowGotmpl, map[string]*bintree{}},

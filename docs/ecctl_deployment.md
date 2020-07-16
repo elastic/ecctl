@@ -51,5 +51,6 @@ ecctl deployment [flags]
 * [ecctl deployment search](ecctl_deployment_search.md)	 - Performs advanced deployment search using the Elasticsearch Query DSL
 * [ecctl deployment show](ecctl_deployment_show.md)	 - Shows the specified deployment resources
 * [ecctl deployment shutdown](ecctl_deployment_shutdown.md)	 - Shuts down a deployment and all of its associated sub-resources
+* [ecctl deployment template](ecctl_deployment_template.md)	 - Interacts with deployment template APIs
 * [ecctl deployment update](ecctl_deployment_update.md)	 - Updates a deployment from a file definition, allowing certain flag overrides
 

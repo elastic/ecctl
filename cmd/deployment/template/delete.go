@@ -15,32 +15,28 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package cmddeployment
+package cmddeploymenttemplate
 
 import (
+	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/deptemplateapi"
 	"github.com/spf13/cobra"
 
-	cmddeploymentnote "github.com/elastic/ecctl/cmd/deployment/note"
-	cmddeploymentplan "github.com/elastic/ecctl/cmd/deployment/plan"
-	cmddeploymentresource "github.com/elastic/ecctl/cmd/deployment/resource"
-	cmddeploymenttemplate "github.com/elastic/ecctl/cmd/deployment/template"
+	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
-// Command is the deployment subcommand
-var Command = &cobra.Command{
-	Use:     "deployment",
-	Short:   "Manages deployments",
-	PreRunE: cobra.MaximumNArgs(0),
-	Run: func(cmd *cobra.Command, args []string) {
-		cmd.Help()
+var deleteCmd = &cobra.Command{
+	Use:     "delete",
+	Short:   "Deletes an existing deployment template",
+	PreRunE: cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return deptemplateapi.Delete(deptemplateapi.DeleteParams{
+			API:        ecctl.Get().API,
+			Region:     ecctl.Get().Config.Region,
+			TemplateID: args[0],
+		})
 	},
 }
 
 func init() {
-	Command.AddCommand(
-		cmddeploymentnote.Command,
-		cmddeploymentplan.Command,
-		cmddeploymentresource.Command,
-		cmddeploymenttemplate.Command,
-	)
+	Command.AddCommand(deleteCmd)
 }

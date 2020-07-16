@@ -1,7 +1,7 @@
-{{- define "override" }}{{ range .Payload }}{{executeTemplate .}}
+{{- define "override" }}{{ range . }}{{executeTemplate .}}
 {{ end }}{{ end }}{{ define "default" }}
 {{-  "ID" }}{{ tab }}{{  "NAME" }}{{ tab }}{{ "SYSTEM" }}{{ tab }}{{ "DESCRIPTION" }}
-{{- range .Payload }}
+{{- range . }}
 {{ .ID }}{{ tab }}{{ .Name }}{{ tab }}{{  .SystemOwned }}{{ tab }}{{ .Description }}
 {{- end}}
 {{end}}
