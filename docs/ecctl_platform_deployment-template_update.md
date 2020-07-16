@@ -1,10 +1,10 @@
 ## ecctl platform deployment-template update
 
-Updates a platform deployment template
+DEPRECATED (Will be removed in the next major version): Updates a platform deployment template
 
 ### Synopsis
 
-Updates a platform deployment template
+DEPRECATED (Will be removed in the next major version): Updates a platform deployment template
 
 ```
 ecctl platform deployment-template update <template id> -f <template file>.json [flags]
@@ -40,5 +40,5 @@ ecctl platform deployment-template update <template id> -f <template file>.json 
 
 ### SEE ALSO
 
-* [ecctl platform deployment-template](ecctl_platform_deployment-template.md)	 - Manages deployment templates (Available for ECE only)
+* [ecctl platform deployment-template](ecctl_platform_deployment-template.md)	 - DEPRECATED (Will be removed in the next major version): Manages deployment templates (Available for ECE only)
 

@@ -1,12 +1,12 @@
 [#ecctl_platform_deployment-template]
 == ecctl platform deployment-template
 
-Manages deployment templates (Available for ECE only)
+DEPRECATED (Will be removed in the next major version): Manages deployment templates (Available for ECE only)
 
 [float]
 === Synopsis
 
-Manages deployment templates (Available for ECE only)
+DEPRECATED (Will be removed in the next major version): Manages deployment templates (Available for ECE only)
 
 ----
 ecctl platform deployment-template [flags]
@@ -45,9 +45,9 @@ ecctl platform deployment-template [flags]
 === SEE ALSO
 
 * xref:ecctl_platform[ecctl platform]	 - Manages the platform
-* xref:ecctl_platform_deployment-template_create[ecctl platform deployment-template create]	 - Creates a platform deployment template
-* xref:ecctl_platform_deployment-template_delete[ecctl platform deployment-template delete]	 - Deletes a specific platform deployment template
-* xref:ecctl_platform_deployment-template_list[ecctl platform deployment-template list]	 - Lists the platform deployment templates
-* xref:ecctl_platform_deployment-template_pull[ecctl platform deployment-template pull]	 - Downloads deployment template into a local folder
-* xref:ecctl_platform_deployment-template_show[ecctl platform deployment-template show]	 - Shows information about a specific platform deployment template
-* xref:ecctl_platform_deployment-template_update[ecctl platform deployment-template update]	 - Updates a platform deployment template
+* xref:ecctl_platform_deployment-template_create[ecctl platform deployment-template create]	 - DEPRECATED (Will be removed in the next major version): Creates a platform deployment template
+* xref:ecctl_platform_deployment-template_delete[ecctl platform deployment-template delete]	 - DEPRECATED (Will be removed in the next major version): Deletes a specific platform deployment template
+* xref:ecctl_platform_deployment-template_list[ecctl platform deployment-template list]	 - DEPRECATED (Will be removed in the next major version): Lists the platform deployment templates
+* xref:ecctl_platform_deployment-template_pull[ecctl platform deployment-template pull]	 - DEPRECATED (Will be removed in the next major version): Downloads deployment template into a local folder
+* xref:ecctl_platform_deployment-template_show[ecctl platform deployment-template show]	 - DEPRECATED (Will be removed in the next major version): Shows information about a specific platform deployment template
+* xref:ecctl_platform_deployment-template_update[ecctl platform deployment-template update]	 - DEPRECATED (Will be removed in the next major version): Updates a platform deployment template

@@ -23,12 +23,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/configurationtemplateapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var createCmd = &cobra.Command{
 	Use:     "create -f <template file>.json",
-	Short:   "Creates a platform deployment template",
+	Short:   cmdutil.DeprecatedDescription("Creates a platform deployment template"),
 	PreRunE: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		tc, err := parseTemplateFile(cmd.Flag("file-template").Value.String())

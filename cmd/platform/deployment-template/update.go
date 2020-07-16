@@ -23,12 +23,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/configurationtemplateapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var updateCmd = &cobra.Command{
 	Use:     "update <template id> -f <template file>.json",
-	Short:   "Updates a platform deployment template",
+	Short:   cmdutil.DeprecatedDescription("Updates a platform deployment template"),
 	PreRunE: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		tc, err := parseTemplateFile(cmd.Flag("file-template").Value.String())

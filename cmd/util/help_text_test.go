@@ -49,3 +49,27 @@ func TestAdminReqDescription(t *testing.T) {
 		})
 	}
 }
+
+func TestDeprecatedDescription(t *testing.T) {
+	type args struct {
+		desc string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			name: "prefixes the text with the depcrated notice",
+			args: args{desc: "some command description here"},
+			want: `DEPRECATED (Will be removed in the next major version): some command description here`,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := DeprecatedDescription(tt.args.desc); got != tt.want {
+				t.Errorf("DeprecatedDescription() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

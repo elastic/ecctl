@@ -23,12 +23,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/configurationtemplateapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var listCmd = &cobra.Command{
 	Use:     "list",
-	Short:   "Lists the platform deployment templates",
+	Short:   cmdutil.DeprecatedDescription("Lists the platform deployment templates"),
 	PreRunE: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		showInstanceConfig, _ := cmd.Flags().GetBool(showInstanceConfigurations)
@@ -49,7 +50,7 @@ var listCmd = &cobra.Command{
 			return err
 		}
 
-		return ecctl.Get().Formatter.Format(filepath.Join("deployment-template", "list"), res)
+		return ecctl.Get().Formatter.Format(filepath.Join("legacy-deployment-template", "list"), res)
 	},
 }
 

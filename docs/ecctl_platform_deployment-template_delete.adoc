@@ -1,12 +1,12 @@
 [#ecctl_platform_deployment-template_delete]
 == ecctl platform deployment-template delete
 
-Deletes a specific platform deployment template
+DEPRECATED (Will be removed in the next major version): Deletes a specific platform deployment template
 
 [float]
 === Synopsis
 
-Deletes a specific platform deployment template
+DEPRECATED (Will be removed in the next major version): Deletes a specific platform deployment template
 
 ----
 ecctl platform deployment-template delete <template id> [flags]
@@ -44,4 +44,4 @@ ecctl platform deployment-template delete <template id> [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_deployment-template[ecctl platform deployment-template]	 - Manages deployment templates (Available for ECE only)
+* xref:ecctl_platform_deployment-template[ecctl platform deployment-template]	 - DEPRECATED (Will be removed in the next major version): Manages deployment templates (Available for ECE only)

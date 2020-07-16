@@ -39,8 +39,10 @@ const (
 
 // Command represents the top level deployment-template command.
 var Command = &cobra.Command{
-	Use:     "deployment-template",
-	Short:   cmdutil.AdminReqDescription("Manages deployment templates"),
+	Use: "deployment-template",
+	Short: cmdutil.DeprecatedDescription(
+		cmdutil.AdminReqDescription("Manages deployment templates"),
+	),
 	PreRunE: cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()

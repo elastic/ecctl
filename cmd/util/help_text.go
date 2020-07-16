@@ -24,7 +24,15 @@ import (
 // PlatformAdminRequired is an additional helper text for commands
 const PlatformAdminRequired = "(Available for ECE only)"
 
+// DeprecatedText is an additional helper text for commands
+const DeprecatedText = "DEPRECATED (Will be removed in the next major version):"
+
 // AdminReqDescription adds a text about required admin permissions to a string
 func AdminReqDescription(desc string) string {
 	return fmt.Sprintf("%s %v", desc, PlatformAdminRequired)
+}
+
+// DeprecatedDescription adds a text about deprecation to a string
+func DeprecatedDescription(desc string) string {
+	return fmt.Sprintf("%v %s", DeprecatedText, desc)
 }

@@ -1,12 +1,12 @@
 [#ecctl_platform_deployment-template_update]
 == ecctl platform deployment-template update
 
-Updates a platform deployment template
+DEPRECATED (Will be removed in the next major version): Updates a platform deployment template
 
 [float]
 === Synopsis
 
-Updates a platform deployment template
+DEPRECATED (Will be removed in the next major version): Updates a platform deployment template
 
 ----
 ecctl platform deployment-template update <template id> -f <template file>.json [flags]
@@ -45,4 +45,4 @@ ecctl platform deployment-template update <template id> -f <template file>.json 
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_deployment-template[ecctl platform deployment-template]	 - Manages deployment templates (Available for ECE only)
+* xref:ecctl_platform_deployment-template[ecctl platform deployment-template]	 - DEPRECATED (Will be removed in the next major version): Manages deployment templates (Available for ECE only)

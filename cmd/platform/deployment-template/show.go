@@ -23,12 +23,15 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/configurationtemplateapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var showCmd = &cobra.Command{
-	Use:     "show <template id>",
-	Short:   "Shows information about a specific platform deployment template",
+	Use: "show <template id>",
+	Short: cmdutil.DeprecatedDescription(
+		"Shows information about a specific platform deployment template",
+	),
 	PreRunE: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		show, _ := cmd.Flags().GetBool("show-instance-configurations")

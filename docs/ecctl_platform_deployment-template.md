@@ -1,10 +1,10 @@
 ## ecctl platform deployment-template
 
-Manages deployment templates (Available for ECE only)
+DEPRECATED (Will be removed in the next major version): Manages deployment templates (Available for ECE only)
 
 ### Synopsis
 
-Manages deployment templates (Available for ECE only)
+DEPRECATED (Will be removed in the next major version): Manages deployment templates (Available for ECE only)
 
 ```
 ecctl platform deployment-template [flags]
@@ -40,10 +40,10 @@ ecctl platform deployment-template [flags]
 ### SEE ALSO
 
 * [ecctl platform](ecctl_platform.md)	 - Manages the platform
-* [ecctl platform deployment-template create](ecctl_platform_deployment-template_create.md)	 - Creates a platform deployment template
-* [ecctl platform deployment-template delete](ecctl_platform_deployment-template_delete.md)	 - Deletes a specific platform deployment template
-* [ecctl platform deployment-template list](ecctl_platform_deployment-template_list.md)	 - Lists the platform deployment templates
-* [ecctl platform deployment-template pull](ecctl_platform_deployment-template_pull.md)	 - Downloads deployment template into a local folder
-* [ecctl platform deployment-template show](ecctl_platform_deployment-template_show.md)	 - Shows information about a specific platform deployment template
-* [ecctl platform deployment-template update](ecctl_platform_deployment-template_update.md)	 - Updates a platform deployment template
+* [ecctl platform deployment-template create](ecctl_platform_deployment-template_create.md)	 - DEPRECATED (Will be removed in the next major version): Creates a platform deployment template
+* [ecctl platform deployment-template delete](ecctl_platform_deployment-template_delete.md)	 - DEPRECATED (Will be removed in the next major version): Deletes a specific platform deployment template
+* [ecctl platform deployment-template list](ecctl_platform_deployment-template_list.md)	 - DEPRECATED (Will be removed in the next major version): Lists the platform deployment templates
+* [ecctl platform deployment-template pull](ecctl_platform_deployment-template_pull.md)	 - DEPRECATED (Will be removed in the next major version): Downloads deployment template into a local folder
+* [ecctl platform deployment-template show](ecctl_platform_deployment-template_show.md)	 - DEPRECATED (Will be removed in the next major version): Shows information about a specific platform deployment template
+* [ecctl platform deployment-template update](ecctl_platform_deployment-template_update.md)	 - DEPRECATED (Will be removed in the next major version): Updates a platform deployment template
 

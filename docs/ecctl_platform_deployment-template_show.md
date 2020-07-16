@@ -1,10 +1,10 @@
 ## ecctl platform deployment-template show
 
-Shows information about a specific platform deployment template
+DEPRECATED (Will be removed in the next major version): Shows information about a specific platform deployment template
 
 ### Synopsis
 
-Shows information about a specific platform deployment template
+DEPRECATED (Will be removed in the next major version): Shows information about a specific platform deployment template
 
 ```
 ecctl platform deployment-template show <template id> [flags]
@@ -41,5 +41,5 @@ ecctl platform deployment-template show <template id> [flags]
 
 ### SEE ALSO
 
-* [ecctl platform deployment-template](ecctl_platform_deployment-template.md)	 - Manages deployment templates (Available for ECE only)
+* [ecctl platform deployment-template](ecctl_platform_deployment-template.md)	 - DEPRECATED (Will be removed in the next major version): Manages deployment templates (Available for ECE only)
 

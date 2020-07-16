@@ -1,10 +1,10 @@
 ## ecctl platform deployment-template pull
 
-Downloads deployment template into a local folder
+DEPRECATED (Will be removed in the next major version): Downloads deployment template into a local folder
 
 ### Synopsis
 
-Downloads deployment template into a local folder
+DEPRECATED (Will be removed in the next major version): Downloads deployment template into a local folder
 
 ```
 ecctl platform deployment-template pull --path <path> [flags]
@@ -41,5 +41,5 @@ ecctl platform deployment-template pull --path <path> [flags]
 
 ### SEE ALSO
 
-* [ecctl platform deployment-template](ecctl_platform_deployment-template.md)	 - Manages deployment templates (Available for ECE only)
+* [ecctl platform deployment-template](ecctl_platform_deployment-template.md)	 - DEPRECATED (Will be removed in the next major version): Manages deployment templates (Available for ECE only)
 

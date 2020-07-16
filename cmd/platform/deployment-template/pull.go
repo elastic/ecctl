@@ -22,12 +22,13 @@ import (
 
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var pullCmd = &cobra.Command{
 	Use:     "pull --path <path>",
-	Short:   "Downloads deployment template into a local folder",
+	Short:   cmdutil.DeprecatedDescription("Downloads deployment template into a local folder"),
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		format, _ := cmd.Flags().GetString(format)
