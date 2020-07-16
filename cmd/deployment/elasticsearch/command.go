@@ -15,21 +15,18 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package cmddeployment
+package cmdelasticsearch
 
 import (
 	"github.com/spf13/cobra"
 
-	cmdelasticsearch "github.com/elastic/ecctl/cmd/deployment/elasticsearch"
-	cmddeploymentnote "github.com/elastic/ecctl/cmd/deployment/note"
-	cmddeploymentplan "github.com/elastic/ecctl/cmd/deployment/plan"
-	cmddeploymentresource "github.com/elastic/ecctl/cmd/deployment/resource"
+	cmdeskeystore "github.com/elastic/ecctl/cmd/deployment/elasticsearch/keystore"
 )
 
 // Command is the deployment subcommand
 var Command = &cobra.Command{
-	Use:     "deployment",
-	Short:   "Manages deployments",
+	Use:     "elasticsearch",
+	Short:   "Manages a deployment's elasticsearch resources",
 	PreRunE: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
@@ -37,10 +34,5 @@ var Command = &cobra.Command{
 }
 
 func init() {
-	Command.AddCommand(
-		cmddeploymentnote.Command,
-		cmddeploymentplan.Command,
-		cmddeploymentresource.Command,
-		cmdelasticsearch.Command,
-	)
+	Command.AddCommand(cmdeskeystore.Command)
 }

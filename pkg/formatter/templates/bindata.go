@@ -22,6 +22,7 @@
 // text/allocator/listmetadata.gotmpl
 // text/allocator/show.gotmpl
 // text/allocator/showmetadata.gotmpl
+// text/deployment/eskeystore_show.gotmpl
 // text/deployment/list.gotmpl
 // text/deployment/notelist.gotmpl
 // text/deployment/search.gotmpl
@@ -215,6 +216,26 @@ func textAllocatorShowmetadataGotmpl() (*asset, error) {
 	}
 
 	info := bindataFileInfo{name: "text/allocator/showmetadata.gotmpl", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _textDeploymentEskeystore_showGotmpl = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x84\x8e\xc1\x8a\x83\x30\x18\x84\xef\x3e\xc5\x4f\xf0\xb8\xeb\x03\x2c\xec\x41\x4a\x84\x82\xa7\x6a\xbd\xa7\x66\x2c\x81\x98\x96\x18\x8b\x10\xf2\xee\x25\xb1\x52\x84\x42\x4f\x19\x66\x26\xff\x37\xde\xff\x92\xc4\xa0\x0c\x88\xdd\x1e\xb0\x56\x49\x30\x0a\x21\xfa\x56\x98\x2b\x28\x57\x46\x62\xf9\xa1\x1c\x1a\x23\xfd\xfd\x53\xd1\xa0\xb7\x70\x53\x6a\x61\x41\x3f\x3b\xb4\x18\xef\x5a\x38\x50\x11\x42\xe6\x3d\xc1\xc8\x14\xbf\xc5\x06\x91\x18\xc4\xac\x5d\x64\x64\x11\x42\xac\xe1\x87\x13\x6f\x57\xa8\x13\x97\xd4\x26\xd6\x95\xf5\x99\xef\x4d\x56\x36\x54\x1d\x6b\xce\x5e\x5f\xbf\xef\x8b\x53\xd6\x7c\x77\x28\x55\x8b\x4e\xe8\x19\x1f\xfc\x72\xaa\x94\xc6\xb6\x0f\x46\x26\xb5\xbe\xcf\x00\x00\x00\xff\xff\xfc\x5b\x44\xd7\x2f\x01\x00\x00")
+
+func textDeploymentEskeystore_showGotmplBytes() ([]byte, error) {
+	return bindataRead(
+		_textDeploymentEskeystore_showGotmpl,
+		"text/deployment/eskeystore_show.gotmpl",
+	)
+}
+
+func textDeploymentEskeystore_showGotmpl() (*asset, error) {
+	bytes, err := textDeploymentEskeystore_showGotmplBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "text/deployment/eskeystore_show.gotmpl", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -691,32 +712,31 @@ func AssetNames() []string {
 
 // _bindata is a table, holding each asset generator, mapped to its name.
 var _bindata = map[string]func() (*asset, error){
-	"bindata.go":                                  bindataGo,
-	"text/allocator/list.gotmpl":                  textAllocatorListGotmpl,
-	"text/allocator/listmetadata.gotmpl":          textAllocatorListmetadataGotmpl,
-	"text/allocator/show.gotmpl":                  textAllocatorShowGotmpl,
-	"text/allocator/showmetadata.gotmpl":          textAllocatorShowmetadataGotmpl,
-	"text/deployment/list.gotmpl":                 textDeploymentListGotmpl,
-	"text/deployment/notelist.gotmpl":             textDeploymentNotelistGotmpl,
-	"text/deployment/search.gotmpl":               textDeploymentSearchGotmpl,
-	"text/deployment-template/list.gotmpl":        textDeploymentTemplateListGotmpl,
-	"text/filtered-group/list.gotmpl":             textFilteredGroupListGotmpl,
-	"text/id.gotmpl":                              textIdGotmpl,
-	"text/instance-configuration/create.gotmpl":   textInstanceConfigurationCreateGotmpl,
-	"text/instance-configuration/list.gotmpl":     textInstanceConfigurationListGotmpl,
-	"text/legacy-deployment-template/list.gotmpl": textLegacyDeploymentTemplateListGotmpl,
-	"text/metadata/show.gotmpl":                   textMetadataShowGotmpl,
-	"text/platform/repositorylist.gotmpl":         textPlatformRepositorylistGotmpl,
-	"text/proxy/list.gotmpl":                      textProxyListGotmpl,
-	"text/roles/list.gotmpl":                      textRolesListGotmpl,
-	"text/runner/list.gotmpl":                     textRunnerListGotmpl,
-	"text/stack/list.gotmpl":                      textStackListGotmpl,
-	"text/token/create.gotmpl":                    textTokenCreateGotmpl,
-	"text/token/list.gotmpl":                      textTokenListGotmpl,
-	"text/user/key-details.gotmpl":                textUserKeyDetailsGotmpl,
-	"text/user/keys-details.gotmpl":               textUserKeysDetailsGotmpl,
-	"text/user/list.gotmpl":                       textUserListGotmpl,
-	"text/user/user-details.gotmpl":               textUserUserDetailsGotmpl,
+	"bindata.go":                                bindataGo,
+	"text/allocator/list.gotmpl":                textAllocatorListGotmpl,
+	"text/allocator/listmetadata.gotmpl":        textAllocatorListmetadataGotmpl,
+	"text/allocator/show.gotmpl":                textAllocatorShowGotmpl,
+	"text/allocator/showmetadata.gotmpl":        textAllocatorShowmetadataGotmpl,
+	"text/deployment/eskeystore_show.gotmpl":    textDeploymentEskeystore_showGotmpl,
+	"text/deployment/list.gotmpl":               textDeploymentListGotmpl,
+	"text/deployment/notelist.gotmpl":           textDeploymentNotelistGotmpl,
+	"text/deployment/search.gotmpl":             textDeploymentSearchGotmpl,
+	"text/deployment-template/list.gotmpl":      textDeploymentTemplateListGotmpl,
+	"text/filtered-group/list.gotmpl":           textFilteredGroupListGotmpl,
+	"text/instance-configuration/create.gotmpl": textInstanceConfigurationCreateGotmpl,
+	"text/instance-configuration/list.gotmpl":   textInstanceConfigurationListGotmpl,
+	"text/metadata/show.gotmpl":                 textMetadataShowGotmpl,
+	"text/platform/repositorylist.gotmpl":       textPlatformRepositorylistGotmpl,
+	"text/proxy/list.gotmpl":                    textProxyListGotmpl,
+	"text/roles/list.gotmpl":                    textRolesListGotmpl,
+	"text/runner/list.gotmpl":                   textRunnerListGotmpl,
+	"text/stack/list.gotmpl":                    textStackListGotmpl,
+	"text/token/create.gotmpl":                  textTokenCreateGotmpl,
+	"text/token/list.gotmpl":                    textTokenListGotmpl,
+	"text/user/key-details.gotmpl":              textUserKeyDetailsGotmpl,
+	"text/user/keys-details.gotmpl":             textUserKeysDetailsGotmpl,
+	"text/user/list.gotmpl":                     textUserListGotmpl,
+	"text/user/user-details.gotmpl":             textUserUserDetailsGotmpl,
 }
 
 // AssetDir returns the file names below a certain
@@ -769,9 +789,10 @@ var _bintree = &bintree{nil, map[string]*bintree{
 			"showmetadata.gotmpl": &bintree{textAllocatorShowmetadataGotmpl, map[string]*bintree{}},
 		}},
 		"deployment": &bintree{nil, map[string]*bintree{
-			"list.gotmpl":     &bintree{textDeploymentListGotmpl, map[string]*bintree{}},
-			"notelist.gotmpl": &bintree{textDeploymentNotelistGotmpl, map[string]*bintree{}},
-			"search.gotmpl":   &bintree{textDeploymentSearchGotmpl, map[string]*bintree{}},
+			"eskeystore_show.gotmpl": &bintree{textDeploymentEskeystore_showGotmpl, map[string]*bintree{}},
+			"list.gotmpl":            &bintree{textDeploymentListGotmpl, map[string]*bintree{}},
+			"notelist.gotmpl":        &bintree{textDeploymentNotelistGotmpl, map[string]*bintree{}},
+			"search.gotmpl":          &bintree{textDeploymentSearchGotmpl, map[string]*bintree{}},
 		}},
 		"deployment-template": &bintree{nil, map[string]*bintree{
 			"list.gotmpl": &bintree{textDeploymentTemplateListGotmpl, map[string]*bintree{}},

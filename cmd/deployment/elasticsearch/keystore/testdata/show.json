@@ -1,0 +1,8 @@
+{
+    "secrets": {
+        "secret-name": {
+            "value": null,
+            "as_file": false
+        }
+    }
+}
