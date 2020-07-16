@@ -32,8 +32,8 @@ ecctl deployment create {--file | --es-size <int> --es-zones <int> | --topology-
 
 ```
 ## Create a deployment with the default values for Elasticsearch, a Kibana instance with a modified size, 
-and a default APM instance. While Elasticsearch and Kibana come enabled by default, both APM and App Search need to be 
-enabled by using the "--apm" and "--appsearch" flags. The command will exit after the API response has been returned, without 
+and a default APM instance. While Elasticsearch and Kibana come enabled by default, APM, Enterprise Search and App Search need to be 
+enabled by using the "--apm", "--enterprise-search" and "--appsearch" flags. The command will exit after the API response has been returned, without 
 waiting until the deployment resources have been created. 
 $ ecctl deployment create --name my-deployment --zones 2 --kibana-size 2048 --apm --apm-size 1024
 
@@ -76,7 +76,7 @@ $ ecctl deployment create --request-id=GMZPMRrcMYqHdmxjIQkHbdjnhPIeBElcwrHwzVlhG
       --appsearch-zones int32             Number of zones the App Search instances will span (default 1)
       --deployment-template string        Deployment template ID on which to base the deployment from
       --enterprise-search                 Enables Enterprise Search for the deployment
-      --enterprise-search-ref-id string   Optional RefId for the Enterprise Search deployment (default "main-enterprise-search")
+      --enterprise-search-ref-id string   Optional RefId for the Enterprise Search deployment (default "main-enterprise_search")
       --enterprise-search-size int32      Memory (RAM) in MB that each of the Enterprise Search instances will have (default 4096)
       --enterprise-search-zones int32     Number of zones the Enterprise Search instances will span (default 1)
       --es-ref-id string                  Optional RefId for the Elasticsearch deployment (default "main-elasticsearch")

@@ -41,8 +41,8 @@ Save it, update or extend the topology and create a deployment using the saved p
 
 	// nolint
 	createExample = `## Create a deployment with the default values for Elasticsearch, a Kibana instance with a modified size, 
-and a default APM instance. While Elasticsearch and Kibana come enabled by default, both APM and App Search need to be 
-enabled by using the "--apm" and "--appsearch" flags. The command will exit after the API response has been returned, without 
+and a default APM instance. While Elasticsearch and Kibana come enabled by default, APM, Enterprise Search and App Search need to be 
+enabled by using the "--apm", "--enterprise-search" and "--appsearch" flags. The command will exit after the API response has been returned, without 
 waiting until the deployment resources have been created. 
 $ ecctl deployment create --name my-deployment --zones 2 --kibana-size 2048 --apm --apm-size 1024
 

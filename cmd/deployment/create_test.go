@@ -331,10 +331,10 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 						Assert: &mock.RequestAssertion{
 							Method: "GET",
 							Header: api.DefaultReadMockHeaders,
-							Path:   "/api/v1/regions/ece-region/platform/configuration/templates/deployments/default",
+							Path:   "/api/v1/deployments/templates/default",
 							Host:   api.DefaultMockHost,
 							Query: url.Values{
-								"format":                       {"deployment"},
+								"region":                       {"ece-region"},
 								"show_instance_configurations": {"true"},
 							},
 						},
@@ -361,10 +361,10 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 						Assert: &mock.RequestAssertion{
 							Method: "GET",
 							Header: api.DefaultReadMockHeaders,
-							Path:   "/api/v1/regions/ece-region/platform/configuration/templates/deployments/default",
+							Path:   "/api/v1/deployments/templates/default",
 							Host:   api.DefaultMockHost,
 							Query: url.Values{
-								"format":                       {"deployment"},
+								"region":                       {"ece-region"},
 								"show_instance_configurations": {"true"},
 							},
 						},

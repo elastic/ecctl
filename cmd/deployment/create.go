@@ -68,6 +68,11 @@ var createCmd = &cobra.Command{
 		var appsearchSize, _ = cmd.Flags().GetInt32("appsearch-size")
 		var appsearchRefID, _ = cmd.Flags().GetString("appsearch-ref-id")
 
+		var enterpriseSearchEnable, _ = cmd.Flags().GetBool("enterprise-search")
+		var enterpriseSearchZoneCount, _ = cmd.Flags().GetInt32("enterprise-search-zones")
+		var enterpriseSearchSize, _ = cmd.Flags().GetInt32("enterprise-search-size")
+		var enterpriseSearchRefID, _ = cmd.Flags().GetString("enterprise-search-ref-id")
+
 		var payload *models.DeploymentCreateRequest
 
 		if file != "" {
@@ -80,21 +85,24 @@ var createCmd = &cobra.Command{
 			}
 		}
 
-		dt = setDefaultTemplate(region, dt)
+		if dt == "" {
+			dt = setDefaultTemplate(region, dt)
+		}
 
 		if payload == nil {
 			var err error
-			payload, err = depresourceapi.New(depresourceapi.NewParams{
-				API:                  ecctl.Get().API,
-				Name:                 name,
-				DeploymentTemplateID: dt,
-				Version:              version,
-				Region:               region,
-				Writer:               ecctl.Get().Config.ErrorDevice,
-				Plugins:              plugin,
-				TopologyElements:     te,
-				ApmEnable:            apmEnable,
-				AppsearchEnable:      appsearchEnable,
+			payload, err = depresourceapi.NewPayload(depresourceapi.NewPayloadParams{
+				API:                    ecctl.Get().API,
+				Name:                   name,
+				DeploymentTemplateID:   dt,
+				Version:                version,
+				Region:                 region,
+				Writer:                 ecctl.Get().Config.ErrorDevice,
+				Plugins:                plugin,
+				TopologyElements:       te,
+				ApmEnable:              apmEnable,
+				AppsearchEnable:        appsearchEnable,
+				EnterpriseSearchEnable: enterpriseSearchEnable,
 				ElasticsearchInstance: depresourceapi.InstanceParams{
 					RefID:     esRefID,
 					Size:      esSize,
@@ -114,6 +122,11 @@ var createCmd = &cobra.Command{
 					RefID:     appsearchRefID,
 					Size:      appsearchSize,
 					ZoneCount: appsearchZoneCount,
+				},
+				EnterpriseSearchInstance: depresourceapi.InstanceParams{
+					RefID:     enterpriseSearchRefID,
+					Size:      enterpriseSearchSize,
+					ZoneCount: enterpriseSearchZoneCount,
 				},
 			})
 			if err != nil {
@@ -184,7 +197,7 @@ func init() {
 	createCmd.Flags().Int32("appsearch-size", 2048, "Memory (RAM) in MB that each of the App Search instances will have")
 
 	createCmd.Flags().Bool("enterprise-search", false, "Enables Enterprise Search for the deployment")
-	createCmd.Flags().String("enterprise-search-ref-id", "main-enterprise-search", "Optional RefId for the Enterprise Search deployment")
+	createCmd.Flags().String("enterprise-search-ref-id", "main-enterprise_search", "Optional RefId for the Enterprise Search deployment")
 	createCmd.Flags().Int32("enterprise-search-zones", 1, "Number of zones the Enterprise Search instances will span")
 	createCmd.Flags().Int32("enterprise-search-size", 4096, "Memory (RAM) in MB that each of the Enterprise Search instances will have")
 }
