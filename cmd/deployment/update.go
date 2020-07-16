@@ -186,5 +186,5 @@ func init() {
 	updateCmd.Flags().Bool("hide-pruned-orphans", false, "Hides orphaned resources that were shut down (only relevant if --prune-orphans=true)")
 	updateCmd.Flags().StringP("file", "f", "", "Partial (default) or full JSON file deployment update payload")
 	updateCmd.MarkFlagRequired("file")
-	updateCmd.MarkFlagFilename("file", "*.json")
+	updateCmd.MarkFlagFilename("file", "json")
 }
