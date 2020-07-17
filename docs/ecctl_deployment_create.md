@@ -9,7 +9,7 @@ Sane default values are provided, making the command work out of the box even wh
 When version is not specified, the latest available stack version will automatically be used. 
 These are the available options:
 
-  * Simplified flags to set size and zone count for each instance type (Elasticsearch, Kibana, APM and App Search). 
+  * Simplified flags to set size and zone count for each instance type (Elasticsearch, Kibana, APM, Enterprise Search and App Search). 
   * Advanced flag for different Elasticsearch node types: --topology-element <json obj> (shorthand: -e).
     Note that the flag can be specified multiple times for complex topologies.
     The JSON object has the following format:

@@ -211,17 +211,14 @@ func setDefaultTemplate(region string) string {
 		region = "gcp"
 	}
 
-	var dt string
 	switch region {
 	case "azure":
-		dt = "azure-io-optimized"
+		return "azure-io-optimized"
 	case "gcp":
-		dt = "gcp-io-optimized"
+		return "gcp-io-optimized"
 	case "ece-region":
-		dt = "default"
+		return "default"
 	default:
-		dt = "aws-io-optimized-v2"
+		return "aws-io-optimized-v2"
 	}
-
-	return dt
 }

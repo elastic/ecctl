@@ -11,7 +11,7 @@ Sane default values are provided, making the command work out of the box even wh
 When version is not specified, the latest available stack version will automatically be used.
 These are the available options:
 
-* Simplified flags to set size and zone count for each instance type (Elasticsearch, Kibana, APM and App Search).
+* Simplified flags to set size and zone count for each instance type (Elasticsearch, Kibana, APM, Enterprise Search and App Search).
 * Advanced flag for different Elasticsearch node types: --topology-element +++<json obj="">+++(shorthand: -e). Note that the flag can be specified multiple times for complex topologies. The JSON object has the following format: { "name": "["data", "master", "ml"]" # type string "size": 1024 # type int32 "zone_count": 1 # type int32 }+++</json>+++
 * File definition: --file=+++<file path="">+++(shorthand: -f). You can create a definition by using the sample JSON seen here: https://elastic.co/guide/en/cloud/current/ec-api-deployment-crud.html#ec_create_a_deployment+++</file>+++
 
