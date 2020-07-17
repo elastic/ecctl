@@ -21,11 +21,13 @@ import (
 	"encoding/json"
 	"errors"
 	"io/ioutil"
+	"net/url"
 	"testing"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
+	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 
 	"github.com/elastic/ecctl/cmd/util/testutils"
 	"github.com/elastic/ecctl/pkg/util"
@@ -79,7 +81,7 @@ func Test_showCmd(t *testing.T) {
 			args: testutils.Args{
 				Cmd: showCmd,
 				Args: []string{
-					"show", util.ValidClusterID,
+					"show", util.ValidClusterID, "--ref-id=main-elasticsearch",
 				},
 				Cfg: testutils.MockCfg{Responses: []mock.Response{
 					mock.SampleInternalError(),
@@ -94,7 +96,7 @@ func Test_showCmd(t *testing.T) {
 			args: testutils.Args{
 				Cmd: showCmd,
 				Args: []string{
-					"show", util.ValidClusterID,
+					"show", util.ValidClusterID, "--ref-id=main-elasticsearch",
 				},
 				Cfg: testutils.MockCfg{
 					OutputFormat: "json",
@@ -114,11 +116,62 @@ func Test_showCmd(t *testing.T) {
 			args: testutils.Args{
 				Cmd: showCmd,
 				Args: []string{
-					"show", util.ValidClusterID,
+					"show", util.ValidClusterID, "--ref-id=main-elasticsearch",
 				},
 				Cfg: testutils.MockCfg{
 					OutputFormat: "text",
 					Responses: []mock.Response{
+						mock.New200ResponseAssertion(
+							reqAssertion, mock.NewByteBody(showRawResp),
+						),
+					},
+				},
+			},
+			want: testutils.Assertion{
+				Stdout: "SECRET        VALUE        AS FILE\n" +
+					"secret-name   <no value>   false\n",
+			},
+		},
+		{
+			name: "succeeds with text format and ref-id auto-discovery",
+			args: testutils.Args{
+				Cmd: showCmd,
+				Args: []string{
+					"show", util.ValidClusterID, "--ref-id=",
+				},
+				Cfg: testutils.MockCfg{
+					OutputFormat: "text",
+					Responses: []mock.Response{
+						mock.New200ResponseAssertion(
+							&mock.RequestAssertion{
+								Header: api.DefaultReadMockHeaders,
+								Method: "GET",
+								Host:   api.DefaultMockHost,
+								Path:   "/api/v1/deployments/320b7b540dfc967a7a649c18e2fce4ed",
+								Query: url.Values{
+									"convert_legacy_plans": {"false"},
+									"enrich_with_template": {"true"},
+									"show_metadata":        {"false"},
+									"show_plan_defaults":   {"false"},
+									"show_plan_history":    {"false"},
+									"show_plan_logs":       {"false"},
+									"show_plans":           {"false"},
+									"show_security":        {"false"},
+									"show_settings":        {"false"},
+									"show_system_alerts":   {"5"},
+								},
+							},
+							mock.NewStructBody(models.DeploymentGetResponse{
+								Healthy: ec.Bool(true),
+								ID:      ec.String(mock.ValidClusterID),
+								Resources: &models.DeploymentResources{
+									Elasticsearch: []*models.ElasticsearchResourceInfo{{
+										ID:    ec.String(mock.ValidClusterID),
+										RefID: ec.String("main-elasticsearch"),
+									}},
+								},
+							}),
+						),
 						mock.New200ResponseAssertion(
 							reqAssertion, mock.NewByteBody(showRawResp),
 						),

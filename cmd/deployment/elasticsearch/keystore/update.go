@@ -73,7 +73,7 @@ var updateCmd = &cobra.Command{
 
 func init() {
 	Command.AddCommand(updateCmd)
-	updateCmd.Flags().String("ref-id", "main-elasticsearch", "Optional ref_id to use for the Elasticsearch resource.")
+	updateCmd.Flags().String("ref-id", "", "Optional ref_id to use for the Elasticsearch resource, auto-discovered if not specified.")
 	updateCmd.Flags().String("file", "", "Required json formatted file path with the keystore secret contents")
 	updateCmd.MarkFlagFilename("file", "json")
 }

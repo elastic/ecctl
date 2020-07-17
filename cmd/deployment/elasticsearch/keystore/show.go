@@ -47,5 +47,5 @@ var showCmd = &cobra.Command{
 
 func init() {
 	Command.AddCommand(showCmd)
-	showCmd.Flags().String("ref-id", "main-elasticsearch", "Optional ref_id to use for the Elasticsearch resource.")
+	showCmd.Flags().String("ref-id", "", "Optional ref_id to use for the Elasticsearch resource, auto-discovered if not specified.")
 }
