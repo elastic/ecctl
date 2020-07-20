@@ -55,7 +55,7 @@ func Test_deleteCmd(t *testing.T) {
 				}},
 			},
 			want: testutils.Assertion{
-				Err: errors.New("accepts 1 arg(s), received 0"),
+				Err: errors.New(`required flag(s) "template-id" not set`),
 			},
 		},
 		{
@@ -63,7 +63,7 @@ func Test_deleteCmd(t *testing.T) {
 			args: testutils.Args{
 				Cmd: deleteCmd,
 				Args: []string{
-					"delete", "default",
+					"delete", "--template-id=default",
 				},
 				Cfg: testutils.MockCfg{Responses: []mock.Response{
 					mock.SampleInternalError(),
@@ -78,7 +78,7 @@ func Test_deleteCmd(t *testing.T) {
 			args: testutils.Args{
 				Cmd: deleteCmd,
 				Args: []string{
-					"delete", "default",
+					"delete", "--template-id=default",
 				},
 				Cfg: testutils.MockCfg{
 					OutputFormat: "json",

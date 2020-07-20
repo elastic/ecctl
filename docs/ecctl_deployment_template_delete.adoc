@@ -9,14 +9,15 @@ Deletes an existing deployment template (Available for ECE only)
 Deletes an existing deployment template (Available for ECE only)
 
 ----
-ecctl deployment template delete [flags]
+ecctl deployment template delete --template-id <template id> [flags]
 ----
 
 [float]
 === Options
 
 ----
-  -h, --help   help for delete
+  -h, --help                 help for delete
+      --template-id string   Required template ID to update.
 ----
 
 [float]

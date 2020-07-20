@@ -26,19 +26,19 @@ import (
 )
 
 var showCmd = &cobra.Command{
-	Use:     "show",
+	Use:     "show --template-id <template id>",
 	Short:   cmdutil.AdminReqDescription("Displays a deployment template"),
-	PreRunE: cobra.ExactArgs(1),
+	PreRunE: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		stackVersion, _ := cmd.Flags().GetString("stack-version")
 		hideIC, _ := cmd.Flags().GetBool("hide-instance-configurations")
-
+		templateID, _ := cmd.Flags().GetString("template-id")
 		res, err := deptemplateapi.Get(deptemplateapi.GetParams{
 			API:                        ecctl.Get().API,
 			Region:                     ecctl.Get().Config.Region,
 			StackVersion:               stackVersion,
 			HideInstanceConfigurations: hideIC,
-			TemplateID:                 args[0],
+			TemplateID:                 templateID,
 		})
 		if err != nil {
 			return err
@@ -52,4 +52,6 @@ func init() {
 	Command.AddCommand(showCmd)
 	showCmd.Flags().Bool("hide-instance-configurations", false, "Hides instance configurations - only visible when using the JSON output")
 	showCmd.Flags().String("stack-version", "", "Optional filter to only return deployment templates which are valid for the specified stack version.")
+	showCmd.Flags().String("template-id", "", "Required template ID to update.")
+	showCmd.MarkFlagRequired("template-id")
 }

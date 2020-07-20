@@ -7,13 +7,14 @@ Deletes an existing deployment template (Available for ECE only)
 Deletes an existing deployment template (Available for ECE only)
 
 ```
-ecctl deployment template delete [flags]
+ecctl deployment template delete --template-id <template id> [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for delete
+  -h, --help                 help for delete
+      --template-id string   Required template ID to update.
 ```
 
 ### Options inherited from parent commands

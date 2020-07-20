@@ -64,7 +64,7 @@ func Test_showCmd(t *testing.T) {
 		want testutils.Assertion
 	}{
 		{
-			name: "fails due empty argument",
+			name: "fails due to empty flag",
 			args: testutils.Args{
 				Cmd: showCmd,
 				Args: []string{
@@ -75,7 +75,7 @@ func Test_showCmd(t *testing.T) {
 				}},
 			},
 			want: testutils.Assertion{
-				Err: errors.New("accepts 1 arg(s), received 0"),
+				Err: errors.New(`required flag(s) "template-id" not set`),
 			},
 		},
 		{
@@ -83,7 +83,7 @@ func Test_showCmd(t *testing.T) {
 			args: testutils.Args{
 				Cmd: showCmd,
 				Args: []string{
-					"show", "default",
+					"show", "--template-id=default",
 				},
 				Cfg: testutils.MockCfg{Responses: []mock.Response{
 					mock.SampleInternalError(),
@@ -98,7 +98,7 @@ func Test_showCmd(t *testing.T) {
 			args: testutils.Args{
 				Cmd: showCmd,
 				Args: []string{
-					"show", "default",
+					"show", "--template-id=default",
 				},
 				Cfg: testutils.MockCfg{
 					OutputFormat: "json",

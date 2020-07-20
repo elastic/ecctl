@@ -26,18 +26,21 @@ import (
 )
 
 var deleteCmd = &cobra.Command{
-	Use:     "delete",
+	Use:     "delete --template-id <template id>",
 	Short:   cmdutil.AdminReqDescription("Deletes an existing deployment template"),
-	PreRunE: cobra.ExactArgs(1),
+	PreRunE: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		templateID, _ := cmd.Flags().GetString("template-id")
 		return deptemplateapi.Delete(deptemplateapi.DeleteParams{
 			API:        ecctl.Get().API,
 			Region:     ecctl.Get().Config.Region,
-			TemplateID: args[0],
+			TemplateID: templateID,
 		})
 	},
 }
 
 func init() {
 	Command.AddCommand(deleteCmd)
+	deleteCmd.Flags().String("template-id", "", "Required template ID to update.")
+	deleteCmd.MarkFlagRequired("template-id")
 }

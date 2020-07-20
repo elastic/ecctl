@@ -32,7 +32,7 @@ import (
 )
 
 var updateCmd = &cobra.Command{
-	Use:     "update",
+	Use:     "update --template-id <template id> --file <definition.json>",
 	Short:   cmdutil.AdminReqDescription("Updates an existing deployment template"),
 	PreRunE: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -58,7 +58,7 @@ func init() {
 	Command.AddCommand(updateCmd)
 	updateCmd.Flags().Bool("hide-instance-configurations", false, "Hides instance configurations - only visible when using the JSON output.")
 	updateCmd.Flags().StringP("file", "f", "", "Deployment template definition.")
-	updateCmd.Flags().String("template-id", "", "It will create the deployment template with the specified ID rather than auto-generating an ID.")
+	updateCmd.Flags().String("template-id", "", "Required template ID to update.")
 	cobra.MarkFlagFilename(updateCmd.Flags(), "file", "json")
 	updateCmd.MarkFlagRequired("template-id")
 }

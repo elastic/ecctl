@@ -7,7 +7,7 @@ Creates a new deployment template (Available for ECE only)
 Creates a new deployment template (Available for ECE only)
 
 ```
-ecctl deployment template create [flags]
+ecctl deployment template create --file <definition.json> [flags]
 ```
 
 ### Options

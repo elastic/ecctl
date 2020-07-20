@@ -7,7 +7,7 @@ Displays a deployment template (Available for ECE only)
 Displays a deployment template (Available for ECE only)
 
 ```
-ecctl deployment template show [flags]
+ecctl deployment template show --template-id <template id> [flags]
 ```
 
 ### Options
@@ -16,6 +16,7 @@ ecctl deployment template show [flags]
   -h, --help                           help for show
       --hide-instance-configurations   Hides instance configurations - only visible when using the JSON output
       --stack-version string           Optional filter to only return deployment templates which are valid for the specified stack version.
+      --template-id string             Required template ID to update.
 ```
 
 ### Options inherited from parent commands

@@ -37,7 +37,7 @@ var (
 )
 
 var createCmd = &cobra.Command{
-	Use:     "create",
+	Use:     "create --file <definition.json>",
 	Short:   cmdutil.AdminReqDescription("Creates a new deployment template"),
 	PreRunE: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
