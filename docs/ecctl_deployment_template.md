@@ -40,9 +40,9 @@ ecctl deployment template [flags]
 ### SEE ALSO
 
 * [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
-* [ecctl deployment template create](ecctl_deployment_template_create.md)	 - Creates a new deployment template
-* [ecctl deployment template delete](ecctl_deployment_template_delete.md)	 - Deletes an existing deployment template
+* [ecctl deployment template create](ecctl_deployment_template_create.md)	 - Creates a new deployment template (Available for ECE only)
+* [ecctl deployment template delete](ecctl_deployment_template_delete.md)	 - Deletes an existing deployment template (Available for ECE only)
 * [ecctl deployment template list](ecctl_deployment_template_list.md)	 - Lists deployment templates
-* [ecctl deployment template show](ecctl_deployment_template_show.md)	 - Displays a deployment template
-* [ecctl deployment template update](ecctl_deployment_template_update.md)	 - Updates an existing deployment template
+* [ecctl deployment template show](ecctl_deployment_template_show.md)	 - Displays a deployment template (Available for ECE only)
+* [ecctl deployment template update](ecctl_deployment_template_update.md)	 - Updates an existing deployment template (Available for ECE only)
 

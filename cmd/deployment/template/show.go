@@ -21,12 +21,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/deptemplateapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var showCmd = &cobra.Command{
 	Use:     "show",
-	Short:   "Displays a deployment template",
+	Short:   cmdutil.AdminReqDescription("Displays a deployment template"),
 	PreRunE: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		stackVersion, _ := cmd.Flags().GetString("stack-version")
@@ -50,5 +51,5 @@ var showCmd = &cobra.Command{
 func init() {
 	Command.AddCommand(showCmd)
 	showCmd.Flags().Bool("hide-instance-configurations", false, "Hides instance configurations - only visible when using the JSON output")
-	showCmd.Flags().String("stack-version", "", "It will cause the returned deployment templates which are valid for the specified stacks version.")
+	showCmd.Flags().String("stack-version", "", "Optional filter to only return deployment templates which are valid for the specified stack version.")
 }

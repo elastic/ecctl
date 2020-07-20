@@ -47,7 +47,6 @@ ecctl platform [flags]
 * xref:ecctl[ecctl]	 - Elastic Cloud Control
 * xref:ecctl_platform_allocator[ecctl platform allocator]	 - Manages allocators (Available for ECE only)
 * xref:ecctl_platform_constructor[ecctl platform constructor]	 - Manages constructors (Available for ECE only)
-* xref:ecctl_platform_deployment-template[ecctl platform deployment-template]	 - DEPRECATED (Will be removed in the next major version): Manages deployment templates (Available for ECE only)
 * xref:ecctl_platform_enrollment-token[ecctl platform enrollment-token]	 - Manages tokens (Available for ECE only)
 * xref:ecctl_platform_info[ecctl platform info]	 - Shows information about the platform (Available for ECE only)
 * xref:ecctl_platform_instance-configuration[ecctl platform instance-configuration]	 - Manages instance configurations (Available for ECE only)

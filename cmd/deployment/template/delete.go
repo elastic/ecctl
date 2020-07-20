@@ -21,12 +21,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/deptemplateapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var deleteCmd = &cobra.Command{
 	Use:     "delete",
-	Short:   "Deletes an existing deployment template",
+	Short:   cmdutil.AdminReqDescription("Deletes an existing deployment template"),
 	PreRunE: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		return deptemplateapi.Delete(deptemplateapi.DeleteParams{

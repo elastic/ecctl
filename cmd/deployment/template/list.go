@@ -51,6 +51,6 @@ var listCmd = &cobra.Command{
 func init() {
 	Command.AddCommand(listCmd)
 	listCmd.Flags().Bool("hide-instance-configurations", false, "Hides instance configurations - only visible when using the JSON output")
-	listCmd.Flags().String("stack-version", "", "It will cause the returned deployment templates which are valid for the specified stacks version.")
+	listCmd.Flags().String("stack-version", "", "Optional filter to only return deployment templates which are valid for the specified stack version.")
 	listCmd.Flags().String("filter", "", "Optional key:value pair that acts as a filter and excludes any template that does not have a matching metadata item associated.")
 }

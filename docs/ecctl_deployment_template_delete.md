@@ -1,10 +1,10 @@
 ## ecctl deployment template delete
 
-Deletes an existing deployment template
+Deletes an existing deployment template (Available for ECE only)
 
 ### Synopsis
 
-Deletes an existing deployment template
+Deletes an existing deployment template (Available for ECE only)
 
 ```
 ecctl deployment template delete [flags]

@@ -1,12 +1,12 @@
 [#ecctl_deployment_template_delete]
 == ecctl deployment template delete
 
-Deletes an existing deployment template
+Deletes an existing deployment template (Available for ECE only)
 
 [float]
 === Synopsis
 
-Deletes an existing deployment template
+Deletes an existing deployment template (Available for ECE only)
 
 ----
 ecctl deployment template delete [flags]

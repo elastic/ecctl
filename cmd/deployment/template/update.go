@@ -27,12 +27,13 @@ import (
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var updateCmd = &cobra.Command{
 	Use:     "update",
-	Short:   "Updates an existing deployment template",
+	Short:   cmdutil.AdminReqDescription("Updates an existing deployment template"),
 	PreRunE: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		var req *models.DeploymentTemplateRequestBody
@@ -56,7 +57,7 @@ var updateCmd = &cobra.Command{
 func init() {
 	Command.AddCommand(updateCmd)
 	updateCmd.Flags().Bool("hide-instance-configurations", false, "Hides instance configurations - only visible when using the JSON output.")
-	updateCmd.Flags().String("file", "", "It will cause the returned deployment templates which are valid for the specified stacks version.")
+	updateCmd.Flags().StringP("file", "f", "", "Deployment template definition.")
 	updateCmd.Flags().String("template-id", "", "It will create the deployment template with the specified ID rather than auto-generating an ID.")
 	cobra.MarkFlagFilename(updateCmd.Flags(), "file", "json")
 	updateCmd.MarkFlagRequired("template-id")

@@ -27,6 +27,7 @@ import (
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
@@ -37,7 +38,7 @@ var (
 
 var createCmd = &cobra.Command{
 	Use:     "create",
-	Short:   "Creates a new deployment template",
+	Short:   cmdutil.AdminReqDescription("Creates a new deployment template"),
 	PreRunE: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		var req *models.DeploymentTemplateRequestBody
@@ -66,7 +67,7 @@ var createCmd = &cobra.Command{
 func init() {
 	Command.AddCommand(createCmd)
 	createCmd.Flags().Bool("hide-instance-configurations", false, "Hides instance configurations - only visible when using the JSON output.")
-	createCmd.Flags().String("file", "", "It will cause the returned deployment templates which are valid for the specified stacks version.")
-	createCmd.Flags().String("template-id", "", "It will create the deployment template with the specified ID rather than auto-generating an ID.")
+	createCmd.Flags().StringP("file", "f", "", "Deployment template definition.")
+	createCmd.Flags().String("template-id", "", "Optional deployment template ID. Otherwise the deployment template will be created with an auto-generated ID.")
 	cobra.MarkFlagFilename(createCmd.Flags(), "file", "json")
 }

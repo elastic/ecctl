@@ -16,7 +16,7 @@ ecctl deployment template list [flags]
       --filter string                  Optional key:value pair that acts as a filter and excludes any template that does not have a matching metadata item associated.
   -h, --help                           help for list
       --hide-instance-configurations   Hides instance configurations - only visible when using the JSON output
-      --stack-version string           It will cause the returned deployment templates which are valid for the specified stacks version.
+      --stack-version string           Optional filter to only return deployment templates which are valid for the specified stack version.
 ```
 
 ### Options inherited from parent commands

@@ -1,10 +1,10 @@
 ## ecctl deployment template show
 
-Displays a deployment template
+Displays a deployment template (Available for ECE only)
 
 ### Synopsis
 
-Displays a deployment template
+Displays a deployment template (Available for ECE only)
 
 ```
 ecctl deployment template show [flags]
@@ -15,7 +15,7 @@ ecctl deployment template show [flags]
 ```
   -h, --help                           help for show
       --hide-instance-configurations   Hides instance configurations - only visible when using the JSON output
-      --stack-version string           It will cause the returned deployment templates which are valid for the specified stacks version.
+      --stack-version string           Optional filter to only return deployment templates which are valid for the specified stack version.
 ```
 
 ### Options inherited from parent commands

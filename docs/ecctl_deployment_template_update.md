@@ -1,10 +1,10 @@
 ## ecctl deployment template update
 
-Updates an existing deployment template
+Updates an existing deployment template (Available for ECE only)
 
 ### Synopsis
 
-Updates an existing deployment template
+Updates an existing deployment template (Available for ECE only)
 
 ```
 ecctl deployment template update [flags]
@@ -13,7 +13,7 @@ ecctl deployment template update [flags]
 ### Options
 
 ```
-      --file string                    It will cause the returned deployment templates which are valid for the specified stacks version.
+  -f, --file string                    Deployment template definition.
   -h, --help                           help for update
       --hide-instance-configurations   Hides instance configurations - only visible when using the JSON output.
       --template-id string             It will create the deployment template with the specified ID rather than auto-generating an ID.

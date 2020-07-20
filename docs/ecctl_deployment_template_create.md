@@ -1,10 +1,10 @@
 ## ecctl deployment template create
 
-Creates a new deployment template
+Creates a new deployment template (Available for ECE only)
 
 ### Synopsis
 
-Creates a new deployment template
+Creates a new deployment template (Available for ECE only)
 
 ```
 ecctl deployment template create [flags]
@@ -13,10 +13,10 @@ ecctl deployment template create [flags]
 ### Options
 
 ```
-      --file string                    It will cause the returned deployment templates which are valid for the specified stacks version.
+  -f, --file string                    Deployment template definition.
   -h, --help                           help for create
       --hide-instance-configurations   Hides instance configurations - only visible when using the JSON output.
-      --template-id string             It will create the deployment template with the specified ID rather than auto-generating an ID.
+      --template-id string             Optional deployment template ID. Otherwise the deployment template will be created with an auto-generated ID.
 ```
 
 ### Options inherited from parent commands
