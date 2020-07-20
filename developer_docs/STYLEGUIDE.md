@@ -6,7 +6,7 @@
   - [API Errors](#api-errors)
   - [Multiple errors](#multiple-errors)
 - [Packages](#packages)
-  - [Structure](#structure)
+  - [Command Structure](#command-structure)
   - [Util packages](#util-packages)
 - [Testing](#testing)
   - [Unit tests](#unit-tests)
@@ -37,18 +37,14 @@ All errors must be handled and returned, `_` variables must not be used to disca
 
 #### Exceptions
 
-Parsing command line arguments/flags is done like this
+Parsing command line arguments/flags is done like this:
 
 ```go
 threshold, _ := cmd.Flags().GetUint32(thresholdArg)
 ```
 
-The above line would return an error only if the flag is not defined, or the datatype does not match the flag declaration data type.
+The above line would return an error only if the flag is not defined, or the data type does not match the flag declaration data type.
 Adding many `if err` checks will make the code a little bit noisy so we can ignore the errors in these cases.
-
-### API Errors
-
-API errors should always be encapsulated with `apierr.Unwrap()`, this function tries to break down and inspect the encapsulated and multi-layer wraps that the API errors contain.
 
 ### Multiple errors
 
@@ -89,15 +85,13 @@ func (params StopParams) Validate() error {
 
 ## Packages
 
-### Structure
+### Command Structure
 
-A package per context, a context applies to any of the high level containers like `platform`, `deployment`, etc. When a context becomes too large to be contained in a package we can start breaking it down into sub-packages.
-
-An example would be  [pkg/deployment/elasticsearch/plan](../pkg/deployment/elasticsearch/plan).
+Commands are defined following the structure of the Elastic Cloud API. If a request to the API is `GET /api/v1/deployments/{deployment_id}`, the corresponding command will be `ecctl deployment show <deployment_id>`.
 
 ### Util packages
 
-When a function can be made generic it should go in one of the utils packages (e.g. [pkg/util](../pkg/util), [pkg/util](../pkg/util)) to remove complexity and give the ability to be reused.
+When a function can be made generic it should go in one of the utils packages (e.g. [cmd/util](../cmd/util), [pkg/util](../pkg/util)) to remove complexity and give the ability to be reused.
 
 If the function is not specific to `ecctl`, it should be part of [cloud-sdk-go](https://github.com/elastic/cloud-sdk-go) or a standalone repository if the functionality is big enough.
 
@@ -107,40 +101,11 @@ If the function is not specific to `ecctl`, it should be part of [cloud-sdk-go](
 
 All files containing functions or methods must have a corresponding unit test file, and we aim to have 100% coverage.
 
-#### API Mocks
+#### Testing commands
 
-When unit testing functions which will call the external API, please use the provided `api.NewMock` in conjunction with `mock.Response`.
+When writing unit tests for commands, we use the `testutils.RunCmdAssertion()` function which tests a `*cobra.Command` and uses the testing.T struct to return any unmatched assertions..
 
-yes! :smile:
-
-``` go
-import (
-    "net/http"
-
-    "github.com/elastic/cloud-sdk-go/pkg/api"
-    "github.com/elastic/cloud-sdk-go/pkg/api/mock"
-)
-
-//Test case
-{
-    name: "succeeds",
-    args: args{params{
-        API: api.NewMock(mock.Response{
-            Response: http.Response{
-                Body:       mock.NewStringBody(`{}`),
-                StatusCode: 200,
-            },
-        }),
-    }},
-},
-// More tests ...
-```
-
-### Testing commands
-
-When writing unit tests for commands, we only look to assert that the command is constructing the correct API call. API responses are mocked and tested only in the `pkg/` directory.
-
-See [TestRunShowKibanaClusterCmd()](./cmd/kibana/show_test.go) as a good example to base your tests on.
+See [Test_listCmd()](../cmd/deployment/template/list_test.go) as a good example to base your tests on.
 
 ## General Style
 
@@ -179,33 +144,13 @@ Names should be descriptive and we should avoid redundancy.
 yes! :smile:
 
 ```go
-kibana.Create()
+ecctl.Get()
 ```
 
 preferably not :confused:
 
 ```go
-kibana.CreateKibanaDeployment()
-```
-
-When using method chaining make sure to put each method in it's own line to improve readability.
-
-yes! :smile:
-
-```go
-res, err := a.API.V1API.ClustersApm.GetApmClusterPlanActivity(
-clusters_apm.NewGetApmClusterPlanActivityParams().
-     WithClusterID(params.id).
-     WithShowPlanDefaults(params.defaults),
-)
-```
-
-preferably not :confused:
-
-```go
-res, err := a.API.V1API.ClustersApm.GetApmClusterPlanActivity(
-    clusters_apm.NewGetApmClusterPlanActivityParams().WithClusterID(params.id).WithShowPlanDefaults(params.defaults),
-)
+ecctl.GetEcctlInstance()
 ```
 
 When possible we try to avoid `else` and nested `if`s. This makes our code more readable and removes complexity.
@@ -241,7 +186,7 @@ if params.Hide {
 
 We use `make docs` to automatically generate documentation for our commands which live in the `cmd` folder.
 
-It is important when writing the descriptions to our commands or flags, that we use simple language and are as clear as possible to provide good UX. If you need to explain more about the command or give examples, please do so using the `Example` field, a good example is the [deployment elasticsearch list](cmd/deployment/elasticsearch/list.go) command.
+It is important when writing the descriptions to our commands or flags, that we use simple language and are as clear as possible to provide good UX. If you need to explain more about the command or give examples, please do so using the `Example` field, a good example is the [deployment list](../cmd/deployment/create.go) command.
 
 The package wide description and documentation is provided in a godoc `doc.go` file. Aside form packages with a very small context, all packages should have this file.
 

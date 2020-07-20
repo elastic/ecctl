@@ -10,28 +10,19 @@ into the `app` package for business logic and returns results.
 
 [`cmd/root.go`](../cmd/root.go) contains the root command (`ecctl`) and global flags.
 [`cmd/commands.go`](../cmd/commands.go) attaches the top level commands (`deployment`, `platform`, etc) to the root command.
-The subdirectories define the subcommand structure (e.g. `platform` -> `proxy`). The lowest level `command.go`
-(e.g. [`cmd/platform/proxy/command.go`](../cmd/platform/proxy/command.go)) contains the definition of the actual command
-(e.g. `platform proxy list`).
+The subdirectories define the subcommand structure (e.g. `deployment` -> `list`). The lowest level
+(e.g. [`cmd/deployment/list.go`](../cmd/deployment/list.go)) contains the definition of the actual command
+(e.g. `deployment list`).
 
-### Example: adding a new command to list proxies
+### Example: adding a new command to list deployments
 
-Create a new subdirectory `cmd/platform/proxy`, and add a `command.go` file to it. (Some of these files/directories
-might already exist, e.g. if you are adding a new operation for an existing entity.) You will define your new command here.
+Create a new subdirectory `cmd/deployment`, and add a `list.go` file to it. Some of these files/directories
+might already exist (i.e. if you are adding a new operation for an existing entity). You will define your new command here.
 
-First, you need to define the `proxy` command:
-
-```go
-var Command = &cobra.Command{
-    Use: "proxy",
-    // ...
-}
-```
-
-Next, define the `list` subcommand:
+Define the `list` subcommand in `cmd/deployment/list.go`:
 
 ```go
-var listProxiesCmd = &cobra.Command{
+var listCmd = &cobra.Command{
     Use:     "list",
     // ...
 }
@@ -39,37 +30,32 @@ var listProxiesCmd = &cobra.Command{
 
 There are a few things to note about the `list` command:
 
-- The `list` command will contain a call to the `proxy.List()` method from the `pkg/platform/proxy` package which you have
-not defined yet. You will define this method later. You will also need to define the parameters struct used to pass
-arguments to this method - e.g. `proxy.ListParams`.
-- Ideally, you would implement a custom text formatter to present the proxy list in a user-friendly way. We currently
+- The `list` command will contain a call to the `deploymentapi.List()` function from the [`/pkg/api/deploymentapi`](https://github.com/elastic/cloud-sdk-go/tree/master/pkg/api/deploymentapi)
+package found in the cloud-sdk-go. You will define this function later. You will also need to define the parameters
+struct used to pass arguments to this function - e.g. `deploymentapi.ListParams`.
+- Ideally, you would implement a custom text formatter to present the deployment list in a user-friendly way. We currently
 support two types of output: json and text. Absent a custom formatter, the output defaults to *json*. If you choose to add
 a formatter to support *text* output, you'll need to create a template such as
-[`pkg/formatter/templates/text/proxy/list.gotmpl`](../pkg/formatter/templates/text/proxy/list.gotmpl). To ensure this template
-gets used, invoke a `ecctl.Get().Formatter.Format()` from the  [`listProxiesCmd`](https://github.com/elastic/ecctl/blob/a90daa0c4411905c8d5c3fa06f5b6250395c4730/cmd/platform/proxy/command.go#L60).
+[`pkg/formatter/templates/text/deployment/list.gotmpl`](../pkg/formatter/templates/text/deployment/list.gotmpl). To ensure this template
+gets used, invoke a `ecctl.Get().Formatter.Format()` from the  [`listCmd`](https://github.com/elastic/ecctl/blob/master/cmd/deployment/list.go#L39).
 
-Next, the `init()` function attaches the `list` subcommand to the `proxy` command, and adds any custom
+Next, the `init()` function attaches the `list` subcommand to the `deployment` command, and adds any custom
 command line parameters.
 
 ```go
 func init() {
-    Command.AddCommand(listProxiesCmd)
+    Command.AddCommand(listCmd)
     // ...
 }
 
 ```
 
-Finally, you need to attach the `proxy` subcommand to the `platform` command, by adding a reference to it
-in [`cmd/platform/platform.go`](../cmd/platform/platform.go).
+Finally, you need to attach the `deployment` subcommand to the `ecctl` command, by adding a reference to it
+in [`cmd/commands.go`](../cmd/commands.go).
 
 ## The `pkg` package
 
 The [`pkg`](../pkg) package is used by the `cmd` package to create commands and is library code that's ok to use by external applications.
-
-### [`deployment`](../pkg/deployment)
-
-Business logic behind `deployment` commands. Typically, methods in this package are called from the `cmd` package,
-they accept parameters and call into the ES Cloud API, process and return results to the commands.
 
 ### [`ecctl`](../pkg/ecctl)
 
@@ -79,39 +65,32 @@ Contains the business logic and configuration for the ecctl app.
 
 Functions and templates to format command output from json into user friendly text.
 
-### [`platform`](../pkg/platform)
-
-Business logic behind `platform` commands. Typically, methods in this package are called from the `cmd` package,
-they accept parameters and call into the ES Cloud API, process and return results to the commands.
-
 ### [`util`](../pkg/util)
 
 Common resources, such as utility functions, constants, parameters, that are shared among different packages.
 
-### Example: adding a new command to list proxies (application logic)
+### Example: adding a new command to list deployments (application logic)
 
-Next, you need to add the business logic to your `platform proxy list` command. That's the `List()`
-method mentioned earlier. It should go into the `pkg/platform/proxy/proxy.go` file (that you'll need create if it does
-not already exist):
+Next, you need to add the business logic to your `ecctl deployment list` command. That's the `List()`
+function mentioned earlier. These APIs can be found in [cloud-sdk-go](https://github.com/elastic/cloud-sdk-go/tree/master/pkg/api).
+The API for our list command should go in the [`cloud-sdk-go/pkg/api/deploymentapi/list.go`](https://github.com/elastic/cloud-sdk-go/tree/master/pkg/api/deploymentapi/list.go) file
+which you'll need create if it does not already exist:
 
 ```go
-func List(params ListParams) (*models.ProxyOverview, error) {
+func List(params ListParams) (*models.DeploymentsListResponse, error) {
     // ...
 }
 ```
 
 Things to note about the `List` function:
 
-- This is where the main business logic happens: it should include a call to the cloud API to retrieve all the
-proxies and return them to the calling function.
-- Make sure to properly catch and handle all possible errors. Consider using the  `multierror`
-library if that makes sense. In this simple case, where we only have one API call, and not much else in terms of processing,
-it's probably fine to use regular `errors`.
-- For a general set of guidelines on how to write good Go code, see our [Style Guide](https://github.com/elastic/ecctl/blob/master/developer_docs/STYLEGUIDE.md).
+- This is where the main business logic happens: it should include a call to the Elastic Cloud API to retrieve all the
+deployments and return them to the calling function.
+- Make sure to properly catch and handle all possible validation errors. Use the [`multierror`](https://github.com/elastic/cloud-sdk-go/blob/master/pkg/api/deploymentapi/get.go#L46-L57)
+package even if you're returning a single error. This provides consistency and good UX since the errors will be be properly prefixed.
+- For a general set of guidelines on the project's code style, see our [Style Guide](https://github.com/elastic/ecctl/blob/master/developer_docs/STYLEGUIDE.md).
 
-You'll also need to define the `ListParams` struct, as we normally use structs to pass several arguments to functions. If you only have one or two
-functions and corresponding parameter structs, it's ok to define the parameters structs in the same file. If it starts growing beyond that,
-a good practice is to define parameter structs in their own file - in this case it would be `pkg/platform/proxy/proxy_params.go`.
+You'll also need to define the `ListParams` struct, as we normally use structs to pass several arguments to API functions.
 
 ```go
 type ListParams struct {
@@ -128,14 +107,13 @@ func (params ListParams) Validate() error {
 ```
 
 Additionally, please create unit tests for your changes. Both the `List()` function and the `Validate()`
-method for `ListParams` need to be tested. These tests should go to `pkg/platform/proxy/proxy_test.go`
-(and `pkg/platform/proxy/proxy_params_test.go`, if you separated the params in their own file).
+method for `ListParams` need to be tested. These tests should go to `cloud-sdk-go/pkg/api/deploymentapi/list_test.go`
 There are many examples of this in the code base, so feel free to browse and use them as inspiration.
 
 That concludes all the steps necessary for creating a new command. You can easily manually test your new command by
-making use of our [helper scripts](../CONTRIBUTING.md#helpers):
+importing your local cloud-sdk-go changes running `make fake-sdk`, and making use of our [helper scripts](../CONTRIBUTING.md#helpers):
 
-`dev-cli --config ~/path/to/your/ecctl/config.yaml platform proxy list`
+`dev-cli --config config deployment list`
 
 If your command behaves as expected, all that's left is to make sure you followed all the
 [code contribution guidelines](../CONTRIBUTING.md#code-contribution-guidelines) before submitting your PR.
