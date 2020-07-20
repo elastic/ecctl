@@ -42,6 +42,7 @@ ecctl deployment [flags]
 * [ecctl](ecctl.md)	 - Elastic Cloud Control
 * [ecctl deployment create](ecctl_deployment_create.md)	 - Creates a deployment
 * [ecctl deployment delete](ecctl_deployment_delete.md)	 - Deletes a previously shutdown deployment (Available for ECE only)
+* [ecctl deployment elasticsearch](ecctl_deployment_elasticsearch.md)	 - Manages Elasticsearch resources
 * [ecctl deployment list](ecctl_deployment_list.md)	 - Lists the platform's deployments
 * [ecctl deployment note](ecctl_deployment_note.md)	 - Manages a deployment's notes
 * [ecctl deployment plan](ecctl_deployment_plan.md)	 - Manages deployment plans

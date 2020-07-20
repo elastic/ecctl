@@ -1,0 +1,7 @@
+{
+    "secrets": {
+        "secret-name": {
+            "value": "the secret value"
+        }
+    }
+}
