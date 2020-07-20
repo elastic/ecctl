@@ -143,8 +143,9 @@ var vacateAllocatorCmd = &cobra.Command{
 		if setAllocatorMaintenance {
 			for _, id := range args {
 				var params = allocatorapi.MaintenanceParams{
-					API: ecctl.Get().API,
-					ID:  id,
+					API:    ecctl.Get().API,
+					ID:     id,
+					Region: ecctl.Get().Config.Region,
 				}
 				if err := allocatorapi.StartMaintenance(params); err != nil {
 					merr = merr.Append(err)
