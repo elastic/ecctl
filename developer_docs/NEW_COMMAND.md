@@ -73,7 +73,7 @@ Common resources, such as utility functions, constants, parameters, that are sha
 
 Next, you need to add the business logic to your `ecctl deployment list` command. That's the `List()`
 function mentioned earlier. These APIs can be found in [cloud-sdk-go](https://github.com/elastic/cloud-sdk-go/tree/master/pkg/api).
-The API for our list command should go in the [`cloud-sdk-go/pkg/api/deploymentapi.list.go`](https://github.com/elastic/cloud-sdk-go/tree/master/pkg/api/deploymentapi/list.go) file
+The API for our list command should go in the [`cloud-sdk-go/pkg/api/deploymentapi/list.go`](https://github.com/elastic/cloud-sdk-go/tree/master/pkg/api/deploymentapi/list.go) file
 which you'll need create if it does not already exist:
 
 ```go
@@ -113,7 +113,7 @@ There are many examples of this in the code base, so feel free to browse and use
 That concludes all the steps necessary for creating a new command. You can easily manually test your new command by
 importing your local cloud-sdk-go changes running `make fake-sdk`, and making use of our [helper scripts](../CONTRIBUTING.md#helpers):
 
-`dev-cli --config ~/path/to/your/ecctl/config.yaml deployment list`
+`dev-cli --config config deployment list`
 
 If your command behaves as expected, all that's left is to make sure you followed all the
 [code contribution guidelines](../CONTRIBUTING.md#code-contribution-guidelines) before submitting your PR.
