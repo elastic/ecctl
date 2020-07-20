@@ -1,28 +1,27 @@
-[#ecctl_deployment_elasticsearch]
-== ecctl deployment elasticsearch
+## ecctl deployment template create
 
-Manages Elasticsearch resources
+Creates a new deployment template (Available for ECE only)
 
-[float]
-=== Synopsis
+### Synopsis
 
-Manages Elasticsearch resources
+Creates a new deployment template (Available for ECE only)
 
-----
-ecctl deployment elasticsearch [flags]
-----
+```
+ecctl deployment template create --file <definition.json> [flags]
+```
 
-[float]
-=== Options
+### Options
 
-----
-  -h, --help   help for elasticsearch
-----
+```
+  -f, --file string                    Deployment template definition.
+  -h, --help                           help for create
+      --hide-instance-configurations   Hides instance configurations - only visible when using the JSON output.
+      --template-id string             Optional deployment template ID. Otherwise the deployment template will be created with an auto-generated ID.
+```
 
-[float]
-=== Options inherited from parent commands
+### Options inherited from parent commands
 
-----
+```
       --apikey string      API key to use to authenticate (If empty will look for EC_APIKEY environment variable)
       --config string      Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
       --force              Do not ask for confirmation
@@ -39,10 +38,9 @@ ecctl deployment elasticsearch [flags]
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
       --verbose            Enable verbose mode
-----
+```
 
-[float]
-=== SEE ALSO
+### SEE ALSO
 
-* xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
-* xref:ecctl_deployment_elasticsearch_keystore[ecctl deployment elasticsearch keystore]	 - Manages Elasticsearch resource keystores
+* [ecctl deployment template](ecctl_deployment_template.md)	 - Interacts with deployment template APIs
+

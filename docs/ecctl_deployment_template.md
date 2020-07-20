@@ -1,28 +1,24 @@
-[#ecctl_deployment_elasticsearch]
-== ecctl deployment elasticsearch
+## ecctl deployment template
 
-Manages Elasticsearch resources
+Interacts with deployment template APIs
 
-[float]
-=== Synopsis
+### Synopsis
 
-Manages Elasticsearch resources
+Interacts with deployment template APIs
 
-----
-ecctl deployment elasticsearch [flags]
-----
+```
+ecctl deployment template [flags]
+```
 
-[float]
-=== Options
+### Options
 
-----
-  -h, --help   help for elasticsearch
-----
+```
+  -h, --help   help for template
+```
 
-[float]
-=== Options inherited from parent commands
+### Options inherited from parent commands
 
-----
+```
       --apikey string      API key to use to authenticate (If empty will look for EC_APIKEY environment variable)
       --config string      Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
       --force              Do not ask for confirmation
@@ -39,10 +35,14 @@ ecctl deployment elasticsearch [flags]
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
       --verbose            Enable verbose mode
-----
+```
 
-[float]
-=== SEE ALSO
+### SEE ALSO
 
-* xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
-* xref:ecctl_deployment_elasticsearch_keystore[ecctl deployment elasticsearch keystore]	 - Manages Elasticsearch resource keystores
+* [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
+* [ecctl deployment template create](ecctl_deployment_template_create.md)	 - Creates a new deployment template (Available for ECE only)
+* [ecctl deployment template delete](ecctl_deployment_template_delete.md)	 - Deletes an existing deployment template (Available for ECE only)
+* [ecctl deployment template list](ecctl_deployment_template_list.md)	 - Lists deployment templates
+* [ecctl deployment template show](ecctl_deployment_template_show.md)	 - Displays a deployment template (Available for ECE only)
+* [ecctl deployment template update](ecctl_deployment_template_update.md)	 - Updates an existing deployment template (Available for ECE only)
+

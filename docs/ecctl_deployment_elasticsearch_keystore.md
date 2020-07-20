@@ -1,10 +1,10 @@
 ## ecctl deployment elasticsearch keystore
 
-Manages a deployment's elasticsearch resource keystore
+Manages Elasticsearch resource keystores
 
 ### Synopsis
 
-Manages a deployment's elasticsearch resource keystore
+Manages Elasticsearch resource keystores
 
 ```
 ecctl deployment elasticsearch keystore [flags]
@@ -39,7 +39,7 @@ ecctl deployment elasticsearch keystore [flags]
 
 ### SEE ALSO
 
-* [ecctl deployment elasticsearch](ecctl_deployment_elasticsearch.md)	 - Manages a deployment's elasticsearch resources
-* [ecctl deployment elasticsearch keystore show](ecctl_deployment_elasticsearch_keystore_show.md)	 - Shows an Elasticsearch keystore contents
+* [ecctl deployment elasticsearch](ecctl_deployment_elasticsearch.md)	 - Manages Elasticsearch resources
+* [ecctl deployment elasticsearch keystore show](ecctl_deployment_elasticsearch_keystore_show.md)	 - Shows the settings from the Elasticsearch resource keystore
 * [ecctl deployment elasticsearch keystore update](ecctl_deployment_elasticsearch_keystore_update.md)	 - Updates the contents of an Elasticsearch keystore
 

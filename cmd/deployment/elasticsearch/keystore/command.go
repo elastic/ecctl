@@ -22,8 +22,8 @@ import "github.com/spf13/cobra"
 // Command is the deployment subcommand
 var Command = &cobra.Command{
 	Use:     "keystore",
-	Short:   "Manages a deployment's elasticsearch resource keystore",
-	PreRunE: cobra.MaximumNArgs(0),
+	Short:   "Manages Elasticsearch resource keystores",
+	PreRunE: cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
 	},

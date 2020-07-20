@@ -1,10 +1,10 @@
 ## ecctl deployment elasticsearch keystore show
 
-Shows an Elasticsearch keystore contents
+Shows the settings from the Elasticsearch resource keystore
 
 ### Synopsis
 
-Shows an Elasticsearch keystore contents
+Shows the settings from the Elasticsearch resource keystore
 
 ```
 ecctl deployment elasticsearch keystore show <deployment id> [--ref-id <ref-id>] [flags]
@@ -40,5 +40,5 @@ ecctl deployment elasticsearch keystore show <deployment id> [--ref-id <ref-id>]
 
 ### SEE ALSO
 
-* [ecctl deployment elasticsearch keystore](ecctl_deployment_elasticsearch_keystore.md)	 - Manages a deployment's elasticsearch resource keystore
+* [ecctl deployment elasticsearch keystore](ecctl_deployment_elasticsearch_keystore.md)	 - Manages Elasticsearch resource keystores
 

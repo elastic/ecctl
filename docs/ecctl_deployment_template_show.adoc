@@ -1,22 +1,25 @@
-[#ecctl_deployment_elasticsearch]
-== ecctl deployment elasticsearch
+[#ecctl_deployment_template_show]
+== ecctl deployment template show
 
-Manages Elasticsearch resources
+Displays a deployment template (Available for ECE only)
 
 [float]
 === Synopsis
 
-Manages Elasticsearch resources
+Displays a deployment template (Available for ECE only)
 
 ----
-ecctl deployment elasticsearch [flags]
+ecctl deployment template show --template-id <template id> [flags]
 ----
 
 [float]
 === Options
 
 ----
-  -h, --help   help for elasticsearch
+  -h, --help                           help for show
+      --hide-instance-configurations   Hides instance configurations - only visible when using the JSON output
+      --stack-version string           Optional filter to only return deployment templates which are valid for the specified stack version.
+      --template-id string             Required template ID to update.
 ----
 
 [float]
@@ -44,5 +47,4 @@ ecctl deployment elasticsearch [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
-* xref:ecctl_deployment_elasticsearch_keystore[ecctl deployment elasticsearch keystore]	 - Manages Elasticsearch resource keystores
+* xref:ecctl_deployment_template[ecctl deployment template]	 - Interacts with deployment template APIs

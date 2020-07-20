@@ -26,7 +26,7 @@ import (
 // Command is the deployment subcommand
 var Command = &cobra.Command{
 	Use:     "elasticsearch",
-	Short:   "Manages a deployment's elasticsearch resources",
+	Short:   "Manages Elasticsearch resources",
 	PreRunE: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()

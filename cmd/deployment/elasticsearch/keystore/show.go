@@ -28,7 +28,7 @@ import (
 
 var showCmd = &cobra.Command{
 	Use:     "show <deployment id> [--ref-id <ref-id>]",
-	Short:   "Shows an Elasticsearch keystore contents",
+	Short:   "Shows the settings from the Elasticsearch resource keystore",
 	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		refID, _ := cmd.Flags().GetString("ref-id")

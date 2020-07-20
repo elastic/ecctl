@@ -47,7 +47,7 @@ ecctl deployment [flags]
 * xref:ecctl[ecctl]	 - Elastic Cloud Control
 * xref:ecctl_deployment_create[ecctl deployment create]	 - Creates a deployment
 * xref:ecctl_deployment_delete[ecctl deployment delete]	 - Deletes a previously shutdown deployment (Available for ECE only)
-* xref:ecctl_deployment_elasticsearch[ecctl deployment elasticsearch]	 - Manages a deployment's elasticsearch resources
+* xref:ecctl_deployment_elasticsearch[ecctl deployment elasticsearch]	 - Manages Elasticsearch resources
 * xref:ecctl_deployment_list[ecctl deployment list]	 - Lists the platform's deployments
 * xref:ecctl_deployment_note[ecctl deployment note]	 - Manages a deployment's notes
 * xref:ecctl_deployment_plan[ecctl deployment plan]	 - Manages deployment plans
@@ -57,4 +57,5 @@ ecctl deployment [flags]
 * xref:ecctl_deployment_search[ecctl deployment search]	 - Performs advanced deployment search using the Elasticsearch Query DSL
 * xref:ecctl_deployment_show[ecctl deployment show]	 - Shows the specified deployment resources
 * xref:ecctl_deployment_shutdown[ecctl deployment shutdown]	 - Shuts down a deployment and all of its associated sub-resources
+* xref:ecctl_deployment_template[ecctl deployment template]	 - Interacts with deployment template APIs
 * xref:ecctl_deployment_update[ecctl deployment update]	 - Updates a deployment from a file definition, allowing certain flag overrides

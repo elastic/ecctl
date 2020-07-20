@@ -31,9 +31,9 @@ import (
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
-const updateLong = `Changes the contents of the specified deployment's elasticsearch
-keystore by using the PATCH method, the payload is a partial payload where
-any ignored current keystore items, are not removed, unless the secrets are
+const updateLong = `Changes the contents of the Elasticsearch resource keystore from the
+specified deployment by using the PATCH method. The payload is a partial payload where
+any ignored current keystore items are not removed, unless the secrets are
 set to "null": {"secrets": {"my-secret": null}}.`
 
 var (
@@ -74,6 +74,6 @@ var updateCmd = &cobra.Command{
 func init() {
 	Command.AddCommand(updateCmd)
 	updateCmd.Flags().String("ref-id", "", "Optional ref_id to use for the Elasticsearch resource, auto-discovered if not specified.")
-	updateCmd.Flags().String("file", "", "Required json formatted file path with the keystore secret contents")
+	updateCmd.Flags().StringP("file", "p", "", "Required json formatted file path with the keystore secret contents.")
 	updateCmd.MarkFlagFilename("file", "json")
 }
