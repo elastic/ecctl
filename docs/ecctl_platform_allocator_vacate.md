@@ -60,11 +60,11 @@ ecctl platform allocator vacate <allocator-id> [flags]
       --move-only                    Keeps the resource in its current -possibly broken- state and just does the bare minimum to move the requested instances across to another allocator. [true|false] (default true)
       --override-failsafe            If false (the default) then the plan will fail out if it believes the requested sequence of operations can result in data loss - this flag will override some of these restraints. [true|false]
       --poll-frequency duration      Optional polling frequency to check for plan change updates (default 10s)
-  -r, --resource-id stringArray      Resource IDs to include in the vacate
+  -r, --resource-id strings          Resource IDs to include in the vacate
       --skip-data-migration string   Skips the data-migration operation on the specified resource IDs. ONLY available when the resource IDs are specified and --move-only is true. [true|false]
       --skip-snapshot string         Skips the snapshot operation on the specified resource IDs. ONLY available when the resource IDs are specified. [true|false]
       --skip-tracking                Skips tracking the vacate progress causing the command to return after the move operation has been executed. Not recommended.
-  -t, --target stringArray           Target allocator(s) on which to place the vacated workload
+  -t, --target strings               Target allocator(s) on which to place the vacated workload
 ```
 
 ### Options inherited from parent commands

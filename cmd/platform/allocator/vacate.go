@@ -89,7 +89,7 @@ var vacateAllocatorCmd = &cobra.Command{
 			return err
 		}
 
-		resources, err := cmd.Flags().GetStringArray("resource-id")
+		resources, err := cmd.Flags().GetStringSlice("resource-id")
 		if err != nil {
 			return err
 		}
@@ -143,8 +143,9 @@ var vacateAllocatorCmd = &cobra.Command{
 		if setAllocatorMaintenance {
 			for _, id := range args {
 				var params = allocatorapi.MaintenanceParams{
-					API: ecctl.Get().API,
-					ID:  id,
+					API:    ecctl.Get().API,
+					ID:     id,
+					Region: ecctl.Get().Config.Region,
 				}
 				if err := allocatorapi.StartMaintenance(params); err != nil {
 					merr = merr.Append(err)
@@ -197,8 +198,8 @@ func init() {
 	Command.AddCommand(vacateAllocatorCmd)
 	vacateAllocatorCmd.Flags().Bool("skip-tracking", false, "Skips tracking the vacate progress causing the command to return after the move operation has been executed. Not recommended.")
 	vacateAllocatorCmd.Flags().StringP("kind", "k", "", "Kind of workload to vacate (elasticsearch|kibana|apm|appsearch|enterprise_search)")
-	vacateAllocatorCmd.Flags().StringArrayP("resource-id", "r", nil, "Resource IDs to include in the vacate")
-	vacateAllocatorCmd.Flags().StringArrayP("target", "t", nil, "Target allocator(s) on which to place the vacated workload")
+	vacateAllocatorCmd.Flags().StringSliceP("resource-id", "r", nil, "Resource IDs to include in the vacate")
+	vacateAllocatorCmd.Flags().StringSliceP("target", "t", nil, "Target allocator(s) on which to place the vacated workload")
 	vacateAllocatorCmd.Flags().BoolP("maintenance", "m", false, "Whether to set the allocator(s) in maintenance before performing the vacate")
 	vacateAllocatorCmd.Flags().Uint("concurrency", 8, "Maximum number of concurrent moves to perform at any time")
 	vacateAllocatorCmd.Flags().String("allocator-down", "", "Disables the allocator health auto-discovery, setting the allocator-down to either [true|false]")
