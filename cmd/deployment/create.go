@@ -20,6 +20,7 @@ package cmddeployment
 import (
 	"errors"
 	"fmt"
+	"strings"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi"
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/depresourceapi"
@@ -33,18 +34,19 @@ import (
 )
 
 var createCmd = &cobra.Command{
-	Use:     "create {--file | --size <int> --zones <string> | --topology-element <obj>}",
+	Use:     "create {--file | --es-size <int> --es-zones <int> | --topology-element <obj>}",
 	Short:   "Creates a deployment",
 	PreRunE: cobra.NoArgs,
-	// Switch back to non-temp constants when reads for deployment templates are available on ESS
-	Long:    createLongTemp,
-	Example: createExampleTemp,
+	Long:    createLong,
+	Example: createExample,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		var file, _ = cmd.Flags().GetString("file")
 		var track, _ = cmd.Flags().GetBool("track")
 		var generatePayload, _ = cmd.Flags().GetBool("generate-payload")
 		var name, _ = cmd.Flags().GetString("name")
 		var version, _ = cmd.Flags().GetString("version")
 		var dt, _ = cmd.Flags().GetString("deployment-template")
+		var region = ecctl.Get().Config.Region
 
 		var esZoneCount, _ = cmd.Flags().GetInt32("es-zones")
 		var esSize, _ = cmd.Flags().GetInt32("es-size")
@@ -66,31 +68,41 @@ var createCmd = &cobra.Command{
 		var appsearchSize, _ = cmd.Flags().GetInt32("appsearch-size")
 		var appsearchRefID, _ = cmd.Flags().GetString("appsearch-ref-id")
 
-		var skipFlagBased = cmd.Flag("deployment-template").Hidden
+		var enterpriseSearchEnable, _ = cmd.Flags().GetBool("enterprise-search")
+		var enterpriseSearchZoneCount, _ = cmd.Flags().GetInt32("enterprise-search-zones")
+		var enterpriseSearchSize, _ = cmd.Flags().GetInt32("enterprise-search-size")
+		var enterpriseSearchRefID, _ = cmd.Flags().GetString("enterprise-search-ref-id")
 
 		var payload *models.DeploymentCreateRequest
 
-		err := sdkcmdutil.DecodeDefinition(cmd, "file", &payload)
-		if err := returnErrOnHidden(err, skipFlagBased); err != nil {
-			merr := multierror.NewPrefixed("failed reading the file definition")
-			return merr.Append(err,
-				errors.New("could not read the specified file, please make sure it exists"),
-			)
+		if file != "" {
+			err := sdkcmdutil.DecodeDefinition(cmd, "file", &payload)
+			if err != nil {
+				merr := multierror.NewPrefixed("failed reading the file definition")
+				return merr.Append(err,
+					errors.New("could not read the specified file, please make sure it exists"),
+				)
+			}
+		}
+
+		if dt == "" {
+			dt = setDefaultTemplate(region)
 		}
 
 		if payload == nil {
 			var err error
-			payload, err = depresourceapi.New(depresourceapi.NewParams{
-				API:                  ecctl.Get().API,
-				Name:                 name,
-				DeploymentTemplateID: dt,
-				Version:              version,
-				Region:               ecctl.Get().Config.Region,
-				Writer:               ecctl.Get().Config.ErrorDevice,
-				Plugins:              plugin,
-				TopologyElements:     te,
-				ApmEnable:            apmEnable,
-				AppsearchEnable:      appsearchEnable,
+			payload, err = depresourceapi.NewPayload(depresourceapi.NewPayloadParams{
+				API:                    ecctl.Get().API,
+				Name:                   name,
+				DeploymentTemplateID:   dt,
+				Version:                version,
+				Region:                 region,
+				Writer:                 ecctl.Get().Config.ErrorDevice,
+				Plugins:                plugin,
+				TopologyElements:       te,
+				ApmEnable:              apmEnable,
+				AppsearchEnable:        appsearchEnable,
+				EnterpriseSearchEnable: enterpriseSearchEnable,
 				ElasticsearchInstance: depresourceapi.InstanceParams{
 					RefID:     esRefID,
 					Size:      esSize,
@@ -110,6 +122,11 @@ var createCmd = &cobra.Command{
 					RefID:     appsearchRefID,
 					Size:      appsearchSize,
 					ZoneCount: appsearchZoneCount,
+				},
+				EnterpriseSearchInstance: depresourceapi.InstanceParams{
+					RefID:     enterpriseSearchRefID,
+					Size:      enterpriseSearchSize,
+					ZoneCount: enterpriseSearchZoneCount,
 				},
 			})
 			if err != nil {
@@ -149,21 +166,10 @@ var createCmd = &cobra.Command{
 	},
 }
 
-func returnErrOnHidden(err error, hidden bool) error {
-	if hidden {
-		return err
-	}
-	if err != nil && err != sdkcmdutil.ErrNodefinitionLoaded {
-		return err
-	}
-	return nil
-}
-
 func init() {
 	Command.AddCommand(createCmd)
 	createCmd.Flags().StringP("file", "f", "", "DeploymentCreateRequest file definition. See help for more information")
-	// Remove when reads for deployment templates are available on ESS
-	createCmd.Flags().String("deployment-template", "default", "Deployment template ID on which to base the deployment from")
+	createCmd.Flags().String("deployment-template", "", "Deployment template ID on which to base the deployment from")
 	createCmd.Flags().String("version", "", "Version to use, if not specified, the latest available stack version will be used")
 	createCmd.Flags().String("name", "", "Optional name for the deployment")
 	createCmd.Flags().BoolP("track", "t", false, cmdutil.TrackFlagMessage)
@@ -190,25 +196,29 @@ func init() {
 	createCmd.Flags().Int32("appsearch-zones", 1, "Number of zones the App Search instances will span")
 	createCmd.Flags().Int32("appsearch-size", 2048, "Memory (RAM) in MB that each of the App Search instances will have")
 
-	// The following flags will remain hidden until reads for deployment templates are available on ESS
-	createCmd.Flags().MarkHidden("deployment-template")
-	createCmd.Flags().MarkHidden("version")
-	createCmd.Flags().MarkHidden("name")
-	createCmd.Flags().MarkHidden("generate-payload")
-	createCmd.Flags().MarkHidden("es-ref-id")
-	createCmd.Flags().MarkHidden("es-zones")
-	createCmd.Flags().MarkHidden("es-size")
-	createCmd.Flags().MarkHidden("topology-element")
-	createCmd.Flags().MarkHidden("plugin")
-	createCmd.Flags().MarkHidden("kibana-ref-id")
-	createCmd.Flags().MarkHidden("kibana-zones")
-	createCmd.Flags().MarkHidden("kibana-size")
-	createCmd.Flags().MarkHidden("apm")
-	createCmd.Flags().MarkHidden("apm-ref-id")
-	createCmd.Flags().MarkHidden("apm-zones")
-	createCmd.Flags().MarkHidden("apm-size")
-	createCmd.Flags().MarkHidden("appsearch")
-	createCmd.Flags().MarkHidden("appsearch-ref-id")
-	createCmd.Flags().MarkHidden("appsearch-zones")
-	createCmd.Flags().MarkHidden("appsearch-size")
+	createCmd.Flags().Bool("enterprise-search", false, "Enables Enterprise Search for the deployment")
+	createCmd.Flags().String("enterprise-search-ref-id", "main-enterprise_search", "Optional RefId for the Enterprise Search deployment")
+	createCmd.Flags().Int32("enterprise-search-zones", 1, "Number of zones the Enterprise Search instances will span")
+	createCmd.Flags().Int32("enterprise-search-size", 4096, "Memory (RAM) in MB that each of the Enterprise Search instances will have")
+}
+
+func setDefaultTemplate(region string) string {
+	if strings.Contains(region, "azure") {
+		region = "azure"
+	}
+
+	if strings.Contains(region, "gcp") {
+		region = "gcp"
+	}
+
+	switch region {
+	case "azure":
+		return "azure-io-optimized"
+	case "gcp":
+		return "gcp-io-optimized"
+	case "ece-region":
+		return "default"
+	default:
+		return "aws-io-optimized-v2"
+	}
 }

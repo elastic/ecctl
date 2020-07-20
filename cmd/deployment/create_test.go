@@ -30,9 +30,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	planmock "github.com/elastic/cloud-sdk-go/pkg/plan/mock"
-	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
-	"github.com/stretchr/testify/assert"
 
 	"github.com/elastic/ecctl/cmd/util/testutils"
 )
@@ -41,6 +39,9 @@ func Test_createCmd(t *testing.T) {
 	var deploymentID = ec.RandomResourceID()
 	var esID = ec.RandomResourceID()
 	var kibanaID = ec.RandomResourceID()
+	var apmID = ec.RandomResourceID()
+	var appsearchID = ec.RandomResourceID()
+	var enterprisesearchID = ec.RandomResourceID()
 	var azureCreateResponse = models.DeploymentCreateResponse{
 		Created: ec.Bool(true),
 		ID:      ec.String(deploymentID),
@@ -65,6 +66,80 @@ func Test_createCmd(t *testing.T) {
 		},
 	}
 	azureCreateResponseBytes, err := json.MarshalIndent(azureCreateResponse, "", "  ")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	var defaultCreateResponse = models.DeploymentCreateResponse{
+		Created: ec.Bool(true),
+		ID:      ec.String(deploymentID),
+		Name:    ec.String("search-dev-ece-region"),
+		Resources: []*models.DeploymentResource{
+			{
+				ID:     ec.String(esID),
+				Kind:   ec.String("elasticsearch"),
+				RefID:  ec.String("main-elasticsearch"),
+				Region: ec.String("ece-region"),
+				Credentials: &models.ClusterCredentials{
+					Username: ec.String("myuser"),
+					Password: ec.String("mypass"),
+				},
+			},
+			{
+				ID:     ec.String(kibanaID),
+				Kind:   ec.String("kibana"),
+				RefID:  ec.String("main-kibana"),
+				Region: ec.String("ece-region"),
+			},
+		},
+	}
+	defaultCreateResponseBytes, err := json.Marshal(defaultCreateResponse)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	var overrideCreateResponse = models.DeploymentCreateResponse{
+		Created: ec.Bool(true),
+		ID:      ec.String(deploymentID),
+		Name:    ec.String("search-dev-ece-region"),
+		Resources: []*models.DeploymentResource{
+			{
+				ID:     ec.String(esID),
+				Kind:   ec.String("elasticsearch"),
+				RefID:  ec.String("main-elasticsearch"),
+				Region: ec.String("ece-region"),
+				Credentials: &models.ClusterCredentials{
+					Username: ec.String("myuser"),
+					Password: ec.String("mypass"),
+				},
+			},
+			{
+				ID:     ec.String(kibanaID),
+				Kind:   ec.String("kibana"),
+				RefID:  ec.String("main-kibana"),
+				Region: ec.String("ece-region"),
+			},
+			{
+				ID:     ec.String(apmID),
+				Kind:   ec.String("apm"),
+				RefID:  ec.String("main-apm"),
+				Region: ec.String("ece-region"),
+			},
+			{
+				ID:     ec.String(appsearchID),
+				Kind:   ec.String("appsearch"),
+				RefID:  ec.String("main-appsearch"),
+				Region: ec.String("ece-region"),
+			},
+			{
+				ID:     ec.String(enterprisesearchID),
+				Kind:   ec.String("enterprise_search"),
+				RefID:  ec.String("main-enterprise_search"),
+				Region: ec.String("ece-region"),
+			},
+		},
+	}
+	overrideCreateResponseBytes, err := json.Marshal(overrideCreateResponse)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -241,6 +316,66 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 			},
 		},
 		{
+			name: "succeeds creating a deployment with default values and without tracking",
+			args: testutils.Args{
+				Cmd: createCmd,
+				Args: []string{
+					"create", "--file=", "--request-id=some_request_id",
+				},
+				Cfg: testutils.MockCfg{Responses: []mock.Response{
+					{
+						Response: http.Response{
+							StatusCode: 201,
+							Body:       mock.NewStructBody(defaultCreateResponse),
+						},
+						Assert: &mock.RequestAssertion{
+							Method: "GET",
+							Header: api.DefaultReadMockHeaders,
+							Path:   "/api/v1/deployments/templates/default",
+							Host:   api.DefaultMockHost,
+							Query: url.Values{
+								"region":                       {"ece-region"},
+								"show_instance_configurations": {"true"},
+							},
+						},
+					},
+				}},
+			},
+			want: testutils.Assertion{
+				Err: errors.New(string(defaultCreateResponseBytes) + "\n"),
+			},
+		},
+		{
+			name: "succeeds creating a deployment with overrides and without tracking",
+			args: testutils.Args{
+				Cmd: createCmd,
+				Args: []string{
+					"create", "--apm", "--appsearch", "--enterprise-search", "--file=", "--request-id=some_request_id",
+				},
+				Cfg: testutils.MockCfg{Responses: []mock.Response{
+					{
+						Response: http.Response{
+							StatusCode: 201,
+							Body:       mock.NewStructBody(overrideCreateResponse),
+						},
+						Assert: &mock.RequestAssertion{
+							Method: "GET",
+							Header: api.DefaultReadMockHeaders,
+							Path:   "/api/v1/deployments/templates/default",
+							Host:   api.DefaultMockHost,
+							Query: url.Values{
+								"region":                       {"ece-region"},
+								"show_instance_configurations": {"true"},
+							},
+						},
+					},
+				}},
+			},
+			want: testutils.Assertion{
+				Err: errors.New(string(overrideCreateResponseBytes) + "\n"),
+			},
+		},
+		{
 			name: "succeeds creating an Azure deployment with payload and without tracking",
 			args: testutils.Args{
 				Cmd: createCmd,
@@ -326,48 +461,6 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			testutils.RunCmdAssertion(t, tt.args, tt.want)
-		})
-	}
-}
-
-func Test_returnErrOnHidden(t *testing.T) {
-	type args struct {
-		err    error
-		hidden bool
-	}
-	tests := []struct {
-		name string
-		args args
-		err  error
-	}{
-		{
-			name: "an error is returned",
-			args: args{
-				err: errors.New("some"),
-			},
-			err: errors.New("some"),
-		},
-		{
-			name: "an error is returned when hidden is false and == sdkcmdutil.ErrNodefinitionLoaded",
-			args: args{
-				err: sdkcmdutil.ErrNodefinitionLoaded,
-			},
-		},
-		{
-			name: "an error is returned when hidden is true and == sdkcmdutil.ErrNodefinitionLoaded",
-			args: args{
-				err:    sdkcmdutil.ErrNodefinitionLoaded,
-				hidden: true,
-			},
-			err: sdkcmdutil.ErrNodefinitionLoaded,
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			err := returnErrOnHidden(tt.args.err, tt.args.hidden)
-			if !assert.Equal(t, tt.err, err) {
-				t.Error(err)
-			}
 		})
 	}
 }

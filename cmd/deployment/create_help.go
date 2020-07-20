@@ -24,7 +24,7 @@ Sane default values are provided, making the command work out of the box even wh
 When version is not specified, the latest available stack version will automatically be used. 
 These are the available options:
 
-  * Simplified flags to set size and zone count for each instance type (Elasticsearch, Kibana, APM and App Search). 
+  * Simplified flags to set size and zone count for each instance type (Elasticsearch, Kibana, APM, Enterprise Search and App Search). 
   * Advanced flag for different Elasticsearch node types: --topology-element <json obj> (shorthand: -e).
     Note that the flag can be specified multiple times for complex topologies.
     The JSON object has the following format:
@@ -41,8 +41,8 @@ Save it, update or extend the topology and create a deployment using the saved p
 
 	// nolint
 	createExample = `## Create a deployment with the default values for Elasticsearch, a Kibana instance with a modified size, 
-and a default APM instance. While Elasticsearch and Kibana come enabled by default, both APM and App Search need to be 
-enabled by using the "--apm" and "--appsearch" flags. The command will exit after the API response has been returned, without 
+and a default APM instance. While Elasticsearch and Kibana come enabled by default, APM, Enterprise Search and App Search need to be 
+enabled by using the "--apm", "--enterprise-search" and "--appsearch" flags. The command will exit after the API response has been returned, without 
 waiting until the deployment resources have been created. 
 $ ecctl deployment create --name my-deployment --zones 2 --kibana-size 2048 --apm --apm-size 1024
 
@@ -70,20 +70,4 @@ $ ecctl deployment create --file create_example.json --track
 
 ## To retry a deployment when the previous deployment creation failed, use the request ID provided in the error response of the previous command:
 $ ecctl deployment create --request-id=GMZPMRrcMYqHdmxjIQkHbdjnhPIeBElcwrHwzVlhGUSMXrEIzVXoBykSVRsKncNb`
-
-	// Remove temporary constants when reads for deployment templates are available on ESS
-	createLongTemp = `Creates a deployment which is defined from a file definition using the --file=<file path> (shorthand: -f) flag.
-
-You can create a definition by using the sample JSON:
-  https://elastic.co/guide/en/cloud/current/ec-api-deployment-crud.html#ec_create_a_deployment`
-
-	createExampleTemp = `## To make the command wait until the resources have been created use the "--track" flag, which will output 
-the current stage on which the deployment resources are in.
-$ deployment create --file create_example.json --track
-[...]
-Deployment [b6ecbea3d5c84124b7dca457f2892086] - [Elasticsearch][b6ecbea3d5c84124b7dca457f2892086]: finished running all the plan steps (Total plan duration: 5m11.s)
-Deployment [91c4d60acb804ba0a27651fac02780ec] - [Kibana][8a9d9916cd6e46a7bb0912211d76e2af]: finished running all the plan steps (Total plan duration: 4m29.58s)
-
-## To retry a deployment when the previous deployment creation failed, use the request ID provided in the error response of the previous command:
-$ ecctl deployment create --file create_example.json --request-id=GMZPMRrcMYqHdmxjIQkHbdjnhPIeBElcwrHwzVlhGUSMXrEIzVXoBykSVRsKncNb`
 )
