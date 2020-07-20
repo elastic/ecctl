@@ -23,6 +23,7 @@ import (
 	cmddeploymentnote "github.com/elastic/ecctl/cmd/deployment/note"
 	cmddeploymentplan "github.com/elastic/ecctl/cmd/deployment/plan"
 	cmddeploymentresource "github.com/elastic/ecctl/cmd/deployment/resource"
+	cmddeploymenttemplate "github.com/elastic/ecctl/cmd/deployment/template"
 )
 
 // Command is the deployment subcommand
@@ -40,5 +41,6 @@ func init() {
 		cmddeploymentnote.Command,
 		cmddeploymentplan.Command,
 		cmddeploymentresource.Command,
+		cmddeploymenttemplate.Command,
 	)
 }

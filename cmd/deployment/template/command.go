@@ -15,37 +15,16 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package cmddeploymentdemplate
+package cmddeploymenttemplate
 
-import (
-	"fmt"
+import "github.com/spf13/cobra"
 
-	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/configurationtemplateapi"
-	"github.com/spf13/cobra"
-
-	"github.com/elastic/ecctl/pkg/ecctl"
-)
-
-var deleteCmd = &cobra.Command{
-	Use:     "delete <template id>",
-	Short:   "Deletes a specific platform deployment template",
-	PreRunE: cobra.ExactArgs(1),
-	RunE: func(cmd *cobra.Command, args []string) error {
-		err := configurationtemplateapi.DeleteTemplate(configurationtemplateapi.DeleteTemplateParams{
-			API:    ecctl.Get().API,
-			Region: ecctl.Get().Config.Region,
-			ID:     args[0],
-		})
-
-		if err != nil {
-			return err
-		}
-
-		fmt.Printf("Successfully deleted deployment template %v \n", args[0])
-		return nil
+// Command is the deployment subcommand
+var Command = &cobra.Command{
+	Use:     "template",
+	Short:   "Interacts with deployment template APIs",
+	PreRunE: cobra.NoArgs,
+	Run: func(cmd *cobra.Command, args []string) {
+		cmd.Help()
 	},
-}
-
-func init() {
-	Command.AddCommand(deleteCmd)
 }

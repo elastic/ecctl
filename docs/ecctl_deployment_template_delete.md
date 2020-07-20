@@ -1,23 +1,20 @@
-## ecctl platform deployment-template list
+## ecctl deployment template delete
 
-Lists the platform deployment templates
+Deletes an existing deployment template (Available for ECE only)
 
 ### Synopsis
 
-Lists the platform deployment templates
+Deletes an existing deployment template (Available for ECE only)
 
 ```
-ecctl platform deployment-template list [flags]
+ecctl deployment template delete --template-id <template id> [flags]
 ```
 
 ### Options
 
 ```
-      --filter string                  Optional key:value pair that acts as a filter and excludes any template that does not have a matching metadata item associated.
-  -h, --help                           help for list
-      --show-instance-configurations   Shows instance configurations - only visible when using the JSON output
-      --stack-version string           If present, it will cause the returned deployment templates to be adapted to return only the elements allowed in that version.
-      --template-format string         If 'deployment' is specified, the deployment_template is populated in the response. If 'cluster' is specified, the cluster_template is populated in the response. (default "cluster")
+  -h, --help                 help for delete
+      --template-id string   Required template ID to update.
 ```
 
 ### Options inherited from parent commands
@@ -43,5 +40,5 @@ ecctl platform deployment-template list [flags]
 
 ### SEE ALSO
 
-* [ecctl platform deployment-template](ecctl_platform_deployment-template.md)	 - Manages deployment templates (Available for ECE only)
+* [ecctl deployment template](ecctl_deployment_template.md)	 - Interacts with deployment template APIs
 

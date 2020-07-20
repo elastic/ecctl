@@ -56,4 +56,5 @@ ecctl deployment [flags]
 * xref:ecctl_deployment_search[ecctl deployment search]	 - Performs advanced deployment search using the Elasticsearch Query DSL
 * xref:ecctl_deployment_show[ecctl deployment show]	 - Shows the specified deployment resources
 * xref:ecctl_deployment_shutdown[ecctl deployment shutdown]	 - Shuts down a deployment and all of its associated sub-resources
+* xref:ecctl_deployment_template[ecctl deployment template]	 - Interacts with deployment template APIs
 * xref:ecctl_deployment_update[ecctl deployment update]	 - Updates a deployment from a file definition, allowing certain flag overrides

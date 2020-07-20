@@ -1,30 +1,27 @@
-[#ecctl_platform_deployment-template_create]
-== ecctl platform deployment-template create
+## ecctl deployment template show
 
-Creates a platform deployment template
+Displays a deployment template (Available for ECE only)
 
-[float]
-=== Synopsis
+### Synopsis
 
-Creates a platform deployment template
+Displays a deployment template (Available for ECE only)
 
-----
-ecctl platform deployment-template create -f <template file>.json [flags]
-----
+```
+ecctl deployment template show --template-id <template id> [flags]
+```
 
-[float]
-=== Options
+### Options
 
-----
-  -f, --file-template string   YAML or JSON file that contains the deployment template configuration
-  -h, --help                   help for create
-      --id string              Optional ID to set for the deployment template (Overrides ID if present)
-----
+```
+  -h, --help                           help for show
+      --hide-instance-configurations   Hides instance configurations - only visible when using the JSON output
+      --stack-version string           Optional filter to only return deployment templates which are valid for the specified stack version.
+      --template-id string             Required template ID to update.
+```
 
-[float]
-=== Options inherited from parent commands
+### Options inherited from parent commands
 
-----
+```
       --apikey string      API key to use to authenticate (If empty will look for EC_APIKEY environment variable)
       --config string      Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
       --force              Do not ask for confirmation
@@ -41,9 +38,9 @@ ecctl platform deployment-template create -f <template file>.json [flags]
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
       --verbose            Enable verbose mode
-----
+```
 
-[float]
-=== SEE ALSO
+### SEE ALSO
 
-* xref:ecctl_platform_deployment-template[ecctl platform deployment-template]	 - Manages deployment templates (Available for ECE only)
+* [ecctl deployment template](ecctl_deployment_template.md)	 - Interacts with deployment template APIs
+

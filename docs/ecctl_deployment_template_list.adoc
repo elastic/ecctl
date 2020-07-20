@@ -1,22 +1,25 @@
-[#ecctl_platform_deployment-template_delete]
-== ecctl platform deployment-template delete
+[#ecctl_deployment_template_list]
+== ecctl deployment template list
 
-Deletes a specific platform deployment template
+Lists deployment templates
 
 [float]
 === Synopsis
 
-Deletes a specific platform deployment template
+Lists deployment templates
 
 ----
-ecctl platform deployment-template delete <template id> [flags]
+ecctl deployment template list [flags]
 ----
 
 [float]
 === Options
 
 ----
-  -h, --help   help for delete
+      --filter string                  Optional key:value pair that acts as a filter and excludes any template that does not have a matching metadata item associated.
+  -h, --help                           help for list
+      --hide-instance-configurations   Hides instance configurations - only visible when using the JSON output
+      --stack-version string           Optional filter to only return deployment templates which are valid for the specified stack version.
 ----
 
 [float]
@@ -44,4 +47,4 @@ ecctl platform deployment-template delete <template id> [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_deployment-template[ecctl platform deployment-template]	 - Manages deployment templates (Available for ECE only)
+* xref:ecctl_deployment_template[ecctl deployment template]	 - Interacts with deployment template APIs

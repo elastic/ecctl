@@ -15,35 +15,32 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package cmddeploymentdemplate
+package cmddeploymenttemplate
 
 import (
-	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/configurationtemplateapi"
-
+	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/deptemplateapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
-var pullCmd = &cobra.Command{
-	Use:     "pull --path <path>",
-	Short:   "Downloads deployment template into a local folder",
-	PreRunE: cobra.MaximumNArgs(0),
+var deleteCmd = &cobra.Command{
+	Use:     "delete --template-id <template id>",
+	Short:   cmdutil.AdminReqDescription("Deletes an existing deployment template"),
+	PreRunE: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		format, _ := cmd.Flags().GetString(format)
-
-		return configurationtemplateapi.PullToFolder(configurationtemplateapi.PullToFolderParams{
-			API:    ecctl.Get().API,
-			Region: ecctl.Get().Config.Region,
-			Folder: cmd.Flag("path").Value.String(),
-			Format: format,
+		templateID, _ := cmd.Flags().GetString("template-id")
+		return deptemplateapi.Delete(deptemplateapi.DeleteParams{
+			API:        ecctl.Get().API,
+			Region:     ecctl.Get().Config.Region,
+			TemplateID: templateID,
 		})
 	},
 }
 
 func init() {
-	Command.AddCommand(pullCmd)
-	pullCmd.Flags().StringP("path", "p", "", "Local path where to store deployment templates")
-	pullCmd.MarkFlagRequired("path")
-	pullCmd.Flags().String(format, "deployment", "If deployment is specified deployment_template is populated in the response, If cluster is specified cluster_template is populated in the response. (Defaults to deployment)")
+	Command.AddCommand(deleteCmd)
+	deleteCmd.Flags().String("template-id", "", "Required template ID to update.")
+	deleteCmd.MarkFlagRequired("template-id")
 }

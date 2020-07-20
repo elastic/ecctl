@@ -1,21 +1,22 @@
-## ecctl platform deployment-template pull
+## ecctl deployment template list
 
-Downloads deployment template into a local folder
+Lists deployment templates
 
 ### Synopsis
 
-Downloads deployment template into a local folder
+Lists deployment templates
 
 ```
-ecctl platform deployment-template pull --path <path> [flags]
+ecctl deployment template list [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help                     help for pull
-  -p, --path string              Local path where to store deployment templates
-      --template-format string   If deployment is specified deployment_template is populated in the response, If cluster is specified cluster_template is populated in the response. (Defaults to deployment) (default "deployment")
+      --filter string                  Optional key:value pair that acts as a filter and excludes any template that does not have a matching metadata item associated.
+  -h, --help                           help for list
+      --hide-instance-configurations   Hides instance configurations - only visible when using the JSON output
+      --stack-version string           Optional filter to only return deployment templates which are valid for the specified stack version.
 ```
 
 ### Options inherited from parent commands
@@ -41,5 +42,5 @@ ecctl platform deployment-template pull --path <path> [flags]
 
 ### SEE ALSO
 
-* [ecctl platform deployment-template](ecctl_platform_deployment-template.md)	 - Manages deployment templates (Available for ECE only)
+* [ecctl deployment template](ecctl_deployment_template.md)	 - Interacts with deployment template APIs
 

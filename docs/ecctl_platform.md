@@ -42,7 +42,6 @@ ecctl platform [flags]
 * [ecctl](ecctl.md)	 - Elastic Cloud Control
 * [ecctl platform allocator](ecctl_platform_allocator.md)	 - Manages allocators (Available for ECE only)
 * [ecctl platform constructor](ecctl_platform_constructor.md)	 - Manages constructors (Available for ECE only)
-* [ecctl platform deployment-template](ecctl_platform_deployment-template.md)	 - Manages deployment templates (Available for ECE only)
 * [ecctl platform enrollment-token](ecctl_platform_enrollment-token.md)	 - Manages tokens (Available for ECE only)
 * [ecctl platform info](ecctl_platform_info.md)	 - Shows information about the platform (Available for ECE only)
 * [ecctl platform instance-configuration](ecctl_platform_instance-configuration.md)	 - Manages instance configurations (Available for ECE only)

@@ -1,24 +1,29 @@
-## ecctl platform deployment-template delete
+[#ecctl_deployment_template_delete]
+== ecctl deployment template delete
 
-Deletes a specific platform deployment template
+Deletes an existing deployment template (Available for ECE only)
 
-### Synopsis
+[float]
+=== Synopsis
 
-Deletes a specific platform deployment template
+Deletes an existing deployment template (Available for ECE only)
 
-```
-ecctl platform deployment-template delete <template id> [flags]
-```
+----
+ecctl deployment template delete --template-id <template id> [flags]
+----
 
-### Options
+[float]
+=== Options
 
-```
-  -h, --help   help for delete
-```
+----
+  -h, --help                 help for delete
+      --template-id string   Required template ID to update.
+----
 
-### Options inherited from parent commands
+[float]
+=== Options inherited from parent commands
 
-```
+----
       --apikey string      API key to use to authenticate (If empty will look for EC_APIKEY environment variable)
       --config string      Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
       --force              Do not ask for confirmation
@@ -35,9 +40,9 @@ ecctl platform deployment-template delete <template id> [flags]
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
       --verbose            Enable verbose mode
-```
+----
 
-### SEE ALSO
+[float]
+=== SEE ALSO
 
-* [ecctl platform deployment-template](ecctl_platform_deployment-template.md)	 - Manages deployment templates (Available for ECE only)
-
+* xref:ecctl_deployment_template[ecctl deployment template]	 - Interacts with deployment template APIs

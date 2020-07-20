@@ -1,29 +1,27 @@
-[#ecctl_platform_deployment-template_update]
-== ecctl platform deployment-template update
+## ecctl deployment template update
 
-Updates a platform deployment template
+Updates an existing deployment template (Available for ECE only)
 
-[float]
-=== Synopsis
+### Synopsis
 
-Updates a platform deployment template
+Updates an existing deployment template (Available for ECE only)
 
-----
-ecctl platform deployment-template update <template id> -f <template file>.json [flags]
-----
+```
+ecctl deployment template update --template-id <template id> --file <definition.json> [flags]
+```
 
-[float]
-=== Options
+### Options
 
-----
-  -f, --file-template string   YAML or JSON file that contains the deployment template configuration
-  -h, --help                   help for update
-----
+```
+  -f, --file string                    Deployment template definition.
+  -h, --help                           help for update
+      --hide-instance-configurations   Hides instance configurations - only visible when using the JSON output.
+      --template-id string             Required template ID to update.
+```
 
-[float]
-=== Options inherited from parent commands
+### Options inherited from parent commands
 
-----
+```
       --apikey string      API key to use to authenticate (If empty will look for EC_APIKEY environment variable)
       --config string      Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
       --force              Do not ask for confirmation
@@ -40,9 +38,9 @@ ecctl platform deployment-template update <template id> -f <template file>.json 
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
       --verbose            Enable verbose mode
-----
+```
 
-[float]
-=== SEE ALSO
+### SEE ALSO
 
-* xref:ecctl_platform_deployment-template[ecctl platform deployment-template]	 - Manages deployment templates (Available for ECE only)
+* [ecctl deployment template](ecctl_deployment_template.md)	 - Interacts with deployment template APIs
+

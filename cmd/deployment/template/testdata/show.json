@@ -1,0 +1,256 @@
+{
+    "id": "default",
+    "name": "Default",
+    "description": "Default deployment template for clusters",
+    "deployment_template": {
+        "resources": {
+            "elasticsearch": [
+                {
+                    "ref_id": "es-ref-id",
+                    "region": "us-east-1",
+                    "plan": {
+                        "cluster_topology": [
+                            {
+                                "node_type": {
+                                    "master": true,
+                                    "data": true,
+                                    "ingest": true
+                                },
+                                "zone_count": 1,
+                                "instance_configuration_id": "data.default",
+                                "size": {
+                                    "value": 4096,
+                                    "resource": "memory"
+                                }
+                            },
+                            {
+                                "node_type": {
+                                    "master": false,
+                                    "data": false,
+                                    "ingest": true
+                                },
+                                "zone_count": 1,
+                                "instance_configuration_id": "coordinating",
+                                "size": {
+                                    "value": 0,
+                                    "resource": "memory"
+                                }
+                            },
+                            {
+                                "node_type": {
+                                    "master": true,
+                                    "data": false,
+                                    "ingest": false
+                                },
+                                "zone_count": 1,
+                                "instance_configuration_id": "master",
+                                "size": {
+                                    "value": 0,
+                                    "resource": "memory"
+                                }
+                            },
+                            {
+                                "node_type": {
+                                    "master": false,
+                                    "data": false,
+                                    "ingest": false,
+                                    "ml": true
+                                },
+                                "zone_count": 1,
+                                "instance_configuration_id": "ml",
+                                "size": {
+                                    "value": 0,
+                                    "resource": "memory"
+                                }
+                            }
+                        ],
+                        "elasticsearch": {}
+                    },
+                    "settings": {
+                        "dedicated_masters_threshold": 6
+                    }
+                }
+            ],
+            "kibana": [
+                {
+                    "ref_id": "kibana-ref-id",
+                    "elasticsearch_cluster_ref_id": "es-ref-id",
+                    "region": "us-east-1",
+                    "plan": {
+                        "zone_count": 1,
+                        "cluster_topology": [
+                            {
+                                "instance_configuration_id": "kibana",
+                                "size": {
+                                    "value": 1024,
+                                    "resource": "memory"
+                                }
+                            }
+                        ],
+                        "kibana": {}
+                    }
+                }
+            ],
+            "apm": [
+                {
+                    "ref_id": "apm-ref-id",
+                    "elasticsearch_cluster_ref_id": "es-ref-id",
+                    "region": "us-east-1",
+                    "plan": {
+                        "cluster_topology": [
+                            {
+                                "instance_configuration_id": "apm",
+                                "size": {
+                                    "value": 0,
+                                    "resource": "memory"
+                                },
+                                "zone_count": 1
+                            }
+                        ],
+                        "apm": {}
+                    }
+                }
+            ]
+        }
+    },
+    "system_owned": true,
+    "source": {
+        "facilitator": "bootstrap",
+        "action": "install/upgrade",
+        "date": "2020-07-13T02:40:16.641Z"
+    },
+    "metadata": [
+        {
+            "key": "parent_solution",
+            "value": "stack"
+        }
+    ],
+    "instance_configurations": [
+        {
+            "id": "data.default",
+            "name": "data.default",
+            "description": "Instance configuration to be used for general purpose elasticsearch instances",
+            "instance_type": "elasticsearch",
+            "node_types": [
+                "data",
+                "ingest",
+                "master"
+            ],
+            "discrete_sizes": {
+                "sizes": [
+                    1024,
+                    2048,
+                    4096,
+                    8192,
+                    16384,
+                    32768,
+                    65536
+                ],
+                "default_size": 1024,
+                "resource": "memory"
+            },
+            "storage_multiplier": 32.0
+        },
+        {
+            "id": "coordinating",
+            "name": "coordinating",
+            "description": "Instance configuration to be used for dedicated request coordination instances",
+            "instance_type": "elasticsearch",
+            "node_types": [
+                "ingest"
+            ],
+            "discrete_sizes": {
+                "sizes": [
+                    1024,
+                    2048,
+                    4096,
+                    8192
+                ],
+                "default_size": 1024,
+                "resource": "memory"
+            },
+            "storage_multiplier": 2.0
+        },
+        {
+            "id": "master",
+            "name": "master",
+            "description": "Instance configuration to be used for dedicated masters",
+            "instance_type": "elasticsearch",
+            "node_types": [
+                "master"
+            ],
+            "discrete_sizes": {
+                "sizes": [
+                    1024,
+                    2048,
+                    4096,
+                    8192,
+                    16384,
+                    32768,
+                    65536
+                ],
+                "default_size": 1024,
+                "resource": "memory"
+            },
+            "storage_multiplier": 4.0
+        },
+        {
+            "id": "ml",
+            "name": "ml",
+            "description": "Instance configuration to be used for ML instances",
+            "instance_type": "elasticsearch",
+            "node_types": [
+                "ml"
+            ],
+            "discrete_sizes": {
+                "sizes": [
+                    1024,
+                    2048,
+                    4096,
+                    8192,
+                    16384,
+                    32768,
+                    65536
+                ],
+                "default_size": 1024,
+                "resource": "memory"
+            },
+            "storage_multiplier": 4.0
+        },
+        {
+            "id": "kibana",
+            "name": "kibana",
+            "description": "Instance configuration to be used for Kibana",
+            "instance_type": "kibana",
+            "discrete_sizes": {
+                "sizes": [
+                    1024,
+                    2048,
+                    4096,
+                    8192
+                ],
+                "default_size": 1024,
+                "resource": "memory"
+            },
+            "storage_multiplier": 4.0
+        },
+        {
+            "id": "apm",
+            "name": "apm",
+            "description": "Instance configuration to be used for APM",
+            "instance_type": "apm",
+            "discrete_sizes": {
+                "sizes": [
+                    512,
+                    1024,
+                    2048,
+                    4096,
+                    8192
+                ],
+                "default_size": 512,
+                "resource": "memory"
+            },
+            "storage_multiplier": 4.0
+        }
+    ]
+}

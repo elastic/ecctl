@@ -1,26 +1,25 @@
-[#ecctl_platform_deployment-template_list]
-== ecctl platform deployment-template list
+[#ecctl_deployment_template_create]
+== ecctl deployment template create
 
-Lists the platform deployment templates
+Creates a new deployment template (Available for ECE only)
 
 [float]
 === Synopsis
 
-Lists the platform deployment templates
+Creates a new deployment template (Available for ECE only)
 
 ----
-ecctl platform deployment-template list [flags]
+ecctl deployment template create --file <definition.json> [flags]
 ----
 
 [float]
 === Options
 
 ----
-      --filter string                  Optional key:value pair that acts as a filter and excludes any template that does not have a matching metadata item associated.
-  -h, --help                           help for list
-      --show-instance-configurations   Shows instance configurations - only visible when using the JSON output
-      --stack-version string           If present, it will cause the returned deployment templates to be adapted to return only the elements allowed in that version.
-      --template-format string         If 'deployment' is specified, the deployment_template is populated in the response. If 'cluster' is specified, the cluster_template is populated in the response. (default "cluster")
+  -f, --file string                    Deployment template definition.
+  -h, --help                           help for create
+      --hide-instance-configurations   Hides instance configurations - only visible when using the JSON output.
+      --template-id string             Optional deployment template ID. Otherwise the deployment template will be created with an auto-generated ID.
 ----
 
 [float]
@@ -48,4 +47,4 @@ ecctl platform deployment-template list [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_deployment-template[ecctl platform deployment-template]	 - Manages deployment templates (Available for ECE only)
+* xref:ecctl_deployment_template[ecctl deployment template]	 - Interacts with deployment template APIs

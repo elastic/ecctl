@@ -1,30 +1,24 @@
-[#ecctl_platform_deployment-template_pull]
-== ecctl platform deployment-template pull
+## ecctl deployment template
 
-Downloads deployment template into a local folder
+Interacts with deployment template APIs
 
-[float]
-=== Synopsis
+### Synopsis
 
-Downloads deployment template into a local folder
+Interacts with deployment template APIs
 
-----
-ecctl platform deployment-template pull --path <path> [flags]
-----
+```
+ecctl deployment template [flags]
+```
 
-[float]
-=== Options
+### Options
 
-----
-  -h, --help                     help for pull
-  -p, --path string              Local path where to store deployment templates
-      --template-format string   If deployment is specified deployment_template is populated in the response, If cluster is specified cluster_template is populated in the response. (Defaults to deployment) (default "deployment")
-----
+```
+  -h, --help   help for template
+```
 
-[float]
-=== Options inherited from parent commands
+### Options inherited from parent commands
 
-----
+```
       --apikey string      API key to use to authenticate (If empty will look for EC_APIKEY environment variable)
       --config string      Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
       --force              Do not ask for confirmation
@@ -41,9 +35,14 @@ ecctl platform deployment-template pull --path <path> [flags]
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
       --verbose            Enable verbose mode
-----
+```
 
-[float]
-=== SEE ALSO
+### SEE ALSO
 
-* xref:ecctl_platform_deployment-template[ecctl platform deployment-template]	 - Manages deployment templates (Available for ECE only)
+* [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
+* [ecctl deployment template create](ecctl_deployment_template_create.md)	 - Creates a new deployment template (Available for ECE only)
+* [ecctl deployment template delete](ecctl_deployment_template_delete.md)	 - Deletes an existing deployment template (Available for ECE only)
+* [ecctl deployment template list](ecctl_deployment_template_list.md)	 - Lists deployment templates
+* [ecctl deployment template show](ecctl_deployment_template_show.md)	 - Displays a deployment template (Available for ECE only)
+* [ecctl deployment template update](ecctl_deployment_template_update.md)	 - Updates an existing deployment template (Available for ECE only)
+

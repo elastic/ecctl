@@ -1,30 +1,27 @@
-[#ecctl_platform_deployment-template_show]
-== ecctl platform deployment-template show
+## ecctl deployment template create
 
-Shows information about a specific platform deployment template
+Creates a new deployment template (Available for ECE only)
 
-[float]
-=== Synopsis
+### Synopsis
 
-Shows information about a specific platform deployment template
+Creates a new deployment template (Available for ECE only)
 
-----
-ecctl platform deployment-template show <template id> [flags]
-----
+```
+ecctl deployment template create --file <definition.json> [flags]
+```
 
-[float]
-=== Options
+### Options
 
-----
-  -h, --help                           help for show
-      --show-instance-configurations   Shows instance configurations
-      --template-format string         If 'deployment' is specified, the deployment_template is populated in the response. If 'cluster' is specified, the cluster_template is populated in the response. (default "cluster")
-----
+```
+  -f, --file string                    Deployment template definition.
+  -h, --help                           help for create
+      --hide-instance-configurations   Hides instance configurations - only visible when using the JSON output.
+      --template-id string             Optional deployment template ID. Otherwise the deployment template will be created with an auto-generated ID.
+```
 
-[float]
-=== Options inherited from parent commands
+### Options inherited from parent commands
 
-----
+```
       --apikey string      API key to use to authenticate (If empty will look for EC_APIKEY environment variable)
       --config string      Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
       --force              Do not ask for confirmation
@@ -41,9 +38,9 @@ ecctl platform deployment-template show <template id> [flags]
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
       --verbose            Enable verbose mode
-----
+```
 
-[float]
-=== SEE ALSO
+### SEE ALSO
 
-* xref:ecctl_platform_deployment-template[ecctl platform deployment-template]	 - Manages deployment templates (Available for ECE only)
+* [ecctl deployment template](ecctl_deployment_template.md)	 - Interacts with deployment template APIs
+

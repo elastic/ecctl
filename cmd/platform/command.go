@@ -22,7 +22,6 @@ import (
 
 	cmdallocator "github.com/elastic/ecctl/cmd/platform/allocator"
 	cmdconstructor "github.com/elastic/ecctl/cmd/platform/constructor"
-	cmddeploymentdemplate "github.com/elastic/ecctl/cmd/platform/deployment-template"
 	cmdenrollmenttoken "github.com/elastic/ecctl/cmd/platform/enrollment-token"
 	cmdinstanceconfig "github.com/elastic/ecctl/cmd/platform/instance-configuration"
 	cmdproxy "github.com/elastic/ecctl/cmd/platform/proxy"
@@ -45,7 +44,6 @@ func init() {
 	Command.AddCommand(
 		cmdallocator.Command,
 		cmdconstructor.Command,
-		cmddeploymentdemplate.Command,
 		cmdenrollmenttoken.Command,
 		cmdinstanceconfig.Command,
 		cmdproxy.Command,
