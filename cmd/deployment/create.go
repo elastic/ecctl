@@ -89,20 +89,22 @@ var createCmd = &cobra.Command{
 			dt = setDefaultTemplate(region)
 		}
 
+		dtAsList, _ := cmd.Flags().GetBool("dt-as-list")
 		if payload == nil {
 			var err error
 			payload, err = depresourceapi.NewPayload(depresourceapi.NewPayloadParams{
-				API:                    ecctl.Get().API,
-				Name:                   name,
-				DeploymentTemplateID:   dt,
-				Version:                version,
-				Region:                 region,
-				Writer:                 ecctl.Get().Config.ErrorDevice,
-				Plugins:                plugin,
-				TopologyElements:       te,
-				ApmEnable:              apmEnable,
-				AppsearchEnable:        appsearchEnable,
-				EnterpriseSearchEnable: enterpriseSearchEnable,
+				DeploymentTemplateAsList: dtAsList,
+				API:                      ecctl.Get().API,
+				Name:                     name,
+				DeploymentTemplateID:     dt,
+				Version:                  version,
+				Region:                   region,
+				Writer:                   ecctl.Get().Config.ErrorDevice,
+				Plugins:                  plugin,
+				TopologyElements:         te,
+				ApmEnable:                apmEnable,
+				AppsearchEnable:          appsearchEnable,
+				EnterpriseSearchEnable:   enterpriseSearchEnable,
 				ElasticsearchInstance: depresourceapi.InstanceParams{
 					RefID:     esRefID,
 					Size:      esSize,
@@ -167,6 +169,10 @@ var createCmd = &cobra.Command{
 }
 
 func init() {
+	initFlags()
+}
+
+func initFlags() {
 	Command.AddCommand(createCmd)
 	createCmd.Flags().StringP("file", "f", "", "DeploymentCreateRequest file definition. See help for more information")
 	createCmd.Flags().String("deployment-template", "", "Deployment template ID on which to base the deployment from")
@@ -200,6 +206,10 @@ func init() {
 	createCmd.Flags().String("enterprise-search-ref-id", "main-enterprise_search", "Optional RefId for the Enterprise Search deployment")
 	createCmd.Flags().Int32("enterprise-search-zones", 1, "Number of zones the Enterprise Search instances will span")
 	createCmd.Flags().Int32("enterprise-search-size", 4096, "Memory (RAM) in MB that each of the Enterprise Search instances will have")
+
+	// Remove in the next version.
+	createCmd.Flags().Bool("dt-as-list", true, "")
+	createCmd.Flags().MarkHidden("dt-as-list")
 }
 
 func setDefaultTemplate(region string) string {
