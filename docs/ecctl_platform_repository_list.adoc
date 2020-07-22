@@ -1,12 +1,12 @@
 [#ecctl_platform_repository_list]
 == ecctl platform repository list
 
-Lists all the snapshot repositories (Available for ECE only)
+Lists all the snapshot repositories {ece-icon}
 
 [float]
 === Synopsis
 
-Lists all the snapshot repositories (Available for ECE only)
+Lists all the snapshot repositories {ece-icon}
 
 ----
 ecctl platform repository list [flags]
@@ -44,4 +44,4 @@ ecctl platform repository list [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_repository[ecctl platform repository]	 - Manages snapshot repositories (Available for ECE only)
+* xref:ecctl_platform_repository[ecctl platform repository]	 - Manages snapshot repositories {ece-icon}

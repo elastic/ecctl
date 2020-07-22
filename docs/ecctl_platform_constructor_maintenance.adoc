@@ -1,12 +1,12 @@
 [#ecctl_platform_constructor_maintenance]
 == ecctl platform constructor maintenance
 
-Sets/un-sets a constructor's maintenance mode (Available for ECE only)
+Sets/un-sets a constructor's maintenance mode {ece-icon}
 
 [float]
 === Synopsis
 
-Sets/un-sets a constructor's maintenance mode (Available for ECE only)
+Sets/un-sets a constructor's maintenance mode {ece-icon}
 
 ----
 ecctl platform constructor maintenance <constructor id> [flags]
@@ -45,4 +45,4 @@ ecctl platform constructor maintenance <constructor id> [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_constructor[ecctl platform constructor]	 - Manages constructors (Available for ECE only)
+* xref:ecctl_platform_constructor[ecctl platform constructor]	 - Manages constructors {ece-icon}

@@ -1,12 +1,12 @@
 [#ecctl_platform_instance-configuration_update]
 == ecctl platform instance-configuration update
 
-Overwrites an instance configuration (Available for ECE only)
+Overwrites an instance configuration {ece-icon}
 
 [float]
 === Synopsis
 
-Overwrites an instance configuration (Available for ECE only)
+Overwrites an instance configuration {ece-icon}
 
 ----
 ecctl platform instance-configuration update <config id> -f <config.json> [flags]
@@ -45,4 +45,4 @@ ecctl platform instance-configuration update <config id> -f <config.json> [flags
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_instance-configuration[ecctl platform instance-configuration]	 - Manages instance configurations (Available for ECE only)
+* xref:ecctl_platform_instance-configuration[ecctl platform instance-configuration]	 - Manages instance configurations {ece-icon}

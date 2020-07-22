@@ -1,12 +1,12 @@
 [#ecctl_platform_role_create]
 == ecctl platform role create
 
-Creates a new platform role from a definition (Available for ECE only)
+Creates a new platform role from a definition {ece-icon}
 
 [float]
 === Synopsis
 
-Creates a new platform role from a definition (Available for ECE only)
+Creates a new platform role from a definition {ece-icon}
 
 ----
 ecctl platform role create --file <filename.json> [flags]
@@ -45,4 +45,4 @@ ecctl platform role create --file <filename.json> [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_role[ecctl platform role]	 - Manages platform roles (Available for ECE only)
+* xref:ecctl_platform_role[ecctl platform role]	 - Manages platform roles {ece-icon}

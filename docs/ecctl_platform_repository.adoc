@@ -1,7 +1,7 @@
 [#ecctl_platform_repository]
 == ecctl platform repository
 
-Manages snapshot repositories (Available for ECE only)
+Manages snapshot repositories {ece-icon}
 
 [float]
 === Synopsis
@@ -45,8 +45,8 @@ ecctl platform repository [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform[ecctl platform]	 - Manages the platform (Available for ECE only)
-* xref:ecctl_platform_repository_create[ecctl platform repository create]	 - Creates / updates a snapshot repository (Available for ECE only)
-* xref:ecctl_platform_repository_delete[ecctl platform repository delete]	 - Deletes a snapshot repositories (Available for ECE only)
-* xref:ecctl_platform_repository_list[ecctl platform repository list]	 - Lists all the snapshot repositories (Available for ECE only)
-* xref:ecctl_platform_repository_show[ecctl platform repository show]	 - Obtains a snapshot repository config (Available for ECE only)
+* xref:ecctl_platform[ecctl platform]	 - Manages the platform {ece-icon}
+* xref:ecctl_platform_repository_create[ecctl platform repository create]	 - Creates / updates a snapshot repository {ece-icon}
+* xref:ecctl_platform_repository_delete[ecctl platform repository delete]	 - Deletes a snapshot repositories {ece-icon}
+* xref:ecctl_platform_repository_list[ecctl platform repository list]	 - Lists all the snapshot repositories {ece-icon}
+* xref:ecctl_platform_repository_show[ecctl platform repository show]	 - Obtains a snapshot repository config {ece-icon}

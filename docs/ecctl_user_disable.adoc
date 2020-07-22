@@ -1,12 +1,12 @@
 [#ecctl_user_disable]
 == ecctl user disable
 
-Disables a platform user (Available for ECE only)
+Disables a platform user {ece-icon}
 
 [float]
 === Synopsis
 
-Disables a platform user (Available for ECE only)
+Disables a platform user {ece-icon}
 
 ----
 ecctl user disable <username> [flags]
@@ -44,4 +44,4 @@ ecctl user disable <username> [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_user[ecctl user]	 - Manages the platform users (Available for ECE only)
+* xref:ecctl_user[ecctl user]	 - Manages the platform users {ece-icon}

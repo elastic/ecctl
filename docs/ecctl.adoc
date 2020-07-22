@@ -38,7 +38,7 @@ Elastic Cloud Control
 * xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
 * xref:ecctl_generate[ecctl generate]	 - Generates completions and docs
 * xref:ecctl_init[ecctl init]	 - Creates an initial configuration file.
-* xref:ecctl_platform[ecctl platform]	 - Manages the platform (Available for ECE only)
+* xref:ecctl_platform[ecctl platform]	 - Manages the platform {ece-icon}
 * xref:ecctl_stack[ecctl stack]	 - Manages Elastic StackPacks
-* xref:ecctl_user[ecctl user]	 - Manages the platform users (Available for ECE only)
+* xref:ecctl_user[ecctl user]	 - Manages the platform users {ece-icon}
 * xref:ecctl_version[ecctl version]	 - Shows ecctl version

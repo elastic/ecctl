@@ -1,12 +1,12 @@
 [#ecctl_platform_proxy_filtered-group_list]
 == ecctl platform proxy filtered-group list
 
-Returns all proxies filtered groups in the platform (Available for ECE only)
+Returns all proxies filtered groups in the platform {ece-icon}
 
 [float]
 === Synopsis
 
-Returns all proxies filtered groups in the platform (Available for ECE only)
+Returns all proxies filtered groups in the platform {ece-icon}
 
 ----
 ecctl platform proxy filtered-group list [flags]
@@ -44,4 +44,4 @@ ecctl platform proxy filtered-group list [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_proxy_filtered-group[ecctl platform proxy filtered-group]	 - Manages proxies filtered group (Available for ECE only)
+* xref:ecctl_platform_proxy_filtered-group[ecctl platform proxy filtered-group]	 - Manages proxies filtered group {ece-icon}

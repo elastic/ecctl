@@ -1,12 +1,12 @@
 [#ecctl_deployment_template_show]
 == ecctl deployment template show
 
-Displays a deployment template (Available for ECE only)
+Displays a deployment template {ece-icon}
 
 [float]
 === Synopsis
 
-Displays a deployment template (Available for ECE only)
+Displays a deployment template {ece-icon}
 
 ----
 ecctl deployment template show --template-id <template id> [flags]

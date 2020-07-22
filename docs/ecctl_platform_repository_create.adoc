@@ -1,7 +1,7 @@
 [#ecctl_platform_repository_create]
 == ecctl platform repository create
 
-Creates / updates a snapshot repository (Available for ECE only)
+Creates / updates a snapshot repository {ece-icon}
 
 [float]
 === Synopsis
@@ -65,4 +65,4 @@ ecctl platform repository create custom --type fs --settings settings.yml
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_repository[ecctl platform repository]	 - Manages snapshot repositories (Available for ECE only)
+* xref:ecctl_platform_repository[ecctl platform repository]	 - Manages snapshot repositories {ece-icon}

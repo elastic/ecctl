@@ -1,12 +1,12 @@
 [#ecctl_platform_runner_resync]
 == ecctl platform runner resync
 
-Resynchronizes the search index and cache for the selected runner or all (Available for ECE only)
+Resynchronizes the search index and cache for the selected runner or all {ece-icon}
 
 [float]
 === Synopsis
 
-Resynchronizes the search index and cache for the selected runner or all (Available for ECE only)
+Resynchronizes the search index and cache for the selected runner or all {ece-icon}
 
 ----
 ecctl platform runner resync {<runner id> | --all} [flags]
@@ -45,4 +45,4 @@ ecctl platform runner resync {<runner id> | --all} [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_runner[ecctl platform runner]	 - Manages platform runners (Available for ECE only)
+* xref:ecctl_platform_runner[ecctl platform runner]	 - Manages platform runners {ece-icon}

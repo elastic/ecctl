@@ -44,7 +44,7 @@ ecctl user key [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_user[ecctl user]	 - Manages the platform users (Available for ECE only)
+* xref:ecctl_user[ecctl user]	 - Manages the platform users {ece-icon}
 * xref:ecctl_user_key_delete[ecctl user key delete]	 - Deletes an existing API key for the specified user
 * xref:ecctl_user_key_list[ecctl user key list]	 - Lists the API keys for the specified user, or all platform users
 * xref:ecctl_user_key_show[ecctl user key show]	 - Shows the API key details for the specified user

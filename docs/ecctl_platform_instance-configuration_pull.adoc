@@ -1,12 +1,12 @@
 [#ecctl_platform_instance-configuration_pull]
 == ecctl platform instance-configuration pull
 
-Downloads instance configuration into a local folder (Available for ECE only)
+Downloads instance configuration into a local folder {ece-icon}
 
 [float]
 === Synopsis
 
-Downloads instance configuration into a local folder (Available for ECE only)
+Downloads instance configuration into a local folder {ece-icon}
 
 ----
 ecctl platform instance-configuration pull --path <path> [flags]
@@ -45,4 +45,4 @@ ecctl platform instance-configuration pull --path <path> [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_instance-configuration[ecctl platform instance-configuration]	 - Manages instance configurations (Available for ECE only)
+* xref:ecctl_platform_instance-configuration[ecctl platform instance-configuration]	 - Manages instance configurations {ece-icon}

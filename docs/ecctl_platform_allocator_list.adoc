@@ -1,7 +1,7 @@
 [#ecctl_platform_allocator_list]
 == ecctl platform allocator list
 
-Returns all allocators that have instances or are connected to the platform. Use --all flag or --output json to show all. Use --query to match any of the allocators properties. (Available for ECE only)
+Returns all allocators that have instances or are connected to the platform. Use --all flag or --output json to show all. Use --query to match any of the allocators properties. {ece-icon}
 
 [float]
 === Synopsis
@@ -71,4 +71,4 @@ ecctl platform allocator list [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_allocator[ecctl platform allocator]	 - Manages allocators (Available for ECE only)
+* xref:ecctl_platform_allocator[ecctl platform allocator]	 - Manages allocators {ece-icon}

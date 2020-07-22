@@ -45,7 +45,7 @@ ecctl stack [flags]
 === SEE ALSO
 
 * xref:ecctl[ecctl]	 - Elastic Cloud Control
-* xref:ecctl_stack_delete[ecctl stack delete]	 - Deletes an Elastic StackPack (Available for ECE only)
+* xref:ecctl_stack_delete[ecctl stack delete]	 - Deletes an Elastic StackPack {ece-icon}
 * xref:ecctl_stack_list[ecctl stack list]	 - Lists Elastic StackPacks
 * xref:ecctl_stack_show[ecctl stack show]	 - Shows information about an Elastic StackPack
-* xref:ecctl_stack_upload[ecctl stack upload]	 - Uploads an Elastic StackPack (Available for ECE only)
+* xref:ecctl_stack_upload[ecctl stack upload]	 - Uploads an Elastic StackPack {ece-icon}
