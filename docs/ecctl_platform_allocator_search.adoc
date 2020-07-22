@@ -1,7 +1,7 @@
 [#ecctl_platform_allocator_search]
 == ecctl platform allocator search
 
-Performs advanced allocator searching
+Performs advanced allocator searching (Available for ECE only)
 
 [float]
 === Synopsis

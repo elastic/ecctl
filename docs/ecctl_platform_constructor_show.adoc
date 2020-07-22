@@ -1,12 +1,12 @@
 [#ecctl_platform_constructor_show]
 == ecctl platform constructor show
 
-Returns information about the constructor with given ID
+Returns information about the constructor with given ID (Available for ECE only)
 
 [float]
 === Synopsis
 
-Returns information about the constructor with given ID
+Returns information about the constructor with given ID (Available for ECE only)
 
 ----
 ecctl platform constructor show <constructor id> [flags]

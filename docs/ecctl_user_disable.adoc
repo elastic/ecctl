@@ -1,12 +1,12 @@
 [#ecctl_user_disable]
 == ecctl user disable
 
-Disables a platform user
+Disables a platform user (Available for ECE only)
 
 [float]
 === Synopsis
 
-Disables a platform user
+Disables a platform user (Available for ECE only)
 
 ----
 ecctl user disable <username> [flags]

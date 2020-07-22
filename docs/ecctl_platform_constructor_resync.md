@@ -1,10 +1,10 @@
 ## ecctl platform constructor resync
 
-Resynchronizes the search index and cache for the selected constructor or all
+Resynchronizes the search index and cache for the selected constructor or all (Available for ECE only)
 
 ### Synopsis
 
-Resynchronizes the search index and cache for the selected constructor or all
+Resynchronizes the search index and cache for the selected constructor or all (Available for ECE only)
 
 ```
 ecctl platform constructor resync {<constructor id> | --all} [flags]

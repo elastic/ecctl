@@ -1,12 +1,12 @@
 [#ecctl_platform_proxy_filtered-group_delete]
 == ecctl platform proxy filtered-group delete
 
-Deletes proxies filtered group
+Deletes proxies filtered group (Available for ECE only)
 
 [float]
 === Synopsis
 
-Deletes proxies filtered group
+Deletes proxies filtered group (Available for ECE only)
 
 ----
 ecctl platform proxy filtered-group delete <filtered group id> [flags]
@@ -44,4 +44,4 @@ ecctl platform proxy filtered-group delete <filtered group id> [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_proxy_filtered-group[ecctl platform proxy filtered-group]	 - Manages proxies filtered group
+* xref:ecctl_platform_proxy_filtered-group[ecctl platform proxy filtered-group]	 - Manages proxies filtered group (Available for ECE only)

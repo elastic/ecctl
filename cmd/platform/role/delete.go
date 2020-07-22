@@ -21,12 +21,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/roleapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var deleteCmd = &cobra.Command{
 	Use:     "delete <role>",
-	Short:   "Deletes an existing platform role",
+	Short:   cmdutil.AdminReqDescription("Deletes an existing platform role"),
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		return roleapi.Delete(roleapi.DeleteParams{

@@ -1,12 +1,12 @@
 [#ecctl_platform_role_delete]
 == ecctl platform role delete
 
-Deletes an existing platform role
+Deletes an existing platform role (Available for ECE only)
 
 [float]
 === Synopsis
 
-Deletes an existing platform role
+Deletes an existing platform role (Available for ECE only)
 
 ----
 ecctl platform role delete <role> [flags]

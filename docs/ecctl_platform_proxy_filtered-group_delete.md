@@ -1,10 +1,10 @@
 ## ecctl platform proxy filtered-group delete
 
-Deletes proxies filtered group
+Deletes proxies filtered group (Available for ECE only)
 
 ### Synopsis
 
-Deletes proxies filtered group
+Deletes proxies filtered group (Available for ECE only)
 
 ```
 ecctl platform proxy filtered-group delete <filtered group id> [flags]
@@ -39,5 +39,5 @@ ecctl platform proxy filtered-group delete <filtered group id> [flags]
 
 ### SEE ALSO
 
-* [ecctl platform proxy filtered-group](ecctl_platform_proxy_filtered-group.md)	 - Manages proxies filtered group
+* [ecctl platform proxy filtered-group](ecctl_platform_proxy_filtered-group.md)	 - Manages proxies filtered group (Available for ECE only)
 

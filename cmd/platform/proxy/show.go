@@ -23,12 +23,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/proxyapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var showProxyCmd = &cobra.Command{
 	Use:     "show <proxy id>",
-	Short:   "Returns information about the proxy with given id",
+	Short:   cmdutil.AdminReqDescription("Returns information about the proxy with given id"),
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		a, err := proxyapi.Get(proxyapi.GetParams{

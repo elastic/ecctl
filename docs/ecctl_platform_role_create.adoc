@@ -1,12 +1,12 @@
 [#ecctl_platform_role_create]
 == ecctl platform role create
 
-Creates a new platform role from a definition
+Creates a new platform role from a definition (Available for ECE only)
 
 [float]
 === Synopsis
 
-Creates a new platform role from a definition
+Creates a new platform role from a definition (Available for ECE only)
 
 ----
 ecctl platform role create --file <filename.json> [flags]

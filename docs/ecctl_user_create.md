@@ -1,10 +1,10 @@
 ## ecctl user create
 
-Creates a new platform user
+Creates a new platform user (Available for ECE only)
 
 ### Synopsis
 
-Creates a new platform user
+Creates a new platform user (Available for ECE only)
 
 ```
 ecctl user create --username <username> --role <role> [flags]

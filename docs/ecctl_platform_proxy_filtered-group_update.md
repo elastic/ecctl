@@ -1,10 +1,10 @@
 ## ecctl platform proxy filtered-group update
 
-Updates proxies filtered group
+Updates proxies filtered group (Available for ECE only)
 
 ### Synopsis
 
-Updates proxies filtered group
+Updates proxies filtered group (Available for ECE only)
 
 ```
 ecctl platform proxy filtered-group update <filtered group id> --filters <key1=value1,key2=value2> --expected-proxies-count <int> --version <int> [flags]
@@ -42,5 +42,5 @@ ecctl platform proxy filtered-group update <filtered group id> --filters <key1=v
 
 ### SEE ALSO
 
-* [ecctl platform proxy filtered-group](ecctl_platform_proxy_filtered-group.md)	 - Manages proxies filtered group
+* [ecctl platform proxy filtered-group](ecctl_platform_proxy_filtered-group.md)	 - Manages proxies filtered group (Available for ECE only)
 

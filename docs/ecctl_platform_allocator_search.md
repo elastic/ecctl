@@ -1,6 +1,6 @@
 ## ecctl platform allocator search
 
-Performs advanced allocator searching
+Performs advanced allocator searching (Available for ECE only)
 
 ### Synopsis
 

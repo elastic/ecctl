@@ -1,12 +1,12 @@
 [#ecctl_platform_instance-configuration_create]
 == ecctl platform instance-configuration create
 
-Creates a new instance configuration
+Creates a new instance configuration (Available for ECE only)
 
 [float]
 === Synopsis
 
-Creates a new instance configuration
+Creates a new instance configuration (Available for ECE only)
 
 ----
 ecctl platform instance-configuration create -f <config.json> [flags]

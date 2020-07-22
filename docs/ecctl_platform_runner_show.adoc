@@ -1,12 +1,12 @@
 [#ecctl_platform_runner_show]
 == ecctl platform runner show
 
-Shows information about the specified runner
+Shows information about the specified runner (Available for ECE only)
 
 [float]
 === Synopsis
 
-Shows information about the specified runner
+Shows information about the specified runner (Available for ECE only)
 
 ----
 ecctl platform runner show <runner id> [flags]

@@ -1,10 +1,10 @@
 ## ecctl user delete
 
-Deletes one or more platform users
+Deletes one or more platform users (Available for ECE only)
 
 ### Synopsis
 
-Deletes one or more platform users
+Deletes one or more platform users (Available for ECE only)
 
 ```
 ecctl user delete <user name> <user name>... [flags]

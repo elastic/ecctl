@@ -41,9 +41,9 @@ ecctl platform repository [flags]
 
 ### SEE ALSO
 
-* [ecctl platform](ecctl_platform.md)	 - Manages the platform
-* [ecctl platform repository create](ecctl_platform_repository_create.md)	 - Creates / updates a snapshot repository
-* [ecctl platform repository delete](ecctl_platform_repository_delete.md)	 - Deletes a snapshot repositories
-* [ecctl platform repository list](ecctl_platform_repository_list.md)	 - Lists all the snapshot repositories
-* [ecctl platform repository show](ecctl_platform_repository_show.md)	 - Obtains a snapshot repository config
+* [ecctl platform](ecctl_platform.md)	 - Manages the platform (Available for ECE only)
+* [ecctl platform repository create](ecctl_platform_repository_create.md)	 - Creates / updates a snapshot repository (Available for ECE only)
+* [ecctl platform repository delete](ecctl_platform_repository_delete.md)	 - Deletes a snapshot repositories (Available for ECE only)
+* [ecctl platform repository list](ecctl_platform_repository_list.md)	 - Lists all the snapshot repositories (Available for ECE only)
+* [ecctl platform repository show](ecctl_platform_repository_show.md)	 - Obtains a snapshot repository config (Available for ECE only)
 

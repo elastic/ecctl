@@ -39,11 +39,11 @@ ecctl platform instance-configuration [flags]
 
 ### SEE ALSO
 
-* [ecctl platform](ecctl_platform.md)	 - Manages the platform
-* [ecctl platform instance-configuration create](ecctl_platform_instance-configuration_create.md)	 - Creates a new instance configuration
-* [ecctl platform instance-configuration delete](ecctl_platform_instance-configuration_delete.md)	 - Deletes an instance configuration
-* [ecctl platform instance-configuration list](ecctl_platform_instance-configuration_list.md)	 - Lists the instance configurations
-* [ecctl platform instance-configuration pull](ecctl_platform_instance-configuration_pull.md)	 - Downloads instance configuration into a local folder
-* [ecctl platform instance-configuration show](ecctl_platform_instance-configuration_show.md)	 - Shows an instance configuration
-* [ecctl platform instance-configuration update](ecctl_platform_instance-configuration_update.md)	 - Overwrites an instance configuration
+* [ecctl platform](ecctl_platform.md)	 - Manages the platform (Available for ECE only)
+* [ecctl platform instance-configuration create](ecctl_platform_instance-configuration_create.md)	 - Creates a new instance configuration (Available for ECE only)
+* [ecctl platform instance-configuration delete](ecctl_platform_instance-configuration_delete.md)	 - Deletes an instance configuration (Available for ECE only)
+* [ecctl platform instance-configuration list](ecctl_platform_instance-configuration_list.md)	 - Lists the instance configurations (Available for ECE only)
+* [ecctl platform instance-configuration pull](ecctl_platform_instance-configuration_pull.md)	 - Downloads instance configuration into a local folder (Available for ECE only)
+* [ecctl platform instance-configuration show](ecctl_platform_instance-configuration_show.md)	 - Shows an instance configuration (Available for ECE only)
+* [ecctl platform instance-configuration update](ecctl_platform_instance-configuration_update.md)	 - Overwrites an instance configuration (Available for ECE only)
 

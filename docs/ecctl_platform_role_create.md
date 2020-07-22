@@ -1,10 +1,10 @@
 ## ecctl platform role create
 
-Creates a new platform role from a definition
+Creates a new platform role from a definition (Available for ECE only)
 
 ### Synopsis
 
-Creates a new platform role from a definition
+Creates a new platform role from a definition (Available for ECE only)
 
 ```
 ecctl platform role create --file <filename.json> [flags]

@@ -23,12 +23,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/allocatorapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var maintenanceAllocatorCmd = &cobra.Command{
 	Use:     "maintenance <allocator id>",
-	Short:   "Sets the allocator in Maintenance mode",
+	Short:   cmdutil.AdminReqDescription("Sets the allocator in Maintenance mode"),
 	PreRunE: cobra.MinimumNArgs(1),
 
 	RunE: func(cmd *cobra.Command, args []string) error {

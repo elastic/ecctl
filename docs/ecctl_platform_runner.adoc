@@ -44,8 +44,8 @@ ecctl platform runner [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform[ecctl platform]	 - Manages the platform
-* xref:ecctl_platform_runner_list[ecctl platform runner list]	 - Lists the existing platform runners
-* xref:ecctl_platform_runner_resync[ecctl platform runner resync]	 - Resynchronizes the search index and cache for the selected runner or all
-* xref:ecctl_platform_runner_search[ecctl platform runner search]	 - Performs advanced runner searching
-* xref:ecctl_platform_runner_show[ecctl platform runner show]	 - Shows information about the specified runner
+* xref:ecctl_platform[ecctl platform]	 - Manages the platform (Available for ECE only)
+* xref:ecctl_platform_runner_list[ecctl platform runner list]	 - Lists the existing platform runners (Available for ECE only)
+* xref:ecctl_platform_runner_resync[ecctl platform runner resync]	 - Resynchronizes the search index and cache for the selected runner or all (Available for ECE only)
+* xref:ecctl_platform_runner_search[ecctl platform runner search]	 - Performs advanced runner searching (Available for ECE only)
+* xref:ecctl_platform_runner_show[ecctl platform runner show]	 - Shows information about the specified runner (Available for ECE only)

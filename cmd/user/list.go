@@ -21,12 +21,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/userapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var listCmd = &cobra.Command{
 	Use:     "list",
-	Short:   "Lists all platform users",
+	Short:   cmdutil.AdminReqDescription("Lists all platform users"),
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		res, err := userapi.List(userapi.ListParams{

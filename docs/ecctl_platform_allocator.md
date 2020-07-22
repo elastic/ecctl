@@ -39,11 +39,11 @@ ecctl platform allocator [flags]
 
 ### SEE ALSO
 
-* [ecctl platform](ecctl_platform.md)	 - Manages the platform
-* [ecctl platform allocator list](ecctl_platform_allocator_list.md)	 - Returns all allocators that have instances or are connected to the platform. Use --all flag or --output json to show all. Use --query to match any of the allocators properties.
-* [ecctl platform allocator maintenance](ecctl_platform_allocator_maintenance.md)	 - Sets the allocator in Maintenance mode
+* [ecctl platform](ecctl_platform.md)	 - Manages the platform (Available for ECE only)
+* [ecctl platform allocator list](ecctl_platform_allocator_list.md)	 - Returns all allocators that have instances or are connected to the platform. Use --all flag or --output json to show all. Use --query to match any of the allocators properties. (Available for ECE only)
+* [ecctl platform allocator maintenance](ecctl_platform_allocator_maintenance.md)	 - Sets the allocator in Maintenance mode (Available for ECE only)
 * [ecctl platform allocator metadata](ecctl_platform_allocator_metadata.md)	 - Manages an allocator's metadata
-* [ecctl platform allocator search](ecctl_platform_allocator_search.md)	 - Performs advanced allocator searching
-* [ecctl platform allocator show](ecctl_platform_allocator_show.md)	 - Returns information about the allocator
-* [ecctl platform allocator vacate](ecctl_platform_allocator_vacate.md)	 - Moves all the resources from the specified allocator
+* [ecctl platform allocator search](ecctl_platform_allocator_search.md)	 - Performs advanced allocator searching (Available for ECE only)
+* [ecctl platform allocator show](ecctl_platform_allocator_show.md)	 - Returns information about the allocator (Available for ECE only)
+* [ecctl platform allocator vacate](ecctl_platform_allocator_vacate.md)	 - Moves all the resources from the specified allocator (Available for ECE only)
 

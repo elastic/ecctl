@@ -19,7 +19,7 @@ ecctl platform enrollment-token create --role <ROLE> [flags]
   ecctl [globalFlags] enrollment-token create --role coordinator
   ecctl [globalFlags] enrollment-token create --role coordinator --role proxy
   ecctl [globalFlags] enrollment-token create --role allocator --validity 120s
-  ecctl [globalFlags] enrollment-token create --role allocator --validity 2h
+  ecctl [globalFlags] enrollment-token create --role allocator --validity 2h (Available for ECE only)
 ----
 
 [float]

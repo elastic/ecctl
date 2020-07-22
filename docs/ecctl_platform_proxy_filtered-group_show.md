@@ -1,10 +1,10 @@
 ## ecctl platform proxy filtered-group show
 
-Shows details for proxies filtered group
+Shows details for proxies filtered group (Available for ECE only)
 
 ### Synopsis
 
-Shows details for proxies filtered group
+Shows details for proxies filtered group (Available for ECE only)
 
 ```
 ecctl platform proxy filtered-group show <filtered group id> [flags]
@@ -39,5 +39,5 @@ ecctl platform proxy filtered-group show <filtered group id> [flags]
 
 ### SEE ALSO
 
-* [ecctl platform proxy filtered-group](ecctl_platform_proxy_filtered-group.md)	 - Manages proxies filtered group
+* [ecctl platform proxy filtered-group](ecctl_platform_proxy_filtered-group.md)	 - Manages proxies filtered group (Available for ECE only)
 

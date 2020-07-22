@@ -39,8 +39,8 @@ ecctl platform proxy [flags]
 
 ### SEE ALSO
 
-* [ecctl platform](ecctl_platform.md)	 - Manages the platform
-* [ecctl platform proxy filtered-group](ecctl_platform_proxy_filtered-group.md)	 - Manages proxies filtered group
-* [ecctl platform proxy list](ecctl_platform_proxy_list.md)	 - Returns all of the proxies in the platform
-* [ecctl platform proxy show](ecctl_platform_proxy_show.md)	 - Returns information about the proxy with given id
+* [ecctl platform](ecctl_platform.md)	 - Manages the platform (Available for ECE only)
+* [ecctl platform proxy filtered-group](ecctl_platform_proxy_filtered-group.md)	 - Manages proxies filtered group (Available for ECE only)
+* [ecctl platform proxy list](ecctl_platform_proxy_list.md)	 - Returns all of the proxies in the platform (Available for ECE only)
+* [ecctl platform proxy show](ecctl_platform_proxy_show.md)	 - Returns information about the proxy with given id (Available for ECE only)
 

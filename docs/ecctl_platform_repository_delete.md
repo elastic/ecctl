@@ -1,10 +1,10 @@
 ## ecctl platform repository delete
 
-Deletes a snapshot repositories
+Deletes a snapshot repositories (Available for ECE only)
 
 ### Synopsis
 
-Deletes a snapshot repositories
+Deletes a snapshot repositories (Available for ECE only)
 
 ```
 ecctl platform repository delete <repository name> [flags]

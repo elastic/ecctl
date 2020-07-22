@@ -23,12 +23,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/enrollmenttokenapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var listTokensCmd = &cobra.Command{
 	Use:     "list",
-	Short:   "Retrieves a list of persistent enrollment tokens",
+	Short:   cmdutil.AdminReqDescription("Retrieves a list of persistent enrollment tokens"),
 	PreRunE: cobra.NoArgs,
 	RunE:    listTokens,
 }

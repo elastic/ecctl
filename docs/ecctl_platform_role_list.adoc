@@ -1,12 +1,12 @@
 [#ecctl_platform_role_list]
 == ecctl platform role list
 
-Lists the existing platform roles
+Lists the existing platform roles (Available for ECE only)
 
 [float]
 === Synopsis
 
-Lists the existing platform roles
+Lists the existing platform roles (Available for ECE only)
 
 ----
 ecctl platform role list [flags]

@@ -1,12 +1,12 @@
 [#ecctl_platform_instance-configuration_show]
 == ecctl platform instance-configuration show
 
-Shows an instance configuration
+Shows an instance configuration (Available for ECE only)
 
 [float]
 === Synopsis
 
-Shows an instance configuration
+Shows an instance configuration (Available for ECE only)
 
 ----
 ecctl platform instance-configuration show <config id> [flags]

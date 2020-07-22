@@ -24,12 +24,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/input"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var updateCmd = &cobra.Command{
 	Use:     "update <config id> -f <config.json>",
-	Short:   "Overwrites an instance configuration",
+	Short:   cmdutil.AdminReqDescription("Overwrites an instance configuration"),
 	PreRunE: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		file, err := input.NewFileOrReader(os.Stdin, cmd.Flag("file").Value.String())

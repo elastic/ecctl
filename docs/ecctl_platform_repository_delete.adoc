@@ -1,12 +1,12 @@
 [#ecctl_platform_repository_delete]
 == ecctl platform repository delete
 
-Deletes a snapshot repositories
+Deletes a snapshot repositories (Available for ECE only)
 
 [float]
 === Synopsis
 
-Deletes a snapshot repositories
+Deletes a snapshot repositories (Available for ECE only)
 
 ----
 ecctl platform repository delete <repository name> [flags]

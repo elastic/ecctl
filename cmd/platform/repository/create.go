@@ -26,6 +26,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/input"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 	"github.com/elastic/ecctl/pkg/util"
 )
@@ -59,7 +60,7 @@ ecctl platform repository create custom --type fs --settings settings.yml
 var platformSnapshotCreateCmd = &cobra.Command{
 	Use:     "create <repository name> --settings <settings file>",
 	Aliases: []string{"update", "set"},
-	Short:   snapshotCreateShortHelp,
+	Short:   cmdutil.AdminReqDescription(snapshotCreateShortHelp),
 	Long:    snapshotCreateLongHelp,
 	Example: snapshotCreateExamples,
 	PreRunE: cobra.MinimumNArgs(1),

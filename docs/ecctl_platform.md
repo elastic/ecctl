@@ -1,10 +1,10 @@
 ## ecctl platform
 
-Manages the platform
+Manages the platform (Available for ECE only)
 
 ### Synopsis
 
-Manages the platform
+Manages the platform (Available for ECE only)
 
 ```
 ecctl platform [flags]

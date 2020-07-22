@@ -1,12 +1,12 @@
 [#ecctl_platform_instance-configuration_update]
 == ecctl platform instance-configuration update
 
-Overwrites an instance configuration
+Overwrites an instance configuration (Available for ECE only)
 
 [float]
 === Synopsis
 
-Overwrites an instance configuration
+Overwrites an instance configuration (Available for ECE only)
 
 ----
 ecctl platform instance-configuration update <config id> -f <config.json> [flags]

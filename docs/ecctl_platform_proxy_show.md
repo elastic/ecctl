@@ -1,10 +1,10 @@
 ## ecctl platform proxy show
 
-Returns information about the proxy with given id
+Returns information about the proxy with given id (Available for ECE only)
 
 ### Synopsis
 
-Returns information about the proxy with given id
+Returns information about the proxy with given id (Available for ECE only)
 
 ```
 ecctl platform proxy show <proxy id> [flags]

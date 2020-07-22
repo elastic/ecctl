@@ -1,12 +1,12 @@
 [#ecctl_user_list]
 == ecctl user list
 
-Lists all platform users
+Lists all platform users (Available for ECE only)
 
 [float]
 === Synopsis
 
-Lists all platform users
+Lists all platform users (Available for ECE only)
 
 ----
 ecctl user list [flags]

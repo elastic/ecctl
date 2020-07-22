@@ -21,16 +21,17 @@ import (
 	"fmt"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/runnerapi"
-	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var resyncRunnerCmd = &cobra.Command{
 	Use:     "resync {<runner id> | --all}",
-	Short:   "Resynchronizes the search index and cache for the selected runner or all",
-	PreRunE: cmdutil.CheckInputHas1ArgsOr0ArgAndAll,
+	Short:   cmdutil.AdminReqDescription("Resynchronizes the search index and cache for the selected runner or all"),
+	PreRunE: sdkcmdutil.CheckInputHas1ArgsOr0ArgAndAll,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		all, _ := cmd.Flags().GetBool("all")
 

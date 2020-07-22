@@ -40,7 +40,7 @@ const (
 // Command represents the allocator search command.
 var searchAllocatorCmd = &cobra.Command{
 	Use:     `search`,
-	Short:   "Performs advanced allocator searching",
+	Short:   cmdutil.AdminReqDescription("Performs advanced allocator searching"),
 	Long:    queryExamples,
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {

@@ -1,10 +1,10 @@
 ## ecctl platform instance-configuration update
 
-Overwrites an instance configuration
+Overwrites an instance configuration (Available for ECE only)
 
 ### Synopsis
 
-Overwrites an instance configuration
+Overwrites an instance configuration (Available for ECE only)
 
 ```
 ecctl platform instance-configuration update <config id> -f <config.json> [flags]

@@ -1,6 +1,6 @@
 ## ecctl platform runner search
 
-Performs advanced runner searching
+Performs advanced runner searching (Available for ECE only)
 
 ### Synopsis
 

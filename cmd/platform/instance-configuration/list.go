@@ -23,12 +23,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/instanceconfigapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var listCmd = &cobra.Command{
 	Use:     "list",
-	Short:   "Lists the instance configurations",
+	Short:   cmdutil.AdminReqDescription("Lists the instance configurations"),
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		res, err := instanceconfigapi.List(instanceconfigapi.ListParams{

@@ -25,6 +25,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/allocatorapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
@@ -88,7 +89,7 @@ func listAllocators(cmd *cobra.Command, args []string) error {
 
 var listAllocatorsCmd = &cobra.Command{
 	Use:     "list",
-	Short:   allocatorListMessage,
+	Short:   cmdutil.AdminReqDescription(allocatorListMessage),
 	Long:    allocatorListMessage + allocatorQueryExample + allocatorFilterExample,
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE:    listAllocators,
