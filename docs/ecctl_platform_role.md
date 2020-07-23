@@ -39,9 +39,9 @@ ecctl platform role [flags]
 
 ### SEE ALSO
 
-* [ecctl platform](ecctl_platform.md)	 - Manages the platform
-* [ecctl platform role create](ecctl_platform_role_create.md)	 - Creates a new platform role from a definition
-* [ecctl platform role delete](ecctl_platform_role_delete.md)	 - Deletes an existing platform role
-* [ecctl platform role list](ecctl_platform_role_list.md)	 - Lists the existing platform roles
-* [ecctl platform role show](ecctl_platform_role_show.md)	 - Shows the existing platform roles
+* [ecctl platform](ecctl_platform.md)	 - Manages the platform (Available for ECE only)
+* [ecctl platform role create](ecctl_platform_role_create.md)	 - Creates a new platform role from a definition (Available for ECE only)
+* [ecctl platform role delete](ecctl_platform_role_delete.md)	 - Deletes an existing platform role (Available for ECE only)
+* [ecctl platform role list](ecctl_platform_role_list.md)	 - Lists the existing platform roles (Available for ECE only)
+* [ecctl platform role show](ecctl_platform_role_show.md)	 - Shows the existing platform roles (Available for ECE only)
 

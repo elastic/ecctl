@@ -23,12 +23,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/instanceconfigapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var showCmd = &cobra.Command{
 	Use:     "show <config id>",
-	Short:   "Shows an instance configuration",
+	Short:   cmdutil.AdminReqDescription("Shows an instance configuration"),
 	PreRunE: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		res, err := instanceconfigapi.Get(instanceconfigapi.GetParams{

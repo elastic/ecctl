@@ -39,5 +39,5 @@ ecctl platform info [flags]
 
 ### SEE ALSO
 
-* [ecctl platform](ecctl_platform.md)	 - Manages the platform
+* [ecctl platform](ecctl_platform.md)	 - Manages the platform (Available for ECE only)
 

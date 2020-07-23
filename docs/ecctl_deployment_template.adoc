@@ -45,8 +45,8 @@ ecctl deployment template [flags]
 === SEE ALSO
 
 * xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
-* xref:ecctl_deployment_template_create[ecctl deployment template create]	 - Creates a new deployment template (Available for ECE only)
-* xref:ecctl_deployment_template_delete[ecctl deployment template delete]	 - Deletes an existing deployment template (Available for ECE only)
+* xref:ecctl_deployment_template_create[ecctl deployment template create]	 - Creates a new deployment template {ece-icon}
+* xref:ecctl_deployment_template_delete[ecctl deployment template delete]	 - Deletes an existing deployment template {ece-icon}
 * xref:ecctl_deployment_template_list[ecctl deployment template list]	 - Lists deployment templates
-* xref:ecctl_deployment_template_show[ecctl deployment template show]	 - Displays a deployment template (Available for ECE only)
-* xref:ecctl_deployment_template_update[ecctl deployment template update]	 - Updates an existing deployment template (Available for ECE only)
+* xref:ecctl_deployment_template_show[ecctl deployment template show]	 - Displays a deployment template {ece-icon}
+* xref:ecctl_deployment_template_update[ecctl deployment template update]	 - Updates an existing deployment template {ece-icon}

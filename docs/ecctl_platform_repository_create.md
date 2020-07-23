@@ -1,6 +1,6 @@
 ## ecctl platform repository create
 
-Creates / updates a snapshot repository
+Creates / updates a snapshot repository (Available for ECE only)
 
 ### Synopsis
 

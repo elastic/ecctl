@@ -1,10 +1,10 @@
 ## ecctl platform constructor maintenance
 
-Sets/un-sets a constructor's maintenance mode
+Sets/un-sets a constructor's maintenance mode (Available for ECE only)
 
 ### Synopsis
 
-Sets/un-sets a constructor's maintenance mode
+Sets/un-sets a constructor's maintenance mode (Available for ECE only)
 
 ```
 ecctl platform constructor maintenance <constructor id> [flags]

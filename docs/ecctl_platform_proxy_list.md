@@ -1,10 +1,10 @@
 ## ecctl platform proxy list
 
-Returns all of the proxies in the platform
+Returns all of the proxies in the platform (Available for ECE only)
 
 ### Synopsis
 
-Returns all of the proxies in the platform
+Returns all of the proxies in the platform (Available for ECE only)
 
 ```
 ecctl platform proxy list [flags]

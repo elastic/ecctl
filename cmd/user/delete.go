@@ -24,20 +24,21 @@ import (
 
 	"github.com/elastic/cloud-sdk-go/pkg/api/userapi"
 	"github.com/elastic/cloud-sdk-go/pkg/multierror"
-	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var deleteCmd = &cobra.Command{
 	Use:     "delete <user name> <user name>...",
-	Short:   "Deletes one or more platform users",
+	Short:   cmdutil.AdminReqDescription("Deletes one or more platform users"),
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if len(args) > 1 {
 			var msg = "Multiple users will be deleted, do you want to continue? [y/n]: "
-			if !cmdutil.ConfirmAction(msg, os.Stdin, ecctl.Get().Config.OutputDevice) {
+			if !sdkcmdutil.ConfirmAction(msg, os.Stdin, ecctl.Get().Config.OutputDevice) {
 				return nil
 			}
 		}

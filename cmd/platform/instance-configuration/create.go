@@ -25,12 +25,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/input"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var createCmd = &cobra.Command{
 	Use:     "create -f <config.json>",
-	Short:   "Creates a new instance configuration",
+	Short:   cmdutil.AdminReqDescription("Creates a new instance configuration"),
 	PreRunE: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		file, err := input.NewFileOrReader(os.Stdin, cmd.Flag("file").Value.String())

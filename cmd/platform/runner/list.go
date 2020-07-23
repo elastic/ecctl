@@ -21,12 +21,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/runnerapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var listCmd = &cobra.Command{
 	Use:     "list",
-	Short:   "Lists the existing platform runners",
+	Short:   cmdutil.AdminReqDescription("Lists the existing platform runners"),
 	PreRunE: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		res, err := runnerapi.List(runnerapi.ListParams{

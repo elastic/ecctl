@@ -39,7 +39,7 @@ ecctl auth key [flags]
 
 ### SEE ALSO
 
-* [ecctl auth](ecctl_auth.md)	 - Manages the platform auth
+* [ecctl auth](ecctl_auth.md)	 - Manages authentication settings
 * [ecctl auth key create](ecctl_auth_key_create.md)	 - Creates a new API key for the current authenticated user
 * [ecctl auth key delete](ecctl_auth_key_delete.md)	 - Deletes one or more existing API keys for the specified user
 * [ecctl auth key list](ecctl_auth_key_list.md)	 - Lists the API keys for the current authenticated user

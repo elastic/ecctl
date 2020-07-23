@@ -1,10 +1,10 @@
 ## ecctl platform enrollment-token list
 
-Retrieves a list of persistent enrollment tokens
+Retrieves a list of persistent enrollment tokens (Available for ECE only)
 
 ### Synopsis
 
-Retrieves a list of persistent enrollment tokens
+Retrieves a list of persistent enrollment tokens (Available for ECE only)
 
 ```
 ecctl platform enrollment-token list [flags]

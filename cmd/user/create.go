@@ -32,7 +32,7 @@ const createExample = `
 
 var createCmd = &cobra.Command{
 	Use:     "create --username <username> --role <role>",
-	Short:   "Creates a new platform user",
+	Short:   cmdutil.AdminReqDescription("Creates a new platform user"),
 	PreRunE: cobra.MinimumNArgs(0),
 	Example: createExample,
 	RunE: func(cmd *cobra.Command, args []string) error {

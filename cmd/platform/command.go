@@ -28,12 +28,13 @@ import (
 	cmdrepository "github.com/elastic/ecctl/cmd/platform/repository"
 	cmdrole "github.com/elastic/ecctl/cmd/platform/role"
 	cmdrunner "github.com/elastic/ecctl/cmd/platform/runner"
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 )
 
 // Command is the platform subcommand
 var Command = &cobra.Command{
 	Use:     "platform",
-	Short:   "Manages the platform",
+	Short:   cmdutil.AdminReqDescription("Manages the platform"),
 	PreRunE: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()

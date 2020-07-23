@@ -23,6 +23,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/proxyapi/filteredgroupapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
@@ -44,7 +45,7 @@ func listProxyFilteredGroups(cmd *cobra.Command, args []string) error {
 
 var platformProxyFilteredGroupsListCmd = &cobra.Command{
 	Use:     "list",
-	Short:   filteredGroupsUse,
+	Short:   cmdutil.AdminReqDescription(filteredGroupsUse),
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE:    listProxyFilteredGroups,
 }

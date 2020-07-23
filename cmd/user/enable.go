@@ -22,12 +22,13 @@ import (
 
 	"github.com/elastic/cloud-sdk-go/pkg/api/userapi"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var enableCmd = &cobra.Command{
 	Use:     "enable <username>",
-	Short:   "Enables a previously disabled platform user",
+	Short:   cmdutil.AdminReqDescription("Enables a previously disabled platform user"),
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		res, err := userapi.Enable(userapi.EnableParams{

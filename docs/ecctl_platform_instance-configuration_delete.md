@@ -1,10 +1,10 @@
 ## ecctl platform instance-configuration delete
 
-Deletes an instance configuration
+Deletes an instance configuration (Available for ECE only)
 
 ### Synopsis
 
-Deletes an instance configuration
+Deletes an instance configuration (Available for ECE only)
 
 ```
 ecctl platform instance-configuration delete <config id> [flags]

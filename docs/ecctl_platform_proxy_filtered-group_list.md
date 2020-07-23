@@ -1,10 +1,10 @@
 ## ecctl platform proxy filtered-group list
 
-Returns all proxies filtered groups in the platform
+Returns all proxies filtered groups in the platform (Available for ECE only)
 
 ### Synopsis
 
-Returns all proxies filtered groups in the platform
+Returns all proxies filtered groups in the platform (Available for ECE only)
 
 ```
 ecctl platform proxy filtered-group list [flags]
@@ -39,5 +39,5 @@ ecctl platform proxy filtered-group list [flags]
 
 ### SEE ALSO
 
-* [ecctl platform proxy filtered-group](ecctl_platform_proxy_filtered-group.md)	 - Manages proxies filtered group
+* [ecctl platform proxy filtered-group](ecctl_platform_proxy_filtered-group.md)	 - Manages proxies filtered group (Available for ECE only)
 

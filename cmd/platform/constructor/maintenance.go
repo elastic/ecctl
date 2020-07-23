@@ -23,12 +23,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/constructorapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var maintenanceConstructorCmd = &cobra.Command{
 	Use:     "maintenance <constructor id>",
-	Short:   constructorMaintenanceMessage,
+	Short:   cmdutil.AdminReqDescription(constructorMaintenanceMessage),
 	PreRunE: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		unset, _ := cmd.Flags().GetBool("unset")

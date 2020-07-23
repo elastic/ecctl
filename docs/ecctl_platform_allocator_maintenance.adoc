@@ -1,12 +1,12 @@
 [#ecctl_platform_allocator_maintenance]
 == ecctl platform allocator maintenance
 
-Sets the allocator in Maintenance mode
+Sets the allocator in Maintenance mode {ece-icon}
 
 [float]
 === Synopsis
 
-Sets the allocator in Maintenance mode
+Sets the allocator in Maintenance mode {ece-icon}
 
 ----
 ecctl platform allocator maintenance <allocator id> [flags]
@@ -45,4 +45,4 @@ ecctl platform allocator maintenance <allocator id> [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_allocator[ecctl platform allocator]	 - Manages allocators (Available for ECE only)
+* xref:ecctl_platform_allocator[ecctl platform allocator]	 - Manages allocators {ece-icon}

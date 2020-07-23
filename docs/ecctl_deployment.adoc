@@ -46,7 +46,7 @@ ecctl deployment [flags]
 
 * xref:ecctl[ecctl]	 - Elastic Cloud Control
 * xref:ecctl_deployment_create[ecctl deployment create]	 - Creates a deployment
-* xref:ecctl_deployment_delete[ecctl deployment delete]	 - Deletes a previously shutdown deployment (Available for ECE only)
+* xref:ecctl_deployment_delete[ecctl deployment delete]	 - Deletes a previously shutdown deployment {ece-icon}
 * xref:ecctl_deployment_elasticsearch[ecctl deployment elasticsearch]	 - Manages Elasticsearch resources
 * xref:ecctl_deployment_list[ecctl deployment list]	 - Lists the platform's deployments
 * xref:ecctl_deployment_note[ecctl deployment note]	 - Manages a deployment's notes

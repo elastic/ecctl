@@ -21,12 +21,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/snaprepoapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var platformSnapshotDeleteCmd = &cobra.Command{
 	Use:     "delete <repository name>",
-	Short:   "Deletes a snapshot repositories",
+	Short:   cmdutil.AdminReqDescription("Deletes a snapshot repositories"),
 	PreRunE: cobra.MinimumNArgs(1),
 
 	RunE: func(cmd *cobra.Command, args []string) error {

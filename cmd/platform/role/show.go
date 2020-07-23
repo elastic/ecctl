@@ -21,12 +21,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/roleapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var showCmd = &cobra.Command{
 	Use:     "show <role>",
-	Short:   "Shows the existing platform roles",
+	Short:   cmdutil.AdminReqDescription("Shows the existing platform roles"),
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		res, err := roleapi.Show(roleapi.ShowParams{

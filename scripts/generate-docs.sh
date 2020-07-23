@@ -39,6 +39,9 @@ done
 # Strip extraneous .adoc out of section IDs and xrefs
 sed -i'.bak' -e 's/\.adoc//g' ecctl*.adoc
 
+# Replace ECE availability text for ece icon
+sed -i'.bak' -e 's/(Available for ECE only)/{ece-icon}/g' ecctl*.adoc
+
 # Add [float] tags to H3 sections to keep content together
 sed -i'.bak' -e 's/===/\[float]\
 &/g' ecctl*.adoc

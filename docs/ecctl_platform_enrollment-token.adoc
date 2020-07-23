@@ -1,12 +1,12 @@
 [#ecctl_platform_enrollment-token]
 == ecctl platform enrollment-token
 
-Manages tokens (Available for ECE only)
+Manages tokens {ece-icon}
 
 [float]
 === Synopsis
 
-Manages tokens (Available for ECE only)
+Manages tokens {ece-icon}
 
 ----
 ecctl platform enrollment-token [flags]
@@ -44,7 +44,7 @@ ecctl platform enrollment-token [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform[ecctl platform]	 - Manages the platform
+* xref:ecctl_platform[ecctl platform]	 - Manages the platform {ece-icon}
 * xref:ecctl_platform_enrollment-token_create[ecctl platform enrollment-token create]	 - Creates an enrollment token for role(s)
-* xref:ecctl_platform_enrollment-token_delete[ecctl platform enrollment-token delete]	 - Deletes an enrollment token
-* xref:ecctl_platform_enrollment-token_list[ecctl platform enrollment-token list]	 - Retrieves a list of persistent enrollment tokens
+* xref:ecctl_platform_enrollment-token_delete[ecctl platform enrollment-token delete]	 - Deletes an enrollment token {ece-icon}
+* xref:ecctl_platform_enrollment-token_list[ecctl platform enrollment-token list]	 - Retrieves a list of persistent enrollment tokens {ece-icon}

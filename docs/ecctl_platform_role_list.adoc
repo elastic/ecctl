@@ -1,12 +1,12 @@
 [#ecctl_platform_role_list]
 == ecctl platform role list
 
-Lists the existing platform roles
+Lists the existing platform roles {ece-icon}
 
 [float]
 === Synopsis
 
-Lists the existing platform roles
+Lists the existing platform roles {ece-icon}
 
 ----
 ecctl platform role list [flags]
@@ -44,4 +44,4 @@ ecctl platform role list [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_role[ecctl platform role]	 - Manages platform roles (Available for ECE only)
+* xref:ecctl_platform_role[ecctl platform role]	 - Manages platform roles {ece-icon}

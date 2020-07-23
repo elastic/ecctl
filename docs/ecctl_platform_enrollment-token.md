@@ -39,8 +39,8 @@ ecctl platform enrollment-token [flags]
 
 ### SEE ALSO
 
-* [ecctl platform](ecctl_platform.md)	 - Manages the platform
+* [ecctl platform](ecctl_platform.md)	 - Manages the platform (Available for ECE only)
 * [ecctl platform enrollment-token create](ecctl_platform_enrollment-token_create.md)	 - Creates an enrollment token for role(s)
-* [ecctl platform enrollment-token delete](ecctl_platform_enrollment-token_delete.md)	 - Deletes an enrollment token
-* [ecctl platform enrollment-token list](ecctl_platform_enrollment-token_list.md)	 - Retrieves a list of persistent enrollment tokens
+* [ecctl platform enrollment-token delete](ecctl_platform_enrollment-token_delete.md)	 - Deletes an enrollment token (Available for ECE only)
+* [ecctl platform enrollment-token list](ecctl_platform_enrollment-token_list.md)	 - Retrieves a list of persistent enrollment tokens (Available for ECE only)
 

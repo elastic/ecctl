@@ -1,10 +1,10 @@
 ## ecctl platform constructor show
 
-Returns information about the constructor with given ID
+Returns information about the constructor with given ID (Available for ECE only)
 
 ### Synopsis
 
-Returns information about the constructor with given ID
+Returns information about the constructor with given ID (Available for ECE only)
 
 ```
 ecctl platform constructor show <constructor id> [flags]

@@ -20,9 +20,10 @@ package cmdrole
 import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/roleapi"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
-	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
@@ -32,12 +33,12 @@ const (
 
 var createCmd = &cobra.Command{
 	Use:     "create --file <filename.json>",
-	Short:   shortCreateDesc,
+	Short:   cmdutil.AdminReqDescription(shortCreateDesc),
 	PreRunE: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		filename, _ := cmd.Flags().GetString("file")
 		var r models.RoleAggregateCreateData
-		if err := cmdutil.DecodeFile(filename, &r); err != nil {
+		if err := sdkcmdutil.DecodeFile(filename, &r); err != nil {
 			return err
 		}
 

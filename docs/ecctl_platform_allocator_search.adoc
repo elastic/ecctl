@@ -1,7 +1,7 @@
 [#ecctl_platform_allocator_search]
 == ecctl platform allocator search
 
-Performs advanced allocator searching
+Performs advanced allocator searching {ece-icon}
 
 [float]
 === Synopsis
@@ -46,4 +46,4 @@ ecctl platform allocator search [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_allocator[ecctl platform allocator]	 - Manages allocators (Available for ECE only)
+* xref:ecctl_platform_allocator[ecctl platform allocator]	 - Manages allocators {ece-icon}

@@ -21,12 +21,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/userapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var disableCmd = &cobra.Command{
 	Use:     "disable <username>",
-	Short:   "Disables a platform user",
+	Short:   cmdutil.AdminReqDescription("Disables a platform user"),
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		res, err := userapi.Enable(userapi.EnableParams{

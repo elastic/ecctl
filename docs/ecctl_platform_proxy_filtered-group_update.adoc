@@ -1,12 +1,12 @@
 [#ecctl_platform_proxy_filtered-group_update]
 == ecctl platform proxy filtered-group update
 
-Updates proxies filtered group
+Updates proxies filtered group {ece-icon}
 
 [float]
 === Synopsis
 
-Updates proxies filtered group
+Updates proxies filtered group {ece-icon}
 
 ----
 ecctl platform proxy filtered-group update <filtered group id> --filters <key1=value1,key2=value2> --expected-proxies-count <int> --version <int> [flags]
@@ -47,4 +47,4 @@ ecctl platform proxy filtered-group update <filtered group id> --filters <key1=v
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_proxy_filtered-group[ecctl platform proxy filtered-group]	 - Manages proxies filtered group
+* xref:ecctl_platform_proxy_filtered-group[ecctl platform proxy filtered-group]	 - Manages proxies filtered group {ece-icon}
