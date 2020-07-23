@@ -26,7 +26,7 @@ import (
 // Command is the auth subcommand
 var Command = &cobra.Command{
 	Use:     "auth",
-	Short:   "Manages authentication",
+	Short:   "Manages authentication settings",
 	PreRunE: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()

@@ -1,12 +1,12 @@
 [#ecctl_auth]
 == ecctl auth
 
-Manages authentication
+Manages authentication settings
 
 [float]
 === Synopsis
 
-Manages authentication
+Manages authentication settings
 
 ----
 ecctl auth [flags]

@@ -1,10 +1,10 @@
 ## ecctl auth
 
-Manages authentication
+Manages authentication settings
 
 ### Synopsis
 
-Manages authentication
+Manages authentication settings
 
 ```
 ecctl auth [flags]

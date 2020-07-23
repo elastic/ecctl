@@ -30,7 +30,7 @@ Elastic Cloud Control
 
 ### SEE ALSO
 
-* [ecctl auth](ecctl_auth.md)	 - Manages authentication
+* [ecctl auth](ecctl_auth.md)	 - Manages authentication settings
 * [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
 * [ecctl generate](ecctl_generate.md)	 - Generates completions and docs
 * [ecctl init](ecctl_init.md)	 - Creates an initial configuration file.
