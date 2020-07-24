@@ -28,6 +28,11 @@ https://download.elastic.co/downloads/ecctl/1.0.0/ecctl_1.0.0_linux_amd64.tar.gz
 * *Deployment create command now supports flag-based actions.* Instance definition flags for the `ecctl deployment create` command are now available. Using a predefined deployment definition JSON file is still optional with the `--file` flag.
 
 * *Enterprise Search support* All relevant commands now support Enterprise Search as a resource kind.
++
+[source,sh]
+--
+$ ecctl deployment plan cancel --kind enterprise_search
+--
 
 * *New Elasticsearch keystore commands.* The following commands have been added:
 +
@@ -38,38 +43,39 @@ https://download.elastic.co/downloads/ecctl/1.0.0/ecctl_1.0.0_linux_amd64.tar.gz
 
 * *New User-Agent header.* API calls made through ecctl now use `ecctl/<version>` instead of `cloud-sdk-go/<version>`.
 
-* *Command-layer testing* It is now possible to write tests for commands using the new `testutils.RunCmdAssertion()` testing function.
-
-```
-  func Test_showCmd(t *testing.T) {
-  <...>
-      {
-      	name: "succeeds with JSON format",
-      	args: testutils.Args{
-      		Cmd: showCmd,
-      		Args: []string{
-      			"show", util.ValidClusterID, "--ref-id=main-elasticsearch",
-      		},
-      		Cfg: testutils.MockCfg{
-      			OutputFormat: "json",
-      			Responses: []mock.Response{
-      				mock.New200ResponseAssertion(
-      					reqAssertion, mock.NewByteBody(showRawResp),
-      				),
-      			},
-      		},
-      	},
-      	want: testutils.Assertion{
-      		Stdout: string(showJSONOutput) + "\n",
-      	},
-      },
-      <...>
-      for _, tt := range tests {
-      		t.Run(tt.name, func(t *testing.T) {
-      			testutils.RunCmdAssertion(t, tt.args, tt.want)
-      		})
-      	}
-```
+* *Command-layer testing* It is now possible to write tests for commands using the new `testutils.RunCmdAssertion()` testing function:
++
+[source,go]
+--
+func Test_showCmd(t *testing.T) {
+<...>
+        {
+        	name: "succeeds with JSON format",
+        	args: testutils.Args{
+        		Cmd: showCmd,
+        		Args: []string{
+        			"show", util.ValidClusterID, "--ref-id=main-elasticsearch",
+        		},
+        		Cfg: testutils.MockCfg{
+        			OutputFormat: "json",
+        			Responses: []mock.Response{
+        				mock.New200ResponseAssertion(
+        					reqAssertion, mock.NewByteBody(showRawResp),
+        				),
+        			},
+        		},
+        	},
+        	want: testutils.Assertion{
+        		Stdout: string(showJSONOutput) + "\n",
+        	},
+        },
+    <...>
+    for _, tt := range tests {
+    		t.Run(tt.name, func(t *testing.T) {
+    			testutils.RunCmdAssertion(t, tt.args, tt.want)
+    		})
+    	}
+--
 
 [float]
 [id="{p}-release-notes-v1.0.0-bug-fixes"]
