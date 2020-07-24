@@ -68,10 +68,10 @@ var createCmd = &cobra.Command{
 		var appsearchSize, _ = cmd.Flags().GetInt32("appsearch-size")
 		var appsearchRefID, _ = cmd.Flags().GetString("appsearch-ref-id")
 
-		var enterpriseSearchEnable, _ = cmd.Flags().GetBool("enterprise-search")
-		var enterpriseSearchZoneCount, _ = cmd.Flags().GetInt32("enterprise-search-zones")
-		var enterpriseSearchSize, _ = cmd.Flags().GetInt32("enterprise-search-size")
-		var enterpriseSearchRefID, _ = cmd.Flags().GetString("enterprise-search-ref-id")
+		var enterpriseSearchEnable, _ = cmd.Flags().GetBool("enterprise_search")
+		var enterpriseSearchZoneCount, _ = cmd.Flags().GetInt32("enterprise_search-zones")
+		var enterpriseSearchSize, _ = cmd.Flags().GetInt32("enterprise_search-size")
+		var enterpriseSearchRefID, _ = cmd.Flags().GetString("enterprise_search-ref-id")
 
 		var payload *models.DeploymentCreateRequest
 
@@ -202,10 +202,10 @@ func initFlags() {
 	createCmd.Flags().Int32("appsearch-zones", 1, "Number of zones the App Search instances will span")
 	createCmd.Flags().Int32("appsearch-size", 2048, "Memory (RAM) in MB that each of the App Search instances will have")
 
-	createCmd.Flags().Bool("enterprise-search", false, "Enables Enterprise Search for the deployment")
-	createCmd.Flags().String("enterprise-search-ref-id", "main-enterprise_search", "Optional RefId for the Enterprise Search deployment")
-	createCmd.Flags().Int32("enterprise-search-zones", 1, "Number of zones the Enterprise Search instances will span")
-	createCmd.Flags().Int32("enterprise-search-size", 4096, "Memory (RAM) in MB that each of the Enterprise Search instances will have")
+	createCmd.Flags().Bool("enterprise_search", false, "Enables Enterprise Search for the deployment")
+	createCmd.Flags().String("enterprise_search-ref-id", "main-enterprise_search", "Optional RefId for the Enterprise Search deployment")
+	createCmd.Flags().Int32("enterprise_search-zones", 1, "Number of zones the Enterprise Search instances will span")
+	createCmd.Flags().Int32("enterprise_search-size", 4096, "Memory (RAM) in MB that each of the Enterprise Search instances will have")
 
 	// Remove in the next version.
 	createCmd.Flags().Bool("dt-as-list", true, "")
