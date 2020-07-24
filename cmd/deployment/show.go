@@ -77,6 +77,10 @@ var showCmd = &cobra.Command{
 }
 
 func init() {
+	initShowFlags()
+}
+
+func initShowFlags() {
 	Command.AddCommand(showCmd)
 	cmdutil.AddKindFlag(showCmd, "Optional", true)
 	showCmd.Flags().String("ref-id", "", "Optional deployment kind RefId, if not set, the RefId will be auto-discovered")
