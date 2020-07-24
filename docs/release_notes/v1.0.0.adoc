@@ -8,7 +8,7 @@
 
 Welcome to the v1.0.0 release of {n}. This version brings new features, some breaking changes, and bug fixes.
 
-Elastic cloud control (ecctl) is Elastic’s CLI to manage Elasticsearch Service (ESS) and Elastic Cloud Enterprise (ECE). It is now open for a public beta.
+Elastic cloud control (ecctl) is Elastic’s CLI to manage Elasticsearch Service (ESS) and Elastic Cloud Enterprise (ECE).
 
 Download the release binaries:
 
@@ -25,36 +25,67 @@ https://download.elastic.co/downloads/ecctl/1.0.0/ecctl_1.0.0_linux_amd64.tar.gz
 [id="{p}-release-notes-v1.0.0-whats-new"]
 ==== What's new
 
-* *Deployment create and update commands now support flag based actions.* Instance definition flags for the `ecctl deployment {create | update}` commands are now available. Using a predefined deployment definition JSON file is still optional with the `--file` flag.
+* *Deployment create command now supports flag-based actions.* Instance definition flags for the `ecctl deployment create` command are now available. Using a predefined deployment definition JSON file is still optional with the `--file` flag.
 
-* *Enterprise Search support* All relevant commands now support the Enterprise Search resource kind.
+* *Enterprise Search support* All relevant commands now support Enterprise Search as a resource kind.
 
-* *New Elasticsearch keystore commands* The following commands have been added:
+* *New Elasticsearch keystore commands.* The following commands have been added:
 +
 --
-* `ecctl deployment elasticsearch keystore show` Shows the settings from the Elasticsearch resource keystore.
-* `ecctl deployment elasticsearch keystore update` Updates the contents of an Elasticsearch resource keystore.
+`ecctl deployment elasticsearch keystore show`:: Shows the settings from the Elasticsearch resource keystore.
+`ecctl deployment elasticsearch keystore update`:: Updates the contents of an Elasticsearch resource keystore.
 --
 
-* *New User-Agent header* API calls made through ecctl now use `ecctl/<version>` instead of `cloud-sdk-go/<version>`.
+* *New User-Agent header.* API calls made through ecctl now use `ecctl/<version>` instead of `cloud-sdk-go/<version>`.
 
-* *Command layer testing* It is now possible to test commands using the new `testutils.RunCmdAssertion()` testing function.
+* *Command-layer testing* It is now possible to write tests for commands using the new `testutils.RunCmdAssertion()` testing function.
+
+```
+  func Test_showCmd(t *testing.T) {
+  <...>
+      {
+      	name: "succeeds with JSON format",
+      	args: testutils.Args{
+      		Cmd: showCmd,
+      		Args: []string{
+      			"show", util.ValidClusterID, "--ref-id=main-elasticsearch",
+      		},
+      		Cfg: testutils.MockCfg{
+      			OutputFormat: "json",
+      			Responses: []mock.Response{
+      				mock.New200ResponseAssertion(
+      					reqAssertion, mock.NewByteBody(showRawResp),
+      				),
+      			},
+      		},
+      	},
+      	want: testutils.Assertion{
+      		Stdout: string(showJSONOutput) + "\n",
+      	},
+      },
+      <...>
+      for _, tt := range tests {
+      		t.Run(tt.name, func(t *testing.T) {
+      			testutils.RunCmdAssertion(t, tt.args, tt.want)
+      		})
+      	}
+```
 
 [float]
 [id="{p}-release-notes-v1.0.0-bug-fixes"]
 ==== Bug fixes
 
-* *Deployments created or updated through Ansible* A bug which showed Stdin as always populated, when coupled with Ansible has been fixed.
+* *Inability to create or update deployments through Ansible.* ecctl should behave in the same manner when executed from the terminal or any automation tool. A bug which showed `os.Stdin` as always populated when coupled with Ansible has been fixed.
 
-* *Allocator vacate flag parsing* The `--target` flag was being ignored due to using `GetStringSlice()` when the flag declaration is `Array`.*
+* *Allocator vacate flag parsing has been fixed* The `--target` flag was being ignored due to using `GetStringSlice()` when the flag declaration is `Array`. Flag parsing for allocator vacate operations now works as documented.*
 
 [float]
 [id="{p}-release-notes-v1.0.0-breaking-changes"]
 ==== Breaking changes
 
-* *All APIs have been removed.* The APIs that ecctl consumes are useful to other projects. These have now been moved to https://github.com/elastic/cloud-sdk-go/tree/master/pkg/api[cloud-sdk-go].
+* *All APIs have been removed.* The APIs that ecctl consumes are useful to other projects. These have now been moved to cloud-sdk-go. If you have any code consuming these APIs, make sure to import the packages from https://github.com/elastic/cloud-sdk-go/tree/master/pkg/api[cloud-sdk-go/pkg/api] instead.
 
-* *Changes with commands and subcommands* In order to maintain parity with the Elastic Cloud API endpoints, the following commands have changed:
+* *Changes with commands and subcommands.* In order to maintain feature parity with the Elastic Cloud API endpoints, the following commands have changed:
 +
 --
 * `ecctl platform stack` is now `ecctl stack`.
