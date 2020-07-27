@@ -34,7 +34,7 @@ import (
 )
 
 var createCmd = &cobra.Command{
-	Use:     "create {--file | --es-size <int> --es-zones <int> | --topology-element <obj>}",
+	Use:     "create {--file | --es-size <int> --es-zones <int> | --es-node-topology <obj>}",
 	Short:   "Creates a deployment",
 	PreRunE: cobra.NoArgs,
 	Long:    createLong,
@@ -51,7 +51,7 @@ var createCmd = &cobra.Command{
 		var esZoneCount, _ = cmd.Flags().GetInt32("es-zones")
 		var esSize, _ = cmd.Flags().GetInt32("es-size")
 		var esRefID, _ = cmd.Flags().GetString("es-ref-id")
-		var te, _ = cmd.Flags().GetStringArray("topology-element")
+		var topologyElements, _ = cmd.Flags().GetStringArray("es-node-topology")
 		var plugin, _ = cmd.Flags().GetStringSlice("plugin")
 
 		var kibanaZoneCount, _ = cmd.Flags().GetInt32("kibana-zones")
@@ -101,7 +101,7 @@ var createCmd = &cobra.Command{
 				Region:                   region,
 				Writer:                   ecctl.Get().Config.ErrorDevice,
 				Plugins:                  plugin,
-				TopologyElements:         te,
+				TopologyElements:         topologyElements,
 				ApmEnable:                apmEnable,
 				AppsearchEnable:          appsearchEnable,
 				EnterpriseSearchEnable:   enterpriseSearchEnable,
@@ -185,7 +185,7 @@ func initFlags() {
 	createCmd.Flags().String("es-ref-id", "main-elasticsearch", "Optional RefId for the Elasticsearch deployment")
 	createCmd.Flags().Int32("es-zones", 1, "Number of zones the Elasticsearch instances will span")
 	createCmd.Flags().Int32("es-size", 4096, "Memory (RAM) in MB that each of the Elasticsearch instances will have")
-	createCmd.Flags().StringArrayP("topology-element", "e", nil, "Optional Elasticsearch topology element definition. See help for more information")
+	createCmd.Flags().StringArrayP("es-node-topology", "e", nil, "Optional Elasticsearch node topology element definition. See help for more information")
 	createCmd.Flags().StringSlice("plugin", nil, "Additional plugins to add to the Elasticsearch deployment")
 
 	createCmd.Flags().String("kibana-ref-id", "main-kibana", "Optional RefId for the Kibana deployment")
