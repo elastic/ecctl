@@ -37,6 +37,16 @@ func Test_showCmd(t *testing.T) {
 		t.Fatal(err)
 	}
 
+	showApmResp, err := ioutil.ReadFile("./testdata/show_apm.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	wantGeneratePayload, err := ioutil.ReadFile("./testdata/want_generate-payload.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+
 	var succeedResp = new(models.DeploymentGetResponse)
 	if err := succeedResp.UnmarshalBinary(showRawResp); err != nil {
 		t.Fatal(err)
@@ -173,6 +183,45 @@ func Test_showCmd(t *testing.T) {
 			},
 			want: testutils.Assertion{
 				Stdout: string(showJSONOutput) + "\n",
+			},
+		},
+		{
+			name: "succeeds with `--generate-payload`",
+			args: testutils.Args{
+				Cmd: showCmd,
+				Args: []string{
+					"show", "29337f77410e23ab30e15c280060facf",
+					"--generate-payload",
+				},
+				Cfg: testutils.MockCfg{
+					OutputFormat: "json",
+					Responses: []mock.Response{
+						mock.New200ResponseAssertion(
+							&mock.RequestAssertion{
+								Header: api.DefaultReadMockHeaders,
+								Method: "GET",
+								Path:   "/api/v1/deployments/29337f77410e23ab30e15c280060facf",
+								Host:   api.DefaultMockHost,
+								Query: url.Values{
+									"convert_legacy_plans": {"false"},
+									"enrich_with_template": {"true"},
+									"show_metadata":        {"false"},
+									"show_plan_defaults":   {"false"},
+									"show_plan_history":    {"false"},
+									"show_plan_logs":       {"false"},
+									"show_plans":           {"true"},
+									"show_security":        {"false"},
+									"show_settings":        {"true"},
+									"show_system_alerts":   {"5"},
+								},
+							},
+							mock.NewByteBody(showApmResp),
+						),
+					},
+				},
+			},
+			want: testutils.Assertion{
+				Stdout: string(wantGeneratePayload),
 			},
 		},
 		{

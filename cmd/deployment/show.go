@@ -18,8 +18,11 @@
 package cmddeployment
 
 import (
+	"encoding/json"
+
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi"
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/deputil"
+	"github.com/elastic/cloud-sdk-go/pkg/models"
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
@@ -32,7 +35,10 @@ const showExample = `
   ecctl deployment show <deployment-id> --kind kibana
 
 * Shows apm resource information from a given deployment with a specified ref-id.
-  ecctl deployment show <deployment-id> --kind apm --ref-id apm-server`
+  ecctl deployment show <deployment-id> --kind apm --ref-id apm-server
+
+* Return the current deployment state as a valid create / update payload.
+  ecctl deployment show <deployment id> --generate-payload > update.json`
 
 var showCmd = &cobra.Command{
 	Use:     "show <deployment-id>",
@@ -50,6 +56,13 @@ var showCmd = &cobra.Command{
 		showPlans := planLogs || planDefaults || plans || planHistory
 
 		refID, _ := cmd.Flags().GetString("ref-id")
+
+		generatePayload, _ := cmd.Flags().GetBool("generate-payload")
+		if generatePayload {
+			showPlans, settings = true, true
+			resourceKind, refID = "", ""
+		}
+
 		getParams := deploymentapi.GetParams{
 			API:          ecctl.Get().API,
 			DeploymentID: args[0],
@@ -68,11 +81,19 @@ var showCmd = &cobra.Command{
 			GetParams: getParams,
 			Kind:      resourceKind,
 		})
-
 		if err != nil {
 			return err
 		}
-		return ecctl.Get().Formatter.Format("deployment/show", res)
+
+		if !generatePayload {
+			return ecctl.Get().Formatter.Format("deployment/show", res)
+		}
+
+		enc := json.NewEncoder(ecctl.Get().Config.OutputDevice)
+		enc.SetIndent("", "  ")
+		return enc.Encode(
+			deploymentapi.NewUpdateRequest(res.(*models.DeploymentGetResponse)),
+		)
 	},
 }
 
@@ -90,4 +111,5 @@ func initShowFlags() {
 	showCmd.Flags().Bool("plan-history", false, "Shows the deployment plan history")
 	showCmd.Flags().BoolP("metadata", "m", false, "Shows the deployment metadata")
 	showCmd.Flags().BoolP("settings", "s", false, "Shows the deployment settings")
+	showCmd.Flags().Bool("generate-payload", false, "Outputs a JSON formatted payload which can be used as an argument for the --file flag on create / update commands.")
 }

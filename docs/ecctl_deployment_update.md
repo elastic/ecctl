@@ -8,6 +8,10 @@ updates a deployment from a file definition, defaulting prune_orphans=false, mak
 update action safe for partial updates, to override this behavior toggle --prune-orphans.
 To track the changes toggle the --track flag.
 
+It is possible to use "--generate-payload" as: "ecctl deployment show --generate-payload ..."
+to obtain a valid create / update payload from an existing deployment which can be manually edited in
+before it is sent as a "--file" flag argument. See "ecctl deployment show --help" for a valid example.
+
 Read more about the deployment definition in https://www.elastic.co/guide/en/cloud-enterprise/current/Deployment_-_CRUD.html
 
 ```
