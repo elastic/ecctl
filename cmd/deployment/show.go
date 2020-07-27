@@ -37,7 +37,7 @@ const showExample = `
 * Shows apm resource information from a given deployment with a specified ref-id.
   ecctl deployment show <deployment-id> --kind apm --ref-id apm-server
 
-* Return the current deployment state as a valid create / update payload.
+* Return the current deployment state as a valid update payload.
   ecctl deployment show <deployment id> --generate-payload > update.json`
 
 var showCmd = &cobra.Command{
@@ -111,5 +111,5 @@ func initShowFlags() {
 	showCmd.Flags().Bool("plan-history", false, "Shows the deployment plan history")
 	showCmd.Flags().BoolP("metadata", "m", false, "Shows the deployment metadata")
 	showCmd.Flags().BoolP("settings", "s", false, "Shows the deployment settings")
-	showCmd.Flags().Bool("generate-payload", false, "Outputs a JSON formatted payload which can be used as an argument for the --file flag on create / update commands.")
+	showCmd.Flags().Bool("generate-payload", false, "Outputs a JSON formatted payload which can be used as an argument for the --file flag on update command.")
 }

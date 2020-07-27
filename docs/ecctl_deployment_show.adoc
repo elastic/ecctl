@@ -23,7 +23,7 @@ ecctl deployment show <deployment-id> [flags]
 * Shows apm resource information from a given deployment with a specified ref-id.
   ecctl deployment show <deployment-id> --kind apm --ref-id apm-server
 
-* Return the current deployment state as a valid create / update payload.
+* Return the current deployment state as a valid update payload.
   ecctl deployment show <deployment id> --generate-payload > update.json
 ----
 
@@ -31,7 +31,7 @@ ecctl deployment show <deployment-id> [flags]
 === Options
 
 ----
-      --generate-payload   Outputs a JSON formatted payload which can be used as an argument for the --file flag on create / update commands.
+      --generate-payload   Outputs a JSON formatted payload which can be used as an argument for the --file flag on update command.
   -h, --help               help for show
       --kind string        Optional deployment resource kind (apm, appsearch, kibana, elasticsearch)
   -m, --metadata           Shows the deployment metadata

@@ -11,7 +11,7 @@ update action safe for partial updates, to override this behavior toggle --prune
 To track the changes toggle the --track flag.
 
 It is possible to use "--generate-payload" as: "ecctl deployment show --generate-payload ..."
-to obtain a valid create / update payload from an existing deployment which can be manually edited in
+to obtain a valid update payload from an existing deployment which can be manually edited in
 before it is sent as a "--file" flag argument. See "ecctl deployment show --help" for a valid example.
 
 Read more about the deployment definition in https://www.elastic.co/guide/en/cloud-enterprise/current/Deployment_-_CRUD.html
@@ -59,57 +59,11 @@ $ cat deployment_example_update.json
     }
 }
 $ ecctl deployment update f44c06c3af6f85dac05023cf243f4ab1 -f deployment_example_update.json
-{
-  "id": "f44c06c3af6f85dac05023cf243f4ab1",
-  "name": "my example cluster",
-  "resources": [
-    {
-      "id": "205745432f6345a4999dd2d77ceb1812",
-      "kind": "elasticsearch",
-      "ref_id": "my-es-cluster",
-      "region": "ece-region"
-    },
-    {
-      "elasticsearch_cluster_ref_id": "my-es-cluster",
-      "id": "3617594f01074b76a5ca4f903f9d33ec",
-      "kind": "kibana",
-      "ref_id": "my-kibana-instance",
-      "region": "ece-region"
-    },
-    {
-      "elasticsearch_cluster_ref_id": "my-es-cluster",
-      "id": "90c3c9566f454861b0dc935c5c7420d8",
-      "kind": "apm",
-      "ref_id": "my-apm-instance",
-      "region": "ece-region"
-    }
-  ]
-}
+...
 #### Setting --prune-orphans, will cause any non-specified resources to be shut down.
 $ ecctl deployment update f44c06c3af6f85dac05023cf243f4ab1 -f deployment_example_update.json --prune-orphans
 setting --prune-orphans to "true" will cause any resources not specified in the update request to be removed from the deployment, do you want to continue? [y/n]: y
-{
-  "id": "f44c06c3af6f85dac05023cf243f4ab1",
-  "name": "my example cluster",
-  "resources": [
-    {
-      "id": "205745432f6345a4999dd2d77ceb1812",
-      "kind": "elasticsearch",
-      "ref_id": "my-es-cluster",
-      "region": "ece-region"
-    }
-  ],
-  "shutdown_resources": {
-    "apm": [
-      "90c3c9566f454861b0dc935c5c7420d8"
-    ],
-    "appsearch": [],
-    "elasticsearch": [],
-    "kibana": [
-      "3617594f01074b76a5ca4f903f9d33ec"
-    ]
-  }
-}
+...
 ----
 
 [float]
