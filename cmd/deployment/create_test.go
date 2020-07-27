@@ -543,6 +543,55 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 			},
 		},
 		{
+			name: "succeeds creating a deployment with ES topology element and without tracking (Normal GetCall)",
+			args: testutils.Args{
+				Cmd: createCmd,
+				Args: []string{
+					"create", "--request-id=some_request_id", "--version=7.8.0", "--es-node-topology",
+					`{"size": 1024, "zone_count": 2, "node_type": "data"}`, "--es-node-topology",
+					`{"size": 1024, "zone_count": 1, "node_type": "ml"}`, "--dt-as-list=false",
+				},
+				Cfg: testutils.MockCfg{Responses: []mock.Response{
+					{
+						Response: http.Response{
+							StatusCode: 200,
+							Body:       mock.NewStructBody(defaultTemplateResponse),
+						},
+						Assert: &mock.RequestAssertion{
+							Method: "GET",
+							Header: api.DefaultReadMockHeaders,
+							Path:   "/api/v1/deployments/templates/default",
+							Host:   api.DefaultMockHost,
+							Query: url.Values{
+								"region":                       {"ece-region"},
+								"show_instance_configurations": {"true"},
+							},
+						},
+					},
+					{
+						Response: http.Response{
+							StatusCode: 201,
+							Body:       mock.NewStructBody(defaultCreateResponse),
+						},
+						Assert: &mock.RequestAssertion{
+							Method: "POST",
+							Header: api.DefaultWriteMockHeaders,
+							Body:   mock.NewStringBody(`{"resources":{"apm":null,"appsearch":null,"elasticsearch":[{"plan":{"cluster_topology":[{"instance_configuration_id":"default.data","node_type":{"data":true},"size":{"resource":"memory","value":1024},"zone_count":2},{"instance_configuration_id":"default.ml","node_type":{"ml":true},"size":{"resource":"memory","value":1024},"zone_count":1}],"deployment_template":{"id":"default"},"elasticsearch":{"version":"7.8.0"}},"ref_id":"main-elasticsearch","region":"ece-region"}],"enterprise_search":null,"kibana":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"size":{"resource":"memory","value":1024},"zone_count":1}],"kibana":{"version":"7.8.0"}},"ref_id":"main-kibana","region":"ece-region"}]}}` + "\n"),
+							Path:   "/api/v1/deployments",
+							Host:   api.DefaultMockHost,
+							Query: url.Values{
+								"request_id":    {"some_request_id"},
+								"validate_only": {"false"},
+							},
+						},
+					},
+				}},
+			},
+			want: testutils.Assertion{
+				Stdout: string(defaultCreateResponseBytes),
+			},
+		},
+		{
 			name: "succeeds creating a deployment with overrides and without tracking",
 			args: testutils.Args{
 				Cmd: createCmd,
