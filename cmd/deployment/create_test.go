@@ -547,7 +547,7 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 			args: testutils.Args{
 				Cmd: createCmd,
 				Args: []string{
-					"create", "--apm", "--appsearch", "--enterprise-search", "--request-id=some_request_id", "--version=7.8.0",
+					"create", "--apm", "--appsearch", "--enterprise_search", "--request-id=some_request_id", "--version=7.8.0",
 				},
 				Cfg: testutils.MockCfg{Responses: []mock.Response{
 					{

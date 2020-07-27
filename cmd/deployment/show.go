@@ -21,8 +21,6 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi"
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/deputil"
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
-	"github.com/elastic/cloud-sdk-go/pkg/util/slice"
-	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -36,8 +34,6 @@ const showExample = `
 * Shows apm resource information from a given deployment with a specified ref-id.
   ecctl deployment show <deployment-id> --kind apm --ref-id apm-server`
 
-var acceptedKinds = []string{"apm", "appsearch", "elasticsearch", "kibana"}
-
 var showCmd = &cobra.Command{
 	Use:     "show <deployment-id>",
 	Short:   "Shows the specified deployment resources",
@@ -45,10 +41,6 @@ var showCmd = &cobra.Command{
 	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		resourceKind, _ := cmd.Flags().GetString("kind")
-		if resourceKind != "" && !slice.HasString(acceptedKinds, resourceKind) {
-			return errors.Errorf(`"%v" is not a valid resource kind. Accepted resource kinds are: %v`, resourceKind, acceptedKinds)
-		}
-
 		planLogs, _ := cmd.Flags().GetBool("plan-logs")
 		planDefaults, _ := cmd.Flags().GetBool("plan-defaults")
 		planHistory, _ := cmd.Flags().GetBool("plan-history")
@@ -85,6 +77,10 @@ var showCmd = &cobra.Command{
 }
 
 func init() {
+	initShowFlags()
+}
+
+func initShowFlags() {
 	Command.AddCommand(showCmd)
 	cmdutil.AddKindFlag(showCmd, "Optional", true)
 	showCmd.Flags().String("ref-id", "", "Optional deployment kind RefId, if not set, the RefId will be auto-discovered")
