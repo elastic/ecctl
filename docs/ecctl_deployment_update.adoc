@@ -6,11 +6,11 @@ Updates a deployment from a file definition, allowing certain flag overrides
 [float]
 === Synopsis
 
-updates a deployment from a file definition, defaulting prune_orphans=false, making the default
-update action safe for partial updates, to override this behavior toggle --prune-orphans.
+updates a deployment from a file definition: Defaulting prune_orphans=false, making the default
+update action safe for partial updates. To override this behavior, toggle --prune-orphans.
 To track the changes toggle the --track flag.
 
-It is possible to use "--generate-payload" as: "ecctl deployment show --generate-payload ..."
+It is possible to use "--generate-update-payload" as: "ecctl deployment show --generate-update-payload ..."
 to obtain a valid update payload from an existing deployment which can be manually edited in
 before it is sent as a "--file" flag argument. See "ecctl deployment show --help" for a valid example.
 

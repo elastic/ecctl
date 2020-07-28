@@ -38,7 +38,7 @@ const showExample = `
   ecctl deployment show <deployment-id> --kind apm --ref-id apm-server
 
 * Return the current deployment state as a valid update payload.
-  ecctl deployment show <deployment id> --generate-payload > update.json`
+  ecctl deployment show <deployment id> --generate-update-payload > update.json`
 
 var showCmd = &cobra.Command{
 	Use:     "show <deployment-id>",
@@ -57,7 +57,7 @@ var showCmd = &cobra.Command{
 
 		refID, _ := cmd.Flags().GetString("ref-id")
 
-		generatePayload, _ := cmd.Flags().GetBool("generate-payload")
+		generatePayload, _ := cmd.Flags().GetBool("generate-update-payload")
 		if generatePayload {
 			showPlans, settings = true, true
 			resourceKind, refID = "", ""
@@ -111,5 +111,5 @@ func initShowFlags() {
 	showCmd.Flags().Bool("plan-history", false, "Shows the deployment plan history")
 	showCmd.Flags().BoolP("metadata", "m", false, "Shows the deployment metadata")
 	showCmd.Flags().BoolP("settings", "s", false, "Shows the deployment settings")
-	showCmd.Flags().Bool("generate-payload", false, "Outputs a JSON formatted payload which can be used as an argument for the --file flag on update command.")
+	showCmd.Flags().Bool("generate-update-payload", false, "Outputs JSON which can be used as an argument for the --file flag with the update command.")
 }

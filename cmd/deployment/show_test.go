@@ -186,12 +186,12 @@ func Test_showCmd(t *testing.T) {
 			},
 		},
 		{
-			name: "succeeds with `--generate-payload`",
+			name: "succeeds with `--generate-update-payload`",
 			args: testutils.Args{
 				Cmd: showCmd,
 				Args: []string{
 					"show", "29337f77410e23ab30e15c280060facf",
-					"--generate-payload",
+					"--generate-update-payload",
 				},
 				Cfg: testutils.MockCfg{
 					OutputFormat: "json",
