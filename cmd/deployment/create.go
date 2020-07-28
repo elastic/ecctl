@@ -281,6 +281,10 @@ func esTopologyParseGB(topology []string) ([]string, error) {
 			return nil, fmt.Errorf("failed unpacking raw topology: %s", err)
 		}
 
+		if len(element.Size) == 0 {
+			return nil, errors.New("memory size cannot be empty")
+		}
+
 		elementSizeMB, err := deploymentsize.ParseGb(element.Size)
 		if err != nil {
 			return nil, err

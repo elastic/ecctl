@@ -543,6 +543,19 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 			},
 		},
 		{
+			name: "fails creating a deployment with ES topology element when size is missing (Normal GetCall)",
+			args: testutils.Args{
+				Cmd: createCmd,
+				Args: []string{
+					"create", "--request-id=some_request_id", "--version=7.8.0", "--es-node-topology",
+					`{"zone_count": 2, "node_type": "data"}`,
+				},
+			},
+			want: testutils.Assertion{
+				Err: errors.New("memory size cannot be empty"),
+			},
+		},
+		{
 			name: "succeeds creating a deployment with ES topology element and without tracking (Normal GetCall)",
 			args: testutils.Args{
 				Cmd: createCmd,
