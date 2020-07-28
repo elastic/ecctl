@@ -1,0 +1,575 @@
+{
+    "healthy": true,
+    "id": "12357180d4e74b3d807cf7843fa6df1b",
+    "metadata": {
+      "hidden": false,
+      "last_modified": "2020-07-23T04:07:52.374Z",
+      "last_resource_plan_modified": "2020-07-23T04:07:50.481Z",
+      "owner_id": "xxxyzz",
+      "subscription_level": "standard",
+      "system_owned": false
+    },
+    "name": "marc-testing",
+    "resources": {
+      "apm": [
+        {
+          "elasticsearch_cluster_ref_id": "main-elasticsearch",
+          "id": "1234178911ce4ca7b8c9ec3904a298cd",
+          "info": {
+            "deployment_id": "12357180d4e74b3d807cf7843fa6df1b",
+            "elasticsearch_cluster": {
+              "elasticsearch_id": "0f180c162ba34bc59a8f6fe44274f153"
+            },
+            "external_links": [],
+            "healthy": true,
+            "id": "1234178911ce4ca7b8c9ec3904a298cd",
+            "metadata": {
+              "endpoint": "1234178911ce4ca7b8c9ec3904a298cd.apm.asia-east1.gcp.elastic-cloud.com",
+              "last_modified": "2020-07-23T08:58:02.619Z",
+              "ports": {
+                "http": 80,
+                "https": 443,
+                "transport_passthrough": 9400
+              },
+              "version": 8
+            },
+            "name": "marc-testing",
+            "plan_info": {
+              "current": {
+                "attempt_end_time": "2020-07-23T08:59:18.682Z",
+                "attempt_start_time": "2020-07-23T08:58:01.476Z",
+                "healthy": true,
+                "plan": {
+                  "apm": {
+                    "system_settings": {
+                      "secret_token": "XYZ"
+                    }
+                  },
+                  "cluster_topology": [
+                    {
+                      "instance_configuration_id": "gcp.apm.1",
+                      "size": {
+                        "resource": "memory",
+                        "value": 512
+                      },
+                      "zone_count": 1
+                    }
+                  ],
+                  "transient": {
+                    "strategy": {
+                      "autodetect": {}
+                    }
+                  }
+                },
+                "plan_attempt_id": "4720aedc-7329-4e2f-890b-831431a0b61c",
+                "plan_attempt_log": [],
+                "plan_end_time": "0001-01-01T00:00:00.000Z",
+                "source": {
+                  "action": "deployments.update-deployment",
+                  "date": "2020-07-23T08:57:59.073Z",
+                  "facilitator": "adminconsole",
+                  "remote_addresses": [
+                    "114.125.104.183",
+                    "100.26.228.165"
+                  ],
+                  "user_id": "1059003638"
+                }
+              },
+              "healthy": true,
+              "history": []
+            },
+            "region": "gcp-asia-east1",
+            "settings": {
+              "metadata": {
+                "hidden": false,
+                "name": "marc-testing",
+                "owner_id": "1059003638",
+                "resources": {
+                  "cpu": {
+                    "boost": true,
+                    "hard_limit": true
+                  }
+                },
+                "system_owned": false
+              }
+            },
+            "status": "started",
+            "topology": {
+              "healthy": true,
+              "instances": [
+                {
+                  "allocator_id": "gi-1231444412487835771",
+                  "container_started": true,
+                  "healthy": true,
+                  "instance_configuration": {
+                    "id": "gcp.apm.1",
+                    "name": "gcp.apm.1",
+                    "resource": "memory"
+                  },
+                  "instance_name": "instance-0000000000",
+                  "maintenance_mode": false,
+                  "memory": {
+                    "instance_capacity": 512,
+                    "native_memory_pressure": 4
+                  },
+                  "service_roles": null,
+                  "service_running": true,
+                  "service_version": "7.8.0",
+                  "zone": "asia-east1-b"
+                }
+              ]
+            }
+          },
+          "ref_id": "main-apm",
+          "region": "gcp-asia-east1"
+        }
+      ],
+      "appsearch": [],
+      "elasticsearch": [
+        {
+          "id": "0f180c162ba34bc59a8f6fe44274f153",
+          "info": {
+            "associated_apm_clusters": [],
+            "associated_appsearch_clusters": [],
+            "associated_enterprise_search_clusters": [],
+            "associated_kibana_clusters": [
+              {
+                "enabled": true,
+                "kibana_id": "123433bf86dd47db90aaea891c13b904"
+              }
+            ],
+            "cluster_id": "0f180c162ba34bc59a8f6fe44274f153",
+            "cluster_name": "marc-testing",
+            "deployment_id": "12357180d4e74b3d807cf7843fa6df1b",
+            "elasticsearch": {
+              "blocking_issues": {
+                "cluster_level": [],
+                "healthy": true,
+                "index_level": []
+              },
+              "healthy": true,
+              "master_info": {
+                "healthy": true,
+                "instances_with_no_master": [],
+                "masters": [
+                  {
+                    "instances": [
+                      "tiebreaker-0000000002",
+                      "instance-0000000001",
+                      "instance-0000000000"
+                    ],
+                    "master_instance_name": "instance-0000000001",
+                    "master_node_id": "GkfF44dUSkSal37u3_UGpg"
+                  }
+                ]
+              },
+              "shard_info": {
+                "available_shards": [
+                  {
+                    "instance_name": "tiebreaker-0000000002",
+                    "shard_count": 8
+                  },
+                  {
+                    "instance_name": "instance-0000000001",
+                    "shard_count": 8
+                  },
+                  {
+                    "instance_name": "instance-0000000000",
+                    "shard_count": 8
+                  }
+                ],
+                "healthy": true,
+                "unavailable_replicas": [
+                  {
+                    "instance_name": "tiebreaker-0000000002",
+                    "replica_count": 0
+                  },
+                  {
+                    "instance_name": "instance-0000000001",
+                    "replica_count": 0
+                  },
+                  {
+                    "instance_name": "instance-0000000000",
+                    "replica_count": 0
+                  }
+                ],
+                "unavailable_shards": [
+                  {
+                    "instance_name": "tiebreaker-0000000002",
+                    "shard_count": 0
+                  },
+                  {
+                    "instance_name": "instance-0000000001",
+                    "shard_count": 0
+                  },
+                  {
+                    "instance_name": "instance-0000000000",
+                    "shard_count": 0
+                  }
+                ]
+              }
+            },
+            "external_links": [],
+            "healthy": true,
+            "locked": false,
+            "metadata": {
+              "cloud_id": "marc-testing:xxxx=",
+              "endpoint": "xxx80c162ba34bc59a8f6fe44274f95a.asia-east1.gcp.elastic-cloud.153",
+              "last_modified": "2020-07-23T04:07:52.374Z",
+              "ports": {
+                "http": 9200,
+                "https": 9243,
+                "transport_passthrough": 9400
+              },
+              "version": 37
+            },
+            "plan_info": {
+              "current": {
+                "attempt_end_time": "2020-07-23T04:07:50.481Z",
+                "attempt_start_time": "2020-07-23T04:07:32.844Z",
+                "healthy": true,
+                "plan": {
+                  "cluster_topology": [
+                    {
+                      "elasticsearch": {},
+                      "instance_configuration_id": "gcp.data.highio.1",
+                      "node_type": {
+                        "data": true,
+                        "ingest": true,
+                        "master": true
+                      },
+                      "size": {
+                        "resource": "memory",
+                        "value": 1024
+                      },
+                      "zone_count": 2
+                    },
+                    {
+                      "elasticsearch": {},
+                      "instance_configuration_id": "gcp.coordinating.1",
+                      "node_type": {
+                        "data": false,
+                        "ingest": true,
+                        "master": false
+                      },
+                      "size": {
+                        "resource": "memory",
+                        "value": 0
+                      },
+                      "zone_count": 2
+                    },
+                    {
+                      "elasticsearch": {},
+                      "instance_configuration_id": "gcp.master.1",
+                      "node_type": {
+                        "data": false,
+                        "ingest": false,
+                        "master": true
+                      },
+                      "size": {
+                        "resource": "memory",
+                        "value": 0
+                      },
+                      "zone_count": 3
+                    },
+                    {
+                      "elasticsearch": {},
+                      "instance_configuration_id": "gcp.ml.1",
+                      "node_type": {
+                        "data": false,
+                        "ingest": false,
+                        "master": false,
+                        "ml": true
+                      },
+                      "size": {
+                        "resource": "memory",
+                        "value": 0
+                      },
+                      "zone_count": 1
+                    }
+                  ],
+                  "deployment_template": {
+                    "id": "gcp-io-optimized"
+                  },
+                  "elasticsearch": {
+                    "version": "7.8.0"
+                  }
+                },
+                "plan_attempt_id": "85d30629-f27d-42d6-a892-11bd2a1cb824",
+                "plan_attempt_log": [],
+                "plan_end_time": "0001-01-01T00:00:00.000Z",
+                "source": {
+                  "action": "deployments.update-deployment",
+                  "date": "2020-07-23T04:07:32.370Z",
+                  "facilitator": "adminconsole",
+                  "remote_addresses": [
+                    "w.x.y.z"
+                  ],
+                  "user_id": "xxxyzz"
+                }
+              },
+              "healthy": true,
+              "history": []
+            },
+            "region": "gcp-asia-east1",
+            "settings": {
+              "curation": {
+                "specs": []
+              },
+              "dedicated_masters_threshold": 6,
+              "metadata": {
+                "hidden": false,
+                "name": "marc-testing",
+                "owner_id": "xxxyzz",
+                "resources": {
+                  "cpu": {
+                    "boost": true,
+                    "hard_limit": true
+                  }
+                },
+                "subscription_level": "standard",
+                "system_owned": false
+              },
+              "snapshot": {
+                "enabled": true,
+                "repository": {
+                  "static": {
+                    "repository_type": "gcs-resource",
+                    "settings": {
+                      "bucket_name": "xxxyz",
+                      "client_name": "elastic-internal-xyzwe"
+                    }
+                  }
+                },
+                "retention": {},
+                "slm": true,
+                "suspended": []
+              }
+            },
+            "snapshots": {
+              "count": 101,
+              "healthy": true,
+              "latest_end_time": "2020-07-23T05:00:01.955Z",
+              "latest_status": "SUCCESS",
+              "latest_successful": true,
+              "latest_successful_end_time": "2020-07-23T05:00:01.955Z",
+              "recent_success": true,
+              "scheduled_time": "2020-07-23T05:30:00.000Z"
+            },
+            "status": "started",
+            "system_alerts": [],
+            "topology": {
+              "healthy": true,
+              "instances": [
+                {
+                  "allocator_id": "gi-1231444412487835771",
+                  "container_started": true,
+                  "disk": {
+                    "disk_space_available": 2048,
+                    "disk_space_used": 19,
+                    "storage_multiplier": 2
+                  },
+                  "healthy": true,
+                  "instance_configuration": {
+                    "id": "gcp.master.1",
+                    "name": "gcp.master.1",
+                    "resource": "memory"
+                  },
+                  "instance_name": "tiebreaker-0000000002",
+                  "maintenance_mode": false,
+                  "memory": {
+                    "instance_capacity": 1024,
+                    "memory_pressure": 11,
+                    "native_memory_pressure": 94
+                  },
+                  "service_id": "1TqDQ5LdSqykmxRJlvLBUg",
+                  "service_roles": [
+                    "master"
+                  ],
+                  "service_running": true,
+                  "service_version": "7.8.0",
+                  "zone": "asia-east1-c"
+                },
+                {
+                  "allocator_id": "gi-1239360990796456087",
+                  "container_started": true,
+                  "disk": {
+                    "disk_space_available": 30720,
+                    "disk_space_used": 26,
+                    "storage_multiplier": 30
+                  },
+                  "healthy": true,
+                  "instance_configuration": {
+                    "id": "gcp.data.highio.1",
+                    "name": "gcp.data.highio.1",
+                    "resource": "memory"
+                  },
+                  "instance_name": "instance-0000000000",
+                  "maintenance_mode": false,
+                  "memory": {
+                    "instance_capacity": 1024,
+                    "memory_pressure": 23,
+                    "native_memory_pressure": 82
+                  },
+                  "service_id": "2Xp7CMJaTnqq4wxXLr932A",
+                  "service_roles": [
+                    "data",
+                    "master",
+                    "ingest"
+                  ],
+                  "service_running": true,
+                  "service_version": "7.8.0",
+                  "zone": "asia-east1-a"
+                },
+                {
+                  "allocator_id": "gi-1231418512926318749",
+                  "container_started": true,
+                  "disk": {
+                    "disk_space_available": 30720,
+                    "disk_space_used": 32,
+                    "storage_multiplier": 30
+                  },
+                  "healthy": true,
+                  "instance_configuration": {
+                    "id": "gcp.data.highio.1",
+                    "name": "gcp.data.highio.1",
+                    "resource": "memory"
+                  },
+                  "instance_name": "instance-0000000001",
+                  "maintenance_mode": false,
+                  "memory": {
+                    "instance_capacity": 1024,
+                    "memory_pressure": 26,
+                    "native_memory_pressure": 85
+                  },
+                  "service_id": "GkfF44dUSkSal37u3_UGpg",
+                  "service_roles": [
+                    "data",
+                    "master",
+                    "ingest"
+                  ],
+                  "service_running": true,
+                  "service_version": "7.8.0",
+                  "zone": "asia-east1-b"
+                }
+              ]
+            }
+          },
+          "ref_id": "main-elasticsearch",
+          "region": "gcp-asia-east1"
+        }
+      ],
+      "enterprise_search": [],
+      "kibana": [
+        {
+          "elasticsearch_cluster_ref_id": "main-elasticsearch",
+          "id": "123433bf86dd47db90aaea891c13b904",
+          "info": {
+            "cluster_id": "123433bf86dd47db90aaea891c13b904",
+            "cluster_name": "marc-testing",
+            "deployment_id": "12357180d4e74b3d807cf7843fa6df1b",
+            "elasticsearch_cluster": {
+              "elasticsearch_id": "0f180c162ba34bc59a8f6fe44274153a"
+            },
+            "external_links": [],
+            "healthy": true,
+            "metadata": {
+              "endpoint": "123433bf86dd47db90aaea891c13b904.asia-east1.gcp.elastic-cloud.com",
+              "last_modified": "2020-07-23T04:07:34.424Z",
+              "ports": {
+                "http": 9200,
+                "https": 9243,
+                "transport_passthrough": 9400
+              },
+              "version": 14
+            },
+            "plan_info": {
+              "current": {
+                "attempt_end_time": "2020-07-23T04:07:34.425Z",
+                "attempt_start_time": "2020-07-23T04:07:33.566Z",
+                "healthy": true,
+                "plan": {
+                  "cluster_topology": [
+                    {
+                      "instance_configuration_id": "gcp.kibana.1",
+                      "size": {
+                        "resource": "memory",
+                        "value": 1024
+                      },
+                      "zone_count": 1
+                    }
+                  ],
+                  "kibana": {
+                    "system_settings": {},
+                    "version": "7.8.0"
+                  },
+                  "transient": {
+                    "strategy": {
+                      "autodetect": {}
+                    }
+                  }
+                },
+                "plan_attempt_id": "3c106ce2-08f4-43c1-8d22-035f86054825",
+                "plan_attempt_log": [],
+                "plan_end_time": "0001-01-01T00:00:00.000Z",
+                "source": {
+                  "action": "deployments.update-deployment",
+                  "date": "2020-07-23T04:07:32.370Z",
+                  "facilitator": "adminconsole",
+                  "remote_addresses": [
+                    "w.x.y.z"
+                  ],
+                  "user_id": "xxxyzz"
+                }
+              },
+              "healthy": true,
+              "history": []
+            },
+            "region": "gcp-asia-east1",
+            "settings": {
+              "metadata": {
+                "hidden": false,
+                "name": "marc-testing",
+                "owner_id": "xxxyzz",
+                "resources": {
+                  "cpu": {
+                    "boost": true,
+                    "hard_limit": true
+                  }
+                },
+                "system_owned": false
+              }
+            },
+            "status": "started",
+            "topology": {
+              "healthy": true,
+              "instances": [
+                {
+                  "allocator_id": "gi-1234696432272220275",
+                  "container_started": true,
+                  "healthy": true,
+                  "instance_configuration": {
+                    "id": "gcp.kibana.1",
+                    "name": "gcp.kibana.1",
+                    "resource": "memory"
+                  },
+                  "instance_name": "instance-0000000000",
+                  "maintenance_mode": false,
+                  "memory": {
+                    "instance_capacity": 1024,
+                    "native_memory_pressure": 36
+                  },
+                  "service_roles": null,
+                  "service_running": true,
+                  "service_version": "7.8.0",
+                  "zone": "asia-east1-b"
+                }
+              ]
+            }
+          },
+          "ref_id": "main-kibana",
+          "region": "gcp-asia-east1"
+        }
+      ]
+    }
+  }
