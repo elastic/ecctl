@@ -548,8 +548,8 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 				Cmd: createCmd,
 				Args: []string{
 					"create", "--request-id=some_request_id", "--version=7.8.0", "--es-node-topology",
-					`{"size": 1024, "zone_count": 2, "node_type": "data"}`, "--es-node-topology",
-					`{"size": 1024, "zone_count": 1, "node_type": "ml"}`, "--dt-as-list=false",
+					`{"size": "1g", "zone_count": 2, "node_type": "data"}`, "--es-node-topology",
+					`{"size": "1g", "zone_count": 1, "node_type": "ml"}`, "--dt-as-list=false",
 				},
 				Cfg: testutils.MockCfg{Responses: []mock.Response{
 					{
