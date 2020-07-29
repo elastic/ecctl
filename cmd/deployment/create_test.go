@@ -552,7 +552,7 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 				},
 			},
 			want: testutils.Assertion{
-				Err: errors.New("memory size cannot be empty"),
+				Err: errors.New("elasticsearch node topology: memory size cannot be empty"),
 			},
 		},
 		{

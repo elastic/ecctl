@@ -218,28 +218,28 @@ func initFlags() {
 
 	createCmd.Flags().String("es-ref-id", "main-elasticsearch", "Optional RefId for the Elasticsearch deployment")
 	createCmd.Flags().Int32("es-zones", 1, "Number of zones the Elasticsearch instances will span")
-	createCmd.Flags().String("es-size", "4g", "Memory (RAM) in MB that each of the Elasticsearch instances will have")
+	createCmd.Flags().String("es-size", "4g", "Memory (RAM) in GB that each of the Elasticsearch instances will have")
 	createCmd.Flags().StringArrayP("es-node-topology", "e", nil, "Optional Elasticsearch node topology element definition. See help for more information")
 	createCmd.Flags().StringSlice("plugin", nil, "Additional plugins to add to the Elasticsearch deployment")
 
 	createCmd.Flags().String("kibana-ref-id", "main-kibana", "Optional RefId for the Kibana deployment")
 	createCmd.Flags().Int32("kibana-zones", 1, "Number of zones the Kibana instances will span")
-	createCmd.Flags().String("kibana-size", "1g", "Memory (RAM) in MB that each of the Kibana instances will have")
+	createCmd.Flags().String("kibana-size", "1g", "Memory (RAM) in GB that each of the Kibana instances will have")
 
 	createCmd.Flags().Bool("apm", false, "Enables APM for the deployment")
 	createCmd.Flags().String("apm-ref-id", "main-apm", "Optional RefId for the APM deployment")
 	createCmd.Flags().Int32("apm-zones", 1, "Number of zones the APM instances will span")
-	createCmd.Flags().String("apm-size", "0.5g", "Memory (RAM) in MB that each of the APM instances will have")
+	createCmd.Flags().String("apm-size", "0.5g", "Memory (RAM) in GB that each of the APM instances will have")
 
 	createCmd.Flags().Bool("appsearch", false, "Enables App Search for the deployment")
 	createCmd.Flags().String("appsearch-ref-id", "main-appsearch", "Optional RefId for the App Search deployment")
 	createCmd.Flags().Int32("appsearch-zones", 1, "Number of zones the App Search instances will span")
-	createCmd.Flags().String("appsearch-size", "2g", "Memory (RAM) in MB that each of the App Search instances will have")
+	createCmd.Flags().String("appsearch-size", "2g", "Memory (RAM) in GB that each of the App Search instances will have")
 
 	createCmd.Flags().Bool("enterprise_search", false, "Enables Enterprise Search for the deployment")
 	createCmd.Flags().String("enterprise_search-ref-id", "main-enterprise_search", "Optional RefId for the Enterprise Search deployment")
 	createCmd.Flags().Int32("enterprise_search-zones", 1, "Number of zones the Enterprise Search instances will span")
-	createCmd.Flags().String("enterprise_search-size", "4g", "Memory (RAM) in MB that each of the Enterprise Search instances will have")
+	createCmd.Flags().String("enterprise_search-size", "4g", "Memory (RAM) in GB that each of the Enterprise Search instances will have")
 
 	// Remove in the next version.
 	createCmd.Flags().Bool("dt-as-list", true, "")
@@ -278,11 +278,11 @@ func esTopologyParseGB(topology []string) ([]string, error) {
 	for _, rawElement := range topology {
 		var element elasticsearchTopologyElement
 		if err := json.Unmarshal([]byte(rawElement), &element); err != nil {
-			return nil, fmt.Errorf("failed unpacking raw topology: %s", err)
+			return nil, fmt.Errorf("failed unpacking raw elasticsearch node topology: %s", err)
 		}
 
 		if element.Size == "" {
-			return nil, errors.New("memory size cannot be empty")
+			return nil, errors.New("elasticsearch node topology: memory size cannot be empty")
 		}
 
 		elementSizeMB, err := deploymentsize.ParseGb(element.Size)
@@ -298,7 +298,7 @@ func esTopologyParseGB(topology []string) ([]string, error) {
 
 		b, err := json.Marshal(esTopologyElement)
 		if err != nil {
-			return nil, fmt.Errorf("failed unpacking topology: %s", err)
+			return nil, fmt.Errorf("failed unpacking elasticsearch node topology: %s", err)
 		}
 		parsedElement := string(b)
 

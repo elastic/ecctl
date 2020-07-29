@@ -68,26 +68,26 @@ $ ecctl deployment create --request-id=GMZPMRrcMYqHdmxjIQkHbdjnhPIeBElcwrHwzVlhG
 ```
       --apm                               Enables APM for the deployment
       --apm-ref-id string                 Optional RefId for the APM deployment (default "main-apm")
-      --apm-size string                   Memory (RAM) in MB that each of the APM instances will have (default "0.5g")
+      --apm-size string                   Memory (RAM) in GB that each of the APM instances will have (default "0.5g")
       --apm-zones int32                   Number of zones the APM instances will span (default 1)
       --appsearch                         Enables App Search for the deployment
       --appsearch-ref-id string           Optional RefId for the App Search deployment (default "main-appsearch")
-      --appsearch-size string             Memory (RAM) in MB that each of the App Search instances will have (default "2g")
+      --appsearch-size string             Memory (RAM) in GB that each of the App Search instances will have (default "2g")
       --appsearch-zones int32             Number of zones the App Search instances will span (default 1)
       --deployment-template string        Deployment template ID on which to base the deployment from
       --enterprise_search                 Enables Enterprise Search for the deployment
       --enterprise_search-ref-id string   Optional RefId for the Enterprise Search deployment (default "main-enterprise_search")
-      --enterprise_search-size string     Memory (RAM) in MB that each of the Enterprise Search instances will have (default "4g")
+      --enterprise_search-size string     Memory (RAM) in GB that each of the Enterprise Search instances will have (default "4g")
       --enterprise_search-zones int32     Number of zones the Enterprise Search instances will span (default 1)
   -e, --es-node-topology stringArray      Optional Elasticsearch node topology element definition. See help for more information
       --es-ref-id string                  Optional RefId for the Elasticsearch deployment (default "main-elasticsearch")
-      --es-size string                    Memory (RAM) in MB that each of the Elasticsearch instances will have (default "4g")
+      --es-size string                    Memory (RAM) in GB that each of the Elasticsearch instances will have (default "4g")
       --es-zones int32                    Number of zones the Elasticsearch instances will span (default 1)
   -f, --file string                       DeploymentCreateRequest file definition. See help for more information
       --generate-payload                  Returns the deployment payload without actually creating the deployment resources
   -h, --help                              help for create
       --kibana-ref-id string              Optional RefId for the Kibana deployment (default "main-kibana")
-      --kibana-size string                Memory (RAM) in MB that each of the Kibana instances will have (default "1g")
+      --kibana-size string                Memory (RAM) in GB that each of the Kibana instances will have (default "1g")
       --kibana-zones int32                Number of zones the Kibana instances will span (default 1)
       --name string                       Optional name for the deployment
       --plugin strings                    Additional plugins to add to the Elasticsearch deployment
