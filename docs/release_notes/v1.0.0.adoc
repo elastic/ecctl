@@ -85,7 +85,7 @@ func Test_showCmd(t *testing.T) {
 
 * *Inability to create or update deployments through Ansible.* ecctl should behave in the same manner when executed from the terminal or any automation tool. A bug which showed `os.Stdin` as always populated when coupled with Ansible has been fixed.
 
-* *Allocator vacate flag parsing has been fixed* The `--target` flag was being ignored due to using `GetStringSlice()` when the flag declaration is `Array`. Flag parsing for allocator vacate operations now works as documented.*
+* *Allocator vacate flag parsing has been fixed* The `--target` flag was being ignored due to using `GetStringSlice()` when the flag declaration is `Array`. Flag parsing for allocator vacate operations now works as documented.
 
 [float]
 [id="{p}-release-notes-v1.0.0-breaking-changes"]
