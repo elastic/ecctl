@@ -35,7 +35,7 @@ const updateExample = `
 
 var updateCmd = &cobra.Command{
 	Use:     "update <username> --role <role>",
-	Short:   "Updates a platform user",
+	Short:   cmdutil.AdminReqDescription("Updates a platform user"),
 	PreRunE: checkInputHas1ArgOr0ArgAndCurrent,
 	Example: updateExample,
 	RunE: func(cmd *cobra.Command, args []string) error {

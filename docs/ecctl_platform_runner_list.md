@@ -1,10 +1,10 @@
 ## ecctl platform runner list
 
-Lists the existing platform runners
+Lists the existing platform runners (Available for ECE only)
 
 ### Synopsis
 
-Lists the existing platform runners
+Lists the existing platform runners (Available for ECE only)
 
 ```
 ecctl platform runner list [flags]

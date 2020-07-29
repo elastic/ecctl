@@ -1,10 +1,10 @@
 ## ecctl auth
 
-Manages the platform auth
+Manages authentication settings
 
 ### Synopsis
 
-Manages the platform auth
+Manages authentication settings
 
 ```
 ecctl auth [flags]

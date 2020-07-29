@@ -35,6 +35,114 @@ import (
 	"github.com/elastic/ecctl/cmd/util/testutils"
 )
 
+var defaultTemplateResponse = models.DeploymentTemplateInfoV2{
+	ID: ec.String("default"),
+	DeploymentTemplate: &models.DeploymentCreateRequest{
+		Resources: &models.DeploymentCreateResources{
+			Apm: []*models.ApmPayload{
+				{
+					Plan: &models.ApmPlan{
+						ClusterTopology: []*models.ApmTopologyElement{
+							{
+								Size: &models.TopologySize{
+									Resource: ec.String("memory"),
+									Value:    ec.Int32(1024),
+								},
+								ZoneCount: 1,
+							},
+						},
+					},
+				},
+			},
+			EnterpriseSearch: []*models.EnterpriseSearchPayload{
+				{
+					Plan: &models.EnterpriseSearchPlan{
+						ClusterTopology: []*models.EnterpriseSearchTopologyElement{
+							{
+								Size: &models.TopologySize{
+									Resource: ec.String("memory"),
+									Value:    ec.Int32(1024),
+								},
+								ZoneCount: 1,
+							},
+						},
+					},
+				},
+			},
+			Appsearch: []*models.AppSearchPayload{
+				{
+					Plan: &models.AppSearchPlan{
+						ClusterTopology: []*models.AppSearchTopologyElement{
+							{
+								Size: &models.TopologySize{
+									Resource: ec.String("memory"),
+									Value:    ec.Int32(1024),
+								},
+								ZoneCount: 1,
+							},
+						},
+					},
+				},
+			},
+			Kibana: []*models.KibanaPayload{
+				{
+					Plan: &models.KibanaClusterPlan{
+						ClusterTopology: []*models.KibanaClusterTopologyElement{
+							{
+								Size: &models.TopologySize{
+									Resource: ec.String("memory"),
+									Value:    ec.Int32(1024),
+								},
+								ZoneCount: 1,
+							},
+						},
+					},
+				},
+			},
+			Elasticsearch: []*models.ElasticsearchPayload{
+				{
+					Plan: &models.ElasticsearchClusterPlan{
+						ClusterTopology: defaultESTopologies,
+					},
+				},
+			},
+		},
+	},
+}
+
+var defaultESTopologies = []*models.ElasticsearchClusterTopologyElement{
+	{
+		InstanceConfigurationID: "default.data",
+		Size: &models.TopologySize{
+			Resource: ec.String("memory"),
+			Value:    ec.Int32(1024),
+		},
+		NodeType: &models.ElasticsearchNodeType{
+			Data: ec.Bool(true),
+		},
+	},
+	{
+		InstanceConfigurationID: "default.master",
+		Size: &models.TopologySize{
+			Resource: ec.String("memory"),
+			Value:    ec.Int32(1024),
+		},
+		NodeType: &models.ElasticsearchNodeType{
+			Master: ec.Bool(true),
+		},
+	},
+	{
+		InstanceConfigurationID: "default.ml",
+		Size: &models.TopologySize{
+			Resource: ec.String("memory"),
+			Value:    ec.Int32(1024),
+		},
+		NodeType: &models.ElasticsearchNodeType{
+			Ml: ec.Bool(true),
+		},
+	},
+}
+
 func Test_createCmd(t *testing.T) {
 	var deploymentID = ec.RandomResourceID()
 	var esID = ec.RandomResourceID()
@@ -73,7 +181,7 @@ func Test_createCmd(t *testing.T) {
 	var defaultCreateResponse = models.DeploymentCreateResponse{
 		Created: ec.Bool(true),
 		ID:      ec.String(deploymentID),
-		Name:    ec.String("search-dev-ece-region"),
+		Name:    ec.String("some-deployment"),
 		Resources: []*models.DeploymentResource{
 			{
 				ID:     ec.String(esID),
@@ -93,15 +201,16 @@ func Test_createCmd(t *testing.T) {
 			},
 		},
 	}
-	defaultCreateResponseBytes, err := json.Marshal(defaultCreateResponse)
+	defaultCreateResponseBytes, err := json.MarshalIndent(defaultCreateResponse, "", "  ")
 	if err != nil {
 		t.Fatal(err)
 	}
+	defaultCreateResponseBytes = append(defaultCreateResponseBytes, []byte("\n")...)
 
 	var overrideCreateResponse = models.DeploymentCreateResponse{
 		Created: ec.Bool(true),
 		ID:      ec.String(deploymentID),
-		Name:    ec.String("search-dev-ece-region"),
+		Name:    ec.String("some-deployment-with-overrides"),
 		Resources: []*models.DeploymentResource{
 			{
 				ID:     ec.String(esID),
@@ -139,10 +248,11 @@ func Test_createCmd(t *testing.T) {
 			},
 		},
 	}
-	overrideCreateResponseBytes, err := json.Marshal(overrideCreateResponse)
+	overrideCreateResponseBytes, err := json.MarshalIndent(overrideCreateResponse, "", "  ")
 	if err != nil {
 		t.Fatal(err)
 	}
+	overrideCreateResponseBytes = append(overrideCreateResponseBytes, []byte("\n")...)
 
 	var awsDeploymentID = ec.RandomResourceID()
 	var awsESID = ec.RandomResourceID()
@@ -320,13 +430,83 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 			args: testutils.Args{
 				Cmd: createCmd,
 				Args: []string{
-					"create", "--file=", "--request-id=some_request_id",
+					"create", "--request-id=some_request_id",
 				},
 				Cfg: testutils.MockCfg{Responses: []mock.Response{
 					{
 						Response: http.Response{
+							StatusCode: 200,
+							Body: mock.NewStructBody([]models.DeploymentTemplateInfoV2{
+								defaultTemplateResponse,
+							}),
+						},
+						Assert: &mock.RequestAssertion{
+							Method: "GET",
+							Header: api.DefaultReadMockHeaders,
+							Path:   "/api/v1/deployments/templates",
+							Host:   api.DefaultMockHost,
+							Query: url.Values{
+								"region":                       {"ece-region"},
+								"show_hidden":                  {"false"},
+								"show_instance_configurations": {"true"},
+							},
+						},
+					},
+					{
+						Response: http.Response{
+							StatusCode: 200,
+							Body: mock.NewStructBody(models.StackVersionConfigs{
+								Stacks: []*models.StackVersionConfig{{Version: "7.8.0"}},
+							}),
+						},
+						Assert: &mock.RequestAssertion{
+							Host:   api.DefaultMockHost,
+							Header: api.DefaultReadMockHeaders,
+							Path:   "/api/v1/regions/ece-region/stack/versions",
+							Method: "GET",
+							Query: url.Values{
+								"show_deleted":  {"false"},
+								"show_unusable": {"false"},
+							},
+						},
+					},
+					{
+						Response: http.Response{
 							StatusCode: 201,
 							Body:       mock.NewStructBody(defaultCreateResponse),
+						},
+						Assert: &mock.RequestAssertion{
+							Method: "POST",
+							Header: api.DefaultWriteMockHeaders,
+							Body:   mock.NewStringBody(`{"resources":{"apm":null,"appsearch":null,"elasticsearch":[{"plan":{"cluster_topology":[{"instance_configuration_id":"default.data","node_type":{"data":true},"size":{"resource":"memory","value":4096},"zone_count":1}],"deployment_template":{"id":"default"},"elasticsearch":{"version":"7.8.0"}},"ref_id":"main-elasticsearch","region":"ece-region"}],"enterprise_search":null,"kibana":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"size":{"resource":"memory","value":1024},"zone_count":1}],"kibana":{"version":"7.8.0"}},"ref_id":"main-kibana","region":"ece-region"}]}}` + "\n"),
+							Path:   "/api/v1/deployments",
+							Host:   api.DefaultMockHost,
+							Query: url.Values{
+								"request_id":    {"some_request_id"},
+								"validate_only": {"false"},
+							},
+						},
+					},
+				}},
+			},
+			want: testutils.Assertion{
+				Stderr: "Obtained latest stack version: 7.8.0\n",
+				Stdout: string(defaultCreateResponseBytes),
+			},
+		},
+		{
+			name: "succeeds creating a deployment with default values and without tracking (Normal GetCall)",
+			args: testutils.Args{
+				Cmd: createCmd,
+				Args: []string{
+					"create", "--request-id=some_request_id", "--version=7.8.0",
+					"--dt-as-list=false",
+				},
+				Cfg: testutils.MockCfg{Responses: []mock.Response{
+					{
+						Response: http.Response{
+							StatusCode: 200,
+							Body:       mock.NewStructBody(defaultTemplateResponse),
 						},
 						Assert: &mock.RequestAssertion{
 							Method: "GET",
@@ -339,10 +519,89 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 							},
 						},
 					},
+					{
+						Response: http.Response{
+							StatusCode: 201,
+							Body:       mock.NewStructBody(defaultCreateResponse),
+						},
+						Assert: &mock.RequestAssertion{
+							Method: "POST",
+							Header: api.DefaultWriteMockHeaders,
+							Body:   mock.NewStringBody(`{"resources":{"apm":null,"appsearch":null,"elasticsearch":[{"plan":{"cluster_topology":[{"instance_configuration_id":"default.data","node_type":{"data":true},"size":{"resource":"memory","value":4096},"zone_count":1}],"deployment_template":{"id":"default"},"elasticsearch":{"version":"7.8.0"}},"ref_id":"main-elasticsearch","region":"ece-region"}],"enterprise_search":null,"kibana":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"size":{"resource":"memory","value":1024},"zone_count":1}],"kibana":{"version":"7.8.0"}},"ref_id":"main-kibana","region":"ece-region"}]}}` + "\n"),
+							Path:   "/api/v1/deployments",
+							Host:   api.DefaultMockHost,
+							Query: url.Values{
+								"request_id":    {"some_request_id"},
+								"validate_only": {"false"},
+							},
+						},
+					},
 				}},
 			},
 			want: testutils.Assertion{
-				Err: errors.New(string(defaultCreateResponseBytes) + "\n"),
+				Stdout: string(defaultCreateResponseBytes),
+			},
+		},
+		{
+			name: "fails creating a deployment with ES topology element when size is missing (Normal GetCall)",
+			args: testutils.Args{
+				Cmd: createCmd,
+				Args: []string{
+					"create", "--request-id=some_request_id", "--version=7.8.0", "--es-node-topology",
+					`{"zone_count": 2, "node_type": "data"}`,
+				},
+			},
+			want: testutils.Assertion{
+				Err: errors.New("elasticsearch node topology: memory size cannot be empty"),
+			},
+		},
+		{
+			name: "succeeds creating a deployment with ES topology element and without tracking (Normal GetCall)",
+			args: testutils.Args{
+				Cmd: createCmd,
+				Args: []string{
+					"create", "--request-id=some_request_id", "--version=7.8.0", "--es-node-topology",
+					`{"size": "1g", "zone_count": 2, "node_type": "data"}`, "--es-node-topology",
+					`{"size": "1g", "zone_count": 1, "node_type": "ml"}`, "--dt-as-list=false",
+				},
+				Cfg: testutils.MockCfg{Responses: []mock.Response{
+					{
+						Response: http.Response{
+							StatusCode: 200,
+							Body:       mock.NewStructBody(defaultTemplateResponse),
+						},
+						Assert: &mock.RequestAssertion{
+							Method: "GET",
+							Header: api.DefaultReadMockHeaders,
+							Path:   "/api/v1/deployments/templates/default",
+							Host:   api.DefaultMockHost,
+							Query: url.Values{
+								"region":                       {"ece-region"},
+								"show_instance_configurations": {"true"},
+							},
+						},
+					},
+					{
+						Response: http.Response{
+							StatusCode: 201,
+							Body:       mock.NewStructBody(defaultCreateResponse),
+						},
+						Assert: &mock.RequestAssertion{
+							Method: "POST",
+							Header: api.DefaultWriteMockHeaders,
+							Body:   mock.NewStringBody(`{"resources":{"apm":null,"appsearch":null,"elasticsearch":[{"plan":{"cluster_topology":[{"instance_configuration_id":"default.data","node_type":{"data":true},"size":{"resource":"memory","value":1024},"zone_count":2},{"instance_configuration_id":"default.ml","node_type":{"ml":true},"size":{"resource":"memory","value":1024},"zone_count":1}],"deployment_template":{"id":"default"},"elasticsearch":{"version":"7.8.0"}},"ref_id":"main-elasticsearch","region":"ece-region"}],"enterprise_search":null,"kibana":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"size":{"resource":"memory","value":1024},"zone_count":1}],"kibana":{"version":"7.8.0"}},"ref_id":"main-kibana","region":"ece-region"}]}}` + "\n"),
+							Path:   "/api/v1/deployments",
+							Host:   api.DefaultMockHost,
+							Query: url.Values{
+								"request_id":    {"some_request_id"},
+								"validate_only": {"false"},
+							},
+						},
+					},
+				}},
+			},
+			want: testutils.Assertion{
+				Stdout: string(defaultCreateResponseBytes),
 			},
 		},
 		{
@@ -350,29 +609,49 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 			args: testutils.Args{
 				Cmd: createCmd,
 				Args: []string{
-					"create", "--apm", "--appsearch", "--enterprise-search", "--file=", "--request-id=some_request_id",
+					"create", "--apm", "--appsearch", "--enterprise_search", "--request-id=some_request_id", "--version=7.8.0",
 				},
 				Cfg: testutils.MockCfg{Responses: []mock.Response{
+					{
+						Response: http.Response{
+							StatusCode: 200,
+							Body: mock.NewStructBody([]models.DeploymentTemplateInfoV2{
+								defaultTemplateResponse,
+							}),
+						},
+						Assert: &mock.RequestAssertion{
+							Method: "GET",
+							Header: api.DefaultReadMockHeaders,
+							Path:   "/api/v1/deployments/templates",
+							Host:   api.DefaultMockHost,
+							Query: url.Values{
+								"region":                       {"ece-region"},
+								"show_hidden":                  {"false"},
+								"show_instance_configurations": {"true"},
+							},
+						},
+					},
 					{
 						Response: http.Response{
 							StatusCode: 201,
 							Body:       mock.NewStructBody(overrideCreateResponse),
 						},
 						Assert: &mock.RequestAssertion{
-							Method: "GET",
-							Header: api.DefaultReadMockHeaders,
-							Path:   "/api/v1/deployments/templates/default",
+							Method: "POST",
+							Header: api.DefaultWriteMockHeaders,
+							Body:   mock.NewStringBody(`{"resources":{"apm":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"apm":{"version":"7.8.0"},"cluster_topology":[{"size":{"resource":"memory","value":512},"zone_count":1}]},"ref_id":"main-apm","region":"ece-region"}],"appsearch":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"appsearch":{"version":"7.8.0"},"cluster_topology":[{"size":{"resource":"memory","value":2048},"zone_count":1}]},"ref_id":"main-appsearch","region":"ece-region"}],"elasticsearch":[{"plan":{"cluster_topology":[{"instance_configuration_id":"default.data","node_type":{"data":true},"size":{"resource":"memory","value":4096},"zone_count":1}],"deployment_template":{"id":"default"},"elasticsearch":{"version":"7.8.0"}},"ref_id":"main-elasticsearch","region":"ece-region"}],"enterprise_search":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"size":{"resource":"memory","value":4096},"zone_count":1}],"enterprise_search":{"version":"7.8.0"}},"ref_id":"main-enterprise_search","region":"ece-region"}],"kibana":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"size":{"resource":"memory","value":1024},"zone_count":1}],"kibana":{"version":"7.8.0"}},"ref_id":"main-kibana","region":"ece-region"}]}}` + "\n"),
+							Path:   "/api/v1/deployments",
 							Host:   api.DefaultMockHost,
 							Query: url.Values{
-								"region":                       {"ece-region"},
-								"show_instance_configurations": {"true"},
+								"request_id":    {"some_request_id"},
+								"validate_only": {"false"},
 							},
 						},
 					},
 				}},
 			},
 			want: testutils.Assertion{
-				Err: errors.New(string(overrideCreateResponseBytes) + "\n"),
+				Stdout: string(overrideCreateResponseBytes),
 			},
 		},
 		{
@@ -461,6 +740,8 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			testutils.RunCmdAssertion(t, tt.args, tt.want)
+			tt.args.Cmd.ResetFlags()
+			defer initFlags()
 		})
 	}
 }

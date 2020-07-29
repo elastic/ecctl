@@ -1,12 +1,12 @@
 [#ecctl_deployment_delete]
 == ecctl deployment delete
 
-Deletes a previously shutdown deployment (Available for ECE only)
+Deletes a previously shutdown deployment {ece-icon}
 
 [float]
 === Synopsis
 
-Deletes a previously shutdown deployment (Available for ECE only)
+Deletes a previously shutdown deployment {ece-icon}
 
 ----
 ecctl deployment delete <deployment-id> [flags]

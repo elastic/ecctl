@@ -1,12 +1,12 @@
 [#ecctl_platform_instance-configuration_create]
 == ecctl platform instance-configuration create
 
-Creates a new instance configuration
+Creates a new instance configuration {ece-icon}
 
 [float]
 === Synopsis
 
-Creates a new instance configuration
+Creates a new instance configuration {ece-icon}
 
 ----
 ecctl platform instance-configuration create -f <config.json> [flags]
@@ -46,4 +46,4 @@ ecctl platform instance-configuration create -f <config.json> [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_instance-configuration[ecctl platform instance-configuration]	 - Manages instance configurations (Available for ECE only)
+* xref:ecctl_platform_instance-configuration[ecctl platform instance-configuration]	 - Manages instance configurations {ece-icon}

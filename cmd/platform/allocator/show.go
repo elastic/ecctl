@@ -23,6 +23,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/allocatorapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
@@ -46,7 +47,7 @@ func showAllocator(cmd *cobra.Command, args []string) error {
 
 var showAllocatorCmd = &cobra.Command{
 	Use:     "show <allocator id>",
-	Short:   "Returns information about the allocator",
+	Short:   cmdutil.AdminReqDescription("Returns information about the allocator"),
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE:    showAllocator,
 }

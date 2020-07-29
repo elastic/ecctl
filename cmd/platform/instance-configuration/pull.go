@@ -21,12 +21,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/instanceconfigapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var pullCmd = &cobra.Command{
 	Use:     "pull --path <path>",
-	Short:   "Downloads instance configuration into a local folder",
+	Short:   cmdutil.AdminReqDescription("Downloads instance configuration into a local folder"),
 	PreRunE: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		return instanceconfigapi.PullToDirectory(instanceconfigapi.PullToDirectoryParams{

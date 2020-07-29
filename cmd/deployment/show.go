@@ -18,11 +18,12 @@
 package cmddeployment
 
 import (
+	"encoding/json"
+
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi"
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/deputil"
+	"github.com/elastic/cloud-sdk-go/pkg/models"
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
-	"github.com/elastic/cloud-sdk-go/pkg/util/slice"
-	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -34,9 +35,10 @@ const showExample = `
   ecctl deployment show <deployment-id> --kind kibana
 
 * Shows apm resource information from a given deployment with a specified ref-id.
-  ecctl deployment show <deployment-id> --kind apm --ref-id apm-server`
+  ecctl deployment show <deployment-id> --kind apm --ref-id apm-server
 
-var acceptedKinds = []string{"apm", "appsearch", "elasticsearch", "kibana"}
+* Return the current deployment state as a valid update payload.
+  ecctl deployment show <deployment id> --generate-update-payload > update.json`
 
 var showCmd = &cobra.Command{
 	Use:     "show <deployment-id>",
@@ -45,10 +47,6 @@ var showCmd = &cobra.Command{
 	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		resourceKind, _ := cmd.Flags().GetString("kind")
-		if resourceKind != "" && !slice.HasString(acceptedKinds, resourceKind) {
-			return errors.Errorf(`"%v" is not a valid resource kind. Accepted resource kinds are: %v`, resourceKind, acceptedKinds)
-		}
-
 		planLogs, _ := cmd.Flags().GetBool("plan-logs")
 		planDefaults, _ := cmd.Flags().GetBool("plan-defaults")
 		planHistory, _ := cmd.Flags().GetBool("plan-history")
@@ -58,6 +56,13 @@ var showCmd = &cobra.Command{
 		showPlans := planLogs || planDefaults || plans || planHistory
 
 		refID, _ := cmd.Flags().GetString("ref-id")
+
+		generatePayload, _ := cmd.Flags().GetBool("generate-update-payload")
+		if generatePayload {
+			showPlans, settings = true, true
+			resourceKind, refID = "", ""
+		}
+
 		getParams := deploymentapi.GetParams{
 			API:          ecctl.Get().API,
 			DeploymentID: args[0],
@@ -76,15 +81,27 @@ var showCmd = &cobra.Command{
 			GetParams: getParams,
 			Kind:      resourceKind,
 		})
-
 		if err != nil {
 			return err
 		}
-		return ecctl.Get().Formatter.Format("deployment/show", res)
+
+		if !generatePayload {
+			return ecctl.Get().Formatter.Format("deployment/show", res)
+		}
+
+		enc := json.NewEncoder(ecctl.Get().Config.OutputDevice)
+		enc.SetIndent("", "  ")
+		return enc.Encode(
+			deploymentapi.NewUpdateRequest(res.(*models.DeploymentGetResponse)),
+		)
 	},
 }
 
 func init() {
+	initShowFlags()
+}
+
+func initShowFlags() {
 	Command.AddCommand(showCmd)
 	cmdutil.AddKindFlag(showCmd, "Optional", true)
 	showCmd.Flags().String("ref-id", "", "Optional deployment kind RefId, if not set, the RefId will be auto-discovered")
@@ -94,4 +111,5 @@ func init() {
 	showCmd.Flags().Bool("plan-history", false, "Shows the deployment plan history")
 	showCmd.Flags().BoolP("metadata", "m", false, "Shows the deployment metadata")
 	showCmd.Flags().BoolP("settings", "s", false, "Shows the deployment settings")
+	showCmd.Flags().Bool("generate-update-payload", false, "Outputs JSON which can be used as an argument for the --file flag with the update command.")
 }

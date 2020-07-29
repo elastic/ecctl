@@ -21,12 +21,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/runnerapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var showCmd = &cobra.Command{
 	Use:     "show <runner id>",
-	Short:   "Shows information about the specified runner",
+	Short:   cmdutil.AdminReqDescription("Shows information about the specified runner"),
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		res, err := runnerapi.Show(runnerapi.ShowParams{

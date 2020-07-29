@@ -23,12 +23,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/proxyapi/filteredgroupapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var platformProxyFilteredGroupShowCmd = &cobra.Command{
 	Use:     "show <filtered group id>",
-	Short:   "Shows details for proxies filtered group",
+	Short:   cmdutil.AdminReqDescription("Shows details for proxies filtered group"),
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		response, err := filteredgroupapi.Get(filteredgroupapi.GetParams{

@@ -1,12 +1,12 @@
 [#ecctl_user]
 == ecctl user
 
-Manages the platform users (Available for ECE only)
+Manages the platform users {ece-icon}
 
 [float]
 === Synopsis
 
-Manages the platform users (Available for ECE only)
+Manages the platform users {ece-icon}
 
 ----
 ecctl user [flags]
@@ -45,11 +45,11 @@ ecctl user [flags]
 === SEE ALSO
 
 * xref:ecctl[ecctl]	 - Elastic Cloud Control
-* xref:ecctl_user_create[ecctl user create]	 - Creates a new platform user
-* xref:ecctl_user_delete[ecctl user delete]	 - Deletes one or more platform users
-* xref:ecctl_user_disable[ecctl user disable]	 - Disables a platform user
-* xref:ecctl_user_enable[ecctl user enable]	 - Enables a previously disabled platform user
+* xref:ecctl_user_create[ecctl user create]	 - Creates a new platform user {ece-icon}
+* xref:ecctl_user_delete[ecctl user delete]	 - Deletes one or more platform users {ece-icon}
+* xref:ecctl_user_disable[ecctl user disable]	 - Disables a platform user {ece-icon}
+* xref:ecctl_user_enable[ecctl user enable]	 - Enables a previously disabled platform user {ece-icon}
 * xref:ecctl_user_key[ecctl user key]	 - Manages the API keys of a platform user
-* xref:ecctl_user_list[ecctl user list]	 - Lists all platform users
-* xref:ecctl_user_show[ecctl user show]	 - Shows details of a specified user
-* xref:ecctl_user_update[ecctl user update]	 - Updates a platform user
+* xref:ecctl_user_list[ecctl user list]	 - Lists all platform users {ece-icon}
+* xref:ecctl_user_show[ecctl user show]	 - Shows details of a specified user {ece-icon}
+* xref:ecctl_user_update[ecctl user update]	 - Updates a platform user {ece-icon}

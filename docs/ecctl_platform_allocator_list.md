@@ -1,6 +1,6 @@
 ## ecctl platform allocator list
 
-Returns all allocators that have instances or are connected to the platform. Use --all flag or --output json to show all. Use --query to match any of the allocators properties.
+Returns all allocators that have instances or are connected to the platform. Use --all flag or --output json to show all. Use --query to match any of the allocators properties. (Available for ECE only)
 
 ### Synopsis
 

@@ -40,12 +40,12 @@ ecctl user [flags]
 ### SEE ALSO
 
 * [ecctl](ecctl.md)	 - Elastic Cloud Control
-* [ecctl user create](ecctl_user_create.md)	 - Creates a new platform user
-* [ecctl user delete](ecctl_user_delete.md)	 - Deletes one or more platform users
-* [ecctl user disable](ecctl_user_disable.md)	 - Disables a platform user
-* [ecctl user enable](ecctl_user_enable.md)	 - Enables a previously disabled platform user
+* [ecctl user create](ecctl_user_create.md)	 - Creates a new platform user (Available for ECE only)
+* [ecctl user delete](ecctl_user_delete.md)	 - Deletes one or more platform users (Available for ECE only)
+* [ecctl user disable](ecctl_user_disable.md)	 - Disables a platform user (Available for ECE only)
+* [ecctl user enable](ecctl_user_enable.md)	 - Enables a previously disabled platform user (Available for ECE only)
 * [ecctl user key](ecctl_user_key.md)	 - Manages the API keys of a platform user
-* [ecctl user list](ecctl_user_list.md)	 - Lists all platform users
-* [ecctl user show](ecctl_user_show.md)	 - Shows details of a specified user
-* [ecctl user update](ecctl_user_update.md)	 - Updates a platform user
+* [ecctl user list](ecctl_user_list.md)	 - Lists all platform users (Available for ECE only)
+* [ecctl user show](ecctl_user_show.md)	 - Shows details of a specified user (Available for ECE only)
+* [ecctl user update](ecctl_user_update.md)	 - Updates a platform user (Available for ECE only)
 

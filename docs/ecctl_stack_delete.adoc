@@ -1,12 +1,12 @@
 [#ecctl_stack_delete]
 == ecctl stack delete
 
-Deletes an Elastic StackPack (Available for ECE only)
+Deletes an Elastic StackPack {ece-icon}
 
 [float]
 === Synopsis
 
-Deletes an Elastic StackPack (Available for ECE only)
+Deletes an Elastic StackPack {ece-icon}
 
 ----
 ecctl stack delete [flags]

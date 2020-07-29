@@ -23,12 +23,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/proxyapi/filteredgroupapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var platformProxyFilteredGroupUpdateCmd = &cobra.Command{
 	Use:     "update <filtered group id> --filters <key1=value1,key2=value2> --expected-proxies-count <int> --version <int>",
-	Short:   "Updates proxies filtered group",
+	Short:   cmdutil.AdminReqDescription("Updates proxies filtered group"),
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 

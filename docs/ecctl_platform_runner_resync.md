@@ -1,10 +1,10 @@
 ## ecctl platform runner resync
 
-Resynchronizes the search index and cache for the selected runner or all
+Resynchronizes the search index and cache for the selected runner or all (Available for ECE only)
 
 ### Synopsis
 
-Resynchronizes the search index and cache for the selected runner or all
+Resynchronizes the search index and cache for the selected runner or all (Available for ECE only)
 
 ```
 ecctl platform runner resync {<runner id> | --all} [flags]

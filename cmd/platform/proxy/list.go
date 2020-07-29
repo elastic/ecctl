@@ -23,12 +23,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/proxyapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var listProxiesCmd = &cobra.Command{
 	Use:     "list",
-	Short:   "Returns all of the proxies in the platform",
+	Short:   cmdutil.AdminReqDescription("Returns all of the proxies in the platform"),
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE:    listProxies,
 }

@@ -1,10 +1,10 @@
 ## ecctl platform repository show
 
-Obtains a snapshot repository config
+Obtains a snapshot repository config (Available for ECE only)
 
 ### Synopsis
 
-Obtains a snapshot repository config
+Obtains a snapshot repository config (Available for ECE only)
 
 ```
 ecctl platform repository show <repository name> [flags]

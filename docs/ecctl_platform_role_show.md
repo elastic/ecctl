@@ -1,10 +1,10 @@
 ## ecctl platform role show
 
-Shows the existing platform roles
+Shows the existing platform roles (Available for ECE only)
 
 ### Synopsis
 
-Shows the existing platform roles
+Shows the existing platform roles (Available for ECE only)
 
 ```
 ecctl platform role show <role> [flags]

@@ -21,12 +21,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/proxyapi/filteredgroupapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var platformProxyFilteredGroupDeleteCmd = &cobra.Command{
 	Use:     "delete <filtered group id>",
-	Short:   "Deletes proxies filtered group",
+	Short:   cmdutil.AdminReqDescription("Deletes proxies filtered group"),
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		return filteredgroupapi.Delete(filteredgroupapi.DeleteParams{

@@ -1,12 +1,12 @@
 [#ecctl_platform_instance-configuration_delete]
 == ecctl platform instance-configuration delete
 
-Deletes an instance configuration
+Deletes an instance configuration {ece-icon}
 
 [float]
 === Synopsis
 
-Deletes an instance configuration
+Deletes an instance configuration {ece-icon}
 
 ----
 ecctl platform instance-configuration delete <config id> [flags]
@@ -44,4 +44,4 @@ ecctl platform instance-configuration delete <config id> [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_instance-configuration[ecctl platform instance-configuration]	 - Manages instance configurations (Available for ECE only)
+* xref:ecctl_platform_instance-configuration[ecctl platform instance-configuration]	 - Manages instance configurations {ece-icon}

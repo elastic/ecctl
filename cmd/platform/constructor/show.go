@@ -23,12 +23,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/constructorapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var showConstructorCmd = &cobra.Command{
 	Use:     "show <constructor id>",
-	Short:   constructorShowMessage,
+	Short:   cmdutil.AdminReqDescription(constructorShowMessage),
 	PreRunE: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		a, err := constructorapi.Get(constructorapi.GetParams{

@@ -1,10 +1,10 @@
 ## ecctl platform allocator maintenance
 
-Sets the allocator in Maintenance mode
+Sets the allocator in Maintenance mode (Available for ECE only)
 
 ### Synopsis
 
-Sets the allocator in Maintenance mode
+Sets the allocator in Maintenance mode (Available for ECE only)
 
 ```
 ecctl platform allocator maintenance <allocator id> [flags]

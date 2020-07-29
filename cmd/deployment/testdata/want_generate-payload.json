@@ -1,0 +1,121 @@
+{
+  "name": "marc-testing",
+  "prune_orphans": false,
+  "resources": {
+    "apm": [
+      {
+        "display_name": "marc-testing",
+        "elasticsearch_cluster_ref_id": "main-elasticsearch",
+        "plan": {
+          "apm": {
+            "system_settings": {
+              "secret_token": "XYZ"
+            }
+          },
+          "cluster_topology": [
+            {
+              "instance_configuration_id": "gcp.apm.1",
+              "size": {
+                "resource": "memory",
+                "value": 512
+              },
+              "zone_count": 1
+            }
+          ],
+          "transient": {
+            "strategy": {
+              "autodetect": {}
+            }
+          }
+        },
+        "ref_id": "main-apm",
+        "region": "gcp-asia-east1",
+        "settings": {}
+      }
+    ],
+    "appsearch": null,
+    "elasticsearch": [
+      {
+        "display_name": "marc-testing",
+        "plan": {
+          "cluster_topology": [
+            {
+              "elasticsearch": {},
+              "instance_configuration_id": "gcp.data.highio.1",
+              "node_type": {
+                "data": true,
+                "ingest": true,
+                "master": true
+              },
+              "size": {
+                "resource": "memory",
+                "value": 1024
+              },
+              "zone_count": 2
+            }
+          ],
+          "deployment_template": {
+            "id": "gcp-io-optimized"
+          },
+          "elasticsearch": {
+            "version": "7.8.0"
+          }
+        },
+        "ref_id": "main-elasticsearch",
+        "region": "gcp-asia-east1",
+        "settings": {
+          "curation": {
+            "specs": []
+          },
+          "dedicated_masters_threshold": 6,
+          "snapshot": {
+            "enabled": true,
+            "repository": {
+              "static": {
+                "repository_type": "gcs-resource",
+                "settings": {
+                  "bucket_name": "xxxyz",
+                  "client_name": "elastic-internal-xyzwe"
+                }
+              }
+            },
+            "retention": {},
+            "slm": true,
+            "suspended": []
+          }
+        }
+      }
+    ],
+    "enterprise_search": null,
+    "kibana": [
+      {
+        "display_name": "marc-testing",
+        "elasticsearch_cluster_ref_id": "main-elasticsearch",
+        "plan": {
+          "cluster_topology": [
+            {
+              "instance_configuration_id": "gcp.kibana.1",
+              "size": {
+                "resource": "memory",
+                "value": 1024
+              },
+              "zone_count": 1
+            }
+          ],
+          "kibana": {
+            "system_settings": {},
+            "version": "7.8.0"
+          },
+          "transient": {
+            "strategy": {
+              "autodetect": {}
+            }
+          }
+        },
+        "ref_id": "main-kibana",
+        "region": "gcp-asia-east1",
+        "settings": {}
+      }
+    ]
+  }
+}

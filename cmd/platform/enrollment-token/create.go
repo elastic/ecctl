@@ -23,6 +23,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/enrollmenttokenapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
@@ -40,7 +41,7 @@ const tokenCreateExamples = `  ecctl [globalFlags] enrollment-token create --rol
 var createTokenCmd = &cobra.Command{
 	Use:     "create --role <ROLE>",
 	Short:   "Creates an enrollment token for role(s)",
-	Example: tokenCreateExamples,
+	Example: cmdutil.AdminReqDescription(tokenCreateExamples),
 	PreRunE: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		roles, _ := cmd.Flags().GetStringArray(roleFlag)

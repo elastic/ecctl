@@ -1,12 +1,12 @@
 [#ecctl_platform]
 == ecctl platform
 
-Manages the platform
+Manages the platform {ece-icon}
 
 [float]
 === Synopsis
 
-Manages the platform
+Manages the platform {ece-icon}
 
 ----
 ecctl platform [flags]
@@ -45,12 +45,12 @@ ecctl platform [flags]
 === SEE ALSO
 
 * xref:ecctl[ecctl]	 - Elastic Cloud Control
-* xref:ecctl_platform_allocator[ecctl platform allocator]	 - Manages allocators (Available for ECE only)
-* xref:ecctl_platform_constructor[ecctl platform constructor]	 - Manages constructors (Available for ECE only)
-* xref:ecctl_platform_enrollment-token[ecctl platform enrollment-token]	 - Manages tokens (Available for ECE only)
-* xref:ecctl_platform_info[ecctl platform info]	 - Shows information about the platform (Available for ECE only)
-* xref:ecctl_platform_instance-configuration[ecctl platform instance-configuration]	 - Manages instance configurations (Available for ECE only)
-* xref:ecctl_platform_proxy[ecctl platform proxy]	 - Manages proxies (Available for ECE only)
-* xref:ecctl_platform_repository[ecctl platform repository]	 - Manages snapshot repositories (Available for ECE only)
-* xref:ecctl_platform_role[ecctl platform role]	 - Manages platform roles (Available for ECE only)
-* xref:ecctl_platform_runner[ecctl platform runner]	 - Manages platform runners (Available for ECE only)
+* xref:ecctl_platform_allocator[ecctl platform allocator]	 - Manages allocators {ece-icon}
+* xref:ecctl_platform_constructor[ecctl platform constructor]	 - Manages constructors {ece-icon}
+* xref:ecctl_platform_enrollment-token[ecctl platform enrollment-token]	 - Manages tokens {ece-icon}
+* xref:ecctl_platform_info[ecctl platform info]	 - Shows information about the platform {ece-icon}
+* xref:ecctl_platform_instance-configuration[ecctl platform instance-configuration]	 - Manages instance configurations {ece-icon}
+* xref:ecctl_platform_proxy[ecctl platform proxy]	 - Manages proxies {ece-icon}
+* xref:ecctl_platform_repository[ecctl platform repository]	 - Manages snapshot repositories {ece-icon}
+* xref:ecctl_platform_role[ecctl platform role]	 - Manages platform roles {ece-icon}
+* xref:ecctl_platform_runner[ecctl platform runner]	 - Manages platform runners {ece-icon}

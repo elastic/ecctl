@@ -23,12 +23,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/userapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var showCmd = &cobra.Command{
 	Use:     "show <user name>",
-	Short:   "Shows details of a specified user",
+	Short:   cmdutil.AdminReqDescription("Shows details of a specified user"),
 	PreRunE: checkInputHas1ArgOr0ArgAndCurrent,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if current, _ := cmd.Flags().GetBool("current"); current {

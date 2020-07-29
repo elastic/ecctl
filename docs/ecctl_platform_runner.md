@@ -39,9 +39,9 @@ ecctl platform runner [flags]
 
 ### SEE ALSO
 
-* [ecctl platform](ecctl_platform.md)	 - Manages the platform
-* [ecctl platform runner list](ecctl_platform_runner_list.md)	 - Lists the existing platform runners
-* [ecctl platform runner resync](ecctl_platform_runner_resync.md)	 - Resynchronizes the search index and cache for the selected runner or all
-* [ecctl platform runner search](ecctl_platform_runner_search.md)	 - Performs advanced runner searching
-* [ecctl platform runner show](ecctl_platform_runner_show.md)	 - Shows information about the specified runner
+* [ecctl platform](ecctl_platform.md)	 - Manages the platform (Available for ECE only)
+* [ecctl platform runner list](ecctl_platform_runner_list.md)	 - Lists the existing platform runners (Available for ECE only)
+* [ecctl platform runner resync](ecctl_platform_runner_resync.md)	 - Resynchronizes the search index and cache for the selected runner or all (Available for ECE only)
+* [ecctl platform runner search](ecctl_platform_runner_search.md)	 - Performs advanced runner searching (Available for ECE only)
+* [ecctl platform runner show](ecctl_platform_runner_show.md)	 - Shows information about the specified runner (Available for ECE only)
 

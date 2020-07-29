@@ -1,12 +1,12 @@
 [#ecctl_platform_constructor_resync]
 == ecctl platform constructor resync
 
-Resynchronizes the search index and cache for the selected constructor or all
+Resynchronizes the search index and cache for the selected constructor or all {ece-icon}
 
 [float]
 === Synopsis
 
-Resynchronizes the search index and cache for the selected constructor or all
+Resynchronizes the search index and cache for the selected constructor or all {ece-icon}
 
 ----
 ecctl platform constructor resync {<constructor id> | --all} [flags]
@@ -45,4 +45,4 @@ ecctl platform constructor resync {<constructor id> | --all} [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_constructor[ecctl platform constructor]	 - Manages constructors (Available for ECE only)
+* xref:ecctl_platform_constructor[ecctl platform constructor]	 - Manages constructors {ece-icon}

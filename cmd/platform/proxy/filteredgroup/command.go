@@ -19,12 +19,14 @@ package cmdfilteredgroup
 
 import (
 	"github.com/spf13/cobra"
+
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 )
 
 // Command represents the top level filtered-group command.
 var Command = &cobra.Command{
 	Use:     "filtered-group",
-	Short:   "Manages proxies filtered group",
+	Short:   cmdutil.AdminReqDescription("Manages proxies filtered group"),
 	PreRunE: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()

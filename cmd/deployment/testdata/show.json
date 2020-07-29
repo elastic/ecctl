@@ -1,0 +1,12 @@
+{
+    "healthy": true,
+    "id": "29337f77410e23ab30e15c280060facf",
+    "name": "29337f77410e23ab30e15c280060facf",
+    "resources": {
+        "apm": [],
+        "appsearch": [],
+        "elasticsearch": [],
+        "enterprise_search": [],
+        "kibana": []
+    }
+}

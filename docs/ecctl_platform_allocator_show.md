@@ -1,10 +1,10 @@
 ## ecctl platform allocator show
 
-Returns information about the allocator
+Returns information about the allocator (Available for ECE only)
 
 ### Synopsis
 
-Returns information about the allocator
+Returns information about the allocator (Available for ECE only)
 
 ```
 ecctl platform allocator show <allocator id> [flags]

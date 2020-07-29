@@ -1,12 +1,12 @@
 [#ecctl_platform_instance-configuration_show]
 == ecctl platform instance-configuration show
 
-Shows an instance configuration
+Shows an instance configuration {ece-icon}
 
 [float]
 === Synopsis
 
-Shows an instance configuration
+Shows an instance configuration {ece-icon}
 
 ----
 ecctl platform instance-configuration show <config id> [flags]
@@ -44,4 +44,4 @@ ecctl platform instance-configuration show <config id> [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_instance-configuration[ecctl platform instance-configuration]	 - Manages instance configurations (Available for ECE only)
+* xref:ecctl_platform_instance-configuration[ecctl platform instance-configuration]	 - Manages instance configurations {ece-icon}

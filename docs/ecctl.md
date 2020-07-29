@@ -30,11 +30,11 @@ Elastic Cloud Control
 
 ### SEE ALSO
 
-* [ecctl auth](ecctl_auth.md)	 - Manages the platform auth
+* [ecctl auth](ecctl_auth.md)	 - Manages authentication settings
 * [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
 * [ecctl generate](ecctl_generate.md)	 - Generates completions and docs
 * [ecctl init](ecctl_init.md)	 - Creates an initial configuration file.
-* [ecctl platform](ecctl_platform.md)	 - Manages the platform
+* [ecctl platform](ecctl_platform.md)	 - Manages the platform (Available for ECE only)
 * [ecctl stack](ecctl_stack.md)	 - Manages Elastic StackPacks
 * [ecctl user](ecctl_user.md)	 - Manages the platform users (Available for ECE only)
 * [ecctl version](ecctl_version.md)	 - Shows ecctl version

@@ -21,12 +21,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/snaprepoapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var platformSnapshotShowCmd = &cobra.Command{
 	Use:     "show <repository name>",
-	Short:   "Obtains a snapshot repository config",
+	Short:   cmdutil.AdminReqDescription("Obtains a snapshot repository config"),
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		repo, err := snaprepoapi.Get(snaprepoapi.GetParams{

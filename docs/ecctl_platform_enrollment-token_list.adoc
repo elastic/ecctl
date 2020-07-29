@@ -1,12 +1,12 @@
 [#ecctl_platform_enrollment-token_list]
 == ecctl platform enrollment-token list
 
-Retrieves a list of persistent enrollment tokens
+Retrieves a list of persistent enrollment tokens {ece-icon}
 
 [float]
 === Synopsis
 
-Retrieves a list of persistent enrollment tokens
+Retrieves a list of persistent enrollment tokens {ece-icon}
 
 ----
 ecctl platform enrollment-token list [flags]
@@ -44,4 +44,4 @@ ecctl platform enrollment-token list [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_enrollment-token[ecctl platform enrollment-token]	 - Manages tokens (Available for ECE only)
+* xref:ecctl_platform_enrollment-token[ecctl platform enrollment-token]	 - Manages tokens {ece-icon}

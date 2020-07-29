@@ -1,10 +1,10 @@
 ## ecctl platform instance-configuration create
 
-Creates a new instance configuration
+Creates a new instance configuration (Available for ECE only)
 
 ### Synopsis
 
-Creates a new instance configuration
+Creates a new instance configuration (Available for ECE only)
 
 ```
 ecctl platform instance-configuration create -f <config.json> [flags]

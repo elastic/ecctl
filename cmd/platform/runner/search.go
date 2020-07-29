@@ -34,7 +34,7 @@ import (
 // Command represents the runner search command.
 var searchCmd = &cobra.Command{
 	Use:     "search",
-	Short:   "Performs advanced runner searching",
+	Short:   cmdutil.AdminReqDescription("Performs advanced runner searching"),
 	Long:    "Read more about Query DSL in https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html",
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {

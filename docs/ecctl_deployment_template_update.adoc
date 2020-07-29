@@ -1,12 +1,12 @@
 [#ecctl_deployment_template_update]
 == ecctl deployment template update
 
-Updates an existing deployment template (Available for ECE only)
+Updates an existing deployment template {ece-icon}
 
 [float]
 === Synopsis
 
-Updates an existing deployment template (Available for ECE only)
+Updates an existing deployment template {ece-icon}
 
 ----
 ecctl deployment template update --template-id <template id> --file <definition.json> [flags]

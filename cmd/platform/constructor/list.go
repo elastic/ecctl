@@ -23,12 +23,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/constructorapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var listConstructorsCmd = &cobra.Command{
 	Use:     "list",
-	Short:   `Returns all of the constructors in the platform`,
+	Short:   cmdutil.AdminReqDescription("Returns all of the constructors in the platform"),
 	PreRunE: cobra.NoArgs,
 	RunE:    listConstructors,
 }

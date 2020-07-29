@@ -1,10 +1,10 @@
 ## ecctl platform instance-configuration list
 
-Lists the instance configurations
+Lists the instance configurations (Available for ECE only)
 
 ### Synopsis
 
-Lists the instance configurations
+Lists the instance configurations (Available for ECE only)
 
 ```
 ecctl platform instance-configuration list [flags]
