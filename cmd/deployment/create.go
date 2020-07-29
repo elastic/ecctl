@@ -18,11 +18,13 @@
 package cmddeployment
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"strings"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi"
+	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/deploymentsize"
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/depresourceapi"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	"github.com/elastic/cloud-sdk-go/pkg/multierror"
@@ -49,28 +51,28 @@ var createCmd = &cobra.Command{
 		var region = ecctl.Get().Config.Region
 
 		var esZoneCount, _ = cmd.Flags().GetInt32("es-zones")
-		var esSize, _ = cmd.Flags().GetInt32("es-size")
+		var esSize, _ = cmd.Flags().GetString("es-size")
 		var esRefID, _ = cmd.Flags().GetString("es-ref-id")
 		var topologyElements, _ = cmd.Flags().GetStringArray("es-node-topology")
 		var plugin, _ = cmd.Flags().GetStringSlice("plugin")
 
 		var kibanaZoneCount, _ = cmd.Flags().GetInt32("kibana-zones")
-		var kibanaSize, _ = cmd.Flags().GetInt32("kibana-size")
+		var kibanaSize, _ = cmd.Flags().GetString("kibana-size")
 		var kibanaRefID, _ = cmd.Flags().GetString("kibana-ref-id")
 
 		var apmEnable, _ = cmd.Flags().GetBool("apm")
 		var apmZoneCount, _ = cmd.Flags().GetInt32("apm-zones")
-		var apmSize, _ = cmd.Flags().GetInt32("apm-size")
+		var apmSize, _ = cmd.Flags().GetString("apm-size")
 		var apmRefID, _ = cmd.Flags().GetString("apm-ref-id")
 
 		var appsearchEnable, _ = cmd.Flags().GetBool("appsearch")
 		var appsearchZoneCount, _ = cmd.Flags().GetInt32("appsearch-zones")
-		var appsearchSize, _ = cmd.Flags().GetInt32("appsearch-size")
+		var appsearchSize, _ = cmd.Flags().GetString("appsearch-size")
 		var appsearchRefID, _ = cmd.Flags().GetString("appsearch-ref-id")
 
 		var enterpriseSearchEnable, _ = cmd.Flags().GetBool("enterprise_search")
 		var enterpriseSearchZoneCount, _ = cmd.Flags().GetInt32("enterprise_search-zones")
-		var enterpriseSearchSize, _ = cmd.Flags().GetInt32("enterprise_search-size")
+		var enterpriseSearchSize, _ = cmd.Flags().GetString("enterprise_search-size")
 		var enterpriseSearchRefID, _ = cmd.Flags().GetString("enterprise_search-ref-id")
 
 		var payload *models.DeploymentCreateRequest
@@ -87,6 +89,38 @@ var createCmd = &cobra.Command{
 
 		if dt == "" {
 			dt = setDefaultTemplate(region)
+		}
+
+		apmSizeMB, err := deploymentsize.ParseGb(apmSize)
+		if err != nil {
+			return err
+		}
+
+		appsearchSizeMB, err := deploymentsize.ParseGb(appsearchSize)
+		if err != nil {
+			return err
+		}
+
+		esSizeMB, err := deploymentsize.ParseGb(esSize)
+		if err != nil {
+			return err
+		}
+
+		enterpriseSearchSizeMB, err := deploymentsize.ParseGb(enterpriseSearchSize)
+		if err != nil {
+			return err
+		}
+
+		kibanaSizeMB, err := deploymentsize.ParseGb(kibanaSize)
+		if err != nil {
+			return err
+		}
+
+		if topologyElements != nil {
+			topologyElements, err = esTopologyParseGB(topologyElements)
+			if err != nil {
+				return err
+			}
 		}
 
 		dtAsList, _ := cmd.Flags().GetBool("dt-as-list")
@@ -107,27 +141,27 @@ var createCmd = &cobra.Command{
 				EnterpriseSearchEnable:   enterpriseSearchEnable,
 				ElasticsearchInstance: depresourceapi.InstanceParams{
 					RefID:     esRefID,
-					Size:      esSize,
+					Size:      esSizeMB,
 					ZoneCount: esZoneCount,
 				},
 				KibanaInstance: depresourceapi.InstanceParams{
 					RefID:     kibanaRefID,
-					Size:      kibanaSize,
+					Size:      kibanaSizeMB,
 					ZoneCount: kibanaZoneCount,
 				},
 				ApmInstance: depresourceapi.InstanceParams{
 					RefID:     apmRefID,
-					Size:      apmSize,
+					Size:      apmSizeMB,
 					ZoneCount: apmZoneCount,
 				},
 				AppsearchInstance: depresourceapi.InstanceParams{
 					RefID:     appsearchRefID,
-					Size:      appsearchSize,
+					Size:      appsearchSizeMB,
 					ZoneCount: appsearchZoneCount,
 				},
 				EnterpriseSearchInstance: depresourceapi.InstanceParams{
 					RefID:     enterpriseSearchRefID,
-					Size:      enterpriseSearchSize,
+					Size:      enterpriseSearchSizeMB,
 					ZoneCount: enterpriseSearchZoneCount,
 				},
 			})
@@ -184,28 +218,28 @@ func initFlags() {
 
 	createCmd.Flags().String("es-ref-id", "main-elasticsearch", "Optional RefId for the Elasticsearch deployment")
 	createCmd.Flags().Int32("es-zones", 1, "Number of zones the Elasticsearch instances will span")
-	createCmd.Flags().Int32("es-size", 4096, "Memory (RAM) in MB that each of the Elasticsearch instances will have")
+	createCmd.Flags().String("es-size", "4g", "Memory (RAM) in GB that each of the Elasticsearch instances will have")
 	createCmd.Flags().StringArrayP("es-node-topology", "e", nil, "Optional Elasticsearch node topology element definition. See help for more information")
 	createCmd.Flags().StringSlice("plugin", nil, "Additional plugins to add to the Elasticsearch deployment")
 
 	createCmd.Flags().String("kibana-ref-id", "main-kibana", "Optional RefId for the Kibana deployment")
 	createCmd.Flags().Int32("kibana-zones", 1, "Number of zones the Kibana instances will span")
-	createCmd.Flags().Int32("kibana-size", 1024, "Memory (RAM) in MB that each of the Kibana instances will have")
+	createCmd.Flags().String("kibana-size", "1g", "Memory (RAM) in GB that each of the Kibana instances will have")
 
 	createCmd.Flags().Bool("apm", false, "Enables APM for the deployment")
 	createCmd.Flags().String("apm-ref-id", "main-apm", "Optional RefId for the APM deployment")
 	createCmd.Flags().Int32("apm-zones", 1, "Number of zones the APM instances will span")
-	createCmd.Flags().Int32("apm-size", 512, "Memory (RAM) in MB that each of the APM instances will have")
+	createCmd.Flags().String("apm-size", "0.5g", "Memory (RAM) in GB that each of the APM instances will have")
 
 	createCmd.Flags().Bool("appsearch", false, "Enables App Search for the deployment")
 	createCmd.Flags().String("appsearch-ref-id", "main-appsearch", "Optional RefId for the App Search deployment")
 	createCmd.Flags().Int32("appsearch-zones", 1, "Number of zones the App Search instances will span")
-	createCmd.Flags().Int32("appsearch-size", 2048, "Memory (RAM) in MB that each of the App Search instances will have")
+	createCmd.Flags().String("appsearch-size", "2g", "Memory (RAM) in GB that each of the App Search instances will have")
 
 	createCmd.Flags().Bool("enterprise_search", false, "Enables Enterprise Search for the deployment")
 	createCmd.Flags().String("enterprise_search-ref-id", "main-enterprise_search", "Optional RefId for the Enterprise Search deployment")
 	createCmd.Flags().Int32("enterprise_search-zones", 1, "Number of zones the Enterprise Search instances will span")
-	createCmd.Flags().Int32("enterprise_search-size", 4096, "Memory (RAM) in MB that each of the Enterprise Search instances will have")
+	createCmd.Flags().String("enterprise_search-size", "4g", "Memory (RAM) in GB that each of the Enterprise Search instances will have")
 
 	// Remove in the next version.
 	createCmd.Flags().Bool("dt-as-list", true, "")
@@ -231,4 +265,45 @@ func setDefaultTemplate(region string) string {
 	default:
 		return "aws-io-optimized-v2"
 	}
+}
+
+type elasticsearchTopologyElement struct {
+	NodeType  string `json:"node_type"`
+	Size      string `json:"size"`
+	ZoneCount int32  `json:"zone_count,omitempty"`
+}
+
+func esTopologyParseGB(topology []string) ([]string, error) {
+	var t = make([]string, 0, len(topology))
+	for _, rawElement := range topology {
+		var element elasticsearchTopologyElement
+		if err := json.Unmarshal([]byte(rawElement), &element); err != nil {
+			return nil, fmt.Errorf("failed unpacking raw elasticsearch node topology: %s", err)
+		}
+
+		if element.Size == "" {
+			return nil, errors.New("elasticsearch node topology: memory size cannot be empty")
+		}
+
+		elementSizeMB, err := deploymentsize.ParseGb(element.Size)
+		if err != nil {
+			return nil, err
+		}
+
+		esTopologyElement := depresourceapi.ElasticsearchTopologyElement{
+			NodeType:  element.NodeType,
+			ZoneCount: element.ZoneCount,
+			Size:      elementSizeMB,
+		}
+
+		b, err := json.Marshal(esTopologyElement)
+		if err != nil {
+			return nil, fmt.Errorf("failed unpacking elasticsearch node topology: %s", err)
+		}
+		parsedElement := string(b)
+
+		t = append(t, parsedElement)
+	}
+
+	return t, nil
 }
