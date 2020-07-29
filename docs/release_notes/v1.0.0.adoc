@@ -155,4 +155,4 @@ https://github.com/elastic/ecctl/commit/882a69a[882a69a] release: Fix git config
 https://github.com/elastic/ecctl/commit/c64d740[c64d740] pkg/deployment: Remove package from ecctl (https://github.com/elastic/ecctl/pull/285[#285])
 https://github.com/elastic/ecctl/commit/7c145c9[7c145c9] build(deps): bump github.com/spf13/viper from 1.6.3 to 1.7.0 (https://github.com/elastic/ecctl/pull/286[#286])
 
-_Release date: July 22, 2020_
+_Release date: July 30, 2020_
