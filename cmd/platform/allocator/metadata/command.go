@@ -63,9 +63,10 @@ var allocatorMetadataDeleteCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 
 		var params = &allocatorapi.MetadataDeleteParams{
-			API: ecctl.Get().API,
-			ID:  args[0],
-			Key: args[1],
+			API:    ecctl.Get().API,
+			ID:     args[0],
+			Key:    args[1],
+			Region: ecctl.Get().Config.Region,
 		}
 		err := allocatorapi.DeleteAllocatorMetadataItem(*params)
 
@@ -82,8 +83,9 @@ var allocatorMetadataShowCmd = &cobra.Command{
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		var params = allocatorapi.MetadataGetParams{
-			API: ecctl.Get().API,
-			ID:  args[0],
+			API:    ecctl.Get().API,
+			ID:     args[0],
+			Region: ecctl.Get().Config.Region,
 		}
 		res, err := allocatorapi.GetAllocatorMetadata(params)
 
