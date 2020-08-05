@@ -20,6 +20,8 @@ package cmddeploymentnote
 import (
 	"path/filepath"
 
+	"github.com/elastic/cloud-sdk-go/pkg/api"
+	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi"
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/noteapi"
 	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
@@ -43,10 +45,16 @@ var deploymentNoteCreateCmd = &cobra.Command{
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		comment, _ := cmd.Flags().GetString("comment")
+		esID, err := getElasticsearchID(args[0], ecctl.Get().API)
+		if err != nil {
+			return err
+		}
+
 		return noteapi.Add(noteapi.AddParams{
 			Params: noteapi.Params{
-				API: ecctl.Get().API,
-				ID:  args[0],
+				API:    ecctl.Get().API,
+				Region: ecctl.Get().Config.Region,
+				ID:     esID,
 			},
 			Message: comment,
 			UserID:  ecctl.Get().Config.User,
@@ -59,9 +67,15 @@ var deploymentNoteListCmd = &cobra.Command{
 	Short:   "Lists the deployment notes",
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
+		esID, err := getElasticsearchID(args[0], ecctl.Get().API)
+		if err != nil {
+			return err
+		}
+
 		res, err := noteapi.List(noteapi.Params{
-			API: ecctl.Get().API,
-			ID:  args[0],
+			API:    ecctl.Get().API,
+			Region: ecctl.Get().Config.Region,
+			ID:     esID,
 		})
 		if err != nil {
 			return err
@@ -78,14 +92,20 @@ var deploymentNoteUpdateCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		comment, _ := cmd.Flags().GetString("comment")
 		noteID, _ := cmd.Flags().GetString("id")
+		esID, err := getElasticsearchID(args[0], ecctl.Get().API)
+		if err != nil {
+			return err
+		}
+
 		return util.ReturnErrOnly(
 			noteapi.Update(noteapi.UpdateParams{
 				Message: comment,
 				UserID:  ecctl.Get().Config.User,
 				NoteID:  noteID,
 				Params: noteapi.Params{
-					API: ecctl.Get().API,
-					ID:  args[0],
+					API:    ecctl.Get().API,
+					Region: ecctl.Get().Config.Region,
+					ID:     esID,
 				},
 			}),
 		)
@@ -98,11 +118,17 @@ var deploymentNoteShowCmd = &cobra.Command{
 	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		noteID, _ := cmd.Flags().GetString("id")
+		esID, err := getElasticsearchID(args[0], ecctl.Get().API)
+		if err != nil {
+			return err
+		}
+
 		res, err := noteapi.Get(noteapi.GetParams{
 			NoteID: noteID,
 			Params: noteapi.Params{
-				API: ecctl.Get().API,
-				ID:  args[0],
+				API:    ecctl.Get().API,
+				Region: ecctl.Get().Config.Region,
+				ID:     esID,
 			},
 		})
 		if err != nil {
@@ -129,4 +155,20 @@ func init() {
 	deploymentNoteUpdateCmd.MarkFlagRequired("id")
 	deploymentNoteShowCmd.Flags().String("id", "", "Note ID")
 	deploymentNoteShowCmd.MarkFlagRequired("id")
+}
+
+// The notes endpoint only allows elasticsearch IDs, but the endpoint
+// `deployments/DEPLOYMENT_ID/notes` endpoint is not specific to elasticsearch.
+// For the time being the command layer will fetch the ES ID until the endpoint
+// accepts deployment IDs.
+func getElasticsearchID(deploymentID string, api *api.API) (string, error) {
+	esID, err := deploymentapi.GetElasticsearchID(deploymentapi.GetParams{
+		API:          api,
+		DeploymentID: deploymentID,
+	})
+	if err != nil {
+		return "", err
+	}
+
+	return esID, nil
 }
