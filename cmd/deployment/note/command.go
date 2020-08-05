@@ -162,13 +162,8 @@ func init() {
 // For the time being the command layer will fetch the ES ID until the endpoint
 // accepts deployment IDs.
 func getElasticsearchID(deploymentID string, ecAPI *api.API) (string, error) {
-	esID, err := deploymentapi.GetElasticsearchID(deploymentapi.GetParams{
+	return deploymentapi.GetElasticsearchID(deploymentapi.GetParams{
 		API:          ecAPI,
 		DeploymentID: deploymentID,
 	})
-	if err != nil {
-		return "", err
-	}
-
-	return esID, nil
 }
