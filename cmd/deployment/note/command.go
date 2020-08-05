@@ -161,9 +161,9 @@ func init() {
 // `deployments/DEPLOYMENT_ID/notes` endpoint is not specific to elasticsearch.
 // For the time being the command layer will fetch the ES ID until the endpoint
 // accepts deployment IDs.
-func getElasticsearchID(deploymentID string, api *api.API) (string, error) {
+func getElasticsearchID(deploymentID string, ecAPI *api.API) (string, error) {
 	esID, err := deploymentapi.GetElasticsearchID(deploymentapi.GetParams{
-		API:          api,
+		API:          ecAPI,
 		DeploymentID: deploymentID,
 	})
 	if err != nil {
