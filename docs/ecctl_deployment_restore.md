@@ -30,7 +30,7 @@ $ ecctl deployment restore 5c17ad7c8df73206baa54b6e2829d9bc
 ### Options inherited from parent commands
 
 ```
-      --apikey string      API key to use to authenticate (If empty will look for EC_APIKEY environment variable)
+      --api-key string     API key to use to authenticate (If empty will look for EC_API_KEY environment variable)
       --config string      Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
       --force              Do not ask for confirmation
       --format string      Formats the output using a Go template
