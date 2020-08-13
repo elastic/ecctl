@@ -200,7 +200,7 @@ func TestInitApp(t *testing.T) {
 				multierror.NewPrefixed(
 					"invalid configuration options specified",
 					errors.New("output must be one either json or text"),
-					errors.New("apikey or user and pass must be specified"),
+					errors.New("api_key or user and pass must be specified"),
 				),
 			),
 		},

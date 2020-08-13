@@ -108,7 +108,7 @@ func init() {
 	RootCmd.PersistentFlags().String("host", "", "Base URL to use")
 	RootCmd.PersistentFlags().String("user", "", "Username to use to authenticate (If empty will look for EC_USER environment variable)")
 	RootCmd.PersistentFlags().String("pass", "", "Password to use to authenticate (If empty will look for EC_PASS environment variable)")
-	RootCmd.PersistentFlags().String("apikey", "", "API key to use to authenticate (If empty will look for EC_APIKEY environment variable)")
+	RootCmd.PersistentFlags().String("api-key", "", "API key to use to authenticate (If empty will look for EC_API_KEY environment variable)")
 	RootCmd.PersistentFlags().Bool("verbose", false, "Enable verbose mode")
 	RootCmd.PersistentFlags().String("output", "text", "Output format [text|json]")
 	RootCmd.PersistentFlags().Bool("force", false, "Do not ask for confirmation")
