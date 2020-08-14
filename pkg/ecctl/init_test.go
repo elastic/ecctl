@@ -109,7 +109,7 @@ func TestInitConfig(t *testing.T) {
 	apikeyConfig.SetConfigName("apikey")
 	var apikeyConfigContents = `{
   "host": "https://localhost",
-  "apikey": "[REDACTED]",
+  "api_key": "[REDACTED]",
   "verbose": true
 }`
 	var userPassConfig = viper.New()
@@ -141,7 +141,7 @@ func TestInitConfig(t *testing.T) {
 	apiKeyConfigToModify.SetConfigName("apikeymodif")
 	var apiKeyConfigToModifyContents = `{
   "host": "https://localhost",
-  "apikey": "[REDACTED]",
+  "api_key": "[REDACTED]",
   "output": "json"
 }`
 
@@ -196,7 +196,7 @@ func TestInitConfig(t *testing.T) {
 				hostConfigContents + "\n" + existingConfigMsg,
 		},
 		{
-			name: "finds a config file, prints the contents with obscured apikey and user skips the creation of one",
+			name: "finds a config file, prints the contents with obscured api_key and user skips the creation of one",
 			args: args{params: InitConfigParams{
 				Viper:            apikeyConfig,
 				Reader:           strings.NewReader("n\n"),
@@ -206,7 +206,7 @@ func TestInitConfig(t *testing.T) {
 				Client:           new(http.Client),
 			}},
 			wantSettings: map[string]interface{}{
-				"apikey":  "someapikey",
+				"api_key": "someapikey",
 				"host":    "https://localhost",
 				"verbose": true,
 			},
@@ -256,7 +256,7 @@ func TestInitConfig(t *testing.T) {
 				}))),
 			}},
 			wantSettings: map[string]interface{}{
-				"apikey":   "somekey",
+				"api_key":  "somekey",
 				"host":     "https://api.elastic-cloud.com",
 				"insecure": true,
 				"output":   "text",
@@ -407,7 +407,7 @@ func TestInitConfig(t *testing.T) {
 				}))),
 			}},
 			wantSettings: map[string]interface{}{
-				"apikey":   "somekey",
+				"api_key":  "somekey",
 				"host":     "https://ahost",
 				"insecure": true,
 				"output":   "text",
@@ -420,7 +420,7 @@ func TestInitConfig(t *testing.T) {
 				"\n" + "\n" + fmt.Sprintf(validCredentialsMsg, "anacleto") + finalMsg + "\n",
 		},
 		{
-			name: "finds a config file and user changes the values, from apikey to user/pass",
+			name: "finds a config file and user changes the values, from api_key to user/pass",
 			args: args{params: InitConfigParams{
 				Viper:    apiKeyConfigToModify,
 				FilePath: filepath.Join(testFiles, "doesnt_matter"),

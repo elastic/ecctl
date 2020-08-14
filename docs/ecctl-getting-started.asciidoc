@@ -154,7 +154,7 @@ authenticated clients. The preferred authentication method is API keys.
 There are two ways to authenticate against the Elasticsearch Service or the Elastic Cloud Enterprise APIs
 {p}:
 
-* By specifying an API key using the `--apikey` flag
+* By specifying an API key using the `--api-key` flag
 * By specifying the `--user` and `--pass` flags
 
 The first method requires the user to already have an API key, if this
@@ -179,8 +179,8 @@ the binary for Elastic Cloud:
 host: https://api.elastic-cloud.com # URL of your Elasticsearch Service or Elastic Cloud Enterprise API endpoint
 
 # Credentials
-## apikey is the preferred authentication mechanism.
-apikey: bWFyYzo4ZTJmNmZkNjY5ZmQ0MDBkOTQ3ZjI3MTg3ZWI5MWZhYjpOQktHY05jclE0cTBzcUlnTXg3QTd3
+## api_key is the preferred authentication mechanism.
+api_key: bWFyYzo4ZTJmNmZkNjY5ZmQ0MDBkOTQ3ZjI3MTg3ZWI5MWZhYjpOQktHY05jclE0cTBzcUlnTXg3QTd3
 
 ## username and password can be used when no API key is available.
 user: username
@@ -198,7 +198,7 @@ i.e. `EC_HOST` or `EC_USER`.
 
 [source,sh]
 ----
-export EC_APIKEY=bWFyYzo4ZTJmNmZkNjY5ZmQ0MDBkOTQ3ZjI3MTg3ZWI5MWZhYjpOQktHY05jclE0cTBzcUlnTXg3QTd3
+export EC_API_KEY=bWFyYzo4ZTJmNmZkNjY5ZmQ0MDBkOTQ3ZjI3MTg3ZWI5MWZhYjpOQktHY05jclE0cTBzcUlnTXg3QTd3
 ----
 
 [float]

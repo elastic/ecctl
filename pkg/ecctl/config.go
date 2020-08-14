@@ -40,8 +40,8 @@ var (
 	errInvalidOutputFormat                    = errors.New("output must be one either json or text")
 	errInvalidOutputDevice                    = errors.New("output device must not be nil")
 	errInvalidErrorDevice                     = errors.New("error device must not be nil")
-	errInvalidEmptyAuthenticaitonSettings     = errors.New("apikey or user and pass must be specified")
-	errInvalidBothAuthenticaitonSettings      = errors.New("cannot specify both apikey and user / pass")
+	errInvalidEmptyAuthenticaitonSettings     = errors.New("api_key or user and pass must be specified")
+	errInvalidBothAuthenticaitonSettings      = errors.New("cannot specify both api_key and user / pass")
 )
 
 // Config contains the application configuration
@@ -49,7 +49,7 @@ type Config struct {
 	User    string `json:"user,omitempty"`
 	Pass    string `json:"pass,omitempty"`
 	Host    string `json:"host,omitempty"`
-	APIKey  string `json:"apikey,omitempty"`
+	APIKey  string `json:"api_key,omitempty" mapstructure:"api_key"`
 	Region  string `json:"region,omitempty"`
 	Output  string `json:"output,omitempty"`
 	Message string `json:"message,omitempty"`
