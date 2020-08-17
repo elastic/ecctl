@@ -100,7 +100,13 @@ func Test_showCmd(t *testing.T) {
 * `ecctl platform deployment-template` is now `ecctl deployment template`.
 --
 
-* *--apikey flag has been renamed to --api-key.* To keep ecctl in sync with our documentation, the `--apikey` command line flag has been renamed to `--api-key`, not only affecting the flag name but also the environment variable from `EC_APIKEY` to `EC_API_KEY`, and the configuration setting in a file from `apikey`to `api_key`.
+* *Renamed API key functionality.* To keep ecctl in sync with our documentation, the following items were renamed:
++
+--
+* The `--apikey` command line flag is now `--api-key`.
+* The environment variable `EC_APIKEY`  is now `EC_API_KEY`.
+* The setting `apikey` used in configuration files is now `api_key`.
+--
 
 
 [float]
