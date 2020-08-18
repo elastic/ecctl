@@ -1,8 +1,6 @@
 [id="{p}-overview"]
 == Overview
 
-beta[]
-
 {p} is the CLI for the Elastic Cloud Enterprise API. 
 It wraps typical operations commonly needed by operators within a single command line tool.
 
