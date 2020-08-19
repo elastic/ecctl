@@ -24,7 +24,6 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
-	"github.com/spf13/cobra/doc"
 )
 
 var (
@@ -76,7 +75,7 @@ var docCmd = &cobra.Command{
 			}
 		}
 
-		return doc.GenMarkdownTree(RootCmd, docsLocation)
+		return genMarkdownTree(RootCmd, docsLocation)
 	},
 }
 
@@ -89,7 +88,7 @@ func init() {
 	docCmd.Flags().StringVarP(&docsLocation, "location", "l", "./docs", "Sets the location of the generated output")
 }
 
-// generateZshCompletion is a modified version of kubectl cmpletion cmd:
+// generateZshCompletion is a modified version of kubectl completion cmd:
 // https://github.com/kubernetes/kubernetes/blob/master/pkg/kubectl/cmd/completion.go#L141
 // All credit goes to the the contributors of that file.
 func generateZshCompletion(out io.Writer, binary string) error {
