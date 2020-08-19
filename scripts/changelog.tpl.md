@@ -16,4 +16,4 @@ Checksums are at [ecctl_VERSION_REPLACE_checksums.txt](https://download.elastic.
 
 ## Release notes
 
-<https://www.elastic.co/guide/en/ecctl/vVERSION_REPLACE/ecctl-release-notes-vVERSION_REPLACE.html>
+<https://www.elastic.co/guide/en/ecctl/VERSION_CROPPED_REPLACE/ecctl-release-notes-vVERSION_REPLACE.html>
