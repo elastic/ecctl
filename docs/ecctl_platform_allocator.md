@@ -2,10 +2,6 @@
 
 Manages allocators (Available for ECE only)
 
-### Synopsis
-
-Manages allocators (Available for ECE only)
-
 ```
 ecctl platform allocator [flags]
 ```

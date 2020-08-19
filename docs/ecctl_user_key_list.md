@@ -2,10 +2,6 @@
 
 Lists the API keys for the specified user, or all platform users
 
-### Synopsis
-
-Lists the API keys for the specified user, or all platform users
-
 ```
 ecctl user key list --user=<user id>|--all [flags]
 ```

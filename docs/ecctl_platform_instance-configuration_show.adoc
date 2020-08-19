@@ -3,11 +3,6 @@
 
 Shows an instance configuration {ece-icon}
 
-[float]
-=== Synopsis
-
-Shows an instance configuration {ece-icon}
-
 ----
 ecctl platform instance-configuration show <config id> [flags]
 ----

@@ -2,10 +2,6 @@
 
 Deletes an existing deployment template (Available for ECE only)
 
-### Synopsis
-
-Deletes an existing deployment template (Available for ECE only)
-
 ```
 ecctl deployment template delete --template-id <template id> [flags]
 ```

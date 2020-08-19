@@ -3,11 +3,6 @@
 
 Deletes one or more platform users {ece-icon}
 
-[float]
-=== Synopsis
-
-Deletes one or more platform users {ece-icon}
-
 ----
 ecctl user delete <user name> <user name>... [flags]
 ----

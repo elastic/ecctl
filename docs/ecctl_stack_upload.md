@@ -2,10 +2,6 @@
 
 Uploads an Elastic StackPack (Available for ECE only)
 
-### Synopsis
-
-Uploads an Elastic StackPack (Available for ECE only)
-
 ```
 ecctl stack upload [flags]
 ```

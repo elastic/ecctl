@@ -2,10 +2,6 @@
 
 Returns all of the proxies in the platform (Available for ECE only)
 
-### Synopsis
-
-Returns all of the proxies in the platform (Available for ECE only)
-
 ```
 ecctl platform proxy list [flags]
 ```

@@ -2,10 +2,6 @@
 
 Stops a deployment resource
 
-### Synopsis
-
-Stops a deployment resource
-
 ```
 ecctl deployment resource stop <deployment id> --kind <kind> [--all|--i <instance-id>,<instance-id>] [flags]
 ```

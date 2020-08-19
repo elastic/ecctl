@@ -2,10 +2,6 @@
 
 Manages deployment resources
 
-### Synopsis
-
-Manages deployment resources
-
 ```
 ecctl deployment resource [flags]
 ```

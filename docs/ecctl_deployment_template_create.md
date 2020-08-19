@@ -2,10 +2,6 @@
 
 Creates a new deployment template (Available for ECE only)
 
-### Synopsis
-
-Creates a new deployment template (Available for ECE only)
-
 ```
 ecctl deployment template create --file <definition.json> [flags]
 ```

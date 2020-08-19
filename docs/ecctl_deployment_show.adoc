@@ -3,11 +3,6 @@
 
 Shows the specified deployment resources
 
-[float]
-=== Synopsis
-
-Shows the specified deployment resources
-
 ----
 ecctl deployment show <deployment-id> [flags]
 ----

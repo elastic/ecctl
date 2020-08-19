@@ -3,11 +3,6 @@
 
 Manages instance configurations {ece-icon}
 
-[float]
-=== Synopsis
-
-Manages instance configurations {ece-icon}
-
 ----
 ecctl platform instance-configuration [flags]
 ----

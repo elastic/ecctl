@@ -3,11 +3,6 @@
 
 Updates an existing deployment template {ece-icon}
 
-[float]
-=== Synopsis
-
-Updates an existing deployment template {ece-icon}
-
 ----
 ecctl deployment template update --template-id <template id> --file <definition.json> [flags]
 ----

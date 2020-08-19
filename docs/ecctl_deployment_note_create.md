@@ -2,10 +2,6 @@
 
 Adds a note to a deployment
 
-### Synopsis
-
-Adds a note to a deployment
-
 ```
 ecctl deployment note create <deployment id> --comment <comment content> [flags]
 ```

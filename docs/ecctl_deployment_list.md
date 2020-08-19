@@ -2,10 +2,6 @@
 
 Lists the platform's deployments
 
-### Synopsis
-
-Lists the platform's deployments
-
 ```
 ecctl deployment list [flags]
 ```

@@ -2,10 +2,6 @@
 
 Manages an allocator's metadata
 
-### Synopsis
-
-Manages an allocator's metadata
-
 ```
 ecctl platform allocator metadata [flags]
 ```

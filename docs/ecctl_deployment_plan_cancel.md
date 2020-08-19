@@ -2,10 +2,6 @@
 
 Cancels a resource's pending plan
 
-### Synopsis
-
-Cancels a resource's pending plan
-
 ```
 ecctl deployment plan cancel <deployment id> --kind <kind> [--ref-id <ref-id>] [flags]
 ```

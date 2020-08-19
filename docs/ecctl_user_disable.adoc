@@ -3,11 +3,6 @@
 
 Disables a platform user {ece-icon}
 
-[float]
-=== Synopsis
-
-Disables a platform user {ece-icon}
-
 ----
 ecctl user disable <username> [flags]
 ----

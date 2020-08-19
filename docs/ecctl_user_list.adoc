@@ -3,11 +3,6 @@
 
 Lists all platform users {ece-icon}
 
-[float]
-=== Synopsis
-
-Lists all platform users {ece-icon}
-
 ----
 ecctl user list [flags]
 ----

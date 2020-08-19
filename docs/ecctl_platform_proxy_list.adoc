@@ -3,11 +3,6 @@
 
 Returns all of the proxies in the platform {ece-icon}
 
-[float]
-=== Synopsis
-
-Returns all of the proxies in the platform {ece-icon}
-
 ----
 ecctl platform proxy list [flags]
 ----

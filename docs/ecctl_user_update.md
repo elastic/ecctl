@@ -2,10 +2,6 @@
 
 Updates a platform user (Available for ECE only)
 
-### Synopsis
-
-Updates a platform user (Available for ECE only)
-
 ```
 ecctl user update <username> --role <role> [flags]
 ```

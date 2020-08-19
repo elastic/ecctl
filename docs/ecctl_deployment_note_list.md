@@ -2,10 +2,6 @@
 
 Lists the deployment notes
 
-### Synopsis
-
-Lists the deployment notes
-
 ```
 ecctl deployment note list <deployment id> [flags]
 ```

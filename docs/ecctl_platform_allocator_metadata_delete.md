@@ -2,10 +2,6 @@
 
 Deletes a single metadata item from a given allocators metadata
 
-### Synopsis
-
-Deletes a single metadata item from a given allocators metadata
-
 ```
 ecctl platform allocator metadata delete <allocator id> <key> [flags]
 ```

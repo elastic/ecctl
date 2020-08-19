@@ -2,10 +2,6 @@
 
 Lists deployment templates
 
-### Synopsis
-
-Lists deployment templates
-
 ```
 ecctl deployment template list [flags]
 ```

@@ -3,11 +3,6 @@
 
 Manages Elastic StackPacks
 
-[float]
-=== Synopsis
-
-Manages Elastic StackPacks
-
 ----
 ecctl stack [flags]
 ----

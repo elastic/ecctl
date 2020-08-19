@@ -2,10 +2,6 @@
 
 Manages the current authenticated user API keys
 
-### Synopsis
-
-Manages the current authenticated user API keys
-
 ```
 ecctl auth key [flags]
 ```

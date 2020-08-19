@@ -3,11 +3,6 @@
 
 Shows information about an Elastic StackPack
 
-[float]
-=== Synopsis
-
-Shows information about an Elastic StackPack
-
 ----
 ecctl stack show [flags]
 ----

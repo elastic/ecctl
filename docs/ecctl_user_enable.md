@@ -2,10 +2,6 @@
 
 Enables a previously disabled platform user (Available for ECE only)
 
-### Synopsis
-
-Enables a previously disabled platform user (Available for ECE only)
-
 ```
 ecctl user enable <username> [flags]
 ```

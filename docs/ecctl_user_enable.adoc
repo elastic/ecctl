@@ -3,11 +3,6 @@
 
 Enables a previously disabled platform user {ece-icon}
 
-[float]
-=== Synopsis
-
-Enables a previously disabled platform user {ece-icon}
-
 ----
 ecctl user enable <username> [flags]
 ----

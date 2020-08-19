@@ -2,10 +2,6 @@
 
 Moves all the resources from the specified allocator (Available for ECE only)
 
-### Synopsis
-
-Moves all the resources from the specified allocator (Available for ECE only)
-
 ```
 ecctl platform allocator vacate <allocator-id> [flags]
 ```

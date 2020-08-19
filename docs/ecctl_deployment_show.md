@@ -2,10 +2,6 @@
 
 Shows the specified deployment resources
 
-### Synopsis
-
-Shows the specified deployment resources
-
 ```
 ecctl deployment show <deployment-id> [flags]
 ```

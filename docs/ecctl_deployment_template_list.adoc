@@ -3,11 +3,6 @@
 
 Lists deployment templates
 
-[float]
-=== Synopsis
-
-Lists deployment templates
-
 ----
 ecctl deployment template list [flags]
 ----

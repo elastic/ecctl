@@ -3,11 +3,6 @@
 
 Returns information about the allocator {ece-icon}
 
-[float]
-=== Synopsis
-
-Returns information about the allocator {ece-icon}
-
 ----
 ecctl platform allocator show <allocator id> [flags]
 ----

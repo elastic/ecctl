@@ -2,10 +2,6 @@
 
 Deletes an enrollment token (Available for ECE only)
 
-### Synopsis
-
-Deletes an enrollment token (Available for ECE only)
-
 ```
 ecctl platform enrollment-token delete <enrollment-token> [flags]
 ```

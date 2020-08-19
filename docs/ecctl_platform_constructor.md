@@ -2,10 +2,6 @@
 
 Manages constructors (Available for ECE only)
 
-### Synopsis
-
-Manages constructors (Available for ECE only)
-
 ```
 ecctl platform constructor [flags]
 ```

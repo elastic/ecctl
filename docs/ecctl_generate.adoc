@@ -3,11 +3,6 @@
 
 Generates completions and docs
 
-[float]
-=== Synopsis
-
-Generates completions and docs
-
 ----
 ecctl generate [flags]
 ----

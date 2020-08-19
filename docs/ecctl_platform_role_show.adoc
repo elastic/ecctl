@@ -3,11 +3,6 @@
 
 Shows the existing platform roles {ece-icon}
 
-[float]
-=== Synopsis
-
-Shows the existing platform roles {ece-icon}
-
 ----
 ecctl platform role show <role> [flags]
 ----

@@ -2,10 +2,6 @@
 
 Manages Elasticsearch resource keystores
 
-### Synopsis
-
-Manages Elasticsearch resource keystores
-
 ```
 ecctl deployment elasticsearch keystore [flags]
 ```

@@ -3,11 +3,6 @@
 
 Moves all the resources from the specified allocator {ece-icon}
 
-[float]
-=== Synopsis
-
-Moves all the resources from the specified allocator {ece-icon}
-
 ----
 ecctl platform allocator vacate <allocator-id> [flags]
 ----

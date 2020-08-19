@@ -3,11 +3,6 @@
 
 Deletes an Elastic StackPack {ece-icon}
 
-[float]
-=== Synopsis
-
-Deletes an Elastic StackPack {ece-icon}
-
 ----
 ecctl stack delete [flags]
 ----

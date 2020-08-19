@@ -2,10 +2,6 @@
 
 Lists all the snapshot repositories (Available for ECE only)
 
-### Synopsis
-
-Lists all the snapshot repositories (Available for ECE only)
-
 ```
 ecctl platform repository list [flags]
 ```

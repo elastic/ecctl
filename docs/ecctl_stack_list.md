@@ -2,10 +2,6 @@
 
 Lists Elastic StackPacks
 
-### Synopsis
-
-Lists Elastic StackPacks
-
 ```
 ecctl stack list [flags]
 ```

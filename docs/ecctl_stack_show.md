@@ -2,10 +2,6 @@
 
 Shows information about an Elastic StackPack
 
-### Synopsis
-
-Shows information about an Elastic StackPack
-
 ```
 ecctl stack show [flags]
 ```

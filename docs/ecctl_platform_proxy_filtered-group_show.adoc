@@ -3,11 +3,6 @@
 
 Shows details for proxies filtered group {ece-icon}
 
-[float]
-=== Synopsis
-
-Shows details for proxies filtered group {ece-icon}
-
 ----
 ecctl platform proxy filtered-group show <filtered group id> [flags]
 ----

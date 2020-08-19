@@ -3,11 +3,6 @@
 
 Creates a new deployment template {ece-icon}
 
-[float]
-=== Synopsis
-
-Creates a new deployment template {ece-icon}
-
 ----
 ecctl deployment template create --file <definition.json> [flags]
 ----

@@ -3,11 +3,6 @@
 
 Shows a deployment note
 
-[float]
-=== Synopsis
-
-Shows a deployment note
-
 ----
 ecctl deployment note show <deployment id> --id <note id> [flags]
 ----

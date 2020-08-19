@@ -3,11 +3,6 @@
 
 Generates the command tree documentation
 
-[float]
-=== Synopsis
-
-Generates the command tree documentation
-
 ----
 ecctl generate docs [flags]
 ----

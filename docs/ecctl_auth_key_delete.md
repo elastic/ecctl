@@ -2,10 +2,6 @@
 
 Deletes one or more existing API keys for the specified user
 
-### Synopsis
-
-Deletes one or more existing API keys for the specified user
-
 ```
 ecctl auth key delete <key id> <key id> ... [flags]
 ```

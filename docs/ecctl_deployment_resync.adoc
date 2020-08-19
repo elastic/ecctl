@@ -3,11 +3,6 @@
 
 Resynchronizes the search index and cache for the selected deployment or all
 
-[float]
-=== Synopsis
-
-Resynchronizes the search index and cache for the selected deployment or all
-
 ----
 ecctl deployment resync {<deployment id> | --all} [flags]
 ----

@@ -2,10 +2,6 @@
 
 Outputs the Bash completion to either stdout (default) or to a file
 
-### Synopsis
-
-Outputs the Bash completion to either stdout (default) or to a file
-
 ```
 ecctl generate completions [flags]
 ```

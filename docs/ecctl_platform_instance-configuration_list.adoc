@@ -3,11 +3,6 @@
 
 Lists the instance configurations {ece-icon}
 
-[float]
-=== Synopsis
-
-Lists the instance configurations {ece-icon}
-
 ----
 ecctl platform instance-configuration list [flags]
 ----

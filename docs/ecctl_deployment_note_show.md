@@ -2,10 +2,6 @@
 
 Shows a deployment note
 
-### Synopsis
-
-Shows a deployment note
-
 ```
 ecctl deployment note show <deployment id> --id <note id> [flags]
 ```

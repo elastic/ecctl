@@ -2,10 +2,6 @@
 
 Shows details of a specified user (Available for ECE only)
 
-### Synopsis
-
-Shows details of a specified user (Available for ECE only)
-
 ```
 ecctl user show <user name> [flags]
 ```

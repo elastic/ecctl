@@ -3,11 +3,6 @@
 
 Manages authentication settings
 
-[float]
-=== Synopsis
-
-Manages authentication settings
-
 ----
 ecctl auth [flags]
 ----

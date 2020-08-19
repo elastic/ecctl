@@ -2,10 +2,6 @@
 
 Creates an initial configuration file.
 
-### Synopsis
-
-Creates an initial configuration file.
-
 ```
 ecctl init [flags]
 ```

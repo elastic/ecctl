@@ -3,11 +3,6 @@
 
 Manages proxies {ece-icon}
 
-[float]
-=== Synopsis
-
-Manages proxies {ece-icon}
-
 ----
 ecctl platform proxy [flags]
 ----

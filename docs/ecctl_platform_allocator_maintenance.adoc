@@ -3,11 +3,6 @@
 
 Sets the allocator in Maintenance mode {ece-icon}
 
-[float]
-=== Synopsis
-
-Sets the allocator in Maintenance mode {ece-icon}
-
 ----
 ecctl platform allocator maintenance <allocator id> [flags]
 ----

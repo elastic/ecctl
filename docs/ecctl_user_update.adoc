@@ -3,11 +3,6 @@
 
 Updates a platform user {ece-icon}
 
-[float]
-=== Synopsis
-
-Updates a platform user {ece-icon}
-
 ----
 ecctl user update <username> --role <role> [flags]
 ----

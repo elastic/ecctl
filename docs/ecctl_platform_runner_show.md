@@ -2,10 +2,6 @@
 
 Shows information about the specified runner (Available for ECE only)
 
-### Synopsis
-
-Shows information about the specified runner (Available for ECE only)
-
 ```
 ecctl platform runner show <runner id> [flags]
 ```

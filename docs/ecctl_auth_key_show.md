@@ -2,10 +2,6 @@
 
 Shows the API key details for the current authenticated user
 
-### Synopsis
-
-Shows the API key details for the current authenticated user
-
 ```
 ecctl auth key show <key id> [flags]
 ```

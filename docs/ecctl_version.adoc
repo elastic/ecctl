@@ -3,11 +3,6 @@
 
 Shows ecctl version
 
-[float]
-=== Synopsis
-
-Shows ecctl version
-
 ----
 ecctl version [flags]
 ----

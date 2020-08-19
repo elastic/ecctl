@@ -3,11 +3,6 @@
 
 Manages an allocator's metadata
 
-[float]
-=== Synopsis
-
-Manages an allocator's metadata
-
 ----
 ecctl platform allocator metadata [flags]
 ----

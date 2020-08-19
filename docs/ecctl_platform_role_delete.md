@@ -2,10 +2,6 @@
 
 Deletes an existing platform role (Available for ECE only)
 
-### Synopsis
-
-Deletes an existing platform role (Available for ECE only)
-
 ```
 ecctl platform role delete <role> [flags]
 ```

@@ -2,10 +2,6 @@
 
 Sets or updates a single metadata item to a given allocators metadata
 
-### Synopsis
-
-Sets or updates a single metadata item to a given allocators metadata
-
 ```
 ecctl platform allocator metadata set <allocator id> <key> <value> [flags]
 ```

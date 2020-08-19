@@ -3,11 +3,6 @@
 
 Manages deployments
 
-[float]
-=== Synopsis
-
-Manages deployments
-
 ----
 ecctl deployment [flags]
 ----

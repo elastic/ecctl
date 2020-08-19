@@ -2,10 +2,6 @@
 
 Deletes an existing API key for the specified user
 
-### Synopsis
-
-Deletes an existing API key for the specified user
-
 ```
 ecctl user key delete --user=<user id> <key id> <key id>... [flags]
 ```

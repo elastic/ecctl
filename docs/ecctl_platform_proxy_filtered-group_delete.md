@@ -2,10 +2,6 @@
 
 Deletes proxies filtered group (Available for ECE only)
 
-### Synopsis
-
-Deletes proxies filtered group (Available for ECE only)
-
 ```
 ecctl platform proxy filtered-group delete <filtered group id> [flags]
 ```

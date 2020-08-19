@@ -2,10 +2,6 @@
 
 Shows allocator metadata
 
-### Synopsis
-
-Shows allocator metadata
-
 ```
 ecctl platform allocator metadata show <allocator id> [flags]
 ```

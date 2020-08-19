@@ -2,10 +2,6 @@
 
 Creates an enrollment token for role(s)
 
-### Synopsis
-
-Creates an enrollment token for role(s)
-
 ```
 ecctl platform enrollment-token create --role <ROLE> [flags]
 ```

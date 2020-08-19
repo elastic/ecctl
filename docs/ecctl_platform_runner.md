@@ -2,10 +2,6 @@
 
 Manages platform runners (Available for ECE only)
 
-### Synopsis
-
-Manages platform runners (Available for ECE only)
-
 ```
 ecctl platform runner [flags]
 ```

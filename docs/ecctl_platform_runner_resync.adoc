@@ -3,11 +3,6 @@
 
 Resynchronizes the search index and cache for the selected runner or all {ece-icon}
 
-[float]
-=== Synopsis
-
-Resynchronizes the search index and cache for the selected runner or all {ece-icon}
-
 ----
 ecctl platform runner resync {<runner id> | --all} [flags]
 ----

@@ -3,11 +3,6 @@
 
 Manages platform roles {ece-icon}
 
-[float]
-=== Synopsis
-
-Manages platform roles {ece-icon}
-
 ----
 ecctl platform role [flags]
 ----

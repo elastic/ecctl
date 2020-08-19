@@ -2,10 +2,6 @@
 
 Disables a platform user (Available for ECE only)
 
-### Synopsis
-
-Disables a platform user (Available for ECE only)
-
 ```
 ecctl user disable <username> [flags]
 ```

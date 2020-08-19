@@ -2,10 +2,6 @@
 
 Shows information about the platform (Available for ECE only)
 
-### Synopsis
-
-Shows information about the platform (Available for ECE only)
-
 ```
 ecctl platform info [flags]
 ```

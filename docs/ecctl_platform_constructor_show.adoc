@@ -3,11 +3,6 @@
 
 Returns information about the constructor with given ID {ece-icon}
 
-[float]
-=== Synopsis
-
-Returns information about the constructor with given ID {ece-icon}
-
 ----
 ecctl platform constructor show <constructor id> [flags]
 ----

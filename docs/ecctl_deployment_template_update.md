@@ -2,10 +2,6 @@
 
 Updates an existing deployment template (Available for ECE only)
 
-### Synopsis
-
-Updates an existing deployment template (Available for ECE only)
-
 ```
 ecctl deployment template update --template-id <template id> --file <definition.json> [flags]
 ```

@@ -2,10 +2,6 @@
 
 Starts maintenance mode on a deployment resource
 
-### Synopsis
-
-Starts maintenance mode on a deployment resource
-
 ```
 ecctl deployment resource start-maintenance <deployment id> --kind <kind> [--all|--i <instance-id>,<instance-id>] [flags]
 ```

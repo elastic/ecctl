@@ -3,11 +3,6 @@
 
 Manages tokens {ece-icon}
 
-[float]
-=== Synopsis
-
-Manages tokens {ece-icon}
-
 ----
 ecctl platform enrollment-token [flags]
 ----

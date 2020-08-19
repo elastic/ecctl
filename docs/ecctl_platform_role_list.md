@@ -2,10 +2,6 @@
 
 Lists the existing platform roles (Available for ECE only)
 
-### Synopsis
-
-Lists the existing platform roles (Available for ECE only)
-
 ```
 ecctl platform role list [flags]
 ```

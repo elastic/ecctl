@@ -2,10 +2,6 @@
 
 Deletes an Elastic StackPack (Available for ECE only)
 
-### Synopsis
-
-Deletes an Elastic StackPack (Available for ECE only)
-
 ```
 ecctl stack delete [flags]
 ```

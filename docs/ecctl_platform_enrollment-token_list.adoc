@@ -3,11 +3,6 @@
 
 Retrieves a list of persistent enrollment tokens {ece-icon}
 
-[float]
-=== Synopsis
-
-Retrieves a list of persistent enrollment tokens {ece-icon}
-
 ----
 ecctl platform enrollment-token list [flags]
 ----

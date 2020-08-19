@@ -2,10 +2,6 @@
 
 Interacts with deployment template APIs
 
-### Synopsis
-
-Interacts with deployment template APIs
-
 ```
 ecctl deployment template [flags]
 ```
