@@ -55,3 +55,12 @@ for file in ecctl*.adoc; do
     fi
 done
 sort temp-index.adoc > ecctl-command-reference-index.adoc; rm temp-index.adoc
+
+echo "-> Validating ASCIIDOC files..."
+
+# Creating /shared/attributes.asciidoc is necessary since it's part of our
+# common doc build process, and the file is imported in docs/index.asciidoc.
+docker run -v $(pwd):/documents/ asciidoctor/docker-asciidoctor bash -c '
+shopt -s extglob
+mkdir -p /shared && touch /shared/attributes.asciidoc
+asciidoctor --failure-level ERROR -o /dev/null ?(*.adoc|*.asciidoc)'
