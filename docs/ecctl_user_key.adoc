@@ -3,11 +3,6 @@
 
 Manages the API keys of a platform user
 
-[float]
-=== Synopsis
-
-Manages the API keys of a platform user
-
 ----
 ecctl user key [flags]
 ----

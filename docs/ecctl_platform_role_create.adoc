@@ -3,11 +3,6 @@
 
 Creates a new platform role from a definition {ece-icon}
 
-[float]
-=== Synopsis
-
-Creates a new platform role from a definition {ece-icon}
-
 ----
 ecctl platform role create --file <filename.json> [flags]
 ----

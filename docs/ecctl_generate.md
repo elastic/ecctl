@@ -2,10 +2,6 @@
 
 Generates completions and docs
 
-### Synopsis
-
-Generates completions and docs
-
 ```
 ecctl generate [flags]
 ```

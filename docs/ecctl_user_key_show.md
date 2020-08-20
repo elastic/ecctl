@@ -2,10 +2,6 @@
 
 Shows the API key details for the specified user
 
-### Synopsis
-
-Shows the API key details for the specified user
-
 ```
 ecctl user key show --user=<user id> <key id> [flags]
 ```

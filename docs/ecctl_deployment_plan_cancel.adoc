@@ -3,11 +3,6 @@
 
 Cancels a resource's pending plan
 
-[float]
-=== Synopsis
-
-Cancels a resource's pending plan
-
 ----
 ecctl deployment plan cancel <deployment id> --kind <kind> [--ref-id <ref-id>] [flags]
 ----

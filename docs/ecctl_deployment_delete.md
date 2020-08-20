@@ -2,10 +2,6 @@
 
 Deletes a previously shutdown deployment (Available for ECE only)
 
-### Synopsis
-
-Deletes a previously shutdown deployment (Available for ECE only)
-
 ```
 ecctl deployment delete <deployment-id> [flags]
 ```

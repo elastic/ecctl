@@ -2,10 +2,6 @@
 
 Starts a previously stopped deployment resource
 
-### Synopsis
-
-Starts a previously stopped deployment resource
-
 ```
 ecctl deployment resource start <deployment id> --kind <kind> [--all|--i <instance-id>,<instance-id>] [flags]
 ```

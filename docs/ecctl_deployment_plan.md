@@ -2,10 +2,6 @@
 
 Manages deployment plans
 
-### Synopsis
-
-Manages deployment plans
-
 ```
 ecctl deployment plan [flags]
 ```

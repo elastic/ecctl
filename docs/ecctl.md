@@ -2,10 +2,6 @@
 
 Elastic Cloud Control
 
-### Synopsis
-
-Elastic Cloud Control
-
 ### Options
 
 ```

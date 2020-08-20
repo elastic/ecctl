@@ -2,10 +2,6 @@
 
 Manages proxies filtered group (Available for ECE only)
 
-### Synopsis
-
-Manages proxies filtered group (Available for ECE only)
-
 ```
 ecctl platform proxy filtered-group [flags]
 ```

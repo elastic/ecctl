@@ -2,10 +2,6 @@
 
 Manages platform roles (Available for ECE only)
 
-### Synopsis
-
-Manages platform roles (Available for ECE only)
-
 ```
 ecctl platform role [flags]
 ```

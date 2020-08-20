@@ -2,10 +2,6 @@
 
 Updates proxies filtered group (Available for ECE only)
 
-### Synopsis
-
-Updates proxies filtered group (Available for ECE only)
-
 ```
 ecctl platform proxy filtered-group update <filtered group id> --filters <key1=value1,key2=value2> --expected-proxies-count <int> --version <int> [flags]
 ```

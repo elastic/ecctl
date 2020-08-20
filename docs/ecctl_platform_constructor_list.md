@@ -2,10 +2,6 @@
 
 Returns all of the constructors in the platform (Available for ECE only)
 
-### Synopsis
-
-Returns all of the constructors in the platform (Available for ECE only)
-
 ```
 ecctl platform constructor list [flags]
 ```

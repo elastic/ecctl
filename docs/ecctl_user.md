@@ -2,10 +2,6 @@
 
 Manages the platform users (Available for ECE only)
 
-### Synopsis
-
-Manages the platform users (Available for ECE only)
-
 ```
 ecctl user [flags]
 ```

@@ -3,11 +3,6 @@
 
 Manages constructors {ece-icon}
 
-[float]
-=== Synopsis
-
-Manages constructors {ece-icon}
-
 ----
 ecctl platform constructor [flags]
 ----

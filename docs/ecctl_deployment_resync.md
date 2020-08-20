@@ -2,10 +2,6 @@
 
 Resynchronizes the search index and cache for the selected deployment or all
 
-### Synopsis
-
-Resynchronizes the search index and cache for the selected deployment or all
-
 ```
 ecctl deployment resync {<deployment id> | --all} [flags]
 ```

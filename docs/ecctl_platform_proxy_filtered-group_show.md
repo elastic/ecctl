@@ -2,10 +2,6 @@
 
 Shows details for proxies filtered group (Available for ECE only)
 
-### Synopsis
-
-Shows details for proxies filtered group (Available for ECE only)
-
 ```
 ecctl platform proxy filtered-group show <filtered group id> [flags]
 ```

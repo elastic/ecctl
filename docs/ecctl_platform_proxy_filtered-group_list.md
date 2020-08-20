@@ -2,10 +2,6 @@
 
 Returns all proxies filtered groups in the platform (Available for ECE only)
 
-### Synopsis
-
-Returns all proxies filtered groups in the platform (Available for ECE only)
-
 ```
 ecctl platform proxy filtered-group list [flags]
 ```

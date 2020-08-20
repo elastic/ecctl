@@ -2,10 +2,6 @@
 
 Manages tokens (Available for ECE only)
 
-### Synopsis
-
-Manages tokens (Available for ECE only)
-
 ```
 ecctl platform enrollment-token [flags]
 ```

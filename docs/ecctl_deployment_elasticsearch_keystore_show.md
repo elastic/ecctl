@@ -2,10 +2,6 @@
 
 Shows the settings from the Elasticsearch resource keystore
 
-### Synopsis
-
-Shows the settings from the Elasticsearch resource keystore
-
 ```
 ecctl deployment elasticsearch keystore show <deployment id> [--ref-id <ref-id>] [flags]
 ```

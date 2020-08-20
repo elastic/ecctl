@@ -3,11 +3,6 @@
 
 Deletes an instance configuration {ece-icon}
 
-[float]
-=== Synopsis
-
-Deletes an instance configuration {ece-icon}
-
 ----
 ecctl platform instance-configuration delete <config id> [flags]
 ----

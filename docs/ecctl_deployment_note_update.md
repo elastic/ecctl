@@ -2,10 +2,6 @@
 
 Updates the deployment notes
 
-### Synopsis
-
-Updates the deployment notes
-
 ```
 ecctl deployment note update <deployment id> --id <note id> --comment <comment content> [flags]
 ```

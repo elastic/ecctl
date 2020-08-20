@@ -3,11 +3,6 @@
 
 Shows information about the platform {ece-icon}
 
-[float]
-=== Synopsis
-
-Shows information about the platform {ece-icon}
-
 ----
 ecctl platform info [flags]
 ----

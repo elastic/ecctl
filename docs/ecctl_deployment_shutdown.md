@@ -2,10 +2,6 @@
 
 Shuts down a deployment and all of its associated sub-resources
 
-### Synopsis
-
-Shuts down a deployment and all of its associated sub-resources
-
 ```
 ecctl deployment shutdown <deployment-id> [flags]
 ```

@@ -3,11 +3,6 @@
 
 Creates a new platform user {ece-icon}
 
-[float]
-=== Synopsis
-
-Creates a new platform user {ece-icon}
-
 ----
 ecctl user create --username <username> --role <role> [flags]
 ----

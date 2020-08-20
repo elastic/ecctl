@@ -3,11 +3,6 @@
 
 Manages Elasticsearch resources
 
-[float]
-=== Synopsis
-
-Manages Elasticsearch resources
-
 ----
 ecctl deployment elasticsearch [flags]
 ----

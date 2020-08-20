@@ -2,10 +2,6 @@
 
 Lists all platform users (Available for ECE only)
 
-### Synopsis
-
-Lists all platform users (Available for ECE only)
-
 ```
 ecctl user list [flags]
 ```

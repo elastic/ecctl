@@ -3,11 +3,6 @@
 
 Returns all proxies filtered groups in the platform {ece-icon}
 
-[float]
-=== Synopsis
-
-Returns all proxies filtered groups in the platform {ece-icon}
-
 ----
 ecctl platform proxy filtered-group list [flags]
 ----

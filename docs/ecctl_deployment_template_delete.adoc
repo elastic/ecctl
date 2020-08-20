@@ -3,11 +3,6 @@
 
 Deletes an existing deployment template {ece-icon}
 
-[float]
-=== Synopsis
-
-Deletes an existing deployment template {ece-icon}
-
 ----
 ecctl deployment template delete --template-id <template id> [flags]
 ----

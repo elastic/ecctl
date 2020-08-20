@@ -2,10 +2,6 @@
 
 Creates a new API key for the current authenticated user
 
-### Synopsis
-
-Creates a new API key for the current authenticated user
-
 ```
 ecctl auth key create [flags]
 ```

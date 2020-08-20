@@ -2,10 +2,6 @@
 
 Manages proxies (Available for ECE only)
 
-### Synopsis
-
-Manages proxies (Available for ECE only)
-
 ```
 ecctl platform proxy [flags]
 ```

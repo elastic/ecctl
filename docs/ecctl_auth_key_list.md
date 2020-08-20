@@ -2,10 +2,6 @@
 
 Lists the API keys for the current authenticated user
 
-### Synopsis
-
-Lists the API keys for the current authenticated user
-
 ```
 ecctl auth key list [flags]
 ```

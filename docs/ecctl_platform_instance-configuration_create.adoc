@@ -3,11 +3,6 @@
 
 Creates a new instance configuration {ece-icon}
 
-[float]
-=== Synopsis
-
-Creates a new instance configuration {ece-icon}
-
 ----
 ecctl platform instance-configuration create -f <config.json> [flags]
 ----

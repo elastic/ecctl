@@ -2,10 +2,6 @@
 
 Displays a deployment template (Available for ECE only)
 
-### Synopsis
-
-Displays a deployment template (Available for ECE only)
-
 ```
 ecctl deployment template show --template-id <template id> [flags]
 ```

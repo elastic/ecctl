@@ -3,11 +3,6 @@
 
 Sets/un-sets a constructor's maintenance mode {ece-icon}
 
-[float]
-=== Synopsis
-
-Sets/un-sets a constructor's maintenance mode {ece-icon}
-
 ----
 ecctl platform constructor maintenance <constructor id> [flags]
 ----

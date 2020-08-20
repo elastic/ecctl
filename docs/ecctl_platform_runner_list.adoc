@@ -3,11 +3,6 @@
 
 Lists the existing platform runners {ece-icon}
 
-[float]
-=== Synopsis
-
-Lists the existing platform runners {ece-icon}
-
 ----
 ecctl platform runner list [flags]
 ----

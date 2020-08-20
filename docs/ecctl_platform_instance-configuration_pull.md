@@ -2,10 +2,6 @@
 
 Downloads instance configuration into a local folder (Available for ECE only)
 
-### Synopsis
-
-Downloads instance configuration into a local folder (Available for ECE only)
-
 ```
 ecctl platform instance-configuration pull --path <path> [flags]
 ```

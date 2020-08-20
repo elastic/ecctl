@@ -3,11 +3,6 @@
 
 Obtains a snapshot repository config {ece-icon}
 
-[float]
-=== Synopsis
-
-Obtains a snapshot repository config {ece-icon}
-
 ----
 ecctl platform repository show <repository name> [flags]
 ----

@@ -2,10 +2,6 @@
 
 Manages authentication settings
 
-### Synopsis
-
-Manages authentication settings
-
 ```
 ecctl auth [flags]
 ```

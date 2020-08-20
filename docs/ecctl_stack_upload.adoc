@@ -3,11 +3,6 @@
 
 Uploads an Elastic StackPack {ece-icon}
 
-[float]
-=== Synopsis
-
-Uploads an Elastic StackPack {ece-icon}
-
 ----
 ecctl stack upload [flags]
 ----

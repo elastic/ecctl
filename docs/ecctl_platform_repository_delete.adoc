@@ -3,11 +3,6 @@
 
 Deletes a snapshot repositories {ece-icon}
 
-[float]
-=== Synopsis
-
-Deletes a snapshot repositories {ece-icon}
-
 ----
 ecctl platform repository delete <repository name> [flags]
 ----

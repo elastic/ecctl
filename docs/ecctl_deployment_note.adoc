@@ -3,11 +3,6 @@
 
 Manages a deployment's notes
 
-[float]
-=== Synopsis
-
-Manages a deployment's notes
-
 ----
 ecctl deployment note [flags]
 ----

@@ -3,11 +3,6 @@
 
 Manages allocators {ece-icon}
 
-[float]
-=== Synopsis
-
-Manages allocators {ece-icon}
-
 ----
 ecctl platform allocator [flags]
 ----

@@ -3,11 +3,6 @@
 
 Lists Elastic StackPacks
 
-[float]
-=== Synopsis
-
-Lists Elastic StackPacks
-
 ----
 ecctl stack list [flags]
 ----

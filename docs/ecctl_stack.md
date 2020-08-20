@@ -2,10 +2,6 @@
 
 Manages Elastic StackPacks
 
-### Synopsis
-
-Manages Elastic StackPacks
-
 ```
 ecctl stack [flags]
 ```

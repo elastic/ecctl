@@ -3,11 +3,6 @@
 
 Lists the platform's deployments
 
-[float]
-=== Synopsis
-
-Lists the platform's deployments
-
 ----
 ecctl deployment list [flags]
 ----

@@ -3,11 +3,6 @@
 
 Deletes an enrollment token {ece-icon}
 
-[float]
-=== Synopsis
-
-Deletes an enrollment token {ece-icon}
-
 ----
 ecctl platform enrollment-token delete <enrollment-token> [flags]
 ----

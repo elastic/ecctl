@@ -3,11 +3,6 @@
 
 Shows allocator metadata
 
-[float]
-=== Synopsis
-
-Shows allocator metadata
-
 ----
 ecctl platform allocator metadata show <allocator id> [flags]
 ----

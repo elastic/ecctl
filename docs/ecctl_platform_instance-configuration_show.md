@@ -2,10 +2,6 @@
 
 Shows an instance configuration (Available for ECE only)
 
-### Synopsis
-
-Shows an instance configuration (Available for ECE only)
-
 ```
 ecctl platform instance-configuration show <config id> [flags]
 ```

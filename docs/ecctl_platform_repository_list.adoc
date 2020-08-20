@@ -3,11 +3,6 @@
 
 Lists all the snapshot repositories {ece-icon}
 
-[float]
-=== Synopsis
-
-Lists all the snapshot repositories {ece-icon}
-
 ----
 ecctl platform repository list [flags]
 ----

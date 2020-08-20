@@ -2,10 +2,6 @@
 
 Generates the command tree documentation
 
-### Synopsis
-
-Generates the command tree documentation
-
 ```
 ecctl generate docs [flags]
 ```

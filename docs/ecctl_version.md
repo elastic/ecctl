@@ -2,10 +2,6 @@
 
 Shows ecctl version
 
-### Synopsis
-
-Shows ecctl version
-
 ```
 ecctl version [flags]
 ```

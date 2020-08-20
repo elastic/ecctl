@@ -2,10 +2,6 @@
 
 Manages a deployment's notes
 
-### Synopsis
-
-Manages a deployment's notes
-
 ```
 ecctl deployment note [flags]
 ```

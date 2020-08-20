@@ -3,11 +3,6 @@
 
 Manages the platform {ece-icon}
 
-[float]
-=== Synopsis
-
-Manages the platform {ece-icon}
-
 ----
 ecctl platform [flags]
 ----

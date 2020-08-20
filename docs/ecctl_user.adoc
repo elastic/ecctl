@@ -3,11 +3,6 @@
 
 Manages the platform users {ece-icon}
 
-[float]
-=== Synopsis
-
-Manages the platform users {ece-icon}
-
 ----
 ecctl user [flags]
 ----

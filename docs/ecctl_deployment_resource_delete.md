@@ -2,10 +2,6 @@
 
 Deletes a previously shut down deployment resource
 
-### Synopsis
-
-Deletes a previously shut down deployment resource
-
 ```
 ecctl deployment resource delete <deployment id> --kind <kind> --ref-id <ref-id> [flags]
 ```

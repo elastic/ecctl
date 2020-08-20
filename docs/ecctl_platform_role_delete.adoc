@@ -3,11 +3,6 @@
 
 Deletes an existing platform role {ece-icon}
 
-[float]
-=== Synopsis
-
-Deletes an existing platform role {ece-icon}
-
 ----
 ecctl platform role delete <role> [flags]
 ----

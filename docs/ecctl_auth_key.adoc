@@ -3,11 +3,6 @@
 
 Manages the current authenticated user API keys
 
-[float]
-=== Synopsis
-
-Manages the current authenticated user API keys
-
 ----
 ecctl auth key [flags]
 ----

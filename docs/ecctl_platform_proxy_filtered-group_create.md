@@ -2,10 +2,6 @@
 
 Creates proxies filtered group (Available for ECE only)
 
-### Synopsis
-
-Creates proxies filtered group (Available for ECE only)
-
 ```
 ecctl platform proxy filtered-group create <filtered group id> --filters <key1=value1,key2=value2> --expected-proxies-count <int> [flags]
 ```

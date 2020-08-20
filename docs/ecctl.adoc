@@ -4,11 +4,6 @@
 Elastic Cloud Control
 
 [float]
-=== Synopsis
-
-Elastic Cloud Control
-
-[float]
 === Options
 
 ----

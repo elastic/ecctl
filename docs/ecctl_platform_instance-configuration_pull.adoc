@@ -3,11 +3,6 @@
 
 Downloads instance configuration into a local folder {ece-icon}
 
-[float]
-=== Synopsis
-
-Downloads instance configuration into a local folder {ece-icon}
-
 ----
 ecctl platform instance-configuration pull --path <path> [flags]
 ----

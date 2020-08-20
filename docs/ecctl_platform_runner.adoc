@@ -3,11 +3,6 @@
 
 Manages platform runners {ece-icon}
 
-[float]
-=== Synopsis
-
-Manages platform runners {ece-icon}
-
 ----
 ecctl platform runner [flags]
 ----

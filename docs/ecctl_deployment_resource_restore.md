@@ -2,10 +2,6 @@
 
 Restores a previously shut down deployment resource
 
-### Synopsis
-
-Restores a previously shut down deployment resource
-
 ```
 ecctl deployment resource restore <deployment id> --kind <kind> --ref-id <ref-id> [flags]
 ```

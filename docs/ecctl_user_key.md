@@ -2,10 +2,6 @@
 
 Manages the API keys of a platform user
 
-### Synopsis
-
-Manages the API keys of a platform user
-
 ```
 ecctl user key [flags]
 ```

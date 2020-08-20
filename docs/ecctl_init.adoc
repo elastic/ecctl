@@ -3,11 +3,6 @@
 
 Creates an initial configuration file.
 
-[float]
-=== Synopsis
-
-Creates an initial configuration file.
-
 ----
 ecctl init [flags]
 ----

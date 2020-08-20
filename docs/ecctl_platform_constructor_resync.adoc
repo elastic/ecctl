@@ -3,11 +3,6 @@
 
 Resynchronizes the search index and cache for the selected constructor or all {ece-icon}
 
-[float]
-=== Synopsis
-
-Resynchronizes the search index and cache for the selected constructor or all {ece-icon}
-
 ----
 ecctl platform constructor resync {<constructor id> | --all} [flags]
 ----

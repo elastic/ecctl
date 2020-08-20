@@ -2,10 +2,6 @@
 
 Stops maintenance mode on a deployment resource
 
-### Synopsis
-
-Stops maintenance mode on a deployment resource
-
 ```
 ecctl deployment resource stop-maintenance <deployment id> --kind <kind> [--all|--i <instance-id>,<instance-id>] [flags]
 ```

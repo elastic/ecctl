@@ -3,11 +3,6 @@
 
 Interacts with deployment template APIs
 
-[float]
-=== Synopsis
-
-Interacts with deployment template APIs
-
 ----
 ecctl deployment template [flags]
 ----

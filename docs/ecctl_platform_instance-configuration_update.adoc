@@ -3,11 +3,6 @@
 
 Overwrites an instance configuration {ece-icon}
 
-[float]
-=== Synopsis
-
-Overwrites an instance configuration {ece-icon}
-
 ----
 ecctl platform instance-configuration update <config id> -f <config.json> [flags]
 ----

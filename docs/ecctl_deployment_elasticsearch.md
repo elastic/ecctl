@@ -2,10 +2,6 @@
 
 Manages Elasticsearch resources
 
-### Synopsis
-
-Manages Elasticsearch resources
-
 ```
 ecctl deployment elasticsearch [flags]
 ```

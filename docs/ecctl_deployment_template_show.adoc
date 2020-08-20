@@ -3,11 +3,6 @@
 
 Displays a deployment template {ece-icon}
 
-[float]
-=== Synopsis
-
-Displays a deployment template {ece-icon}
-
 ----
 ecctl deployment template show --template-id <template id> [flags]
 ----
