@@ -64,11 +64,13 @@ func listAllocators(cmd *cobra.Command, args []string) error {
 	}
 
 	allFlag, _ := strconv.ParseBool(cmd.Flag("all").Value.String())
+	size, _ := cmd.Flags().GetInt("size")
 	a, err := allocatorapi.List(allocatorapi.ListParams{
 		API:        ecctl.Get().API,
 		Query:      queryString,
 		FilterTags: cmd.Flag("filter").Value.String(),
 		ShowAll:    allFlag,
+		Size:       int64(size),
 		Region:     ecctl.Get().Config.Region,
 	})
 	if err != nil {
@@ -101,6 +103,7 @@ func init() {
 	listAllocatorsCmd.Flags().StringArrayP("filter", "f", nil, allocatorFilterCmdMessage)
 	listAllocatorsCmd.Flags().Bool("unhealthy", false, "Searches for unhealthy allocators")
 	listAllocatorsCmd.Flags().String("query", "", queryFlagHelp)
+	listAllocatorsCmd.Flags().String("size", "", "Defines the maximum number of allocators to return.")
 	listAllocatorsCmd.Flags().Bool("metadata", false, "Shows allocators metadata")
 	listAllocatorsCmd.Flags().Bool("all", false, "Shows all allocators (including those with no instances or not connected)")
 }
