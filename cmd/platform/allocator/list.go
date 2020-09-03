@@ -103,7 +103,7 @@ func init() {
 	listAllocatorsCmd.Flags().StringArrayP("filter", "f", nil, allocatorFilterCmdMessage)
 	listAllocatorsCmd.Flags().Bool("unhealthy", false, "Searches for unhealthy allocators")
 	listAllocatorsCmd.Flags().String("query", "", queryFlagHelp)
-	listAllocatorsCmd.Flags().String("size", "", "Defines the maximum number of allocators to return (defaults to 100)")
+	listAllocatorsCmd.Flags().Int("size", 100, "Defines the maximum number of allocators to return")
 	listAllocatorsCmd.Flags().Bool("metadata", false, "Shows allocators metadata")
 	listAllocatorsCmd.Flags().Bool("all", false, "Shows all allocators (including those with no instances or not connected)")
 }
