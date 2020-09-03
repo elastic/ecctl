@@ -43,7 +43,7 @@ ecctl platform allocator list [flags]
   -h, --help                 help for list
       --metadata             Shows allocators metadata
       --query string         Searches allocators using an Elasticsearch search query string query
-      --size string          Defines the maximum number of allocators to return.
+      --size string          Defines the maximum number of allocators to return (defaults to 100)
       --unhealthy            Searches for unhealthy allocators
 ----
 
