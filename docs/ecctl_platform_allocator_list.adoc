@@ -38,7 +38,7 @@ ecctl platform allocator list [flags]
 === Options
 
 ----
-      --all                  Shows all allocators (including those with no instances or not connected)
+      --all                  Shows all allocators, including those with no instances or not connected, this is relative to the --size flag.
   -f, --filter stringArray   Post-query filter out allocators based on metadata tags, for instance 'instanceType:i3.large'
   -h, --help                 help for list
       --metadata             Shows allocators metadata
