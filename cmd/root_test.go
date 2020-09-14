@@ -217,7 +217,11 @@ func TestInitApp(t *testing.T) {
 				client: new(http.Client),
 				configFunc: func(v *viper.Viper) func() {
 					unsetEnv(t)
-					cfg := filepath.Join(os.ExpandEnv(ecctlHomePath), "someconfig.yml")
+					home := os.ExpandEnv(ecctlHomePath)
+					if err := os.MkdirAll(home, 0755); err != nil {
+						t.Fatal(err)
+					}
+					cfg := filepath.Join(home, "someconfig.yml")
 					if err := ioutil.WriteFile(cfg, []byte("api_key: someapikey"), 0660); err != nil {
 						t.Fatal(err)
 					}
