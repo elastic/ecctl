@@ -105,5 +105,5 @@ func init() {
 	listAllocatorsCmd.Flags().String("query", "", queryFlagHelp)
 	listAllocatorsCmd.Flags().Int("size", 100, "Defines the maximum number of allocators to return")
 	listAllocatorsCmd.Flags().Bool("metadata", false, "Shows allocators metadata")
-	listAllocatorsCmd.Flags().Bool("all", false, "Shows all allocators (including those with no instances or not connected)")
+	listAllocatorsCmd.Flags().Bool("all", false, "Shows all allocators, including those with no instances or not connected, this is relative to the --size flag.")
 }
