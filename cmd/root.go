@@ -75,7 +75,7 @@ var RootCmd = &cobra.Command{
 	DisableAutoGenTag:      true,
 	BashCompletionFunction: bashCompletionFunc,
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
-		initConfig()
+		setupViper(defaultViper)
 		if err := setupDebug(defaultViper.GetBool("trace"), defaultViper.GetBool("pprof")); err != nil {
 			return err
 		}
@@ -127,17 +127,20 @@ func init() {
 	defaultViper.BindPFlags(RootCmd.PersistentFlags())
 }
 
-// initConfig reads in config file and ENV variables if set.
-func initConfig() {
-	defaultViper.SetEnvPrefix("EC")
-	defaultViper.AutomaticEnv()
-	defaultViper.AddConfigPath(ecctlHomePath)                    // adding home directory as first search path
-	defaultViper.SetConfigName(defaultViper.GetString("config")) // name of config file (without extension)
+// setupViper configures a `*viper.Viper` instance for ecctl use.
+func setupViper(v *viper.Viper) {
+	v.SetEnvPrefix("EC")
+	v.SetEnvKeyReplacer(strings.NewReplacer("-", "_"))
+	v.AutomaticEnv()
+	v.AddConfigPath(ecctlHomePath)         // adding home directory as first search path
+	v.SetConfigName(v.GetString("config")) // name of config file (without extension)
 
 	// If a config file is found, read it in.
-	if err := defaultViper.ReadInConfig(); err == nil && defaultViper.GetBool("verbose") {
-		fmt.Fprintln(os.Stderr, "Using config file:", defaultViper.ConfigFileUsed())
+	if err := v.ReadInConfig(); err == nil && v.GetBool("verbose") {
+		fmt.Fprintln(os.Stderr, "Using config file:", v.ConfigFileUsed())
 	}
+	// Register an alias value after the config file has been read.
+	v.RegisterAlias("api_key", "api-key")
 }
 
 // populateValidArgs dynamically generates the validargs for all of the cobra

@@ -22,9 +22,14 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io/ioutil"
 	"net/http"
+	"os"
+	"path/filepath"
 	"reflect"
+	"strings"
 	"testing"
+	"time"
 
 	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	"github.com/elastic/cloud-sdk-go/pkg/output"
@@ -112,10 +117,11 @@ func TestInitApp(t *testing.T) {
 
 	versionInfo.Version = "v2.6.0"
 	type args struct {
-		cmd    *cobra.Command
-		client *http.Client
-		config *ecctl.Config
-		v      *viper.Viper
+		cmd        *cobra.Command
+		client     *http.Client
+		config     *ecctl.Config
+		v          *viper.Viper
+		configFunc func(v *viper.Viper) func()
 	}
 	tests := []struct {
 		name       string
@@ -167,7 +173,7 @@ func TestInitApp(t *testing.T) {
 			err: errors.New("cmd: root http client cannot be nil"),
 		},
 		{
-			name: "initialises rootCmd app with APIKey",
+			name: "initializes rootCmd app with APIKey",
 			args: args{
 				cmd:    RootCmd,
 				client: new(http.Client),
@@ -189,7 +195,7 @@ func TestInitApp(t *testing.T) {
 			},
 		},
 		{
-			name: "initialises rootCmd app with invalid config and empty file returns an error",
+			name: "initializes rootCmd app with invalid config and empty file returns an error",
 			args: args{
 				cmd:    RootCmd,
 				client: new(http.Client),
@@ -203,6 +209,66 @@ func TestInitApp(t *testing.T) {
 					errors.New("api_key or user and pass must be specified"),
 				),
 			),
+		},
+		{
+			name: "initializes rootCmd app with the defaultViper and a file",
+			args: args{
+				cmd:    RootCmd,
+				client: new(http.Client),
+				configFunc: func(v *viper.Viper) func() {
+					unsetEnv(t)
+					home := os.ExpandEnv(ecctlHomePath)
+					if err := os.MkdirAll(home, 0755); err != nil {
+						t.Fatal(err)
+					}
+					cfg := filepath.Join(home, "someconfig.yml")
+					if err := ioutil.WriteFile(cfg, []byte("api_key: someapikey"), 0660); err != nil {
+						t.Fatal(err)
+					}
+					v.Set("config", "someconfig")
+					setupViper(v)
+
+					return func() {
+						os.RemoveAll(cfg)
+						ecctl.Cleanup()
+					}
+				},
+				v: defaultViper,
+			},
+			wantConfig: ecctl.Config{
+				APIKey:       "someapikey",
+				OutputDevice: output.NewDevice(defaultOutput),
+				ErrorDevice:  defaultError,
+				UserAgent:    strings.Join([]string{"ecctl", versionInfo.Version}, "/"),
+				Timeout:      30 * time.Second,
+				Output:       "text",
+				Region:       "ece-region",
+			},
+		},
+		{
+			name: "initializes rootCmd app with the defaultViper and EC_API_KEY",
+			args: args{
+				cmd:    RootCmd,
+				client: new(http.Client),
+				configFunc: func(v *viper.Viper) func() {
+					unsetEnv(t)
+					v.Set("config", "unexisting-config")
+					os.Setenv("EC_API_KEY", "someenvapikey")
+					setupViper(v)
+
+					return func() { ecctl.Cleanup() }
+				},
+				v: defaultViper,
+			},
+			wantConfig: ecctl.Config{
+				APIKey:       "someenvapikey",
+				OutputDevice: output.NewDevice(defaultOutput),
+				ErrorDevice:  defaultError,
+				UserAgent:    strings.Join([]string{"ecctl", versionInfo.Version}, "/"),
+				Timeout:      30 * time.Second,
+				Output:       "text",
+				Region:       "ece-region",
+			},
 		},
 	}
 	for _, tt := range tests {
@@ -220,16 +286,29 @@ func TestInitApp(t *testing.T) {
 				}
 			}
 
+			if tt.args.configFunc != nil {
+				defer tt.args.configFunc(tt.args.v)()
+			}
+
 			if err := initApp(tt.args.cmd, tt.args.client, tt.args.v); !reflect.DeepEqual(err, tt.err) {
 				t.Errorf("initApp() error = %v, wantErr %v", err, tt.err)
 			}
 
-			if tt.args.config != nil {
+			if tt.args.config != nil || tt.args.configFunc != nil {
 				cfg := ecctl.Get().Config
 				cfg.Client = nil
 				assert.Equal(t, tt.wantConfig, cfg)
 			}
 		})
+	}
+}
+
+func unsetEnv(t *testing.T) {
+	t.Helper()
+	for _, env := range os.Environ() {
+		if strings.HasPrefix(env, "EC_") {
+			os.Unsetenv(strings.Split(env, "=")[0])
+		}
 	}
 }
 
