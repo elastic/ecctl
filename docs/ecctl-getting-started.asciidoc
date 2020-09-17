@@ -282,7 +282,7 @@ ID                                 NAME            ELASTICSEARCH                
 [id="{p}-example-create-deployment"]
 === Create a deployment
 
-Let's create a basic deployment. Elasticsearch Service supports {cloud}/ec-getting-started-templates.html[deployment templates], which pre-configure the Elastic Stack components in your deployment to best suit your particular use case. For this example, use Google Cloud Platform (GCP) to host the deployment in region `US Central 1 (Iowa)`. To know which deployment options are available by platform, see {cloud}/ec-regions-templates-instances.html[available regions, deployment templates and instance configurations].
+Let's create a basic deployment. Elasticsearch Service supports {cloud}/ec-getting-started-solutions[solutions] and {cloud}/ec-getting-started-profiles.html[hardware profiles], which pre-configure the Elastic Stack components in your deployment to best suit your particular use case. For this example, use Google Cloud Platform (GCP) to host the deployment in region `US Central 1 (Iowa)`. To know which deployment options are available by platform, see {cloud}/ec-regions-templates-instances.html[available regions, deployment templates and instance configurations].
 
 Copy the following JSON payload and save it as file `create-deployment.json`.
 
