@@ -19,6 +19,7 @@ package cmdrole
 
 import (
 	"fmt"
+
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/roleapi"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
