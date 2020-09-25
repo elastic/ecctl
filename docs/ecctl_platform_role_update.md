@@ -1,15 +1,16 @@
-## ecctl platform role
+## ecctl platform role update
 
-Manages platform roles (Available for ECE only)
+Updates an existing platform role
 
 ```
-ecctl platform role [flags]
+ecctl platform role update <role> [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for role
+      --file string   File name of the role to update
+  -h, --help          help for update
 ```
 
 ### Options inherited from parent commands
@@ -35,10 +36,5 @@ ecctl platform role [flags]
 
 ### SEE ALSO
 
-* [ecctl platform](ecctl_platform.md)	 - Manages the platform (Available for ECE only)
-* [ecctl platform role create](ecctl_platform_role_create.md)	 - Creates a new platform role from a definition (Available for ECE only)
-* [ecctl platform role delete](ecctl_platform_role_delete.md)	 - Deletes an existing platform role (Available for ECE only)
-* [ecctl platform role list](ecctl_platform_role_list.md)	 - Lists the existing platform roles (Available for ECE only)
-* [ecctl platform role show](ecctl_platform_role_show.md)	 - Shows the existing platform roles (Available for ECE only)
-* [ecctl platform role update](ecctl_platform_role_update.md)	 - Updates an existing platform role
+* [ecctl platform role](ecctl_platform_role.md)	 - Manages platform roles (Available for ECE only)
 
