@@ -35,7 +35,7 @@ var platformProxyFilteredGroupUpdateCmd = &cobra.Command{
 
 		filters, _ := cmd.Flags().GetStringToString("filters")
 		expectedProxiesCount, _ := cmd.Flags().GetInt32("expected-proxies-count")
-		version, _ := cmd.Flags().GetInt64("version")
+		version, _ := cmd.Flags().GetString("version")
 
 		response, err := filteredgroupapi.Update(filteredgroupapi.UpdateParams{
 			API:                  ecctl.Get().API,
@@ -58,5 +58,5 @@ func init() {
 	Command.AddCommand(platformProxyFilteredGroupUpdateCmd)
 	platformProxyFilteredGroupUpdateCmd.Flags().StringToString("filters", make(map[string]string), "Filters for proxies group")
 	platformProxyFilteredGroupUpdateCmd.Flags().Int32("expected-proxies-count", 1, "Expected proxies count in filtered group")
-	platformProxyFilteredGroupUpdateCmd.Flags().Int64("version", 0, "Version update for filtered group")
+	platformProxyFilteredGroupUpdateCmd.Flags().String("version", "", "Version update for filtered group")
 }

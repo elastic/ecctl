@@ -12,7 +12,7 @@ ecctl platform proxy filtered-group update <filtered group id> --filters <key1=v
       --expected-proxies-count int32   Expected proxies count in filtered group (default 1)
       --filters stringToString         Filters for proxies group (default [])
   -h, --help                           help for update
-      --version int                    Version update for filtered group
+      --version string                 Version update for filtered group
 ```
 
 ### Options inherited from parent commands
