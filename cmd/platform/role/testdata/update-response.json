@@ -1,0 +1,52 @@
+{
+    "id" : "proxy",
+    "role" : {
+        "value" : {
+            "id" : "proxy",
+            "auto_blessed" : false,
+            "containers" : [
+                {
+                    "name" : "proxyv2",
+                    "container_set_name" : "proxies",
+                    "kind" : "docker",
+                    "options" : {
+                        "enabled" : true,
+                        "auths" : [
+                        ],
+                        "acls" : [
+                        ]
+                    }
+                },
+                {
+                    "name" : "route-server",
+                    "container_set_name" : "proxies",
+                    "kind" : "docker",
+                    "options" : {
+                        "enabled" : true,
+                        "auths" : [
+                        ],
+                        "acls" : [
+                        ]
+                    }
+                },
+                {
+                    "name" : "docker-images-housekeeping",
+                    "container_set_name" : "utilities",
+                    "kind" : "docker",
+                    "options" : {
+                        "enabled" : true,
+                        "auths" : [
+                        ],
+                        "acls" : [
+                        ]
+                    }
+                }
+            ]
+        },
+        "meta" : {
+            "created_time" : "2020-04-24T09:45:59.468Z",
+            "modified_time" : "2020-09-25T15:56:09.480Z",
+            "version" : 4
+        }
+    }
+}

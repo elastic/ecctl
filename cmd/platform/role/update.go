@@ -51,6 +51,10 @@ var updateCmd = &cobra.Command{
 }
 
 func init() {
+	initFlags()
+}
+
+func initFlags() {
 	Command.AddCommand(updateCmd)
 	updateCmd.Flags().String("file", "", "File name of the role to update")
 	cobra.MarkFlagFilename(updateCmd.Flags(), "file", "json")
