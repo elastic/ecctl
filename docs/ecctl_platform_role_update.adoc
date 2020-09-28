@@ -1,20 +1,24 @@
-## ecctl platform role
+[#ecctl_platform_role_update]
+== ecctl platform role update
 
-Manages platform roles (Available for ECE only)
+Updates an existing platform role
 
-```
-ecctl platform role [flags]
-```
+----
+ecctl platform role update <role> [flags]
+----
 
-### Options
+[float]
+=== Options
 
-```
-  -h, --help   help for role
-```
+----
+      --file string   File name of the role to update
+  -h, --help          help for update
+----
 
-### Options inherited from parent commands
+[float]
+=== Options inherited from parent commands
 
-```
+----
       --api-key string     API key to use to authenticate (If empty will look for EC_API_KEY environment variable)
       --config string      Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
       --force              Do not ask for confirmation
@@ -31,14 +35,9 @@ ecctl platform role [flags]
       --trace              Enables tracing saves the trace to trace-20060102150405
       --user string        Username to use to authenticate (If empty will look for EC_USER environment variable)
       --verbose            Enable verbose mode
-```
+----
 
-### SEE ALSO
+[float]
+=== SEE ALSO
 
-* [ecctl platform](ecctl_platform.md)	 - Manages the platform (Available for ECE only)
-* [ecctl platform role create](ecctl_platform_role_create.md)	 - Creates a new platform role from a definition (Available for ECE only)
-* [ecctl platform role delete](ecctl_platform_role_delete.md)	 - Deletes an existing platform role (Available for ECE only)
-* [ecctl platform role list](ecctl_platform_role_list.md)	 - Lists the existing platform roles (Available for ECE only)
-* [ecctl platform role show](ecctl_platform_role_show.md)	 - Shows the existing platform roles (Available for ECE only)
-* [ecctl platform role update](ecctl_platform_role_update.md)	 - Updates an existing platform role
-
+* xref:ecctl_platform_role[ecctl platform role]	 - Manages platform roles {ece-icon}
