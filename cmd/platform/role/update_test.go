@@ -47,7 +47,7 @@ func Test_updateCmd(t *testing.T) {
 				},
 			},
 			want: testutils.Assertion{
-				Err: errors.New("requires at least 1 arg(s), only received 0"),
+				Err: errors.New("accepts 1 arg(s), received 0"),
 			},
 		},
 		{

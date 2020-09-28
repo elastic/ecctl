@@ -31,7 +31,7 @@ import (
 var updateCmd = &cobra.Command{
 	Use:     "update <role>",
 	Short:   "Updates an existing platform role",
-	PreRunE: cobra.MinimumNArgs(1),
+	PreRunE: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		filename, _ := cmd.Flags().GetString("file")
 		var r models.Role
