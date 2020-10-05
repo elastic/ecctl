@@ -6,9 +6,9 @@
 
 <<{p}-release-notes-v1.0.1-bug-fixes,Bug fixes>> | <<{p}-release-notes-v1.0.1-changelog,Changelog>>
 
-Welcome to the v1.0.1 release of {n}. This version brings a bug fix.
+{n} version 1.0.1 includes a bug fix.
 
-Elastic Cloud Control (ecctl) is Elastic’s CLI to manage Elasticsearch Service (ESS) and Elastic Cloud Enterprise (ECE).
+Elastic Cloud Control (ecctl) is the CLI for Elasticsearch Service (ESS) and Elastic Cloud Enterprise (ECE).
 
 Download the release binaries:
 
