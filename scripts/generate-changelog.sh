@@ -6,19 +6,21 @@ if [[ $(git status) == *"Your branch is behind"* ]]; then
 fi
 
 git fetch
-PREV_TAG=$(git tag -l | tail -1)
+PREV_TAG=$(git tag -l 'v[0-9-]*.[0-9-]*.[0-9-]'| tail -1)
 CHANGELOGFILE=notes/${VERSION}.md
 ADOC_CHANGELOG=docs/release_notes/${VERSION}.adoc
 ADOC_CHANGELOG_HISTORY=docs/ecctl-release-notes.asciidoc
 
 if [[ -z ${PREV_TAG} ]]; then echo "-> Exiting changelog generation since there's no previous tag"; exit 0; fi
 
+MAJORMINOR="$(echo ${VERSION} | tr -d 'v' |cut -d '.' -f1).$(echo $VERSION | tr -d 'v' |cut -d '.' -f2)"
+
 echo "=> Attempting to generate the changelog for release ${VERSION}..."
 read -p "=> Previous release was ${PREV_TAG}, is that correct? " -n 1 -r
 
 if [[ ${REPLY} =~ ^[Yy]$ ]]; then
     echo ""
-    sed "s/VERSION_REPLACE/$(echo ${VERSION}| sed 's/^v//')/g" scripts/changelog.tpl.md > ${CHANGELOGFILE}
+    sed "s/VERSION_REPLACE/$(echo ${VERSION}| sed 's/^v//')/g" scripts/changelog.tpl.md | sed "s/VERSION_CROPPED_REPLACE/${MAJORMINOR}/" > ${CHANGELOGFILE}
     sed "s/VERSION_REPLACE/$(echo ${VERSION}| sed 's/^v//')/g" scripts/changelog.tpl.adoc > ${ADOC_CHANGELOG}
     
     git -c log.showSignature=false log --pretty="https://github.com/elastic/ecctl/commit/%h[%h] %s" --no-decorate --no-color tags/${PREV_TAG}..master |\
@@ -38,5 +40,3 @@ if [[ ${REPLY} =~ ^[Yy]$ ]]; then
     fi
     "${VISUAL}" "${ADOC_CHANGELOG}"
 fi
-
-
