@@ -8,7 +8,7 @@
 
 Welcome to the vVERSION_REPLACE release of {n}. This version brings new features, some breaking changes, and bug fixes.
 
-Elastic Cloud Control (ecctl) is Elastic’s CLI to manage Elasticsearch Service (ESS) and Elastic Cloud Enterprise (ECE).
+Elastic Cloud Control (ecctl) is the CLI for Elasticsearch Service (ESS) and Elastic Cloud Enterprise (ECE).
 
 Download the release binaries:
 
