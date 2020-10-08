@@ -4,7 +4,7 @@ go 1.13
 
 require (
 	github.com/asaskevich/govalidator v0.0.0-20200907205600-7a23bdc65eef
-	github.com/elastic/cloud-sdk-go v1.0.1-0.20200923055402-fc4e5b0c75ee
+	github.com/elastic/cloud-sdk-go v1.0.1-0.20201008140428-6fc097679c22
 	github.com/go-openapi/runtime v0.19.22
 	github.com/go-openapi/strfmt v0.19.5
 	github.com/pkg/errors v0.9.1
