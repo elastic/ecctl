@@ -436,18 +436,15 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 					{
 						Response: http.Response{
 							StatusCode: 200,
-							Body: mock.NewStructBody([]models.DeploymentTemplateInfoV2{
-								defaultTemplateResponse,
-							}),
+							Body:       mock.NewStructBody(defaultTemplateResponse),
 						},
 						Assert: &mock.RequestAssertion{
 							Method: "GET",
 							Header: api.DefaultReadMockHeaders,
-							Path:   "/api/v1/deployments/templates",
+							Path:   "/api/v1/deployments/templates/default",
 							Host:   api.DefaultMockHost,
 							Query: url.Values{
 								"region":                       {"ece-region"},
-								"show_hidden":                  {"false"},
 								"show_instance_configurations": {"true"},
 							},
 						},
@@ -500,7 +497,6 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 				Cmd: createCmd,
 				Args: []string{
 					"create", "--request-id=some_request_id", "--version=7.8.0",
-					"--dt-as-list=false",
 				},
 				Cfg: testutils.MockCfg{Responses: []mock.Response{
 					{
@@ -562,7 +558,7 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 				Args: []string{
 					"create", "--request-id=some_request_id", "--version=7.8.0", "--es-node-topology",
 					`{"size": "1g", "zone_count": 2, "node_type": "data"}`, "--es-node-topology",
-					`{"size": "1g", "zone_count": 1, "node_type": "ml"}`, "--dt-as-list=false",
+					`{"size": "1g", "zone_count": 1, "node_type": "ml"}`,
 				},
 				Cfg: testutils.MockCfg{Responses: []mock.Response{
 					{
@@ -615,18 +611,15 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 					{
 						Response: http.Response{
 							StatusCode: 200,
-							Body: mock.NewStructBody([]models.DeploymentTemplateInfoV2{
-								defaultTemplateResponse,
-							}),
+							Body:       mock.NewStructBody(defaultTemplateResponse),
 						},
 						Assert: &mock.RequestAssertion{
 							Method: "GET",
 							Header: api.DefaultReadMockHeaders,
-							Path:   "/api/v1/deployments/templates",
+							Path:   "/api/v1/deployments/templates/default",
 							Host:   api.DefaultMockHost,
 							Query: url.Values{
 								"region":                       {"ece-region"},
-								"show_hidden":                  {"false"},
 								"show_instance_configurations": {"true"},
 							},
 						},
