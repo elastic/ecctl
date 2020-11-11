@@ -18,13 +18,16 @@
 package ecctl
 
 import (
+	"fmt"
+	"os"
+
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/auth"
 
 	"github.com/elastic/ecctl/pkg/formatter"
 )
 
-// App stitches together all the parts to make a fully formed application
+// App stitches together all the parts to create the ecctl application.
 type App struct {
 	API       *api.API
 	Formatter formatter.Formatter
@@ -33,31 +36,12 @@ type App struct {
 
 // NewApplication returns a fully initialized App, which will be called from the presentation layer (cmd)
 func NewApplication(c Config) (*App, error) {
-	if err := c.Validate(); err != nil {
-		return nil, err
-	}
-
-	authWriter, err := auth.NewAuthWriter(auth.Config{
-		APIKey: c.APIKey, Username: c.User, Password: c.Pass,
-	})
+	cfg, err := newAPIConfig(c)
 	if err != nil {
 		return nil, err
 	}
 
-	apiInstance, err := api.NewAPI(api.Config{
-		Client:        c.Client,
-		Host:          c.Host,
-		AuthWriter:    authWriter,
-		SkipTLSVerify: c.Insecure,
-		Timeout:       c.Timeout,
-		VerboseSettings: api.VerboseSettings{
-			Verbose: c.Verbose,
-			Device:  c.OutputDevice,
-		},
-		SkipLogin:   c.SkipLogin,
-		ErrorDevice: c.ErrorDevice,
-		UserAgent:   c.UserAgent,
-	})
+	apiInstance, err := api.NewAPI(cfg)
 	if err != nil {
 		return nil, err
 	}
@@ -78,4 +62,46 @@ func NewApplication(c Config) (*App, error) {
 		Formatter: fmter,
 		Config:    c,
 	}, nil
+}
+
+func newAPIConfig(cfg Config) (api.Config, error) {
+	var empty api.Config
+	if err := cfg.Validate(); err != nil {
+		return empty, err
+	}
+
+	apiCfg := api.Config{
+		Client:        cfg.Client,
+		Host:          cfg.Host,
+		SkipTLSVerify: cfg.Insecure,
+		Timeout:       cfg.Timeout,
+		VerboseSettings: api.VerboseSettings{
+			Verbose:    cfg.Verbose,
+			Device:     cfg.OutputDevice,
+			RedactAuth: !cfg.VerboseCredentials,
+		},
+		SkipLogin:   cfg.SkipLogin,
+		ErrorDevice: cfg.ErrorDevice,
+		UserAgent:   cfg.UserAgent,
+	}
+
+	authWriter, err := auth.NewAuthWriter(auth.Config{
+		APIKey: cfg.APIKey, Username: cfg.User, Password: cfg.Pass,
+	})
+	if err != nil {
+		return empty, err
+	}
+	apiCfg.AuthWriter = authWriter
+
+	if cfg.VerboseFile != "" {
+		f, err := os.Create(cfg.VerboseFile)
+		if err != nil {
+			return empty, fmt.Errorf(
+				`failed creating verbose file "%s": %w`, cfg.VerboseFile, err,
+			)
+		}
+		apiCfg.VerboseSettings.Device = f
+	}
+
+	return apiCfg, nil
 }

@@ -110,6 +110,8 @@ func init() {
 	RootCmd.PersistentFlags().String("pass", "", "Password to use to authenticate (If empty will look for EC_PASS environment variable)")
 	RootCmd.PersistentFlags().String("api-key", "", "API key to use to authenticate (If empty will look for EC_API_KEY environment variable)")
 	RootCmd.PersistentFlags().Bool("verbose", false, "Enable verbose mode")
+	RootCmd.PersistentFlags().Bool("verbose-credentials", false, "When set, it will not redact the Authorization headers on the request/response trail")
+	RootCmd.PersistentFlags().String("verbose-file", "", "If set, it will write the verbose request/response trail to this file")
 	RootCmd.PersistentFlags().String("output", "text", "Output format [text|json]")
 	RootCmd.PersistentFlags().Bool("force", false, "Do not ask for confirmation")
 	RootCmd.PersistentFlags().String("message", "", "A message to set on cluster operation")
@@ -141,6 +143,8 @@ func setupViper(v *viper.Viper) {
 	}
 	// Register an alias value after the config file has been read.
 	v.RegisterAlias("api_key", "api-key")
+	v.RegisterAlias("verbose_file", "verbose-file")
+	v.RegisterAlias("verbose_credentials", "verbose-credentials")
 }
 
 // populateValidArgs dynamically generates the validargs for all of the cobra
@@ -197,7 +201,7 @@ func initApp(cmd *cobra.Command, client *http.Client, v *viper.Viper) error {
 	err := util.ReturnErrOnly(ecctl.Instance(c))
 	// When no config file has been read and initApp returns an error, tell
 	// the user how to initialize the application.
-	if err != nil && defaultViper.ConfigFileUsed() == "" {
+	if err != nil && v.ConfigFileUsed() == "" {
 		return multierror.NewPrefixed(
 			`missing ecctl config file, please use the "ecctl init" command to initialize ecctl`, err,
 		)
