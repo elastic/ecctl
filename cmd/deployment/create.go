@@ -123,22 +123,20 @@ var createCmd = &cobra.Command{
 			}
 		}
 
-		dtAsList, _ := cmd.Flags().GetBool("dt-as-list")
 		if payload == nil {
 			var err error
 			payload, err = depresourceapi.NewPayload(depresourceapi.NewPayloadParams{
-				DeploymentTemplateAsList: dtAsList,
-				API:                      ecctl.Get().API,
-				Name:                     name,
-				DeploymentTemplateID:     dt,
-				Version:                  version,
-				Region:                   region,
-				Writer:                   ecctl.Get().Config.ErrorDevice,
-				Plugins:                  plugin,
-				TopologyElements:         topologyElements,
-				ApmEnable:                apmEnable,
-				AppsearchEnable:          appsearchEnable,
-				EnterpriseSearchEnable:   enterpriseSearchEnable,
+				API:                    ecctl.Get().API,
+				Name:                   name,
+				DeploymentTemplateID:   dt,
+				Version:                version,
+				Region:                 region,
+				Writer:                 ecctl.Get().Config.ErrorDevice,
+				Plugins:                plugin,
+				TopologyElements:       topologyElements,
+				ApmEnable:              apmEnable,
+				AppsearchEnable:        appsearchEnable,
+				EnterpriseSearchEnable: enterpriseSearchEnable,
 				ElasticsearchInstance: depresourceapi.InstanceParams{
 					RefID:     esRefID,
 					Size:      esSizeMB,
@@ -240,10 +238,6 @@ func initFlags() {
 	createCmd.Flags().String("enterprise_search-ref-id", "main-enterprise_search", "Optional RefId for the Enterprise Search deployment")
 	createCmd.Flags().Int32("enterprise_search-zones", 1, "Number of zones the Enterprise Search instances will span")
 	createCmd.Flags().String("enterprise_search-size", "4g", "Memory (RAM) in GB that each of the Enterprise Search instances will have")
-
-	// Remove in the next version.
-	createCmd.Flags().Bool("dt-as-list", true, "")
-	createCmd.Flags().MarkHidden("dt-as-list")
 }
 
 func setDefaultTemplate(region string) string {
