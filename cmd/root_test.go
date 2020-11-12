@@ -211,10 +211,11 @@ func TestInitApp(t *testing.T) {
 			),
 		},
 		{
-			name: "initializes rootCmd app with the defaultViper and a file",
+			name: "initializes rootCmd app with a file",
 			args: args{
 				cmd:    RootCmd,
 				client: new(http.Client),
+				v:      viper.New(),
 				configFunc: func(v *viper.Viper) func() {
 					unsetEnv(t)
 					home := os.ExpandEnv(ecctlHomePath)
@@ -222,18 +223,25 @@ func TestInitApp(t *testing.T) {
 						t.Fatal(err)
 					}
 					cfg := filepath.Join(home, "someconfig.yml")
-					if err := ioutil.WriteFile(cfg, []byte("api_key: someapikey"), 0660); err != nil {
+					contents := []byte(
+						"api_key: someapikey\n" +
+							"verbose: true\n" +
+							"verbose_credentials: true\n" +
+							"verbose_file: request.log\n",
+					)
+					if err := ioutil.WriteFile(cfg, contents, 0660); err != nil {
 						t.Fatal(err)
 					}
 					v.Set("config", "someconfig")
+
 					setupViper(v)
 
 					return func() {
 						os.RemoveAll(cfg)
+						os.RemoveAll("request.log")
 						ecctl.Cleanup()
 					}
 				},
-				v: defaultViper,
 			},
 			wantConfig: ecctl.Config{
 				APIKey:       "someapikey",
@@ -243,6 +251,11 @@ func TestInitApp(t *testing.T) {
 				Timeout:      30 * time.Second,
 				Output:       "text",
 				Region:       "ece-region",
+
+				// Verbose settings.
+				Verbose:            true,
+				VerboseCredentials: true,
+				VerboseFile:        "request.log",
 			},
 		},
 		{
@@ -250,6 +263,7 @@ func TestInitApp(t *testing.T) {
 			args: args{
 				cmd:    RootCmd,
 				client: new(http.Client),
+				v:      viper.New(),
 				configFunc: func(v *viper.Viper) func() {
 					unsetEnv(t)
 					v.Set("config", "unexisting-config")
@@ -258,7 +272,6 @@ func TestInitApp(t *testing.T) {
 
 					return func() { ecctl.Cleanup() }
 				},
-				v: defaultViper,
 			},
 			wantConfig: ecctl.Config{
 				APIKey:       "someenvapikey",
@@ -268,6 +281,43 @@ func TestInitApp(t *testing.T) {
 				Timeout:      30 * time.Second,
 				Output:       "text",
 				Region:       "ece-region",
+			},
+		},
+		{
+			name: "initializes rootCmd app with the defaultViper and EC_API_KEY and verbose ENV",
+			args: args{
+				cmd:    RootCmd,
+				client: new(http.Client),
+				v:      viper.New(),
+				configFunc: func(v *viper.Viper) func() {
+					unsetEnv(t)
+
+					v.Set("config", "unexisting-config")
+					os.Setenv("EC_API_KEY", "someenvapikey")
+					os.Setenv("EC_VERBOSE", "true")
+					os.Setenv("EC_VERBOSE_FILE", "verbose.log")
+					os.Setenv("EC_VERBOSE_CREDENTIALS", "true")
+					setupViper(v)
+
+					return func() {
+						ecctl.Cleanup()
+						os.Remove("verbose.log")
+					}
+				},
+			},
+			wantConfig: ecctl.Config{
+				APIKey:       "someenvapikey",
+				OutputDevice: output.NewDevice(defaultOutput),
+				ErrorDevice:  defaultError,
+				UserAgent:    strings.Join([]string{"ecctl", versionInfo.Version}, "/"),
+				Timeout:      30 * time.Second,
+				Output:       "text",
+				Region:       "ece-region",
+
+				// Verbose settings.
+				Verbose:            true,
+				VerboseCredentials: true,
+				VerboseFile:        "verbose.log",
 			},
 		},
 	}
@@ -287,6 +337,9 @@ func TestInitApp(t *testing.T) {
 			}
 
 			if tt.args.configFunc != nil {
+				if fs := tt.args.cmd.PersistentFlags(); fs != nil {
+					tt.args.v.BindPFlags(fs)
+				}
 				defer tt.args.configFunc(tt.args.v)()
 			}
 

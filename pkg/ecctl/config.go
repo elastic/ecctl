@@ -46,14 +46,15 @@ var (
 
 // Config contains the application configuration
 type Config struct {
-	User    string `json:"user,omitempty"`
-	Pass    string `json:"pass,omitempty"`
-	Host    string `json:"host,omitempty"`
-	APIKey  string `json:"api_key,omitempty" mapstructure:"api_key"`
-	Region  string `json:"region,omitempty"`
-	Output  string `json:"output,omitempty"`
-	Message string `json:"message,omitempty"`
-	Format  string `json:"format,omitempty"`
+	User        string `json:"user,omitempty"`
+	Pass        string `json:"pass,omitempty"`
+	Host        string `json:"host,omitempty"`
+	APIKey      string `json:"api_key,omitempty" mapstructure:"api_key"`
+	Region      string `json:"region,omitempty"`
+	Output      string `json:"output,omitempty"`
+	Message     string `json:"message,omitempty"`
+	Format      string `json:"format,omitempty"`
+	VerboseFile string `json:"verbose_file,omitempty" mapstructure:"verbose_file"`
 
 	OutputDevice *output.Device `json:"-"`
 	ErrorDevice  io.Writer      `json:"-"`
@@ -61,9 +62,10 @@ type Config struct {
 
 	Timeout time.Duration `json:"timeout,omitempty"`
 
-	Verbose  bool `json:"verbose,omitempty"`
-	Force    bool `json:"force,omitempty"`
-	Insecure bool `json:"insecure,omitempty"`
+	Verbose            bool `json:"verbose,omitempty"`
+	VerboseCredentials bool `json:"verbose_credentials,omitempty" mapstructure:"verbose_credentials"`
+	Force              bool `json:"force,omitempty"`
+	Insecure           bool `json:"insecure,omitempty"`
 
 	// SkipLogin skips loging in when user and pass are set.
 	SkipLogin bool `json:"-"`
