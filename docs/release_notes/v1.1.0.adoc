@@ -4,7 +4,7 @@
 <titleabbrev>v1.1.0</titleabbrev>
 ++++
 
-<<{p}-release-notes-v1.1.0-whats-new,What's new>> | <<{p}-release-notes-v1.1.0-bug-fixes,Bug fixes>> | <<{p}-release-notes-v1.1.0-breaking-changes,Breaking changes>> | <<{p}-release-notes-v1.1.0-changelog,Changelog>>
+<<{p}-release-notes-v1.1.0-whats-new,What's new>> | <<{p}-release-notes-v1.1.0-bug-fixes,Bug fixes>> | <<{p}-release-notes-v1.1.0-changelog,Changelog>>
 
 Welcome to the v1.1.0 release of {n}. This version brings new features, some breaking changes, and bug fixes.
 
@@ -42,7 +42,7 @@ https://download.elastic.co/downloads/ecctl/1.1.0/ecctl_1.1.0_linux_amd64.tar.gz
 --
 
 
-* *Allocator list command now supports a `--size` flag.* With the addition of the new flag, it allows users to obtain more than the default per region allocator limit of 100.
+* *Allocator list command now supports a `--size` flag.* With the addition of the new flag, users are able to obtain more than the default per region allocator limit of 100.
 
 * *New Platform role command.* One new command has been added:
 +
