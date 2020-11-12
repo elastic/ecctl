@@ -34,8 +34,8 @@ ecctl platform enrollment-token delete <enrollment-token> [flags]
       --trace                 Enables tracing saves the trace to trace-20060102150405
       --user string           Username to use to authenticate (If empty will look for EC_USER environment variable)
       --verbose               Enable verbose mode
-      --verbose-credentials   When set, it will not redact the Authorization headers on the request/response trail
-      --verbose-file string   If set, it will write the verbose request/response trail to this file
+      --verbose-credentials   When set, Authorization headers on the request/response trail will be displayed as plain text
+      --verbose-file string   When set, the verbose request/response trail will be written to the defined file
 ----
 
 [float]
