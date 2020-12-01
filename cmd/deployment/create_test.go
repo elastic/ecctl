@@ -422,7 +422,7 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 				Err: multierror.NewPrefixed("failed reading the file definition",
 					errors.New("invalid argument"),
 					errors.New("could not read the specified file, please make sure it exists"),
-				),
+				).Error(),
 			},
 		},
 		{
@@ -482,7 +482,7 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 				},
 			},
 			want: testutils.Assertion{
-				Err: errors.New("elasticsearch node topology: memory size cannot be empty"),
+				Err: "elasticsearch node topology: memory size cannot be empty",
 			},
 		},
 		{
@@ -658,7 +658,7 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 				},
 			},
 			want: testutils.Assertion{
-				Err: errors.New(`{"error": "some"}`),
+				Err: `{"error": "some"}`,
 				Stderr: "The deployment creation returned with an error. Use the displayed request ID to recreate the deployment resources" +
 					"\n" + "Request ID: some_request_id" + "\n",
 			},

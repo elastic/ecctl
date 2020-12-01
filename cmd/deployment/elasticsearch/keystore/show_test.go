@@ -19,7 +19,6 @@ package cmdeskeystore
 
 import (
 	"encoding/json"
-	"errors"
 	"io/ioutil"
 	"net/url"
 	"testing"
@@ -73,7 +72,7 @@ func Test_showCmd(t *testing.T) {
 				}},
 			},
 			want: testutils.Assertion{
-				Err: errors.New("requires at least 1 arg(s), only received 0"),
+				Err: "requires at least 1 arg(s), only received 0",
 			},
 		},
 		{
@@ -88,7 +87,7 @@ func Test_showCmd(t *testing.T) {
 				}},
 			},
 			want: testutils.Assertion{
-				Err: mock.MultierrorInternalError,
+				Err: mock.MultierrorInternalError.Error(),
 			},
 		},
 		{

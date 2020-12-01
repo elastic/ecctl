@@ -18,7 +18,6 @@
 package cmddeploymenttemplate
 
 import (
-	"errors"
 	"io/ioutil"
 	"net/url"
 	"testing"
@@ -64,7 +63,7 @@ func Test_createCmd(t *testing.T) {
 				}},
 			},
 			want: testutils.Assertion{
-				Err: errors.New("failed reading deployment template definition: provide a valid deployment template definition using the --file flag"),
+				Err: "failed reading deployment template definition: provide a valid deployment template definition using the --file flag",
 			},
 		},
 		{
@@ -79,7 +78,7 @@ func Test_createCmd(t *testing.T) {
 				}},
 			},
 			want: testutils.Assertion{
-				Err: mock.MultierrorInternalError,
+				Err: mock.MultierrorInternalError.Error(),
 			},
 		},
 		{

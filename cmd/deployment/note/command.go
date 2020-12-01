@@ -27,7 +27,6 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/util"
 )
 
 // Command represents the deployment note subcommand.
@@ -97,7 +96,7 @@ var deploymentNoteUpdateCmd = &cobra.Command{
 			return err
 		}
 
-		return util.ReturnErrOnly(
+		return api.ReturnErrOnly(
 			noteapi.Update(noteapi.UpdateParams{
 				Message: comment,
 				UserID:  ecctl.Get().Config.User,

@@ -19,7 +19,6 @@ package cmddeploymenttemplate
 
 import (
 	"encoding/json"
-	"errors"
 	"io/ioutil"
 	"net/url"
 	"testing"
@@ -75,7 +74,7 @@ func Test_showCmd(t *testing.T) {
 				}},
 			},
 			want: testutils.Assertion{
-				Err: errors.New(`required flag(s) "template-id" not set`),
+				Err: `required flag(s) "template-id" not set`,
 			},
 		},
 		{
@@ -90,7 +89,7 @@ func Test_showCmd(t *testing.T) {
 				}},
 			},
 			want: testutils.Assertion{
-				Err: mock.MultierrorInternalError,
+				Err: mock.MultierrorInternalError.Error(),
 			},
 		},
 		{
