@@ -117,5 +117,21 @@
         "settings": {}
       }
     ]
+  },
+  "settings": {
+    "observability": {
+      "logging": {
+        "destination": {
+          "deployment_id": "e3aab7bd0d95e47cf31995b24d6908bf",
+          "ref_id": "main-elasticsearch"
+        }
+      },
+      "metrics": {
+        "destination": {
+          "deployment_id": "e3aab7bd0d95e47cf31995b24d6908bf",
+          "ref_id": "main-elasticsearch"
+        }
+      }
+    }
   }
 }
