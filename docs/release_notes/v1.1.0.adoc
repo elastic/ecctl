@@ -56,7 +56,7 @@ https://download.elastic.co/downloads/ecctl/1.1.0/ecctl_1.1.0_linux_amd64.tar.gz
 
 * *Allocator list `--all` flag description has been amended.* Changed the vague flag description to reflect that the flag is still bound to the size limit defined in the `--size` flag.
 
-* *Deployment show `--generate-update-payload` flag output has been amended.* Fixed a  bug where the observability settings were not included in the generated payload.
+* *Deployment show `--generate-update-payload` flag output has been amended.* Fixed a bug where the observability settings were not included in the generated payload.
 
 [float]
 [id="{p}-release-notes-v1.1.0-changelog"]
