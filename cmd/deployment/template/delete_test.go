@@ -18,7 +18,6 @@
 package cmddeploymenttemplate
 
 import (
-	"errors"
 	"net/url"
 	"testing"
 
@@ -55,7 +54,7 @@ func Test_deleteCmd(t *testing.T) {
 				}},
 			},
 			want: testutils.Assertion{
-				Err: errors.New(`required flag(s) "template-id" not set`),
+				Err: `required flag(s) "template-id" not set`,
 			},
 		},
 		{
@@ -70,7 +69,7 @@ func Test_deleteCmd(t *testing.T) {
 				}},
 			},
 			want: testutils.Assertion{
-				Err: mock.MultierrorInternalError,
+				Err: mock.MultierrorInternalError.Error(),
 			},
 		},
 		{

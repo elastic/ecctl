@@ -41,7 +41,7 @@ type Args struct {
 
 // Assertion to use for tests.
 type Assertion struct {
-	Err    error
+	Err    string
 	Stdout string
 	Stderr string
 }
@@ -74,7 +74,7 @@ func RunCmdAssertion(t *testing.T, args Args, assertion Assertion) {
 }
 
 func assertCmd(t *testing.T, args Args, want Assertion, execErr error, track bool) {
-	if !assert.Equal(t, want.Err, execErr) {
+	if execErr != nil && !assert.EqualError(t, execErr, want.Err) {
 		t.Error(execErr)
 	}
 

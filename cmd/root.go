@@ -34,7 +34,6 @@ import (
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
-	"github.com/elastic/ecctl/pkg/util"
 )
 
 const (
@@ -198,7 +197,7 @@ func initApp(cmd *cobra.Command, client *http.Client, v *viper.Viper) error {
 		c.Region = cmdutil.DefaultECERegion
 	}
 
-	err := util.ReturnErrOnly(ecctl.Instance(c))
+	err := api.ReturnErrOnly(ecctl.Instance(c))
 	// When no config file has been read and initApp returns an error, tell
 	// the user how to initialize the application.
 	if err != nil && v.ConfigFileUsed() == "" {

@@ -18,7 +18,6 @@
 package cmdrole
 
 import (
-	"errors"
 	"io/ioutil"
 	"testing"
 
@@ -47,7 +46,7 @@ func Test_updateCmd(t *testing.T) {
 				},
 			},
 			want: testutils.Assertion{
-				Err: errors.New("accepts 1 arg(s), received 0"),
+				Err: "accepts 1 arg(s), received 0",
 			},
 		},
 		{
@@ -62,7 +61,7 @@ func Test_updateCmd(t *testing.T) {
 				}},
 			},
 			want: testutils.Assertion{
-				Err: mock.MultierrorInternalError,
+				Err: mock.MultierrorInternalError.Error(),
 			},
 		},
 		{
@@ -74,7 +73,7 @@ func Test_updateCmd(t *testing.T) {
 				},
 			},
 			want: testutils.Assertion{
-				Err: errors.New(`required flag(s) "file" not set`),
+				Err: `required flag(s) "file" not set`,
 			},
 		},
 		{
@@ -86,7 +85,7 @@ func Test_updateCmd(t *testing.T) {
 				},
 			},
 			want: testutils.Assertion{
-				Err: errors.New("role id [my-role] cannot be found in the role file"),
+				Err: "role id [my-role] cannot be found in the role file",
 			},
 		},
 		{

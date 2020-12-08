@@ -78,7 +78,7 @@ func Test_listCmd(t *testing.T) {
 				}},
 			},
 			want: testutils.Assertion{
-				Err: mock.MultierrorInternalError,
+				Err: mock.MultierrorInternalError.Error(),
 			},
 		},
 		{
