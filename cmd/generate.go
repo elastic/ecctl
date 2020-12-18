@@ -24,6 +24,7 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/cobra/doc"
 )
 
 var (
@@ -75,7 +76,7 @@ var docCmd = &cobra.Command{
 			}
 		}
 
-		return genMarkdownTree(RootCmd, docsLocation)
+		return doc.GenMarkdownTree(RootCmd, docsLocation)
 	},
 }
 
