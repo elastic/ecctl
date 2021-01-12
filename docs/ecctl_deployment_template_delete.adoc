@@ -1,7 +1,7 @@
 [#ecctl_deployment_template_delete]
 == ecctl deployment template delete
 
-Deletes an existing deployment template {ece-icon}
+Deletes an existing deployment template {ece-icon} (Available for ECE only)
 
 ----
 ecctl deployment template delete --template-id <template id> [flags]
