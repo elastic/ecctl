@@ -1,7 +1,7 @@
 [#ecctl_user_update]
 == ecctl user update
 
-Updates a platform user {ece-icon}
+Updates a platform user {ece-icon} (Available for ECE only)
 
 ----
 ecctl user update <username> --role <role> [flags]
@@ -61,4 +61,4 @@ ecctl user update <username> --role <role> [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_user[ecctl user]	 - Manages the platform users {ece-icon}
+* xref:ecctl_user[ecctl user]	 - Manages the platform users {ece-icon} (Available for ECE only)

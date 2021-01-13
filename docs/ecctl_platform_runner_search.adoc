@@ -1,7 +1,7 @@
 [#ecctl_platform_runner_search]
 == ecctl platform runner search
 
-Performs advanced runner searching {ece-icon}
+Performs advanced runner searching {ece-icon} (Available for ECE only)
 
 [float]
 === Synopsis
@@ -48,4 +48,4 @@ ecctl platform runner search [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_runner[ecctl platform runner]	 - Manages platform runners {ece-icon}
+* xref:ecctl_platform_runner[ecctl platform runner]	 - Manages platform runners {ece-icon} (Available for ECE only)

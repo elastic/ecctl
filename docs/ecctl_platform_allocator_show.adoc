@@ -1,7 +1,7 @@
 [#ecctl_platform_allocator_show]
 == ecctl platform allocator show
 
-Returns information about the allocator {ece-icon}
+Returns information about the allocator {ece-icon} (Available for ECE only)
 
 ----
 ecctl platform allocator show <allocator id> [flags]
@@ -42,4 +42,4 @@ ecctl platform allocator show <allocator id> [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_allocator[ecctl platform allocator]	 - Manages allocators {ece-icon}
+* xref:ecctl_platform_allocator[ecctl platform allocator]	 - Manages allocators {ece-icon} (Available for ECE only)

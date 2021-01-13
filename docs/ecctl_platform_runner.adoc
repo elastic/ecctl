@@ -1,7 +1,7 @@
 [#ecctl_platform_runner]
 == ecctl platform runner
 
-Manages platform runners {ece-icon}
+Manages platform runners {ece-icon} (Available for ECE only)
 
 ----
 ecctl platform runner [flags]
@@ -41,8 +41,8 @@ ecctl platform runner [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform[ecctl platform]	 - Manages the platform {ece-icon}
-* xref:ecctl_platform_runner_list[ecctl platform runner list]	 - Lists the existing platform runners {ece-icon}
-* xref:ecctl_platform_runner_resync[ecctl platform runner resync]	 - Resynchronizes the search index and cache for the selected runner or all {ece-icon}
-* xref:ecctl_platform_runner_search[ecctl platform runner search]	 - Performs advanced runner searching {ece-icon}
-* xref:ecctl_platform_runner_show[ecctl platform runner show]	 - Shows information about the specified runner {ece-icon}
+* xref:ecctl_platform[ecctl platform]	 - Manages the platform {ece-icon} (Available for ECE only)
+* xref:ecctl_platform_runner_list[ecctl platform runner list]	 - Lists the existing platform runners {ece-icon} (Available for ECE only)
+* xref:ecctl_platform_runner_resync[ecctl platform runner resync]	 - Resynchronizes the search index and cache for the selected runner or all {ece-icon} (Available for ECE only)
+* xref:ecctl_platform_runner_search[ecctl platform runner search]	 - Performs advanced runner searching {ece-icon} (Available for ECE only)
+* xref:ecctl_platform_runner_show[ecctl platform runner show]	 - Shows information about the specified runner {ece-icon} (Available for ECE only)

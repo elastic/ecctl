@@ -1,7 +1,7 @@
 [#ecctl_platform_role]
 == ecctl platform role
 
-Manages platform roles {ece-icon}
+Manages platform roles {ece-icon} (Available for ECE only)
 
 ----
 ecctl platform role [flags]
@@ -41,9 +41,9 @@ ecctl platform role [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform[ecctl platform]	 - Manages the platform {ece-icon}
-* xref:ecctl_platform_role_create[ecctl platform role create]	 - Creates a new platform role from a definition {ece-icon}
-* xref:ecctl_platform_role_delete[ecctl platform role delete]	 - Deletes an existing platform role {ece-icon}
-* xref:ecctl_platform_role_list[ecctl platform role list]	 - Lists the existing platform roles {ece-icon}
-* xref:ecctl_platform_role_show[ecctl platform role show]	 - Shows the existing platform roles {ece-icon}
+* xref:ecctl_platform[ecctl platform]	 - Manages the platform {ece-icon} (Available for ECE only)
+* xref:ecctl_platform_role_create[ecctl platform role create]	 - Creates a new platform role from a definition {ece-icon} (Available for ECE only)
+* xref:ecctl_platform_role_delete[ecctl platform role delete]	 - Deletes an existing platform role {ece-icon} (Available for ECE only)
+* xref:ecctl_platform_role_list[ecctl platform role list]	 - Lists the existing platform roles {ece-icon} (Available for ECE only)
+* xref:ecctl_platform_role_show[ecctl platform role show]	 - Shows the existing platform roles {ece-icon} (Available for ECE only)
 * xref:ecctl_platform_role_update[ecctl platform role update]	 - Updates an existing platform role

@@ -1,7 +1,7 @@
 [#ecctl_deployment_template_create]
 == ecctl deployment template create
 
-Creates a new deployment template {ece-icon}
+Creates a new deployment template {ece-icon} (Available for ECE only)
 
 ----
 ecctl deployment template create --file <definition.json> [flags]

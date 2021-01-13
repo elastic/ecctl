@@ -1,7 +1,7 @@
 [#ecctl_user_delete]
 == ecctl user delete
 
-Deletes one or more platform users {ece-icon}
+Deletes one or more platform users {ece-icon} (Available for ECE only)
 
 ----
 ecctl user delete <user name> <user name>... [flags]
@@ -41,4 +41,4 @@ ecctl user delete <user name> <user name>... [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_user[ecctl user]	 - Manages the platform users {ece-icon}
+* xref:ecctl_user[ecctl user]	 - Manages the platform users {ece-icon} (Available for ECE only)
