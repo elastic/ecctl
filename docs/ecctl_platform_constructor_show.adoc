@@ -1,7 +1,7 @@
 [#ecctl_platform_constructor_show]
 == ecctl platform constructor show
 
-Returns information about the constructor with given ID {ece-icon}
+Returns information about the constructor with given ID {ece-icon} (Available for ECE only)
 
 ----
 ecctl platform constructor show <constructor id> [flags]
@@ -41,4 +41,4 @@ ecctl platform constructor show <constructor id> [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_constructor[ecctl platform constructor]	 - Manages constructors {ece-icon}
+* xref:ecctl_platform_constructor[ecctl platform constructor]	 - Manages constructors {ece-icon} (Available for ECE only)

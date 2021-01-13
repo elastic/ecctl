@@ -1,7 +1,7 @@
 [#ecctl_platform_constructor]
 == ecctl platform constructor
 
-Manages constructors {ece-icon}
+Manages constructors {ece-icon} (Available for ECE only)
 
 ----
 ecctl platform constructor [flags]
@@ -41,8 +41,8 @@ ecctl platform constructor [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform[ecctl platform]	 - Manages the platform {ece-icon}
-* xref:ecctl_platform_constructor_list[ecctl platform constructor list]	 - Returns all of the constructors in the platform {ece-icon}
-* xref:ecctl_platform_constructor_maintenance[ecctl platform constructor maintenance]	 - Sets/un-sets a constructor's maintenance mode {ece-icon}
-* xref:ecctl_platform_constructor_resync[ecctl platform constructor resync]	 - Resynchronizes the search index and cache for the selected constructor or all {ece-icon}
-* xref:ecctl_platform_constructor_show[ecctl platform constructor show]	 - Returns information about the constructor with given ID {ece-icon}
+* xref:ecctl_platform[ecctl platform]	 - Manages the platform {ece-icon} (Available for ECE only)
+* xref:ecctl_platform_constructor_list[ecctl platform constructor list]	 - Returns all of the constructors in the platform {ece-icon} (Available for ECE only)
+* xref:ecctl_platform_constructor_maintenance[ecctl platform constructor maintenance]	 - Sets/un-sets a constructor's maintenance mode {ece-icon} (Available for ECE only)
+* xref:ecctl_platform_constructor_resync[ecctl platform constructor resync]	 - Resynchronizes the search index and cache for the selected constructor or all {ece-icon} (Available for ECE only)
+* xref:ecctl_platform_constructor_show[ecctl platform constructor show]	 - Returns information about the constructor with given ID {ece-icon} (Available for ECE only)

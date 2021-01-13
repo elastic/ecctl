@@ -1,7 +1,7 @@
 [#ecctl_user_list]
 == ecctl user list
 
-Lists all platform users {ece-icon}
+Lists all platform users {ece-icon} (Available for ECE only)
 
 ----
 ecctl user list [flags]
@@ -41,4 +41,4 @@ ecctl user list [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_user[ecctl user]	 - Manages the platform users {ece-icon}
+* xref:ecctl_user[ecctl user]	 - Manages the platform users {ece-icon} (Available for ECE only)
