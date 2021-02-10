@@ -42,7 +42,7 @@ func Test_newAPIConfig(t *testing.T) {
 		{
 			name: "fails on invalid config",
 			args: args{},
-			err:  "invalid configuration options specified: 4 errors occurred:\n\t* output must be one either json or text\n\t* api_key or user and pass must be specified\n\t* output device must not be nil\n\t* error device must not be nil\n\n",
+			err:  "invalid configuration options specified: 4 errors occurred:\n\t* api_key or user and pass must be specified\n\t* error device must not be nil\n\t* output device must not be nil\n\t* output must be one either json or text\n\n",
 		},
 		{
 			name: "succeeds without verbose",
