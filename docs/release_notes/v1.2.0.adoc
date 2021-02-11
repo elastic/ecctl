@@ -4,7 +4,7 @@
 <titleabbrev>v1.2.0</titleabbrev>
 ++++
 
-<<{p}-release-notes-v1.2.0-bug-fixes,Bug fixes>> | <<{p}-release-notes-v1.2.0-breaking-changes,Breaking changes>> | <<{p}-release-notes-v1.2.0-changelog,Changelog>>
+<<{p}-release-notes-v1.2.0-bug-fixes,Bug fixes>> | <<{p}-release-notes-v1.2.0-changelog,Changelog>>
 
 Welcome to the v1.2.0 release of {n}. This version brings new features, some breaking changes, and bug fixes.
 
