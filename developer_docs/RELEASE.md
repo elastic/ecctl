@@ -4,6 +4,8 @@ This guide aims to provide guidance on how to release new versions of the `ecctl
 
 ## Prerequisites
 
+Before starting any release, make sure to open a release checklist [issue](https://github.com/elastic/ecctl/issues/403) using the provided release [template](https://github.com/elastic/ecctl/issues/new?assignees=&labels=Team%3ADelivery&template=RELEASE_CHECKLIST.md).
+
 Releasing a new version of the binary implies that there have been changes in the source code which are meant to be released for wider consumption. Before releasing a new version there's some prerequisites that have to be checked.
 
 ### Verify a release in cloud-sdk-go has been made
@@ -53,3 +55,11 @@ In order to have the documentation live for our new release we need to modify th
 Once the PR for the above changes has been merged, you'll need to run a full doc [rebuild](https://elasticsearch-ci.elastic.co/job/elastic+docs+master+build/build?delay=0sec) to make the new release branch the default docs.
 
 ![alt text](docs-rebuild.png "rebuild instructions")
+
+### Update downloads website
+
+Once the release is done and the documentation is live, you'll need to get in touch with the marketing team to update the [downloads website](https://www.elastic.co/downloads/ecctl) with the correct links and information.
+
+To do this you'll need to open up an issue similar to [this](https://github.com/elastic/website-www.elastic.co/issues/7163) one. In that issue you'll see a link to a google doc, do **NOT** directly edit this doc, but rather add as suggestions the changes to the links and information. The marketing team is pretty quick to answer, but should they miss this issue for some reason you can ping them in the #marketing channel.
+
+There is an open [issue](https://github.com/elastic/ecctl/issues/428) to automate this process, but we've not had the bandwidth to dedicate time to work on this.
