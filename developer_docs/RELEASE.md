@@ -4,6 +4,8 @@ This guide aims to provide guidance on how to release new versions of the `ecctl
 
 ## Prerequisites
 
+Before starting any release, make sure to open a release checklist [issue](https://github.com/elastic/ecctl/issues/403) using the provided release [template](https://github.com/elastic/ecctl/issues/new?assignees=&labels=Team%3ADelivery&template=RELEASE_CHECKLIST.md).
+
 Releasing a new version of the binary implies that there have been changes in the source code which are meant to be released for wider consumption. Before releasing a new version there's some prerequisites that have to be checked.
 
 ### Verify a release in cloud-sdk-go has been made
