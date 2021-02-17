@@ -1,6 +1,6 @@
 ## ecctl deployment note
 
-Manages a deployment's notes
+Manages a deployment's notes (Available for ECE only)
 
 ```
 ecctl deployment note [flags]
@@ -38,8 +38,8 @@ ecctl deployment note [flags]
 ### SEE ALSO
 
 * [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
-* [ecctl deployment note create](ecctl_deployment_note_create.md)	 - Adds a note to a deployment
-* [ecctl deployment note list](ecctl_deployment_note_list.md)	 - Lists the deployment notes
-* [ecctl deployment note show](ecctl_deployment_note_show.md)	 - Shows a deployment note
-* [ecctl deployment note update](ecctl_deployment_note_update.md)	 - Updates the deployment notes
+* [ecctl deployment note create](ecctl_deployment_note_create.md)	 - Adds a note to a deployment (Available for ECE only)
+* [ecctl deployment note list](ecctl_deployment_note_list.md)	 - Lists the deployment notes (Available for ECE only)
+* [ecctl deployment note show](ecctl_deployment_note_show.md)	 - Shows a deployment note (Available for ECE only)
+* [ecctl deployment note update](ecctl_deployment_note_update.md)	 - Updates the deployment notes (Available for ECE only)
 
