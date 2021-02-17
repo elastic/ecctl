@@ -1,6 +1,6 @@
 ## ecctl deployment note update
 
-Updates the deployment notes
+Updates the deployment notes (Available for ECE only)
 
 ```
 ecctl deployment note update <deployment id> --id <note id> --comment <comment content> [flags]
@@ -39,5 +39,5 @@ ecctl deployment note update <deployment id> --id <note id> --comment <comment c
 
 ### SEE ALSO
 
-* [ecctl deployment note](ecctl_deployment_note.md)	 - Manages a deployment's notes
+* [ecctl deployment note](ecctl_deployment_note.md)	 - Manages a deployment's notes (Available for ECE only)
 
