@@ -23,16 +23,17 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi"
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/noteapi"
-	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
+	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 // Command represents the deployment note subcommand.
 var Command = &cobra.Command{
 	Use:     "note",
-	Short:   "Manages a deployment's notes",
+	Short:   cmdutil.AdminReqDescription("Manages a deployment's notes"),
 	PreRunE: cobra.MaximumNArgs(0),
 	Run:     func(cmd *cobra.Command, args []string) { cmd.Help() },
 }
@@ -40,8 +41,8 @@ var Command = &cobra.Command{
 var deploymentNoteCreateCmd = &cobra.Command{
 	Use:     "create <deployment id> --comment <comment content>",
 	Aliases: []string{"add"},
-	Short:   "Adds a note to a deployment",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	Short:   cmdutil.AdminReqDescription("Adds a note to a deployment"),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		comment, _ := cmd.Flags().GetString("comment")
 		esID, err := getElasticsearchID(args[0], ecctl.Get().API)
@@ -63,8 +64,8 @@ var deploymentNoteCreateCmd = &cobra.Command{
 
 var deploymentNoteListCmd = &cobra.Command{
 	Use:     "list <deployment id>",
-	Short:   "Lists the deployment notes",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	Short:   cmdutil.AdminReqDescription("Lists the deployment notes"),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		esID, err := getElasticsearchID(args[0], ecctl.Get().API)
 		if err != nil {
@@ -86,8 +87,8 @@ var deploymentNoteListCmd = &cobra.Command{
 
 var deploymentNoteUpdateCmd = &cobra.Command{
 	Use:     "update <deployment id> --id <note id> --comment <comment content>",
-	Short:   "Updates the deployment notes",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	Short:   cmdutil.AdminReqDescription("Updates the deployment notes"),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		comment, _ := cmd.Flags().GetString("comment")
 		noteID, _ := cmd.Flags().GetString("id")
@@ -113,8 +114,8 @@ var deploymentNoteUpdateCmd = &cobra.Command{
 
 var deploymentNoteShowCmd = &cobra.Command{
 	Use:     "show <deployment id> --id <note id>",
-	Short:   "Shows a deployment note",
-	PreRunE: cmdutil.MinimumNArgsAndUUID(1),
+	Short:   cmdutil.AdminReqDescription("Shows a deployment note"),
+	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		noteID, _ := cmd.Flags().GetString("id")
 		esID, err := getElasticsearchID(args[0], ecctl.Get().API)

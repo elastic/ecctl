@@ -1,6 +1,6 @@
 ## ecctl deployment note list
 
-Lists the deployment notes
+Lists the deployment notes (Available for ECE only)
 
 ```
 ecctl deployment note list <deployment id> [flags]
@@ -37,5 +37,5 @@ ecctl deployment note list <deployment id> [flags]
 
 ### SEE ALSO
 
-* [ecctl deployment note](ecctl_deployment_note.md)	 - Manages a deployment's notes
+* [ecctl deployment note](ecctl_deployment_note.md)	 - Manages a deployment's notes (Available for ECE only)
 

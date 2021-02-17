@@ -1,7 +1,7 @@
 [#ecctl_deployment_note_update]
 == ecctl deployment note update
 
-Updates the deployment notes
+Updates the deployment notes {ece-icon} (Available for ECE only)
 
 ----
 ecctl deployment note update <deployment id> --id <note id> --comment <comment content> [flags]
@@ -43,4 +43,4 @@ ecctl deployment note update <deployment id> --id <note id> --comment <comment c
 [float]
 === SEE ALSO
 
-* xref:ecctl_deployment_note[ecctl deployment note]	 - Manages a deployment's notes
+* xref:ecctl_deployment_note[ecctl deployment note]	 - Manages a deployment's notes {ece-icon} (Available for ECE only)
