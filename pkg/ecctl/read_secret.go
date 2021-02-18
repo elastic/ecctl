@@ -22,13 +22,13 @@ import (
 	"io"
 	"syscall"
 
-	"golang.org/x/crypto/ssh/terminal"
+	"golang.org/x/term"
 )
 
 var (
 	// DefaultPassFunc can be used to consume a password from a file descriptor.
 	// References terminal.ReadPassword which obscures the user input.
-	DefaultPassFunc = terminal.ReadPassword
+	DefaultPassFunc = term.ReadPassword
 )
 
 // ReadSecret obtains a secret by reading the PassFunc passing the stdin file
