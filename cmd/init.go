@@ -26,7 +26,7 @@ import (
 
 	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
-	"golang.org/x/crypto/ssh/terminal"
+	"golang.org/x/term"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
@@ -47,7 +47,7 @@ var initCmd = &cobra.Command{
 			Reader:           defaultInput,
 			Writer:           defaultOutput,
 			ErrWriter:        defaultError,
-			PasswordReadFunc: terminal.ReadPassword,
+			PasswordReadFunc: term.ReadPassword,
 			FilePath:         filepath.Join(fp, defaultViper.GetString("config")),
 		})
 		if err != nil {

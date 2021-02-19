@@ -42,6 +42,7 @@
             {
               "elasticsearch": {},
               "instance_configuration_id": "gcp.data.highio.1",
+              "node_roles": null,
               "node_type": {
                 "data": true,
                 "ingest": true,
