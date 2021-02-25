@@ -5,6 +5,8 @@
 
 include::{asciidoc-dir}/../../shared/attributes.asciidoc[]
 
+DO NOT MERGE. This is a {cloud}/bad-link.html[bad link].
+
 include::ecctl-getting-started.asciidoc[]
 
 include::ecctl-release-notes.asciidoc[]
