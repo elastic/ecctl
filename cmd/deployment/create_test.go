@@ -316,8 +316,7 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 				Path:   "/api/v1/deployments",
 				Host:   api.DefaultMockHost,
 				Query: url.Values{
-					"request_id":    {"some_other_request_id"},
-					"validate_only": {"false"},
+					"request_id": {"some_other_request_id"},
 				},
 			},
 		},
@@ -461,8 +460,7 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 							Path:   "/api/v1/deployments",
 							Host:   api.DefaultMockHost,
 							Query: url.Values{
-								"request_id":    {"some_request_id"},
-								"validate_only": {"false"},
+								"request_id": {"some_request_id"},
 							},
 						},
 					},
@@ -523,8 +521,7 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 							Path:   "/api/v1/deployments",
 							Host:   api.DefaultMockHost,
 							Query: url.Values{
-								"request_id":    {"some_request_id"},
-								"validate_only": {"false"},
+								"request_id": {"some_request_id"},
 							},
 						},
 					},
@@ -570,8 +567,7 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 							Path:   "/api/v1/deployments",
 							Host:   api.DefaultMockHost,
 							Query: url.Values{
-								"request_id":    {"some_request_id"},
-								"validate_only": {"false"},
+								"request_id": {"some_request_id"},
 							},
 						},
 					},
@@ -602,8 +598,7 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 							Path:   "/api/v1/deployments",
 							Host:   api.DefaultMockHost,
 							Query: url.Values{
-								"request_id":    {"some_request_id"},
-								"validate_only": {"false"},
+								"request_id": {"some_request_id"},
 							},
 						},
 					},
@@ -649,8 +644,7 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 								Path:   "/api/v1/deployments",
 								Host:   api.DefaultMockHost,
 								Query: url.Values{
-									"request_id":    {"some_request_id"},
-									"validate_only": {"false"},
+									"request_id": {"some_request_id"},
 								},
 							},
 						},
