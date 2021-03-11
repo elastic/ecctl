@@ -181,13 +181,11 @@ func Test_updateCmd(t *testing.T) {
 								Path:   "/api/v1/deployments/320b7b540dfc967a7a649c18e2fce4ed",
 								Query: url.Values{
 									"convert_legacy_plans": {"false"},
-									"enrich_with_template": {"true"},
 									"show_metadata":        {"false"},
 									"show_plan_defaults":   {"false"},
 									"show_plan_history":    {"false"},
 									"show_plan_logs":       {"false"},
 									"show_plans":           {"false"},
-									"show_security":        {"false"},
 									"show_settings":        {"false"},
 									"show_system_alerts":   {"5"},
 								},
