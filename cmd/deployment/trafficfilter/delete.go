@@ -46,5 +46,5 @@ func init() {
 
 func initDeleteFlags() {
 	Command.AddCommand(deleteCmd)
-	deleteCmd.Flags().Bool("ignore-associations", false, "Optional flag to ignore the associations and delete the ruleset")
+	deleteCmd.Flags().Bool("ignore-associations", false, "Optional flag to delete the ruleset even if it has associated rules")
 }

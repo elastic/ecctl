@@ -10,7 +10,7 @@ ecctl deployment traffic-filter delete <ruleset id> [--ignore-associations] [fla
 
 ```
   -h, --help                  help for delete
-      --ignore-associations   Optional flag to ignore the associations and delete the ruleset
+      --ignore-associations   Optional flag to delete the ruleset even if it has associated rules
 ```
 
 ### Options inherited from parent commands

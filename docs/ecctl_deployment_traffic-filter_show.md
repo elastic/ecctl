@@ -10,7 +10,7 @@ ecctl deployment traffic-filter show <ruleset id> [--include-associations] [flag
 
 ```
   -h, --help                   help for show
-      --include-associations   Optional flag to include a list of resources that are associated to the ruleset
+      --include-associations   Optional flag to include all associated resources
 ```
 
 ### Options inherited from parent commands

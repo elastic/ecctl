@@ -51,5 +51,5 @@ func init() {
 
 func initShowFlags() {
 	Command.AddCommand(showCmd)
-	showCmd.Flags().Bool("include-associations", false, "Optional flag to include a list of resources that are associated to the ruleset")
+	showCmd.Flags().Bool("include-associations", false, "Optional flag to include all associated resources")
 }

@@ -52,5 +52,5 @@ func init() {
 func initListFlags() {
 	Command.AddCommand(listCmd)
 	listCmd.Flags().String("single-region", "", "Optional flag to list traffic filters from a specific region only")
-	listCmd.Flags().Bool("include-associations", false, "Optional flag to include a list of resources that are associated to each ruleset")
+	listCmd.Flags().Bool("include-associations", false, "Optional flag to include all associated resources")
 }
