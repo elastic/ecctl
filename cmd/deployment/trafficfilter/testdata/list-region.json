@@ -1,0 +1,18 @@
+{
+    "rulesets": [
+        {
+            "associations": null,
+            "id": "4e974d9476534d35b12fbdcfd0acee0a",
+            "include_by_default": false,
+            "name": "azure",
+            "region": "azure-eastus2",
+            "rules": [
+                {
+                    "id": "e5f03a27777a4efc97e3c6aa4d287b9f",
+                    "source": "0.0.0.0/0"
+                }
+            ],
+            "type": "ip"
+        }
+    ]
+}

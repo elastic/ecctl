@@ -1,17 +1,18 @@
-[#ecctl_deployment]
-== ecctl deployment
+[#ecctl_deployment_traffic-filter_show]
+== ecctl deployment traffic-filter show
 
-Manages deployments
+Shows information about a traffic filter ruleset
 
 ----
-ecctl deployment [flags]
+ecctl deployment traffic-filter show <ruleset id> [--include-associations] [flags]
 ----
 
 [float]
 === Options
 
 ----
-  -h, --help   help for deployment
+  -h, --help                   help for show
+      --include-associations   Optional flag to include all associated resources
 ----
 
 [float]
@@ -41,19 +42,4 @@ ecctl deployment [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl[ecctl]	 - Elastic Cloud Control
-* xref:ecctl_deployment_create[ecctl deployment create]	 - Creates a deployment
-* xref:ecctl_deployment_delete[ecctl deployment delete]	 - Deletes a previously shutdown deployment {ece-icon} (Available for ECE only)
-* xref:ecctl_deployment_elasticsearch[ecctl deployment elasticsearch]	 - Manages Elasticsearch resources
-* xref:ecctl_deployment_list[ecctl deployment list]	 - Lists the platform's deployments
-* xref:ecctl_deployment_note[ecctl deployment note]	 - Manages a deployment's notes {ece-icon} (Available for ECE only)
-* xref:ecctl_deployment_plan[ecctl deployment plan]	 - Manages deployment plans
-* xref:ecctl_deployment_resource[ecctl deployment resource]	 - Manages deployment resources
-* xref:ecctl_deployment_restore[ecctl deployment restore]	 - Restores a previously shut down deployment and all of its associated sub-resources
-* xref:ecctl_deployment_resync[ecctl deployment resync]	 - Resynchronizes the search index and cache for the selected deployment or all
-* xref:ecctl_deployment_search[ecctl deployment search]	 - Performs advanced deployment search using the Elasticsearch Query DSL
-* xref:ecctl_deployment_show[ecctl deployment show]	 - Shows the specified deployment resources
-* xref:ecctl_deployment_shutdown[ecctl deployment shutdown]	 - Shuts down a deployment and all of its associated sub-resources
-* xref:ecctl_deployment_template[ecctl deployment template]	 - Interacts with deployment template APIs
 * xref:ecctl_deployment_traffic-filter[ecctl deployment traffic-filter]	 - Manages traffic filter rulesets
-* xref:ecctl_deployment_update[ecctl deployment update]	 - Updates a deployment from a file definition, allowing certain flag overrides
