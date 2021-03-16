@@ -1,15 +1,17 @@
-## ecctl deployment
+## ecctl deployment traffic-filter list
 
-Manages deployments
+Lists the traffic filter rulesets
 
 ```
-ecctl deployment [flags]
+ecctl deployment traffic-filter list <deployment id> [--include-associations] [--single-region <region>] [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for deployment
+  -h, --help                   help for list
+      --include-associations   Optional flag to include a list of resources that are associated to each ruleset
+      --single-region string   Optional flag to list traffic filters from a specific region only
 ```
 
 ### Options inherited from parent commands
@@ -37,20 +39,5 @@ ecctl deployment [flags]
 
 ### SEE ALSO
 
-* [ecctl](ecctl.md)	 - Elastic Cloud Control
-* [ecctl deployment create](ecctl_deployment_create.md)	 - Creates a deployment
-* [ecctl deployment delete](ecctl_deployment_delete.md)	 - Deletes a previously shutdown deployment (Available for ECE only)
-* [ecctl deployment elasticsearch](ecctl_deployment_elasticsearch.md)	 - Manages Elasticsearch resources
-* [ecctl deployment list](ecctl_deployment_list.md)	 - Lists the platform's deployments
-* [ecctl deployment note](ecctl_deployment_note.md)	 - Manages a deployment's notes (Available for ECE only)
-* [ecctl deployment plan](ecctl_deployment_plan.md)	 - Manages deployment plans
-* [ecctl deployment resource](ecctl_deployment_resource.md)	 - Manages deployment resources
-* [ecctl deployment restore](ecctl_deployment_restore.md)	 - Restores a previously shut down deployment and all of its associated sub-resources
-* [ecctl deployment resync](ecctl_deployment_resync.md)	 - Resynchronizes the search index and cache for the selected deployment or all
-* [ecctl deployment search](ecctl_deployment_search.md)	 - Performs advanced deployment search using the Elasticsearch Query DSL
-* [ecctl deployment show](ecctl_deployment_show.md)	 - Shows the specified deployment resources
-* [ecctl deployment shutdown](ecctl_deployment_shutdown.md)	 - Shuts down a deployment and all of its associated sub-resources
-* [ecctl deployment template](ecctl_deployment_template.md)	 - Interacts with deployment template APIs
 * [ecctl deployment traffic-filter](ecctl_deployment_traffic-filter.md)	 - Manages traffic filter rulesets
-* [ecctl deployment update](ecctl_deployment_update.md)	 - Updates a deployment from a file definition, allowing certain flag overrides
 
