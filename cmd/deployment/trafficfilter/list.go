@@ -25,7 +25,7 @@ import (
 )
 
 var listCmd = &cobra.Command{
-	Use:     "list <deployment id> [--include-associations] [--single-region <region>]",
+	Use:     "list [--include-associations] [--single-region <region>]",
 	Short:   "Lists the traffic filter rulesets",
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {

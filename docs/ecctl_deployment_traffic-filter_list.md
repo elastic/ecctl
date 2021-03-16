@@ -3,7 +3,7 @@
 Lists the traffic filter rulesets
 
 ```
-ecctl deployment traffic-filter list <deployment id> [--include-associations] [--single-region <region>] [flags]
+ecctl deployment traffic-filter list [--include-associations] [--single-region <region>] [flags]
 ```
 
 ### Options
