@@ -4,7 +4,7 @@ go 1.13
 
 require (
 	github.com/asaskevich/govalidator v0.0.0-20210307081110-f21760c49a8d
-	github.com/elastic/cloud-sdk-go v1.2.1-0.20210310053318-2f1ce00ef1ea
+	github.com/elastic/cloud-sdk-go v1.2.1-0.20210315013508-712598da07dd
 	github.com/go-openapi/runtime v0.19.26
 	github.com/go-openapi/strfmt v0.20.0
 	github.com/pkg/errors v0.9.1
@@ -14,5 +14,3 @@ require (
 	github.com/stretchr/testify v1.7.0
 	golang.org/x/term v0.0.0-20201210144234-2321bbc49cbf
 )
-
-replace sourcegraph.com/sourcegraph/go-diff v0.5.1 => github.com/sourcegraph/go-diff v0.5.1
