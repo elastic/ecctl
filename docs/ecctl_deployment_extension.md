@@ -40,5 +40,5 @@ ecctl deployment extension [flags]
 * [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
 * [ecctl deployment extension delete](ecctl_deployment_extension_delete.md)	 - Deletes an extension
 * [ecctl deployment extension list](ecctl_deployment_extension_list.md)	 - Lists the extensions
-* [ecctl deployment extension show](ecctl_deployment_extension_show.md)	 - Shows information about a traffic filter ruleset
+* [ecctl deployment extension show](ecctl_deployment_extension_show.md)	 - Shows information about an extension
 

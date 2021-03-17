@@ -1,6 +1,6 @@
 ## ecctl deployment extension show
 
-Shows information about a traffic filter ruleset
+Shows information about an extension
 
 ```
 ecctl deployment extension show <extension id> [--include-deployments] [flags]
