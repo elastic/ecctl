@@ -1,6 +1,6 @@
 ## ecctl deployment extension delete
 
-Deletes an extension
+Deletes a deployment extension
 
 ```
 ecctl deployment extension delete <extension id> [flags]
@@ -37,5 +37,5 @@ ecctl deployment extension delete <extension id> [flags]
 
 ### SEE ALSO
 
-* [ecctl deployment extension](ecctl_deployment_extension.md)	 - Manages extensions
+* [ecctl deployment extension](ecctl_deployment_extension.md)	 - Manages deployment extensions, such as custom plugins or bundles
 

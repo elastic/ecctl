@@ -1,6 +1,6 @@
 ## ecctl deployment extension list
 
-Lists the extensions
+Lists all deployment extensions
 
 ```
 ecctl deployment extension list [flags]
@@ -37,5 +37,5 @@ ecctl deployment extension list [flags]
 
 ### SEE ALSO
 
-* [ecctl deployment extension](ecctl_deployment_extension.md)	 - Manages extensions
+* [ecctl deployment extension](ecctl_deployment_extension.md)	 - Manages deployment extensions, such as custom plugins or bundles
 

@@ -1,6 +1,6 @@
 ## ecctl deployment extension show
 
-Shows information about an extension
+Shows information about a deployment extension
 
 ```
 ecctl deployment extension show <extension id> [--include-deployments] [flags]
@@ -38,5 +38,5 @@ ecctl deployment extension show <extension id> [--include-deployments] [flags]
 
 ### SEE ALSO
 
-* [ecctl deployment extension](ecctl_deployment_extension.md)	 - Manages extensions
+* [ecctl deployment extension](ecctl_deployment_extension.md)	 - Manages deployment extensions, such as custom plugins or bundles
 

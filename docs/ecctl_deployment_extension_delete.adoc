@@ -1,7 +1,7 @@
 [#ecctl_deployment_extension_delete]
 == ecctl deployment extension delete
 
-Deletes an extension
+Deletes a deployment extension
 
 ----
 ecctl deployment extension delete <extension id> [flags]
@@ -41,4 +41,4 @@ ecctl deployment extension delete <extension id> [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_deployment_extension[ecctl deployment extension]	 - Manages extensions
+* xref:ecctl_deployment_extension[ecctl deployment extension]	 - Manages deployment extensions, such as custom plugins or bundles

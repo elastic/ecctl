@@ -1,7 +1,7 @@
 [#ecctl_deployment_extension_list]
 == ecctl deployment extension list
 
-Lists the extensions
+Lists all deployment extensions
 
 ----
 ecctl deployment extension list [flags]
@@ -41,4 +41,4 @@ ecctl deployment extension list [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_deployment_extension[ecctl deployment extension]	 - Manages extensions
+* xref:ecctl_deployment_extension[ecctl deployment extension]	 - Manages deployment extensions, such as custom plugins or bundles

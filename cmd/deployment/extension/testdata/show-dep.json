@@ -6,7 +6,7 @@
     "file_metadata": {
         "last_modified_date": "2021-03-17T00:51:23.110Z",
         "size": 149,
-        "url": "https://found-user-plugins.s3.amazonaws.com/265644854/2536123203.zip?response-content-disposition=attachment%3Bfilename%3D265644854%2F2536123203.zip\u0026X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Date=20210317T013226Z\u0026X-Amz-SignedHeaders=host\u0026X-Amz-Expires=899\u0026X-Amz-Credential=AKIAJ7R3WYI3IDZPIDEQ%2F20210317%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Signature=15bceae82c331c34ef46cb8d737cc4b20287115082bad231ca83604ea39b562e"
+        "url": "https://test-plugins.s3.amazonaws.com/265644854/2536123203.zip"
     },
     "id": "2536123203",
     "name": "test-ext",
