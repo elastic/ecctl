@@ -33,10 +33,6 @@ labels: Team:Delivery
 <!--- credentials, API tokens, etc., or any other sensitive -->
 <!--- information from everything you decide to include. -->
 
-## Possible Solution
-<!--- Not obligatory, but suggest a fix for the bug, or ideas -->
-<!--- how to implement the addition or change. -->
-
 ## Steps to Reproduce
 <!--- Provide a link to a live example, or an unambiguous set -->
 <!--- of steps to reproduce this bug.  Include a code snippet -->
@@ -45,6 +41,10 @@ labels: Team:Delivery
 2.
 3.
 4.
+
+## Possible Solution
+<!--- Not obligatory, but suggest a fix for the bug, or ideas -->
+<!--- how to implement the addition or change. -->
 
 ## Context
 <!--- How has this issue affected you?  What are you trying to -->
@@ -55,6 +55,7 @@ labels: Team:Delivery
 <!--- Include as many relevant details about the environment -->
 <!--- you experienced the bug in. -->
 * Version used:
+* Running against Elastic Cloud SaaS or Elastic Cloud Enterprise and version:
 * Environment name and version (e.g. Go 1.9):
 * Server type and version:
 * Operating System and version:
