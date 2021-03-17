@@ -1,15 +1,24 @@
-## ecctl
+## ecctl comment
 
-Elastic Cloud Control
+Manages Comments
+
+```
+ecctl comment [flags]
+```
 
 ### Options
+
+```
+  -h, --help   help for comment
+```
+
+### Options inherited from parent commands
 
 ```
       --api-key string        API key to use to authenticate (If empty will look for EC_API_KEY environment variable)
       --config string         Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
       --force                 Do not ask for confirmation
       --format string         Formats the output using a Go template
-  -h, --help                  help for ecctl
       --host string           Base URL to use
       --insecure              Skips all TLS validation
       --message string        A message to set on cluster operation
@@ -28,13 +37,6 @@ Elastic Cloud Control
 
 ### SEE ALSO
 
-* [ecctl auth](ecctl_auth.md)	 - Manages authentication settings
-* [ecctl comment](ecctl_comment.md)	 - Manages Comments
-* [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
-* [ecctl generate](ecctl_generate.md)	 - Generates completions and docs
-* [ecctl init](ecctl_init.md)	 - Creates an initial configuration file.
-* [ecctl platform](ecctl_platform.md)	 - Manages the platform (Available for ECE only)
-* [ecctl stack](ecctl_stack.md)	 - Manages Elastic StackPacks
-* [ecctl user](ecctl_user.md)	 - Manages the platform users (Available for ECE only)
-* [ecctl version](ecctl_version.md)	 - Shows ecctl version
+* [ecctl](ecctl.md)	 - Elastic Cloud Control
+* [ecctl comment create](ecctl_comment_create.md)	 - Creates a new resource comment
 
