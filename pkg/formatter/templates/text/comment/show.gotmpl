@@ -1,0 +1,5 @@
+{{- define "override" }}{{executeTemplate .}}
+{{ end }}{{ define "default" }}
+{{-  "COMMENT ID" }}{{tab}}{{  "USER" }}{{tab}}{{ "MESSAGE"}}
+{{ .ID }}{{tab}}{{ .UserID }}{{tab}}{{  .Message}}
+{{end}}
