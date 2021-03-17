@@ -26,7 +26,7 @@ import (
 
 var showCmd = &cobra.Command{
 	Use:     "show <extension id> [--include-deployments]",
-	Short:   "Shows information about an extension",
+	Short:   "Shows information about a deployment extension",
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		deps, _ := cmd.Flags().GetBool("include-deployments")

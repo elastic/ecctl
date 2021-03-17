@@ -26,7 +26,7 @@ import (
 
 var listCmd = &cobra.Command{
 	Use:     "list",
-	Short:   "Lists the extensions",
+	Short:   "Lists all deployment extensions",
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		res, err := extensionapi.List(extensionapi.ListParams{

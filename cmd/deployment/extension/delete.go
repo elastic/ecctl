@@ -26,7 +26,7 @@ import (
 
 var deleteCmd = &cobra.Command{
 	Use:     "delete <extension id>",
-	Short:   "Deletes an extension",
+	Short:   "Deletes a deployment extension",
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		return extensionapi.Delete(extensionapi.DeleteParams{
