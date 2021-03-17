@@ -21,6 +21,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"testing"
@@ -404,6 +405,11 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 		})),
 	}
 
+	awsIoOpt, err := ioutil.ReadFile("./testdata/template-aws-io-optimized-v2.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+
 	tests := []struct {
 		name string
 		args testutils.Args
@@ -425,26 +431,31 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 			},
 		},
 		{
-			name: "succeeds creating a deployment with default values and without tracking (Normal GetCall)",
+			name: "succeeds creating a deployment with default values and without tracking (aws-io-optimized-v2 DT)",
 			args: testutils.Args{
 				Cmd: createCmd,
 				Args: []string{
-					"create", "--request-id=some_request_id", "--version=7.8.0",
+					"create",
+					"--request-id=some_request_id",
+					"--version=7.8.0",
+					"--deployment-template=aws-io-optimized-v2",
+					"--name=with_default",
 				},
 				Cfg: testutils.MockCfg{Responses: []mock.Response{
 					{
 						Response: http.Response{
 							StatusCode: 200,
-							Body:       mock.NewStructBody(defaultTemplateResponse),
+							Body:       mock.NewByteBody(awsIoOpt),
 						},
 						Assert: &mock.RequestAssertion{
 							Method: "GET",
 							Header: api.DefaultReadMockHeaders,
-							Path:   "/api/v1/deployments/templates/default",
+							Path:   "/api/v1/deployments/templates/aws-io-optimized-v2",
 							Host:   api.DefaultMockHost,
 							Query: url.Values{
 								"region":                       {"ece-region"},
 								"show_instance_configurations": {"true"},
+								"stack_version":                {"7.8.0"},
 							},
 						},
 					},
@@ -456,7 +467,7 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 						Assert: &mock.RequestAssertion{
 							Method: "POST",
 							Header: api.DefaultWriteMockHeaders,
-							Body:   mock.NewStringBody(`{"resources":{"apm":null,"appsearch":null,"elasticsearch":[{"plan":{"cluster_topology":[{"instance_configuration_id":"default.data","node_roles":null,"node_type":{"data":true},"size":{"resource":"memory","value":4096},"zone_count":1}],"deployment_template":{"id":"default"},"elasticsearch":{"version":"7.8.0"}},"ref_id":"main-elasticsearch","region":"ece-region"}],"enterprise_search":null,"kibana":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"size":{"resource":"memory","value":1024},"zone_count":1}],"kibana":{"version":"7.8.0"}},"ref_id":"main-kibana","region":"ece-region"}]}}` + "\n"),
+							Body:   mock.NewStringBody(`{"name":"with_default","resources":{"apm":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"apm":{"version":"7.8.0"},"cluster_topology":[{"instance_configuration_id":"aws.apm.r5d","size":{"resource":"memory","value":512},"zone_count":1}]},"ref_id":"main-apm","region":"us-east-1"}],"appsearch":null,"elasticsearch":[{"plan":{"autoscaling_enabled":false,"cluster_topology":[{"id":"coordinating","instance_configuration_id":"aws.coordinating.m5d","node_roles":null,"node_type":{"data":false,"ingest":true,"master":false},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":118784},"elasticsearch":{"node_attributes":{"data":"hot"}},"id":"hot_content","instance_configuration_id":"aws.data.highio.i3","node_roles":null,"node_type":{"data":true,"ingest":true,"master":true},"size":{"resource":"memory","value":8192},"topology_element_control":{"min":{"resource":"memory","value":1024}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":118784},"elasticsearch":{"node_attributes":{"data":"warm"}},"id":"warm","instance_configuration_id":"aws.data.highstorage.d3","node_roles":null,"node_type":{"data":true,"ingest":false,"master":false},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":59392},"elasticsearch":{"node_attributes":{"data":"cold"}},"id":"cold","instance_configuration_id":"aws.data.highstorage.d3","node_roles":null,"node_type":{"data":true,"ingest":false,"master":false},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":1},{"id":"master","instance_configuration_id":"aws.master.r5d","node_roles":null,"node_type":{"data":false,"ingest":false,"master":true},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":3},{"autoscaling_max":{"resource":"memory","value":61440},"autoscaling_min":{"resource":"memory","value":0},"id":"ml","instance_configuration_id":"aws.ml.m5d","node_roles":null,"node_type":{"data":false,"ingest":false,"master":false,"ml":true},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":1}],"elasticsearch":{"version":"7.8.0"}},"ref_id":"main-elasticsearch","region":"us-east-1","settings":{"dedicated_masters_threshold":6}}],"enterprise_search":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"instance_configuration_id":"aws.enterprisesearch.m5d","node_type":{"appserver":true,"connector":true,"worker":true},"size":{"resource":"memory","value":0},"zone_count":2}],"enterprise_search":{"version":"7.8.0"}},"ref_id":"main-enterprise_search","region":"us-east-1"}],"kibana":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"instance_configuration_id":"aws.kibana.r5d","size":{"resource":"memory","value":1024},"zone_count":1}],"kibana":{"version":"7.8.0"}},"ref_id":"main-kibana","region":"us-east-1"}]}}` + "\n"),
 							Path:   "/api/v1/deployments",
 							Host:   api.DefaultMockHost,
 							Query: url.Values{
@@ -471,41 +482,31 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 			},
 		},
 		{
-			name: "fails creating a deployment with ES topology element when size is missing (Normal GetCall)",
+			name: "succeeds creating a deployment with default values and without tracking (aws-io-optimized-v2 DT) with node_roles",
 			args: testutils.Args{
 				Cmd: createCmd,
 				Args: []string{
-					"create", "--request-id=some_request_id", "--version=7.8.0", "--es-node-topology",
-					`{"zone_count": 2, "node_type": "data"}`,
-				},
-			},
-			want: testutils.Assertion{
-				Err: "elasticsearch node topology: memory size cannot be empty",
-			},
-		},
-		{
-			name: "succeeds creating a deployment with ES topology element and without tracking (Normal GetCall)",
-			args: testutils.Args{
-				Cmd: createCmd,
-				Args: []string{
-					"create", "--request-id=some_request_id", "--version=7.8.0", "--es-node-topology",
-					`{"size": "1g", "zone_count": 2, "node_type": "data"}`, "--es-node-topology",
-					`{"size": "1g", "zone_count": 1, "node_type": "ml"}`,
+					"create",
+					"--request-id=some_request_id",
+					"--version=7.11.2",
+					"--deployment-template=aws-io-optimized-v2",
+					"--name=with_default",
 				},
 				Cfg: testutils.MockCfg{Responses: []mock.Response{
 					{
 						Response: http.Response{
 							StatusCode: 200,
-							Body:       mock.NewStructBody(defaultTemplateResponse),
+							Body:       mock.NewByteBody(awsIoOpt),
 						},
 						Assert: &mock.RequestAssertion{
 							Method: "GET",
 							Header: api.DefaultReadMockHeaders,
-							Path:   "/api/v1/deployments/templates/default",
+							Path:   "/api/v1/deployments/templates/aws-io-optimized-v2",
 							Host:   api.DefaultMockHost,
 							Query: url.Values{
 								"region":                       {"ece-region"},
 								"show_instance_configurations": {"true"},
+								"stack_version":                {"7.11.2"},
 							},
 						},
 					},
@@ -517,7 +518,7 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 						Assert: &mock.RequestAssertion{
 							Method: "POST",
 							Header: api.DefaultWriteMockHeaders,
-							Body:   mock.NewStringBody(`{"resources":{"apm":null,"appsearch":null,"elasticsearch":[{"plan":{"cluster_topology":[{"instance_configuration_id":"default.data","node_roles":null,"node_type":{"data":true},"size":{"resource":"memory","value":1024},"zone_count":2},{"instance_configuration_id":"default.ml","node_roles":null,"node_type":{"ml":true},"size":{"resource":"memory","value":1024},"zone_count":1}],"deployment_template":{"id":"default"},"elasticsearch":{"version":"7.8.0"}},"ref_id":"main-elasticsearch","region":"ece-region"}],"enterprise_search":null,"kibana":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"size":{"resource":"memory","value":1024},"zone_count":1}],"kibana":{"version":"7.8.0"}},"ref_id":"main-kibana","region":"ece-region"}]}}` + "\n"),
+							Body:   mock.NewStringBody(`{"name":"with_default","resources":{"apm":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"apm":{"version":"7.11.2"},"cluster_topology":[{"instance_configuration_id":"aws.apm.r5d","size":{"resource":"memory","value":512},"zone_count":1}]},"ref_id":"main-apm","region":"us-east-1"}],"appsearch":null,"elasticsearch":[{"plan":{"autoscaling_enabled":false,"cluster_topology":[{"id":"coordinating","instance_configuration_id":"aws.coordinating.m5d","node_roles":["ingest","remote_cluster_client"],"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":118784},"elasticsearch":{"node_attributes":{"data":"hot"}},"id":"hot_content","instance_configuration_id":"aws.data.highio.i3","node_roles":["master","ingest","remote_cluster_client","data_hot","transform","data_content"],"size":{"resource":"memory","value":8192},"topology_element_control":{"min":{"resource":"memory","value":1024}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":118784},"elasticsearch":{"node_attributes":{"data":"warm"}},"id":"warm","instance_configuration_id":"aws.data.highstorage.d3","node_roles":["data_warm","remote_cluster_client"],"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":59392},"elasticsearch":{"node_attributes":{"data":"cold"}},"id":"cold","instance_configuration_id":"aws.data.highstorage.d3","node_roles":["data_cold","remote_cluster_client"],"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":1},{"id":"master","instance_configuration_id":"aws.master.r5d","node_roles":["master"],"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":3},{"autoscaling_max":{"resource":"memory","value":61440},"autoscaling_min":{"resource":"memory","value":0},"id":"ml","instance_configuration_id":"aws.ml.m5d","node_roles":["ml","remote_cluster_client"],"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":1}],"elasticsearch":{"version":"7.11.2"}},"ref_id":"main-elasticsearch","region":"us-east-1","settings":{"dedicated_masters_threshold":6}}],"enterprise_search":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"instance_configuration_id":"aws.enterprisesearch.m5d","node_type":{"appserver":true,"connector":true,"worker":true},"size":{"resource":"memory","value":0},"zone_count":2}],"enterprise_search":{"version":"7.11.2"}},"ref_id":"main-enterprise_search","region":"us-east-1"}],"kibana":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"instance_configuration_id":"aws.kibana.r5d","size":{"resource":"memory","value":1024},"zone_count":1}],"kibana":{"version":"7.11.2"}},"ref_id":"main-kibana","region":"us-east-1"}]}}` + "\n"),
 							Path:   "/api/v1/deployments",
 							Host:   api.DefaultMockHost,
 							Query: url.Values{
@@ -529,52 +530,6 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 			},
 			want: testutils.Assertion{
 				Stdout: string(defaultCreateResponseBytes),
-			},
-		},
-		{
-			name: "succeeds creating a deployment with overrides and without tracking",
-			args: testutils.Args{
-				Cmd: createCmd,
-				Args: []string{
-					"create", "--apm", "--appsearch", "--enterprise_search", "--request-id=some_request_id", "--version=7.8.0",
-				},
-				Cfg: testutils.MockCfg{Responses: []mock.Response{
-					{
-						Response: http.Response{
-							StatusCode: 200,
-							Body:       mock.NewStructBody(defaultTemplateResponse),
-						},
-						Assert: &mock.RequestAssertion{
-							Method: "GET",
-							Header: api.DefaultReadMockHeaders,
-							Path:   "/api/v1/deployments/templates/default",
-							Host:   api.DefaultMockHost,
-							Query: url.Values{
-								"region":                       {"ece-region"},
-								"show_instance_configurations": {"true"},
-							},
-						},
-					},
-					{
-						Response: http.Response{
-							StatusCode: 201,
-							Body:       mock.NewStructBody(overrideCreateResponse),
-						},
-						Assert: &mock.RequestAssertion{
-							Method: "POST",
-							Header: api.DefaultWriteMockHeaders,
-							Body:   mock.NewStringBody(`{"resources":{"apm":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"apm":{"version":"7.8.0"},"cluster_topology":[{"size":{"resource":"memory","value":512},"zone_count":1}]},"ref_id":"main-apm","region":"ece-region"}],"appsearch":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"appsearch":{"version":"7.8.0"},"cluster_topology":[{"size":{"resource":"memory","value":2048},"zone_count":1}]},"ref_id":"main-appsearch","region":"ece-region"}],"elasticsearch":[{"plan":{"cluster_topology":[{"instance_configuration_id":"default.data","node_roles":null,"node_type":{"data":true},"size":{"resource":"memory","value":4096},"zone_count":1}],"deployment_template":{"id":"default"},"elasticsearch":{"version":"7.8.0"}},"ref_id":"main-elasticsearch","region":"ece-region"}],"enterprise_search":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"size":{"resource":"memory","value":4096},"zone_count":1}],"enterprise_search":{"version":"7.8.0"}},"ref_id":"main-enterprise_search","region":"ece-region"}],"kibana":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"size":{"resource":"memory","value":1024},"zone_count":1}],"kibana":{"version":"7.8.0"}},"ref_id":"main-kibana","region":"ece-region"}]}}` + "\n"),
-							Path:   "/api/v1/deployments",
-							Host:   api.DefaultMockHost,
-							Query: url.Values{
-								"request_id": {"some_request_id"},
-							},
-						},
-					},
-				}},
-			},
-			want: testutils.Assertion{
-				Stdout: string(overrideCreateResponseBytes),
 			},
 		},
 		{
