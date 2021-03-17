@@ -1,6 +1,6 @@
 ## ecctl comment
 
-Manages Comments
+Manages resource comments (Available for ECE only)
 
 ```
 ecctl comment [flags]
@@ -38,5 +38,5 @@ ecctl comment [flags]
 ### SEE ALSO
 
 * [ecctl](ecctl.md)	 - Elastic Cloud Control
-* [ecctl comment create](ecctl_comment_create.md)	 - Creates a new resource comment
+* [ecctl comment create](ecctl_comment_create.md)	 - Creates a new resource comment (Available for ECE only)
 

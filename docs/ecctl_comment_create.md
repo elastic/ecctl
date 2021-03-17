@@ -1,6 +1,6 @@
 ## ecctl comment create
 
-Creates a new resource comment
+Creates a new resource comment (Available for ECE only)
 
 ```
 ecctl comment create <message> --resource-type <resource-type> --resource-id <resource-id> [flags]
@@ -10,8 +10,8 @@ ecctl comment create <message> --resource-type <resource-type> --resource-id <re
 
 ```
   -h, --help                   help for create
-      --resource-id string     Id of the Resource that a Comment belongs to.
-      --resource-type string   The kind of Resource that a Comment belongs to. Should be one of [elasticsearch, kibana, apm, appsearch, enterprise_search, allocator, constructor, runner, proxy].
+      --resource-id string     ID of the resource that a comment belongs to.
+      --resource-type string   The kind of resource that a comment belongs to. Should be one of [elasticsearch, kibana, apm, appsearch, enterprise_search, allocator, constructor, runner, proxy].
 ```
 
 ### Options inherited from parent commands
@@ -39,5 +39,5 @@ ecctl comment create <message> --resource-type <resource-type> --resource-id <re
 
 ### SEE ALSO
 
-* [ecctl comment](ecctl_comment.md)	 - Manages Comments
+* [ecctl comment](ecctl_comment.md)	 - Manages resource comments (Available for ECE only)
 
