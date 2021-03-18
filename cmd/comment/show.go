@@ -18,8 +18,6 @@
 package cmdcomment
 
 import (
-	"path/filepath"
-
 	"github.com/elastic/cloud-sdk-go/pkg/api/commentapi"
 	"github.com/spf13/cobra"
 
@@ -30,7 +28,7 @@ import (
 var showCmd = &cobra.Command{
 	Use:     "show <comment id> --resource-type <resource-type> --resource-id <resource-id>",
 	Short:   cmdutil.AdminReqDescription("Shows information about a resource comment"),
-	PreRunE: cobra.ExactValidArgs(1),
+	PreRunE: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		resourceType, _ := cmd.Flags().GetString("resource-type")
 		resourceID, _ := cmd.Flags().GetString("resource-id")
@@ -47,7 +45,7 @@ var showCmd = &cobra.Command{
 			return err
 		}
 
-		return ecctl.Get().Formatter.Format(filepath.Join("comment", "show"), res)
+		return ecctl.Get().Formatter.Format("comment/show", res)
 	},
 }
 
