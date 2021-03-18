@@ -18,8 +18,6 @@
 package cmdcomment
 
 import (
-	"path/filepath"
-
 	"github.com/elastic/cloud-sdk-go/pkg/api/commentapi"
 	"github.com/spf13/cobra"
 
@@ -29,7 +27,7 @@ import (
 var updateCmd = &cobra.Command{
 	Use:     "update <comment id> <message> --resource-type <resource-type> --resource-id <resource-id>",
 	Short:   "Updates an existing resource comment",
-	PreRunE: cobra.ExactValidArgs(2),
+	PreRunE: cobra.ExactArgs(2),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		resourceType, _ := cmd.Flags().GetString("resource-type")
 		resourceID, _ := cmd.Flags().GetString("resource-id")
@@ -49,7 +47,7 @@ var updateCmd = &cobra.Command{
 			return err
 		}
 
-		return ecctl.Get().Formatter.Format(filepath.Join("comment", "create"), res)
+		return ecctl.Get().Formatter.Format("comment/create", res)
 	},
 }
 
