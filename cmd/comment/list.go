@@ -46,7 +46,7 @@ var listCmd = &cobra.Command{
 			return err
 		}
 
-		return ecctl.Get().Formatter.Format(filepath.Join("comment", "list"), res)
+		return ecctl.Get().Formatter.Format("comment/list", res)
 	},
 }
 
