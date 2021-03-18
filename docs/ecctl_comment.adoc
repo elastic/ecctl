@@ -42,5 +42,5 @@ ecctl comment [flags]
 === SEE ALSO
 
 * xref:ecctl[ecctl]	 - Elastic Cloud Control
-* xref:ecctl_comment_list[ecctl comment list]	 - Lists all resource comments {ece-icon} (Available for ECE only)
 * xref:ecctl_comment_create[ecctl comment create]	 - Creates a new resource comment {ece-icon} (Available for ECE only)
+* xref:ecctl_comment_list[ecctl comment list]	 - Lists all resource comments {ece-icon} (Available for ECE only)
