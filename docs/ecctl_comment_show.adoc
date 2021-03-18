@@ -1,17 +1,19 @@
-[#ecctl_comment]
-== ecctl comment
+[#ecctl_comment_show]
+== ecctl comment show
 
-Manages Comments
+Shows information about a resource comment {ece-icon} (Available for ECE only)
 
 ----
-ecctl comment [flags]
+ecctl comment show <comment id> --resource-type <resource-type> --resource-id <resource-id> [flags]
 ----
 
 [float]
 === Options
 
 ----
-  -h, --help   help for comment
+  -h, --help                   help for show
+      --resource-id string     ID of the resource that the comment belongs to.
+      --resource-type string   The kind of resource that a comment belongs to. Should be one of [elasticsearch, kibana, apm, appsearch, enterprise_search, allocator, constructor, runner, proxy].
 ----
 
 [float]
@@ -41,9 +43,4 @@ ecctl comment [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl[ecctl]	 - Elastic Cloud Control
-* xref:ecctl_comment_create[ecctl comment create]	 - Creates a new resource comment {ece-icon} (Available for ECE only)
-* xref:ecctl_comment_delete[ecctl comment delete]	 - Deletes a resource comment {ece-icon} (Available for ECE only)
-* xref:ecctl_comment_list[ecctl comment list]	 - Lists all resource comments {ece-icon} (Available for ECE only)
-* xref:ecctl_comment_show[ecctl comment show]	 - Shows information about a resource comment {ece-icon} (Available for ECE only)
-* xref:ecctl_comment_update[ecctl comment update]	 - Updates an existing resource comment
+* xref:ecctl_comment[ecctl comment]	 - Manages Comments
