@@ -45,5 +45,5 @@ ecctl comment [flags]
 * xref:ecctl_comment_create[ecctl comment create]	 - Creates a new resource comment {ece-icon} (Available for ECE only)
 * xref:ecctl_comment_delete[ecctl comment delete]	 - Deletes a resource comment {ece-icon} (Available for ECE only)
 * xref:ecctl_comment_list[ecctl comment list]	 - Lists all resource comments {ece-icon} (Available for ECE only)
-* xref:ecctl_comment_show[ecctl comment show]	 - Shows a resource comment
+* xref:ecctl_comment_show[ecctl comment show]	 - Shows information about a resource comment {ece-icon} (Available for ECE only)
 * xref:ecctl_comment_update[ecctl comment update]	 - Updates an existing resource comment

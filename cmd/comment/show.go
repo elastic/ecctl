@@ -23,6 +23,7 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/commentapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
