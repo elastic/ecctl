@@ -58,7 +58,7 @@ func initShowFlags() {
 	Command.AddCommand(showCmd)
 
 	showCmd.Flags().String("resource-type", "", "The kind of resource that a comment belongs to. Should be one of [elasticsearch, kibana, apm, appsearch, enterprise_search, allocator, constructor, runner, proxy].")
-	showCmd.Flags().String("resource-id", "", "Id of the Resource that a Comment belongs to.")
+	showCmd.Flags().String("resource-id", "", "ID of the resource that the comment belongs to.")
 
 	showCmd.MarkFlagRequired("resource-type")
 	showCmd.MarkFlagRequired("resource-id")
