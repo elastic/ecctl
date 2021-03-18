@@ -23,6 +23,7 @@
 // text/allocator/show.gotmpl
 // text/allocator/showmetadata.gotmpl
 // text/comment/create.gotmpl
+// text/comment/list.gotmpl
 // text/deployment/eskeystore_show.gotmpl
 // text/deployment/list.gotmpl
 // text/deployment/notelist.gotmpl
@@ -237,6 +238,26 @@ func textCommentCreateGotmpl() (*asset, error) {
 	}
 
 	info := bindataFileInfo{name: "text/comment/create.gotmpl", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _textCommentListGotmpl = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x7c\x8f\x4f\x6b\x84\x30\x10\xc5\xef\xfb\x29\x86\xdc\xeb\x77\x58\x34\x2d\x39\x64\x05\x75\xbd\x4f\x9b\xe7\x12\xd0\x58\x92\x58\x0a\xc1\xef\x5e\xd4\xed\x16\xa5\xed\x69\x86\xf7\x9b\x3f\xef\xa5\xf4\x44\x06\x9d\x75\x20\x31\x7e\xc0\x7b\x6b\x20\x68\x9e\x53\x22\xcf\xee\x06\xca\x5a\xee\x27\x84\x55\xc2\x27\xde\xa6\x88\x06\xc3\x7b\xcf\x11\x94\xcd\xf3\x29\x25\x82\x33\xdb\xc6\xa3\xf9\xbe\x68\xd0\xf1\xd4\xc7\xe5\xe0\x69\xf9\x44\x22\x2f\xb5\x96\x97\x86\x54\xb1\x7d\x89\xfc\xba\x6e\x90\xb8\xd6\xb2\xda\x6b\x42\xcb\xba\x3e\xbf\x48\xb1\x13\xf3\x4a\x9e\x1b\x59\x50\xa3\xf4\x81\xe8\xb2\x50\xcf\xea\x57\xd4\xca\xaa\x56\xe5\x45\xdc\x7d\x1c\xa3\x2d\x29\xb2\x7c\x1c\x06\xb8\x98\xa9\x62\xe7\xe2\xa1\x5f\x03\xfc\x81\xfd\x40\x8d\x10\xf8\x86\x3d\xd4\x88\x6c\x38\x72\x96\x7b\x70\x84\x69\xec\xf0\xd7\x84\x1e\x8d\xed\xec\xbf\x23\x2d\x7c\xb0\xa3\xbb\x47\x80\x33\x6b\xb7\xd5\xaf\x00\x00\x00\xff\xff\xe6\x1e\x76\x8c\xc7\x01\x00\x00")
+
+func textCommentListGotmplBytes() ([]byte, error) {
+	return bindataRead(
+		_textCommentListGotmpl,
+		"text/comment/list.gotmpl",
+	)
+}
+
+func textCommentListGotmpl() (*asset, error) {
+	bytes, err := textCommentListGotmplBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "text/comment/list.gotmpl", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -739,6 +760,7 @@ var _bindata = map[string]func() (*asset, error){
 	"text/allocator/show.gotmpl":                  textAllocatorShowGotmpl,
 	"text/allocator/showmetadata.gotmpl":          textAllocatorShowmetadataGotmpl,
 	"text/comment/create.gotmpl":                  textCommentCreateGotmpl,
+	"text/comment/list.gotmpl":                    textCommentListGotmpl,
 	"text/deployment/eskeystore_show.gotmpl":      textDeploymentEskeystore_showGotmpl,
 	"text/deployment/list.gotmpl":                 textDeploymentListGotmpl,
 	"text/deployment/notelist.gotmpl":             textDeploymentNotelistGotmpl,
@@ -814,6 +836,7 @@ var _bintree = &bintree{nil, map[string]*bintree{
 		}},
 		"comment": &bintree{nil, map[string]*bintree{
 			"create.gotmpl": &bintree{textCommentCreateGotmpl, map[string]*bintree{}},
+			"list.gotmpl":   &bintree{textCommentListGotmpl, map[string]*bintree{}},
 		}},
 		"deployment": &bintree{nil, map[string]*bintree{
 			"eskeystore_show.gotmpl": &bintree{textDeploymentEskeystore_showGotmpl, map[string]*bintree{}},
