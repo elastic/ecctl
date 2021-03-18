@@ -1,17 +1,20 @@
-[#ecctl_comment]
-== ecctl comment
+[#ecctl_comment_update]
+== ecctl comment update
 
-Manages Comments
+Updates an existing resource comment
 
 ----
-ecctl comment [flags]
+ecctl comment update <comment id> <message> --resource-type <resource-type> --resource-id <resource-id> [flags]
 ----
 
 [float]
 === Options
 
 ----
-  -h, --help   help for comment
+  -h, --help                   help for update
+      --resource-id string     Id of the Resource that a Comment belongs to.
+      --resource-type string   The kind of Resource that a Comment belongs to. Should be one of [elasticsearch, kibana, apm, appsearch, enterprise_search, allocator, constructor, runner, proxy].
+      --version string         If specified then checks for conflicts against the version stored in the persistent store.
 ----
 
 [float]
@@ -41,7 +44,4 @@ ecctl comment [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl[ecctl]	 - Elastic Cloud Control
-* xref:ecctl_comment_create[ecctl comment create]	 - Creates a new resource comment {ece-icon} (Available for ECE only)
-* xref:ecctl_comment_list[ecctl comment list]	 - Lists all resource comments {ece-icon} (Available for ECE only)
-* xref:ecctl_comment_update[ecctl comment update]	 - Updates an existing resource comment
+* xref:ecctl_comment[ecctl comment]	 - Manages Comments

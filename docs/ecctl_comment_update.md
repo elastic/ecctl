@@ -1,23 +1,23 @@
-[#ecctl_comment]
-== ecctl comment
+## ecctl comment update
 
-Manages Comments
+Updates an existing resource comment
 
-----
-ecctl comment [flags]
-----
+```
+ecctl comment update <comment id> <message> --resource-type <resource-type> --resource-id <resource-id> [flags]
+```
 
-[float]
-=== Options
+### Options
 
-----
-  -h, --help   help for comment
-----
+```
+  -h, --help                   help for update
+      --resource-id string     Id of the Resource that a Comment belongs to.
+      --resource-type string   The kind of Resource that a Comment belongs to. Should be one of [elasticsearch, kibana, apm, appsearch, enterprise_search, allocator, constructor, runner, proxy].
+      --version string         If specified then checks for conflicts against the version stored in the persistent store.
+```
 
-[float]
-=== Options inherited from parent commands
+### Options inherited from parent commands
 
-----
+```
       --api-key string        API key to use to authenticate (If empty will look for EC_API_KEY environment variable)
       --config string         Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
       --force                 Do not ask for confirmation
@@ -36,12 +36,9 @@ ecctl comment [flags]
       --verbose               Enable verbose mode
       --verbose-credentials   When set, Authorization headers on the request/response trail will be displayed as plain text
       --verbose-file string   When set, the verbose request/response trail will be written to the defined file
-----
+```
 
-[float]
-=== SEE ALSO
+### SEE ALSO
 
-* xref:ecctl[ecctl]	 - Elastic Cloud Control
-* xref:ecctl_comment_create[ecctl comment create]	 - Creates a new resource comment {ece-icon} (Available for ECE only)
-* xref:ecctl_comment_list[ecctl comment list]	 - Lists all resource comments {ece-icon} (Available for ECE only)
-* xref:ecctl_comment_update[ecctl comment update]	 - Updates an existing resource comment
+* [ecctl comment](ecctl_comment.md)	 - Manages Comments
+

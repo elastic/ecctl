@@ -40,4 +40,5 @@ ecctl comment [flags]
 * [ecctl](ecctl.md)	 - Elastic Cloud Control
 * [ecctl comment create](ecctl_comment_create.md)	 - Creates a new resource comment (Available for ECE only)
 * [ecctl comment list](ecctl_comment_list.md)	 - Lists all resource comments (Available for ECE only)
+* [ecctl comment update](ecctl_comment_update.md)	 - Updates an existing resource comment
 
