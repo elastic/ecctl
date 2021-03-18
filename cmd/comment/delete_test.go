@@ -109,7 +109,7 @@ func Test_deleteCmd(t *testing.T) {
 				},
 			},
 			want: testutils.Assertion{
-				Stdout: "comment deleted successfully",
+				Stdout: "comment deleted successfully\n",
 			},
 		},
 		{
@@ -136,7 +136,7 @@ func Test_deleteCmd(t *testing.T) {
 				},
 			},
 			want: testutils.Assertion{
-				Stdout: "comment deleted successfully",
+				Stdout: "comment deleted successfully\n",
 			},
 		},
 	}
