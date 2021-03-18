@@ -23,12 +23,13 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/commentapi"
 	"github.com/spf13/cobra"
 
+	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
 var createCmd = &cobra.Command{
 	Use:     "create <message> --resource-type <resource-type> --resource-id <resource-id>",
-	Short:   "Creates a new resource comment",
+	Short:   cmdutil.AdminReqDescription("Creates a new resource comment"),
 	PreRunE: cobra.ExactValidArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		resourceType, _ := cmd.Flags().GetString("resource-type")
@@ -57,8 +58,9 @@ func init() {
 func initCreateFlags() {
 	Command.AddCommand(createCmd)
 
-	createCmd.Flags().String("resource-type", "", "The kind of Resource that a Comment belongs to. Should be one of [elasticsearch, kibana, apm, appsearch, enterprise_search, allocator, constructor, runner, proxy].")
-	createCmd.Flags().String("resource-id", "", "Id of the Resource that a Comment belongs to.")
+	createCmd.Flags().String("resource-type", "", "The kind of resource that a comment belongs to. "+
+		"Should be one of [elasticsearch, kibana, apm, appsearch, enterprise_search, allocator, constructor, runner, proxy].")
+	createCmd.Flags().String("resource-id", "", "Id of the resource that a Comment belongs to.")
 
 	createCmd.MarkFlagRequired("resource-type")
 	createCmd.MarkFlagRequired("resource-id")
