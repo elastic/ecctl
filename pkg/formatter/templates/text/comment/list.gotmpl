@@ -1,0 +1,7 @@
+{{- define "override" }}{{ range .Values }}{{executeTemplate .}}
+{{ end }}{{ end }}{{ define "default" }}
+{{-  "COMMENT ID" }}{{tab}}{{  "USER" }}{{tab}}{{ "MESSAGE"}}{{tab}}{{ "CREATED TIME"}}{{tab}}{{ "MODIFIED TIME"}}{{tab}}{{ "VERSION"}}
+{{- range .Values }}
+{{ .Comment.ID }}{{tab}}{{ .Comment.UserID }}{{tab}}{{  .Comment.Message}}{{tab}}{{  .Metadata.CreatedTime}}{{tab}}{{  .Metadata.ModifiedTime}}{{tab}}{{  .Metadata.Version}}
+{{- end}}
+{{end}}
