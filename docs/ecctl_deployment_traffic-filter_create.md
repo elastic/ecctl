@@ -1,23 +1,26 @@
-[#ecctl_deployment_traffic-filter]
-== ecctl deployment traffic-filter
+## ecctl deployment traffic-filter create
 
-Manages traffic filter rulesets
+Creates traffic filter rulesets
 
-----
-ecctl deployment traffic-filter [flags]
-----
+```
+ecctl deployment traffic-filter create --filter-region <region> --name <filter name> --type <filter type> --source <filter source>,<filter source>  [flags]
+```
 
-[float]
-=== Options
+### Options
 
-----
-  -h, --help   help for traffic-filter
-----
+```
+      --description string     Optional description for the traffic filter.
+      --filter-region string   Region where the filter will be available for.
+  -h, --help                   help for create
+      --include-by-default     If set, any future eligible deployments will have this filter applied automatically.
+      --name string            Name for the traffic filter.
+      --source strings         List of allowed traffic filter sources. Can be IP addresses, CIDR masks, or VPC endpoint IDs
+      --type string            Type of traffic filter. Can be one of [ip, vpce])
+```
 
-[float]
-=== Options inherited from parent commands
+### Options inherited from parent commands
 
-----
+```
       --api-key string        API key to use to authenticate (If empty will look for EC_API_KEY environment variable)
       --config string         Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
       --force                 Do not ask for confirmation
@@ -36,13 +39,9 @@ ecctl deployment traffic-filter [flags]
       --verbose               Enable verbose mode
       --verbose-credentials   When set, Authorization headers on the request/response trail will be displayed as plain text
       --verbose-file string   When set, the verbose request/response trail will be written to the defined file
-----
+```
 
-[float]
-=== SEE ALSO
+### SEE ALSO
 
-* xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
-* xref:ecctl_deployment_traffic-filter_create[ecctl deployment traffic-filter create]	 - Creates traffic filter rulesets
-* xref:ecctl_deployment_traffic-filter_delete[ecctl deployment traffic-filter delete]	 - Deletes a traffic filter ruleset
-* xref:ecctl_deployment_traffic-filter_list[ecctl deployment traffic-filter list]	 - Lists the traffic filter rulesets
-* xref:ecctl_deployment_traffic-filter_show[ecctl deployment traffic-filter show]	 - Shows information about a traffic filter ruleset
+* [ecctl deployment traffic-filter](ecctl_deployment_traffic-filter.md)	 - Manages traffic filter rulesets
+
