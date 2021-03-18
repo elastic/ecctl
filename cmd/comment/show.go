@@ -28,7 +28,7 @@ import (
 
 var showCmd = &cobra.Command{
 	Use:     "show <id> --resource-type <resource-type> --resource-id <resource-id>",
-	Short:   "Shows a resource comment",
+	Short:   cmdutil.AdminReqDescription("Shows information about a resource comment"),
 	PreRunE: cobra.ExactValidArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		resourceType, _ := cmd.Flags().GetString("resource-type")
