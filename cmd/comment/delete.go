@@ -18,6 +18,7 @@
 package cmdcomment
 
 import (
+	"fmt"
 	"github.com/elastic/cloud-sdk-go/pkg/api/commentapi"
 	"github.com/spf13/cobra"
 
@@ -46,7 +47,7 @@ var deleteCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		fmt.Fprintln(ecctl.Get().Config.OutputDevice, "comment deleted successfully)
+		fmt.Fprintln(ecctl.Get().Config.OutputDevice, "comment deleted successfully")
 		return nil
 	},
 }

@@ -1,6 +1,6 @@
 ## ecctl comment delete
 
-Shows information about a resource comment (Available for ECE only)
+Deletes a resource comment (Available for ECE only)
 
 ```
 ecctl comment delete <comment id> --resource-type <resource-type> --resource-id <resource-id> [flags]
