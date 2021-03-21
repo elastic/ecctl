@@ -18,48 +18,50 @@
 package cmdcomment
 
 import (
-	"path/filepath"
-
 	"github.com/elastic/cloud-sdk-go/pkg/api/commentapi"
 	"github.com/spf13/cobra"
 
-	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
-var createCmd = &cobra.Command{
-	Use:     "create <message> --resource-type <resource-type> --resource-id <resource-id>",
-	Short:   cmdutil.AdminReqDescription("Creates a new resource comment"),
-	PreRunE: cobra.ExactValidArgs(1),
+var updateCmd = &cobra.Command{
+	Use:     "update <comment id> <message> --resource-type <resource-type> --resource-id <resource-id>",
+	Short:   "Updates an existing resource comment",
+	PreRunE: cobra.ExactArgs(2),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		resourceType, _ := cmd.Flags().GetString("resource-type")
 		resourceID, _ := cmd.Flags().GetString("resource-id")
+		version, _ := cmd.Flags().GetString("version")
 
-		res, err := commentapi.Create(commentapi.CreateParams{
+		res, err := commentapi.Update(commentapi.UpdateParams{
 			API:          ecctl.Get().API,
 			Region:       ecctl.Get().Config.Region,
-			Message:      args[0],
+			CommentID:    args[0],
+			Message:      args[1],
 			ResourceID:   resourceID,
 			ResourceType: resourceType,
+			Version:      version,
 		})
 
 		if err != nil {
 			return err
 		}
 
-		return ecctl.Get().Formatter.Format(filepath.Join("comment", "create"), res)
+		return ecctl.Get().Formatter.Format("comment/create", res)
 	},
 }
 
 func init() {
-	initCreateFlags()
+	initUpdateFlags()
 }
 
-func initCreateFlags() {
-	Command.AddCommand(createCmd)
-	createCmd.Flags().String("resource-type", "", "The kind of resource that a comment belongs to. "+
-		"Should be one of [elasticsearch, kibana, apm, appsearch, enterprise_search, allocator, constructor, runner, proxy].")
-	createCmd.Flags().String("resource-id", "", "ID of the resource that a comment belongs to.")
-	createCmd.MarkFlagRequired("resource-type")
-	createCmd.MarkFlagRequired("resource-id")
+func initUpdateFlags() {
+	Command.AddCommand(updateCmd)
+
+	updateCmd.Flags().String("resource-type", "", "The kind of Resource that a Comment belongs to. Should be one of [elasticsearch, kibana, apm, appsearch, enterprise_search, allocator, constructor, runner, proxy].")
+	updateCmd.Flags().String("resource-id", "", "Id of the Resource that a Comment belongs to.")
+	updateCmd.Flags().String("version", "", "If specified then checks for conflicts against the version stored in the persistent store.")
+
+	updateCmd.MarkFlagRequired("resource-type")
+	updateCmd.MarkFlagRequired("resource-id")
 }

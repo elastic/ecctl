@@ -18,7 +18,7 @@
 package cmdcomment
 
 import (
-	"path/filepath"
+	"fmt"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api/commentapi"
 	"github.com/spf13/cobra"
@@ -27,39 +27,44 @@ import (
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
-var createCmd = &cobra.Command{
-	Use:     "create <message> --resource-type <resource-type> --resource-id <resource-id>",
-	Short:   cmdutil.AdminReqDescription("Creates a new resource comment"),
+var deleteCmd = &cobra.Command{
+	Use:     "delete <comment id> --resource-type <resource-type> --resource-id <resource-id>",
+	Short:   cmdutil.AdminReqDescription("Deletes a resource comment"),
 	PreRunE: cobra.ExactValidArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		resourceType, _ := cmd.Flags().GetString("resource-type")
 		resourceID, _ := cmd.Flags().GetString("resource-id")
+		version, _ := cmd.Flags().GetString("version")
 
-		res, err := commentapi.Create(commentapi.CreateParams{
+		err := commentapi.Delete(commentapi.DeleteParams{
 			API:          ecctl.Get().API,
 			Region:       ecctl.Get().Config.Region,
-			Message:      args[0],
+			CommentID:    args[0],
 			ResourceID:   resourceID,
 			ResourceType: resourceType,
+			Version:      version,
 		})
 
 		if err != nil {
 			return err
 		}
-
-		return ecctl.Get().Formatter.Format(filepath.Join("comment", "create"), res)
+		fmt.Fprintln(ecctl.Get().Config.OutputDevice, "comment deleted successfully")
+		return nil
 	},
 }
 
 func init() {
-	initCreateFlags()
+	initDeleteFlags()
 }
 
-func initCreateFlags() {
-	Command.AddCommand(createCmd)
-	createCmd.Flags().String("resource-type", "", "The kind of resource that a comment belongs to. "+
+func initDeleteFlags() {
+	Command.AddCommand(deleteCmd)
+
+	deleteCmd.Flags().String("resource-type", "", "The kind of resource that a comment belongs to. "+
 		"Should be one of [elasticsearch, kibana, apm, appsearch, enterprise_search, allocator, constructor, runner, proxy].")
-	createCmd.Flags().String("resource-id", "", "ID of the resource that a comment belongs to.")
-	createCmd.MarkFlagRequired("resource-type")
-	createCmd.MarkFlagRequired("resource-id")
+	deleteCmd.Flags().String("resource-id", "", "ID of the resource that the comment belongs to.")
+	deleteCmd.Flags().String("version", "", "If specified then checks for conflicts against the version stored in the persistent store.")
+
+	deleteCmd.MarkFlagRequired("resource-type")
+	deleteCmd.MarkFlagRequired("resource-id")
 }

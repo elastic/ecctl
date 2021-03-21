@@ -18,8 +18,6 @@
 package cmdcomment
 
 import (
-	"path/filepath"
-
 	"github.com/elastic/cloud-sdk-go/pkg/api/commentapi"
 	"github.com/spf13/cobra"
 
@@ -27,18 +25,18 @@ import (
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
-var createCmd = &cobra.Command{
-	Use:     "create <message> --resource-type <resource-type> --resource-id <resource-id>",
-	Short:   cmdutil.AdminReqDescription("Creates a new resource comment"),
-	PreRunE: cobra.ExactValidArgs(1),
+var showCmd = &cobra.Command{
+	Use:     "show <comment id> --resource-type <resource-type> --resource-id <resource-id>",
+	Short:   cmdutil.AdminReqDescription("Shows information about a resource comment"),
+	PreRunE: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		resourceType, _ := cmd.Flags().GetString("resource-type")
 		resourceID, _ := cmd.Flags().GetString("resource-id")
 
-		res, err := commentapi.Create(commentapi.CreateParams{
+		res, err := commentapi.Get(commentapi.GetParams{
 			API:          ecctl.Get().API,
 			Region:       ecctl.Get().Config.Region,
-			Message:      args[0],
+			CommentID:    args[0],
 			ResourceID:   resourceID,
 			ResourceType: resourceType,
 		})
@@ -47,19 +45,20 @@ var createCmd = &cobra.Command{
 			return err
 		}
 
-		return ecctl.Get().Formatter.Format(filepath.Join("comment", "create"), res)
+		return ecctl.Get().Formatter.Format("comment/show", res)
 	},
 }
 
 func init() {
-	initCreateFlags()
+	initShowFlags()
 }
 
-func initCreateFlags() {
-	Command.AddCommand(createCmd)
-	createCmd.Flags().String("resource-type", "", "The kind of resource that a comment belongs to. "+
-		"Should be one of [elasticsearch, kibana, apm, appsearch, enterprise_search, allocator, constructor, runner, proxy].")
-	createCmd.Flags().String("resource-id", "", "ID of the resource that a comment belongs to.")
-	createCmd.MarkFlagRequired("resource-type")
-	createCmd.MarkFlagRequired("resource-id")
+func initShowFlags() {
+	Command.AddCommand(showCmd)
+
+	showCmd.Flags().String("resource-type", "", "The kind of resource that a comment belongs to. Should be one of [elasticsearch, kibana, apm, appsearch, enterprise_search, allocator, constructor, runner, proxy].")
+	showCmd.Flags().String("resource-id", "", "ID of the resource that the comment belongs to.")
+
+	showCmd.MarkFlagRequired("resource-type")
+	showCmd.MarkFlagRequired("resource-id")
 }

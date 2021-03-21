@@ -1,15 +1,17 @@
-## ecctl comment
+## ecctl comment list
 
-Manages resource comments (Available for ECE only)
+Lists all resource comments (Available for ECE only)
 
 ```
-ecctl comment [flags]
+ecctl comment list --resource-type <resource-type> --resource-id <resource-id> [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for comment
+  -h, --help                   help for list
+      --resource-id string     Id of the resource that a comment belongs to.
+      --resource-type string   The kind of resource that a comment belongs to. Should be one of [elasticsearch, kibana, apm, appsearch, enterprise_search, allocator, constructor, runner, proxy].
 ```
 
 ### Options inherited from parent commands
@@ -37,9 +39,5 @@ ecctl comment [flags]
 
 ### SEE ALSO
 
-* [ecctl](ecctl.md)	 - Elastic Cloud Control
-* [ecctl comment create](ecctl_comment_create.md)	 - Creates a new resource comment (Available for ECE only)
-* [ecctl comment delete](ecctl_comment_delete.md)	 - Deletes a resource comment (Available for ECE only)
-* [ecctl comment list](ecctl_comment_list.md)	 - Lists all resource comments (Available for ECE only)
-* [ecctl comment show](ecctl_comment_show.md)	 - Shows information about a resource comment (Available for ECE only)
-* [ecctl comment update](ecctl_comment_update.md)	 - Updates an existing resource comment
+* [ecctl comment](ecctl_comment.md)	 - Manages Comments
+

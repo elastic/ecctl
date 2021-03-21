@@ -18,8 +18,6 @@
 package cmdcomment
 
 import (
-	"path/filepath"
-
 	"github.com/elastic/cloud-sdk-go/pkg/api/commentapi"
 	"github.com/spf13/cobra"
 
@@ -27,18 +25,17 @@ import (
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
-var createCmd = &cobra.Command{
-	Use:     "create <message> --resource-type <resource-type> --resource-id <resource-id>",
-	Short:   cmdutil.AdminReqDescription("Creates a new resource comment"),
-	PreRunE: cobra.ExactValidArgs(1),
+var listCmd = &cobra.Command{
+	Use:     "list --resource-type <resource-type> --resource-id <resource-id>",
+	Short:   cmdutil.AdminReqDescription("Lists all resource comments"),
+	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		resourceType, _ := cmd.Flags().GetString("resource-type")
 		resourceID, _ := cmd.Flags().GetString("resource-id")
 
-		res, err := commentapi.Create(commentapi.CreateParams{
+		res, err := commentapi.List(commentapi.ListParams{
 			API:          ecctl.Get().API,
 			Region:       ecctl.Get().Config.Region,
-			Message:      args[0],
 			ResourceID:   resourceID,
 			ResourceType: resourceType,
 		})
@@ -47,19 +44,21 @@ var createCmd = &cobra.Command{
 			return err
 		}
 
-		return ecctl.Get().Formatter.Format(filepath.Join("comment", "create"), res)
+		return ecctl.Get().Formatter.Format("comment/list", res)
 	},
 }
 
 func init() {
-	initCreateFlags()
+	initListFlags()
 }
 
-func initCreateFlags() {
-	Command.AddCommand(createCmd)
-	createCmd.Flags().String("resource-type", "", "The kind of resource that a comment belongs to. "+
+func initListFlags() {
+	Command.AddCommand(listCmd)
+
+	listCmd.Flags().String("resource-type", "", "The kind of resource that a comment belongs to. "+
 		"Should be one of [elasticsearch, kibana, apm, appsearch, enterprise_search, allocator, constructor, runner, proxy].")
-	createCmd.Flags().String("resource-id", "", "ID of the resource that a comment belongs to.")
-	createCmd.MarkFlagRequired("resource-type")
-	createCmd.MarkFlagRequired("resource-id")
+	listCmd.Flags().String("resource-id", "", "Id of the resource that a comment belongs to.")
+
+	listCmd.MarkFlagRequired("resource-type")
+	listCmd.MarkFlagRequired("resource-id")
 }
