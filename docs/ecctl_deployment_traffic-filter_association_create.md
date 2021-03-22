@@ -1,15 +1,16 @@
-## ecctl deployment traffic-filter
+## ecctl deployment traffic-filter association create
 
-Manages traffic filter rulesets
+Applies the ruleset to the specified deployment.
 
 ```
-ecctl deployment traffic-filter [flags]
+ecctl deployment traffic-filter association create <ruleset id> [--deployment-id] [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for traffic-filter
+      --deployment-id string   Required deployment ID where the traffic filter will be associated
+  -h, --help                   help for create
 ```
 
 ### Options inherited from parent commands
@@ -37,9 +38,5 @@ ecctl deployment traffic-filter [flags]
 
 ### SEE ALSO
 
-* [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
 * [ecctl deployment traffic-filter association](ecctl_deployment_traffic-filter_association.md)	 - Manages traffic filter ruleset associations
-* [ecctl deployment traffic-filter delete](ecctl_deployment_traffic-filter_delete.md)	 - Deletes a traffic filter ruleset
-* [ecctl deployment traffic-filter list](ecctl_deployment_traffic-filter_list.md)	 - Lists the traffic filter rulesets
-* [ecctl deployment traffic-filter show](ecctl_deployment_traffic-filter_show.md)	 - Shows information about a traffic filter ruleset
 
