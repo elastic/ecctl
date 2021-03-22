@@ -18,41 +18,43 @@
 package cmddeploymenttrafficfilter
 
 import (
-	"net/url"
+	"encoding/json"
+	"io/ioutil"
 	"testing"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
+	"github.com/elastic/cloud-sdk-go/pkg/models"
 
 	"github.com/elastic/ecctl/cmd/util/testutils"
 )
 
-func Test_deleteCmd(t *testing.T) {
+func Test_createCmd(t *testing.T) {
+	createRawResp, err := ioutil.ReadFile("./testdata/create.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	var succeedResp = new(models.TrafficFilterRulesets)
+	if err := succeedResp.UnmarshalBinary(createRawResp); err != nil {
+		t.Fatal(err)
+	}
+
+	createJSONOutput, err := json.MarshalIndent(succeedResp, "", "  ")
+	if err != nil {
+		t.Fatal(err)
+	}
+
 	tests := []struct {
 		name string
 		args testutils.Args
 		want testutils.Assertion
 	}{
 		{
-			name: "fails due to empty argument",
-			args: testutils.Args{
-				Cmd:  deleteCmd,
-				Args: []string{"delete"},
-				Cfg: testutils.MockCfg{Responses: []mock.Response{
-					mock.SampleInternalError(),
-				}},
-			},
-			want: testutils.Assertion{
-				Err: `requires at least 1 arg(s), only received 0`,
-			},
-		},
-		{
 			name: "fails due to API error",
 			args: testutils.Args{
-				Cmd: deleteCmd,
-				Args: []string{
-					"delete", "11111111111111111111111111111111",
-				},
+				Cmd:  createCmd,
+				Args: []string{"create"},
 				Cfg: testutils.MockCfg{Responses: []mock.Response{
 					mock.SampleInternalError(),
 				}},
@@ -64,53 +66,27 @@ func Test_deleteCmd(t *testing.T) {
 		{
 			name: "succeeds",
 			args: testutils.Args{
-				Cmd: deleteCmd,
-				Args: []string{
-					"delete", "4e974d9476534d35b12fbdcfd0acee0a",
-				},
+				Cmd: createCmd,
+				Args: []string{"create", "--name", "hi", "--type", "ip",
+					"--include-by-default", "--description", "bob", "--source", "0.0.0.0/0,0.0.0.0/1"},
 				Cfg: testutils.MockCfg{
 					OutputFormat: "json",
 					Responses: []mock.Response{
 						mock.New200ResponseAssertion(
 							&mock.RequestAssertion{
 								Header: api.DefaultWriteMockHeaders,
-								Method: "DELETE",
-								Path:   "/api/v1/deployments/traffic-filter/rulesets/4e974d9476534d35b12fbdcfd0acee0a",
+								Method: "POST",
+								Path:   "/api/v1/deployments/traffic-filter/rulesets",
 								Host:   api.DefaultMockHost,
-								Query: url.Values{
-									"ignore_associations": []string{"false"},
-								},
+								Body:   mock.NewStringBody(`{"description":"bob","include_by_default":true,"name":"hi","region":"ece-region","rules":[{"source":"0.0.0.0/0"},{"source":"0.0.0.0/1"}],"type":"ip"}` + "\n"),
 							},
-							mock.NewByteBody(nil),
+							mock.NewByteBody(createRawResp),
 						),
 					},
 				},
 			},
-		},
-		{
-			name: "succeeds with ignore associations",
-			args: testutils.Args{
-				Cmd: deleteCmd,
-				Args: []string{
-					"delete", "4e974d9476534d35b12fbdcfd0acee0a", "--ignore-associations",
-				},
-				Cfg: testutils.MockCfg{
-					OutputFormat: "json",
-					Responses: []mock.Response{
-						mock.New200ResponseAssertion(
-							&mock.RequestAssertion{
-								Header: api.DefaultWriteMockHeaders,
-								Method: "DELETE",
-								Path:   "/api/v1/deployments/traffic-filter/rulesets/4e974d9476534d35b12fbdcfd0acee0a",
-								Host:   api.DefaultMockHost,
-								Query: url.Values{
-									"ignore_associations": []string{"true"},
-								},
-							},
-							mock.NewByteBody(nil),
-						),
-					},
-				},
+			want: testutils.Assertion{
+				Err: string(createJSONOutput),
 			},
 		},
 	}
@@ -118,7 +94,7 @@ func Test_deleteCmd(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			testutils.RunCmdAssertion(t, tt.args, tt.want)
 			tt.args.Cmd.ResetFlags()
-			defer initDeleteFlags()
+			defer initCreateFlags()
 		})
 	}
 }
