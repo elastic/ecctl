@@ -53,11 +53,11 @@ var createCmd = &cobra.Command{
 
 		if err := deploymentapi.OverrideCreateOrUpdateRequest(payload,
 			&deploymentapi.PayloadOverrides{
-				Name:                name,
-				Version:             version,
-				Region:              region,
-				ElasticcsearchRefID: "main-elasticsearch",
-				OverrideRefIDs:      true,
+				Name:               name,
+				Version:            version,
+				Region:             region,
+				ElasticsearchRefID: "main-elasticsearch",
+				OverrideRefIDs:     true,
 			},
 		); err != nil {
 			return err
