@@ -10,7 +10,7 @@ ecctl comment create <message> --resource-type <resource-type> --resource-id <re
 
 ```
   -h, --help                   help for create
-      --resource-id string     Id of the resource that a Comment belongs to.
+      --resource-id string     ID of the resource that a comment belongs to.
       --resource-type string   The kind of resource that a comment belongs to. Should be one of [elasticsearch, kibana, apm, appsearch, enterprise_search, allocator, constructor, runner, proxy].
 ```
 
@@ -39,5 +39,5 @@ ecctl comment create <message> --resource-type <resource-type> --resource-id <re
 
 ### SEE ALSO
 
-* [ecctl comment](ecctl_comment.md)	 - Manages Comments
+* [ecctl comment](ecctl_comment.md)	 - Manages resource comments (Available for ECE only)
 

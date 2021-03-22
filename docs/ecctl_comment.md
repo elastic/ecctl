@@ -1,6 +1,6 @@
 ## ecctl comment
 
-Manages Comments
+Manages resource comments (Available for ECE only)
 
 ```
 ecctl comment [flags]
@@ -42,5 +42,5 @@ ecctl comment [flags]
 * [ecctl comment delete](ecctl_comment_delete.md)	 - Deletes a resource comment (Available for ECE only)
 * [ecctl comment list](ecctl_comment_list.md)	 - Lists all resource comments (Available for ECE only)
 * [ecctl comment show](ecctl_comment_show.md)	 - Shows information about a resource comment (Available for ECE only)
-* [ecctl comment update](ecctl_comment_update.md)	 - Updates an existing resource comment
+* [ecctl comment update](ecctl_comment_update.md)	 - Updates an existing resource comment (Available for ECE only)
 

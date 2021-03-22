@@ -57,11 +57,9 @@ func init() {
 
 func initCreateFlags() {
 	Command.AddCommand(createCmd)
-
 	createCmd.Flags().String("resource-type", "", "The kind of resource that a comment belongs to. "+
 		"Should be one of [elasticsearch, kibana, apm, appsearch, enterprise_search, allocator, constructor, runner, proxy].")
-	createCmd.Flags().String("resource-id", "", "Id of the resource that a Comment belongs to.")
-
+	createCmd.Flags().String("resource-id", "", "ID of the resource that a comment belongs to.")
 	createCmd.MarkFlagRequired("resource-type")
 	createCmd.MarkFlagRequired("resource-id")
 }

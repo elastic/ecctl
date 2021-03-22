@@ -1,6 +1,6 @@
 ## ecctl comment update
 
-Updates an existing resource comment
+Updates an existing resource comment (Available for ECE only)
 
 ```
 ecctl comment update <comment id> <message> --resource-type <resource-type> --resource-id <resource-id> [flags]
@@ -40,5 +40,5 @@ ecctl comment update <comment id> <message> --resource-type <resource-type> --re
 
 ### SEE ALSO
 
-* [ecctl comment](ecctl_comment.md)	 - Manages Comments
+* [ecctl comment](ecctl_comment.md)	 - Manages resource comments (Available for ECE only)
 

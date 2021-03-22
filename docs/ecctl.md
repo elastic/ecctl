@@ -29,7 +29,7 @@ Elastic Cloud Control
 ### SEE ALSO
 
 * [ecctl auth](ecctl_auth.md)	 - Manages authentication settings
-* [ecctl comment](ecctl_comment.md)	 - Manages Comments
+* [ecctl comment](ecctl_comment.md)	 - Manages resource comments (Available for ECE only)
 * [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
 * [ecctl generate](ecctl_generate.md)	 - Generates completions and docs
 * [ecctl init](ecctl_init.md)	 - Creates an initial configuration file.
