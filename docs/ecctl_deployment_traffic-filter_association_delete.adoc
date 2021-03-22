@@ -1,17 +1,18 @@
-[#ecctl_deployment_traffic-filter]
-== ecctl deployment traffic-filter
+[#ecctl_deployment_traffic-filter_association_delete]
+== ecctl deployment traffic-filter association delete
 
-Manages traffic filter rulesets
+Deletes the traffic rules in the ruleset from the deployment.
 
 ----
-ecctl deployment traffic-filter [flags]
+ecctl deployment traffic-filter association delete <ruleset id> --deployment-id <deployment-id> [flags]
 ----
 
 [float]
 === Options
 
 ----
-  -h, --help   help for traffic-filter
+      --deployment-id string   Required deployment ID where the traffic filter is associated
+  -h, --help                   help for delete
 ----
 
 [float]
@@ -41,9 +42,4 @@ ecctl deployment traffic-filter [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
 * xref:ecctl_deployment_traffic-filter_association[ecctl deployment traffic-filter association]	 - Manages traffic filter ruleset associations
-* xref:ecctl_deployment_traffic-filter_create[ecctl deployment traffic-filter create]	 - Creates traffic filter rulesets
-* xref:ecctl_deployment_traffic-filter_delete[ecctl deployment traffic-filter delete]	 - Deletes a traffic filter ruleset
-* xref:ecctl_deployment_traffic-filter_list[ecctl deployment traffic-filter list]	 - Lists the traffic filter rulesets
-* xref:ecctl_deployment_traffic-filter_show[ecctl deployment traffic-filter show]	 - Shows information about a traffic filter ruleset

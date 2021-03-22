@@ -1,23 +1,21 @@
-[#ecctl_deployment_traffic-filter]
-== ecctl deployment traffic-filter
+## ecctl deployment traffic-filter association create
 
-Manages traffic filter rulesets
+Applies the ruleset to the specified deployment.
 
-----
-ecctl deployment traffic-filter [flags]
-----
+```
+ecctl deployment traffic-filter association create <ruleset id> --deployment-id <deployment-id> [flags]
+```
 
-[float]
-=== Options
+### Options
 
-----
-  -h, --help   help for traffic-filter
-----
+```
+      --deployment-id string   Required deployment ID where the traffic filter will be associated
+  -h, --help                   help for create
+```
 
-[float]
-=== Options inherited from parent commands
+### Options inherited from parent commands
 
-----
+```
       --api-key string        API key to use to authenticate (If empty will look for EC_API_KEY environment variable)
       --config string         Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
       --force                 Do not ask for confirmation
@@ -36,14 +34,9 @@ ecctl deployment traffic-filter [flags]
       --verbose               Enable verbose mode
       --verbose-credentials   When set, Authorization headers on the request/response trail will be displayed as plain text
       --verbose-file string   When set, the verbose request/response trail will be written to the defined file
-----
+```
 
-[float]
-=== SEE ALSO
+### SEE ALSO
 
-* xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
-* xref:ecctl_deployment_traffic-filter_association[ecctl deployment traffic-filter association]	 - Manages traffic filter ruleset associations
-* xref:ecctl_deployment_traffic-filter_create[ecctl deployment traffic-filter create]	 - Creates traffic filter rulesets
-* xref:ecctl_deployment_traffic-filter_delete[ecctl deployment traffic-filter delete]	 - Deletes a traffic filter ruleset
-* xref:ecctl_deployment_traffic-filter_list[ecctl deployment traffic-filter list]	 - Lists the traffic filter rulesets
-* xref:ecctl_deployment_traffic-filter_show[ecctl deployment traffic-filter show]	 - Shows information about a traffic filter ruleset
+* [ecctl deployment traffic-filter association](ecctl_deployment_traffic-filter_association.md)	 - Manages traffic filter ruleset associations
+

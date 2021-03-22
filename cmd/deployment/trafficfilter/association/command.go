@@ -15,22 +15,18 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package cmddeploymenttrafficfilter
+package cmdtrafficfilterassoc
 
 import (
 	"github.com/spf13/cobra"
-
-	cmdtrafficfilterassoc "github.com/elastic/ecctl/cmd/deployment/trafficfilter/association"
 )
 
-// Command represents the deployment traffic-filter subcommand.
+const entityType = "deployment"
+
+// Command represents the deployment traffic-filter association subcommand.
 var Command = &cobra.Command{
-	Use:     "traffic-filter",
-	Short:   "Manages traffic filter rulesets",
+	Use:     "association",
+	Short:   "Manages traffic filter ruleset associations",
 	PreRunE: cobra.MaximumNArgs(0),
 	Run:     func(cmd *cobra.Command, args []string) { cmd.Help() },
-}
-
-func init() {
-	Command.AddCommand(cmdtrafficfilterassoc.Command)
 }

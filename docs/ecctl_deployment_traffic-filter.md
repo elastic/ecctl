@@ -38,6 +38,7 @@ ecctl deployment traffic-filter [flags]
 ### SEE ALSO
 
 * [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
+* [ecctl deployment traffic-filter association](ecctl_deployment_traffic-filter_association.md)	 - Manages traffic filter ruleset associations
 * [ecctl deployment traffic-filter create](ecctl_deployment_traffic-filter_create.md)	 - Creates traffic filter rulesets
 * [ecctl deployment traffic-filter delete](ecctl_deployment_traffic-filter_delete.md)	 - Deletes a traffic filter ruleset
 * [ecctl deployment traffic-filter list](ecctl_deployment_traffic-filter_list.md)	 - Lists the traffic filter rulesets
