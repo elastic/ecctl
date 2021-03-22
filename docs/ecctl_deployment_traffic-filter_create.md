@@ -3,19 +3,18 @@
 Creates traffic filter rulesets
 
 ```
-ecctl deployment traffic-filter create --filter-region <region> --name <filter name> --type <filter type> --source <filter source>,<filter source>  [flags]
+ecctl deployment traffic-filter create --region <region> --name <filter name> --type <filter type> --source <filter source>,<filter source>  [flags]
 ```
 
 ### Options
 
 ```
-      --description string     Optional description for the traffic filter.
-      --filter-region string   Region where the filter will be available for.
-  -h, --help                   help for create
-      --include-by-default     If set, any future eligible deployments will have this filter applied automatically.
-      --name string            Name for the traffic filter.
-      --source strings         List of allowed traffic filter sources. Can be IP addresses, CIDR masks, or VPC endpoint IDs
-      --type string            Type of traffic filter. Can be one of [ip, vpce])
+      --description string   Optional description for the traffic filter.
+  -h, --help                 help for create
+      --include-by-default   If set, any future eligible deployments will have this filter applied automatically.
+      --name string          Name for the traffic filter.
+      --source strings       List of allowed traffic filter sources. Can be IP addresses, CIDR masks, or VPC endpoint IDs
+      --type string          Type of traffic filter. Can be one of [ip, vpce])
 ```
 
 ### Options inherited from parent commands

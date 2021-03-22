@@ -27,11 +27,11 @@ import (
 )
 
 var createCmd = &cobra.Command{
-	Use:     "create --filter-region <region> --name <filter name> --type <filter type> --source <filter source>,<filter source> ",
+	Use:     "create --region <region> --name <filter name> --type <filter type> --source <filter source>,<filter source> ",
 	Short:   "Creates traffic filter rulesets",
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		region, _ := cmd.Flags().GetString("filter-region")
+		region := ecctl.Get().Config.Region
 		name, _ := cmd.Flags().GetString("name")
 		ftype, _ := cmd.Flags().GetString("type")
 		description, _ := cmd.Flags().GetString("description")
@@ -70,7 +70,6 @@ func init() {
 
 func initCreateFlags() {
 	Command.AddCommand(createCmd)
-	createCmd.Flags().String("filter-region", "", "Region where the filter will be available for.")
 	createCmd.Flags().String("name", "", "Name for the traffic filter.")
 	createCmd.Flags().String("description", "", "Optional description for the traffic filter.")
 	createCmd.Flags().String("type", "", "Type of traffic filter. Can be one of [ip, vpce])")

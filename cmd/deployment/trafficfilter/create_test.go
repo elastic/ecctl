@@ -67,7 +67,7 @@ func Test_createCmd(t *testing.T) {
 			name: "succeeds",
 			args: testutils.Args{
 				Cmd: createCmd,
-				Args: []string{"create", "--name", "hi", "--filter-region", "us-east-1", "--type", "ip",
+				Args: []string{"create", "--name", "hi", "--type", "ip",
 					"--include-by-default", "--description", "bob", "--source", "0.0.0.0/0,0.0.0.0/1"},
 				Cfg: testutils.MockCfg{
 					OutputFormat: "json",
@@ -78,7 +78,7 @@ func Test_createCmd(t *testing.T) {
 								Method: "POST",
 								Path:   "/api/v1/deployments/traffic-filter/rulesets",
 								Host:   api.DefaultMockHost,
-								Body:   mock.NewStringBody(`{"description":"bob","include_by_default":true,"name":"hi","region":"us-east-1","rules":[{"source":"0.0.0.0/0"},{"source":"0.0.0.0/1"}],"type":"ip"}` + "\n"),
+								Body:   mock.NewStringBody(`{"description":"bob","include_by_default":true,"name":"hi","region":"ece-region","rules":[{"source":"0.0.0.0/0"},{"source":"0.0.0.0/1"}],"type":"ip"}` + "\n"),
 							},
 							mock.NewByteBody(createRawResp),
 						),
