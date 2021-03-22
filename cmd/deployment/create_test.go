@@ -36,121 +36,10 @@ import (
 	"github.com/elastic/ecctl/cmd/util/testutils"
 )
 
-var defaultTemplateResponse = models.DeploymentTemplateInfoV2{
-	ID: ec.String("default"),
-	DeploymentTemplate: &models.DeploymentCreateRequest{
-		Resources: &models.DeploymentCreateResources{
-			Apm: []*models.ApmPayload{
-				{
-					Plan: &models.ApmPlan{
-						ClusterTopology: []*models.ApmTopologyElement{
-							{
-								Size: &models.TopologySize{
-									Resource: ec.String("memory"),
-									Value:    ec.Int32(1024),
-								},
-								ZoneCount: 1,
-							},
-						},
-					},
-				},
-			},
-			EnterpriseSearch: []*models.EnterpriseSearchPayload{
-				{
-					Plan: &models.EnterpriseSearchPlan{
-						ClusterTopology: []*models.EnterpriseSearchTopologyElement{
-							{
-								Size: &models.TopologySize{
-									Resource: ec.String("memory"),
-									Value:    ec.Int32(1024),
-								},
-								ZoneCount: 1,
-							},
-						},
-					},
-				},
-			},
-			Appsearch: []*models.AppSearchPayload{
-				{
-					Plan: &models.AppSearchPlan{
-						ClusterTopology: []*models.AppSearchTopologyElement{
-							{
-								Size: &models.TopologySize{
-									Resource: ec.String("memory"),
-									Value:    ec.Int32(1024),
-								},
-								ZoneCount: 1,
-							},
-						},
-					},
-				},
-			},
-			Kibana: []*models.KibanaPayload{
-				{
-					Plan: &models.KibanaClusterPlan{
-						ClusterTopology: []*models.KibanaClusterTopologyElement{
-							{
-								Size: &models.TopologySize{
-									Resource: ec.String("memory"),
-									Value:    ec.Int32(1024),
-								},
-								ZoneCount: 1,
-							},
-						},
-					},
-				},
-			},
-			Elasticsearch: []*models.ElasticsearchPayload{
-				{
-					Plan: &models.ElasticsearchClusterPlan{
-						ClusterTopology: defaultESTopologies,
-					},
-				},
-			},
-		},
-	},
-}
-
-var defaultESTopologies = []*models.ElasticsearchClusterTopologyElement{
-	{
-		InstanceConfigurationID: "default.data",
-		Size: &models.TopologySize{
-			Resource: ec.String("memory"),
-			Value:    ec.Int32(1024),
-		},
-		NodeType: &models.ElasticsearchNodeType{
-			Data: ec.Bool(true),
-		},
-	},
-	{
-		InstanceConfigurationID: "default.master",
-		Size: &models.TopologySize{
-			Resource: ec.String("memory"),
-			Value:    ec.Int32(1024),
-		},
-		NodeType: &models.ElasticsearchNodeType{
-			Master: ec.Bool(true),
-		},
-	},
-	{
-		InstanceConfigurationID: "default.ml",
-		Size: &models.TopologySize{
-			Resource: ec.String("memory"),
-			Value:    ec.Int32(1024),
-		},
-		NodeType: &models.ElasticsearchNodeType{
-			Ml: ec.Bool(true),
-		},
-	},
-}
-
 func Test_createCmd(t *testing.T) {
 	var deploymentID = ec.RandomResourceID()
 	var esID = ec.RandomResourceID()
 	var kibanaID = ec.RandomResourceID()
-	var apmID = ec.RandomResourceID()
-	var appsearchID = ec.RandomResourceID()
-	var enterprisesearchID = ec.RandomResourceID()
 	var azureCreateResponse = models.DeploymentCreateResponse{
 		Created: ec.Bool(true),
 		ID:      ec.String(deploymentID),
@@ -207,53 +96,6 @@ func Test_createCmd(t *testing.T) {
 		t.Fatal(err)
 	}
 	defaultCreateResponseBytes = append(defaultCreateResponseBytes, []byte("\n")...)
-
-	var overrideCreateResponse = models.DeploymentCreateResponse{
-		Created: ec.Bool(true),
-		ID:      ec.String(deploymentID),
-		Name:    ec.String("some-deployment-with-overrides"),
-		Resources: []*models.DeploymentResource{
-			{
-				ID:     ec.String(esID),
-				Kind:   ec.String("elasticsearch"),
-				RefID:  ec.String("main-elasticsearch"),
-				Region: ec.String("ece-region"),
-				Credentials: &models.ClusterCredentials{
-					Username: ec.String("myuser"),
-					Password: ec.String("mypass"),
-				},
-			},
-			{
-				ID:     ec.String(kibanaID),
-				Kind:   ec.String("kibana"),
-				RefID:  ec.String("main-kibana"),
-				Region: ec.String("ece-region"),
-			},
-			{
-				ID:     ec.String(apmID),
-				Kind:   ec.String("apm"),
-				RefID:  ec.String("main-apm"),
-				Region: ec.String("ece-region"),
-			},
-			{
-				ID:     ec.String(appsearchID),
-				Kind:   ec.String("appsearch"),
-				RefID:  ec.String("main-appsearch"),
-				Region: ec.String("ece-region"),
-			},
-			{
-				ID:     ec.String(enterprisesearchID),
-				Kind:   ec.String("enterprise_search"),
-				RefID:  ec.String("main-enterprise_search"),
-				Region: ec.String("ece-region"),
-			},
-		},
-	}
-	overrideCreateResponseBytes, err := json.MarshalIndent(overrideCreateResponse, "", "  ")
-	if err != nil {
-		t.Fatal(err)
-	}
-	overrideCreateResponseBytes = append(overrideCreateResponseBytes, []byte("\n")...)
 
 	var awsDeploymentID = ec.RandomResourceID()
 	var awsESID = ec.RandomResourceID()
