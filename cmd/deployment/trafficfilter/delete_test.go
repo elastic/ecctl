@@ -36,7 +36,7 @@ func Test_deleteCmd(t *testing.T) {
 		{
 			name: "fails due to empty argument",
 			args: testutils.Args{
-				Cmd:  showCmd,
+				Cmd:  deleteCmd,
 				Args: []string{"delete"},
 				Cfg: testutils.MockCfg{Responses: []mock.Response{
 					mock.SampleInternalError(),
@@ -49,7 +49,7 @@ func Test_deleteCmd(t *testing.T) {
 		{
 			name: "fails due to API error",
 			args: testutils.Args{
-				Cmd: showCmd,
+				Cmd: deleteCmd,
 				Args: []string{
 					"delete", "11111111111111111111111111111111",
 				},
@@ -64,7 +64,7 @@ func Test_deleteCmd(t *testing.T) {
 		{
 			name: "succeeds",
 			args: testutils.Args{
-				Cmd: showCmd,
+				Cmd: deleteCmd,
 				Args: []string{
 					"delete", "4e974d9476534d35b12fbdcfd0acee0a",
 				},
@@ -90,7 +90,7 @@ func Test_deleteCmd(t *testing.T) {
 		{
 			name: "succeeds with ignore associations",
 			args: testutils.Args{
-				Cmd: showCmd,
+				Cmd: deleteCmd,
 				Args: []string{
 					"delete", "4e974d9476534d35b12fbdcfd0acee0a", "--ignore-associations",
 				},
@@ -118,6 +118,7 @@ func Test_deleteCmd(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			testutils.RunCmdAssertion(t, tt.args, tt.want)
 			tt.args.Cmd.ResetFlags()
+			defer initDeleteFlags()
 		})
 	}
 }
