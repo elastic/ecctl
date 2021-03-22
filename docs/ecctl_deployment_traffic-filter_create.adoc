@@ -1,17 +1,22 @@
-[#ecctl_deployment_traffic-filter]
-== ecctl deployment traffic-filter
+[#ecctl_deployment_traffic-filter_create]
+== ecctl deployment traffic-filter create
 
-Manages traffic filter rulesets
+Creates traffic filter rulesets
 
 ----
-ecctl deployment traffic-filter [flags]
+ecctl deployment traffic-filter create --region <region> --name <filter name> --type <filter type> --source <filter source>,<filter source>  [flags]
 ----
 
 [float]
 === Options
 
 ----
-  -h, --help   help for traffic-filter
+      --description string   Optional description for the traffic filter.
+  -h, --help                 help for create
+      --include-by-default   If set, any future eligible deployments will have this filter applied automatically.
+      --name string          Name for the traffic filter.
+      --source strings       List of allowed traffic filter sources. Can be IP addresses, CIDR masks, or VPC endpoint IDs
+      --type string          Type of traffic filter. Can be one of [ip, vpce])
 ----
 
 [float]
@@ -41,8 +46,4 @@ ecctl deployment traffic-filter [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
-* xref:ecctl_deployment_traffic-filter_create[ecctl deployment traffic-filter create]	 - Creates traffic filter rulesets
-* xref:ecctl_deployment_traffic-filter_delete[ecctl deployment traffic-filter delete]	 - Deletes a traffic filter ruleset
-* xref:ecctl_deployment_traffic-filter_list[ecctl deployment traffic-filter list]	 - Lists the traffic filter rulesets
-* xref:ecctl_deployment_traffic-filter_show[ecctl deployment traffic-filter show]	 - Shows information about a traffic filter ruleset
+* xref:ecctl_deployment_traffic-filter[ecctl deployment traffic-filter]	 - Manages traffic filter rulesets
