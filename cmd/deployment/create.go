@@ -18,14 +18,12 @@
 package cmddeployment
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
 	"strings"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi"
-	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/deploymentsize"
-	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/depresourceapi"
+	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/deptemplateapi"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
@@ -42,130 +40,27 @@ var createCmd = &cobra.Command{
 	Long:    createLong,
 	Example: createExample,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		var file, _ = cmd.Flags().GetString("file")
-		var track, _ = cmd.Flags().GetBool("track")
-		var generatePayload, _ = cmd.Flags().GetBool("generate-payload")
-		var name, _ = cmd.Flags().GetString("name")
-		var version, _ = cmd.Flags().GetString("version")
-		var dt, _ = cmd.Flags().GetString("deployment-template")
-		var region = ecctl.Get().Config.Region
+		track, _ := cmd.Flags().GetBool("track")
+		generatePayload, _ := cmd.Flags().GetBool("generate-payload")
+		name, _ := cmd.Flags().GetString("name")
+		version, _ := cmd.Flags().GetString("version")
+		region := ecctl.Get().Config.Region
 
-		var esZoneCount, _ = cmd.Flags().GetInt32("es-zones")
-		var esSize, _ = cmd.Flags().GetString("es-size")
-		var esRefID, _ = cmd.Flags().GetString("es-ref-id")
-		var topologyElements, _ = cmd.Flags().GetStringArray("es-node-topology")
-		var plugin, _ = cmd.Flags().GetStringSlice("plugin")
-
-		var kibanaZoneCount, _ = cmd.Flags().GetInt32("kibana-zones")
-		var kibanaSize, _ = cmd.Flags().GetString("kibana-size")
-		var kibanaRefID, _ = cmd.Flags().GetString("kibana-ref-id")
-
-		var apmEnable, _ = cmd.Flags().GetBool("apm")
-		var apmZoneCount, _ = cmd.Flags().GetInt32("apm-zones")
-		var apmSize, _ = cmd.Flags().GetString("apm-size")
-		var apmRefID, _ = cmd.Flags().GetString("apm-ref-id")
-
-		var appsearchEnable, _ = cmd.Flags().GetBool("appsearch")
-		var appsearchZoneCount, _ = cmd.Flags().GetInt32("appsearch-zones")
-		var appsearchSize, _ = cmd.Flags().GetString("appsearch-size")
-		var appsearchRefID, _ = cmd.Flags().GetString("appsearch-ref-id")
-
-		var enterpriseSearchEnable, _ = cmd.Flags().GetBool("enterprise_search")
-		var enterpriseSearchZoneCount, _ = cmd.Flags().GetInt32("enterprise_search-zones")
-		var enterpriseSearchSize, _ = cmd.Flags().GetString("enterprise_search-size")
-		var enterpriseSearchRefID, _ = cmd.Flags().GetString("enterprise_search-ref-id")
-
-		var payload *models.DeploymentCreateRequest
-
-		if file != "" {
-			err := sdkcmdutil.DecodeDefinition(cmd, "file", &payload)
-			if err != nil {
-				merr := multierror.NewPrefixed("failed reading the file definition")
-				return merr.Append(err,
-					errors.New("could not read the specified file, please make sure it exists"),
-				)
-			}
-		}
-
-		if dt == "" {
-			dt = setDefaultTemplate(region)
-		}
-
-		apmSizeMB, err := deploymentsize.ParseGb(apmSize)
+		payload, err := newCreatePayload(cmd, version, region)
 		if err != nil {
 			return err
 		}
 
-		appsearchSizeMB, err := deploymentsize.ParseGb(appsearchSize)
-		if err != nil {
+		if err := deploymentapi.OverrideCreateOrUpdateRequest(payload,
+			&deploymentapi.PayloadOverrides{
+				Name:               name,
+				Version:            version,
+				Region:             region,
+				ElasticsearchRefID: "main-elasticsearch",
+				OverrideRefIDs:     true,
+			},
+		); err != nil {
 			return err
-		}
-
-		esSizeMB, err := deploymentsize.ParseGb(esSize)
-		if err != nil {
-			return err
-		}
-
-		enterpriseSearchSizeMB, err := deploymentsize.ParseGb(enterpriseSearchSize)
-		if err != nil {
-			return err
-		}
-
-		kibanaSizeMB, err := deploymentsize.ParseGb(kibanaSize)
-		if err != nil {
-			return err
-		}
-
-		if topologyElements != nil {
-			topologyElements, err = esTopologyParseGB(topologyElements)
-			if err != nil {
-				return err
-			}
-		}
-
-		if payload == nil {
-			var err error
-			payload, err = depresourceapi.NewPayload(depresourceapi.NewPayloadParams{
-				API:                    ecctl.Get().API,
-				Name:                   name,
-				DeploymentTemplateID:   dt,
-				Version:                version,
-				Region:                 region,
-				Writer:                 ecctl.Get().Config.ErrorDevice,
-				Plugins:                plugin,
-				TopologyElements:       topologyElements,
-				ApmEnable:              apmEnable,
-				AppsearchEnable:        appsearchEnable,
-				EnterpriseSearchEnable: enterpriseSearchEnable,
-				ElasticsearchInstance: depresourceapi.InstanceParams{
-					RefID:     esRefID,
-					Size:      esSizeMB,
-					ZoneCount: esZoneCount,
-				},
-				KibanaInstance: depresourceapi.InstanceParams{
-					RefID:     kibanaRefID,
-					Size:      kibanaSizeMB,
-					ZoneCount: kibanaZoneCount,
-				},
-				ApmInstance: depresourceapi.InstanceParams{
-					RefID:     apmRefID,
-					Size:      apmSizeMB,
-					ZoneCount: apmZoneCount,
-				},
-				AppsearchInstance: depresourceapi.InstanceParams{
-					RefID:     appsearchRefID,
-					Size:      appsearchSizeMB,
-					ZoneCount: appsearchZoneCount,
-				},
-				EnterpriseSearchInstance: depresourceapi.InstanceParams{
-					RefID:     enterpriseSearchRefID,
-					Size:      enterpriseSearchSizeMB,
-					ZoneCount: enterpriseSearchZoneCount,
-				},
-			})
-			if err != nil {
-				return err
-			}
 		}
 
 		// Returns the DeploymentCreateRequest skipping the creation of the resources.
@@ -175,8 +70,7 @@ var createCmd = &cobra.Command{
 
 		reqID, _ := cmd.Flags().GetString("request-id")
 		reqID = deploymentapi.RequestID(reqID)
-
-		var createParams = deploymentapi.CreateParams{
+		createParams := deploymentapi.CreateParams{
 			API:       ecctl.Get().API,
 			RequestID: reqID,
 			Request:   payload,
@@ -213,31 +107,6 @@ func initFlags() {
 	createCmd.Flags().BoolP("track", "t", false, cmdutil.TrackFlagMessage)
 	createCmd.Flags().Bool("generate-payload", false, "Returns the deployment payload without actually creating the deployment resources")
 	createCmd.Flags().String("request-id", "", "Optional request ID - Can be found in the Stderr device when a previous deployment creation failed. For more information see the examples in the help command page")
-
-	createCmd.Flags().String("es-ref-id", "main-elasticsearch", "Optional RefId for the Elasticsearch deployment")
-	createCmd.Flags().Int32("es-zones", 1, "Number of zones the Elasticsearch instances will span")
-	createCmd.Flags().String("es-size", "4g", "Memory (RAM) in GB that each of the Elasticsearch instances will have")
-	createCmd.Flags().StringArrayP("es-node-topology", "e", nil, "Optional Elasticsearch node topology element definition. See help for more information")
-	createCmd.Flags().StringSlice("plugin", nil, "Additional plugins to add to the Elasticsearch deployment")
-
-	createCmd.Flags().String("kibana-ref-id", "main-kibana", "Optional RefId for the Kibana deployment")
-	createCmd.Flags().Int32("kibana-zones", 1, "Number of zones the Kibana instances will span")
-	createCmd.Flags().String("kibana-size", "1g", "Memory (RAM) in GB that each of the Kibana instances will have")
-
-	createCmd.Flags().Bool("apm", false, "Enables APM for the deployment")
-	createCmd.Flags().String("apm-ref-id", "main-apm", "Optional RefId for the APM deployment")
-	createCmd.Flags().Int32("apm-zones", 1, "Number of zones the APM instances will span")
-	createCmd.Flags().String("apm-size", "0.5g", "Memory (RAM) in GB that each of the APM instances will have")
-
-	createCmd.Flags().Bool("appsearch", false, "Enables App Search for the deployment")
-	createCmd.Flags().String("appsearch-ref-id", "main-appsearch", "Optional RefId for the App Search deployment")
-	createCmd.Flags().Int32("appsearch-zones", 1, "Number of zones the App Search instances will span")
-	createCmd.Flags().String("appsearch-size", "2g", "Memory (RAM) in GB that each of the App Search instances will have")
-
-	createCmd.Flags().Bool("enterprise_search", false, "Enables Enterprise Search for the deployment")
-	createCmd.Flags().String("enterprise_search-ref-id", "main-enterprise_search", "Optional RefId for the Enterprise Search deployment")
-	createCmd.Flags().Int32("enterprise_search-zones", 1, "Number of zones the Enterprise Search instances will span")
-	createCmd.Flags().String("enterprise_search-size", "4g", "Memory (RAM) in GB that each of the Enterprise Search instances will have")
 }
 
 func setDefaultTemplate(region string) string {
@@ -261,43 +130,33 @@ func setDefaultTemplate(region string) string {
 	}
 }
 
-type elasticsearchTopologyElement struct {
-	NodeType  string `json:"node_type"`
-	Size      string `json:"size"`
-	ZoneCount int32  `json:"zone_count,omitempty"`
-}
-
-func esTopologyParseGB(topology []string) ([]string, error) {
-	var t = make([]string, 0, len(topology))
-	for _, rawElement := range topology {
-		var element elasticsearchTopologyElement
-		if err := json.Unmarshal([]byte(rawElement), &element); err != nil {
-			return nil, fmt.Errorf("failed unpacking raw elasticsearch node topology: %s", err)
+func newCreatePayload(cmd *cobra.Command, version, region string) (*models.DeploymentCreateRequest, error) {
+	file, _ := cmd.Flags().GetString("file")
+	dt, _ := cmd.Flags().GetString("deployment-template")
+	var payload models.DeploymentCreateRequest
+	if file != "" {
+		if err := sdkcmdutil.DecodeDefinition(cmd, "file", &payload); err != nil {
+			merr := multierror.NewPrefixed("failed reading the file definition")
+			return nil, merr.Append(err,
+				errors.New("could not read the specified file, please make sure it exists"),
+			)
 		}
-
-		if element.Size == "" {
-			return nil, errors.New("elasticsearch node topology: memory size cannot be empty")
-		}
-
-		elementSizeMB, err := deploymentsize.ParseGb(element.Size)
-		if err != nil {
-			return nil, err
-		}
-
-		esTopologyElement := depresourceapi.ElasticsearchTopologyElement{
-			NodeType:  element.NodeType,
-			ZoneCount: element.ZoneCount,
-			Size:      elementSizeMB,
-		}
-
-		b, err := json.Marshal(esTopologyElement)
-		if err != nil {
-			return nil, fmt.Errorf("failed unpacking elasticsearch node topology: %s", err)
-		}
-		parsedElement := string(b)
-
-		t = append(t, parsedElement)
+		return &payload, nil
 	}
 
-	return t, nil
+	if dt == "" {
+		dt = setDefaultTemplate(region)
+		fmt.Fprintf(cmd.ErrOrStderr(), "--deployment-template not set, using %s", dt)
+	}
+	tpl, err := deptemplateapi.Get(deptemplateapi.GetParams{
+		API:          ecctl.Get().API,
+		TemplateID:   dt,
+		Region:       region,
+		StackVersion: version,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	return tpl.DeploymentTemplate, nil
 }
