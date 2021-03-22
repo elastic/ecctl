@@ -39,5 +39,5 @@ ecctl comment show <comment id> --resource-type <resource-type> --resource-id <r
 
 ### SEE ALSO
 
-* [ecctl comment](ecctl_comment.md)	 - Manages Comments
+* [ecctl comment](ecctl_comment.md)	 - Manages resource comments (Available for ECE only)
 

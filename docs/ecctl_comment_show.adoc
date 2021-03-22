@@ -43,4 +43,4 @@ ecctl comment show <comment id> --resource-type <resource-type> --resource-id <r
 [float]
 === SEE ALSO
 
-* xref:ecctl_comment[ecctl comment]	 - Manages Comments
+* xref:ecctl_comment[ecctl comment]	 - Manages resource comments {ece-icon} (Available for ECE only)
