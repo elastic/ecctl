@@ -3,7 +3,7 @@
 Applies the ruleset to the specified deployment.
 
 ```
-ecctl deployment traffic-filter association create <ruleset id> [--deployment-id] [flags]
+ecctl deployment traffic-filter association create <ruleset id> --deployment-id <deployment-id> [flags]
 ```
 
 ### Options

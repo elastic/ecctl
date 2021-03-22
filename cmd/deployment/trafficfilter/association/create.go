@@ -26,7 +26,7 @@ import (
 )
 
 var createCmd = &cobra.Command{
-	Use:     "create <ruleset id> [--deployment-id]",
+	Use:     "create <ruleset id> --deployment-id <deployment-id>",
 	Short:   "Applies the ruleset to the specified deployment.",
 	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {

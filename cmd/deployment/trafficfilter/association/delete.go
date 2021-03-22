@@ -26,7 +26,7 @@ import (
 )
 
 var deleteCmd = &cobra.Command{
-	Use:     "delete <ruleset id> [--deployment-id]",
+	Use:     "delete <ruleset id> --deployment-id <deployment-id>",
 	Short:   "Deletes the traffic rules in the ruleset from the deployment.",
 	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {

@@ -3,7 +3,7 @@
 Deletes the traffic rules in the ruleset from the deployment.
 
 ```
-ecctl deployment traffic-filter association delete <ruleset id> [--deployment-id] [flags]
+ecctl deployment traffic-filter association delete <ruleset id> --deployment-id <deployment-id> [flags]
 ```
 
 ### Options
