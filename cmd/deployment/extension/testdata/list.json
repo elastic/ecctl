@@ -1,0 +1,17 @@
+{
+    "extensions": [
+        {
+            "deployments": null,
+            "extension_type": "bundle",
+            "file_metadata": {
+                "last_modified_date": "2021-03-17T00:51:23.110Z",
+                "size": 149,
+                "url": "https://test-plugins.s3.amazonaws.com/265644854/2536123203.zip"
+            },
+            "id": "2536123203",
+            "name": "test-ext",
+            "url": "repo://2536123203",
+            "version": "*"
+        }
+    ]
+}
