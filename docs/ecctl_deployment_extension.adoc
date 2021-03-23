@@ -42,6 +42,7 @@ ecctl deployment extension [flags]
 === SEE ALSO
 
 * xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
+* xref:ecctl_deployment_extension_create[ecctl deployment extension create]	 - Creates an extension
 * xref:ecctl_deployment_extension_delete[ecctl deployment extension delete]	 - Deletes a deployment extension
 * xref:ecctl_deployment_extension_list[ecctl deployment extension list]	 - Lists all deployment extensions
 * xref:ecctl_deployment_extension_show[ecctl deployment extension show]	 - Shows information about a deployment extension

@@ -1,15 +1,20 @@
-## ecctl deployment extension
+## ecctl deployment extension create
 
-Manages deployment extensions, such as custom plugins or bundles
+Creates an extension
 
 ```
-ecctl deployment extension [flags]
+ecctl deployment extension create <extension name> --version <version> --type <extension type> {--file <file-path> | --download-url <url>} [--description <description>] [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for extension
+      --description string    Optional flag to add a description to the extension.
+      --download-url string   Optional flag to define the URL to download the extension archive.
+      --file string           Optional flag to upload an extension from a local file path.
+  -h, --help                  help for create
+      --type string           Extension type. Can be one of [bundle, plugin].
+      --version string        Elastic stack version. Numeric version for plugins, e.g. 7.10.0. Major version e.g. 7.*, or wildcards e.g. * for bundles.
 ```
 
 ### Options inherited from parent commands
@@ -37,9 +42,5 @@ ecctl deployment extension [flags]
 
 ### SEE ALSO
 
-* [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
-* [ecctl deployment extension create](ecctl_deployment_extension_create.md)	 - Creates an extension
-* [ecctl deployment extension delete](ecctl_deployment_extension_delete.md)	 - Deletes a deployment extension
-* [ecctl deployment extension list](ecctl_deployment_extension_list.md)	 - Lists all deployment extensions
-* [ecctl deployment extension show](ecctl_deployment_extension_show.md)	 - Shows information about a deployment extension
+* [ecctl deployment extension](ecctl_deployment_extension.md)	 - Manages deployment extensions, such as custom plugins or bundles
 
