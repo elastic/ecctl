@@ -37,7 +37,7 @@ https://download.elastic.co/downloads/ecctl/1.3.0/ecctl_1.3.0_linux_amd64.tar.gz
 [id="{p}-release-notes-v1.3.0-bug-fixes"]
 ==== Bug fixes
 
-* *Improved deployment tracking.* The deployment tracking has been improved to only fail when the plan has actually finished with a failure, instead of returning errors from in other steps of the plan.
+* *Improved deployment tracking.* The deployment tracking has been improved. It now fails only when the plan completes with a failure, instead of returning errors from other steps of the plan.
 
 [float]
 [id="{p}-release-notes-v1.3.0-breaking-changes"]
