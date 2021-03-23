@@ -1,6 +1,7 @@
 name: goreleaser
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - '*.*.*'
@@ -12,6 +13,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Set up Go
         uses: actions/setup-go@v1
@@ -34,10 +37,17 @@ jobs:
 
       - name: Update AWS cli
         uses: chrislennon/action-aws-cli@v1.1
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
       - name: Get the version
         id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+        run: |
+          VERSION=${GITHUB_REF/refs\/tags\//}
+          if ${{github.event_name == 'workflow_dispatch'}}; then
+            VERSION=$(git describe --abbrev=0 --tags)
+          fi
+          echo ::set-output name=VERSION::${VERSION}
 
       - name: Get the builtvar
         id: get_built
