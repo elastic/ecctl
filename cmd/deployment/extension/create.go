@@ -28,7 +28,7 @@ import (
 )
 
 var createCmd = &cobra.Command{
-	Use:     "create <extension id> [--include-deployments]",
+	Use:     "create <extension id> --version <version> --type <extension type> {--file <file-path> | --download-url <url>} [--description <description>]",
 	Short:   "Creates an extension",
 	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {

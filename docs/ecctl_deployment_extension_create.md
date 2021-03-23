@@ -3,7 +3,7 @@
 Creates an extension
 
 ```
-ecctl deployment extension create <extension id> [--include-deployments] [flags]
+ecctl deployment extension create <extension id> --version <version> --type <extension type> {--file <file-path> | --download-url <url>} [--description <description>] [flags]
 ```
 
 ### Options
