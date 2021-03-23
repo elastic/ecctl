@@ -62,7 +62,7 @@ func Test_createCmd(t *testing.T) {
 				}},
 			},
 			want: testutils.Assertion{
-				Err: `requires at least 1 arg(s), only received 0`,
+				Err: `accepts 1 arg(s), received 0`,
 			},
 		},
 		{
@@ -137,8 +137,30 @@ func Test_createCmd(t *testing.T) {
 			want: testutils.Assertion{
 				Err: string(createJSONOutput) + "\n",
 			},
-			// Not testing for file upload as the content type is multipart/form-data
-			// with a boundary that is a randomly generated string which changes every time.
+		},
+		{
+			name: "succeeds with upload",
+			args: testutils.Args{
+				Cmd: createCmd,
+				Args: []string{
+					"create", "mybundle", "--version", "*", "--type", "bundle", "--file",
+					"./testdata/extension.zip", "--description", "Why hello there",
+				},
+				Cfg: testutils.MockCfg{
+					OutputFormat: "json",
+					Responses: []mock.Response{
+						mock.New200Response(
+							mock.NewByteBody(createRawResp),
+						),
+						mock.New200Response(
+							mock.NewByteBody(createRawResp),
+						),
+					},
+				},
+			},
+			want: testutils.Assertion{
+				Err: string(createJSONOutput) + "\n",
+			},
 		},
 	}
 	for _, tt := range tests {

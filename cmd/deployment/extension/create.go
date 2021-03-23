@@ -28,9 +28,9 @@ import (
 )
 
 var createCmd = &cobra.Command{
-	Use:     "create <extension id> --version <version> --type <extension type> {--file <file-path> | --download-url <url>} [--description <description>]",
+	Use:     "create <extension name> --version <version> --type <extension type> {--file <file-path> | --download-url <url>} [--description <description>]",
 	Short:   "Creates an extension",
-	PreRunE: cobra.MinimumNArgs(1),
+	PreRunE: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		version, _ := cmd.Flags().GetString("version")
 		extType, _ := cmd.Flags().GetString("type")
@@ -83,7 +83,7 @@ func init() {
 
 func initCreateFlags() {
 	Command.AddCommand(createCmd)
-	createCmd.Flags().String("version", "", "Elastic stack version. Numeric version for plugins, e.g. 2.3.0. Major version e.g. 2.*, or wildcards e.g. * for bundles.")
+	createCmd.Flags().String("version", "", "Elastic stack version. Numeric version for plugins, e.g. 7.10.0. Major version e.g. 7.*, or wildcards e.g. * for bundles.")
 	createCmd.Flags().String("type", "", "Extension type. Can be one of [bundle, plugin].")
 	createCmd.Flags().String("download-url", "", "Optional flag to define the URL to download the extension archive.")
 	createCmd.Flags().String("description", "", "Optional flag to add a description to the extension.")

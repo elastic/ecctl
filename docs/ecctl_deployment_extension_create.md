@@ -3,7 +3,7 @@
 Creates an extension
 
 ```
-ecctl deployment extension create <extension id> --version <version> --type <extension type> {--file <file-path> | --download-url <url>} [--description <description>] [flags]
+ecctl deployment extension create <extension name> --version <version> --type <extension type> {--file <file-path> | --download-url <url>} [--description <description>] [flags]
 ```
 
 ### Options
@@ -14,7 +14,7 @@ ecctl deployment extension create <extension id> --version <version> --type <ext
       --file string           Optional flag to upload an extension from a local file path.
   -h, --help                  help for create
       --type string           Extension type. Can be one of [bundle, plugin].
-      --version string        Elastic stack version. Numeric version for plugins, e.g. 2.3.0. Major version e.g. 2.*, or wildcards e.g. * for bundles.
+      --version string        Elastic stack version. Numeric version for plugins, e.g. 7.10.0. Major version e.g. 7.*, or wildcards e.g. * for bundles.
 ```
 
 ### Options inherited from parent commands
