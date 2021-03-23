@@ -1,0 +1,12 @@
+{
+  "deployments": null,
+  "description": "Why hello there",
+  "extension_type": "bundle",
+  "file_metadata": {
+    "last_modified_date": "0001-01-01T00:00:00.000Z"
+  },
+  "id": "4237175152",
+  "name": "mybundle",
+  "url": "repo://4237175152",
+  "version": "*"
+}
