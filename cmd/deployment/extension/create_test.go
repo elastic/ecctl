@@ -93,7 +93,7 @@ func Test_createCmd(t *testing.T) {
 				}},
 			},
 			want: testutils.Assertion{
-				Err: "both --file and --download-url are set. Only one may be used.",
+				Err: "both --file and --download-url are set. Only one may be used",
 			},
 		},
 		{

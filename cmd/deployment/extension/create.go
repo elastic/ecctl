@@ -39,7 +39,7 @@ var createCmd = &cobra.Command{
 		file, _ := cmd.Flags().GetString("file")
 
 		if url != "" && file != "" {
-			return errors.New("both --file and --download-url are set. Only one may be used.")
+			return errors.New("both --file and --download-url are set. Only one may be used")
 		}
 
 		res, err := extensionapi.Create(extensionapi.CreateParams{
@@ -90,5 +90,4 @@ func initCreateFlags() {
 	createCmd.Flags().String("file", "", "Optional flag to upload an extension from a local file path.")
 	cobra.MarkFlagRequired(createCmd.Flags(), "version")
 	cobra.MarkFlagRequired(createCmd.Flags(), "type")
-
 }
