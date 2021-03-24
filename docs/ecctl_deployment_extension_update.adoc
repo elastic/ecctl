@@ -1,20 +1,26 @@
-## ecctl deployment extension
+[#ecctl_deployment_extension_update]
+== ecctl deployment extension update
 
-Manages deployment extensions, such as custom plugins or bundles
+Updates an extension
 
-```
-ecctl deployment extension [flags]
-```
+----
+ecctl deployment extension update <extension id> {--file <file-path> | --generate-payload} [--extension-file <file path>] [flags]
+----
 
-### Options
+[float]
+=== Options
 
-```
-  -h, --help   help for extension
-```
+----
+      --extension-file string   Optional flag to upload an extension from a local file path.
+      --file string             Path to the file containing the update json definition.
+      --generate-payload        Outputs JSON which can be used as an argument for the --file flag.
+  -h, --help                    help for update
+----
 
-### Options inherited from parent commands
+[float]
+=== Options inherited from parent commands
 
-```
+----
       --api-key string        API key to use to authenticate (If empty will look for EC_API_KEY environment variable)
       --config string         Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
       --force                 Do not ask for confirmation
@@ -33,14 +39,9 @@ ecctl deployment extension [flags]
       --verbose               Enable verbose mode
       --verbose-credentials   When set, Authorization headers on the request/response trail will be displayed as plain text
       --verbose-file string   When set, the verbose request/response trail will be written to the defined file
-```
+----
 
-### SEE ALSO
+[float]
+=== SEE ALSO
 
-* [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
-* [ecctl deployment extension create](ecctl_deployment_extension_create.md)	 - Creates an extension
-* [ecctl deployment extension delete](ecctl_deployment_extension_delete.md)	 - Deletes a deployment extension
-* [ecctl deployment extension list](ecctl_deployment_extension_list.md)	 - Lists all deployment extensions
-* [ecctl deployment extension show](ecctl_deployment_extension_show.md)	 - Shows information about a deployment extension
-* [ecctl deployment extension update](ecctl_deployment_extension_update.md)	 - Updates an extension
-
+* xref:ecctl_deployment_extension[ecctl deployment extension]	 - Manages deployment extensions, such as custom plugins or bundles

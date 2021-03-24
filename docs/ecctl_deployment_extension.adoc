@@ -46,3 +46,4 @@ ecctl deployment extension [flags]
 * xref:ecctl_deployment_extension_delete[ecctl deployment extension delete]	 - Deletes a deployment extension
 * xref:ecctl_deployment_extension_list[ecctl deployment extension list]	 - Lists all deployment extensions
 * xref:ecctl_deployment_extension_show[ecctl deployment extension show]	 - Shows information about a deployment extension
+* xref:ecctl_deployment_extension_update[ecctl deployment extension update]	 - Updates an extension

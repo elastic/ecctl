@@ -1,0 +1,14 @@
+{
+    "deployments": null,
+    "description": "hello",
+    "extension_type": "bundle",
+    "file_metadata": {
+        "last_modified_date": "2021-03-23T22:57:41.795Z",
+        "size": 149,
+        "url": "https://test-plugins.s3.amazonaws.com/265644854/2649887448.zip"
+    },
+    "id": "2649887448",
+    "name": "mybundle",
+    "url": "repo://2649887448",
+    "version": "*"
+}
