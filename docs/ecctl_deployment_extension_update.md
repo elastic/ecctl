@@ -6,6 +6,20 @@ Updates an extension
 ecctl deployment extension update <extension id> {--file <file-path> | --generate-payload} [--extension-file <file path>] [flags]
 ```
 
+### Examples
+
+```
+
+* Return the current extension state as a valid update payload.
+  ecctl deployment extension update <extension id> --generate-payload > update.json
+
+* After editing the file with your new values pass it as an argument to the --file flag.
+  ecctl deployment extension update <extension id> --file update.json
+
+* The extensions uploaded from a local file will remain unchanged unless the --extension-file flag is used.
+  ecctl deployment extension update <extension id> --file update.json --extension-file extension.zip
+```
+
 ### Options
 
 ```

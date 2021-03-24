@@ -42,6 +42,7 @@ const updateExample = `
 var updateCmd = &cobra.Command{
 	Use:     "update <extension id> {--file <file-path> | --generate-payload} [--extension-file <file path>]",
 	Short:   "Updates an extension",
+	Example: updateExample,
 	PreRunE: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		genPayload, _ := cmd.Flags().GetBool("generate-payload")
