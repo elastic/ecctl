@@ -1,0 +1,6 @@
+{
+  "name": "mybundle",
+  "version": "*",
+  "extension_type": "bundle",
+  "description": "hello"
+}

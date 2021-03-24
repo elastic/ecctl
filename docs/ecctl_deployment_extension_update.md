@@ -1,15 +1,32 @@
-## ecctl deployment extension
+## ecctl deployment extension update
 
-Manages deployment extensions, such as custom plugins or bundles
+Updates an extension
 
 ```
-ecctl deployment extension [flags]
+ecctl deployment extension update <extension id> {--file <file-path> | --generate-payload} [--extension-file <file path>] [flags]
+```
+
+### Examples
+
+```
+
+* Return the current extension state as a valid update payload.
+  ecctl deployment extension update <extension id> --generate-payload > update.json
+
+* After editing the file with your new values pass it as an argument to the --file flag.
+  ecctl deployment extension update <extension id> --file update.json
+
+* The extensions uploaded from a local file will remain unchanged unless the --extension-file flag is used.
+  ecctl deployment extension update <extension id> --file update.json --extension-file extension.zip
 ```
 
 ### Options
 
 ```
-  -h, --help   help for extension
+      --extension-file string   Optional flag to upload an extension from a local file path.
+      --file string             Path to the file containing the update JSON definition.
+      --generate-payload        Outputs JSON which can be used as an argument for the --file flag.
+  -h, --help                    help for update
 ```
 
 ### Options inherited from parent commands
@@ -37,10 +54,5 @@ ecctl deployment extension [flags]
 
 ### SEE ALSO
 
-* [ecctl deployment](ecctl_deployment.md)	 - Manages deployments
-* [ecctl deployment extension create](ecctl_deployment_extension_create.md)	 - Creates an extension
-* [ecctl deployment extension delete](ecctl_deployment_extension_delete.md)	 - Deletes a deployment extension
-* [ecctl deployment extension list](ecctl_deployment_extension_list.md)	 - Lists all deployment extensions
-* [ecctl deployment extension show](ecctl_deployment_extension_show.md)	 - Shows information about a deployment extension
-* [ecctl deployment extension update](ecctl_deployment_extension_update.md)	 - Updates an extension
+* [ecctl deployment extension](ecctl_deployment_extension.md)	 - Manages deployment extensions, such as custom plugins or bundles
 
