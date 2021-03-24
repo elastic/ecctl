@@ -122,11 +122,11 @@ func initUpdateFlags() {
 }
 
 func flagRequirements(genPayload bool, file string) error {
-	if genPayload == true && file != "" {
+	if genPayload && file != "" {
 		return errors.New("both --file and --generate-payload are set. Only one may be used")
 	}
 
-	if genPayload == false && file == "" {
+	if !genPayload && file == "" {
 		return errors.New("one of --file or --generate-payload must be set")
 	}
 
