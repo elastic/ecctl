@@ -116,7 +116,7 @@ func init() {
 func initUpdateFlags() {
 	Command.AddCommand(updateCmd)
 	updateCmd.Flags().Bool("generate-payload", false, "Outputs JSON which can be used as an argument for the --file flag.")
-	updateCmd.Flags().String("file", "", "Path to the file containing the update json definition.")
+	updateCmd.Flags().String("file", "", "Path to the file containing the update JSON definition.")
 	updateCmd.Flags().String("extension-file", "", "Optional flag to upload an extension from a local file path.")
 	updateCmd.MarkFlagFilename("file", "json")
 }

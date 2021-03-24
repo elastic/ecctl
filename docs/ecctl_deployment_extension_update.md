@@ -24,7 +24,7 @@ ecctl deployment extension update <extension id> {--file <file-path> | --generat
 
 ```
       --extension-file string   Optional flag to upload an extension from a local file path.
-      --file string             Path to the file containing the update json definition.
+      --file string             Path to the file containing the update JSON definition.
       --generate-payload        Outputs JSON which can be used as an argument for the --file flag.
   -h, --help                    help for update
 ```
