@@ -43,4 +43,5 @@ ecctl deployment traffic-filter [flags]
 * [ecctl deployment traffic-filter delete](ecctl_deployment_traffic-filter_delete.md)	 - Deletes a traffic filter ruleset
 * [ecctl deployment traffic-filter list](ecctl_deployment_traffic-filter_list.md)	 - Lists the traffic filter rulesets
 * [ecctl deployment traffic-filter show](ecctl_deployment_traffic-filter_show.md)	 - Shows information about a traffic filter ruleset
+* [ecctl deployment traffic-filter update](ecctl_deployment_traffic-filter_update.md)	 - Updates a traffic-filter
 

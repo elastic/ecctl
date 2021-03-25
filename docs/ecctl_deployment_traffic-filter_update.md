@@ -1,23 +1,33 @@
-[#ecctl_deployment_traffic-filter]
-== ecctl deployment traffic-filter
+## ecctl deployment traffic-filter update
 
-Manages traffic filter rulesets
+Updates a traffic-filter
 
-----
-ecctl deployment traffic-filter [flags]
-----
+```
+ecctl deployment traffic-filter update <traffic-filter id> {--file <file-path> | --generate-payload} [flags]
+```
 
-[float]
-=== Options
+### Examples
 
-----
-  -h, --help   help for traffic-filter
-----
+```
 
-[float]
-=== Options inherited from parent commands
+* Return the current traffic filter state as a valid update payload.
+  ecctl deployment traffic-filter update <traffic-filter id> --generate-payload > update.json
 
-----
+* After editing the file with your new values pass it as an argument to the --file flag.
+  ecctl deployment traffic-filter update <traffic-filter id> --file update.json
+```
+
+### Options
+
+```
+      --file string        Path to the file containing the update JSON definition.
+      --generate-payload   Outputs JSON which can be used as an argument for the --file flag.
+  -h, --help               help for update
+```
+
+### Options inherited from parent commands
+
+```
       --api-key string        API key to use to authenticate (If empty will look for EC_API_KEY environment variable)
       --config string         Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
       --force                 Do not ask for confirmation
@@ -36,15 +46,9 @@ ecctl deployment traffic-filter [flags]
       --verbose               Enable verbose mode
       --verbose-credentials   When set, Authorization headers on the request/response trail will be displayed as plain text
       --verbose-file string   When set, the verbose request/response trail will be written to the defined file
-----
+```
 
-[float]
-=== SEE ALSO
+### SEE ALSO
 
-* xref:ecctl_deployment[ecctl deployment]	 - Manages deployments
-* xref:ecctl_deployment_traffic-filter_association[ecctl deployment traffic-filter association]	 - Manages traffic filter ruleset associations
-* xref:ecctl_deployment_traffic-filter_create[ecctl deployment traffic-filter create]	 - Creates traffic filter rulesets
-* xref:ecctl_deployment_traffic-filter_delete[ecctl deployment traffic-filter delete]	 - Deletes a traffic filter ruleset
-* xref:ecctl_deployment_traffic-filter_list[ecctl deployment traffic-filter list]	 - Lists the traffic filter rulesets
-* xref:ecctl_deployment_traffic-filter_show[ecctl deployment traffic-filter show]	 - Shows information about a traffic filter ruleset
-* xref:ecctl_deployment_traffic-filter_update[ecctl deployment traffic-filter update]	 - Updates a traffic-filter
+* [ecctl deployment traffic-filter](ecctl_deployment_traffic-filter.md)	 - Manages traffic filter rulesets
+
