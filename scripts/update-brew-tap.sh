@@ -30,9 +30,24 @@ hub fork --no-remote
 hub remote add fork https://github.com/${GITHUB_USER}/homebrew-tap
 hub add Formula/ecctl.rb
 hub checkout -b f/update-ecctl-formula-to-${VERSION}
-git config user.email "${GIT_AUTHOR_EMAIL}"
-git config user.name "${GIT_AUTHOR_NAME}"
+
+if [ ! -z ${GIT_AUTHOR_EMAIL} ]; then
+    git config --local user.email "${GIT_AUTHOR_EMAIL}"
+fi
+
+if [ ! -z ${GIT_AUTHOR_NAME} ]; then
+    git config --local user.name "${GIT_AUTHOR_NAME}"
+fi
+
 git config --global hub.protocol https
 git commit -m "Update ecctl version to ${VERSION}"
+
+if [ ${CI} ]; then
+    git config --global url."https://${GITHUB_TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
+fi
+
+echo "-> Printing ecctl formula..."
+cat Formula/ecctl.rb
+
 hub push fork f/update-ecctl-formula-to-${VERSION}
 hub pull-request -m "Update ecctl version to ${VERSION}" -m "Created through automation by update-brew-tap.sh"
