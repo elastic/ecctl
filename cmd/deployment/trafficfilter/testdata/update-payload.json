@@ -1,0 +1,12 @@
+{
+    "include_by_default": false,
+    "name": "1235",
+    "region": "azure-eastus2",
+    "rules": [
+        {
+            "id": "fad8132b0470479f95c3a41c5d67bd57",
+            "source": "0.0.0.0/0"
+        }
+    ],
+    "type": "ip"
+}
