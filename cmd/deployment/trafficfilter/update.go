@@ -24,7 +24,6 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/trafficfilterapi"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
-	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
@@ -67,7 +66,7 @@ var updateCmd = &cobra.Command{
 		}
 
 		var req models.TrafficFilterRulesetRequest
-		if err := sdkcmdutil.DecodeFile(file, &req); err != nil {
+		if err := cmdutil.DecodeFile(file, &req); err != nil {
 			return err
 		}
 		res, err := trafficfilterapi.Update(trafficfilterapi.UpdateParams{
@@ -95,11 +94,11 @@ func initUpdateFlags() {
 }
 
 func flagRequirements(genPayload bool, file string) error {
-	if genPayload == true && file != "" {
+	if genPayload && file != "" {
 		return errors.New("both --file and --generate-payload are set. Only one may be used")
 	}
 
-	if genPayload == false && file == "" {
+	if !genPayload && file == "" {
 		return errors.New("one of --file or --generate-payload must be set")
 	}
 
