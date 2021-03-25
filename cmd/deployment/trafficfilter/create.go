@@ -41,7 +41,7 @@ var createCmd = &cobra.Command{
 		var rules []*models.TrafficFilterRule
 		for _, rule := range source {
 			rules = append(rules, &models.TrafficFilterRule{
-				Source: ec.String(rule),
+				Source: rule,
 			})
 		}
 
