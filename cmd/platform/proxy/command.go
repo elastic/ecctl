@@ -20,9 +20,8 @@ package cmdproxy
 import (
 	"github.com/spf13/cobra"
 
-	cmdproxysettings "github.com/elastic/ecctl/cmd/platform/proxy/settings"
-
 	cmdfilteredgroup "github.com/elastic/ecctl/cmd/platform/proxy/filteredgroup"
+	cmdproxysettings "github.com/elastic/ecctl/cmd/platform/proxy/settings"
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 )
 
