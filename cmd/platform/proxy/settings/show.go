@@ -18,7 +18,7 @@
 package cmdproxysettings
 
 import (
-	proxysettingsapi "github.com/elastic/cloud-sdk-go/pkg/api/platformapi/proxyapi/settingsapi"
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/proxyapi/settingsapi"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -30,7 +30,7 @@ var platformProxySettingsShowCmd = &cobra.Command{
 	Short:   cmdutil.AdminReqDescription("Shows details for proxies settings"),
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		settings, err := proxysettingsapi.Get(proxysettingsapi.GetParams{
+		settings, err := settingsapi.Get(settingsapi.GetParams{
 			API:    ecctl.Get().API,
 			Region: ecctl.Get().Config.Region,
 		})
