@@ -15,26 +15,20 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package cmdproxy
+package cmdproxysettings
 
 import (
 	"github.com/spf13/cobra"
 
-	cmdfilteredgroup "github.com/elastic/ecctl/cmd/platform/proxy/filteredgroup"
-	cmdproxysettings "github.com/elastic/ecctl/cmd/platform/proxy/settings"
 	cmdutil "github.com/elastic/ecctl/cmd/util"
 )
 
-// Command represents the proxy command
+// Command represents the top level proxies settings command.
 var Command = &cobra.Command{
-	Use:     "proxy",
-	Short:   cmdutil.AdminReqDescription("Manages proxies"),
+	Use:     "settings",
+	Short:   cmdutil.AdminReqDescription("Manages proxies settings"),
 	PreRunE: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
 	},
-}
-
-func init() {
-	Command.AddCommand(cmdfilteredgroup.Command, cmdproxysettings.Command)
 }

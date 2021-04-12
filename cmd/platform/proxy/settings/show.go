@@ -15,26 +15,33 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package cmdproxy
+package cmdproxysettings
 
 import (
+	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/proxyapi/settingsapi"
 	"github.com/spf13/cobra"
 
-	cmdfilteredgroup "github.com/elastic/ecctl/cmd/platform/proxy/filteredgroup"
-	cmdproxysettings "github.com/elastic/ecctl/cmd/platform/proxy/settings"
 	cmdutil "github.com/elastic/ecctl/cmd/util"
+	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
-// Command represents the proxy command
-var Command = &cobra.Command{
-	Use:     "proxy",
-	Short:   cmdutil.AdminReqDescription("Manages proxies"),
+var platformProxySettingsShowCmd = &cobra.Command{
+	Use:     "show",
+	Short:   cmdutil.AdminReqDescription("Shows details for proxies settings"),
 	PreRunE: cobra.MaximumNArgs(0),
-	Run: func(cmd *cobra.Command, args []string) {
-		cmd.Help()
+	RunE: func(cmd *cobra.Command, args []string) error {
+		settings, err := settingsapi.Get(settingsapi.GetParams{
+			API:    ecctl.Get().API,
+			Region: ecctl.Get().Config.Region,
+		})
+
+		if err != nil {
+			return err
+		}
+		return ecctl.Get().Formatter.Format("", settings)
 	},
 }
 
 func init() {
-	Command.AddCommand(cmdfilteredgroup.Command, cmdproxysettings.Command)
+	Command.AddCommand(platformProxySettingsShowCmd)
 }
