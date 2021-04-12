@@ -1,17 +1,21 @@
-[#ecctl_platform_proxy_settings]
-== ecctl platform proxy settings
+[#ecctl_platform_proxy_settings_update]
+== ecctl platform proxy settings update
 
-Manages proxies settings {ece-icon} (Available for ECE only)
+Updates proxies settings {ece-icon} (Available for ECE only)
 
 ----
-ecctl platform proxy settings [flags]
+ecctl platform proxy settings update --file settings.json [flags]
 ----
 
 [float]
 === Options
 
 ----
-  -h, --help   help for settings
+      --file string      File name containing the proxy settings
+  -h, --help             help for update
+      --patch            Set this to false to perform a full update and overwrite the proxy settings - all unspecified fields are deleted.
+                         When it's set to true, the operation does a partial update and only the fields that are referenced in the given file are changed (default true)
+      --version string   If specified, checks for conflicts against the version of the settings
 ----
 
 [float]
@@ -41,7 +45,4 @@ ecctl platform proxy settings [flags]
 [float]
 === SEE ALSO
 
-* xref:ecctl_platform_proxy[ecctl platform proxy]	 - Manages proxies {ece-icon} (Available for ECE only)
-* xref:ecctl_platform_proxy_settings_show[ecctl platform proxy settings show]	 - Shows details for proxies settings {ece-icon} (Available for ECE only)
-* xref:ecctl_platform_proxy_settings_update[ecctl platform proxy settings update]	 - Updates proxies settings {ece-icon} (Available for ECE only)
-* xref:ecctl_platform_proxy_settings_update[ecctl platform proxy settings update]	 - Updates proxies settings {ece-icon} (Available for ECE only)
+* xref:ecctl_platform_proxy_settings[ecctl platform proxy settings]	 - Manages proxies settings {ece-icon} (Available for ECE only)

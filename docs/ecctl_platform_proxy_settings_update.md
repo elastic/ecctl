@@ -1,23 +1,24 @@
-[#ecctl_platform_proxy_settings]
-== ecctl platform proxy settings
+## ecctl platform proxy settings update
 
-Manages proxies settings {ece-icon} (Available for ECE only)
+Updates proxies settings (Available for ECE only)
 
-----
-ecctl platform proxy settings [flags]
-----
+```
+ecctl platform proxy settings update --file settings.json [flags]
+```
 
-[float]
-=== Options
+### Options
 
-----
-  -h, --help   help for settings
-----
+```
+      --file string      File name containing the proxy settings
+  -h, --help             help for update
+      --patch            Set this to false to perform a full update and overwrite the proxy settings - all unspecified fields are deleted.
+                         When it's set to true, the operation does a partial update and only the fields that are referenced in the given file are changed (default true)
+      --version string   If specified, checks for conflicts against the version of the settings
+```
 
-[float]
-=== Options inherited from parent commands
+### Options inherited from parent commands
 
-----
+```
       --api-key string        API key to use to authenticate (If empty will look for EC_API_KEY environment variable)
       --config string         Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
       --force                 Do not ask for confirmation
@@ -36,12 +37,9 @@ ecctl platform proxy settings [flags]
       --verbose               Enable verbose mode
       --verbose-credentials   When set, Authorization headers on the request/response trail will be displayed as plain text
       --verbose-file string   When set, the verbose request/response trail will be written to the defined file
-----
+```
 
-[float]
-=== SEE ALSO
+### SEE ALSO
 
-* xref:ecctl_platform_proxy[ecctl platform proxy]	 - Manages proxies {ece-icon} (Available for ECE only)
-* xref:ecctl_platform_proxy_settings_show[ecctl platform proxy settings show]	 - Shows details for proxies settings {ece-icon} (Available for ECE only)
-* xref:ecctl_platform_proxy_settings_update[ecctl platform proxy settings update]	 - Updates proxies settings {ece-icon} (Available for ECE only)
-* xref:ecctl_platform_proxy_settings_update[ecctl platform proxy settings update]	 - Updates proxies settings {ece-icon} (Available for ECE only)
+* [ecctl platform proxy settings](ecctl_platform_proxy_settings.md)	 - Manages proxies settings (Available for ECE only)
+
