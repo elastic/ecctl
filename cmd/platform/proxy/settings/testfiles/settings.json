@@ -1,0 +1,20 @@
+{
+  "expected_proxies_count": 5,
+  "http_settings": {
+    "cookie_secret": "some-secret",
+    "dashboards_base_url": "some-url",
+    "disconnected_cutoff": 2,
+    "minimum_proxy_services": 1,
+    "sso_settings": {
+      "cookie_name": "some-cookie",
+      "default_redirect_path": "some-path",
+      "dont_log_requests": true,
+      "maintenance_bypass_cookie_name": "some-other-cookie",
+      "max_age": 10,
+      "sso_secret": "sso-secret"
+    },
+    "user_cookie_key": "user-cookie"
+  },
+  "signature_secret": "signature-secret",
+  "signature_valid_for_millis": 60
+}
