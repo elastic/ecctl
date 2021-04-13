@@ -82,9 +82,7 @@ func initUpdateFlags() {
 	Command.AddCommand(platformProxySettingsUpdateCmd)
 	platformProxySettingsUpdateCmd.Flags().StringP("file", "f", "", "ProxiesSettings file definition. See https://www.elastic.co/guide/en/cloud-enterprise/current/ProxiesSettings.html for more information.")
 	platformProxySettingsUpdateCmd.Flags().String("version", "", "If specified, checks for conflicts against the version of the repository configuration")
-	platformProxySettingsUpdateCmd.Flags().Bool("patch", true, "Set this to false to perform a full update and "+
-		"overwrite the proxy settings - all unspecified fields are deleted.\n"+
-		"When it's set to true, the operation does a partial update and only the fields that are referenced in the given file are changed")
+	platformProxySettingsUpdateCmd.Flags().Bool("full", false, "If set, a full update will be performed and all proxy settings will be overwritten. Any unspecified fields will be deleted.")
 	cobra.MarkFlagFilename(platformProxySettingsUpdateCmd.Flags(), "file", "json")
 	cobra.MarkFlagRequired(platformProxySettingsUpdateCmd.Flags(), "file")
 }
