@@ -80,7 +80,7 @@ func init() {
 
 func initUpdateFlags() {
 	Command.AddCommand(platformProxySettingsUpdateCmd)
-	platformProxySettingsUpdateCmd.Flags().String("file", "", "File name containing the proxy settings")
+	platformProxySettingsUpdateCmd.Flags().StringP("file", "f", "", "ProxiesSettings file definition. See https://www.elastic.co/guide/en/cloud-enterprise/current/ProxiesSettings.html for more information.")
 	platformProxySettingsUpdateCmd.Flags().String("version", "", "If specified, checks for conflicts against the version of the settings")
 	platformProxySettingsUpdateCmd.Flags().Bool("patch", true, "Set this to false to perform a full update and "+
 		"overwrite the proxy settings - all unspecified fields are deleted.\n"+
