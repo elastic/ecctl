@@ -158,5 +158,13 @@ func newCreatePayload(cmd *cobra.Command, version, region string) (*models.Deplo
 		return nil, err
 	}
 
+	if es := tpl.DeploymentTemplate.Resources.Elasticsearch; len(es) > 0 {
+		if es[0].Plan.DeploymentTemplate == nil {
+			es[0].Plan.DeploymentTemplate = &models.DeploymentTemplateReference{}
+		}
+
+		es[0].Plan.DeploymentTemplate.ID = &dt
+	}
+
 	return tpl.DeploymentTemplate, nil
 }
