@@ -30,14 +30,22 @@ import (
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
+const examples = `## Update only the defined proxy settings 
+$ ecctl platform proxy settings update -file settings.json --region=us-east-1
+
+## Update by overriding all proxy settings 
+$ ecctl platform proxy settings update --file settings.json --region=us-east-1 --full
+`
+
 var platformProxySettingsUpdateCmd = &cobra.Command{
 	Use:     "update --file settings.json",
-	Short:   cmdutil.AdminReqDescription("Updates proxies settings"),
+	Short:   cmdutil.AdminReqDescription("Updates settings for all proxies"),
+	Example: examples,
 	PreRunE: cobra.ExactArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		filename, _ := cmd.Flags().GetString("file")
 		version, _ := cmd.Flags().GetString("version")
-		patch, _ := cmd.Flags().GetBool("patch")
+		full, _ := cmd.Flags().GetBool("full")
 
 		if filepath.Ext(filename) != ".json" {
 			return fmt.Errorf("only files with json extension are supported")
@@ -50,21 +58,20 @@ var platformProxySettingsUpdateCmd = &cobra.Command{
 
 		var updatedSettings *models.ProxiesSettings
 		var updateErr error
-		if patch {
-			updatedSettings, updateErr = proxysettingsapi.Patch(proxysettingsapi.UpdateParams{
-				API:             ecctl.Get().API,
-				Region:          ecctl.Get().Config.Region,
-				ProxiesSettings: &settings,
-				Version:         version,
-			})
-		} else {
+		if full {
 			updatedSettings, updateErr = proxysettingsapi.Set(proxysettingsapi.UpdateParams{
 				API:             ecctl.Get().API,
 				Region:          ecctl.Get().Config.Region,
 				ProxiesSettings: &settings,
 				Version:         version,
 			})
-
+		} else {
+			updatedSettings, updateErr = proxysettingsapi.Patch(proxysettingsapi.UpdateParams{
+				API:             ecctl.Get().API,
+				Region:          ecctl.Get().Config.Region,
+				ProxiesSettings: &settings,
+				Version:         version,
+			})
 		}
 
 		if updateErr != nil {

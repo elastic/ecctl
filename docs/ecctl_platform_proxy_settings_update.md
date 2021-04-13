@@ -1,19 +1,29 @@
 ## ecctl platform proxy settings update
 
-Updates proxies settings (Available for ECE only)
+Updates settings for all proxies (Available for ECE only)
 
 ```
 ecctl platform proxy settings update --file settings.json [flags]
 ```
 
+### Examples
+
+```
+## Update only the defined proxy settings 
+$ ecctl platform proxy settings update -file settings.json --region=us-east-1
+
+## Update by overriding all proxy settings 
+$ ecctl platform proxy settings update --file settings.json --region=us-east-1 --full
+
+```
+
 ### Options
 
 ```
-      --file string      File name containing the proxy settings
+  -f, --file string      ProxiesSettings file definition. See https://www.elastic.co/guide/en/cloud-enterprise/current/ProxiesSettings.html for more information.
+      --full             If set, a full update will be performed and all proxy settings will be overwritten. Any unspecified fields will be deleted.
   -h, --help             help for update
-      --patch            Set this to false to perform a full update and overwrite the proxy settings - all unspecified fields are deleted.
-                         When it's set to true, the operation does a partial update and only the fields that are referenced in the given file are changed (default true)
-      --version string   If specified, checks for conflicts against the version of the settings
+      --version string   If specified, checks for conflicts against the version of the repository configuration
 ```
 
 ### Options inherited from parent commands

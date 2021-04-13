@@ -154,7 +154,7 @@ func Test_updateCmd(t *testing.T) {
 			args: testutils.Args{
 				Cmd: platformProxySettingsUpdateCmd,
 				Args: []string{
-					"update", "--file", "./testfiles/settings.json", "--patch=false",
+					"update", "--file", "./testfiles/settings.json", "--full",
 				},
 				Cfg: testutils.MockCfg{
 					Responses: []mock.Response{

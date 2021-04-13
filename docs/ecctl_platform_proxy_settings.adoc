@@ -43,5 +43,5 @@ ecctl platform proxy settings [flags]
 
 * xref:ecctl_platform_proxy[ecctl platform proxy]	 - Manages proxies {ece-icon} (Available for ECE only)
 * xref:ecctl_platform_proxy_settings_show[ecctl platform proxy settings show]	 - Shows details for proxies settings {ece-icon} (Available for ECE only)
-* xref:ecctl_platform_proxy_settings_update[ecctl platform proxy settings update]	 - Updates proxies settings {ece-icon} (Available for ECE only)
-* xref:ecctl_platform_proxy_settings_update[ecctl platform proxy settings update]	 - Updates proxies settings {ece-icon} (Available for ECE only)
+* xref:ecctl_platform_proxy_settings_update[ecctl platform proxy settings update]	 - Updates settings for all proxies {ece-icon} (Available for ECE only)
+* xref:ecctl_platform_proxy_settings_update[ecctl platform proxy settings update]	 - Updates settings for all proxies {ece-icon} (Available for ECE only)
