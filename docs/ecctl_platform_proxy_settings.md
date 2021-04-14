@@ -39,4 +39,6 @@ ecctl platform proxy settings [flags]
 
 * [ecctl platform proxy](ecctl_platform_proxy.md)	 - Manages proxies (Available for ECE only)
 * [ecctl platform proxy settings show](ecctl_platform_proxy_settings_show.md)	 - Shows details for proxies settings (Available for ECE only)
+* [ecctl platform proxy settings update](ecctl_platform_proxy_settings_update.md)	 - Updates settings for all proxies (Available for ECE only)
+* [ecctl platform proxy settings update](ecctl_platform_proxy_settings_update.md)	 - Updates settings for all proxies (Available for ECE only)
 

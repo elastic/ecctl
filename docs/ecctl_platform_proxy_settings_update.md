@@ -1,23 +1,34 @@
-[#ecctl_platform_proxy_settings]
-== ecctl platform proxy settings
+## ecctl platform proxy settings update
 
-Manages proxies settings {ece-icon} (Available for ECE only)
+Updates settings for all proxies (Available for ECE only)
 
-----
-ecctl platform proxy settings [flags]
-----
+```
+ecctl platform proxy settings update --file settings.json [flags]
+```
 
-[float]
-=== Options
+### Examples
 
-----
-  -h, --help   help for settings
-----
+```
+## Update only the defined proxy settings 
+$ ecctl platform proxy settings update --file settings.json --region us-east-1
 
-[float]
-=== Options inherited from parent commands
+## Update by overriding all proxy settings 
+$ ecctl platform proxy settings update --file settings.json --region us-east-1 --full
 
-----
+```
+
+### Options
+
+```
+  -f, --file string      ProxiesSettings file definition. See https://www.elastic.co/guide/en/cloud-enterprise/current/ProxiesSettings.html for more information.
+      --full             If set, a full update will be performed and all proxy settings will be overwritten. Any unspecified fields will be deleted.
+  -h, --help             help for update
+      --version string   If specified, checks for conflicts against the version of the repository configuration
+```
+
+### Options inherited from parent commands
+
+```
       --api-key string        API key to use to authenticate (If empty will look for EC_API_KEY environment variable)
       --config string         Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
       --force                 Do not ask for confirmation
@@ -36,12 +47,9 @@ ecctl platform proxy settings [flags]
       --verbose               Enable verbose mode
       --verbose-credentials   When set, Authorization headers on the request/response trail will be displayed as plain text
       --verbose-file string   When set, the verbose request/response trail will be written to the defined file
-----
+```
 
-[float]
-=== SEE ALSO
+### SEE ALSO
 
-* xref:ecctl_platform_proxy[ecctl platform proxy]	 - Manages proxies {ece-icon} (Available for ECE only)
-* xref:ecctl_platform_proxy_settings_show[ecctl platform proxy settings show]	 - Shows details for proxies settings {ece-icon} (Available for ECE only)
-* xref:ecctl_platform_proxy_settings_update[ecctl platform proxy settings update]	 - Updates settings for all proxies {ece-icon} (Available for ECE only)
-* xref:ecctl_platform_proxy_settings_update[ecctl platform proxy settings update]	 - Updates settings for all proxies {ece-icon} (Available for ECE only)
+* [ecctl platform proxy settings](ecctl_platform_proxy_settings.md)	 - Manages proxies settings (Available for ECE only)
+
