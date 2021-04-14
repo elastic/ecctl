@@ -34,7 +34,7 @@ const examples = `## Update only the defined proxy settings
 $ ecctl platform proxy settings update --file settings.json --region us-east-1
 
 ## Update by overriding all proxy settings 
-$ ecctl platform proxy settings update --file settings.json --region=us-east-1 --full
+$ ecctl platform proxy settings update --file settings.json --region us-east-1 --full
 `
 
 var platformProxySettingsUpdateCmd = &cobra.Command{
