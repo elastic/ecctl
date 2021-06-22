@@ -4,7 +4,7 @@
 <titleabbrev>v1.4.0</titleabbrev>
 ++++
 
-<<{p}-release-notes-v1.4.0-whats-new,What's new>> | <<{p}-release-notes-v1.4.0-bug-fixes,Bug fixes>> | <<{p}-release-notes-v1.4.0-breaking-changes,Breaking changes>> | <<{p}-release-notes-v1.4.0-changelog,Changelog>>
+<<{p}-release-notes-v1.4.0-whats-new,What's new>> | <<{p}-release-notes-v1.4.0-changelog,Changelog>>
 
 Welcome to the v1.4.0 release of {n}. This version brings new features.
 
