@@ -16,7 +16,7 @@ Download the release binaries:
 https://download.elastic.co/downloads/ecctl/VERSION_REPLACE/ecctl_VERSION_REPLACE_darwin_amd64.tar.gz[ecctl_VERSION_REPLACE_darwin_amd64.tar.gz]
 https://download.elastic.co/downloads/ecctl/VERSION_REPLACE/ecctl_VERSION_REPLACE_linux_32-bit.deb[ecctl_VERSION_REPLACE_linux_32-bit.deb]
 https://download.elastic.co/downloads/ecctl/VERSION_REPLACE/ecctl_VERSION_REPLACE_linux_32-bit.rpm[ecctl_VERSION_REPLACE_linux_32-bit.rpm]
-https://download.elastic.co/downloads/ecctl/VERSION_REPLACE/ecctl_VERSION_REPLACE_linux_386.tar.g[ecctl_VERSION_REPLACE_linux_386.tar.g]
+https://download.elastic.co/downloads/ecctl/VERSION_REPLACE/ecctl_VERSION_REPLACE_linux_386.tar.g[ecctl_VERSION_REPLACE_linux_386.tar.gz]
 https://download.elastic.co/downloads/ecctl/VERSION_REPLACE/ecctl_VERSION_REPLACE_linux_64-bit.deb[ecctl_VERSION_REPLACE_linux_64-bit.deb]
 https://download.elastic.co/downloads/ecctl/VERSION_REPLACE/ecctl_VERSION_REPLACE_linux_64-bit.rpm[ecctl_VERSION_REPLACE_linux_64-bit.rpm]
 https://download.elastic.co/downloads/ecctl/VERSION_REPLACE/ecctl_VERSION_REPLACE_linux_amd64.tar.gz[ecctl_VERSION_REPLACE_linux_amd64.tar.gz]

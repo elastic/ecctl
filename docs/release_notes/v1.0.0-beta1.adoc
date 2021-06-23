@@ -16,7 +16,7 @@ Download the release binaries:
 https://download.elastic.co/downloads/ecctl/v1.0.0-beta1/ecctl_v1.0.0-beta1_darwin_amd64.tar.gz[ecctl_v1.0.0-beta1_darwin_amd64.tar.gz]
 https://download.elastic.co/downloads/ecctl/v1.0.0-beta1/ecctl_v1.0.0-beta1_linux_32-bit.deb[ecctl_v1.0.0-beta1_linux_32-bit.deb]
 https://download.elastic.co/downloads/ecctl/v1.0.0-beta1/ecctl_v1.0.0-beta1_linux_32-bit.rpm[ecctl_v1.0.0-beta1_linux_32-bit.rpm]
-https://download.elastic.co/downloads/ecctl/v1.0.0-beta1/ecctl_v1.0.0-beta1_linux_386.tar.g[ecctl_v1.0.0-beta1_linux_386.tar.g]
+https://download.elastic.co/downloads/ecctl/v1.0.0-beta1/ecctl_v1.0.0-beta1_linux_386.tar.g[ecctl_v1.0.0-beta1_linux_386.tar.gz]
 https://download.elastic.co/downloads/ecctl/v1.0.0-beta1/ecctl_v1.0.0-beta1_linux_64-bit.deb[ecctl_v1.0.0-beta1_linux_64-bit.deb]
 https://download.elastic.co/downloads/ecctl/v1.0.0-beta1/ecctl_v1.0.0-beta1_linux_64-bit.rpm[ecctl_v1.0.0-beta1_linux_64-bit.rpm]
 https://download.elastic.co/downloads/ecctl/v1.0.0-beta1/ecctl_v1.0.0-beta1_linux_amd64.tar.gz[ecctl_v1.0.0-beta1_linux_amd64.tar.gz]
