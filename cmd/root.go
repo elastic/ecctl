@@ -67,11 +67,14 @@ var (
 
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
-	Use:                    "ecctl",
-	Short:                  "Elastic Cloud Control",
-	SilenceErrors:          true,
-	SilenceUsage:           true,
-	DisableAutoGenTag:      true,
+	Use:               "ecctl",
+	Short:             "Elastic Cloud Control",
+	SilenceErrors:     true,
+	SilenceUsage:      true,
+	DisableAutoGenTag: true,
+	CompletionOptions: cobra.CompletionOptions{
+		DisableDefaultCmd: true,
+	},
 	BashCompletionFunction: bashCompletionFunc,
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 		setupViper(defaultViper)
