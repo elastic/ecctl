@@ -3,7 +3,6 @@ issues:
   max-same-issues: 0
 
 linters:
-  enable-all: true
   disable:
     - dupl
     - lll
