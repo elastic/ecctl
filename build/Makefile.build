@@ -57,3 +57,6 @@ changelog:
 ## Generates a snapshot of the potential release
 snapshot: deps
 	@ $(GOBIN)/goreleaser release --rm-dist --snapshot --skip-validate
+
+update-cloud-sdk-go:
+	@ go get github.com/elastic/cloud-sdk-go@$(VERSION)
