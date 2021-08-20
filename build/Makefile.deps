@@ -9,6 +9,7 @@ VERSION_GOLICENSER:=v0.3.0
 VERSION_GOLANGCILINT:=v1.38.0
 VERSION_GOBINDATA:=v0.0.0-20190711162640-ee3c2418e368
 VERSION_GORELEASER:=v0.156.1
+VERSION_VERSIONBUMP:=v1.1.0
 
 deps: $(GOBIN)/golint $(GOBIN)/go-licenser $(GOBIN)/golangci-lint $(GOBIN)/go-bindata $(GOBIN)/goreleaser
 
@@ -57,3 +58,11 @@ $(VERSION_DIR)/.version-goreleaser-$(VERSION_GORELEASER): | $(VERSION_DIR)
 $(GOBIN)/goreleaser: $(VERSION_DIR)/.version-goreleaser-$(VERSION_GORELEASER) | $(GOBIN)
 	@ echo "-> Installing goreleaser..."
 	@ curl -sfL https://install.goreleaser.com/github.com/goreleaser/goreleaser.sh| sh -s -- -b $(GOBIN) $(VERSION_GORELEASER)
+
+$(VERSION_DIR)/.version-versionbump-$(VERSION_VERSIONBUMP):
+	@ rm -f $(VERSION_DIR)/.version-versionbump-*
+	@ echo $(VERSION_VERSIONBUMP) > $(VERSION_DIR)/.version-versionbump-$(VERSION_VERSIONBUMP)
+
+$(GOBIN)/versionbump: $(VERSION_DIR)/.version-versionbump-$(VERSION_VERSIONBUMP) | $(GOBIN)
+	@ echo "-> Installing versionbump..."
+	@ go install github.com/crosseyed/versionbump/cmd/versionbump@$(VERSION_VERSIONBUMP)
