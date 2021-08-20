@@ -1,7 +1,7 @@
 [id="{p}-overview"]
 == Overview
 
-{p} is the CLI for the Elastic Cloud Enterprise API. 
+{p} is the command-line interface for the Elasticsearch Service and Elastic Cloud Enterprise (ECE) APIs.
 It wraps typical operations commonly needed by operators within a single command line tool.
 
 Benefits of {p}:
@@ -16,7 +16,7 @@ Benefits of {p}:
 The latest stable binaries can be found on the
 https://github.com/elastic/ecctl/releases[release page] or compiled from
 the latest on the master branch to leverage the most recently merged
-features. 
+features.
 
 To learn more about building {p} from the source, see
 the steps from our link:https://github.com/elastic/ecctl/blob/master/CONTRIBUTING.md#setting-up-a-dev-environment[Setting up a dev environment].
@@ -34,13 +34,19 @@ $ brew tap elastic/tap
 $ brew install elastic/tap/ecctl
 
 Updating Homebrew...
-=> Installing ecctl from elastic/ecctl
+==> Installing ecctl from elastic/tap
 ...
-=> Summary
-🍺  /usr/local/Cellar/ecctl/1.0.0: 6 files, 13MB, built in 7 seconds
+==> Caveats
+To get autocompletions working make sure to run "source <(ecctl generate completions)".
+If you prefer to add to your shell interpreter configuration file run, for bash or zsh respectively:
+* `echo "source <(ecctl generate completions)" >> ~/.bash_profile`
+* `echo "source <(ecctl generate completions)" >> ~/.zshrc`.
+==> Summary
+🍺  /usr/local/Cellar/ecctl/1.5.0: 5 files, 22.6MB, built in 4 seconds
+
 ----
 
-NOTE: To get autocompletions working make sure to run `source <(ecctl generate completions)`. If you prefer to add to your shell interpreter configuration file run `echo "source <(ecctl generate completions)" >> ~/.bash_profile` or `echo "source <(ecctl generate completions)" >> ~/.zshrc`.
+NOTE: To get autocompletions working, follow the instructions in the Homebrew output.
 
 [float]
 [id="{p}-upgrading-macos"]
@@ -60,7 +66,7 @@ $ brew upgrade ecctl
 == Install on Linux
 
 // NR TO DO with info from https://github.com/elastic/cloud-cli#linux-based-os
- 
+
 The simplest installation for Linux-based users is to install ecl with apt-get. We are hosting ecl binaries in a temporary apt repository so you need to do the following:
 
 [source,console]
@@ -87,7 +93,7 @@ Setting up ece-ctl (0.12.0) ...
 dpkg: warning: parsing file '/var/lib/dpkg/status' near line 1607 package 'ece-ctl':
  missing maintainer
 ----
- 
+
 ////
 
 [id="{p}-configuring"]
@@ -115,11 +121,11 @@ If it’s your first time using {p}, use the `init` command to assist you in gen
 [source]
 ----
 $ ecctl init
-Welcome to the Elastic Cloud CLI! This command will guide you through authenticating and setting some default values.
+Welcome to Elastic Cloud Control (ecctl)! This command will guide you through authenticating and setting some default values.
 
 Missing configuration file, would you like to initialise it? [y/n]: y
 
-Select which type of Elastic Cloud offering will you be working with:
+Select which type of Elastic Cloud offering you will be working with:
   [1] Elasticsearch Service (default).
   [2] Elastic Cloud Enterprise (ECE).
   [3] Elasticsearch Service Private (ESSP).
@@ -127,6 +133,45 @@ Select which type of Elastic Cloud offering will you be working with:
 Please enter your choice: 1
 
 Using "https://api.elastic-cloud.com" as the API endpoint.
+
+Select a region you would like to have as default:
+
+  GCP
+  [1] us-central1 (Iowa)
+  [2] us-east1 (S. Carolina)
+  [3] us-east4 (N. Virginia)
+  [4] us-west1 (Oregon)
+  [5] northamerica-northeast1 (Montreal)
+  [6] southamerica-east1 (São Paulo)
+  [7] australia-southeast1 (Sydney)
+  [8] europe-west1 (Belgium)
+  [9] europe-west2 (London)
+  [10] europe-west3 (Frankfurt)
+  [11] asia-northeast1 (Tokyo)
+  [12] asia-south1 (Mumbai)
+  [13] asia-southeast1 (Singapore)
+
+  AWS
+  [14] us-east-1 (N. Virginia)
+  [15] us-west-1 (N. California)
+  [16] us-west-2 (Oregon)
+  [17] eu-central-1 (Frankfurt)
+  [18] eu-west-2 (London)
+  [19] eu-west-1 (Ireland)
+  [20] ap-northeast-1 (Tokyo)
+  [21] ap-southeast-1 (Singapore)
+  [22] ap-southeast-2 (Sydney)
+  [23] sa-east-1 (São Paulo)
+
+  Azure
+  [24] eastus2 (Virginia)
+  [25] westus2 (Washington)
+  [26] westeurope (Netherlands)
+  [27] uksouth (London)
+  [28] japaneast (Tokyo)
+  [29] southeastasia (Singapore)
+
+Please enter your choice: 1
 
 Paste your API Key and press enter: xxxxx
 
@@ -136,10 +181,12 @@ What default output format would you like?
 
 Please enter a choice: 1
 
-Your credentials seem to be valid, and show you're authenticated as "user".
+Your credentials seem to be valid.
 
-You're all set! Here is a command to try:
+You're all set! Here are some commands to try:
   $ ecctl deployment list
+
+Config written to /home/myuser/.ecctl/config.json
 ----
 
 [id="{p}-authentication"]
@@ -302,7 +349,7 @@ Copy the following JSON payload and save it as file `create-deployment.json`.
                 "master": true,
                 "data": true,
                 "ingest": true,
-                "ml": false                
+                "ml": false
               },
               "instance_configuration_id": "gcp.data.highio.1", <2>
               "zone_count": 2, <3>
@@ -578,7 +625,7 @@ $ unset EC_FORMAT
 * Platform components
 * And more
 
-:leveloffset: +1 
+:leveloffset: +1
 include::ecctl-command-reference-index.adoc[]
 :leveloffset: 0
 
