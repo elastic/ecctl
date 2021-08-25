@@ -108,7 +108,7 @@ variables, or at runtime using the CLI’s global flags.
 === Before you begin
 The hierarchy for configuration parameters is as follows, from higher precedence to lower:
 
-. Command line flags `--host`, `--user`, `--pass`
+. Command line flags `--api-key`, `--region`, `--verbose`
 . Environment variables
 . Shared configuration file
 `$HOME/.ecctl/config.<json|toml|yaml|hcl>`
@@ -173,6 +173,7 @@ Select a region you would like to have as default:
 
 Please enter your choice: 1
 
+Create a new Elasticsearch Service API key (https://cloud.elastic.co/deployment-features/keys) and/or
 Paste your API Key and press enter: xxxxx
 
 What default output format would you like?

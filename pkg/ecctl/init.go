@@ -103,8 +103,9 @@ const (
 	esspHostMsg    = "Enter the URL of your ESSP installation: "
 	essChoiceMsg   = "Using \"%s\" as the API endpoint.\n"
 
-	apiKeyMsg = "Paste your API Key and press enter: "
-	userMsg   = "Type in your username: "
+	essAPIKeyCreateMsg = "Create a new Elasticsearch Service API key (https://cloud.elastic.co/deployment-features/keys) and/or"
+	apiKeyMsg          = "Paste your API Key and press enter: "
+	userMsg            = "Type in your username: "
 	//nolint
 	passMsg = "Type in your password: "
 
@@ -386,6 +387,7 @@ func askInfraSelection(cfg *Config, scanner *input.Scanner, writer, errWriter io
 		if err := askRegionSelection(cfg, scanner, writer, essRegions); err != nil {
 			return err
 		}
+		fmt.Fprintln(writer, essAPIKeyCreateMsg)
 		if err := askAPIKey(cfg, writer, passFunc); err != nil {
 			return err
 		}

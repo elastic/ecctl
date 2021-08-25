@@ -264,6 +264,7 @@ func TestInitConfig(t *testing.T) {
 			},
 			wantOutput: disclaimer + missingConfigMsg + hostChoiceMsg + "\n" +
 				fmt.Sprintf(essChoiceMsg, essHostAddress) + regionChoiceMsg + "\n" +
+				essAPIKeyCreateMsg + "\n" +
 				apiKeyMsg + "\n" + formatChoiceMsg + "\n" + "\n" +
 				fmt.Sprintf(validCredentialsMsg, "anacleto") + finalMsg + "\n",
 		},
