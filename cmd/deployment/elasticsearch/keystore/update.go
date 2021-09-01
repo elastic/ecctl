@@ -31,10 +31,54 @@ import (
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
-const updateLong = `Changes the contents of the Elasticsearch resource keystore from the
-specified deployment by using the PATCH method. The payload is a partial payload where
-any ignored current keystore items are not removed, unless the secrets are
-set to "null": {"secrets": {"my-secret": null}}.`
+const updateLong = `Changes the contents of the Elasticsearch resource keystore from the specified
+deployment by using the PATCH method. The payload is a partial payload where any
+omitted current keystore items are not removed, unless the secrets are set to "null":
+{"secrets": {"my-secret": null}}.
+
+The contents of the specified file should be formatted to match the Elasticsearch Service
+API "KeystoreContents" model. For more information on format, see the ESS API reference:
+https://www.elastic.co/guide/en/cloud/current/definitions.html#KeystoreContents.
+`
+
+const updateExample = `# Set credentials for a GCS snapshot repository
+$ cat gcs-creds.json
+{
+    "secrets": {
+        "gcs.client.default.credentials_file": {
+            "as_file": true,
+            "value": {
+                "type": "service_account",
+                "project_id": "project-id",
+                "private_key_id": "key-id",
+                "private_key": "-----BEGIN PRIVATE KEY-----\nprivate-key\n-----END PRIVATE KEY-----\n",
+                "client_email": "service-account-email",
+                "client_id": "client-id",
+                "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+                "token_uri": "https://accounts.google.com/o/oauth2/token",
+                "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+                "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/service-account-email"
+            }
+        }
+    }
+}
+$ ecctl deployment elasticsearch keystore set --file=gcs-creds.json <Deployment ID>
+...
+# Set multiple secrets in one playload
+$ cat multiple.json
+{
+    "secrets": {
+        "my-secret": {
+            "value": "my-value"
+        },
+        "my-other-secret": {
+            "value": "my-other-value"
+        }
+    }
+}
+$ ecctl deployment elasticsearch keystore set --file=multiple.json <Deployment ID>
+...
+`
 
 var (
 	errReadingDefPrefix  = "failed reading keystore secret definition"
@@ -44,6 +88,7 @@ var (
 var updateCmd = &cobra.Command{
 	Use:     "update <deployment id> [--ref-id <ref-id>] {--file=<filename>.json}",
 	Long:    updateLong,
+	Example: updateExample,
 	Aliases: []string{"set"},
 	Short:   "Updates the contents of an Elasticsearch keystore",
 	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
@@ -74,6 +119,6 @@ var updateCmd = &cobra.Command{
 func init() {
 	Command.AddCommand(updateCmd)
 	updateCmd.Flags().String("ref-id", "", "Optional ref_id to use for the Elasticsearch resource, auto-discovered if not specified.")
-	updateCmd.Flags().StringP("file", "p", "", "Required json formatted file path with the keystore secret contents.")
+	updateCmd.Flags().StringP("file", "f", "", "Required json formatted file path with the keystore secret contents.")
 	updateCmd.MarkFlagFilename("file", "json")
 }
