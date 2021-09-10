@@ -59,7 +59,7 @@ $(GOBIN)/goreleaser: $(VERSION_DIR)/.version-goreleaser-$(VERSION_GORELEASER) | 
 	@ echo "-> Installing goreleaser..."
 	@ curl -sfL https://install.goreleaser.com/github.com/goreleaser/goreleaser.sh| sh -s -- -b $(GOBIN) $(VERSION_GORELEASER)
 
-$(VERSION_DIR)/.version-versionbump-$(VERSION_VERSIONBUMP):
+$(VERSION_DIR)/.version-versionbump-$(VERSION_VERSIONBUMP): | $(VERSION_DIR)
 	@ rm -f $(VERSION_DIR)/.version-versionbump-*
 	@ echo $(VERSION_VERSIONBUMP) > $(VERSION_DIR)/.version-versionbump-$(VERSION_VERSIONBUMP)
 
