@@ -1,5 +1,5 @@
 ecctl
-Copyright 2019-2020 Elasticsearch B.V.
+Copyright 2019-2021 Elasticsearch B.V.
 
 This product includes software developed at Elasticsearch B.V. and
 third-party software developed by the licenses listed below.
@@ -12,8 +12,9 @@ github.com/go-openapi/strfmt         Apache-2.0
 github.com/spf13/cobra               Apache-2.0
 github.com/pkg/errors                BSD-2-Clause
 github.com/spf13/pflag               BSD-3-Clause
-golang.org/x/crypto                  BSD-3-Clause
+golang.org/x/term                    BSD-3-Clause
 github.com/asaskevich/govalidator    MIT
 github.com/spf13/viper               MIT
+github.com/stretchr/testify          MIT
 
 =========================================================================
