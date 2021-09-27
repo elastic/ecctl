@@ -11,7 +11,7 @@ VERSION_GOBINDATA:=v0.0.0-20190711162640-ee3c2418e368
 VERSION_GORELEASER:=v0.156.1
 VERSION_VERSIONBUMP:=v1.1.0
 
-deps: $(GOBIN)/golint $(GOBIN)/go-licenser $(GOBIN)/golangci-lint $(GOBIN)/go-bindata $(GOBIN)/goreleaser
+deps: $(GOBIN)/golint $(GOBIN)/go-licenser $(GOBIN)/golangci-lint $(GOBIN)/go-bindata
 
 $(GOBIN):
 	@ mkdir -p $(GOBIN)
@@ -59,7 +59,7 @@ $(GOBIN)/goreleaser: $(VERSION_DIR)/.version-goreleaser-$(VERSION_GORELEASER) | 
 	@ echo "-> Installing goreleaser..."
 	@ curl -sfL https://install.goreleaser.com/github.com/goreleaser/goreleaser.sh| sh -s -- -b $(GOBIN) $(VERSION_GORELEASER)
 
-$(VERSION_DIR)/.version-versionbump-$(VERSION_VERSIONBUMP):
+$(VERSION_DIR)/.version-versionbump-$(VERSION_VERSIONBUMP): | $(VERSION_DIR)
 	@ rm -f $(VERSION_DIR)/.version-versionbump-*
 	@ echo $(VERSION_VERSIONBUMP) > $(VERSION_DIR)/.version-versionbump-$(VERSION_VERSIONBUMP)
 
