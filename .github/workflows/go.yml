@@ -41,6 +41,7 @@ jobs:
       id: unit
 
     - name: Commit & push changes to NOTICE
+      if: github.event_name == 'push'
       run: |
         if [[ ! -z  $(git status --porcelain) ]]; then
           git config --local user.email elasticcloudclients@elastic.co
