@@ -1,9 +1,9 @@
-name: Generate NOTICE
+name: Generate on commit to master
 on:
   push:
   workflow_dispatch:
 jobs:
-  GenerateChangelog:
+  GenerateOnMaster:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
