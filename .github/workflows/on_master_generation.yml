@@ -1,6 +1,8 @@
 name: Generate on commit to master
 on:
   push:
+    branches:
+      - master
   workflow_dispatch:
 jobs:
   GenerateOnMaster:
