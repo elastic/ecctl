@@ -35,7 +35,7 @@ var (
 // descriptor. If passFunc is empty, it defaults to terminal.
 func ReadSecret(w io.Writer, passFunc PassFunc, msg string) ([]byte, error) {
 	fmt.Fprint(w, msg)
-	b, err := passFunc(syscall.Stdin)
+	b, err := passFunc(int(syscall.Stdin))
 	fmt.Fprintln(w)
 	if err != nil {
 		return nil, err
