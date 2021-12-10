@@ -25,7 +25,6 @@ builds:
       goarch: 386
   ldflags: -s -w -X main.version={{.Env.VERSION }} -X main.commit={{.Commit}} -X main.owner={{.Env.OWNER}} -X main.repo={{.Env.REPO}} -X main.built={{.Env.BUILT}}
   binary: ecctl
-  lang: go
 archives:
   - name_template: '{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm}}v{{ .Arm }}{{ end }}'
     format: tar.gz
