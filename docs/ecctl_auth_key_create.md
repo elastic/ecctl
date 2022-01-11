@@ -9,9 +9,8 @@ ecctl auth key create [flags]
 ### Options
 
 ```
-      --description string         User API key description
-  -h, --help                       help for create
-      --insecure-password string   [INSECURE] User plaintext password
+      --description string   User API key description
+  -h, --help                 help for create
 ```
 
 ### Options inherited from parent commands
