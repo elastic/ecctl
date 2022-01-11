@@ -21,7 +21,6 @@ import (
 	userauthapi "github.com/elastic/cloud-sdk-go/pkg/api/userapi/authapi"
 	"github.com/spf13/cobra"
 
-	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
 
@@ -30,18 +29,7 @@ var createCmd = &cobra.Command{
 	Short:   "Creates a new API key for the current authenticated user",
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		insecure, _ := cmd.Flags().GetString("insecure-password")
-		message := "re-enter your password: "
-		password, err := cmdutil.InsecureOrSecurePassword(insecure, message, false)
-		if err != nil {
-			return err
-		}
-
 		res, err := userauthapi.CreateKey(userauthapi.CreateKeyParams{
-			ReAuthenticateParams: userauthapi.ReAuthenticateParams{
-				API:      ecctl.Get().API,
-				Password: password,
-			},
 			Description: cmd.Flag("description").Value.String(),
 		})
 		if err != nil {
@@ -54,6 +42,5 @@ var createCmd = &cobra.Command{
 
 func init() {
 	createCmd.Flags().String("description", "", "User API key description")
-	createCmd.Flags().String("insecure-password", "", "[INSECURE] User plaintext password")
 	cobra.MarkFlagRequired(createCmd.Flags(), "description")
 }
