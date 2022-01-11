@@ -42,6 +42,5 @@ var createCmd = &cobra.Command{
 
 func init() {
 	createCmd.Flags().String("description", "", "User API key description")
-	createCmd.Flags().String("insecure-password", "", "[INSECURE] User plaintext password")
 	cobra.MarkFlagRequired(createCmd.Flags(), "description")
 }
