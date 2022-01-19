@@ -30,6 +30,7 @@ var createCmd = &cobra.Command{
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		res, err := userauthapi.CreateKey(userauthapi.CreateKeyParams{
+			API:         ecctl.Get().API,
 			Description: cmd.Flag("description").Value.String(),
 		})
 		if err != nil {
