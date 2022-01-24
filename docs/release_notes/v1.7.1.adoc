@@ -4,7 +4,7 @@
 <titleabbrev>v1.7.1</titleabbrev>
 ++++
 
-<<{p}-release-notes-v1.7.1-whats-new,What's new>> | <<{p}-release-notes-v1.7.1-bug-fixes,Bug fixes>> | <<{p}-release-notes-v1.7.1-breaking-changes,Breaking changes>> | <<{p}-release-notes-v1.7.1-changelog,Changelog>>
+<<{p}-release-notes-v1.7.1-changelog,Changelog>>
 
 Welcome to the v1.7.1 release of {n}. This version was released to fix an issue which resulted in the 1.7.0 release to be missing from the downloads. No code changes were made to ecctl itself.
 
