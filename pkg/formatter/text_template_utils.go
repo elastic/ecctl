@@ -143,11 +143,7 @@ func substr(a, b int32) int32 { return a - b }
 func computeClusterCapacity(plan *models.ElasticsearchClusterPlan) int32 {
 	var total = int32(0)
 	for _, t := range plan.ClusterTopology {
-		total += t.MemoryPerNode * t.NodeCountPerZone
-	}
-
-	if plan.ZoneCount > 1 {
-		total *= plan.ZoneCount
+		total += (t.MemoryPerNode * t.NodeCountPerZone) * t.ZoneCount
 	}
 
 	return total
@@ -253,7 +249,7 @@ func formatTopologyInfo(clusterInfo models.ElasticsearchClusterInfo) string {
 	return fmt.Sprintf(
 		format,
 		formatClusterBytes(plan.Plan.ClusterTopology[0].MemoryPerNode, true),
-		plan.Plan.ZoneCount,
+		plan.Plan.ClusterTopology[0].ZoneCount,
 	)
 }
 
@@ -297,11 +293,11 @@ func getESCurrentOrPendingPlan(clusterInfo models.ElasticsearchClusterInfo) *mod
 				Elasticsearch: &models.ElasticsearchConfiguration{
 					Version: version,
 				},
-				ZoneCount: zoneCount,
 				ClusterTopology: []*models.ElasticsearchClusterTopologyElement{
 					{
 						NodeCountPerZone: nodeCountPerZone,
 						MemoryPerNode:    memoryPerNode,
+						ZoneCount: zoneCount,
 					},
 				},
 			},
