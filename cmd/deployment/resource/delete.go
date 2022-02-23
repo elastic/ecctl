@@ -39,7 +39,7 @@ var deleteCmd = &cobra.Command{
 
 		force, _ := cmd.Flags().GetBool("force")
 		var msg = "This action will delete a deployment's resource kind and its configuration history. Do you want to continue? [y/n]: "
-		if !force && !sdkcmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
+		if !force && !sdkcmdutil.ConfirmAction(msg, os.Stdin, ecctl.Get().Config.OutputDevice) {
 			return nil
 		}
 

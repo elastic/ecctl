@@ -47,7 +47,7 @@ var startMaintCmd = &cobra.Command{
 		}
 
 		var msg = "This action will incur in downtime if used with the --all flag. Do you want to continue? [y/n]: "
-		if all && !force && !sdkcmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
+		if all && !force && !sdkcmdutil.ConfirmAction(msg, os.Stdin, ecctl.Get().Config.OutputDevice) {
 			return nil
 		}
 
