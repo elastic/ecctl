@@ -8,7 +8,7 @@ jobs:
   GenerateOnMaster:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           token: ${{ secrets.GH_TOKEN_EXTRA }}
           fetch-depth: 0
