@@ -120,8 +120,8 @@ github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSs
 github.com/docker/go-units v0.3.3/go.mod h1:fgPhTUdO+D/Jk86RDLlptpiXQzgHJF7gydDDbaIK4Dk=
 github.com/docker/go-units v0.4.0/go.mod h1:fgPhTUdO+D/Jk86RDLlptpiXQzgHJF7gydDDbaIK4Dk=
 github.com/dustin/go-humanize v1.0.0/go.mod h1:HtrtbFcZ19U5GC7JDqmcUSB87Iq5E25KnS6fMYU6eOk=
-github.com/elastic/cloud-sdk-go v1.9.0 h1:dJlAebOSJqv6Q7IrEmT9i57dLcRUFPsEBk8f/rNJI2A=
-github.com/elastic/cloud-sdk-go v1.9.0/go.mod h1:BMx5iwmVwL8gpomLSMPI6gcvfWzrV4KsWSnbPlWwlrI=
+github.com/elastic/cloud-sdk-go v1.10.0 h1:1WBUkP71ogoxynWfaGg5Bm8Z36F4tL3bjiu+e8YctkQ=
+github.com/elastic/cloud-sdk-go v1.10.0/go.mod h1:BMx5iwmVwL8gpomLSMPI6gcvfWzrV4KsWSnbPlWwlrI=
 github.com/envoyproxy/go-control-plane v0.9.0/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
 github.com/envoyproxy/go-control-plane v0.9.1-0.20191026205805-5f8ba28d4473/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
 github.com/envoyproxy/go-control-plane v0.9.4/go.mod h1:6rpuAdCZL397s3pYoYcLgu1mIlRU8Am5FuJP05cCM98=
