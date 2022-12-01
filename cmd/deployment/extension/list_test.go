@@ -18,8 +18,8 @@
 package cmddeploymentextension
 
 import (
+	_ "embed"
 	"encoding/json"
-	"io/ioutil"
 	"testing"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api"
@@ -29,12 +29,10 @@ import (
 	"github.com/elastic/ecctl/cmd/util/testutils"
 )
 
-func Test_listCmd(t *testing.T) {
-	listRawResp, err := ioutil.ReadFile("./testdata/list.json")
-	if err != nil {
-		t.Fatal(err)
-	}
+//go:embed "testdata/list.json"
+var listRawResp []byte
 
+func Test_listCmd(t *testing.T) {
 	var succeedResp = new(models.Extensions)
 	if err := succeedResp.UnmarshalBinary(listRawResp); err != nil {
 		t.Fatal(err)

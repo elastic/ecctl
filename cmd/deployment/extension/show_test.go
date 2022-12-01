@@ -18,8 +18,8 @@
 package cmddeploymentextension
 
 import (
+	_ "embed"
 	"encoding/json"
-	"io/ioutil"
 	"net/url"
 	"testing"
 
@@ -30,23 +30,19 @@ import (
 	"github.com/elastic/ecctl/cmd/util/testutils"
 )
 
-func Test_showCmd(t *testing.T) {
-	showRawResp, err := ioutil.ReadFile("./testdata/show.json")
-	if err != nil {
-		t.Fatal(err)
-	}
+//go:embed "testdata/show.json"
+var showRawResp []byte
 
+//go:embed "testdata/show-dep.json"
+var showDepRawResp []byte
+
+func Test_showCmd(t *testing.T) {
 	var succeedResp = new(models.Extension)
 	if err := succeedResp.UnmarshalBinary(showRawResp); err != nil {
 		t.Fatal(err)
 	}
 
 	showJSONOutput, err := json.MarshalIndent(succeedResp, "", "  ")
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	showDepRawResp, err := ioutil.ReadFile("./testdata/show-dep.json")
 	if err != nil {
 		t.Fatal(err)
 	}

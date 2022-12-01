@@ -18,7 +18,7 @@
 package cmdrole
 
 import (
-	"io/ioutil"
+	_ "embed"
 	"testing"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
@@ -26,12 +26,10 @@ import (
 	"github.com/elastic/ecctl/cmd/util/testutils"
 )
 
-func Test_updateCmd(t *testing.T) {
-	roleRawResponseData, err := ioutil.ReadFile("./testdata/update-response.json")
-	if err != nil {
-		t.Fatal(err)
-	}
+//go:embed "testdata/update-response.json"
+var roleRawResponseData []byte
 
+func Test_updateCmd(t *testing.T) {
 	tests := []struct {
 		name string
 		args testutils.Args

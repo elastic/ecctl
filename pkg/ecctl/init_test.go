@@ -22,7 +22,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -50,13 +49,13 @@ func copyFixtures(t *testing.T, fixturePath string) func() {
 			return nil
 		}
 
-		b, err := ioutil.ReadFile(path)
+		b, err := os.ReadFile(path)
 		if err != nil {
 			return err
 		}
 
 		var newFile = strings.Replace(path, ".orig", "", 1)
-		err = ioutil.WriteFile(newFile, b, 0660)
+		err = os.WriteFile(newFile, b, 0660)
 		if err != nil {
 			return err
 		}

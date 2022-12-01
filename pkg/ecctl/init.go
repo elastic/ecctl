@@ -23,8 +23,8 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
+	"os"
 	"strconv"
 	"strings"
 
@@ -125,7 +125,7 @@ Please enter your choice: `
 
 	regionChoiceMsg = `
 Select a region you would like to have as default:
-  
+
   GCP
   [1] us-central1 (Iowa)
   [2] us-east1 (S. Carolina)
@@ -350,7 +350,7 @@ func writeConfig(cfg Config, filePath, ext string) error {
 		filePath += ext
 	}
 
-	return ioutil.WriteFile(filePath, configBytes, 0666)
+	return os.WriteFile(filePath, configBytes, 0666)
 }
 
 func printConfig(writer io.Writer, v *viper.Viper) error {

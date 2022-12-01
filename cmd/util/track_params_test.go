@@ -18,7 +18,7 @@
 package cmdutil
 
 import (
-	"io/ioutil"
+	"io"
 	"reflect"
 	"testing"
 	"time"
@@ -37,7 +37,7 @@ import (
 func TestNewTrackParams(t *testing.T) {
 	textFormatter := &formatter.Text{}
 	some := models.APIKeyResponse{}
-	someOutputDevice := output.NewDevice(ioutil.Discard)
+	someOutputDevice := output.NewDevice(io.Discard)
 	emptyMockAAPI := api.NewMock()
 	ecctlInstance := ecctl.App{
 		API:       emptyMockAAPI,

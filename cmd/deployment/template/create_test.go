@@ -18,7 +18,7 @@
 package cmddeploymenttemplate
 
 import (
-	"io/ioutil"
+	_ "embed"
 	"net/url"
 	"testing"
 
@@ -30,12 +30,10 @@ import (
 	"github.com/elastic/ecctl/cmd/util/testutils"
 )
 
-func Test_createCmd(t *testing.T) {
-	createRawResp, err := ioutil.ReadFile("./testdata/create.json")
-	if err != nil {
-		t.Fatal(err)
-	}
+//go:embed "testdata/create.json"
+var createRawResp []byte
 
+func Test_createCmd(t *testing.T) {
 	var succeedResp = new(models.DeploymentTemplateRequestBody)
 	if err := succeedResp.UnmarshalBinary(createRawResp); err != nil {
 		t.Fatal(err)

@@ -20,7 +20,7 @@ package cmdutil
 import (
 	"bytes"
 	"errors"
-	"io/ioutil"
+	"io"
 	"reflect"
 	"testing"
 
@@ -74,7 +74,7 @@ func TestTrack(t *testing.T) {
 			args: args{params: TrackParams{
 				Track: false,
 				Formatter: formatter.NewText(&formatter.TextConfig{
-					Output: ioutil.Discard,
+					Output: io.Discard,
 				}),
 				Response: models.TokenResponse{
 					Token: ec.String("tokenvalue"),

@@ -18,10 +18,10 @@
 package cmddeployment
 
 import (
+	_ "embed"
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 	"testing"
@@ -35,6 +35,9 @@ import (
 
 	"github.com/elastic/ecctl/cmd/util/testutils"
 )
+
+//go:embed "testdata/template-aws-io-optimized-v2.json"
+var awsIoOptimisedTemplate []byte
 
 func Test_createCmd(t *testing.T) {
 	var deploymentID = ec.RandomResourceID()
@@ -247,11 +250,6 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 		})),
 	}
 
-	awsIoOpt, err := ioutil.ReadFile("./testdata/template-aws-io-optimized-v2.json")
-	if err != nil {
-		t.Fatal(err)
-	}
-
 	tests := []struct {
 		name string
 		args testutils.Args
@@ -287,7 +285,7 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 					{
 						Response: http.Response{
 							StatusCode: 200,
-							Body:       mock.NewByteBody(awsIoOpt),
+							Body:       mock.NewByteBody(awsIoOptimisedTemplate),
 						},
 						Assert: &mock.RequestAssertion{
 							Method: "GET",
@@ -338,7 +336,7 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 					{
 						Response: http.Response{
 							StatusCode: 200,
-							Body:       mock.NewByteBody(awsIoOpt),
+							Body:       mock.NewByteBody(awsIoOptimisedTemplate),
 						},
 						Assert: &mock.RequestAssertion{
 							Method: "GET",

@@ -18,8 +18,8 @@
 package cmddeploymenttrafficfilter
 
 import (
+	_ "embed"
 	"encoding/json"
-	"io/ioutil"
 	"net/url"
 	"testing"
 
@@ -30,11 +30,13 @@ import (
 	"github.com/elastic/ecctl/cmd/util/testutils"
 )
 
+//go:embed "testdata/update-payload.json"
+var updatePayloadRawResp []byte
+
+//go:embed "testdata/update.json"
+var updateRawResp []byte
+
 func Test_updateCmd(t *testing.T) {
-	updatePayloadRawResp, err := ioutil.ReadFile("./testdata/update-payload.json")
-	if err != nil {
-		t.Fatal(err)
-	}
 
 	var succeedPayloadResp = new(models.TrafficFilterRulesetRequest)
 	if err := succeedPayloadResp.UnmarshalBinary(updatePayloadRawResp); err != nil {
@@ -42,11 +44,6 @@ func Test_updateCmd(t *testing.T) {
 	}
 
 	updatePayloadJSONOutput, err := json.MarshalIndent(succeedPayloadResp, "", "  ")
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	updateRawResp, err := ioutil.ReadFile("./testdata/update.json")
 	if err != nil {
 		t.Fatal(err)
 	}
