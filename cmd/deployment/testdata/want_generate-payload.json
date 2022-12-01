@@ -53,6 +53,52 @@
                 "value": 1024
               },
               "zone_count": 2
+            },
+            {
+              "elasticsearch": {},
+              "instance_configuration_id": "gcp.coordinating.1",
+              "node_roles": null,
+              "node_type": {
+                "data": false,
+                "ingest": true,
+                "master": false
+              },
+              "size": {
+                "resource": "memory",
+                "value": 0
+              },
+              "zone_count": 2
+            },
+            {
+              "elasticsearch": {},
+              "instance_configuration_id": "gcp.master.1",
+              "node_roles": null,
+              "node_type": {
+                "data": false,
+                "ingest": false,
+                "master": true
+              },
+              "size": {
+                "resource": "memory",
+                "value": 0
+              },
+              "zone_count": 3
+            },
+            {
+              "elasticsearch": {},
+              "instance_configuration_id": "gcp.ml.1",
+              "node_roles": null,
+              "node_type": {
+                "data": false,
+                "ingest": false,
+                "master": false,
+                "ml": true
+              },
+              "size": {
+                "resource": "memory",
+                "value": 0
+              },
+              "zone_count": 1
             }
           ],
           "deployment_template": {

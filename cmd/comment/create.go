@@ -30,7 +30,7 @@ import (
 var createCmd = &cobra.Command{
 	Use:     "create <message> --resource-type <resource-type> --resource-id <resource-id>",
 	Short:   cmdutil.AdminReqDescription("Creates a new resource comment"),
-	PreRunE: cobra.ExactValidArgs(1),
+	PreRunE: cobra.MatchAll(cobra.ExactArgs(1), cobra.OnlyValidArgs),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		resourceType, _ := cmd.Flags().GetString("resource-type")
 		resourceID, _ := cmd.Flags().GetString("resource-id")

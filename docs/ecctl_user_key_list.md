@@ -9,8 +9,9 @@ ecctl user key list --user=<user id>|--all [flags]
 ### Options
 
 ```
-      --all    If specified, lists all API keys for all platform users
-  -h, --help   help for list
+      --all           If specified, lists all API keys for all platform users
+  -h, --help          help for list
+      --user string   user id for the specified action
 ```
 
 ### Options inherited from parent commands
@@ -30,7 +31,6 @@ ecctl user key list --user=<user id>|--all [flags]
       --region string         Elasticsearch Service region
       --timeout duration      Timeout to use on all HTTP calls (default 30s)
       --trace                 Enables tracing saves the trace to trace-20060102150405
-      --user string           Username to use to authenticate (If empty will look for EC_USER environment variable)
       --verbose               Enable verbose mode
       --verbose-credentials   When set, Authorization headers on the request/response trail will be displayed as plain text
       --verbose-file string   When set, the verbose request/response trail will be written to the defined file

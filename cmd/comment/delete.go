@@ -30,7 +30,7 @@ import (
 var deleteCmd = &cobra.Command{
 	Use:     "delete <comment id> --resource-type <resource-type> --resource-id <resource-id>",
 	Short:   cmdutil.AdminReqDescription("Deletes a resource comment"),
-	PreRunE: cobra.ExactValidArgs(1),
+	PreRunE: cobra.MatchAll(cobra.ExactArgs(1), cobra.OnlyValidArgs),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		resourceType, _ := cmd.Flags().GetString("resource-type")
 		resourceID, _ := cmd.Flags().GetString("resource-id")
