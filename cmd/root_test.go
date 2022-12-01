@@ -22,7 +22,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -229,7 +228,7 @@ func TestInitApp(t *testing.T) {
 							"verbose_credentials: true\n" +
 							"verbose_file: request.log\n",
 					)
-					if err := ioutil.WriteFile(cfg, contents, 0660); err != nil {
+					if err := os.WriteFile(cfg, contents, 0660); err != nil {
 						t.Fatal(err)
 					}
 					v.Set("config", "someconfig")

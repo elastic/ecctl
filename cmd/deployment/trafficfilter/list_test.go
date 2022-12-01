@@ -18,8 +18,8 @@
 package cmddeploymenttrafficfilter
 
 import (
+	_ "embed"
 	"encoding/json"
-	"io/ioutil"
 	"net/url"
 	"testing"
 
@@ -30,11 +30,16 @@ import (
 	"github.com/elastic/ecctl/cmd/util/testutils"
 )
 
+//go:embed "testdata/list.json"
+var listRawResp []byte
+
+//go:embed "testdata/list-assoc.json"
+var listAssocRawResp []byte
+
+//go:embed "testdata/list-region.json"
+var listRegionRawResp []byte
+
 func Test_listCmd(t *testing.T) {
-	listRawResp, err := ioutil.ReadFile("./testdata/list.json")
-	if err != nil {
-		t.Fatal(err)
-	}
 
 	var succeedResp = new(models.TrafficFilterRulesets)
 	if err := succeedResp.UnmarshalBinary(listRawResp); err != nil {
@@ -46,22 +51,12 @@ func Test_listCmd(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	listAssocRawResp, err := ioutil.ReadFile("./testdata/list-assoc.json")
-	if err != nil {
-		t.Fatal(err)
-	}
-
 	var succeedAssocResp = new(models.TrafficFilterRulesets)
 	if err := succeedAssocResp.UnmarshalBinary(listAssocRawResp); err != nil {
 		t.Fatal(err)
 	}
 
 	listAssocJSONOutput, err := json.MarshalIndent(succeedAssocResp, "", "  ")
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	listRegionRawResp, err := ioutil.ReadFile("./testdata/list-region.json")
 	if err != nil {
 		t.Fatal(err)
 	}

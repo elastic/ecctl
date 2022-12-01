@@ -18,8 +18,8 @@
 package cmddeploymenttemplate
 
 import (
+	_ "embed"
 	"encoding/json"
-	"io/ioutil"
 	"net/url"
 	"testing"
 
@@ -29,6 +29,9 @@ import (
 
 	"github.com/elastic/ecctl/cmd/util/testutils"
 )
+
+//go:embed "testdata/show.json"
+var showRawResp []byte
 
 func Test_showCmd(t *testing.T) {
 	var reqAssertion = &mock.RequestAssertion{
@@ -40,11 +43,6 @@ func Test_showCmd(t *testing.T) {
 			"region":                       []string{"ece-region"},
 			"show_instance_configurations": []string{"true"},
 		},
-	}
-
-	showRawResp, err := ioutil.ReadFile("./testdata/show.json")
-	if err != nil {
-		t.Fatal(err)
 	}
 
 	var succeedResp = new(models.DeploymentTemplateInfoV2)

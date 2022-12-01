@@ -18,8 +18,8 @@
 package cmdeskeystore
 
 import (
+	_ "embed"
 	"encoding/json"
-	"io/ioutil"
 	"net/url"
 	"testing"
 
@@ -32,17 +32,15 @@ import (
 	"github.com/elastic/ecctl/pkg/util"
 )
 
+//go:embed "testdata/show.json"
+var showRawResp []byte
+
 func Test_showCmd(t *testing.T) {
 	var reqAssertion = &mock.RequestAssertion{
 		Header: api.DefaultReadMockHeaders,
 		Method: "GET",
 		Path:   "/api/v1/deployments/320b7b540dfc967a7a649c18e2fce4ed/elasticsearch/main-elasticsearch/keystore",
 		Host:   api.DefaultMockHost,
-	}
-
-	showRawResp, err := ioutil.ReadFile("./testdata/show.json")
-	if err != nil {
-		t.Fatal(err)
 	}
 
 	var succeedResp = new(models.KeystoreContents)

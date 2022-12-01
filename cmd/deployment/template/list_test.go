@@ -18,8 +18,8 @@
 package cmddeploymenttemplate
 
 import (
+	_ "embed"
 	"encoding/json"
-	"io/ioutil"
 	"net/url"
 	"testing"
 
@@ -29,6 +29,9 @@ import (
 
 	"github.com/elastic/ecctl/cmd/util/testutils"
 )
+
+//go:embed "testdata/list.json"
+var listRawResp []byte
 
 func Test_listCmd(t *testing.T) {
 	var reqAssertion = &mock.RequestAssertion{
@@ -41,11 +44,6 @@ func Test_listCmd(t *testing.T) {
 			"show_hidden":                  []string{"false"},
 			"show_instance_configurations": []string{"true"},
 		},
-	}
-
-	listRawResp, err := ioutil.ReadFile("./testdata/list.json")
-	if err != nil {
-		t.Fatal(err)
 	}
 
 	var succeedResp []*models.DeploymentTemplateInfoV2

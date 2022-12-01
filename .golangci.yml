@@ -17,7 +17,7 @@ linters-settings:
 
   gofmt:
     simplify: true
-  
+
   golint:
     min-confidence: 0
 

@@ -18,8 +18,8 @@
 package cmddeployment
 
 import (
+	_ "embed"
 	"encoding/json"
-	"io/ioutil"
 	"net/url"
 	"testing"
 
@@ -30,33 +30,25 @@ import (
 	"github.com/elastic/ecctl/cmd/util/testutils"
 )
 
+//go:embed "testdata/show.json"
+var showRawResp []byte
+
+//go:embed "testdata/show_apm.json"
+var showApmResp []byte
+
+//go:embed "testdata/want_generate-payload.json"
+var wantGeneratePayload []byte
+
+//go:embed "testdata/show-resource.json"
+var showResourceRawResp []byte
+
 func Test_showCmd(t *testing.T) {
-	showRawResp, err := ioutil.ReadFile("./testdata/show.json")
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	showApmResp, err := ioutil.ReadFile("./testdata/show_apm.json")
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	wantGeneratePayload, err := ioutil.ReadFile("./testdata/want_generate-payload.json")
-	if err != nil {
-		t.Fatal(err)
-	}
-
 	var succeedResp = new(models.DeploymentGetResponse)
 	if err := succeedResp.UnmarshalBinary(showRawResp); err != nil {
 		t.Fatal(err)
 	}
 
 	showJSONOutput, err := json.MarshalIndent(succeedResp, "", "  ")
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	showResourceRawResp, err := ioutil.ReadFile("./testdata/show-resource.json")
 	if err != nil {
 		t.Fatal(err)
 	}

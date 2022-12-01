@@ -18,8 +18,8 @@
 package cmddeploymentextension
 
 import (
+	_ "embed"
 	"encoding/json"
-	"io/ioutil"
 	"net/url"
 	"testing"
 
@@ -30,23 +30,19 @@ import (
 	"github.com/elastic/ecctl/cmd/util/testutils"
 )
 
-func Test_updateCmd(t *testing.T) {
-	updatePayloadRawResp, err := ioutil.ReadFile("./testdata/update-payload.json")
-	if err != nil {
-		t.Fatal(err)
-	}
+//go:embed "testdata/update-payload.json"
+var updatePayloadRawResp []byte
 
+//go:embed "testdata/update.json"
+var updateRawResp []byte
+
+func Test_updateCmd(t *testing.T) {
 	var succeedPayloadResp = new(models.UpdateExtensionRequest)
 	if err := succeedPayloadResp.UnmarshalBinary(updatePayloadRawResp); err != nil {
 		t.Fatal(err)
 	}
 
 	updatePayloadJSONOutput, err := json.MarshalIndent(succeedPayloadResp, "", "  ")
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	updateRawResp, err := ioutil.ReadFile("./testdata/update.json")
 	if err != nil {
 		t.Fatal(err)
 	}
