@@ -47,7 +47,7 @@ var updateCmd = &cobra.Command{
 
 		force, _ := cmd.Flags().GetBool("force")
 		var msg = `setting --prune-orphans to "true" will cause any resources not specified in the update request to be removed from the deployment, do you want to continue? [y/n]: `
-		if pruneOrphans && !force && !sdkcmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
+		if pruneOrphans && !force && !sdkcmdutil.ConfirmAction(msg, os.Stdin, ecctl.Get().Config.OutputDevice) {
 			return nil
 		}
 

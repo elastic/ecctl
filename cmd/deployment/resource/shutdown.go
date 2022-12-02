@@ -42,7 +42,7 @@ var shutdownCmd = &cobra.Command{
 
 		force, _ := cmd.Flags().GetBool("force")
 		var msg = "This action will shut down a deployment's resource kind. Do you want to continue? [y/n]: "
-		if !force && !sdkcmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
+		if !force && !sdkcmdutil.ConfirmAction(msg, os.Stdin, ecctl.Get().Config.OutputDevice) {
 			return nil
 		}
 

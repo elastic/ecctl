@@ -43,7 +43,7 @@ var restoreCmd = &cobra.Command{
 		var esKind = resKind == "elasticsearch"
 		var dataLoss = esKind && !restoreSnapshot
 		var msg = "This action restores an Elasticsearch resource without its snapshot which might incur data loss, do you want to continue? [y/n]: "
-		if dataLoss && !force && !sdkcmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
+		if dataLoss && !force && !sdkcmdutil.ConfirmAction(msg, os.Stdin, ecctl.Get().Config.OutputDevice) {
 			return nil
 		}
 

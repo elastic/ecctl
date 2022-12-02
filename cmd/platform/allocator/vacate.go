@@ -99,7 +99,7 @@ var vacateAllocatorCmd = &cobra.Command{
 		overrideFailsafe, _ := cmd.Flags().GetBool("override-failsafe")
 		force, _ := cmd.Flags().GetBool("force")
 		var msg = "--override-failsafe has been flag specified. Are you sure you want to proceed? [y/N]: "
-		if overrideFailsafe && !force && !sdkcmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
+		if overrideFailsafe && !force && !sdkcmdutil.ConfirmAction(msg, os.Stdin, ecctl.Get().Config.OutputDevice) {
 			return nil
 		}
 
@@ -132,7 +132,7 @@ var vacateAllocatorCmd = &cobra.Command{
 		}
 
 		skipTracking, _ := cmd.Flags().GetBool("skip-tracking")
-		if !force && skipTracking && !sdkcmdutil.ConfirmAction("--skip-tracking flag specified. Are you sure you want to proceed? [y/N]: ", os.Stdin, os.Stderr) {
+		if !force && skipTracking && !sdkcmdutil.ConfirmAction("--skip-tracking flag specified. Are you sure you want to proceed? [y/N]: ", os.Stdin, ecctl.Get().Config.OutputDevice) {
 			return nil
 		}
 

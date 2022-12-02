@@ -35,7 +35,7 @@ var shutdownCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		force, _ := cmd.Flags().GetBool("force")
 		var msg = "This action will delete the specified deployment ID and its associated sub-resources, do you want to continue? [y/n]: "
-		if !force && !sdkcmdutil.ConfirmAction(msg, os.Stderr, os.Stdout) {
+		if !force && !sdkcmdutil.ConfirmAction(msg, os.Stdin, ecctl.Get().Config.OutputDevice) {
 			return nil
 		}
 
