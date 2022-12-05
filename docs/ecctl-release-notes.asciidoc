@@ -3,6 +3,7 @@
 
 This section summarizes the changes in each {n} release.
 
+* <<{p}-release-notes-v1.9.0>>
 * <<{p}-release-notes-v1.8.0>>
 * <<{p}-release-notes-v1.7.0>>
 * <<{p}-release-notes-v1.6.0>>
@@ -17,6 +18,8 @@ This section summarizes the changes in each {n} release.
 * <<{p}-release-notes-v1.0.0-beta2>>
 * <<{p}-release-notes-v1.0.0-beta1>>
 
+include::release_notes/v1.9.0.adoc[]
+include::release_notes/v1.8.0.adoc[]
 include::release_notes/v1.7.0.adoc[]
 include::release_notes/v1.6.0.adoc[]
 include::release_notes/v1.5.0.adoc[]
@@ -29,4 +32,3 @@ include::release_notes/v1.0.0.adoc[]
 include::release_notes/v1.0.0-beta3.adoc[]
 include::release_notes/v1.0.0-beta2.adoc[]
 include::release_notes/v1.0.0-beta1.adoc[]
-include::release_notes/v1.8.0.adoc[]
