@@ -54,7 +54,7 @@ jobs:
         run: echo ::set-output name=BUILT::$(date -u +%a_%d_%b_%H:%M:%S_%Y)
 
       - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v3
+        uses: goreleaser/goreleaser-action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN_EXTRA }}
           VERSION: ${{ steps.get_version.outputs.VERSION }}
