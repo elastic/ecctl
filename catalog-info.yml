@@ -1,0 +1,27 @@
+# This entity represents the ECCTL, a library.
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ecctl
+  description: The CLI for the Elasticsearch Service and Elastic Cloud Enterprise APIs. It wraps typical operations commonly needed by operators within a single command line tool.
+
+  annotations:
+    backstage.io/source-location: url:https://github.com/elastic/ecctl
+    github.com/project-slug: elastic/ecctl
+    github.com/team-slug: elastic/control-plane-stateful-foundations
+    # buildkite.com/project-slug: elastic/pipeline-slug-here
+
+  tags:
+    - ess
+    - library
+    - go
+
+  links:
+    - title: Documentation
+      url: https://www.elastic.co/guide/en/ecctl/current/index.html
+
+spec:
+  type: service
+  owner: group:control-plane-stateful-foundations
+  lifecycle: production
