@@ -1,4 +1,4 @@
 # These owners will be the default owners for everything in
 # the repository.
 *       @elastic/control-plane-stateful-applications
-docs/   @alaudazzi @nrichers @elastic/control-plane-stateful-applications
+docs/   @alaudazzi @elastic/control-plane-stateful-applications
