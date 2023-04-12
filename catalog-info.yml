@@ -23,5 +23,5 @@ metadata:
 
 spec:
   type: service
-  owner: group:control-plane-stateful-foundations
+  owner: group:control-plane-stateful-applications
   lifecycle: production
