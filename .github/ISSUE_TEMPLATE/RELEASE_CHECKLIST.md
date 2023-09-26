@@ -18,7 +18,6 @@ For detailed instructions on all of the steps, read the release [documentation](
 - [ ] Update the cloud-sdk-go dependency.
 - [ ] Update `VERSION` environment variable in the Makefile and generate changelog.
 - [ ] Execute the release.
-- [ ] Create release branch for documentation.
 - [ ] Modify the conf.yaml file in the docs repository to add the release branch.
 - [ ] Run a full doc rebuild.
 - [ ] Alert marketing team to update downloads website with new links.
