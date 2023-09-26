@@ -67,7 +67,7 @@ The release process will open a pull request against the [`homebrew-tap`](https:
 
 ### Create documentation specific to the release (Minor and Major only)
 
-In order to have the documentation live for our new release we need to modify the conf.yaml file in the docs repository to [add the release branch](https://github.com/elastic/docs/blob/master/conf.yaml#L837) and have the build [point to our new branch](https://github.com/elastic/docs/blob/master/conf.yaml#L836).
+In order to have the documentation live for our new release we need to modify the conf.yaml file in the docs repository to add the release branch and have the build point to our new branch. ([Example PR](https://github.com/elastic/docs/pull/2770))
 
 Once the PR for the above changes has been merged, you'll need to run a full doc [rebuild](https://elasticsearch-ci.elastic.co/job/elastic+docs+master+build/build?delay=0sec) to make the new release branch the default docs.
 
