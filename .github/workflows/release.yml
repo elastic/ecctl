@@ -47,11 +47,11 @@ jobs:
           if ${{github.event_name == 'workflow_dispatch'}}; then
             VERSION=$(git describe --abbrev=0 --tags)
           fi
-          echo ::set-output name=VERSION::${VERSION}
+          echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
 
       - name: Get the builtvar
         id: get_built
-        run: echo ::set-output name=BUILT::$(date -u +%a_%d_%b_%H:%M:%S_%Y)
+        run: echo "BUILT=$(date -u +%a_%d_%b_%H:%M:%S_%Y)" >> $GITHUB_OUTPUT
 
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v5
