@@ -55,7 +55,7 @@ notice:
 .PHONY: lint
 lint: deps
 	@ echo "-> Running linters..."
-	@ $(GOBIN)/golint -set_exit_status cmd/... pkg/ecctl/... pkg/util/...
+	@ go vet
 	@ $(GOBIN)/golangci-lint run --deadline=5m
 	@ $(GOBIN)/go-licenser -d .
 	@ echo "-> Done."
