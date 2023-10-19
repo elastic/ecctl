@@ -1,7 +1,6 @@
 ---
 name: Bug Report
 about: Create a report to help us improve.
-labels: Team:Delivery
 
 ---
 <!--- Thank you for taking the time to create a Bug Report! -->
