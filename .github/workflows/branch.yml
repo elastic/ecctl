@@ -55,7 +55,7 @@ jobs:
         with:
           ref: master
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_TOKEN_EXTRA }}
 
       - name: Set up Go
         uses: actions/setup-go@v4
