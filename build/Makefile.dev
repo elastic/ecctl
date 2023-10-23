@@ -43,14 +43,13 @@ _bindata:
 format: deps
 	@ echo "-> Formatting Go files..."
 	@ $(GOBIN)/go-licenser -license ASL2
-	@ go list -m -json all | $(GOBIN)/go-licence-detector -noticeOut=NOTICE -noticeTemplate build/NOTICE.tmpl -includeIndirect
 	@ $(GOBIN)/golangci-lint run --fix --deadline=5m
 	@ echo "-> Done."
 
 ## Generates the notice file
 .PHONY: notice
 notice:
-	@ $(GOBIN)/go-licenser -license ASL2 -notice -notice-year 2019 .
+	@ go list -m -json all | $(GOBIN)/go-licence-detector -noticeOut=NOTICE -noticeTemplate build/NOTICE.tmpl -includeIndirect
 
 ## Checks if there's any format violations on the Go files.
 .PHONY: lint
