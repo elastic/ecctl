@@ -43,6 +43,7 @@ _bindata:
 format: deps
 	@ echo "-> Formatting Go files..."
 	@ $(GOBIN)/go-licenser -license ASL2
+	@ go list -m -json all | $(GOBIN)/go-licence-detector -noticeOut=NOTICE -noticeTemplate build/NOTICE.tmpl -includeIndirect
 	@ $(GOBIN)/golangci-lint run --fix --deadline=5m
 	@ echo "-> Done."
 
@@ -51,7 +52,7 @@ format: deps
 notice:
 	@ $(GOBIN)/go-licenser -license ASL2 -notice -notice-year 2019 .
 
-## Checks if there's any format violations on the Go files.
+## Checks if there's any format violations on the Go files.
 .PHONY: lint
 lint: deps
 	@ echo "-> Running linters..."
@@ -70,7 +71,7 @@ docs:
 	@ ./scripts/generate-docs.sh
 	@ $(MAKE) check-changes
 
-## Removes all temporary files and artifacts.
+## Removes all temporary files and artifacts.
 .PHONY: clean
 clean:
 	@ rm -rf vendor reports pkg dist pprof-* trace-*

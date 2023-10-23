@@ -4,13 +4,14 @@ OS:=$(shell uname -s | tr '[:upper:]' '[:lower:]')
 ARCH:=$(shell $(PWD)/scripts/uname_arch.sh)
 VERSION_DIR:=$(GOBIN)/versions
 
-VERSION_GOLICENSER:=v0.3.0
+VERSION_GOLICENSER:=v0.4.1
+VERSION_GOLICENCEDETECTOR:=v0.6.0
 VERSION_GOLANGCILINT:=v1.54.2
 VERSION_GOBINDATA:=v0.0.0-20190711162640-ee3c2418e368
 VERSION_GORELEASER:=v1.2.5
 VERSION_VERSIONBUMP:=v1.1.0
 
-deps: $(GOBIN)/go-licenser $(GOBIN)/golangci-lint $(GOBIN)/go-bindata
+deps: $(GOBIN)/go-licenser $(GOBIN)/go-licence-detector $(GOBIN)/golangci-lint $(GOBIN)/go-bindata
 
 $(GOBIN):
 	@ mkdir -p $(GOBIN)
@@ -25,6 +26,14 @@ $(VERSION_DIR)/.version-go-licenser-$(VERSION_GOLICENSER): | $(VERSION_DIR)
 $(GOBIN)/go-licenser: $(VERSION_DIR)/.version-go-licenser-$(VERSION_GOLICENSER) | $(GOBIN)
 	@ echo "-> Installing go-licenser..."
 	@ go install github.com/elastic/go-licenser@$(VERSION_GOLICENSER)
+
+$(VERSION_DIR)/.version-go-licence-detector-$(VERSION_GOLICENCEDETECTOR): | $(VERSION_DIR)
+	@ rm -f $(VERSION_DIR)/.version-go-licence-detector-*
+	@ echo $(VERSION_GOLICENCEDETECTOR) > $(VERSION_DIR)/.version-go-licence-detector-$(VERSION_GOLICENCEDETECTOR)
+
+$(GOBIN)/go-licence-detector: $(VERSION_DIR)/.version-go-licence-detector-$(VERSION_GOLICENCEDETECTOR) | $(GOBIN)
+	@ echo "-> Installing go-licence-detector..."
+	@ go install go.elastic.co/go-licence-detector@$(VERSION_GOLICENCEDETECTOR)
 
 $(VERSION_DIR)/.version-golangci-lint-$(VERSION_GOLANGCILINT): | $(VERSION_DIR)
 	@ rm -f $(VERSION_DIR)/.version-golangci-lint-*
