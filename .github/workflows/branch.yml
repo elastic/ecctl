@@ -6,6 +6,9 @@ on:
     tags:
       - '*.*.*'
 
+permissions:
+  contents: write
+
 jobs:
   branch-out:
     name: Create a github branch
@@ -31,22 +34,15 @@ jobs:
           go-version: "1.20"
         id: go
 
-      - name: Bump main version
+      - name: Bump patch version
         run: make patch
 
-      - name: Create a github branch
-        uses: peterjgrainger/action-create-branch@v2.4.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.HOMEBREW_TAP_GH_TOKEN }}
-        with:
-          branch: ${{ steps.get_branch.outputs.BRANCH }}
-
-      - name: Commit changes to the minor branch
+      - name: Create new branch and commit changes to the minor branch
         uses: EndBug/add-and-commit@v9
         with:
           default_author: user_info
           message: 'Update patch version'
-          branch: ${{ steps.get_branch.outputs.BRANCH }}
+          new_branch: ${{ steps.get_branch.outputs.BRANCH }}
           author_name: elasticcloudclients
           author_email: elasticcloudclients@elastic.co
 
@@ -59,7 +55,7 @@ jobs:
         with:
           ref: master
           fetch-depth: 0
-          token: ${{ secrets.GH_TOKEN_EXTRA }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Go
         uses: actions/setup-go@v4
