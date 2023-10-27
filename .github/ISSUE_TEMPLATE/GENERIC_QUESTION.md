@@ -1,7 +1,6 @@
 ---
 name: Generic Question
 about: Not a Bug Report or a Feature Request? Ask a question.
-labels: Team:Delivery
 
 ---
 <!--- Thank you for taking the time to ask us a question! -->

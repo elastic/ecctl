@@ -49,13 +49,12 @@ format: deps
 ## Generates the notice file
 .PHONY: notice
 notice:
-	@ $(GOBIN)/go-licenser -license ASL2 -notice -notice-year 2019 .
+	@ go list -m -json all | $(GOBIN)/go-licence-detector -noticeOut=NOTICE -noticeTemplate build/NOTICE.tmpl -includeIndirect
 
-## Checks if there's any format violations on the Go files.
+## Checks if there's any format violations on the Go files.
 .PHONY: lint
 lint: deps
 	@ echo "-> Running linters..."
-	@ go vet
 	@ $(GOBIN)/golangci-lint run --deadline=5m
 	@ $(GOBIN)/go-licenser -d .
 	@ echo "-> Done."
@@ -71,7 +70,7 @@ docs:
 	@ ./scripts/generate-docs.sh
 	@ $(MAKE) check-changes
 
-## Removes all temporary files and artifacts.
+## Removes all temporary files and artifacts.
 .PHONY: clean
 clean:
 	@ rm -rf vendor reports pkg dist pprof-* trace-*

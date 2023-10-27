@@ -1,7 +1,6 @@
 ---
 name: Release Checklist
 about: Items to be completed in every release.
-labels: Team:Delivery
 
 ---
 
@@ -14,9 +13,8 @@ labels: Team:Delivery
 The following actions must be performed in the order specified here.
 For detailed instructions on all of the steps, read the release [documentation](https://github.com/elastic/ecctl/blob/master/developer_docs/RELEASE.md).
 
-- [ ] Verify a cloud-sdk-go release with the same version has been made.
 - [ ] Update the cloud-sdk-go dependency.
-- [ ] Update `VERSION` environment variable in the Makefile and generate changelog.
+- [ ] Check that the `VERSION` environment variable in the Makefile is updated and generate changelog.
 - [ ] Execute the release.
 - [ ] Modify the conf.yaml file in the docs repository to add the release branch.
 - [ ] Run a full doc rebuild.
