@@ -23,7 +23,7 @@ builds:
     - arm64
   ignore:
     - goos: darwin
-      goarch: 386
+      goarch: "386"
   ldflags: -s -w -X main.version={{.Env.VERSION }} -X main.commit={{.Commit}} -X main.owner={{.Env.OWNER}} -X main.repo={{.Env.REPO}} -X main.built={{.Env.BUILT}}
   binary: ecctl
 archives:
@@ -36,15 +36,16 @@ archives:
 snapshot:
   name_template: "{{ .Version }}_SNAPSHOT_{{ .ShortCommit }}"
 nfpms:
-  - file_name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+  - file_name_template: >-
+      {{ .ProjectName }}_{{ .Version }}_{{ .Os }}_
+      {{- if eq .Arch "amd64" }}64-bit
+      {{- else if eq .Arch "386" }}32-bit
+      {{- else }}{{ .Arch }}{{ end }}
     license: Apache 2.0
     maintainer: Elastic Cloud
     vendor: Elastic
     description: ecctl is the CLI for the Elasticsearch Service and Elastic Cloud Enterprise APIs.
     homepage: https://www.elastic.co/guide/en/ecctl/current/index.html
-    replacements:
-      amd64: 64-bit
-      "386": 32-bit
     formats:
       - deb
       - rpm

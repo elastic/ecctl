@@ -47,7 +47,7 @@ ifneq ($(SKIP_TAG),true)
 endif
 	@ echo "-> Releasing $(BINARY) $(VERSION)..."
 	@ okta-awscli
-	@ $(GOBIN)/goreleaser release --skip-validate --rm-dist --release-notes=notes/$(VERSION).md
+	@ $(GOBIN)/goreleaser release --skip=validate --clean --release-notes=notes/$(VERSION).md
 
 ## Generates a changelog file in notes/$(VERSION) for the next release.
 changelog:

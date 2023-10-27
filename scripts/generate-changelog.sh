@@ -6,7 +6,7 @@ if [[ $(git status) == *"Your branch is behind"* ]]; then
 fi
 
 git fetch
-PREV_TAG=$(git tag -l 'v[0-9-]*.[0-9-]*.[0-9-]'| tail -1)
+PREV_TAG=$(git tag -l 'v[0-9-]*.[0-9-]*.[0-9-]' | sort --version-sort | tail -1)
 CHANGELOGFILE=notes/${VERSION}.md
 ADOC_CHANGELOG=docs/release_notes/${VERSION}.adoc
 ADOC_CHANGELOG_HISTORY=docs/ecctl-release-notes.asciidoc
