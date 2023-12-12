@@ -26,6 +26,8 @@ import (
 	"net/url"
 	"testing"
 
+	"github.com/stretchr/testify/require"
+
 	"github.com/elastic/cloud-sdk-go/pkg/api"
 	"github.com/elastic/cloud-sdk-go/pkg/api/mock"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
@@ -458,6 +460,101 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 			testutils.RunCmdAssertion(t, tt.args, tt.want)
 			tt.args.Cmd.ResetFlags()
 			defer initFlags()
+		})
+	}
+}
+
+func Test_newCreatePayload(t *testing.T) {
+	type args struct {
+		version string
+		tpl     *models.DeploymentCreateRequest
+	}
+	tests := []struct {
+		name     string
+		args     args
+		expected *models.DeploymentCreateRequest
+		err      error
+	}{
+		{
+			name: "fails if it cannot parse version",
+			args: args{
+				version: "bad version",
+			},
+			err: fmt.Errorf("failed to parse version: No Major.Minor.Patch elements found"),
+		},
+		{
+			name: "returns payload from template as-is including Apm if version < 8.0.0",
+			args: args{
+				version: "7.17.16",
+				tpl: &models.DeploymentCreateRequest{
+					Resources: &models.DeploymentCreateResources{
+						Apm: []*models.ApmPayload{
+							{
+								DisplayName: "test-apm",
+							},
+						},
+						Elasticsearch: []*models.ElasticsearchPayload{
+							{
+								DisplayName: "test-elasticsearch",
+							},
+						},
+					},
+				},
+			},
+			expected: &models.DeploymentCreateRequest{
+				Resources: &models.DeploymentCreateResources{
+					Apm: []*models.ApmPayload{
+						{
+							DisplayName: "test-apm",
+						},
+					},
+					Elasticsearch: []*models.ElasticsearchPayload{
+						{
+							DisplayName: "test-elasticsearch",
+						},
+					},
+				},
+			},
+		},
+		{
+			name: "returns payload from template but without Apm if version >= 8.0.0",
+			args: args{
+				version: "8.0.0",
+				tpl: &models.DeploymentCreateRequest{
+					Resources: &models.DeploymentCreateResources{
+						Apm: []*models.ApmPayload{
+							{
+								DisplayName: "test-apm",
+							},
+						},
+						Elasticsearch: []*models.ElasticsearchPayload{
+							{
+								DisplayName: "test-elasticsearch",
+							},
+						},
+					},
+				},
+			},
+			expected: &models.DeploymentCreateRequest{
+				Resources: &models.DeploymentCreateResources{
+					Elasticsearch: []*models.ElasticsearchPayload{
+						{
+							DisplayName: "test-elasticsearch",
+						},
+					},
+				},
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			res, err := removeApmForVersions8(tt.args.version, tt.args.tpl)
+			if tt.err != nil {
+				require.Equal(t, tt.err, err)
+				require.Nil(t, res)
+			} else {
+				require.Equal(t, *tt.expected, *res)
+			}
 		})
 	}
 }

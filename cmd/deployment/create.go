@@ -22,6 +22,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/blang/semver/v4"
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi"
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/deptemplateapi"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
@@ -166,5 +167,16 @@ func newCreatePayload(cmd *cobra.Command, version, region string) (*models.Deplo
 		es[0].Plan.DeploymentTemplate.ID = &dt
 	}
 
-	return tpl.DeploymentTemplate, nil
+	return removeApmForVersions8(version, tpl.DeploymentTemplate)
+}
+
+func removeApmForVersions8(version string, tpl *models.DeploymentCreateRequest) (*models.DeploymentCreateRequest, error) {
+	vers, err := semver.Parse(version)
+	if err != nil {
+		return nil, fmt.Errorf("failed to parse version: %v", err)
+	}
+	if vers.Major >= 8 {
+		tpl.Resources.Apm = nil
+	}
+	return tpl, nil
 }
