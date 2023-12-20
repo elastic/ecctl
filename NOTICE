@@ -71,10 +71,10 @@ THE SOFTWARE.
 --------------------------------------------------------------------------------
 
 Dependency : github.com/elastic/cloud-sdk-go
-Version: v1.14.0
+Version: v1.15.0
 Licence type (autodetected): Apache-2.0
 
-Contents of probable licence file $GOMODCACHE/github.com/elastic/cloud-sdk-go@v1.14.0/LICENSE:
+Contents of probable licence file $GOMODCACHE/github.com/elastic/cloud-sdk-go@v1.15.0/LICENSE:
 
 
                                  Apache License

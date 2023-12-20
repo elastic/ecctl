@@ -38,6 +38,7 @@ func TestTrack(t *testing.T) {
 	var secondOutputBuf = new(bytes.Buffer)
 	var thirdOutputBuf = new(bytes.Buffer)
 	var wantOutTokenValue = `{
+  "session_expiration_time": null,
   "token": "tokenvalue"
 }
 `
