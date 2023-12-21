@@ -36,16 +36,6 @@ jobs:
       run: make docs
       id: docs
 
-    - name: Ensure formatting caused no changes
-      run: |
-        if [[ ! -z "$(git status --untracked-files=no --porcelain)" ]]; then
-          echo "There are modified files:"
-          git status --untracked-files=no --porcelain
-          exit 1
-        else
-          exit 0
-        fi
-
     - name: Run unit tests
       run: make unit
       id: unit

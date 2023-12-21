@@ -71,10 +71,10 @@ THE SOFTWARE.
 --------------------------------------------------------------------------------
 
 Dependency : github.com/elastic/cloud-sdk-go
-Version: v1.15.0
+Version: v1.16.0
 Licence type (autodetected): Apache-2.0
 
-Contents of probable licence file $GOMODCACHE/github.com/elastic/cloud-sdk-go@v1.15.0/LICENSE:
+Contents of probable licence file $GOMODCACHE/github.com/elastic/cloud-sdk-go@v1.16.0/LICENSE:
 
 
                                  Apache License
@@ -740,10 +740,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 --------------------------------------------------------------------------------
 
 Dependency : github.com/spf13/cobra
-Version: v1.7.0
+Version: v1.8.0
 Licence type (autodetected): Apache-2.0
 
-Contents of probable licence file $GOMODCACHE/github.com/spf13/cobra@v1.7.0/LICENSE.txt:
+Contents of probable licence file $GOMODCACHE/github.com/spf13/cobra@v1.8.0/LICENSE.txt:
 
                                 Apache License
                            Version 2.0, January 2004
@@ -1066,10 +1066,10 @@ Indirect dependencies
 ================================================================================
 
 Dependency : github.com/cpuguy83/go-md2man/v2
-Version: v2.0.2
+Version: v2.0.3
 Licence type (autodetected): MIT
 
-Contents of probable licence file $GOMODCACHE/github.com/cpuguy83/go-md2man/v2@v2.0.2/LICENSE.md:
+Contents of probable licence file $GOMODCACHE/github.com/cpuguy83/go-md2man/v2@v2.0.3/LICENSE.md:
 
 The MIT License (MIT)
 
@@ -5802,10 +5802,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 --------------------------------------------------------------------------------
 
 Dependency : golang.org/x/text
-Version: v0.13.0
+Version: v0.14.0
 Licence type (autodetected): BSD-3-Clause
 
-Contents of probable licence file $GOMODCACHE/golang.org/x/text@v0.13.0/LICENSE:
+Contents of probable licence file $GOMODCACHE/golang.org/x/text@v0.14.0/LICENSE:
 
 Copyright (c) 2009 The Go Authors. All rights reserved.
 
