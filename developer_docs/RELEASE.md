@@ -21,7 +21,7 @@ Releasing a new version of the binary implies that there have been changes in th
 
 ### Verify a release in `cloud-sdk-go` has been made
 
-Unless this is a patch release, make sure a `cloud-sdk-go` release with the same version has been made. Once this is done, the `cloud-sdk-go` dependency should be updated to that version. To update the cloud-sdk-go dependency, please use the following command in the root of the project: `make update-cloud-sdk-go`.
+Unless this is a patch release, make sure a `cloud-sdk-go` release with the same version has been made. Once this is done, the `cloud-sdk-go` dependency should be updated to that version. To update the cloud-sdk-go dependency, please update the version in `go.mod`.
 
 ### Make sure the version has been updated
 
