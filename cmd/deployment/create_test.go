@@ -297,6 +297,7 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 							Query: url.Values{
 								"region":                       {"ece-region"},
 								"show_instance_configurations": {"true"},
+								"show_max_zones":               {"false"},
 								"stack_version":                {"7.8.0"},
 							},
 						},
@@ -348,6 +349,7 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 							Query: url.Values{
 								"region":                       {"ece-region"},
 								"show_instance_configurations": {"true"},
+								"show_max_zones":               {"false"},
 								"stack_version":                {"7.11.2"},
 							},
 						},
@@ -479,6 +481,7 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 							Query: url.Values{
 								"region":                       {"ece-region"},
 								"show_instance_configurations": {"true"},
+								"show_max_zones":               {"false"},
 								"stack_version":                {"8.11.3"},
 							},
 						},

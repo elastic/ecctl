@@ -25,6 +25,8 @@ github.com/docker/go-units v0.3.3/go.mod h1:fgPhTUdO+D/Jk86RDLlptpiXQzgHJF7gydDD
 github.com/docker/go-units v0.4.0/go.mod h1:fgPhTUdO+D/Jk86RDLlptpiXQzgHJF7gydDDbaIK4Dk=
 github.com/elastic/cloud-sdk-go v1.16.0 h1:kpULwHy6AiB36n+IA0sq8v+yH7VV0r4YuezbB8AD2bQ=
 github.com/elastic/cloud-sdk-go v1.16.0/go.mod h1:1FJKODMG9oCiBsZZmFC/a6GvAj+8BoFL8ULDI3bI00Q=
+github.com/elastic/cloud-sdk-go v1.17.0 h1:DI75RYG/X37vxFNVRFGlUZtRS+WilvKXpYgFlpLLNzw=
+github.com/elastic/cloud-sdk-go v1.17.0/go.mod h1:8ijASzuND0kK8km08a/FIfedmPVjf0whGIJDVGHpgQ4=
 github.com/frankban/quicktest v1.14.6 h1:7Xjx+VpznH+oBnejlPUj8oUpdxnVs4f8XU8WnHkI4W8=
 github.com/fsnotify/fsnotify v1.7.0 h1:8JEhPFa5W2WU7YfeZzPNqzMP6Lwt7L2715Ggo0nosvA=
 github.com/fsnotify/fsnotify v1.7.0/go.mod h1:40Bi/Hjc2AVfZrqy+aj+yEI+/bRxZnMJyTJwOpGvigM=

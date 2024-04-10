@@ -43,6 +43,7 @@ func Test_listCmd(t *testing.T) {
 			"region":                       []string{"ece-region"},
 			"show_hidden":                  []string{"false"},
 			"show_instance_configurations": []string{"true"},
+			"show_max_zones":               {"false"},
 		},
 	}
 

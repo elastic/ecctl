@@ -47,7 +47,6 @@ ecctl deployment [flags]
 * xref:ecctl_deployment_elasticsearch[ecctl deployment elasticsearch]	 - Manages Elasticsearch resources
 * xref:ecctl_deployment_extension[ecctl deployment extension]	 - Manages deployment extensions, such as custom plugins or bundles
 * xref:ecctl_deployment_list[ecctl deployment list]	 - Lists the platform's deployments
-* xref:ecctl_deployment_note[ecctl deployment note]	 - Manages a deployment's notes {ece-icon} (Available for ECE only)
 * xref:ecctl_deployment_plan[ecctl deployment plan]	 - Manages deployment plans
 * xref:ecctl_deployment_resource[ecctl deployment resource]	 - Manages deployment resources
 * xref:ecctl_deployment_restore[ecctl deployment restore]	 - Restores a previously shut down deployment and all of its associated sub-resources

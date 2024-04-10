@@ -42,6 +42,7 @@ func Test_showCmd(t *testing.T) {
 		Query: url.Values{
 			"region":                       []string{"ece-region"},
 			"show_instance_configurations": []string{"true"},
+			"show_max_zones":               []string{"false"},
 		},
 	}
 
