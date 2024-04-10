@@ -22,7 +22,6 @@ import (
 
 	cmdelasticsearch "github.com/elastic/ecctl/cmd/deployment/elasticsearch"
 	cmddeploymentextension "github.com/elastic/ecctl/cmd/deployment/extension"
-	cmddeploymentnote "github.com/elastic/ecctl/cmd/deployment/note"
 	cmddeploymentplan "github.com/elastic/ecctl/cmd/deployment/plan"
 	cmddeploymentresource "github.com/elastic/ecctl/cmd/deployment/resource"
 	cmddeploymenttemplate "github.com/elastic/ecctl/cmd/deployment/template"
@@ -42,7 +41,6 @@ var Command = &cobra.Command{
 func init() {
 	Command.AddCommand(
 		cmddeploymentextension.Command,
-		cmddeploymentnote.Command,
 		cmddeploymentplan.Command,
 		cmddeploymentresource.Command,
 		cmddeploymenttemplate.Command,
