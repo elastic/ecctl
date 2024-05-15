@@ -192,6 +192,7 @@ func Test_showCmd(t *testing.T) {
 								Path:   "/api/v1/deployments/29337f77410e23ab30e15c280060facf",
 								Host:   api.DefaultMockHost,
 								Query: url.Values{
+									"clear_transient":      {"true"},
 									"convert_legacy_plans": {"false"},
 									"show_metadata":        {"false"},
 									"show_plan_defaults":   {"false"},
