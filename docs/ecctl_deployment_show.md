@@ -24,6 +24,7 @@ ecctl deployment show <deployment-id> [flags]
 
 ```
       --generate-update-payload   Outputs JSON which can be used as an argument for the --file flag with the update command.
+      --clear-transient           Removes the `transient` field in order to make updating with --file flag safer.
   -h, --help                      help for show
       --kind string               Optional deployment resource kind (apm, appsearch, kibana, elasticsearch)
   -m, --metadata                  Shows the deployment metadata
