@@ -23,17 +23,17 @@ ecctl deployment show <deployment-id> [flags]
 ### Options
 
 ```
-      --clear-transient transient   Removes the transient field in order to make read - edit - write loop safer. The default value of clear-transient depends on the value of `generate-update-payload`. If `generate-update-payload` is true `clear-transient` defaults to true. Otherwise defaults to false.
-      --generate-update-payload     Outputs JSON which can be used as an argument for the --file flag with the update command.
-  -h, --help                        help for show
-      --kind string                 Optional deployment resource kind (apm, appsearch, kibana, elasticsearch)
-  -m, --metadata                    Shows the deployment metadata
-      --plan-defaults               Shows the deployment plan defaults
-      --plan-history                Shows the deployment plan history
-      --plan-logs                   Shows the deployment plan logs
-      --plans                       Shows the deployment plans
-      --ref-id string               Optional deployment kind RefId, if not set, the RefId will be auto-discovered
-  -s, --settings                    Shows the deployment settings
+      --clear-transient           Removes the transient field in order to make read - edit - write loop safer. The default value of clear-transient depends on the value of generate-update-payload. If generate-update-payload is true then clear-transient defaults to true. Otherwise defaults to false.
+      --generate-update-payload   Outputs JSON which can be used as an argument for the --file flag with the update command.
+  -h, --help                      help for show
+      --kind string               Optional deployment resource kind (apm, appsearch, kibana, elasticsearch)
+  -m, --metadata                  Shows the deployment metadata
+      --plan-defaults             Shows the deployment plan defaults
+      --plan-history              Shows the deployment plan history
+      --plan-logs                 Shows the deployment plan logs
+      --plans                     Shows the deployment plans
+      --ref-id string             Optional deployment kind RefId, if not set, the RefId will be auto-discovered
+  -s, --settings                  Shows the deployment settings
 ```
 
 ### Options inherited from parent commands

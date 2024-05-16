@@ -123,5 +123,5 @@ func initShowFlags() {
 	showCmd.Flags().BoolP("metadata", "m", false, "Shows the deployment metadata")
 	showCmd.Flags().BoolP("settings", "s", false, "Shows the deployment settings")
 	showCmd.Flags().Bool("generate-update-payload", false, "Outputs JSON which can be used as an argument for the --file flag with the update command.")
-	showCmd.Flags().Bool("clear-transient", false, "Removes the `transient` field in order to make read - edit - write loop safer. The default value of clear-transient depends on the value of `generate-update-payload`. If `generate-update-payload` is true `clear-transient` defaults to true. Otherwise defaults to false.")
+	showCmd.Flags().Bool("clear-transient", false, "Removes the transient field in order to make read - edit - write loop safer. The default value of clear-transient depends on the value of generate-update-payload. If generate-update-payload is true then clear-transient defaults to true. Otherwise defaults to false.")
 }
