@@ -58,9 +58,19 @@ var showCmd = &cobra.Command{
 		refID, _ := cmd.Flags().GetString("ref-id")
 
 		generatePayload, _ := cmd.Flags().GetBool("generate-update-payload")
+
+		clearTransient := false
+
 		if generatePayload {
-			showPlans, settings = true, true
+			showPlans, settings, clearTransient = true, true, true
 			resourceKind, refID = "", ""
+		}
+
+		// The idea here is that the default of clear-transient depends on the value of `generate-update-payload`. If
+		// `generate-update-payload` is true then we want `clear-transient` to default to true. If the flag value
+		// has been passed in we want to use that value instead.
+		if cmd.Flags().Changed("clear-transient") {
+			clearTransient, _ = cmd.Flags().GetBool("clear-transient")
 		}
 
 		getParams := deploymentapi.GetParams{
@@ -74,6 +84,7 @@ var showCmd = &cobra.Command{
 				ShowPlanHistory:  planHistory,
 				ShowMetadata:     metadata,
 				ShowSettings:     settings,
+				ClearTransient:   clearTransient,
 			},
 		}
 
@@ -112,4 +123,5 @@ func initShowFlags() {
 	showCmd.Flags().BoolP("metadata", "m", false, "Shows the deployment metadata")
 	showCmd.Flags().BoolP("settings", "s", false, "Shows the deployment settings")
 	showCmd.Flags().Bool("generate-update-payload", false, "Outputs JSON which can be used as an argument for the --file flag with the update command.")
+	showCmd.Flags().Bool("clear-transient", false, "Removes the transient field in order to make read - edit - write loop safer. The default value of clear-transient depends on the value of generate-update-payload. If generate-update-payload is true then clear-transient defaults to true. Otherwise defaults to false.")
 }

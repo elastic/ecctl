@@ -192,6 +192,82 @@ func Test_showCmd(t *testing.T) {
 								Path:   "/api/v1/deployments/29337f77410e23ab30e15c280060facf",
 								Host:   api.DefaultMockHost,
 								Query: url.Values{
+									"clear_transient":      {"true"},
+									"convert_legacy_plans": {"false"},
+									"show_metadata":        {"false"},
+									"show_plan_defaults":   {"false"},
+									"show_plan_history":    {"false"},
+									"show_plan_logs":       {"false"},
+									"show_plans":           {"true"},
+									"show_settings":        {"true"},
+									"show_system_alerts":   {"5"},
+								},
+							},
+							mock.NewByteBody(showApmResp),
+						),
+					},
+				},
+			},
+			want: testutils.Assertion{
+				Stdout: string(wantGeneratePayload),
+			},
+		},
+		{
+			name: "succeeds with `--clear-transient=false`",
+			args: testutils.Args{
+				Cmd: showCmd,
+				Args: []string{
+					"show", "29337f77410e23ab30e15c280060facf",
+					"--clear-transient=false",
+				},
+				Cfg: testutils.MockCfg{
+					OutputFormat: "json",
+					Responses: []mock.Response{
+						mock.New200ResponseAssertion(
+							&mock.RequestAssertion{
+								Header: api.DefaultReadMockHeaders,
+								Method: "GET",
+								Path:   "/api/v1/deployments/29337f77410e23ab30e15c280060facf",
+								Host:   api.DefaultMockHost,
+								Query: url.Values{
+									"convert_legacy_plans": {"false"},
+									"show_metadata":        {"false"},
+									"show_plan_defaults":   {"false"},
+									"show_plan_history":    {"false"},
+									"show_plan_logs":       {"false"},
+									"show_plans":           {"false"},
+									"show_settings":        {"false"},
+									"show_system_alerts":   {"5"},
+								},
+							},
+							mock.NewByteBody(showRawResp),
+						),
+					},
+				},
+			},
+			want: testutils.Assertion{
+				Stdout: string(showJSONOutput) + "\n",
+			},
+		},
+		{
+			name: "succeeds with `--generate-update-payload` and `--clear-transient=false`",
+			args: testutils.Args{
+				Cmd: showCmd,
+				Args: []string{
+					"show", "29337f77410e23ab30e15c280060facf",
+					"--generate-update-payload",
+					"--clear-transient=false",
+				},
+				Cfg: testutils.MockCfg{
+					OutputFormat: "json",
+					Responses: []mock.Response{
+						mock.New200ResponseAssertion(
+							&mock.RequestAssertion{
+								Header: api.DefaultReadMockHeaders,
+								Method: "GET",
+								Path:   "/api/v1/deployments/29337f77410e23ab30e15c280060facf",
+								Host:   api.DefaultMockHost,
+								Query: url.Values{
 									"convert_legacy_plans": {"false"},
 									"show_metadata":        {"false"},
 									"show_plan_defaults":   {"false"},
@@ -389,7 +465,7 @@ func Test_showCmd(t *testing.T) {
 				Args: []string{
 					"show", "29337f77410e23ab30e15c280060facf", "--plans",
 					"--plan-logs", "--plan-defaults", "--plan-history",
-					"--metadata", "--settings",
+					"--metadata", "--settings", "--clear-transient",
 				},
 				Cfg: testutils.MockCfg{
 					OutputFormat: "json",
@@ -401,6 +477,7 @@ func Test_showCmd(t *testing.T) {
 								Path:   "/api/v1/deployments/29337f77410e23ab30e15c280060facf",
 								Host:   api.DefaultMockHost,
 								Query: url.Values{
+									"clear_transient":      {"true"},
 									"convert_legacy_plans": {"false"},
 									"show_metadata":        {"true"},
 									"show_plan_defaults":   {"true"},

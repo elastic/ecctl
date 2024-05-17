@@ -23,6 +23,7 @@ ecctl deployment show <deployment-id> [flags]
 ### Options
 
 ```
+      --clear-transient           Removes the transient field in order to make read - edit - write loop safer. The default value of clear-transient depends on the value of generate-update-payload. If generate-update-payload is true then clear-transient defaults to true. Otherwise defaults to false.
       --generate-update-payload   Outputs JSON which can be used as an argument for the --file flag with the update command.
   -h, --help                      help for show
       --kind string               Optional deployment resource kind (apm, appsearch, kibana, elasticsearch)
