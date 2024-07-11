@@ -173,7 +173,7 @@ Select a region you would like to have as default:
 
 Please enter your choice: 1
 
-Create a new Elasticsearch Service API key (https://cloud.elastic.co/deployment-features/keys) and/or
+Create a new Elasticsearch Service API key (https://cloud.elastic.co/account/keys) and/or
 Paste your API Key and press enter: xxxxx
 
 What default output format would you like?
