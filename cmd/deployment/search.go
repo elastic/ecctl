@@ -18,9 +18,12 @@
 package cmddeployment
 
 import (
+	"fmt"
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi"
+	"github.com/elastic/cloud-sdk-go/pkg/models"
 	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
 	"github.com/spf13/cobra"
+	"strconv"
 
 	"github.com/elastic/ecctl/pkg/ecctl"
 )
@@ -51,16 +54,47 @@ var searchCmd = &cobra.Command{
 			return err
 		}
 
-		res, err := deploymentapi.Search(deploymentapi.SearchParams{
-			API:     ecctl.Get().API,
-			Request: &sr,
-		})
-
-		if err != nil {
-			return err
+		returnAllMatches, _ := strconv.ParseBool(cmd.Flag("all-matches").Value.String())
+		if returnAllMatches && sr.Sort == nil {
+			return fmt.Errorf("The query must include a sort-field when using --all-matches. Example: \"sort\": [\"id\"]")
 		}
 
-		return ecctl.Get().Formatter.Format("deployment/search", res)
+		var result *models.DeploymentsSearchResponse
+		var cursor string
+		for {
+			sr.Cursor = cursor
+			if returnAllMatches {
+				// Custom batch-size to override any size already set in the input query
+				sr.Size = 500
+			}
+
+			res, err := deploymentapi.Search(deploymentapi.SearchParams{
+				API:     ecctl.Get().API,
+				Request: &sr,
+			})
+
+			if err != nil {
+				return err
+			}
+
+			cursor = res.Cursor
+
+			if result == nil {
+				result = res
+				result.Cursor = "" // Hide cursor in output
+			} else {
+				result.Deployments = append(result.Deployments, res.Deployments...)
+				newReturnCount := *result.ReturnCount + *res.ReturnCount
+				result.ReturnCount = &newReturnCount
+				result.MatchCount = newReturnCount
+			}
+
+			if *res.ReturnCount == 0 || !returnAllMatches {
+				break
+			}
+		}
+
+		return ecctl.Get().Formatter.Format("deployment/search", result)
 	},
 }
 
@@ -68,4 +102,9 @@ func init() {
 	Command.AddCommand(searchCmd)
 	searchCmd.Flags().StringP("file", "f", "", "JSON file that contains JSON-style domain-specific language query")
 	searchCmd.MarkFlagRequired("file")
+	searchCmd.Flags().BoolP(
+		"all-matches",
+		"a",
+		false,
+		"Uses a cursor to return all matches of the query (ignoring the size in the query). This can be used to query more than 10k results.")
 }
