@@ -28,6 +28,7 @@ $ ecctl deployment search -f query_string_query.json
 ### Options
 
 ```
+  -a, --all-matches   Uses a cursor to return all matches of the query (ignoring the size in the query). This can be used to query more than 10k results.
   -f, --file string   JSON file that contains JSON-style domain-specific language query
   -h, --help          help for search
 ```
