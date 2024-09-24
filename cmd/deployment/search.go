@@ -22,10 +22,8 @@ import (
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	"github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
-	"github.com/spf13/cobra"
-	"strconv"
-
 	"github.com/elastic/ecctl/pkg/ecctl"
+	"github.com/spf13/cobra"
 )
 
 const searchQueryLong = `Read more about Query DSL in https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html`
@@ -54,18 +52,20 @@ var searchCmd = &cobra.Command{
 			return err
 		}
 
-		returnAllMatches, _ := strconv.ParseBool(cmd.Flag("all-matches").Value.String())
+		returnAllMatches, _ := cmd.Flags().GetBool("all-matches")
 		if returnAllMatches && sr.Sort == nil {
 			return fmt.Errorf("The query must include a sort-field when using --all-matches. Example: \"sort\": [\"id\"]")
 		}
 
+		batchSize, _ := cmd.Flags().GetInt32("size")
+
 		var result *models.DeploymentsSearchResponse
 		var cursor string
-		for {
+		for i := 0; i < 100; i++ {
 			sr.Cursor = cursor
 			if returnAllMatches {
 				// Custom batch-size to override any size already set in the input query
-				sr.Size = 500
+				sr.Size = batchSize
 			}
 
 			res, err := deploymentapi.Search(deploymentapi.SearchParams{
@@ -102,9 +102,7 @@ func init() {
 	Command.AddCommand(searchCmd)
 	searchCmd.Flags().StringP("file", "f", "", "JSON file that contains JSON-style domain-specific language query")
 	searchCmd.MarkFlagRequired("file")
-	searchCmd.Flags().BoolP(
-		"all-matches",
-		"a",
-		false,
+	searchCmd.Flags().BoolP("all-matches", "a", false,
 		"Uses a cursor to return all matches of the query (ignoring the size in the query). This can be used to query more than 10k results.")
+	searchCmd.Flags().Int32("size", 500, "Defines the size per request when using the --all-matches option.")
 }

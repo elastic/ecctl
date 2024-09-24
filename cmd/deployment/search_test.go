@@ -41,6 +41,8 @@ func Test_searchCmd(t *testing.T) {
 					"-f",
 					"testdata/search_query.json",
 					"--all-matches",
+					"--size",
+					"250",
 				},
 				Cfg: testutils.MockCfg{
 					OutputFormat: "json",
@@ -55,7 +57,7 @@ func Test_searchCmd(t *testing.T) {
 									Query: &models.QueryContainer{
 										MatchAll: struct{}{},
 									},
-									Size: 500,
+									Size: 250,
 									Sort: []interface{}{"id"},
 								}),
 							},
@@ -81,7 +83,7 @@ func Test_searchCmd(t *testing.T) {
 									Query: &models.QueryContainer{
 										MatchAll: struct{}{},
 									},
-									Size: 500,
+									Size: 250,
 									Sort: []interface{}{"id"},
 								}),
 							},
@@ -106,7 +108,7 @@ func Test_searchCmd(t *testing.T) {
 									Query: &models.QueryContainer{
 										MatchAll: struct{}{},
 									},
-									Size: 500,
+									Size: 250,
 									Sort: []interface{}{"id"},
 								}),
 							},
