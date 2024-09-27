@@ -1,3 +1,4 @@
+version: 2
 project_name: ecctl
 before:
   hooks:
@@ -34,7 +35,7 @@ archives:
     - README*
     - docs/*
 snapshot:
-  name_template: "{{ .Version }}_SNAPSHOT_{{ .ShortCommit }}"
+  version_template: "{{ .Version }}_SNAPSHOT_{{ .ShortCommit }}"
 nfpms:
   - file_name_template: >-
       {{ .ProjectName }}_{{ .Version }}_{{ .Os }}_
