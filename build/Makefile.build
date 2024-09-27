@@ -56,4 +56,4 @@ changelog:
 
 ## Generates a snapshot of the potential release
 snapshot: deps
-	@ $(GOBIN)/goreleaser release --rm-dist --snapshot --skip-validate
+	@ $(GOBIN)/goreleaser release --clean --snapshot --skip-validate
