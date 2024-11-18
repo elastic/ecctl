@@ -23,9 +23,7 @@ Releasing a new version of the binary implies that there have been changes in th
 
 Unless this is a patch release, make sure a `cloud-sdk-go` release with the same version has been made. Once this is done, the `cloud-sdk-go` dependency should be updated to that version. To update the cloud-sdk-go dependency, please update the version in `go.mod`.
 
-### Make sure the version has been updated
-
-**Since the version updates are now automated via github actions, this is just a double check**
+### Update the version
 
 Since the source has changed, we need to update the current committed version to a higher version so that the release is published.
 
@@ -36,14 +34,14 @@ SHELL := /bin/bash
 export VERSION ?= v1.0.0
 ```
 
-Say we want to perform a minor version release (i.e. no breaking changes and only new features and bug fixes are being included); in which case we'll update the _MINOR_ part of the version, this can be done with the `make minor` target, but it should have been updated automatically via GitHub actions.
+Say we want to perform a minor version release (i.e. no breaking changes and only new features and bug fixes are being included); in which case we'll update the _MINOR_ part of the version, this can be done with the `make minor` target.
 
 ```Makefile
 SHELL := /bin/bash
 export VERSION ?= v1.1.0
 ```
 
-If a patch version needs to be released, the VERSION variable in the Makefile should already be up to date, but in case it's not, it can be bumped with the `make patch` target.
+If a patch version needs to be released, the VERSION variable can be bumped with the `make patch` target.
 
 ### Generating a changelog for the new version
 
