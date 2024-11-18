@@ -9,7 +9,9 @@ ecctl platform instance-configuration show <config id> [flags]
 ### Options
 
 ```
-  -h, --help   help for show
+  -v, --config-version string   Instance configuration version
+  -h, --help                    help for show
+      --show-deleted            If set to true, allows to show deleted instance configurations
 ```
 
 ### Options inherited from parent commands
