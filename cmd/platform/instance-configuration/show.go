@@ -19,8 +19,10 @@ package cmdinstanceconfig
 
 import (
 	"path/filepath"
+	"strconv"
 
 	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/instanceconfigapi"
+	"github.com/elastic/cloud-sdk-go/pkg/util/ec"
 	"github.com/spf13/cobra"
 
 	cmdutil "github.com/elastic/ecctl/cmd/util"
@@ -32,10 +34,27 @@ var showCmd = &cobra.Command{
 	Short:   cmdutil.AdminReqDescription("Shows an instance configuration"),
 	PreRunE: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
+		configVersion, _ := cmd.Flags().GetString("config-version")
+		showDeleted, _ := cmd.Flags().GetBool("show-deleted")
+
+		var version *int64 = nil
+
+		if configVersion != "" {
+			parsedVersion, err := strconv.ParseInt(configVersion, 10, 64)
+
+			version = ec.Int64(parsedVersion)
+
+			if err != nil {
+				return err
+			}
+		}
+
 		res, err := instanceconfigapi.Get(instanceconfigapi.GetParams{
-			API:    ecctl.Get().API,
-			Region: ecctl.Get().Config.Region,
-			ID:     args[0],
+			API:           ecctl.Get().API,
+			Region:        ecctl.Get().Config.Region,
+			ID:            args[0],
+			ConfigVersion: version,
+			ShowDeleted:   showDeleted,
 		})
 
 		if err != nil {
@@ -48,4 +67,6 @@ var showCmd = &cobra.Command{
 
 func init() {
 	Command.AddCommand(showCmd)
+	showCmd.Flags().StringP("config-version", "v", "", "Instance configuration version")
+	showCmd.Flags().Bool("show-deleted", false, "If set to true, allows to show deleted instance configurations")
 }
