@@ -43,7 +43,7 @@ SHELL := /bin/bash
 export VERSION ?= v1.1.0
 ```
 
-If a patch version needs to be released, the release will be done from the minor branch. For example, if we want to release `v1.5.1`, we will check out the `1.5` branch and perform any changes in that branch. The VERSION variable in the Makefile should already be up to date, but in case it's not, it can be bumped with the `make patch` target.
+If a patch version needs to be released, the VERSION variable in the Makefile should already be up to date, but in case it's not, it can be bumped with the `make patch` target.
 
 ### Generating a changelog for the new version
 
