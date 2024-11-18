@@ -4,7 +4,7 @@
 <titleabbrev>v1.14.1</titleabbrev>
 ++++
 
-<<{p}-release-notes-v1.14.1-whats-new,What's new>> | <<{p}-release-notes-v1.14.1-bug-fixes,Bug fixes>> | <<{p}-release-notes-v1.14.1-breaking-changes,Breaking changes>> | <<{p}-release-notes-v1.14.1-changelog,Changelog>>
+<<{p}-release-notes-v1.14.1-whats-new,What's new>> | <<{p}-release-notes-v1.14.1-changelog,Changelog>>
 
 Welcome to the v1.14.1 release of {n}. This version brings new features, some breaking changes, and bug fixes.
 
