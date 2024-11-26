@@ -37,8 +37,7 @@ omitted current keystore items are not removed, unless the secrets are set to "n
 {"secrets": {"my-secret": null}}.
 
 The contents of the specified file should be formatted to match the Elasticsearch Service
-API "KeystoreContents" model. For more information on format, see the ESS API reference:
-https://www.elastic.co/guide/en/cloud/current/definitions.html#KeystoreContents.
+API "KeystoreContents" model.
 `
 
 const updateExample = `# Set credentials for a GCS snapshot repository
