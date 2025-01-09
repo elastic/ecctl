@@ -9,7 +9,7 @@ metadata:
   annotations:
     backstage.io/source-location: url:https://github.com/elastic/ecctl
     github.com/project-slug: elastic/ecctl
-    github.com/team-slug: elastic/control-plane-stateful-applications
+    github.com/team-slug: elastic/control-plane-hosted-applications
     # buildkite.com/project-slug: elastic/pipeline-slug-here
 
   tags:
@@ -23,5 +23,5 @@ metadata:
 
 spec:
   type: service
-  owner: group:control-plane-stateful-applications
+  owner: group:control-plane-hosted-applications
   lifecycle: production
