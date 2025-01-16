@@ -35,11 +35,6 @@ jobs:
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
-      - name: Update AWS cli
-        uses: chrislennon/action-aws-cli@v1.1
-        env:
-          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-
       - name: Get the version
         id: get_version
         run: |
