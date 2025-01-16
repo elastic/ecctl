@@ -3,6 +3,7 @@
 
 This section summarizes the changes in each {n} release.
 
+* <<{p}-release-notes-v1.14.2>>
 * <<{p}-release-notes-v1.14.1>>
 * <<{p}-release-notes-v1.14.0>>
 * <<{p}-release-notes-v1.13.0>>
@@ -24,6 +25,7 @@ This section summarizes the changes in each {n} release.
 * <<{p}-release-notes-v1.0.0-beta2>>
 * <<{p}-release-notes-v1.0.0-beta1>>
 
+include::release_notes/v1.14.2.adoc[]
 include::release_notes/v1.14.1.adoc[]
 include::release_notes/v1.14.0.adoc[]
 include::release_notes/v1.13.0.adoc[]
