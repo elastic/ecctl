@@ -58,3 +58,8 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
+
+retract (
+    v1.14.1 // Broken release (more details in https://elastic.slack.com/archives/C01DJ3DC0AX/p1737122643411819?thread_ts=1736776556.219929&cid=C01DJ3DC0AX)
+    v1.14.2 // Broken release (more details in https://elastic.slack.com/archives/C01DJ3DC0AX/p1737122643411819?thread_ts=1736776556.219929&cid=C01DJ3DC0AX)
+)
