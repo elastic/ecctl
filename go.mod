@@ -10,7 +10,7 @@ require (
 	github.com/go-openapi/strfmt v0.21.2
 	github.com/pkg/errors v0.9.1
 	github.com/spf13/cobra v1.8.1
-	github.com/spf13/pflag v1.0.5
+	github.com/spf13/pflag v1.0.6
 	github.com/spf13/viper v1.19.0
 	github.com/stretchr/testify v1.10.0
 	golang.org/x/term v0.27.0
@@ -60,6 +60,6 @@ require (
 )
 
 retract (
-    v1.14.1 // Broken release (more details in https://elastic.slack.com/archives/C01DJ3DC0AX/p1737122643411819?thread_ts=1736776556.219929&cid=C01DJ3DC0AX)
-    v1.14.2 // Broken release (more details in https://elastic.slack.com/archives/C01DJ3DC0AX/p1737122643411819?thread_ts=1736776556.219929&cid=C01DJ3DC0AX)
+	v1.14.2 // Broken release (more details in https://elastic.slack.com/archives/C01DJ3DC0AX/p1737122643411819?thread_ts=1736776556.219929&cid=C01DJ3DC0AX)
+	v1.14.1 // Broken release (more details in https://elastic.slack.com/archives/C01DJ3DC0AX/p1737122643411819?thread_ts=1736776556.219929&cid=C01DJ3DC0AX)
 )
