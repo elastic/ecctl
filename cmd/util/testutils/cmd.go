@@ -63,7 +63,7 @@ func RunCmdAssertion(t *testing.T, args Args, assertion Assertion) {
 	args.Cmd.SilenceErrors = true
 
 	// Set the Out and Err to the mocked devices.
-	args.Cmd.SetOutput(cfg.Out)
+	args.Cmd.SetOut(cfg.Out)
 	args.Cmd.SetErr(cfg.Err)
 
 	err := args.Cmd.Execute()
