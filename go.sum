@@ -23,8 +23,8 @@ github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc h1:U9qPSI2PIWSS1
 github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/docker/go-units v0.3.3/go.mod h1:fgPhTUdO+D/Jk86RDLlptpiXQzgHJF7gydDDbaIK4Dk=
 github.com/docker/go-units v0.4.0/go.mod h1:fgPhTUdO+D/Jk86RDLlptpiXQzgHJF7gydDDbaIK4Dk=
-github.com/elastic/cloud-sdk-go v1.22.0 h1:sPjvu7zZeDbgl6eufy41VH0TjWbaMgDS+Cy9qIvdFZ4=
-github.com/elastic/cloud-sdk-go v1.22.0/go.mod h1:k0ZebhZKX22l6Ysl5Zbpc8VLF54hfwDtHppEEEVUJ04=
+github.com/elastic/cloud-sdk-go v1.23.0 h1:IH41W2E+GIlHjuPtkNPbpYoACAJ8ffk3QiyDjUcrpgQ=
+github.com/elastic/cloud-sdk-go v1.23.0/go.mod h1:k0ZebhZKX22l6Ysl5Zbpc8VLF54hfwDtHppEEEVUJ04=
 github.com/frankban/quicktest v1.14.6 h1:7Xjx+VpznH+oBnejlPUj8oUpdxnVs4f8XU8WnHkI4W8=
 github.com/frankban/quicktest v1.14.6/go.mod h1:4ptaffx2x8+WTWXmUCuVU6aPUX1/Mz7zb5vbUoiM6w0=
 github.com/fsnotify/fsnotify v1.7.0 h1:8JEhPFa5W2WU7YfeZzPNqzMP6Lwt7L2715Ggo0nosvA=
