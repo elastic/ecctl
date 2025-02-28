@@ -10,7 +10,7 @@ Performs advanced allocator searching ![logo cloud ece](https://doc-icons.s3.us-
 
 ## Synopsis [_synopsis_9]
 
-Read more about [Query DSL](elasticsearch://docs/reference/query-languages/querydsl.md).
+Read more about [Query DSL](elasticsearch://reference/query-languages/querydsl.md).
 
 ```
 ecctl platform allocator search [flags]

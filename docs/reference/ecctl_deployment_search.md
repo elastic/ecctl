@@ -10,7 +10,7 @@ Performs advanced deployment search using the Elasticsearch Query DSL
 
 ## Synopsis [_synopsis_6]
 
-Read more about [Query DSL](elasticsearch://docs/reference/query-languages/querydsl.md).
+Read more about [Query DSL](elasticsearch://reference/query-languages/querydsl.md).
 
 ```
 ecctl deployment search -f <query file.json> [flags]

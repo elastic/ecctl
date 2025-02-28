@@ -12,7 +12,7 @@ Once you’ve [installed](/reference/ecctl-installing.md) and [configured](/refe
 * [Update a deployment](/reference/ecctl-example-update-deployment.md)
 * [Delete a deployment](/reference/ecctl-example-delete-deployment.md)
 
-To compare the ecctl commands against their API equivalents, see the [API examples](cloud://docs/reference/cloud-hosted/ec-api-examples.md).
+To compare the ecctl commands against their API equivalents, see the [API examples](cloud://reference/cloud-hosted/ec-api-examples.md).
 
 
 
