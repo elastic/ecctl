@@ -10,7 +10,7 @@ Performs advanced runner searching ![logo cloud ece](https://doc-icons.s3.us-eas
 
 ## Synopsis [_synopsis_12]
 
-Read more about [Query DSL](elasticsearch://docs/reference/query-languages/querydsl.md).
+Read more about [Query DSL](elasticsearch://reference/query-languages/querydsl.md).
 
 ```
 ecctl platform runner search [flags]
