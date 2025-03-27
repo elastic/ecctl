@@ -19,7 +19,7 @@ Query examples:
 
 * Allocators with more than 10GB of capacity: --query capacity.memory.total:\>10240
 ```
-Read all the simple query string syntax in [/elasticsearch/docs/reference/query-languages/query-dsl-query-string-query.md#query-string-syntax](elasticsearch://reference/query-languages/query-dsl-query-string-query.md#query-string-syntax)
+Read all the simple query string syntax in [/elasticsearch/docs/reference/query-languages/query-dsl-query-string-query.md#query-string-syntax](elasticsearch://reference/query-languages/query-dsl/query-dsl-query-string-query.md#query-string-syntax)
 
 Filter examples:
 
