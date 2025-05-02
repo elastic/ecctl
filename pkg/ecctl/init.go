@@ -103,8 +103,8 @@ const (
 	esspHostMsg    = "Enter the URL of your ESSP installation: "
 	essChoiceMsg   = "Using \"%s\" as the API endpoint.\n"
 
-	essAPIKeyCreateMsg = "Create a new Elasticsearch Service API key (https://cloud.elastic.co/deployment-features/keys) and/or"
-	apiKeyMsg          = "Paste your API Key and press enter: "
+	essAPIKeyCreateMsg = "Create a new Elastic Cloud API key (https://cloud.elastic.co/account/keys) and/or"
+	apiKeyMsg          = "Paste your API key and press enter: "
 	userMsg            = "Type in your username: "
 	//nolint
 	passMsg = "Type in your password: "
@@ -117,7 +117,7 @@ const (
 var (
 	hostChoiceMsg = `
 Select which type of Elastic Cloud offering you will be working with:
-  [1] Elasticsearch Service (default).
+  [1] Elastic Cloud  / cloud.elastic.co (default).
   [2] Elastic Cloud Enterprise (ECE).
   [3] Elasticsearch Service Private (ESSP).
 

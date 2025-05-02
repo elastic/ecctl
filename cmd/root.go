@@ -123,7 +123,7 @@ func init() {
 	RootCmd.PersistentFlags().Bool("insecure", false, "Skips all TLS validation")
 	RootCmd.PersistentFlags().BoolP("quiet", "q", false, "Suppresses the configuration file used for the run, if any")
 	RootCmd.PersistentFlags().Duration("timeout", time.Second*30, "Timeout to use on all HTTP calls")
-	RootCmd.PersistentFlags().String("region", "", "Elasticsearch Service region")
+	RootCmd.PersistentFlags().String("region", "", "Elastic Cloud Hosted region")
 	RootCmd.Flag("region").Annotations = map[string][]string{
 		cobra.BashCompCustom: {"__ecctl_valid_regions"},
 	}
