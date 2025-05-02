@@ -5,7 +5,7 @@ mapped_pages:
 
 # Create a deployment [ecctl-example-create-deployment]
 
-Let’s create a basic deployment. Elasticsearch Service supports [solutions](docs-content://get-started/index.md) and [hardware profiles](docs-content://deploy-manage/deploy/elastic-cloud/ec-change-hardware-profile.md), which pre-configure the Elastic Stack components in your deployment to best suit your particular use case. For this example, use Google Cloud Platform (GCP) to host the deployment in region `US Central 1 (Iowa)`. To know which deployment options are available by platform, see [available regions, deployment templates and instance configurations](cloud://reference/cloud-hosted/ec-regions-templates-instances.md).
+Let’s create a basic deployment. Elastic Cloud Hosted supports [solutions](docs-content://get-started/index.md) and [hardware profiles](docs-content://deploy-manage/deploy/elastic-cloud/ec-change-hardware-profile.md), which pre-configure the Elastic Stack components in your deployment to best suit your particular use case. For this example, use Google Cloud Platform (GCP) to host the deployment in region `US Central 1 (Iowa)`. To know which deployment options are available by platform, see [available regions, deployment templates and instance configurations](cloud://reference/cloud-hosted/ec-regions-templates-instances.md).
 
 Copy the following JSON payload and save it as file `create-deployment.json`.
 

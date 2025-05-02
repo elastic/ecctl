@@ -7,7 +7,7 @@ mapped_pages:
 
 Elastic Cloud uses API keys to authenticate users against its API. Additionally, it supports the usage of [JWT](https://jwt.io/) to validate authenticated clients. The preferred authentication method is API keys.
 
-There are two ways to authenticate against the Elasticsearch Service or the Elastic Cloud Enterprise APIs ecctl:
+There are two ways to authenticate against the Elastic Cloud or Elastic Cloud Enterprise APIs in ecctl:
 
 * By specifying an API key using the `--api-key` flag
 * By specifying the `--user` and `--pass` flags

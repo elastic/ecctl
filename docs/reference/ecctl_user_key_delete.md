@@ -34,7 +34,7 @@ ecctl user key delete --user=<user id> <key id> <key id>... [flags]
       --pass string           Password to use to authenticate (If empty will look for EC_PASS environment variable)
       --pprof                 Enables pprofing and saves the profile to pprof-20060102150405
   -q, --quiet                 Suppresses the configuration file used for the run, if any
-      --region string         Elasticsearch Service region
+      --region string         Elastic Cloud Hosted region
       --timeout duration      Timeout to use on all HTTP calls (default 30s)
       --trace                 Enables tracing saves the trace to trace-20060102150405
       --verbose               Enable verbose mode

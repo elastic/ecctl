@@ -8,7 +8,7 @@ mapped_pages:
 Below is an example `YAML` configuration file `$HOME/.ecctl/config.yaml` that will effectively point and configure the binary for Elastic Cloud:
 
 ```yaml
-host: https://api.elastic-cloud.com # URL of your Elasticsearch Service or Elastic Cloud Enterprise API endpoint
+host: https://api.elastic-cloud.com # URL of your Elastic Cloud or Elastic Cloud Enterprise API endpoint
 
 # Credentials
 ## api_key is the preferred authentication mechanism.

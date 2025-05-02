@@ -28,7 +28,7 @@ Welcome to Elastic Cloud Control (ecctl)! This command will guide you through au
 Missing configuration file, would you like to initialise it? [y/n]: y
 
 Select which type of Elastic Cloud offering you will be working with:
-  [1] Elasticsearch Service (default).
+  [1] Elastic Cloud (default).
   [2] Elastic Cloud Enterprise (ECE).
   [3] Elasticsearch Service Private (ESSP).
 
@@ -75,7 +75,7 @@ Select a region you would like to have as default:
 
 Please enter your choice: 1
 
-Create a new Elasticsearch Service API key (https://cloud.elastic.co/account/keys) and/or
+Create a new Elastic Cloud API key (https://cloud.elastic.co/account/keys) and/or
 Paste your API Key and press enter: xxxxx
 
 What default output format would you like?
