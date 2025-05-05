@@ -24,7 +24,7 @@ ecctl deployment template list [flags]
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_46]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 

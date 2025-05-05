@@ -22,7 +22,7 @@ ecctl platform role create --file <filename.json> [flags]
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_109]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 

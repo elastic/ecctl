@@ -12,7 +12,7 @@ Updates the contents of an Elasticsearch keystore
 
 Changes the contents of the Elasticsearch resource keystore from the specified deployment by using the PATCH method. The payload is a partial payload where any omitted current keystore items are not removed, unless the secrets are set to "null": {"secrets": {"my-secret": null}}.
 
-The contents of the specified file should be formatted to match the Elasticsearch Service API "KeystoreContents" model.
+The contents of the specified file should be formatted to match the Elastic Cloud API "secrets" object.
 
 ```
 ecctl deployment elasticsearch keystore update <deployment id> [--ref-id <ref-id>] {--file=<filename>.json} [flags]
@@ -73,7 +73,7 @@ $ ecctl deployment elasticsearch keystore set --file=multiple.json <Deployment I
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_19]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 

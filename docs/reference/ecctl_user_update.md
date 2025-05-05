@@ -40,7 +40,7 @@ ecctl user update <username> --role <role> [flags]
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_135]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 

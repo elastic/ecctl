@@ -26,7 +26,7 @@ ecctl deployment resource stop-maintenance <deployment id> --kind <kind> [--all|
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_35]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 

@@ -36,7 +36,7 @@ $ ecctl deployment restore 5c17ad7c8df73206baa54b6e2829d9bc
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_38]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 

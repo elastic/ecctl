@@ -22,7 +22,7 @@ ecctl deployment traffic-filter association create <ruleset id> --deployment-id 
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_51]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 

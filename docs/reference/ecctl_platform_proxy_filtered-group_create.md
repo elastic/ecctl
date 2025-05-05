@@ -23,7 +23,7 @@ ecctl platform proxy filtered-group create <filtered group id> --filters <key1=v
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_93]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 

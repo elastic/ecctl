@@ -43,7 +43,7 @@ ecctl platform repository create custom --type fs --settings settings.yml
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_104]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 

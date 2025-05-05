@@ -23,7 +23,7 @@ ecctl deployment plan cancel <deployment id> --kind <kind> [--ref-id <ref-id>] [
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_28]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 

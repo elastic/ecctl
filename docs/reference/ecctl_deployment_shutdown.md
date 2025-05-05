@@ -23,7 +23,7 @@ ecctl deployment shutdown <deployment-id> [flags]
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_42]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 

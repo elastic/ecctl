@@ -81,7 +81,7 @@ setting --prune-orphans to "true" will cause any resources not specified in the 
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_58]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 

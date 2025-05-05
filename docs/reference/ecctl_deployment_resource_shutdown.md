@@ -30,7 +30,7 @@ ecctl deployment resource shutdown <deployment id> --kind <kind> --ref-id <ref-i
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_32]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 

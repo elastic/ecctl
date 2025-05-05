@@ -24,7 +24,7 @@ ecctl deployment template update --template-id <template id> --file <definition.
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_48]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 

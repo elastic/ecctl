@@ -24,7 +24,7 @@ ecctl comment delete <comment id> --resource-type <resource-type> --resource-id 
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_9]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 

@@ -26,7 +26,7 @@ ecctl deployment extension create <extension name> --version <version> --type <e
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_21]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 

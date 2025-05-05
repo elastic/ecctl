@@ -26,7 +26,7 @@ ecctl deployment traffic-filter create --region <region> --name <filter name> --
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_53]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 

@@ -35,7 +35,7 @@ $ ecctl platform proxy settings update --file settings.json --region us-east-1 -
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_101]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 

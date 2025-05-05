@@ -23,7 +23,7 @@ ecctl platform instance-configuration show <config id> [flags]
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_89]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 

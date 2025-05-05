@@ -38,7 +38,7 @@ ecctl deployment extension update <extension id> {--file <file-path> | --generat
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_25]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 

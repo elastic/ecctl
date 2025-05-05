@@ -21,7 +21,7 @@ ecctl platform repository list [flags]
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_106]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 

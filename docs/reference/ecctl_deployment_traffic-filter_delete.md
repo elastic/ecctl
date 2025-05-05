@@ -22,7 +22,7 @@ ecctl deployment traffic-filter delete <ruleset id> [--ignore-associations] [fla
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_54]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 

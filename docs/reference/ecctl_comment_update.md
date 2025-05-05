@@ -24,7 +24,7 @@ ecctl comment update <comment id> <message> --resource-type <resource-type> --re
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_12]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 

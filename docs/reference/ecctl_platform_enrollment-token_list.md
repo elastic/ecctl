@@ -21,7 +21,7 @@ ecctl platform enrollment-token list [flags]
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_82]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 

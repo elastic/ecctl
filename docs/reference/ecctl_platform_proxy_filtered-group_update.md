@@ -24,7 +24,7 @@ ecctl platform proxy filtered-group update <filtered group id> --filters <key1=v
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_97]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 

@@ -22,7 +22,7 @@ ecctl deployment extension show <extension id> [--include-deployments] [flags]
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_24]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 

@@ -21,7 +21,7 @@ ecctl platform allocator metadata [flags]
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_67]
 
-:::{include} /_snippets/inherited-options.md
+:::{include} _snippets/inherited-options.md
 :::
 
 
