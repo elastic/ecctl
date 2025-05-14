@@ -1,4 +1,6 @@
 project: 'Elastic cloud control (ECCTL) docs'
+products:
+  - id: cloud-control-ecctl
 cross_links:
   - cloud
   - docs-content
