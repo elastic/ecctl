@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_template_delete.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl deployment template delete [ecctl_deployment_template_delete]
 
-Deletes an existing deployment template ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Deletes an existing deployment template.
 
 ```
 ecctl deployment template delete --template-id <template id> [flags]

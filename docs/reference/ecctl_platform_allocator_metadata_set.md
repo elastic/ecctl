@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_allocator_metadata_set.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl platform allocator metadata set [ecctl_platform_allocator_metadata_set]
 
-Sets or updates a single metadata item to a given allocators metadata
+Sets or updates a single metadata item to a given allocators metadata.
 
 ```
 ecctl platform allocator metadata set <allocator id> <key> <value> [flags]

@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_runner_resync.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl platform runner resync [ecctl_platform_runner_resync]
 
-Resynchronizes the search index and cache for the selected runner or all ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Resynchronizes the search index and cache for the selected runner or all.
 
 ```
 ecctl platform runner resync {<runner id> | --all} [flags]
@@ -46,5 +49,5 @@ ecctl platform runner resync {<runner id> | --all} [flags]
 
 ## SEE ALSO [_see_also_117]
 
-* [ecctl platform runner](/reference/ecctl_platform_runner.md)	 - Manages platform runners ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+* [ecctl platform runner](/reference/ecctl_platform_runner.md) - Manages platform runners
 

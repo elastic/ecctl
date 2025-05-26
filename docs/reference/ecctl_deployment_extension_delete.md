@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_extension_delete.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment extension delete [ecctl_deployment_extension_delete]
 
-Deletes a deployment extension
+Deletes a deployment extension.
 
 ```
 ecctl deployment extension delete <extension id> [flags]

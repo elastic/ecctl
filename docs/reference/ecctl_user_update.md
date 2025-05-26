@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_user_update.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl user update [ecctl_user_update]
 
-Updates a platform user ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Updates a platform user.
 
 ```
 ecctl user update <username> --role <role> [flags]
@@ -64,5 +67,5 @@ ecctl user update <username> --role <role> [flags]
 
 ## SEE ALSO [_see_also_136]
 
-* [ecctl user](/reference/ecctl_user.md)	 - Manages the platform users ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+* [ecctl user](/reference/ecctl_user.md) - Manages the platform users
 

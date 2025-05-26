@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_resync.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment resync [ecctl_deployment_resync]
 
-Resynchronizes the search index and cache for the selected deployment or all
+Resynchronizes the search index and cache for the selected deployment or all.
 
 ```
 ecctl deployment resync {<deployment id> | --all} [flags]

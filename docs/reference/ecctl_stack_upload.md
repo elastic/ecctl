@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_stack_upload.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl stack upload [ecctl_stack_upload]
 
-Uploads an Elastic StackPack ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Uploads an Elastic StackPack.
 
 ```
 ecctl stack upload [flags]
@@ -45,5 +48,5 @@ ecctl stack upload [flags]
 
 ## SEE ALSO [_see_also_124]
 
-* [ecctl stack](/reference/ecctl_stack.md)	 - Manages Elastic StackPacks
+* [ecctl stack](/reference/ecctl_stack.md) - Manages Elastic StackPacks
 

@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_update.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment update [ecctl_deployment_update]
 
-Updates a deployment from a file definition, allowing certain flag overrides
+Updates a deployment from a file definition, allowing certain flag overrides.
 
 
 ## Synopsis [_synopsis_7]

@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_instance-configuration_show.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl platform instance-configuration show [ecctl_platform_instance-configuration_show]
 
-Shows an instance configuration ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Shows an instance configuration.
 
 ```
 ecctl platform instance-configuration show <config id> [flags]
@@ -47,5 +50,5 @@ ecctl platform instance-configuration show <config id> [flags]
 
 ## SEE ALSO [_see_also_90]
 
-* [ecctl platform instance-configuration](/reference/ecctl_platform_instance-configuration.md)	 - Manages instance configurations ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+* [ecctl platform instance-configuration](/reference/ecctl_platform_instance-configuration.md)	 - Manages instance configurations
 

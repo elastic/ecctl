@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_template_list.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment template list [ecctl_deployment_template_list]
 
-Lists deployment templates
+Lists deployment templates.
 
 ```
 ecctl deployment template list [flags]

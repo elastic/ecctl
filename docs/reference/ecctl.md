@@ -35,13 +35,13 @@ Elastic Cloud Control
 
 ## SEE ALSO [_see_also]
 
-* [ecctl auth](/reference/ecctl_auth.md)	 - Manages authentication settings
-* [ecctl comment](/reference/ecctl_comment.md)	 - Manages resource comments ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
-* [ecctl deployment](/reference/ecctl_deployment.md)	 - Manages deployments
-* [ecctl generate](/reference/ecctl_generate.md)	 - Generates completions and docs
-* [ecctl init](/reference/ecctl_init.md)	 - Creates an initial configuration file.
-* [ecctl platform](/reference/ecctl_platform.md)	 - Manages the platform ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
-* [ecctl stack](/reference/ecctl_stack.md)	 - Manages Elastic StackPacks
-* [ecctl user](/reference/ecctl_user.md)	 - Manages the platform users ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
-* [ecctl version](/reference/ecctl_version.md)	 - Shows ecctl version
+* [ecctl auth](/reference/ecctl_auth.md) - Manages authentication settings
+* [ecctl comment](/reference/ecctl_comment.md) - Manages resource comments
+* [ecctl deployment](/reference/ecctl_deployment.md) - Manages deployments
+* [ecctl generate](/reference/ecctl_generate.md) - Generates completions and docs
+* [ecctl init](/reference/ecctl_init.md) - Creates an initial configuration file.
+* [ecctl platform](/reference/ecctl_platform.md) - Manages the platform
+* [ecctl stack](/reference/ecctl_stack.md) - Manages Elastic StackPacks
+* [ecctl user](/reference/ecctl_user.md) - Manages the platform users
+* [ecctl version](/reference/ecctl_version.md) - Shows ecctl version
 

@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_auth_key_create.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl auth key create [ecctl_auth_key_create]
 
-Creates a new API key for the current authenticated user
+Creates a new API key for the current authenticated user.
 
 ```
 ecctl auth key create [flags]

@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_auth_key_show.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl auth key show [ecctl_auth_key_show]
 
-Shows the API key details for the current authenticated user
+Shows the API key details for the current authenticated user.
 
 ```
 ecctl auth key show <key id> [flags]

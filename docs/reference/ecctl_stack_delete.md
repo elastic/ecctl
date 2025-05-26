@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_stack_delete.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl stack delete [ecctl_stack_delete]
 
-Deletes an Elastic StackPack ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Deletes an Elastic StackPack.
 
 ```
 ecctl stack delete [flags]
@@ -45,5 +48,5 @@ ecctl stack delete [flags]
 
 ## SEE ALSO [_see_also_121]
 
-* [ecctl stack](/reference/ecctl_stack.md)	 - Manages Elastic StackPacks
+* [ecctl stack](/reference/ecctl_stack.md) - Manages Elastic StackPacks
 

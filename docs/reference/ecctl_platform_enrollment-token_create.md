@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_enrollment-token_create.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl platform enrollment-token create [ecctl_platform_enrollment-token_create]
 
-Creates an enrollment token for role(s)
+Creates an enrollment token for roles.
 
 ```
 ecctl platform enrollment-token create --role <ROLE> [flags]
@@ -57,5 +61,4 @@ ecctl platform enrollment-token create --role <ROLE> [flags]
 
 ## SEE ALSO [_see_also_81]
 
-* [ecctl platform enrollment-token](/reference/ecctl_platform_enrollment-token.md)	 - Manages tokens ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
-
+* [ecctl platform enrollment-token](/reference/ecctl_platform_enrollment-token.md)	 - Manages tokens

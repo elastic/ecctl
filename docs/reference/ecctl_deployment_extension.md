@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_extension.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment extension [ecctl_deployment_extension]
 
-Manages deployment extensions, such as custom plugins or bundles
+Manages deployment extensions, such as custom plugins or bundles.
 
 ```
 ecctl deployment extension [flags]

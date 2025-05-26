@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_auth.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl auth [ecctl_auth]
 
-Manages authentication settings
+Manages authentication settings.
 
 ```
 ecctl auth [flags]

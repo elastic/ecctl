@@ -1,6 +1,10 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_init.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl init [ecctl_init]

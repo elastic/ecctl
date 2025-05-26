@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment [ecctl_deployment]
 
-Manages deployments
+Manages deployments.
 
 ```
 ecctl deployment [flags]

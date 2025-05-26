@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_traffic-filter_association.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment traffic-filter association [ecctl_deployment_traffic-filter_association]
 
-Manages traffic filter ruleset associations
+Manages traffic filter ruleset associations.
 
 ```
 ecctl deployment traffic-filter association [flags]

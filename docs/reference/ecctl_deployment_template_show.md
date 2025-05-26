@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_template_show.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl deployment template show [ecctl_deployment_template_show]
 
-Displays a deployment template ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Displays a deployment template.
 
 ```
 ecctl deployment template show --template-id <template id> [flags]

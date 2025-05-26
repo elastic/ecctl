@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_extension_create.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment extension create [ecctl_deployment_extension_create]
 
-Creates an extension
+Creates an extension.
 
 ```
 ecctl deployment extension create <extension name> --version <version> --type <extension type> {--file <file-path> | --download-url <url>} [--description <description>] [flags]

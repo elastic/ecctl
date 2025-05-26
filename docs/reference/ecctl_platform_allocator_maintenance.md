@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_allocator_maintenance.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl platform allocator maintenance [ecctl_platform_allocator_maintenance]
 
-Sets the allocator in Maintenance mode ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Sets the allocator in Maintenance mode.
 
 ```
 ecctl platform allocator maintenance <allocator id> [flags]
@@ -46,5 +49,4 @@ ecctl platform allocator maintenance <allocator id> [flags]
 
 ## SEE ALSO [_see_also_67]
 
-* [ecctl platform allocator](/reference/ecctl_platform_allocator.md)	 - Manages allocators ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
-
+* [ecctl platform allocator](/reference/ecctl_platform_allocator.md) - Manages allocators

@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_traffic-filter_delete.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment traffic-filter delete [ecctl_deployment_traffic-filter_delete]
 
-Deletes a traffic filter ruleset
+Deletes a traffic filter ruleset.
 
 ```
 ecctl deployment traffic-filter delete <ruleset id> [--ignore-associations] [flags]

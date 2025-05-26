@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_user_key_delete.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl user key delete [ecctl_user_key_delete]
 
-Deletes an existing API key for the specified user
+Deletes an existing API key for the specified user.
 
 ```
 ecctl user key delete --user=<user id> <key id> <key id>... [flags]
@@ -45,5 +49,5 @@ ecctl user key delete --user=<user id> <key id> <key id>... [flags]
 
 ## SEE ALSO [_see_also_131]
 
-* [ecctl user key](/reference/ecctl_user_key.md)	 - Manages the API keys of a platform user
+* [ecctl user key](/reference/ecctl_user_key.md) - Manages the API keys of a platform user
 

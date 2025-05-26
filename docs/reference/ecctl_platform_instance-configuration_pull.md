@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_instance-configuration_pull.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl platform instance-configuration pull [ecctl_platform_instance-configuration_pull]
 
-Downloads instance configuration into a local folder ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Downloads instance configuration into a local folder.
 
 ```
 ecctl platform instance-configuration pull --path <path> [flags]
@@ -46,5 +49,4 @@ ecctl platform instance-configuration pull --path <path> [flags]
 
 ## SEE ALSO [_see_also_89]
 
-* [ecctl platform instance-configuration](/reference/ecctl_platform_instance-configuration.md)	 - Manages instance configurations ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
-
+* [ecctl platform instance-configuration](/reference/ecctl_platform_instance-configuration.md) - Manages instance configurations

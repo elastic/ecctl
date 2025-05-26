@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_elasticsearch_keystore.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment elasticsearch keystore [ecctl_deployment_elasticsearch_keystore]
 
-Manages Elasticsearch resource keystores
+Manages Elasticsearch resource keystores.
 
 ```
 ecctl deployment elasticsearch keystore [flags]

@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_generate.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl generate [ecctl_generate]
 
-Generates completions and docs
+Generates completions and docs.
 
 ```
 ecctl generate [flags]

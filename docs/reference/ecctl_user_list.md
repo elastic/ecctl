@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_user_list.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl user list [ecctl_user_list]
 
-Lists all platform users ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Lists all platform users.
 
 ```
 ecctl user list [flags]
@@ -45,5 +48,5 @@ ecctl user list [flags]
 
 ## SEE ALSO [_see_also_134]
 
-* [ecctl user](/reference/ecctl_user.md)	 - Manages the platform users ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+* [ecctl user](/reference/ecctl_user.md) - Manages the platform users
 

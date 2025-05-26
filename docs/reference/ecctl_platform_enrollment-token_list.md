@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_enrollment-token_list.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl platform enrollment-token list [ecctl_platform_enrollment-token_list]
 
-Retrieves a list of persistent enrollment tokens ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Retrieves a list of persistent enrollment tokens.
 
 ```
 ecctl platform enrollment-token list [flags]
@@ -45,5 +48,5 @@ ecctl platform enrollment-token list [flags]
 
 ## SEE ALSO [_see_also_83]
 
-* [ecctl platform enrollment-token](/reference/ecctl_platform_enrollment-token.md)	 - Manages tokens ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+* [ecctl platform enrollment-token](/reference/ecctl_platform_enrollment-token.md) - Manages tokens
 

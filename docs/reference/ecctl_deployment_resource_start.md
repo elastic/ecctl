@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_resource_start.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment resource start [ecctl_deployment_resource_start]
 
-Starts a previously stopped deployment resource
+Starts a previously stopped deployment resource.
 
 ```
 ecctl deployment resource start <deployment id> --kind <kind> [--all|--i <instance-id>,<instance-id>] [flags]

@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_constructor_list.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl platform constructor list [ecctl_platform_constructor_list]
 
-Returns all of the constructors in the platform ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Returns all of the constructors in the platform.
 
 ```
 ecctl platform constructor list [flags]
@@ -45,5 +48,5 @@ ecctl platform constructor list [flags]
 
 ## SEE ALSO [_see_also_76]
 
-* [ecctl platform constructor](/reference/ecctl_platform_constructor.md)	 - Manages constructors ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+* [ecctl platform constructor](/reference/ecctl_platform_constructor.md) - Manages constructors
 
