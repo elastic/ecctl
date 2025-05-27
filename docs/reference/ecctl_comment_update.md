@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_comment_update.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl comment update [ecctl_comment_update]
 
-Updates an existing resource comment ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Updates an existing resource comment.
 
 ```
 ecctl comment update <comment id> <message> --resource-type <resource-type> --resource-id <resource-id> [flags]
@@ -28,7 +31,6 @@ ecctl comment update <comment id> <message> --resource-type <resource-type> --re
 :::
 
 
-## SEE ALSO [_see_also_13]
+## See also [_see_also_13]
 
-* [ecctl comment](/reference/ecctl_comment.md)	 - Manages resource comments ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
-
+* [ecctl comment](/reference/ecctl_comment.md)	 - Manages resource comments

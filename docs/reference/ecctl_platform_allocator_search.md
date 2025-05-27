@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_allocator_search.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl platform allocator search [ecctl_platform_allocator_search]
 
-Performs advanced allocator searching ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Performs advanced allocator searching.
 
 
 ## Synopsis [_synopsis_9]
@@ -32,7 +35,6 @@ ecctl platform allocator search [flags]
 :::
 
 
-## SEE ALSO [_see_also_72]
+## See also [_see_also_72]
 
-* [ecctl platform allocator](/reference/ecctl_platform_allocator.md)	 - Manages allocators ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
-
+* [ecctl platform allocator](/reference/ecctl_platform_allocator.md) - Manages allocators

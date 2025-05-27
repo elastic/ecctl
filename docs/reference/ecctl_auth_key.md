@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_auth_key.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl auth key [ecctl_auth_key]
 
-Manages the current authenticated user API keys
+Manages the current authenticated user API keys.
 
 ```
 ecctl auth key [flags]
@@ -25,7 +29,7 @@ ecctl auth key [flags]
 :::
 
 
-## SEE ALSO [_see_also_3]
+## See also [_see_also_3]
 
 * [ecctl auth](/reference/ecctl_auth.md)	 - Manages authentication settings
 * [ecctl auth key create](/reference/ecctl_auth_key_create.md)	 - Creates a new API key for the current authenticated user

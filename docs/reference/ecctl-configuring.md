@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl-configuring.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # Configuring [ecctl-configuring]
 
-In order for ecctl to be able to communicate with the RESTful API, it needs to have a set of configuration parameters defined. These parameters can be set in a configuration file, through environment variables, or at runtime using the CLI’s global flags.
+In order for ecctl to be able to communicate with the RESTful API, it needs to have a set of configuration parameters defined. These parameters can be set in a configuration file, through environment variables, or at runtime using the CLI's global flags.
 
 
 ### Before you begin [_before_you_begin]
@@ -19,7 +23,7 @@ The hierarchy for configuration parameters is as follows, from higher precedence
 
 ## Generate a configuration file [_generate_a_configuration_file]
 
-If it’s your first time using ecctl, use the `init` command to assist you in generating a configuration file. The resulting configuration file will be saved under `~/.ecctl/config.json`:
+If it's your first time using ecctl, use the `init` command to assist you in generating a configuration file. The resulting configuration file will be saved under `~/.ecctl/config.json`:
 
 ```
 $ ecctl init
@@ -91,10 +95,3 @@ You're all set! Here are some commands to try:
 
 Config written to /home/myuser/.ecctl/config.json
 ```
-
-
-
-
-
-
-

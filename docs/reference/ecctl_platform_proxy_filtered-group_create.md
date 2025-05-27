@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_proxy_filtered-group_create.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl platform proxy filtered-group create [ecctl_platform_proxy_filtered-group_create]
 
-Creates proxies filtered group ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Creates proxies filtered group.
 
 ```
 ecctl platform proxy filtered-group create <filtered group id> --filters <key1=value1,key2=value2> --expected-proxies-count <int> [flags]
@@ -27,7 +30,7 @@ ecctl platform proxy filtered-group create <filtered group id> --filters <key1=v
 :::
 
 
-## SEE ALSO [_see_also_94]
+## See also [_see_also_94]
 
-* [ecctl platform proxy filtered-group](/reference/ecctl_platform_proxy_filtered-group.md)	 - Manages proxies filtered group ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+* [ecctl platform proxy filtered-group](/reference/ecctl_platform_proxy_filtered-group.md) - Manages proxies filtered group
 

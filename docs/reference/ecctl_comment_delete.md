@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_comment_delete.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl comment delete [ecctl_comment_delete]
 
-Deletes a resource comment ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Deletes a resource comment.
 
 ```
 ecctl comment delete <comment id> --resource-type <resource-type> --resource-id <resource-id> [flags]
@@ -28,7 +31,6 @@ ecctl comment delete <comment id> --resource-type <resource-type> --resource-id 
 :::
 
 
-## SEE ALSO [_see_also_10]
+## See also [_see_also_10]
 
-* [ecctl comment](/reference/ecctl_comment.md)	 - Manages resource comments ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
-
+* [ecctl comment](/reference/ecctl_comment.md)	 - Manages resource comments

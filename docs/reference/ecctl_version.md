@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_version.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl version [ecctl_version]
 
-Shows ecctl version
+Shows the `ecctl` version.
 
 ```
 ecctl version [flags]
@@ -25,7 +29,7 @@ ecctl version [flags]
 :::
 
 
-## SEE ALSO [_see_also_137]
+## See also [_see_also_137]
 
-* [ecctl](/reference/ecctl.md)	 - Elastic Cloud Control
+* [ecctl](/reference/ecctl.md) - Elastic Cloud Control
 

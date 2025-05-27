@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_info.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl platform info [ecctl_platform_info]
 
-Shows information about the platform ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Shows information about the platform.
 
 ```
 ecctl platform info [flags]
@@ -25,7 +28,7 @@ ecctl platform info [flags]
 :::
 
 
-## SEE ALSO [_see_also_84]
+## See also [_see_also_84]
 
-* [ecctl platform](/reference/ecctl_platform.md)	 - Manages the platform ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+* [ecctl platform](/reference/ecctl_platform.md) - Manages the platform
 

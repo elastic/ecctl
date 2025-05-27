@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_role_update.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl platform role update [ecctl_platform_role_update]
 
-Updates an existing platform role
+Updates an existing platform role.
 
 ```
 ecctl platform role update <role> [flags]
@@ -26,7 +30,6 @@ ecctl platform role update <role> [flags]
 :::
 
 
-## SEE ALSO [_see_also_114]
+## See also [_see_also_114]
 
-* [ecctl platform role](/reference/ecctl_platform_role.md)	 - Manages platform roles ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
-
+* [ecctl platform role](/reference/ecctl_platform_role.md) - Manages platform roles

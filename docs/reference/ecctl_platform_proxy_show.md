@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_proxy_show.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl platform proxy show [ecctl_platform_proxy_show]
 
-Returns information about the proxy with given id ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Returns information about the proxy with given ID.
 
 ```
 ecctl platform proxy show <proxy id> [flags]
@@ -25,7 +28,6 @@ ecctl platform proxy show <proxy id> [flags]
 :::
 
 
-## SEE ALSO [_see_also_103]
+## See also [_see_also_103]
 
-* [ecctl platform proxy](/reference/ecctl_platform_proxy.md)	 - Manages proxies ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
-
+* [ecctl platform proxy](/reference/ecctl_platform_proxy.md) - Manages proxies

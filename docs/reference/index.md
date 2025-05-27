@@ -2,6 +2,10 @@
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/index.html
   - https://www.elastic.co/guide/en/ecctl/current/ecctl-overview.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # Elastic cloud control (ECCTL) [ecctl-overview]
@@ -13,5 +17,3 @@ Benefits of ecctl:
 * Easier to use than the Cloud UI or using the RESTful API directly
 * Helps you automate the deployment lifecycle
 * Provides a foundation for integration with other tools
-
-

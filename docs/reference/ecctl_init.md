@@ -1,6 +1,10 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_init.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl init [ecctl_init]
@@ -25,7 +29,7 @@ ecctl init [flags]
 :::
 
 
-## SEE ALSO [_see_also_63]
+## See also [_see_also_63]
 
 * [ecctl](/reference/ecctl.md)	 - Elastic Cloud Control
 

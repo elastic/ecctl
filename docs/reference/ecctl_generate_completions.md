@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_generate_completions.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl generate completions [ecctl_generate_completions]
 
-Outputs the Bash completion to either stdout (default) or to a file
+Outputs the Bash completion to either stdout (default) or to a file.
 
 ```
 ecctl generate completions [flags]
@@ -27,7 +31,7 @@ ecctl generate completions [flags]
 :::
 
 
-## SEE ALSO [_see_also_61]
+## See also [_see_also_61]
 
 * [ecctl generate](/reference/ecctl_generate.md)	 - Generates completions and docs
 

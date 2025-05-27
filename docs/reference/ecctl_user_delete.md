@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_user_delete.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl user delete [ecctl_user_delete]
 
-Deletes one or more platform users ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Deletes one or more platform users.
 
 ```
 ecctl user delete <user name> <user name>... [flags]
@@ -25,7 +28,6 @@ ecctl user delete <user name> <user name>... [flags]
 :::
 
 
-## SEE ALSO [_see_also_127]
+## See also [_see_also_127]
 
-* [ecctl user](/reference/ecctl_user.md)	 - Manages the platform users ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
-
+* [ecctl user](/reference/ecctl_user.md) - Manages the platform users

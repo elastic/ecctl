@@ -1,6 +1,10 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl-authentication.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # Authentication [ecctl-authentication]

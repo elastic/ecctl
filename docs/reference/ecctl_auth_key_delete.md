@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_auth_key_delete.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl auth key delete [ecctl_auth_key_delete]
 
-Deletes one or more existing API keys for the specified user
+Deletes one or more existing API keys for the specified user.
 
 ```
 ecctl auth key delete <key id> <key id> ... [flags]
@@ -25,7 +29,7 @@ ecctl auth key delete <key id> <key id> ... [flags]
 :::
 
 
-## SEE ALSO [_see_also_5]
+## See also [_see_also_5]
 
 * [ecctl auth key](/reference/ecctl_auth_key.md)	 - Manages the current authenticated user API keys
 

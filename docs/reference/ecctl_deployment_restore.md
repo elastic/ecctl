@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_restore.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment restore [ecctl_deployment_restore]
 
-Restores a previously shut down deployment and all of its associated sub-resources
+Restores a previously shut down deployment and all of its associated sub-resources.
 
 
 ## Synopsis [_synopsis_5]
@@ -40,7 +44,7 @@ $ ecctl deployment restore 5c17ad7c8df73206baa54b6e2829d9bc
 :::
 
 
-## SEE ALSO [_see_also_39]
+## See also [_see_also_39]
 
 * [ecctl deployment](/reference/ecctl_deployment.md)	 - Manages deployments
 

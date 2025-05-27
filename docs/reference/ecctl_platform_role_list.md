@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_role_list.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl platform role list [ecctl_platform_role_list]
 
-Lists the existing platform roles ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Lists the existing platform roles.
 
 ```
 ecctl platform role list [flags]
@@ -25,7 +28,6 @@ ecctl platform role list [flags]
 :::
 
 
-## SEE ALSO [_see_also_112]
+## See also [_see_also_112]
 
-* [ecctl platform role](/reference/ecctl_platform_role.md)	 - Manages platform roles ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
-
+* [ecctl platform role](/reference/ecctl_platform_role.md) - Manages platform roles

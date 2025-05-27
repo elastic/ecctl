@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_auth.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl auth [ecctl_auth]
 
-Manages authentication settings
+Manages authentication settings.
 
 ```
 ecctl auth [flags]
@@ -25,7 +29,7 @@ ecctl auth [flags]
 :::
 
 
-## SEE ALSO [_see_also_2]
+## See also [_see_also_2]
 
 * [ecctl](/reference/ecctl.md)	 - Elastic Cloud Control
 * [ecctl auth key](/reference/ecctl_auth_key.md)	 - Manages the current authenticated user API keys

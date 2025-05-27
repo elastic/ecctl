@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_shutdown.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment shutdown [ecctl_deployment_shutdown]
 
-Shuts down a deployment and all of its associated sub-resources
+Shuts down a deployment and all of its associated sub-resources.
 
 ```
 ecctl deployment shutdown <deployment-id> [flags]
@@ -27,7 +31,7 @@ ecctl deployment shutdown <deployment-id> [flags]
 :::
 
 
-## SEE ALSO [_see_also_43]
+## See also [_see_also_43]
 
 * [ecctl deployment](/reference/ecctl_deployment.md)	 - Manages deployments
 

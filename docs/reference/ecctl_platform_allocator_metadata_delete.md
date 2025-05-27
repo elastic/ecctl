@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_allocator_metadata_delete.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl platform allocator metadata delete [ecctl_platform_allocator_metadata_delete]
 
-Deletes a single metadata item from a given allocators metadata
+Deletes a single metadata item from a given allocators metadata.
 
 ```
 ecctl platform allocator metadata delete <allocator id> <key> [flags]
@@ -25,7 +29,6 @@ ecctl platform allocator metadata delete <allocator id> <key> [flags]
 :::
 
 
-## SEE ALSO [_see_also_69]
+## See also [_see_also_69]
 
 * [ecctl platform allocator metadata](/reference/ecctl_platform_allocator_metadata.md)	 - Manages an allocator’s metadata
-

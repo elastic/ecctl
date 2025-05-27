@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_traffic-filter_update.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment traffic-filter update [ecctl_deployment_traffic-filter_update]
 
-Updates a traffic-filter
+Updates a traffic-filter.
 
 ```
 ecctl deployment traffic-filter update <traffic-filter id> {--file <file-path> | --generate-payload} [flags]
@@ -38,7 +42,7 @@ ecctl deployment traffic-filter update <traffic-filter id> {--file <file-path> |
 :::
 
 
-## SEE ALSO [_see_also_58]
+## See also [_see_also_58]
 
 * [ecctl deployment traffic-filter](/reference/ecctl_deployment_traffic-filter.md)	 - Manages traffic filter rulesets
 

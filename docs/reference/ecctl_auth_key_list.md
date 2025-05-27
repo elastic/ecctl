@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_auth_key_list.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl auth key list [ecctl_auth_key_list]
 
-Lists the API keys for the current authenticated user
+Lists the API keys for the current authenticated user.
 
 ```
 ecctl auth key list [flags]
@@ -25,7 +29,7 @@ ecctl auth key list [flags]
 :::
 
 
-## SEE ALSO [_see_also_6]
+## See also [_see_also_6]
 
 * [ecctl auth key](/reference/ecctl_auth_key.md)	 - Manages the current authenticated user API keys
 

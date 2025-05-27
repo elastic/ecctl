@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_proxy_settings_update.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl platform proxy settings update [ecctl_platform_proxy_settings_update]
 
-Updates settings for all proxies ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Updates settings for all proxies.
 
 ```
 ecctl platform proxy settings update --file settings.json [flags]
@@ -39,7 +42,7 @@ $ ecctl platform proxy settings update --file settings.json --region us-east-1 -
 :::
 
 
-## SEE ALSO [_see_also_102]
+## See also [_see_also_102]
 
-* [ecctl platform proxy settings](/reference/ecctl_platform_proxy_settings.md)	 - Manages proxies settings ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+* [ecctl platform proxy settings](/reference/ecctl_platform_proxy_settings.md) - Manages proxies settings
 

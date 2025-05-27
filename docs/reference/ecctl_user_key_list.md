@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_user_key_list.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl user key list [ecctl_user_key_list]
 
-Lists the API keys for the specified user, or all platform users
+Lists the API keys for the specified user or all platform users.
 
 ```
 ecctl user key list --user=<user id>|--all [flags]
@@ -44,7 +48,7 @@ ecctl user key list --user=<user id>|--all [flags]
 ```
 
 
-## SEE ALSO [_see_also_132]
+## See also [_see_also_132]
 
-* [ecctl user key](/reference/ecctl_user_key.md)	 - Manages the API keys of a platform user
+* [ecctl user key](/reference/ecctl_user_key.md) - Manages the API keys of a platform user
 

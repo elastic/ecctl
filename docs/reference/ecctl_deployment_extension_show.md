@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_extension_show.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment extension show [ecctl_deployment_extension_show]
 
-Shows information about a deployment extension
+Shows information about a deployment extension.
 
 ```
 ecctl deployment extension show <extension id> [--include-deployments] [flags]
@@ -26,7 +30,7 @@ ecctl deployment extension show <extension id> [--include-deployments] [flags]
 :::
 
 
-## SEE ALSO [_see_also_25]
+## See also [_see_also_25]
 
 * [ecctl deployment extension](/reference/ecctl_deployment_extension.md)	 - Manages deployment extensions, such as custom plugins or bundles
 

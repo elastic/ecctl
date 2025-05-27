@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_user_enable.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl user enable [ecctl_user_enable]
 
-Enables a previously disabled platform user ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Enables a previously disabled platform user.
 
 ```
 ecctl user enable <username> [flags]
@@ -25,7 +28,6 @@ ecctl user enable <username> [flags]
 :::
 
 
-## SEE ALSO [_see_also_129]
+## See also [_see_also_129]
 
-* [ecctl user](/reference/ecctl_user.md)	 - Manages the platform users ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
-
+* [ecctl user](/reference/ecctl_user.md) - Manages the platform users

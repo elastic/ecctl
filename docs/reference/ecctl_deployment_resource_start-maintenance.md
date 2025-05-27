@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_resource_start-maintenance.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment resource start-maintenance [ecctl_deployment_resource_start-maintenance]
 
-Starts maintenance mode on a deployment resource
+Starts maintenance mode on a deployment resource.
 
 ```
 ecctl deployment resource start-maintenance <deployment id> --kind <kind> [--all|--i <instance-id>,<instance-id>] [flags]
@@ -30,7 +34,7 @@ ecctl deployment resource start-maintenance <deployment id> --kind <kind> [--all
 :::
 
 
-## SEE ALSO [_see_also_34]
+## See also [_see_also_34]
 
 * [ecctl deployment resource](/reference/ecctl_deployment_resource.md)	 - Manages deployment resources
 

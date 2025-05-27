@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_elasticsearch_keystore_update.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl deployment elasticsearch keystore update [ecctl_deployment_elasticsearch_keystore_update]
 
-Updates the contents of an Elasticsearch keystore
+Updates the contents of an Elasticsearch keystore.
 
 
 ## Synopsis [_synopsis_2]
@@ -77,7 +80,6 @@ $ ecctl deployment elasticsearch keystore set --file=multiple.json <Deployment I
 :::
 
 
-## SEE ALSO [_see_also_20]
+## See also [_see_also_20]
 
 * [ecctl deployment elasticsearch keystore](/reference/ecctl_deployment_elasticsearch_keystore.md)	 - Manages Elasticsearch resource keystores
-
