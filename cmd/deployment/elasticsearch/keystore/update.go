@@ -36,8 +36,8 @@ deployment by using the PATCH method. The payload is a partial payload where any
 omitted current keystore items are not removed, unless the secrets are set to "null":
 {"secrets": {"my-secret": null}}.
 
-The contents of the specified file should be formatted to match the Elasticsearch Service
-API "KeystoreContents" model.
+The contents of the specified file should be formatted to match the Elastic Cloud
+API "secrets" object.
 `
 
 const updateExample = `# Set credentials for a GCS snapshot repository
