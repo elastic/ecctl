@@ -9,7 +9,7 @@ applies_to:
 
 # ecctl deployment search [ecctl_deployment_search]
 
-Performs advanced deployment search using the {{es}} Query DSL.
+Performs advanced deployment search using the Elasticsearch Query DSL.
 
 
 ## Synopsis [_synopsis_6]
