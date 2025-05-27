@@ -18,5 +18,5 @@ There are two ways to authenticate against the Elastic Cloud or Elastic Cloud En
 
 The first method requires the user to already have an API key, if this is the case, all the outgoing API requests will use an Authentication API key header.
 
-The second method uses the `user` and `pass` values to obtain a valid JWT token, that token is then used as the Authentication Bearer header for every API call. A goroutine that refreshes the token every minute is started, so that the token doesn’t expire while we’re performing actions.
+The second method uses the `user` and `pass` values to obtain a valid JWT token, that token is then used as the Authentication Bearer header for every API call. A goroutine that refreshes the token every minute is started, so that the token doesn’t expire while we’re performing actions.
 
