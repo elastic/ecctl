@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment [ecctl_deployment]
 
-Manages deployments
+Manages deployments.
 
 ```
 ecctl deployment [flags]
@@ -43,7 +47,7 @@ ecctl deployment [flags]
 ```
 
 
-## SEE ALSO [_see_also_14]
+## See also [_see_also_14]
 
 * [ecctl](/reference/ecctl.md)	 - Elastic Cloud Control
 * [ecctl deployment create](/reference/ecctl_deployment_create.md)	 - Creates a deployment

@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_resource_stop-maintenance.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment resource stop-maintenance [ecctl_deployment_resource_stop-maintenance]
 
-Stops maintenance mode on a deployment resource
+Stops maintenance mode on a deployment resource.
 
 ```
 ecctl deployment resource stop-maintenance <deployment id> --kind <kind> [--all|--i <instance-id>,<instance-id>] [flags]
@@ -48,7 +52,7 @@ ecctl deployment resource stop-maintenance <deployment id> --kind <kind> [--all|
 ```
 
 
-## SEE ALSO [_see_also_36]
+## See also [_see_also_36]
 
 * [ecctl deployment resource](/reference/ecctl_deployment_resource.md)	 - Manages deployment resources
 

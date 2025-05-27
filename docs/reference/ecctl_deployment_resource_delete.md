@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_resource_delete.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment resource delete [ecctl_deployment_resource_delete]
 
-Deletes a previously shut down deployment resource
+Deletes a previously shut down deployment resource.
 
 ```
 ecctl deployment resource delete <deployment id> --kind <kind> --ref-id <ref-id> [flags]
@@ -45,7 +49,7 @@ ecctl deployment resource delete <deployment id> --kind <kind> --ref-id <ref-id>
 ```
 
 
-## SEE ALSO [_see_also_31]
+## See also [_see_also_31]
 
 * [ecctl deployment resource](/reference/ecctl_deployment_resource.md)	 - Manages deployment resources
 

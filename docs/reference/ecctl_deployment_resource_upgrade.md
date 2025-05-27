@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_resource_upgrade.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment resource upgrade [ecctl_deployment_resource_upgrade]
 
-Upgrades a deployment resource
+Upgrades a deployment resource.
 
 
 ## Synopsis [_synopsis_4]
@@ -51,7 +55,7 @@ ecctl deployment resource upgrade <deployment id> --kind <kind> --ref-id <ref-id
 ```
 
 
-## SEE ALSO [_see_also_38]
+## See also [_see_also_38]
 
 * [ecctl deployment resource](/reference/ecctl_deployment_resource.md)	 - Manages deployment resources
 

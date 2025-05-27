@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_show.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment show [ecctl_deployment_show]
 
-Shows the specified deployment resources
+Shows the specified deployment resources.
 
 ```
 ecctl deployment show <deployment-id> [flags]
@@ -67,7 +71,7 @@ ecctl deployment show <deployment-id> [flags]
 ```
 
 
-## SEE ALSO [_see_also_42]
+## See also [_see_also_42]
 
 * [ecctl deployment](/reference/ecctl_deployment.md)	 - Manages deployments
 

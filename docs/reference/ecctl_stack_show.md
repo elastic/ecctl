@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_stack_show.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl stack show [ecctl_stack_show]
 
-Shows information about an Elastic StackPack
+Shows information about an Elastic StackPack.
 
 ```
 ecctl stack show [flags]
@@ -43,7 +47,7 @@ ecctl stack show [flags]
 ```
 
 
-## SEE ALSO [_see_also_123]
+## See also [_see_also_123]
 
-* [ecctl stack](/reference/ecctl_stack.md)	 - Manages Elastic StackPacks
+* [ecctl stack](/reference/ecctl_stack.md) - Manages Elastic StackPacks
 

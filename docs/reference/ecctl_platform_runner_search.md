@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_runner_search.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl platform runner search [ecctl_platform_runner_search]
 
-Performs advanced runner searching ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Performs advanced runner searching.
 
 
 ## Synopsis [_synopsis_12]
@@ -50,7 +53,7 @@ ecctl platform runner search [flags]
 ```
 
 
-## SEE ALSO [_see_also_118]
+## See also [_see_also_118]
 
-* [ecctl platform runner](/reference/ecctl_platform_runner.md)	 - Manages platform runners ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+* [ecctl platform runner](/reference/ecctl_platform_runner.md) - Manages platform runners
 

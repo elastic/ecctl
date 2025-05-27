@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_user_show.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl user show [ecctl_user_show]
 
-Shows details of a specified user ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Shows details of a specified user.
 
 ```
 ecctl user show <user name> [flags]
@@ -44,7 +47,7 @@ ecctl user show <user name> [flags]
 ```
 
 
-## SEE ALSO [_see_also_135]
+## See also [_see_also_135]
 
-* [ecctl user](/reference/ecctl_user.md)	 - Manages the platform users ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+* [ecctl user](/reference/ecctl_user.md) - Manages the platform users
 

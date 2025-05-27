@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_traffic-filter_list.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment traffic-filter list [ecctl_deployment_traffic-filter_list]
 
-Lists the traffic filter rulesets
+Lists the traffic filter rulesets.
 
 ```
 ecctl deployment traffic-filter list [--include-associations] [--single-region <region>] [flags]
@@ -45,7 +49,7 @@ ecctl deployment traffic-filter list [--include-associations] [--single-region <
 ```
 
 
-## SEE ALSO [_see_also_56]
+## See also [_see_also_56]
 
 * [ecctl deployment traffic-filter](/reference/ecctl_deployment_traffic-filter.md)	 - Manages traffic filter rulesets
 

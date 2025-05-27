@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_traffic-filter_create.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment traffic-filter create [ecctl_deployment_traffic-filter_create]
 
-Creates traffic filter rulesets
+Creates traffic filter rulesets.
 
 ```
 ecctl deployment traffic-filter create --region <region> --name <filter name> --type <filter type> --source <filter source>,<filter source>  [flags]
@@ -48,7 +52,7 @@ ecctl deployment traffic-filter create --region <region> --name <filter name> --
 ```
 
 
-## SEE ALSO [_see_also_54]
+## See also [_see_also_54]
 
 * [ecctl deployment traffic-filter](/reference/ecctl_deployment_traffic-filter.md)	 - Manages traffic filter rulesets
 

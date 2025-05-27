@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_allocator_vacate.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl platform allocator vacate [ecctl_platform_allocator_vacate]
 
-Moves all the resources from the specified allocator ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Moves all the resources from the specified allocator.
 
 ```
 ecctl platform allocator vacate <allocator-id> [flags]
@@ -94,7 +97,6 @@ ecctl platform allocator vacate <allocator-id> [flags]
 ```
 
 
-## SEE ALSO [_see_also_74]
+## See also [_see_also_74]
 
-* [ecctl platform allocator](/reference/ecctl_platform_allocator.md)	 - Manages allocators ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
-
+* [ecctl platform allocator](/reference/ecctl_platform_allocator.md) - Manages allocators

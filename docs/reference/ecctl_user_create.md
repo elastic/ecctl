@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_user_create.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl user create [ecctl_user_create]
 
-Creates a new platform user ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Creates a new platform user.
 
 ```
 ecctl user create --username <username> --role <role> [flags]
@@ -57,7 +60,6 @@ ecctl user create --username <username> --role <role> [flags]
 ```
 
 
-## SEE ALSO [_see_also_126]
+## See also [_see_also_126]
 
-* [ecctl user](/reference/ecctl_user.md)	 - Manages the platform users ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
-
+* [ecctl user](/reference/ecctl_user.md) - Manages the platform users

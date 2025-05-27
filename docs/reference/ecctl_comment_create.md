@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_comment_create.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl comment create [ecctl_comment_create]
 
-Creates a new resource comment ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Creates a new resource comment.
 
 ```
 ecctl comment create <message> --resource-type <resource-type> --resource-id <resource-id> [flags]
@@ -45,7 +48,6 @@ ecctl comment create <message> --resource-type <resource-type> --resource-id <re
 ```
 
 
-## SEE ALSO [_see_also_9]
+## See also [_see_also_9]
 
-* [ecctl comment](/reference/ecctl_comment.md)	 - Manages resource comments ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
-
+* [ecctl comment](/reference/ecctl_comment.md)	 - Manages resource comments

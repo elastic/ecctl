@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_resource_restore.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment resource restore [ecctl_deployment_resource_restore]
 
-Restores a previously shut down deployment resource
+Restores a previously shut down deployment resource.
 
 ```
 ecctl deployment resource restore <deployment id> --kind <kind> --ref-id <ref-id> [flags]
@@ -46,7 +50,7 @@ ecctl deployment resource restore <deployment id> --kind <kind> --ref-id <ref-id
 ```
 
 
-## SEE ALSO [_see_also_32]
+## See also [_see_also_32]
 
 * [ecctl deployment resource](/reference/ecctl_deployment_resource.md)	 - Manages deployment resources
 

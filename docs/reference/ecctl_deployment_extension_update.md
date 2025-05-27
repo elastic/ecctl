@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_extension_update.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment extension update [ecctl_deployment_extension_update]
 
-Updates an extension
+Updates an extension.
 
 ```
 ecctl deployment extension update <extension id> {--file <file-path> | --generate-payload} [--extension-file <file path>] [flags]
@@ -60,7 +64,7 @@ ecctl deployment extension update <extension id> {--file <file-path> | --generat
 ```
 
 
-## SEE ALSO [_see_also_26]
+## See also [_see_also_26]
 
 * [ecctl deployment extension](/reference/ecctl_deployment_extension.md)	 - Manages deployment extensions, such as custom plugins or bundles
 

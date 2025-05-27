@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_resource.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment resource [ecctl_deployment_resource]
 
-Manages deployment resources
+Manages deployment resources.
 
 ```
 ecctl deployment resource [flags]
@@ -43,7 +47,7 @@ ecctl deployment resource [flags]
 ```
 
 
-## SEE ALSO [_see_also_30]
+## See also [_see_also_30]
 
 * [ecctl deployment](/reference/ecctl_deployment.md)	 - Manages deployments
 * [ecctl deployment resource delete](/reference/ecctl_deployment_resource_delete.md)	 - Deletes a previously shut down deployment resource

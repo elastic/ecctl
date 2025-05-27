@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_generate_docs.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl generate docs [ecctl_generate_docs]
 
-Generates the command tree documentation
+Generates the command tree documentation.
 
 ```
 ecctl generate docs [flags]
@@ -44,7 +48,7 @@ ecctl generate docs [flags]
 ```
 
 
-## SEE ALSO [_see_also_62]
+## See also [_see_also_62]
 
 * [ecctl generate](/reference/ecctl_generate.md)	 - Generates completions and docs
 

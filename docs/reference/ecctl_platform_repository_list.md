@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_repository_list.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl platform repository list [ecctl_platform_repository_list]
 
-Lists all the snapshot repositories ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Lists all the snapshot repositories.
 
 ```
 ecctl platform repository list [flags]
@@ -43,7 +46,7 @@ ecctl platform repository list [flags]
 ```
 
 
-## SEE ALSO [_see_also_107]
+## See also [_see_also_107]
 
-* [ecctl platform repository](/reference/ecctl_platform_repository.md)	 - Manages snapshot repositories ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+* [ecctl platform repository](/reference/ecctl_platform_repository.md) - Manages snapshot repositories
 

@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_proxy_filtered-group_update.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl platform proxy filtered-group update [ecctl_platform_proxy_filtered-group_update]
 
-Updates proxies filtered group ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Updates proxies filtered group.
 
 ```
 ecctl platform proxy filtered-group update <filtered group id> --filters <key1=value1,key2=value2> --expected-proxies-count <int> --version <int> [flags]
@@ -46,7 +49,6 @@ ecctl platform proxy filtered-group update <filtered group id> --filters <key1=v
 ```
 
 
-## SEE ALSO [_see_also_98]
+## See also [_see_also_98]
 
-* [ecctl platform proxy filtered-group](/reference/ecctl_platform_proxy_filtered-group.md)	 - Manages proxies filtered group ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
-
+* [ecctl platform proxy filtered-group](/reference/ecctl_platform_proxy_filtered-group.md) - Manages proxies filtered group

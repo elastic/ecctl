@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_proxy_filtered-group_list.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl platform proxy filtered-group list [ecctl_platform_proxy_filtered-group_list]
 
-Returns all proxies filtered groups in the platform ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Returns all proxies filtered groups in the platform.
 
 ```
 ecctl platform proxy filtered-group list [flags]
@@ -43,7 +46,7 @@ ecctl platform proxy filtered-group list [flags]
 ```
 
 
-## SEE ALSO [_see_also_96]
+## See also [_see_also_96]
 
-* [ecctl platform proxy filtered-group](/reference/ecctl_platform_proxy_filtered-group.md)	 - Manages proxies filtered group ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+* [ecctl platform proxy filtered-group](/reference/ecctl_platform_proxy_filtered-group.md) - Manages proxies filtered group
 

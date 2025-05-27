@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_role_create.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl platform role create [ecctl_platform_role_create]
 
-Creates a new platform role from a definition ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Creates a new platform role from a definition.
 
 ```
 ecctl platform role create --file <filename.json> [flags]
@@ -44,7 +47,7 @@ ecctl platform role create --file <filename.json> [flags]
 ```
 
 
-## SEE ALSO [_see_also_110]
+## See also [_see_also_110]
 
-* [ecctl platform role](/reference/ecctl_platform_role.md)	 - Manages platform roles ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+* [ecctl platform role](/reference/ecctl_platform_role.md) - Manages platform roles
 

@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_resource_stop.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment resource stop [ecctl_deployment_resource_stop]
 
-Stops a deployment resource
+Stops a deployment resource.
 
 ```
 ecctl deployment resource stop <deployment id> --kind <kind> [--all|--i <instance-id>,<instance-id>] [flags]
@@ -48,7 +52,7 @@ ecctl deployment resource stop <deployment id> --kind <kind> [--all|--i <instanc
 ```
 
 
-## SEE ALSO [_see_also_37]
+## See also [_see_also_37]
 
 * [ecctl deployment resource](/reference/ecctl_deployment_resource.md)	 - Manages deployment resources
 

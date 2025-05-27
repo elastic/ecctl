@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_allocator_list.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl platform allocator list [ecctl_platform_allocator_list]
 
-Returns all allocators that have instances or are connected to the platform. Use --all flag or --output json to show all. Use --query to match any of the allocators properties. ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Returns all allocators that have instances or are connected to the platform.
+Use --all flag or --output json to show all. Use --query to match any of the allocators properties.
 
 
 ## Synopsis [_synopsis_8]
@@ -74,7 +78,6 @@ ecctl platform allocator list [flags]
 ```
 
 
-## SEE ALSO [_see_also_66]
+## See also [_see_also_66]
 
-* [ecctl platform allocator](/reference/ecctl_platform_allocator.md)	 - Manages allocators ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
-
+* [ecctl platform allocator](/reference/ecctl_platform_allocator.md)	 - Manages allocators
