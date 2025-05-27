@@ -1,6 +1,10 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl [ecctl]
@@ -32,7 +36,6 @@ Elastic Cloud Control
       --verbose-file string   When set, the verbose request/response trail will be written to the defined file
 ```
 
-
 ## SEE ALSO [_see_also]
 
 * [ecctl auth](/reference/ecctl_auth.md) - Manages authentication settings
@@ -44,4 +47,3 @@ Elastic Cloud Control
 * [ecctl stack](/reference/ecctl_stack.md) - Manages Elastic StackPacks
 * [ecctl user](/reference/ecctl_user.md) - Manages the platform users
 * [ecctl version](/reference/ecctl_version.md) - Shows ecctl version
-
