@@ -50,7 +50,7 @@ ecctl deployment template list [flags]
 ```
 
 
-## SEE ALSO [_see_also_47]
+## See also [_see_also_47]
 
 * [ecctl deployment template](/reference/ecctl_deployment_template.md)	 - Interacts with deployment template APIs
 

@@ -107,7 +107,7 @@ setting --prune-orphans to "true" will cause any resources not specified in the 
 ```
 
 
-## SEE ALSO [_see_also_59]
+## See also [_see_also_59]
 
 * [ecctl deployment](/reference/ecctl_deployment.md)	 - Manages deployments
 

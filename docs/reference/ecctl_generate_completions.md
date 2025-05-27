@@ -49,7 +49,7 @@ ecctl generate completions [flags]
 ```
 
 
-## SEE ALSO [_see_also_61]
+## See also [_see_also_61]
 
 * [ecctl generate](/reference/ecctl_generate.md)	 - Generates completions and docs
 

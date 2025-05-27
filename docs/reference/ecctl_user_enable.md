@@ -46,6 +46,6 @@ ecctl user enable <username> [flags]
 ```
 
 
-## SEE ALSO [_see_also_129]
+## See also [_see_also_129]
 
 * [ecctl user](/reference/ecctl_user.md) - Manages the platform users

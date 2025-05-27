@@ -48,7 +48,7 @@ ecctl platform proxy filtered-group create <filtered group id> --filters <key1=v
 ```
 
 
-## SEE ALSO [_see_also_94]
+## See also [_see_also_94]
 
 * [ecctl platform proxy filtered-group](/reference/ecctl_platform_proxy_filtered-group.md) - Manages proxies filtered group
 

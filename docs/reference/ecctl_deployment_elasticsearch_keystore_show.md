@@ -48,6 +48,6 @@ ecctl deployment elasticsearch keystore show <deployment id> [--ref-id <ref-id>]
 ```
 
 
-## SEE ALSO [_see_also_19]
+## See also [_see_also_19]
 
 * [ecctl deployment elasticsearch keystore](/reference/ecctl_deployment_elasticsearch_keystore.md)	 - Manages Elasticsearch resource keystores

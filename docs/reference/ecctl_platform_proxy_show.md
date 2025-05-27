@@ -46,6 +46,6 @@ ecctl platform proxy show <proxy id> [flags]
 ```
 
 
-## SEE ALSO [_see_also_103]
+## See also [_see_also_103]
 
 * [ecctl platform proxy](/reference/ecctl_platform_proxy.md) - Manages proxies

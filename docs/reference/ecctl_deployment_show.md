@@ -71,7 +71,7 @@ ecctl deployment show <deployment-id> [flags]
 ```
 
 
-## SEE ALSO [_see_also_42]
+## See also [_see_also_42]
 
 * [ecctl deployment](/reference/ecctl_deployment.md)	 - Manages deployments
 

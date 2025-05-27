@@ -46,7 +46,7 @@ ecctl platform constructor [flags]
 ```
 
 
-## SEE ALSO [_see_also_75]
+## See also [_see_also_75]
 
 * [ecctl platform](/reference/ecctl_platform.md) - Manages the platform
 * [ecctl platform constructor list](/reference/ecctl_platform_constructor_list.md) - Returns all of the constructors in the platform

@@ -49,7 +49,7 @@ ecctl deployment template update --template-id <template id> --file <definition.
 ```
 
 
-## SEE ALSO [_see_also_49]
+## See also [_see_also_49]
 
 * [ecctl deployment template](/reference/ecctl_deployment_template.md)	 - Interacts with deployment template APIs
 

@@ -49,7 +49,7 @@ ecctl deployment shutdown <deployment-id> [flags]
 ```
 
 
-## SEE ALSO [_see_also_43]
+## See also [_see_also_43]
 
 * [ecctl deployment](/reference/ecctl_deployment.md)	 - Manages deployments
 

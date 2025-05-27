@@ -50,7 +50,7 @@ ecctl platform repository [flags]
 ```
 
 
-## SEE ALSO [_see_also_104]
+## See also [_see_also_104]
 
 * [ecctl platform](/reference/ecctl_platform.md) - Manages the platform
 * [ecctl platform repository create](/reference/ecctl_platform_repository_create.md) - Creates or updates a snapshot repository

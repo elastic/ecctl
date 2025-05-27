@@ -47,7 +47,7 @@ ecctl user show <user name> [flags]
 ```
 
 
-## SEE ALSO [_see_also_135]
+## See also [_see_also_135]
 
 * [ecctl user](/reference/ecctl_user.md) - Manages the platform users
 

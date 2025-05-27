@@ -65,7 +65,7 @@ ecctl user update <username> --role <role> [flags]
 ```
 
 
-## SEE ALSO [_see_also_136]
+## See also [_see_also_136]
 
 * [ecctl user](/reference/ecctl_user.md) - Manages the platform users
 

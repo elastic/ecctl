@@ -46,7 +46,7 @@ ecctl platform enrollment-token [flags]
 ```
 
 
-## SEE ALSO [_see_also_80]
+## See also [_see_also_80]
 
 * [ecctl platform](/reference/ecctl_platform.md) - Manages the platform
 * [ecctl platform enrollment-token create](/reference/ecctl_platform_enrollment-token_create.md) - Creates an enrollment token for roles

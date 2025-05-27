@@ -46,7 +46,7 @@ ecctl platform instance-configuration delete <config id> [flags]
 ```
 
 
-## SEE ALSO [_see_also_87]
+## See also [_see_also_87]
 
 * [ecctl platform instance-configuration](/reference/ecctl_platform_instance-configuration.md)	 - Manages instance configurations
 

@@ -46,7 +46,7 @@ ecctl platform enrollment-token list [flags]
 ```
 
 
-## SEE ALSO [_see_also_83]
+## See also [_see_also_83]
 
 * [ecctl platform enrollment-token](/reference/ecctl_platform_enrollment-token.md) - Manages tokens
 

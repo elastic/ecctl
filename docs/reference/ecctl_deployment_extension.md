@@ -47,7 +47,7 @@ ecctl deployment extension [flags]
 ```
 
 
-## SEE ALSO [_see_also_21]
+## See also [_see_also_21]
 
 * [ecctl deployment](/reference/ecctl_deployment.md)	 - Manages deployments
 * [ecctl deployment extension create](/reference/ecctl_deployment_extension_create.md)	 - Creates an extension

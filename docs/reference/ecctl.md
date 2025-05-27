@@ -36,7 +36,7 @@ Elastic Cloud Control
       --verbose-file string   When set, the verbose request/response trail will be written to the defined file
 ```
 
-## SEE ALSO [_see_also]
+## See also [_see_also]
 
 * [ecctl auth](/reference/ecctl_auth.md) - Manages authentication settings
 * [ecctl comment](/reference/ecctl_comment.md) - Manages resource comments

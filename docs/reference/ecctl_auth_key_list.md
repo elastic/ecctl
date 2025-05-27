@@ -47,7 +47,7 @@ ecctl auth key list [flags]
 ```
 
 
-## SEE ALSO [_see_also_6]
+## See also [_see_also_6]
 
 * [ecctl auth key](/reference/ecctl_auth_key.md)	 - Manages the current authenticated user API keys
 

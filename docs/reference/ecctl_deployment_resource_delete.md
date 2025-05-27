@@ -49,7 +49,7 @@ ecctl deployment resource delete <deployment id> --kind <kind> --ref-id <ref-id>
 ```
 
 
-## SEE ALSO [_see_also_31]
+## See also [_see_also_31]
 
 * [ecctl deployment resource](/reference/ecctl_deployment_resource.md)	 - Manages deployment resources
 

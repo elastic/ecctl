@@ -46,7 +46,7 @@ ecctl platform allocator [flags]
 ```
 
 
-## SEE ALSO [_see_also_65]
+## See also [_see_also_65]
 
 * [ecctl platform](/reference/ecctl_platform.md) - Manages the platform
 * [ecctl platform allocator list](/reference/ecctl_platform_allocator_list.md) - Returns all allocators that have instances or are connected to the platform.

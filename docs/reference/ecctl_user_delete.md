@@ -46,6 +46,6 @@ ecctl user delete <user name> <user name>... [flags]
 ```
 
 
-## SEE ALSO [_see_also_127]
+## See also [_see_also_127]
 
 * [ecctl user](/reference/ecctl_user.md) - Manages the platform users

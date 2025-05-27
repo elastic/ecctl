@@ -46,7 +46,7 @@ ecctl platform proxy filtered-group [flags]
 ```
 
 
-## SEE ALSO [_see_also_93]
+## See also [_see_also_93]
 
 * [ecctl platform proxy](/reference/ecctl_platform_proxy.md) - Manages proxies
 * [ecctl platform proxy filtered-group create](/reference/ecctl_platform_proxy_filtered-group_create.md) - Creates proxies filtered group

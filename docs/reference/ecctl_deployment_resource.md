@@ -47,7 +47,7 @@ ecctl deployment resource [flags]
 ```
 
 
-## SEE ALSO [_see_also_30]
+## See also [_see_also_30]
 
 * [ecctl deployment](/reference/ecctl_deployment.md)	 - Manages deployments
 * [ecctl deployment resource delete](/reference/ecctl_deployment_resource_delete.md)	 - Deletes a previously shut down deployment resource

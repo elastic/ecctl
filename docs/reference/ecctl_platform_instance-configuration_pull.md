@@ -47,6 +47,6 @@ ecctl platform instance-configuration pull --path <path> [flags]
 ```
 
 
-## SEE ALSO [_see_also_89]
+## See also [_see_also_89]
 
 * [ecctl platform instance-configuration](/reference/ecctl_platform_instance-configuration.md) - Manages instance configurations

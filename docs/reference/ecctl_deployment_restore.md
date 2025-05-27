@@ -62,7 +62,7 @@ $ ecctl deployment restore 5c17ad7c8df73206baa54b6e2829d9bc
 ```
 
 
-## SEE ALSO [_see_also_39]
+## See also [_see_also_39]
 
 * [ecctl deployment](/reference/ecctl_deployment.md)	 - Manages deployments
 

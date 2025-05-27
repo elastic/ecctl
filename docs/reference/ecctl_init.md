@@ -47,7 +47,7 @@ ecctl init [flags]
 ```
 
 
-## SEE ALSO [_see_also_63]
+## See also [_see_also_63]
 
 * [ecctl](/reference/ecctl.md)	 - Elastic Cloud Control
 

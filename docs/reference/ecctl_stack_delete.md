@@ -46,7 +46,7 @@ ecctl stack delete [flags]
 ```
 
 
-## SEE ALSO [_see_also_121]
+## See also [_see_also_121]
 
 * [ecctl stack](/reference/ecctl_stack.md) - Manages Elastic StackPacks
 

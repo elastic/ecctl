@@ -60,7 +60,7 @@ ecctl deployment traffic-filter update <traffic-filter id> {--file <file-path> |
 ```
 
 
-## SEE ALSO [_see_also_58]
+## See also [_see_also_58]
 
 * [ecctl deployment traffic-filter](/reference/ecctl_deployment_traffic-filter.md)	 - Manages traffic filter rulesets
 

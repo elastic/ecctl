@@ -47,7 +47,7 @@ ecctl deployment traffic-filter association [flags]
 ```
 
 
-## SEE ALSO [_see_also_51]
+## See also [_see_also_51]
 
 * [ecctl deployment traffic-filter](/reference/ecctl_deployment_traffic-filter.md)	 - Manages traffic filter rulesets
 * [ecctl deployment traffic-filter association create](/reference/ecctl_deployment_traffic-filter_association_create.md)	 - Applies the ruleset to the specified deployment.

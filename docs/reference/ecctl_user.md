@@ -46,7 +46,7 @@ ecctl user [flags]
 ```
 
 
-## SEE ALSO [_see_also_125]
+## See also [_see_also_125]
 
 * [ecctl](/reference/ecctl.md) - Elastic Cloud Control
 * [ecctl user create](/reference/ecctl_user_create.md) - Creates a new platform user

@@ -46,7 +46,7 @@ ecctl platform repository delete <repository name> [flags]
 ```
 
 
-## SEE ALSO [_see_also_106]
+## See also [_see_also_106]
 
 * [ecctl platform repository](/reference/ecctl_platform_repository.md) - Manages snapshot repositories
 

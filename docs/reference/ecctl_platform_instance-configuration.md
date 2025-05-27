@@ -46,7 +46,7 @@ ecctl platform instance-configuration [flags]
 ```
 
 
-## SEE ALSO [_see_also_85]
+## See also [_see_also_85]
 
 * [ecctl platform](/reference/ecctl_platform.md) - Manages the platform
 * [ecctl platform instance-configuration create](/reference/ecctl_platform_instance-configuration_create.md) - Creates a new instance configuration

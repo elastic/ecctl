@@ -46,7 +46,7 @@ ecctl stack upload [flags]
 ```
 
 
-## SEE ALSO [_see_also_124]
+## See also [_see_also_124]
 
 * [ecctl stack](/reference/ecctl_stack.md) - Manages Elastic StackPacks
 

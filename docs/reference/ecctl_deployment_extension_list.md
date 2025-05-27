@@ -47,7 +47,7 @@ ecctl deployment extension list [flags]
 ```
 
 
-## SEE ALSO [_see_also_24]
+## See also [_see_also_24]
 
 * [ecctl deployment extension](/reference/ecctl_deployment_extension.md)	 - Manages deployment extensions, such as custom plugins or bundles
 

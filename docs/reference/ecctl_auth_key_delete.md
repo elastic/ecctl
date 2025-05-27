@@ -47,7 +47,7 @@ ecctl auth key delete <key id> <key id> ... [flags]
 ```
 
 
-## SEE ALSO [_see_also_5]
+## See also [_see_also_5]
 
 * [ecctl auth key](/reference/ecctl_auth_key.md)	 - Manages the current authenticated user API keys
 

@@ -52,7 +52,7 @@ ecctl deployment resource stop-maintenance <deployment id> --kind <kind> [--all|
 ```
 
 
-## SEE ALSO [_see_also_36]
+## See also [_see_also_36]
 
 * [ecctl deployment resource](/reference/ecctl_deployment_resource.md)	 - Manages deployment resources
 

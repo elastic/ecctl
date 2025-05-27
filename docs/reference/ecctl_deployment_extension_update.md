@@ -64,7 +64,7 @@ ecctl deployment extension update <extension id> {--file <file-path> | --generat
 ```
 
 
-## SEE ALSO [_see_also_26]
+## See also [_see_also_26]
 
 * [ecctl deployment extension](/reference/ecctl_deployment_extension.md)	 - Manages deployment extensions, such as custom plugins or bundles
 

@@ -49,7 +49,7 @@ ecctl deployment template create --file <definition.json> [flags]
 ```
 
 
-## SEE ALSO [_see_also_45]
+## See also [_see_also_45]
 
 * [ecctl deployment template](/reference/ecctl_deployment_template.md)	 - Interacts with deployment template APIs
 

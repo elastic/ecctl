@@ -47,7 +47,7 @@ ecctl platform allocator metadata [flags]
 ```
 
 
-## SEE ALSO [_see_also_68]
+## See also [_see_also_68]
 
 * [ecctl platform allocator](/reference/ecctl_platform_allocator.md)	 - Manages allocators ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
 * [ecctl platform allocator metadata delete](/reference/ecctl_platform_allocator_metadata_delete.md)	 - Deletes a single metadata item from a given allocators metadata

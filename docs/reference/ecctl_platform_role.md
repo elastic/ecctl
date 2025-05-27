@@ -46,7 +46,7 @@ ecctl platform role [flags]
 ```
 
 
-## SEE ALSO [_see_also_109]
+## See also [_see_also_109]
 
 * [ecctl platform](/reference/ecctl_platform.md) - Manages the platform
 * [ecctl platform role create](/reference/ecctl_platform_role_create.md) - Creates a new platform role from a definition

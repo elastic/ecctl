@@ -48,7 +48,7 @@ ecctl deployment traffic-filter association create <ruleset id> --deployment-id 
 ```
 
 
-## SEE ALSO [_see_also_52]
+## See also [_see_also_52]
 
 * [ecctl deployment traffic-filter association](/reference/ecctl_deployment_traffic-filter_association.md)	 - Manages traffic filter ruleset associations
 

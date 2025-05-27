@@ -47,7 +47,7 @@ ecctl auth key [flags]
 ```
 
 
-## SEE ALSO [_see_also_3]
+## See also [_see_also_3]
 
 * [ecctl auth](/reference/ecctl_auth.md)	 - Manages authentication settings
 * [ecctl auth key create](/reference/ecctl_auth_key_create.md)	 - Creates a new API key for the current authenticated user

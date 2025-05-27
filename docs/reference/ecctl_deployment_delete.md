@@ -46,7 +46,7 @@ ecctl deployment delete <deployment-id> [flags]
 ```
 
 
-## SEE ALSO [_see_also_16]
+## See also [_see_also_16]
 
 * [ecctl deployment](/reference/ecctl_deployment.md) - Manages deployments
 

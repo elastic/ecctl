@@ -47,7 +47,7 @@ ecctl deployment extension delete <extension id> [flags]
 ```
 
 
-## SEE ALSO [_see_also_23]
+## See also [_see_also_23]
 
 * [ecctl deployment extension](/reference/ecctl_deployment_extension.md)	 - Manages deployment extensions, such as custom plugins or bundles
 

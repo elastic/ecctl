@@ -47,7 +47,7 @@ ecctl stack [flags]
 ```
 
 
-## SEE ALSO [_see_also_120]
+## See also [_see_also_120]
 
 * [ecctl](/reference/ecctl.md) - Elastic Cloud Control
 * [ecctl stack delete](/reference/ecctl_stack_delete.md) - Deletes an Elastic StackPack

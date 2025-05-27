@@ -46,7 +46,7 @@ ecctl user list [flags]
 ```
 
 
-## SEE ALSO [_see_also_134]
+## See also [_see_also_134]
 
 * [ecctl user](/reference/ecctl_user.md) - Manages the platform users
 

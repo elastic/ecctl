@@ -46,7 +46,7 @@ ecctl platform repository show <repository name> [flags]
 ```
 
 
-## SEE ALSO [_see_also_108]
+## See also [_see_also_108]
 
 * [ecctl platform repository](/reference/ecctl_platform_repository.md) - Manages snapshot repositories
 

@@ -47,6 +47,6 @@ ecctl platform constructor resync {<constructor id> | --all} [flags]
 ```
 
 
-## SEE ALSO [_see_also_78]
+## See also [_see_also_78]
 
 * [ecctl platform constructor](/reference/ecctl_platform_constructor.md) - Manages constructors

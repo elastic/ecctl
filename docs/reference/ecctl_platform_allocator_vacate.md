@@ -97,6 +97,6 @@ ecctl platform allocator vacate <allocator-id> [flags]
 ```
 
 
-## SEE ALSO [_see_also_74]
+## See also [_see_also_74]
 
 * [ecctl platform allocator](/reference/ecctl_platform_allocator.md) - Manages allocators

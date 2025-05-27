@@ -68,7 +68,7 @@ ecctl platform repository create custom --type fs --settings settings.yml
 ```
 
 
-## SEE ALSO [_see_also_105]
+## See also [_see_also_105]
 
 * [ecctl platform repository](/reference/ecctl_platform_repository.md) - Manages snapshot repositories
 

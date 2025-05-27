@@ -48,7 +48,7 @@ ecctl deployment resync {<deployment id> | --all} [flags]
 ```
 
 
-## SEE ALSO [_see_also_40]
+## See also [_see_also_40]
 
 * [ecctl deployment](/reference/ecctl_deployment.md)	 - Manages deployments
 

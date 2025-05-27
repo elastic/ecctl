@@ -47,7 +47,7 @@ ecctl deployment plan [flags]
 ```
 
 
-## SEE ALSO [_see_also_28]
+## See also [_see_also_28]
 
 * [ecctl deployment](/reference/ecctl_deployment.md)	 - Manages deployments
 * [ecctl deployment plan cancel](/reference/ecctl_deployment_plan_cancel.md)	 - Cancels a resource’s pending plan

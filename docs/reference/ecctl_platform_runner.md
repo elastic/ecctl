@@ -46,7 +46,7 @@ ecctl platform runner [flags]
 ```
 
 
-## SEE ALSO [_see_also_115]
+## See also [_see_also_115]
 
 * [ecctl platform](/reference/ecctl_platform.md) - Manages the platform
 * [ecctl platform runner list](/reference/ecctl_platform_runner_list.md) - Lists the existing platform runners

@@ -46,7 +46,7 @@ ecctl platform proxy filtered-group list [flags]
 ```
 
 
-## SEE ALSO [_see_also_96]
+## See also [_see_also_96]
 
 * [ecctl platform proxy filtered-group](/reference/ecctl_platform_proxy_filtered-group.md) - Manages proxies filtered group
 

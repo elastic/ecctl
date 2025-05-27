@@ -46,6 +46,6 @@ ecctl platform role show <role> [flags]
 ```
 
 
-## SEE ALSO [_see_also_113]
+## See also [_see_also_113]
 
 * [ecctl platform role](/reference/ecctl_platform_role.md) - Manages platform roles

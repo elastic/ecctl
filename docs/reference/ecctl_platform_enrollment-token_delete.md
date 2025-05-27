@@ -46,6 +46,6 @@ ecctl platform enrollment-token delete <enrollment-token> [flags]
 ```
 
 
-## SEE ALSO [_see_also_82]
+## See also [_see_also_82]
 
 * [ecctl platform enrollment-token](/reference/ecctl_platform_enrollment-token.md) - Manages tokens

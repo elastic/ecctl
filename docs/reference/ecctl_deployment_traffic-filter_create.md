@@ -52,7 +52,7 @@ ecctl deployment traffic-filter create --region <region> --name <filter name> --
 ```
 
 
-## SEE ALSO [_see_also_54]
+## See also [_see_also_54]
 
 * [ecctl deployment traffic-filter](/reference/ecctl_deployment_traffic-filter.md)	 - Manages traffic filter rulesets
 

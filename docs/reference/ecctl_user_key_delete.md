@@ -47,7 +47,7 @@ ecctl user key delete --user=<user id> <key id> <key id>... [flags]
 ```
 
 
-## SEE ALSO [_see_also_131]
+## See also [_see_also_131]
 
 * [ecctl user key](/reference/ecctl_user_key.md) - Manages the API keys of a platform user
 

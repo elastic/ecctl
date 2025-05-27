@@ -46,7 +46,7 @@ ecctl user disable <username> [flags]
 ```
 
 
-## SEE ALSO [_see_also_128]
+## See also [_see_also_128]
 
 * [ecctl user](/reference/ecctl_user.md) - Manages the platform users
 

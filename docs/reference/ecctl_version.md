@@ -47,7 +47,7 @@ ecctl version [flags]
 ```
 
 
-## SEE ALSO [_see_also_137]
+## See also [_see_also_137]
 
 * [ecctl](/reference/ecctl.md) - Elastic Cloud Control
 

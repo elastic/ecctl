@@ -46,7 +46,7 @@ ecctl platform info [flags]
 ```
 
 
-## SEE ALSO [_see_also_84]
+## See also [_see_also_84]
 
 * [ecctl platform](/reference/ecctl_platform.md) - Manages the platform
 

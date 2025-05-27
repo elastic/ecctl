@@ -49,7 +49,7 @@ ecctl deployment traffic-filter list [--include-associations] [--single-region <
 ```
 
 
-## SEE ALSO [_see_also_56]
+## See also [_see_also_56]
 
 * [ecctl deployment traffic-filter](/reference/ecctl_deployment_traffic-filter.md)	 - Manages traffic filter rulesets
 

@@ -47,7 +47,7 @@ ecctl platform instance-configuration update <config id> -f <config.json> [flags
 ```
 
 
-## SEE ALSO [_see_also_91]
+## See also [_see_also_91]
 
 * [ecctl platform instance-configuration](/reference/ecctl_platform_instance-configuration.md)	 - Manages instance configurations
 

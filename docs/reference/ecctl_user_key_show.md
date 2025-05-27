@@ -47,7 +47,7 @@ ecctl user key show --user=<user id> <key id> [flags]
 ```
 
 
-## SEE ALSO [_see_also_133]
+## See also [_see_also_133]
 
 * [ecctl user key](/reference/ecctl_user_key.md) - Manages the API keys of a platform user
 

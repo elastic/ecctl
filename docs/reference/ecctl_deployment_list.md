@@ -47,7 +47,7 @@ ecctl deployment list [flags]
 ```
 
 
-## SEE ALSO [_see_also_27]
+## See also [_see_also_27]
 
 * [ecctl deployment](/reference/ecctl_deployment.md)	 - Manages deployments
 

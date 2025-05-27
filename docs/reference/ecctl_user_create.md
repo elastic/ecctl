@@ -60,6 +60,6 @@ ecctl user create --username <username> --role <role> [flags]
 ```
 
 
-## SEE ALSO [_see_also_126]
+## See also [_see_also_126]
 
 * [ecctl user](/reference/ecctl_user.md) - Manages the platform users

@@ -46,7 +46,7 @@ ecctl platform instance-configuration list [flags]
 ```
 
 
-## SEE ALSO [_see_also_88]
+## See also [_see_also_88]
 
 * [ecctl platform instance-configuration](/reference/ecctl_platform_instance-configuration.md)	 - Manages instance configurations
 

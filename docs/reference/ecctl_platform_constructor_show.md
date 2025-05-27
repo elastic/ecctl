@@ -46,7 +46,7 @@ ecctl platform constructor show <constructor id> [flags]
 ```
 
 
-## SEE ALSO [_see_also_79]
+## See also [_see_also_79]
 
 * [ecctl platform constructor](/reference/ecctl_platform_constructor.md) - Manages constructors
 

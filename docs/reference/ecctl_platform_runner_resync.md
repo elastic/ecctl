@@ -47,7 +47,7 @@ ecctl platform runner resync {<runner id> | --all} [flags]
 ```
 
 
-## SEE ALSO [_see_also_117]
+## See also [_see_also_117]
 
 * [ecctl platform runner](/reference/ecctl_platform_runner.md) - Manages platform runners
 

@@ -60,7 +60,7 @@ $ ecctl platform proxy settings update --file settings.json --region us-east-1 -
 ```
 
 
-## SEE ALSO [_see_also_102]
+## See also [_see_also_102]
 
 * [ecctl platform proxy settings](/reference/ecctl_platform_proxy_settings.md) - Manages proxies settings
 

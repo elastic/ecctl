@@ -47,7 +47,7 @@ ecctl deployment elasticsearch keystore [flags]
 ```
 
 
-## SEE ALSO [_see_also_18]
+## See also [_see_also_18]
 
 * [ecctl deployment elasticsearch](/reference/ecctl_deployment_elasticsearch.md)	 - Manages Elasticsearch resources
 * [ecctl deployment elasticsearch keystore show](/reference/ecctl_deployment_elasticsearch_keystore_show.md)	 - Shows the settings from the Elasticsearch resource keystore

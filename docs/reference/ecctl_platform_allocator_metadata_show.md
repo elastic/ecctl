@@ -47,7 +47,7 @@ ecctl platform allocator metadata show <allocator id> [flags]
 ```
 
 
-## SEE ALSO [_see_also_71]
+## See also [_see_also_71]
 
 * [ecctl platform allocator metadata](/reference/ecctl_platform_allocator_metadata.md)	 - Manages an allocator’s metadata
 

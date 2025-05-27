@@ -47,7 +47,7 @@ ecctl stack show [flags]
 ```
 
 
-## SEE ALSO [_see_also_123]
+## See also [_see_also_123]
 
 * [ecctl stack](/reference/ecctl_stack.md) - Manages Elastic StackPacks
 

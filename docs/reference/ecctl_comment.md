@@ -46,7 +46,7 @@ ecctl comment [flags]
 ```
 
 
-## SEE ALSO [_see_also_8]
+## See also [_see_also_8]
 
 * [ecctl](/reference/ecctl.md)	 - Elastic Cloud Control
 * [ecctl comment create](/reference/ecctl_comment_create.md)	 - Creates a new resource comment

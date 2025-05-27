@@ -46,6 +46,6 @@ ecctl platform runner show <runner id> [flags]
 ```
 
 
-## SEE ALSO [_see_also_119]
+## See also [_see_also_119]
 
 * [ecctl platform runner](/reference/ecctl_platform_runner.md) - Manages platform runners

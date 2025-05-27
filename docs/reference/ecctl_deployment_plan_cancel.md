@@ -49,7 +49,7 @@ ecctl deployment plan cancel <deployment id> --kind <kind> [--ref-id <ref-id>] [
 ```
 
 
-## SEE ALSO [_see_also_29]
+## See also [_see_also_29]
 
 * [ecctl deployment plan](/reference/ecctl_deployment_plan.md)	 - Manages deployment plans
 

@@ -47,6 +47,6 @@ ecctl platform allocator metadata delete <allocator id> <key> [flags]
 ```
 
 
-## SEE ALSO [_see_also_69]
+## See also [_see_also_69]
 
 * [ecctl platform allocator metadata](/reference/ecctl_platform_allocator_metadata.md)	 - Manages an allocator’s metadata

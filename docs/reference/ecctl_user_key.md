@@ -47,7 +47,7 @@ ecctl user key [flags]
 ```
 
 
-## SEE ALSO [_see_also_130]
+## See also [_see_also_130]
 
 * [ecctl user](/reference/ecctl_user.md) - Manages the platform users
 * [ecctl user key delete](/reference/ecctl_user_key_delete.md) - Deletes an existing API key for the specified user

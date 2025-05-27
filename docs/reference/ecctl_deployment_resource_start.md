@@ -52,7 +52,7 @@ ecctl deployment resource start <deployment id> --kind <kind> [--all|--i <instan
 ```
 
 
-## SEE ALSO [_see_also_35]
+## See also [_see_also_35]
 
 * [ecctl deployment resource](/reference/ecctl_deployment_resource.md)	 - Manages deployment resources
 

@@ -23,7 +23,6 @@ ecctl auth key create [flags]
   -h, --help                 help for create
 ```
 
-
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_3]
 
 ```
@@ -47,8 +46,6 @@ ecctl auth key create [flags]
       --verbose-file string   When set, the verbose request/response trail will be written to the defined file
 ```
 
+## See also [_see_also_4]
 
-## SEE ALSO [_see_also_4]
-
-* [ecctl auth key](/reference/ecctl_auth_key.md)	 - Manages the current authenticated user API keys
-
+* [ecctl auth key](/reference/ecctl_auth_key.md) - Manages the current authenticated user API keys

@@ -47,7 +47,7 @@ ecctl deployment template delete --template-id <template id> [flags]
 ```
 
 
-## SEE ALSO [_see_also_46]
+## See also [_see_also_46]
 
 * [ecctl deployment template](/reference/ecctl_deployment_template.md)	 - Interacts with deployment template APIs
 

@@ -47,7 +47,7 @@ ecctl platform role create --file <filename.json> [flags]
 ```
 
 
-## SEE ALSO [_see_also_110]
+## See also [_see_also_110]
 
 * [ecctl platform role](/reference/ecctl_platform_role.md) - Manages platform roles
 

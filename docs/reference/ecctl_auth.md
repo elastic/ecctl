@@ -47,7 +47,7 @@ ecctl auth [flags]
 ```
 
 
-## SEE ALSO [_see_also_2]
+## See also [_see_also_2]
 
 * [ecctl](/reference/ecctl.md)	 - Elastic Cloud Control
 * [ecctl auth key](/reference/ecctl_auth_key.md)	 - Manages the current authenticated user API keys

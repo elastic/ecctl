@@ -47,7 +47,7 @@ ecctl deployment [flags]
 ```
 
 
-## SEE ALSO [_see_also_14]
+## See also [_see_also_14]
 
 * [ecctl](/reference/ecctl.md)	 - Elastic Cloud Control
 * [ecctl deployment create](/reference/ecctl_deployment_create.md)	 - Creates a deployment

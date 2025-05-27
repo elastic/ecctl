@@ -70,7 +70,7 @@ $ ecctl deployment search -f query_string_query.json
 ```
 
 
-## SEE ALSO [_see_also_41]
+## See also [_see_also_41]
 
 * [ecctl deployment](/reference/ecctl_deployment.md)	 - Manages deployments
 

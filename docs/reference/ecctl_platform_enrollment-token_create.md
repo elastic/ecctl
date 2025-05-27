@@ -59,6 +59,6 @@ ecctl platform enrollment-token create --role <ROLE> [flags]
 ```
 
 
-## SEE ALSO [_see_also_81]
+## See also [_see_also_81]
 
 * [ecctl platform enrollment-token](/reference/ecctl_platform_enrollment-token.md)	 - Manages tokens

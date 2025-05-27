@@ -56,7 +56,7 @@ ecctl deployment resource shutdown <deployment id> --kind <kind> --ref-id <ref-i
 ```
 
 
-## SEE ALSO [_see_also_33]
+## See also [_see_also_33]
 
 * [ecctl deployment resource](/reference/ecctl_deployment_resource.md)	 - Manages deployment resources
 

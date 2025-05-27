@@ -49,6 +49,6 @@ ecctl comment delete <comment id> --resource-type <resource-type> --resource-id 
 ```
 
 
-## SEE ALSO [_see_also_10]
+## See also [_see_also_10]
 
 * [ecctl comment](/reference/ecctl_comment.md)	 - Manages resource comments

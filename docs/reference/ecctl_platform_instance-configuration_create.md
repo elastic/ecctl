@@ -48,7 +48,7 @@ ecctl platform instance-configuration create -f <config.json> [flags]
 ```
 
 
-## SEE ALSO [_see_also_86]
+## See also [_see_also_86]
 
 * [ecctl platform instance-configuration](/reference/ecctl_platform_instance-configuration.md) - Manages instance configurations
 

@@ -49,6 +49,6 @@ ecctl comment update <comment id> <message> --resource-type <resource-type> --re
 ```
 
 
-## SEE ALSO [_see_also_13]
+## See also [_see_also_13]
 
 * [ecctl comment](/reference/ecctl_comment.md)	 - Manages resource comments

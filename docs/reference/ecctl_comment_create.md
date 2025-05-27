@@ -48,6 +48,6 @@ ecctl comment create <message> --resource-type <resource-type> --resource-id <re
 ```
 
 
-## SEE ALSO [_see_also_9]
+## See also [_see_also_9]
 
 * [ecctl comment](/reference/ecctl_comment.md)	 - Manages resource comments

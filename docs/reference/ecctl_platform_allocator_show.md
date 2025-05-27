@@ -47,6 +47,6 @@ ecctl platform allocator show <allocator id> [flags]
 ```
 
 
-## SEE ALSO [_see_also_73]
+## See also [_see_also_73]
 
 * [ecctl platform allocator](/reference/ecctl_platform_allocator.md) - Manages allocators

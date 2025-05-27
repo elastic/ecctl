@@ -46,7 +46,7 @@ ecctl platform [flags]
 ```
 
 
-## SEE ALSO [_see_also_64]
+## See also [_see_also_64]
 
 * [ecctl](/reference/ecctl.md) - Elastic Cloud Control
 * [ecctl platform allocator](/reference/ecctl_platform_allocator.md) - Manages allocators

@@ -53,7 +53,7 @@ ecctl platform runner search [flags]
 ```
 
 
-## SEE ALSO [_see_also_118]
+## See also [_see_also_118]
 
 * [ecctl platform runner](/reference/ecctl_platform_runner.md) - Manages platform runners
 

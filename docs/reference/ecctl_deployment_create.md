@@ -93,7 +93,7 @@ $ ecctl deployment create --request-id=GMZPMRrcMYqHdmxjIQkHbdjnhPIeBElcwrHwzVlhG
 ```
 
 
-## SEE ALSO [_see_also_15]
+## See also [_see_also_15]
 
 * [ecctl deployment](/reference/ecctl_deployment.md) - Manages deployments
 

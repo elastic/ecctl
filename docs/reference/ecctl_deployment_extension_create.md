@@ -52,7 +52,7 @@ ecctl deployment extension create <extension name> --version <version> --type <e
 ```
 
 
-## SEE ALSO [_see_also_22]
+## See also [_see_also_22]
 
 * [ecctl deployment extension](/reference/ecctl_deployment_extension.md)	 - Manages deployment extensions, such as custom plugins or bundles
 

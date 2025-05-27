@@ -48,7 +48,7 @@ ecctl deployment traffic-filter show <ruleset id> [--include-associations] [flag
 ```
 
 
-## SEE ALSO [_see_also_57]
+## See also [_see_also_57]
 
 * [ecctl deployment traffic-filter](/reference/ecctl_deployment_traffic-filter.md)	 - Manages traffic filter rulesets
 

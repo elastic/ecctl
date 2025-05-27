@@ -46,7 +46,7 @@ ecctl platform proxy settings [flags]
 ```
 
 
-## SEE ALSO [_see_also_100]
+## See also [_see_also_100]
 
 * [ecctl platform proxy](/reference/ecctl_platform_proxy.md) - Manages proxies
 * [ecctl platform proxy settings show](/reference/ecctl_platform_proxy_settings_show.md) - Shows details for proxies settings
