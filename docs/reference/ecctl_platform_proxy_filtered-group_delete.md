@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_proxy_filtered-group_delete.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl platform proxy filtered-group delete [ecctl_platform_proxy_filtered-group_delete]
 
-Deletes proxies filtered group ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Deletes proxies filtered group.
 
 ```
 ecctl platform proxy filtered-group delete <filtered group id> [flags]
@@ -43,7 +46,7 @@ ecctl platform proxy filtered-group delete <filtered group id> [flags]
 ```
 
 
-## SEE ALSO [_see_also_95]
+## See also [_see_also_95]
 
-* [ecctl platform proxy filtered-group](/reference/ecctl_platform_proxy_filtered-group.md)	 - Manages proxies filtered group ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+* [ecctl platform proxy filtered-group](/reference/ecctl_platform_proxy_filtered-group.md) - Manages proxies filtered group
 

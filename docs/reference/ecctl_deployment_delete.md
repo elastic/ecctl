@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_delete.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl deployment delete [ecctl_deployment_delete]
 
-Deletes a previously shutdown deployment ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Deletes a previously shutdown deployment.
 
 ```
 ecctl deployment delete <deployment-id> [flags]
@@ -43,7 +46,7 @@ ecctl deployment delete <deployment-id> [flags]
 ```
 
 
-## SEE ALSO [_see_also_16]
+## See also [_see_also_16]
 
-* [ecctl deployment](/reference/ecctl_deployment.md)	 - Manages deployments
+* [ecctl deployment](/reference/ecctl_deployment.md) - Manages deployments
 

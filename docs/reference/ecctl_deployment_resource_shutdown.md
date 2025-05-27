@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_resource_shutdown.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment resource shutdown [ecctl_deployment_resource_shutdown]
 
-Shuts down a deployment resource by its kind and ref-id
+Shuts down a deployment resource by its kind and `ref-id`.
 
 
 ## Synopsis [_synopsis_3]
@@ -52,7 +56,7 @@ ecctl deployment resource shutdown <deployment id> --kind <kind> --ref-id <ref-i
 ```
 
 
-## SEE ALSO [_see_also_33]
+## See also [_see_also_33]
 
 * [ecctl deployment resource](/reference/ecctl_deployment_resource.md)	 - Manages deployment resources
 

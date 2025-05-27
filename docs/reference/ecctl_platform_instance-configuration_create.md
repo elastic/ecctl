@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_instance-configuration_create.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl platform instance-configuration create [ecctl_platform_instance-configuration_create]
 
-Creates a new instance configuration ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Creates a new instance configuration.
 
 ```
 ecctl platform instance-configuration create -f <config.json> [flags]
@@ -45,7 +48,7 @@ ecctl platform instance-configuration create -f <config.json> [flags]
 ```
 
 
-## SEE ALSO [_see_also_86]
+## See also [_see_also_86]
 
-* [ecctl platform instance-configuration](/reference/ecctl_platform_instance-configuration.md)	 - Manages instance configurations ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+* [ecctl platform instance-configuration](/reference/ecctl_platform_instance-configuration.md) - Manages instance configurations
 

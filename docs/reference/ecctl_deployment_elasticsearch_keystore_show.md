@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_elasticsearch_keystore_show.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment elasticsearch keystore show [ecctl_deployment_elasticsearch_keystore_show]
 
-Shows the settings from the Elasticsearch resource keystore
+Shows the settings from the Elasticsearch resource keystore.
 
 ```
 ecctl deployment elasticsearch keystore show <deployment id> [--ref-id <ref-id>] [flags]
@@ -44,7 +48,6 @@ ecctl deployment elasticsearch keystore show <deployment id> [--ref-id <ref-id>]
 ```
 
 
-## SEE ALSO [_see_also_19]
+## See also [_see_also_19]
 
 * [ecctl deployment elasticsearch keystore](/reference/ecctl_deployment_elasticsearch_keystore.md)	 - Manages Elasticsearch resource keystores
-

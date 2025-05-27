@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_constructor_maintenance.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl platform constructor maintenance [ecctl_platform_constructor_maintenance]
 
-Sets/un-sets a constructor’s maintenance mode ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Sets/un-sets a constructor's maintenance mode.
 
 ```
 ecctl platform constructor maintenance <constructor id> [flags]
@@ -44,7 +47,7 @@ ecctl platform constructor maintenance <constructor id> [flags]
 ```
 
 
-## SEE ALSO [_see_also_77]
+## See also [_see_also_77]
 
-* [ecctl platform constructor](/reference/ecctl_platform_constructor.md)	 - Manages constructors ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+* [ecctl platform constructor](/reference/ecctl_platform_constructor.md) - Manages constructors
 

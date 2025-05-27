@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_comment_list.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl comment list [ecctl_comment_list]
 
-Lists all resource comments ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Lists all resource comments.
 
 ```
 ecctl comment list --resource-type <resource-type> --resource-id <resource-id> [flags]
@@ -45,7 +48,6 @@ ecctl comment list --resource-type <resource-type> --resource-id <resource-id> [
 ```
 
 
-## SEE ALSO [_see_also_11]
+## See also [_see_also_11]
 
-* [ecctl comment](/reference/ecctl_comment.md)	 - Manages resource comments ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
-
+* [ecctl comment](/reference/ecctl_comment.md)	 - Manages resource comments

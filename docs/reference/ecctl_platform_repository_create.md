@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_repository_create.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl platform repository create [ecctl_platform_repository_create]
 
-Creates / updates a snapshot repository ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Creates or updates a snapshot repository.
 
 
 ## Synopsis [_synopsis_11]
@@ -65,7 +68,7 @@ ecctl platform repository create custom --type fs --settings settings.yml
 ```
 
 
-## SEE ALSO [_see_also_105]
+## See also [_see_also_105]
 
-* [ecctl platform repository](/reference/ecctl_platform_repository.md)	 - Manages snapshot repositories ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+* [ecctl platform repository](/reference/ecctl_platform_repository.md) - Manages snapshot repositories
 

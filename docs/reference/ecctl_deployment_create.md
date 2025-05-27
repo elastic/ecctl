@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_create.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment create [ecctl_deployment_create]
 
-Creates a deployment
+Creates a deployment.
 
 
 ## Synopsis [_synopsis]
@@ -89,7 +93,7 @@ $ ecctl deployment create --request-id=GMZPMRrcMYqHdmxjIQkHbdjnhPIeBElcwrHwzVlhG
 ```
 
 
-## SEE ALSO [_see_also_15]
+## See also [_see_also_15]
 
-* [ecctl deployment](/reference/ecctl_deployment.md)	 - Manages deployments
+* [ecctl deployment](/reference/ecctl_deployment.md) - Manages deployments
 

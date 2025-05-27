@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_search.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment search [ecctl_deployment_search]
 
-Performs advanced deployment search using the Elasticsearch Query DSL
+Performs advanced deployment search using the Elasticsearch Query DSL.
 
 
 ## Synopsis [_synopsis_6]
@@ -66,7 +70,7 @@ $ ecctl deployment search -f query_string_query.json
 ```
 
 
-## SEE ALSO [_see_also_41]
+## See also [_see_also_41]
 
 * [ecctl deployment](/reference/ecctl_deployment.md)	 - Manages deployments
 

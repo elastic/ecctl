@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_update.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment update [ecctl_deployment_update]
 
-Updates a deployment from a file definition, allowing certain flag overrides
+Updates a deployment from a file definition, allowing certain flag overrides.
 
 
 ## Synopsis [_synopsis_7]
@@ -103,7 +107,7 @@ setting --prune-orphans to "true" will cause any resources not specified in the 
 ```
 
 
-## SEE ALSO [_see_also_59]
+## See also [_see_also_59]
 
 * [ecctl deployment](/reference/ecctl_deployment.md)	 - Manages deployments
 

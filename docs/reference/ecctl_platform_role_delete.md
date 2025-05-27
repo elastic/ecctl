@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_role_delete.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl platform role delete [ecctl_platform_role_delete]
 
-Deletes an existing platform role ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Deletes an existing platform role.
 
 ```
 ecctl platform role delete <role> [flags]
@@ -43,7 +46,7 @@ ecctl platform role delete <role> [flags]
 ```
 
 
-## SEE ALSO [_see_also_111]
+## See also [_see_also_111]
 
-* [ecctl platform role](/reference/ecctl_platform_role.md)	 - Manages platform roles ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+* [ecctl platform role](/reference/ecctl_platform_role.md) - Manages platform roles
 

@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_platform_enrollment-token_delete.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl platform enrollment-token delete [ecctl_platform_enrollment-token_delete]
 
-Deletes an enrollment token ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Deletes an enrollment token.
 
 ```
 ecctl platform enrollment-token delete <enrollment-token> [flags]
@@ -43,7 +46,6 @@ ecctl platform enrollment-token delete <enrollment-token> [flags]
 ```
 
 
-## SEE ALSO [_see_also_82]
+## See also [_see_also_82]
 
-* [ecctl platform enrollment-token](/reference/ecctl_platform_enrollment-token.md)	 - Manages tokens ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
-
+* [ecctl platform enrollment-token](/reference/ecctl_platform_enrollment-token.md) - Manages tokens

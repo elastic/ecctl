@@ -1,11 +1,14 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_template_create.html
+applies_to:
+  deployment:
+    ece: all
 ---
 
 # ecctl deployment template create [ecctl_deployment_template_create]
 
-Creates a new deployment template ![logo cloud ece](https://doc-icons.s3.us-east-2.amazonaws.com/logo_cloud_ece.svg "Supported on {{ece}}") (Available for ECE only)
+Creates a new deployment template.
 
 ```
 ecctl deployment template create --file <definition.json> [flags]
@@ -46,7 +49,7 @@ ecctl deployment template create --file <definition.json> [flags]
 ```
 
 
-## SEE ALSO [_see_also_45]
+## See also [_see_also_45]
 
 * [ecctl deployment template](/reference/ecctl_deployment_template.md)	 - Interacts with deployment template APIs
 

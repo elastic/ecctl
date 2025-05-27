@@ -1,11 +1,15 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_plan_cancel.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment plan cancel [ecctl_deployment_plan_cancel]
 
-Cancels a resource’s pending plan
+Cancels a resource's pending plan.
 
 ```
 ecctl deployment plan cancel <deployment id> --kind <kind> [--ref-id <ref-id>] [flags]
@@ -45,7 +49,7 @@ ecctl deployment plan cancel <deployment id> --kind <kind> [--ref-id <ref-id>] [
 ```
 
 
-## SEE ALSO [_see_also_29]
+## See also [_see_also_29]
 
 * [ecctl deployment plan](/reference/ecctl_deployment_plan.md)	 - Manages deployment plans
 

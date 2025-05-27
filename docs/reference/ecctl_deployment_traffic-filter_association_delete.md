@@ -1,6 +1,10 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl_deployment_traffic-filter_association_delete.html
+applies_to:
+  deployment:
+    ess: all
+    ece: all
 ---
 
 # ecctl deployment traffic-filter association delete [ecctl_deployment_traffic-filter_association_delete]
@@ -44,7 +48,7 @@ ecctl deployment traffic-filter association delete <ruleset id> --deployment-id 
 ```
 
 
-## SEE ALSO [_see_also_53]
+## See also [_see_also_53]
 
 * [ecctl deployment traffic-filter association](/reference/ecctl_deployment_traffic-filter_association.md)	 - Manages traffic filter ruleset associations
 
