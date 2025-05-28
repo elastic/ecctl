@@ -1,32 +1,3 @@
----
-mapped_pages:
-  - https://www.elastic.co/guide/en/ecctl/current/ecctl_user_key_list.html
-applies_to:
-  deployment:
-    ess: all
-    ece: all
----
-
-# ecctl user key list [ecctl_user_key_list]
-
-Lists the API keys for the specified user or all platform users.
-
-```
-ecctl user key list --user=<user id>|--all [flags]
-```
-
-
-## Options [_options_132]
-
-```
-      --all           If specified, lists all API keys for all platform users
-  -h, --help          help for list
-      --user string   user id for the specified action
-```
-
-
-## Options inherited from parent commands [_options_inherited_from_parent_commands_131]
-
 ```
       --api-key string        API key to use to authenticate (If empty will look for EC_API_KEY environment variable)
       --config string         Config name, used to have multiple configs in $HOME/.ecctl/<env> (default "config")
@@ -42,13 +13,8 @@ ecctl user key list --user=<user id>|--all [flags]
       --region string         Elastic Cloud Hosted region
       --timeout duration      Timeout to use on all HTTP calls (default 30s)
       --trace                 Enables tracing saves the trace to trace-20060102150405
+      --user string           Username to use to authenticate (If empty will look for EC_USER environment variable)
       --verbose               Enable verbose mode
       --verbose-credentials   When set, Authorization headers on the request/response trail will be displayed as plain text
       --verbose-file string   When set, the verbose request/response trail will be written to the defined file
 ```
-
-
-## See also [_see_also_132]
-
-* [ecctl user key](/reference/ecctl_user_key.md) - Manages the API keys of a platform user
-
