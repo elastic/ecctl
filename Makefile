@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-export VERSION ?= v1.14.4
+export VERSION ?= v1.15.0
 export GO111MODULE ?= on
 export GOBIN = $(shell pwd)/bin
 BINARY := ecctl
