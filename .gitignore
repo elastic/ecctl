@@ -5,3 +5,4 @@ reports
 .idea/
 html_docs/
 ecctl.iml
+docs/.artifacts
