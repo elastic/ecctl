@@ -27,7 +27,7 @@ mapped_pages:
 
 # Release notes [ecctl-release-notes]
 
-This section summarizes the changes in each Elastic Cloud Control release.
+See [](/release-notes/index.md).
 
 
 
