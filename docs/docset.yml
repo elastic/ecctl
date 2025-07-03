@@ -7,6 +7,6 @@ cross_links:
   - elasticsearch
 toc:
   - toc: reference
-  - folder: release-notes
+  - toc: release-notes
 subs:
   ece:   "Elastic Cloud Enterprise"
