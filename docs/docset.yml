@@ -1,4 +1,4 @@
-project: 'Elastic cloud control (ECCTL) docs'
+project: 'Elastic Cloud Control (ECCTL) docs'
 products:
   - id: cloud-control-ecctl
 cross_links:
@@ -7,5 +7,6 @@ cross_links:
   - elasticsearch
 toc:
   - toc: reference
+  - toc: release-notes
 subs:
   ece:   "Elastic Cloud Enterprise"
