@@ -9,7 +9,7 @@ applies_to:
 
 # ecctl deployment traffic-filter update [ecctl_deployment_traffic-filter_update]
 
-Updates a traffic-filter.
+Updates a network security policy or traffic filter ruleset.
 
 ```
 ecctl deployment traffic-filter update <traffic-filter id> {--file <file-path> | --generate-payload} [flags]
@@ -44,5 +44,5 @@ ecctl deployment traffic-filter update <traffic-filter id> {--file <file-path> |
 
 ## See also [_see_also_58]
 
-* [ecctl deployment traffic-filter](/reference/ecctl_deployment_traffic-filter.md)	 - Manages traffic filter rulesets
+* [ecctl deployment traffic-filter](/reference/ecctl_deployment_traffic-filter.md)	 - Manages network security policies or traffic filter rulesets
 
