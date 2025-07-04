@@ -26,7 +26,7 @@ import (
 // Command represents the deployment traffic-filter subcommand.
 var Command = &cobra.Command{
 	Use:     "traffic-filter",
-	Short:   "Manages traffic filter rulesets",
+	Short:   "Manages network security policies or traffic filter rulesets",
 	PreRunE: cobra.MaximumNArgs(0),
 	Run:     func(cmd *cobra.Command, args []string) { cmd.Help() },
 }

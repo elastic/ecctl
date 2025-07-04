@@ -27,7 +27,7 @@ import (
 
 var showCmd = &cobra.Command{
 	Use:     "show <ruleset id> [--include-associations]",
-	Short:   "Shows information about a traffic filter ruleset",
+	Short:   "Shows information about a network security policy or traffic filter ruleset",
 	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		assoc, _ := cmd.Flags().GetBool("include-associations")

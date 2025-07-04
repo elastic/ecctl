@@ -26,7 +26,7 @@ import (
 
 var listCmd = &cobra.Command{
 	Use:     "list [--include-associations] [--single-region <region>]",
-	Short:   "Lists the traffic filter rulesets",
+	Short:   "Lists the network security policies or traffic filter rulesets",
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		region, _ := cmd.Flags().GetString("single-region")

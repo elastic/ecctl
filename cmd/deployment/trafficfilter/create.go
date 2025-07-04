@@ -28,7 +28,7 @@ import (
 
 var createCmd = &cobra.Command{
 	Use:     "create --region <region> --name <filter name> --type <filter type> --source <filter source>,<filter source> ",
-	Short:   "Creates traffic filter rulesets",
+	Short:   "Creates network security policies or traffic filter rulesets",
 	PreRunE: cobra.MaximumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		region := ecctl.Get().Config.Region
