@@ -45,6 +45,6 @@ ecctl deployment [flags]
 * [ecctl deployment show](/reference/ecctl_deployment_show.md)	 - Shows the specified deployment resources
 * [ecctl deployment shutdown](/reference/ecctl_deployment_shutdown.md)	 - Shuts down a deployment and all of its associated sub-resources
 * [ecctl deployment template](/reference/ecctl_deployment_template.md)	 - Interacts with deployment template APIs
-* [ecctl deployment traffic-filter](/reference/ecctl_deployment_traffic-filter.md)	 - Manages traffic filter rulesets
+* [ecctl deployment traffic-filter](/reference/ecctl_deployment_traffic-filter.md)	 - Manages network security policies or traffic filter rulesets
 * [ecctl deployment update](/reference/ecctl_deployment_update.md)	 - Updates a deployment from a file definition, allowing certain flag overrides
 

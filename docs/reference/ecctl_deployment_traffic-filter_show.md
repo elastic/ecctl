@@ -9,7 +9,7 @@ applies_to:
 
 # ecctl deployment traffic-filter show [ecctl_deployment_traffic-filter_show]
 
-Shows information about a traffic filter ruleset.
+Shows information about a network security policy or traffic filter ruleset.
 
 ```
 ecctl deployment traffic-filter show <ruleset id> [--include-associations] [flags]
@@ -32,5 +32,5 @@ ecctl deployment traffic-filter show <ruleset id> [--include-associations] [flag
 
 ## See also [_see_also_57]
 
-* [ecctl deployment traffic-filter](/reference/ecctl_deployment_traffic-filter.md)	 - Manages traffic filter rulesets
+* [ecctl deployment traffic-filter](/reference/ecctl_deployment_traffic-filter.md) - Manages network security policies or traffic filter rulesets
 
