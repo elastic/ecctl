@@ -14,9 +14,8 @@ The following actions must be performed in the order specified here.
 For detailed instructions on all of the steps, read the release [documentation](https://github.com/elastic/ecctl/blob/master/developer_docs/RELEASE.md).
 
 - [ ] Update the cloud-sdk-go dependency.
-- [ ] Check that the `VERSION` environment variable in the Makefile is updated and generate changelog.
+- [ ] Check that the `VERSION` environment variable in the Makefile
+- [ ] Generate change log (both release-notes/index.md and notes/*.md)
 - [ ] Execute the release.
-- [ ] Modify the conf.yaml file in the docs repository to add the release branch.
-- [ ] Run a full doc rebuild.
 - [ ] Alert marketing team to update downloads website with new links.
 - [ ] Celebrate :tada:
