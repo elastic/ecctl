@@ -37,8 +37,8 @@ const showExample = `
 * Shows apm resource information from a given deployment with a specified ref-id.
   ecctl deployment show <deployment-id> --kind apm --ref-id apm-server
 
-* Return the current deployment state as a valid update payload.
-  ecctl deployment show <deployment id> --generate-update-payload > update.json`
+* Return the current deployment state as a valid update payload. Note that usage of --generate-update-payload is mutually exclusive to --kind.
+  ecctl deployment show <deployment id> --generate-update-payload > update.json
 
 var showCmd = &cobra.Command{
 	Use:     "show <deployment-id>",
