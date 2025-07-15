@@ -19,9 +19,9 @@ Before starting any release, make sure to open a release checklist [issue](https
 
 Releasing a new version of the binary implies that there have been changes in the source code which are meant to be released for wider consumption. Before releasing a new version there's some prerequisites that have to be checked.
 
-### Verify a release in `cloud-sdk-go` has been made
+### Update `cloud-sdk-go` if applicable
 
-Unless this is a patch release, make sure a `cloud-sdk-go` release with the same version has been made. Once this is done, the `cloud-sdk-go` dependency should be updated to that version. To update the cloud-sdk-go dependency, please update the version in `go.mod`.
+If applicable, update the `cloud-sdk-go` dependency in `go.mod`. In the past the cloud-sdk-go version was tied to the ecctl version. This is no longer the case as the two are released independently.
 
 ### Make sure the version has been updated
 
@@ -47,9 +47,9 @@ If a patch version needs to be released, the release will be done from the minor
 
 ### Generating a changelog for the new version
 
-Once the version is updated, we can then generate the changelog and release notes by calling `make changelog`.
-
-Take a look at one of our previous releases [`v1.5.0.adoc`](../docs/release_notes/v1.5.0.adoc) and the [template](../scripts/changelog.tpl.adoc) we use to generate them. The idea is to fill all the applicable sections so that users can consume easily.
+Steps 
+* Add a new changelog entry to docs/release-notes/index.md (this powers the release notes [docs page](https://www.elastic.co/docs/release-notes/ecctl)) See prior release within file as an example.
+* Run `make changelog` to create a new file in `notes/*.md` (supports the [release notes](https://github.com/elastic/ecctl/releases) within the github repo)
 
 After the release notes have been manually curated, a new pull request can be opened with the changelog and release notes.
 
@@ -67,11 +67,7 @@ The release process will open a pull request against the [`homebrew-tap`](https:
 
 ### Create documentation specific to the release (Minor and Major only)
 
-In order to have the documentation live for our new release we need to modify the conf.yaml file in the docs repository to add the release branch and have the build point to our new branch. ([Example PR](https://github.com/elastic/docs/pull/2770))
-
-Once the PR for the above changes has been merged, you'll need to run a full doc [rebuild](https://elasticsearch-ci.elastic.co/job/elastic+docs+master+build/build?delay=0sec) to make the new release branch the default docs.
-
-![alt text](docs-rebuild.png "rebuild instructions")
+Previously this required special action to trigger a full docs rebuild. Currently after PR has been merged documentation should be automatically updated within ~30 minutes.
 
 ### Update downloads website
 
