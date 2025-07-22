@@ -37,7 +37,7 @@ const showExample = `
 * Shows apm resource information from a given deployment with a specified ref-id.
   ecctl deployment show <deployment-id> --kind apm --ref-id apm-server
 
-* Return the current deployment state as a valid update payload.
+* Return the current deployment state as a valid update payload. Note that usage of --generate-update-payload is mutually exclusive to --kind.
   ecctl deployment show <deployment id> --generate-update-payload > update.json`
 
 var showCmd = &cobra.Command{
@@ -66,8 +66,8 @@ var showCmd = &cobra.Command{
 			resourceKind, refID = "", ""
 		}
 
-		// The idea here is that the default of clear-transient depends on the value of `generate-update-payload`. If
-		// `generate-update-payload` is true then we want `clear-transient` to default to true. If the flag value
+		// The idea here is that the default of clear-transient depends on the value of 'generate-update-payload'. If
+		// 'generate-update-payload' is true then we want 'clear-transient' to default to true. If the flag value
 		// has been passed in we want to use that value instead.
 		if cmd.Flags().Changed("clear-transient") {
 			clearTransient, _ = cmd.Flags().GetBool("clear-transient")
