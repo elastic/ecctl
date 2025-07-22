@@ -25,7 +25,7 @@ ecctl deployment show <deployment-id> [flags]
 * Shows apm resource information from a given deployment with a specified ref-id.
   ecctl deployment show <deployment-id> --kind apm --ref-id apm-server
 
-* Return the current deployment state as a valid update payload.
+* Return the current deployment state as a valid update payload. Note that usage of --generate-update-payload is mutually exclusive to --kind.
   ecctl deployment show <deployment id> --generate-update-payload > update.json
 ```
 
@@ -34,9 +34,9 @@ ecctl deployment show <deployment-id> [flags]
 
 ```
       --clear-transient           Removes the transient field in order to make read - edit - write loop safer. The default value of clear-transient depends on the value of generate-update-payload. If generate-update-payload is true then clear-transient defaults to true. Otherwise defaults to false.
-      --generate-update-payload   Outputs JSON which can be used as an argument for the --file flag with the update command.
+      --generate-update-payload   Outputs JSON for complete deployment which can be used as an argument for the --file flag with the update command. (Note that usage of --generate-update-payload is mutually exclusive to --kind)
   -h, --help                      help for show
-      --kind string               Optional deployment resource kind (apm, appsearch, kibana, elasticsearch)
+      --kind string               Optional deployment resource kind (apm, appsearch, kibana, elasticsearch). If provided only the specified resource info will be shown.
   -m, --metadata                  Shows the deployment metadata
       --plan-defaults             Shows the deployment plan defaults
       --plan-history              Shows the deployment plan history
