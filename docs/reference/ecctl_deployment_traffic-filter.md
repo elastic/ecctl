@@ -9,7 +9,7 @@ applies_to:
 
 # ecctl deployment traffic-filter [ecctl_deployment_traffic-filter]
 
-Manages {{ecloud}} network security policies and {{ece}} traffic filter rulesets. [Learn more about network security](docs-content://deploy-manage/security/network-security.md).
+Manages Elastic Cloud network security policies and Elastic Cloud Enterprise traffic filter rulesets. [Learn more about network security](docs-content://deploy-manage/security/network-security.md).
 
 ```
 ecctl deployment traffic-filter [flags]
