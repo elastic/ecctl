@@ -27,7 +27,7 @@ import (
 
 var deleteCmd = &cobra.Command{
 	Use:     "delete <ruleset id> [--ignore-associations]",
-	Short:   "Deletes a traffic filter ruleset",
+	Short:   "Deletes a network security policy or traffic filter ruleset",
 	PreRunE: sdkcmdutil.MinimumNArgsAndUUID(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		assoc, _ := cmd.Flags().GetBool("ignore-associations")
