@@ -38,7 +38,7 @@ jobs:
         run: make patch
 
       - name: Create new branch and commit changes to the minor branch
-        uses: EndBug/add-and-commit@050a66787244b10a4874a2a5f682130263edc192  # v9.0.0
+        uses: EndBug/add-and-commit@a94899bca583c204427a224a7af87c02f9b325d5  # v9.1.4
         with:
           default_author: user_info
           message: 'Update patch version'
@@ -67,7 +67,7 @@ jobs:
         run: make minor; git diff
 
       - name: Commit changes to main
-        uses: EndBug/add-and-commit@050a66787244b10a4874a2a5f682130263edc192  # v9.0.0
+        uses: EndBug/add-and-commit@a94899bca583c204427a224a7af87c02f9b325d5  # v9.1.4
         with:
           default_author: user_info
           message: 'Update minor version'
