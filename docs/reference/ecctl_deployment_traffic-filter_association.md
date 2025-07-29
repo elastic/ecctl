@@ -9,7 +9,7 @@ applies_to:
 
 # ecctl deployment traffic-filter association [ecctl_deployment_traffic-filter_association]
 
-Manages traffic filter ruleset associations.
+Manages network security policy or traffic filter ruleset associations.
 
 ```
 ecctl deployment traffic-filter association [flags]
@@ -31,7 +31,7 @@ ecctl deployment traffic-filter association [flags]
 
 ## See also [_see_also_51]
 
-* [ecctl deployment traffic-filter](/reference/ecctl_deployment_traffic-filter.md)	 - Manages traffic filter rulesets
-* [ecctl deployment traffic-filter association create](/reference/ecctl_deployment_traffic-filter_association_create.md)	 - Applies the ruleset to the specified deployment.
-* [ecctl deployment traffic-filter association delete](/reference/ecctl_deployment_traffic-filter_association_delete.md)	 - Deletes the traffic rules in the ruleset from the deployment.
+* [ecctl deployment traffic-filter](/reference/ecctl_deployment_traffic-filter.md)	- Manages network security policies or traffic filter rulesets
+* [ecctl deployment traffic-filter association create](/reference/ecctl_deployment_traffic-filter_association_create.md)	 - Applies the policy or ruleset to the specified deployment.
+* [ecctl deployment traffic-filter association delete](/reference/ecctl_deployment_traffic-filter_association_delete.md)	 - Deletes the network security policy or traffic filter ruleset from the deployment.
 

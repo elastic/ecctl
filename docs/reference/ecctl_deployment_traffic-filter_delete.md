@@ -9,8 +9,7 @@ applies_to:
 
 # ecctl deployment traffic-filter delete [ecctl_deployment_traffic-filter_delete]
 
-Deletes a traffic filter ruleset.
-
+Deletes a network security policy or traffic filter ruleset.
 ```
 ecctl deployment traffic-filter delete <ruleset id> [--ignore-associations] [flags]
 ```
@@ -32,5 +31,5 @@ ecctl deployment traffic-filter delete <ruleset id> [--ignore-associations] [fla
 
 ## See also [_see_also_55]
 
-* [ecctl deployment traffic-filter](/reference/ecctl_deployment_traffic-filter.md)	 - Manages traffic filter rulesets
+* [ecctl deployment traffic-filter](/reference/ecctl_deployment_traffic-filter.md) - Manages network security policies or traffic filter rulesets
 

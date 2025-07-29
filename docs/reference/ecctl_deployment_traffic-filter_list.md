@@ -9,7 +9,7 @@ applies_to:
 
 # ecctl deployment traffic-filter list [ecctl_deployment_traffic-filter_list]
 
-Lists the traffic filter rulesets.
+Lists the network security policies or traffic filter rulesets.
 
 ```
 ecctl deployment traffic-filter list [--include-associations] [--single-region <region>] [flags]
@@ -33,5 +33,5 @@ ecctl deployment traffic-filter list [--include-associations] [--single-region <
 
 ## See also [_see_also_56]
 
-* [ecctl deployment traffic-filter](/reference/ecctl_deployment_traffic-filter.md)	 - Manages traffic filter rulesets
+* [ecctl deployment traffic-filter](/reference/ecctl_deployment_traffic-filter.md) - Manages network security policies or traffic filter rulesets
 

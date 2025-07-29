@@ -26,7 +26,7 @@ const entityType = "deployment"
 // Command represents the deployment traffic-filter association subcommand.
 var Command = &cobra.Command{
 	Use:     "association",
-	Short:   "Manages traffic filter ruleset associations",
+	Short:   "Manages network security policy or traffic filter ruleset associations",
 	PreRunE: cobra.MaximumNArgs(0),
 	Run:     func(cmd *cobra.Command, args []string) { cmd.Help() },
 }
