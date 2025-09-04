@@ -9,8 +9,8 @@ require (
 	github.com/go-openapi/runtime v0.23.0
 	github.com/go-openapi/strfmt v0.21.2
 	github.com/pkg/errors v0.9.1
-	github.com/spf13/cobra v1.9.1
-	github.com/spf13/pflag v1.0.6
+	github.com/spf13/cobra v1.10.1
+	github.com/spf13/pflag v1.0.9
 	github.com/spf13/viper v1.20.1
 	github.com/stretchr/testify v1.10.0
 	golang.org/x/term v0.29.0
