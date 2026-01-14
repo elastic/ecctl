@@ -155,4 +155,3 @@ toc:
       - file: ecctl_user_update.md
       - file: ecctl_version.md
   - file: ecctl-contributing.md
-  - file: ecctl-release-notes.md

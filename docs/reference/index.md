@@ -17,3 +17,5 @@ Benefits of ecctl:
 * Easier to use than the Cloud UI or using the RESTful API directly
 * Helps you automate the deployment lifecycle
 * Provides a foundation for integration with other tools
+
+Stay up to date with the latest changes by reviewing the [ECCTL release notes](/release-notes/index.md).
