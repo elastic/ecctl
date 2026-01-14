@@ -23,6 +23,8 @@ mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl-release-notes-v1.0.0-beta3.html
   - https://www.elastic.co/guide/en/ecctl/current/ecctl-release-notes-v1.0.0-beta2.html
   - https://www.elastic.co/guide/en/ecctl/current/ecctl-release-notes-v1.0.0-beta1.html
+  
+ navigation_title: "Release notes"
 ---
 
 # Elastic cloud control (ECCTL) release notes [ecctl-release-notes]
