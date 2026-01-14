@@ -25,7 +25,7 @@ mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl-release-notes-v1.0.0-beta1.html
 ---
 
-# Release notes [ecctl-release-notes]
+# Elastic cloud control (ECCTL) release notes [ecctl-release-notes]
 
 See [](/release-notes/index.md).
 
