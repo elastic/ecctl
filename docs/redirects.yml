@@ -1,0 +1,3 @@
+redirects:
+  'reference/ecctl-release-notes.md': '!release-notes/index.md'
+  'reference/ecctl-contributing.md': '!reference/index.md'
