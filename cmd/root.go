@@ -96,7 +96,7 @@ func Execute(v ecctl.VersionInfo) int {
 	versionInfo = v
 
 	if err := RootCmd.Execute(); err != nil {
-		fmt.Fprintln(RootCmd.OutOrStderr(), err)
+		_, _ = fmt.Fprintln(RootCmd.OutOrStderr(), err)
 		if ret, ok := err.(ecctl.ReturnCodeError); ok {
 			return ret.ReturnCode()
 		}

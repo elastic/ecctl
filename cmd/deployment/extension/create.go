@@ -59,7 +59,7 @@ var createCmd = &cobra.Command{
 			if err != nil {
 				return err
 			}
-			defer f.Close()
+			defer func() { _ = f.Close() }()
 
 			res2, err := extensionapi.Upload(extensionapi.UploadParams{
 				API:         ecctl.Get().API,

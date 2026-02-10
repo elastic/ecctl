@@ -49,7 +49,7 @@ func ActionConfirm(actionRaw, msg string) (*bool, error) {
 		)); !strings.HasPrefix(confirm, "y") {
 			return nil, errors.New("action has been aborted")
 		}
-		fmt.Fprintln(ecctl.Get().Config.OutputDevice, "continuing...")
+		_, _ = fmt.Fprintln(ecctl.Get().Config.OutputDevice, "continuing...")
 	}
 
 	return action, nil

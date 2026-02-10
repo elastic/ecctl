@@ -28,7 +28,7 @@ var versionCmd = &cobra.Command{
 	Short:   "Shows ecctl version",
 	PreRunE: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Fprint(cmd.OutOrStdout(), versionInfo)
+		_, _ = fmt.Fprint(cmd.OutOrStdout(), versionInfo)
 	},
 }
 

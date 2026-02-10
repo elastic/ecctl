@@ -43,7 +43,7 @@ var stopCmd = &cobra.Command{
 		force, _ := cmd.Flags().GetBool("force")
 
 		if err := sdkcmdutil.IncompatibleFlags(cmd, "all", "instance-id"); err != nil {
-			fmt.Fprintln(cmd.OutOrStderr(), err)
+			_, _ = fmt.Fprintln(cmd.OutOrStderr(), err)
 		}
 
 		var msg = "This action will incur in downtime if used with the --all flag. Do you want to continue? [y/n]: "

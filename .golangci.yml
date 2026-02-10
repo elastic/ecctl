@@ -56,6 +56,12 @@ linters:
       - path: cmd/version.go
         linters:
           - gosec
+      - path: cmd/deployment/search.go
+        linters:
+          - staticcheck
+        text: "ST1005:"
+    paths:
+      - pkg/formatter/templates/bindata.go
 
 formatters:
   enable:
@@ -63,6 +69,9 @@ formatters:
   settings:
     gofmt:
       simplify: true
+  exclusions:
+    paths:
+      - pkg/formatter/templates/bindata.go
 
 issues:
   max-issues-per-linter: 0

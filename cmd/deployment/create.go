@@ -79,10 +79,10 @@ var createCmd = &cobra.Command{
 
 		res, err := deploymentapi.Create(createParams)
 		if err != nil {
-			fmt.Fprintln(cmd.ErrOrStderr(),
+			_, _ = fmt.Fprintln(cmd.ErrOrStderr(),
 				"The deployment creation returned with an error. Use the displayed request ID to recreate the deployment resources",
 			)
-			fmt.Fprintln(cmd.ErrOrStderr(), "Request ID:", reqID)
+			_, _ = fmt.Fprintln(cmd.ErrOrStderr(), "Request ID:", reqID)
 			return err
 		}
 
@@ -147,7 +147,7 @@ func newCreatePayload(cmd *cobra.Command, version, region string) (*models.Deplo
 
 	if dt == "" {
 		dt = setDefaultTemplate(region)
-		fmt.Fprintf(cmd.ErrOrStderr(), "--deployment-template not set, using %s", dt)
+		_, _ = fmt.Fprintf(cmd.ErrOrStderr(), "--deployment-template not set, using %s", dt)
 	}
 	tpl, err := deptemplateapi.Get(deptemplateapi.GetParams{
 		API:          ecctl.Get().API,

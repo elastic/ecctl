@@ -41,7 +41,7 @@ func (f *JSON) format(data interface{}) error {
 	if err != nil {
 		return err
 	}
-	fmt.Fprintln(f.o, string(r))
+	_, _ = fmt.Fprintln(f.o, string(r))
 	return nil
 }
 

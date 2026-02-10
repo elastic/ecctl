@@ -37,7 +37,7 @@ var updateCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		defer file.Close()
+		defer func() { _ = file.Close() }()
 
 		config, err := instanceconfigapi.NewConfig(file)
 		if err != nil {

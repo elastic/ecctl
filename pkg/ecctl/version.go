@@ -47,14 +47,14 @@ func (v VersionInfo) String() string {
 		commit = commit[:8]
 	}
 
-	fmt.Fprintln(w, "Version:\t", v.Version)
-	fmt.Fprintln(w, "Client API Version:\t", v.APIVersion)
-	fmt.Fprintln(w, "Go version:\t", runtime.Version())
-	fmt.Fprintln(w, "Git commit:\t", commit)
-	fmt.Fprintln(w, "Built:\t", strings.ReplaceAll(v.Built, "_", " "))
-	fmt.Fprintln(w, "OS/Arch:\t", runtime.GOOS, "/", runtime.GOARCH)
+	_, _ = fmt.Fprintln(w, "Version:\t", v.Version)
+	_, _ = fmt.Fprintln(w, "Client API Version:\t", v.APIVersion)
+	_, _ = fmt.Fprintln(w, "Go version:\t", runtime.Version())
+	_, _ = fmt.Fprintln(w, "Git commit:\t", commit)
+	_, _ = fmt.Fprintln(w, "Built:\t", strings.ReplaceAll(v.Built, "_", " "))
+	_, _ = fmt.Fprintln(w, "OS/Arch:\t", runtime.GOOS, "/", runtime.GOARCH)
 
-	w.Flush()
+	_ = w.Flush()
 
 	return buf.String()
 }
