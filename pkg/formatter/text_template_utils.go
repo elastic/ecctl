@@ -297,7 +297,7 @@ func getESCurrentOrPendingPlan(clusterInfo models.ElasticsearchClusterInfo) *mod
 					{
 						NodeCountPerZone: nodeCountPerZone,
 						MemoryPerNode:    memoryPerNode,
-						ZoneCount: zoneCount,
+						ZoneCount:        zoneCount,
 					},
 				},
 			},
