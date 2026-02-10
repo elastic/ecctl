@@ -56,10 +56,6 @@ linters:
       - path: cmd/version.go
         linters:
           - gosec
-      - path: cmd/deployment/search.go
-        linters:
-          - staticcheck
-        text: "ST1005:"
     paths:
       - pkg/formatter/templates/bindata.go
 
