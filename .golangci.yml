@@ -1,14 +1,6 @@
 version: "2"
 
 linters:
-  disable:
-    - dupl
-    - lll
-    - gochecknoglobals
-    - gochecknoinits
-    - funlen
-    - wsl
-    - mnd
   settings:
     errcheck:
       exclude-functions:
@@ -20,20 +12,8 @@ linters:
         - (*github.com/spf13/cobra.Command).Help
         - (*github.com/spf13/viper.Viper).BindPFlags
         - (*github.com/spf13/pflag.FlagSet).MarkHidden
-    govet:
-      check-shadowing: false
-    gofmt:
-      simplify: true
-    golint:
-      min-confidence: 0
     gocyclo:
       min-complexity: 20
-    maligned:
-      suggest-new: true
-    misspell:
-      locale: neutral
-    goimports:
-      local-prefixes: github.com/elastic/ecctl
     gocritic:
       enabled-tags:
         - performance
@@ -42,32 +22,16 @@ linters:
       disabled-checks:
         - hugeParam
   exclusions:
+    generated: lax
     rules:
       - path: _test\.go
         linters:
-          - gocyclo
           - errcheck
-          - dupl
-          - gosec
-          - gocognit
-      - path: cmd/platform/enrollment-token/command.go
-        linters:
-          - gosec
-      - path: cmd/version.go
-        linters:
-          - gosec
-    paths:
-      - pkg/formatter/templates/bindata.go
 
 formatters:
-  enable:
-    - gofmt
   settings:
-    gofmt:
-      simplify: true
-  exclusions:
-    paths:
-      - pkg/formatter/templates/bindata.go
+    goimports:
+      local-prefixes: github.com/elastic/ecctl
 
 issues:
   max-issues-per-linter: 0
