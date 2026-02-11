@@ -53,7 +53,7 @@ var completionCmd = &cobra.Command{
 			if output, err = os.Create(completionsLocation); err != nil {
 				return err
 			}
-			defer output.Close()
+			defer func() { _ = output.Close() }()
 		}
 
 		RootCmd.Use = generatedBinary

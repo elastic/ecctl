@@ -154,7 +154,7 @@ var vacateAllocatorCmd = &cobra.Command{
 		}
 
 		if err := merr.ErrorOrNil(); err != nil {
-			fmt.Fprint(ecctl.Get().Config.OutputDevice, err.Error())
+			_, _ = fmt.Fprint(ecctl.Get().Config.OutputDevice, err.Error())
 		}
 
 		maxRetries, pollFrequency := cmdutil.GetTrackSettings(cmd)

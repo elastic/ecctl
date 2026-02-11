@@ -66,8 +66,8 @@ func Track(params TrackParams) error {
 		if !params.Track {
 			return err
 		}
-		if params.TrackChangeParams.Writer != nil {
-			fmt.Fprintln(params.Writer, err)
+		if params.Writer != nil {
+			_, _ = fmt.Fprintln(params.Writer, err)
 		}
 	}
 

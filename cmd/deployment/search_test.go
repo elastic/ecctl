@@ -143,7 +143,7 @@ func Test_searchCmd(t *testing.T) {
 				},
 			},
 			want: testutils.Assertion{
-				Err: "The query must include a sort-field when using --all-matches. Example: \"sort\": [\"id\"]",
+				Err: "the query must include a sort-field when using --all-matches. Example: \"sort\": [\"id\"]",
 			},
 		},
 	}

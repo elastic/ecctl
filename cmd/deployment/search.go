@@ -54,7 +54,7 @@ var searchCmd = &cobra.Command{
 
 		returnAllMatches, _ := cmd.Flags().GetBool("all-matches")
 		if returnAllMatches && sr.Sort == nil {
-			return fmt.Errorf("The query must include a sort-field when using --all-matches. Example: \"sort\": [\"id\"]")
+			return fmt.Errorf("the query must include a sort-field when using --all-matches. Example: \"sort\": [\"id\"]")
 		}
 
 		batchSize, _ := cmd.Flags().GetInt32("size")

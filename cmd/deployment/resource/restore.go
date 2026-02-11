@@ -48,7 +48,7 @@ var restoreCmd = &cobra.Command{
 		}
 
 		if restoreSnapshot && !esKind {
-			fmt.Fprintf(ecctl.Get().Config.ErrorDevice,
+			_, _ = fmt.Fprintf(ecctl.Get().Config.ErrorDevice,
 				"Using --restore-snapshot on resource kind \"%s\" will have no effect\n", resKind,
 			)
 		}

@@ -1,76 +1,43 @@
+version: "2"
+
 linters:
-  disable:
-    - dupl
-    - lll
-    - gochecknoglobals
-    - gochecknoinits
-    - funlen
-    - wsl
-    - gomnd
+  settings:
+    errcheck:
+      exclude-functions:
+        - (*github.com/spf13/cobra.Command).MarkFlagRequired
+        - (*github.com/spf13/cobra.Command).MarkFlagFilename
+        - github.com/spf13/cobra.MarkFlagRequired
+        - github.com/spf13/cobra.MarkFlagFilename
+        - github.com/spf13/cobra.MarkFlagFilename
+        - (*github.com/spf13/cobra.Command).Help
+        - (*github.com/spf13/viper.Viper).BindPFlags
+        - (*github.com/spf13/pflag.FlagSet).MarkHidden
+    gocyclo:
+      min-complexity: 20
+    gocritic:
+      enabled-tags:
+        - performance
+        - style
+        - experimental
+      disabled-checks:
+        - hugeParam
+  exclusions:
+    generated: lax
+    rules:
+      - path: _test\.go
+        linters:
+          - errcheck
 
-linters-settings:
-  errcheck:
-    exclude-functions:
-      - (*github.com/spf13/cobra.Command).MarkFlagRequired
-      - (*github.com/spf13/cobra.Command).MarkFlagFilename
-      - github.com/spf13/cobra.MarkFlagRequired
-      - github.com/spf13/cobra.MarkFlagFilename
-      - github.com/spf13/cobra.MarkFlagFilename
-      - (*github.com/spf13/cobra.Command).Help
-      - (*github.com/spf13/viper.Viper).BindPFlags
-      - (*github.com/spf13/pflag.FlagSet).MarkHidden
-  govet:
-    check-shadowing: false
-
-  gofmt:
-    simplify: true
-
-  golint:
-    min-confidence: 0
-
-  gocyclo:
-    # minimal code complexity to report, 30 by default (we should lower it to around 15-17)
-    min-complexity: 20
-
-  maligned:
-    # print struct with more effective memory layout or not, false by default
-    suggest-new: true
-
-  misspell:
-    locale: neutral
-
-  goimports:
-    local-prefixes: github.com/elastic/ecctl
-
-  gocritic:
-    enabled-tags:
-      - performance
-      - style
-      - experimental
-    disabled-checks:
-      - hugeParam
+formatters:
+  settings:
+    goimports:
+      local-prefixes: github.com/elastic/ecctl
 
 issues:
   max-issues-per-linter: 0
   max-same-issues: 0
-  # Excluding configuration per-path, per-linter, per-text and per-source
-  exclude-rules:
-    - path: _test\.go
-      linters:
-        - gocyclo
-        - errcheck
-        - dupl
-        - gosec
-        - gocognit
-    - path: cmd/platform/enrollment-token/command.go
-      linters:
-        - gosec
-    - path: cmd/version.go
-      linters:
-        - gosec
-
 
 output:
   formats:
-    - format: tab
+    tab:
       path: stderr
