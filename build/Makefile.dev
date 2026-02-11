@@ -55,7 +55,7 @@ notice: deps
 .PHONY: lint
 lint: deps
 	@ echo "-> Running linters..."
-	@ $(GOBIN)/golangci-lint run --timeout 5m
+	@ $(GOBIN)/golangci-lint run --timeout 5m --fix
 	@ $(GOBIN)/go-licenser -d .
 	@ echo "-> Done."
 
