@@ -1,0 +1,7 @@
+{{- define "override" }}{{ range .Projects }}{{ executeTemplate .}}
+{{ end }}{{ end }}{{ define "default" }}
+{{- "ID" }}{{tab}}{{"NAME"}}{{tab}}{{"TYPE"}}{{tab}}{{"REGION"}}{{tab}}{{"ALIAS"}}
+{{- range .Projects }}
+{{ .ID }}{{tab}}{{ .Name }}{{tab}}{{ .Type }}{{tab}}{{ .RegionID }}{{tab}}{{ if .Alias }}{{ .Alias }}{{ else }}-{{ end }}
+{{- end}}
+{{end}}
