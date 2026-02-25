@@ -37,6 +37,6 @@ ecctl project [flags]
 
 ### SEE ALSO
 
-* [ecctl](/reference/ecctl.md)	 - Elastic Cloud Control
+* [ecctl](ecctl.md)	 - Elastic Cloud Control
 * [ecctl project list](ecctl_project_list.md)	 - Lists serverless projects
 
