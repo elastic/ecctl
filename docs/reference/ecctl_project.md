@@ -1,4 +1,11 @@
-## ecctl project
+---
+mapped_pages:
+  - https://www.elastic.co/guide/en/ecctl/current/ecctl_project.html
+applies_to:
+  deployment:
+    ess: all
+---
+## ecctl project [ecctl_project]
 
 Manages serverless projects
 
@@ -6,13 +13,13 @@ Manages serverless projects
 ecctl project [flags]
 ```
 
-### Options
+### Options [_options_67]
 
 ```
   -h, --help   help for project
 ```
 
-### Options inherited from parent commands
+### Options inherited from parent commands [_options_inherited_from_parent_commands_67]
 
 ```
       --api-key string        API key to use to authenticate (If empty will look for EC_API_KEY environment variable)
@@ -34,8 +41,8 @@ ecctl project [flags]
       --verbose-credentials   When set, Authorization headers on the request/response trail will be displayed as plain text
       --verbose-file string   When set, the verbose request/response trail will be written to the defined file
 ```
-
-### SEE ALSO
+ 
+### SEE ALSO [_see_also_67]
 
 * [ecctl](/reference/ecctl.md)	 - Elastic Cloud Control
 * [ecctl project list](ecctl_project_list.md)	 - Lists serverless projects

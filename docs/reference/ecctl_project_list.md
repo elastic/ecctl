@@ -1,4 +1,11 @@
-## ecctl project list
+---
+mapped_pages:
+  - https://www.elastic.co/guide/en/ecctl/current/ecctl_project_list.html
+applies_to:
+  deployment:
+    ess: all
+---
+## ecctl project list [ecctl_project_list]
 
 Lists serverless projects
 
@@ -6,14 +13,14 @@ Lists serverless projects
 ecctl project list [flags]
 ```
 
-### Options
+### Options [_options_68]
 
 ```
   -h, --help          help for list
       --type string   Filters by project type (elasticsearch, observability, security)
 ```
 
-### Options inherited from parent commands
+### Options inherited from parent commands [_options_inherited_from_parent_commands_68]
 
 ```
       --api-key string        API key to use to authenticate (If empty will look for EC_API_KEY environment variable)
@@ -36,7 +43,7 @@ ecctl project list [flags]
       --verbose-file string   When set, the verbose request/response trail will be written to the defined file
 ```
 
-### SEE ALSO
+### SEE ALSO [_see_also_68]
 
 * [ecctl project](/reference/ecctl_project.md)	 - Manages serverless projects
 
