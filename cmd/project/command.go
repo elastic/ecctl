@@ -15,26 +15,18 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package cmd
+package cmdproject
 
 import (
-	cmdauth "github.com/elastic/ecctl/cmd/auth"
-	cmdcomment "github.com/elastic/ecctl/cmd/comment"
-	cmddeployment "github.com/elastic/ecctl/cmd/deployment"
-	cmdplatform "github.com/elastic/ecctl/cmd/platform"
-	cmdproject "github.com/elastic/ecctl/cmd/project"
-	cmdstack "github.com/elastic/ecctl/cmd/stack"
-	cmduser "github.com/elastic/ecctl/cmd/user"
+	"github.com/spf13/cobra"
 )
 
-func init() {
-	RootCmd.AddCommand(
-		cmdauth.Command,
-		cmdcomment.Command,
-		cmddeployment.Command,
-		cmdplatform.Command,
-		cmdproject.Command,
-		cmduser.Command,
-		cmdstack.Command,
-	)
+// Command is the top level project command.
+var Command = &cobra.Command{
+	Use:     "project",
+	Short:   "Manages serverless projects",
+	PreRunE: cobra.MaximumNArgs(0),
+	Run: func(cmd *cobra.Command, args []string) {
+		cmd.Help()
+	},
 }
