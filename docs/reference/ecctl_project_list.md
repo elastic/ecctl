@@ -38,5 +38,5 @@ ecctl project list [flags]
 
 ### SEE ALSO
 
-* [ecctl project](ecctl_project.md)	 - Manages serverless projects
+* [ecctl project](/reference/ecctl_project.md)	 - Manages serverless projects
 
