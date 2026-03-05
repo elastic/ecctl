@@ -1,0 +1,5 @@
+{{- define "override" }}{{ executeTemplate . }}
+{{ end }}{{ define "default" }}
+{{- "ID" }}{{tab}}{{"NAME"}}{{tab}}{{"TYPE"}}{{tab}}{{"REGION"}}{{tab}}{{"ALIAS"}}
+{{ .ID }}{{tab}}{{ .Name }}{{tab}}{{ .Type }}{{tab}}{{ .RegionID }}{{tab}}{{ if .Alias }}{{ .Alias }}{{ else }}-{{ end }}
+{{- end}}

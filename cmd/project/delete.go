@@ -18,7 +18,7 @@
 package cmdproject
 
 import (
-	"path/filepath"
+	"fmt"
 
 	"github.com/spf13/cobra"
 
@@ -26,16 +26,17 @@ import (
 	"github.com/elastic/ecctl/pkg/project"
 )
 
-var listCmd = &cobra.Command{
-	Use:     "list",
-	Short:   "Lists serverless projects",
-	PreRunE: cobra.NoArgs,
+var deleteCmd = &cobra.Command{
+	Use:     "delete <project-id>",
+	Short:   "Deletes a serverless project",
+	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		projectType, _ := cmd.Flags().GetString("type")
 
-		res, err := project.List(project.ListParams{
+		err := project.Delete(project.DeleteParams{
 			API:    ecctl.Get().API,
 			Host:   ecctl.Get().Config.Host,
+			ID:     args[0],
 			Type:   projectType,
 			Client: ecctl.Get().Config.Client,
 		})
@@ -43,12 +44,16 @@ var listCmd = &cobra.Command{
 			return err
 		}
 
-		return ecctl.Get().Formatter.Format(filepath.Join("project", "list"), res)
+		_, err = fmt.Fprintf(cmd.OutOrStdout(), "Project %q deletion scheduled.\n", args[0])
+		return err
 	},
 }
 
 func init() {
-	Command.AddCommand(listCmd)
+	Command.AddCommand(deleteCmd)
+	initDeleteFlags()
+}
 
-	listCmd.Flags().String("type", "", "Filters by project type (elasticsearch/search, observability, security)")
+func initDeleteFlags() {
+	deleteCmd.Flags().String("type", "", "Project type (elasticsearch/search, observability, security). Auto-detected if omitted.")
 }

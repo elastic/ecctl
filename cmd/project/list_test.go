@@ -105,7 +105,7 @@ func Test_listCmd(t *testing.T) {
 				}},
 			},
 			want: testutils.Assertion{
-				Err: `invalid project type "invalid", must be one of: elasticsearch, observability, security`,
+				Err: `invalid project type "invalid", must be one of: elasticsearch (or search), observability, security`,
 			},
 		},
 		{

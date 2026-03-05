@@ -26,29 +26,44 @@ import (
 	"github.com/elastic/ecctl/pkg/project"
 )
 
-var listCmd = &cobra.Command{
-	Use:     "list",
-	Short:   "Lists serverless projects",
+var createCmd = &cobra.Command{
+	Use:     "create",
+	Short:   "Creates a serverless project",
 	PreRunE: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		projectType, _ := cmd.Flags().GetString("type")
+		name, _ := cmd.Flags().GetString("name")
+		region, _ := cmd.Flags().GetString("region")
+		tier, _ := cmd.Flags().GetString("tier")
 
-		res, err := project.List(project.ListParams{
-			API:    ecctl.Get().API,
-			Host:   ecctl.Get().Config.Host,
-			Type:   projectType,
-			Client: ecctl.Get().Config.Client,
+		res, err := project.Create(project.CreateParams{
+			API:      ecctl.Get().API,
+			Host:     ecctl.Get().Config.Host,
+			Type:     projectType,
+			Name:     name,
+			RegionID: region,
+			Tier:     tier,
+			Client:   ecctl.Get().Config.Client,
 		})
 		if err != nil {
 			return err
 		}
 
-		return ecctl.Get().Formatter.Format(filepath.Join("project", "list"), res)
+		return ecctl.Get().Formatter.Format(filepath.Join("project", "create"), res)
 	},
 }
 
 func init() {
-	Command.AddCommand(listCmd)
+	Command.AddCommand(createCmd)
+	initCreateFlags()
+}
 
-	listCmd.Flags().String("type", "", "Filters by project type (elasticsearch/search, observability, security)")
+func initCreateFlags() {
+	createCmd.Flags().String("type", "", "Project type (elasticsearch/search, observability, security) (required)")
+	createCmd.Flags().String("name", "", "Project name (required)")
+	createCmd.Flags().String("region", "", "Region ID (e.g. aws-us-east-1) (required)")
+	createCmd.Flags().String("tier", "", "Product tier (observability: complete/logs_essentials, security: complete/essentials)")
+	_ = createCmd.MarkFlagRequired("type")
+	_ = createCmd.MarkFlagRequired("name")
+	_ = createCmd.MarkFlagRequired("region")
 }
