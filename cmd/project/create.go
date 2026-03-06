@@ -59,8 +59,8 @@ func init() {
 }
 
 func initCreateFlags() {
-	createCmd.Flags().String("type", "", "Project type (elasticsearch/search, observability, security) (required)")
-	createCmd.Flags().String("name", "", "Project name (required)")
+	createCmd.Flags().String("type", "", "Project type (elasticsearch/search, observability, security)")
+	createCmd.Flags().String("name", "", "Project name")
 	createCmd.Flags().String("tier", "", "Product tier (observability: complete/logs_essentials, security: complete/essentials)")
 	_ = createCmd.MarkFlagRequired("type")
 	_ = createCmd.MarkFlagRequired("name")

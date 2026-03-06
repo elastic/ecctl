@@ -158,7 +158,7 @@ func Test_createCmd(t *testing.T) {
 				}},
 			},
 			want: testutils.Assertion{
-				Err: "invalid project create params: 1 error occurred:\n\t* --tier is not supported for elasticsearch projects\n\n",
+				Err: "invalid project create params: 1 error occurred:\n\t* tier is not supported for elasticsearch projects\n\n",
 			},
 		},
 		{

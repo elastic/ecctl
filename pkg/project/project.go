@@ -203,7 +203,7 @@ func (p CreateParams) Validate() error {
 	if p.Tier != "" {
 		pt, _ := ValidateType(p.Type)
 		if pt == Elasticsearch {
-			merr = merr.Append(errors.New("--tier is not supported for elasticsearch projects"))
+			merr = merr.Append(errors.New("tier is not supported for elasticsearch projects"))
 		}
 	}
 	return merr.ErrorOrNil()

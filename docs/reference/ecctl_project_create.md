@@ -17,9 +17,9 @@ ecctl project create [flags]
 
 ```
   -h, --help          help for create
-      --name string   Project name (required)
+      --name string   Project name
       --tier string   Product tier (observability: complete/logs_essentials, security: complete/essentials)
-      --type string   Project type (elasticsearch/search, observability, security) (required)
+      --type string   Project type (elasticsearch/search, observability, security)
 ```
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_68a]
