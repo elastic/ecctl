@@ -16,11 +16,10 @@ ecctl project create [flags]
 ## Options [_options_68a]
 
 ```
-  -h, --help            help for create
-      --name string     Project name (required)
-      --region string   Region ID (e.g. aws-us-east-1) (required)
-      --tier string     Product tier (observability: complete/logs_essentials, security: complete/essentials)
-      --type string     Project type (elasticsearch/search, observability, security) (required)
+  -h, --help          help for create
+      --name string   Project name (required)
+      --tier string   Product tier (observability: complete/logs_essentials, security: complete/essentials)
+      --type string   Project type (elasticsearch/search, observability, security) (required)
 ```
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_68a]

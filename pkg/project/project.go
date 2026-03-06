@@ -407,34 +407,51 @@ func newRequest(method, endpoint string, body io.Reader) (*http.Request, error) 
 
 func listByType(params ListParams, pt ProjectType) (*ListResponse, error) {
 	host := strings.TrimRight(params.Host, "/")
-	endpoint := fmt.Sprintf("%s/api/v1/serverless/projects/%s", host, pt)
+	baseEndpoint := fmt.Sprintf("%s/api/v1/serverless/projects/%s", host, pt)
 
-	req, err := newRequest(http.MethodGet, endpoint, nil)
-	if err != nil {
-		return nil, err
+	var allItems []Project
+	cursor := ""
+
+	for {
+		endpoint := baseEndpoint
+		if cursor != "" {
+			endpoint = fmt.Sprintf("%s?from=%s", baseEndpoint, cursor)
+		}
+
+		req, err := newRequest(http.MethodGet, endpoint, nil)
+		if err != nil {
+			return nil, err
+		}
+
+		req = params.API.AuthWriter.AuthRequest(req)
+
+		resp, err := params.httpClient().Do(req)
+		if err != nil {
+			return nil, fmt.Errorf("request failed: %w", err)
+		}
+
+		body, err := io.ReadAll(resp.Body)
+		_ = resp.Body.Close()
+		if err != nil {
+			return nil, fmt.Errorf("failed to read response body: %w", err)
+		}
+
+		if resp.StatusCode != http.StatusOK {
+			return nil, fmt.Errorf("API returned status %d: %s", resp.StatusCode, string(body))
+		}
+
+		var page ListResponse
+		if err := json.Unmarshal(body, &page); err != nil {
+			return nil, fmt.Errorf("failed to decode response: %w", err)
+		}
+
+		allItems = append(allItems, page.Items...)
+
+		if page.NextPage == "" {
+			break
+		}
+		cursor = page.NextPage
 	}
 
-	req = params.API.AuthWriter.AuthRequest(req)
-
-	resp, err := params.httpClient().Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("request failed: %w", err)
-	}
-	defer func() { _ = resp.Body.Close() }()
-
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return nil, fmt.Errorf("failed to read response body: %w", err)
-	}
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API returned status %d: %s", resp.StatusCode, string(body))
-	}
-
-	var listResp ListResponse
-	if err := json.Unmarshal(body, &listResp); err != nil {
-		return nil, fmt.Errorf("failed to decode response: %w", err)
-	}
-
-	return &listResp, nil
+	return &ListResponse{Items: allItems}, nil
 }

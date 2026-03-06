@@ -28,6 +28,14 @@ import (
 	"github.com/elastic/ecctl/pkg/project"
 )
 
+func init() {
+	// Mirror the persistent --region flag from cmd/root.go so that
+	// createCmd can inherit it when tested in isolation.
+	if Command.PersistentFlags().Lookup("region") == nil {
+		Command.PersistentFlags().String("region", "", "Elastic Cloud Hosted or Serverless region")
+	}
+}
+
 func newProjectCreateBody(p project.CreateResult) mock.Response {
 	b, _ := json.Marshal(p)
 	return mock.Response{
@@ -75,7 +83,7 @@ func Test_createCmd(t *testing.T) {
 				}},
 			},
 			want: testutils.Assertion{
-				Err: `required flag(s) "name", "region", "type" not set`,
+				Err: `required flag(s) "name", "type" not set`,
 			},
 		},
 		{
