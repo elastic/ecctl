@@ -51,6 +51,10 @@ func Test_showCmd(t *testing.T) {
 		RegionID: "aws-us-east-1",
 		Alias:    "my-project-abc123",
 		CloudID:  "my-project:abc==",
+		Endpoints: map[string]string{
+			"elasticsearch": "https://abc123.es.us-east-1.aws.elastic.cloud",
+			"kibana":        "https://abc123.kb.us-east-1.aws.elastic.cloud",
+		},
 	}
 
 	projJSON, _ := json.MarshalIndent(proj, "", "  ")
@@ -102,8 +106,12 @@ func Test_showCmd(t *testing.T) {
 				},
 			},
 			want: testutils.Assertion{
-				Stdout: "ID       NAME         TYPE            REGION          ALIAS               CLOUD_ID\n" +
-					"abc123   my-project   elasticsearch   aws-us-east-1   my-project-abc123   my-project:abc==",
+				Stdout: "ID       NAME         TYPE            REGION          ALIAS\n" +
+					"abc123   my-project   elasticsearch   aws-us-east-1   my-project-abc123\n" +
+					"\n" +
+					"ENDPOINTS:\n" +
+					"  elasticsearch:   https://abc123.es.us-east-1.aws.elastic.cloud\n" +
+					"  kibana:          https://abc123.kb.us-east-1.aws.elastic.cloud\n",
 			},
 		},
 		{

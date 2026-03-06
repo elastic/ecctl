@@ -1,5 +1,11 @@
 {{- define "override" }}{{ executeTemplate . }}
 {{ end }}{{ define "default" }}
-{{- "ID" }}{{tab}}{{"NAME"}}{{tab}}{{"TYPE"}}{{tab}}{{"REGION"}}{{tab}}{{"ALIAS"}}{{tab}}{{"CLOUD_ID"}}
-{{ .ID }}{{tab}}{{ .Name }}{{tab}}{{ .Type }}{{tab}}{{ .RegionID }}{{tab}}{{ if .Alias }}{{ .Alias }}{{ else }}-{{ end }}{{tab}}{{ if .CloudID }}{{ .CloudID }}{{ else }}-{{ end }}
+{{- "ID" }}{{tab}}{{"NAME"}}{{tab}}{{"TYPE"}}{{tab}}{{"REGION"}}{{tab}}{{"ALIAS"}}
+{{ .ID }}{{tab}}{{ .Name }}{{tab}}{{ .Type }}{{tab}}{{ .RegionID }}{{tab}}{{ if .Alias }}{{ .Alias }}{{ else }}-{{ end }}
+{{ if .Endpoints }}
+ENDPOINTS:
+{{- range $k := sortKeys .Endpoints }}
+  {{ $k }}:{{tab}}{{ index $.Endpoints $k }}
+{{- end }}
+{{ end }}
 {{- end}}

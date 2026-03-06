@@ -77,13 +77,14 @@ type Metadata struct {
 
 // Project represents a serverless project.
 type Project struct {
-	ID       string   `json:"id"`
-	Name     string   `json:"name"`
-	Alias    string   `json:"alias,omitempty"`
-	Type     string   `json:"type"`
-	RegionID string   `json:"region_id"`
-	CloudID  string   `json:"cloud_id,omitempty"`
-	Metadata Metadata `json:"metadata,omitempty"`
+	ID        string            `json:"id"`
+	Name      string            `json:"name"`
+	Alias     string            `json:"alias,omitempty"`
+	Type      string            `json:"type"`
+	RegionID  string            `json:"region_id"`
+	CloudID   string            `json:"cloud_id,omitempty"`
+	Endpoints map[string]string `json:"endpoints,omitempty"`
+	Metadata  Metadata          `json:"metadata,omitempty"`
 }
 
 // ListResponse is the response from listing projects of a given type.
@@ -485,13 +486,18 @@ func newRequest(method, endpoint string, body io.Reader) (*http.Request, error) 
 }
 
 func listByType(params ListParams, pt ProjectType) (*ListResponse, error) {
+	const maxPages = 100
+
 	host := strings.TrimRight(params.Host, "/")
 	baseEndpoint := fmt.Sprintf("%s/api/v1/serverless/projects/%s", host, pt)
 
 	var allItems []Project
 	cursor := ""
 
-	for {
+	for page := 0; ; page++ {
+		if page >= maxPages {
+			return nil, fmt.Errorf("exceeded maximum number of pages (%d) while listing %s projects", maxPages, pt)
+		}
 		reqURL, err := url.Parse(baseEndpoint)
 		if err != nil {
 			return nil, fmt.Errorf("invalid base endpoint URL: %w", err)
