@@ -140,6 +140,7 @@ toc:
       - file: ecctl_project_create.md
       - file: ecctl_project_delete.md
       - file: ecctl_project_list.md
+      - file: ecctl_project_show.md
       - file: ecctl_stack.md
       - file: ecctl_stack_delete.md
       - file: ecctl_stack_list.md

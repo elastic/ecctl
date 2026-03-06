@@ -305,7 +305,7 @@ func Delete(params DeleteParams) error {
 		return err
 	}
 
-	pt, err := resolveProjectType(params)
+	pt, err := resolveProjectType(params.Type, params.ID, params.API, params.Host, params.Client)
 	if err != nil {
 		return err
 	}
@@ -338,27 +338,106 @@ func Delete(params DeleteParams) error {
 	return nil
 }
 
-func resolveProjectType(params DeleteParams) (ProjectType, error) {
-	if params.Type != "" {
-		return ValidateType(params.Type)
+// ShowParams are the parameters for showing a project.
+type ShowParams struct {
+	API    *api.API
+	Host   string
+	ID     string
+	Type   string
+	Client *http.Client
+}
+
+// Validate ensures the parameters are usable.
+func (p ShowParams) Validate() error {
+	var merr = multierror.NewPrefixed("invalid project show params")
+	if p.API == nil {
+		merr = merr.Append(errors.New("api reference is required"))
+	}
+	if p.Host == "" {
+		merr = merr.Append(errors.New("host is required"))
+	}
+	if p.ID == "" {
+		merr = merr.Append(errors.New("project id is required"))
+	}
+	return merr.ErrorOrNil()
+}
+
+func (p ShowParams) httpClient() *http.Client {
+	if p.Client != nil {
+		return p.Client
+	}
+	return &http.Client{}
+}
+
+// Show retrieves a single serverless project by ID. If Type is empty it
+// auto-detects the project type by listing all projects first.
+func Show(params ShowParams) (*Project, error) {
+	if err := params.Validate(); err != nil {
+		return nil, err
+	}
+
+	pt, err := resolveProjectType(params.Type, params.ID, params.API, params.Host, params.Client)
+	if err != nil {
+		return nil, err
+	}
+
+	host := strings.TrimRight(params.Host, "/")
+	endpoint := fmt.Sprintf("%s/api/v1/serverless/projects/%s/%s", host, pt, params.ID)
+
+	req, err := newRequest(http.MethodGet, endpoint, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	req = params.API.AuthWriter.AuthRequest(req)
+
+	resp, err := params.httpClient().Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("request failed: %w", err)
+	}
+	defer func() { _ = resp.Body.Close() }()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read response body: %w", err)
+	}
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("API returned status %d: %s", resp.StatusCode, string(body))
+	}
+
+	var result Project
+	if err := json.Unmarshal(body, &result); err != nil {
+		return nil, fmt.Errorf("failed to decode response: %w", err)
+	}
+	if result.Type == "" {
+		result.Type = string(pt)
+	}
+
+	return &result, nil
+}
+
+func resolveProjectType(typeHint, id string, a *api.API, host string, client *http.Client) (ProjectType, error) {
+	if typeHint != "" {
+		return ValidateType(typeHint)
 	}
 
 	res, err := List(ListParams{
-		API:    params.API,
-		Host:   params.Host,
-		Client: params.Client,
+		API:    a,
+		Host:   host,
+		Client: client,
 	})
 	if err != nil {
 		return "", fmt.Errorf("failed to auto-detect project type: %w", err)
 	}
 
 	for _, p := range res.Projects {
-		if p.ID == params.ID {
-			return ProjectType(p.Type), nil
+		if p.ID == id {
+			return ValidateType(p.Type)
 		}
 	}
 
-	return "", fmt.Errorf("project %q not found", params.ID)
+	return "", fmt.Errorf("project %q not found", id)
 }
 
 type securityProductType struct {
@@ -413,12 +492,18 @@ func listByType(params ListParams, pt ProjectType) (*ListResponse, error) {
 	cursor := ""
 
 	for {
-		endpoint := baseEndpoint
-		if cursor != "" {
-			endpoint = fmt.Sprintf("%s?from=%s", baseEndpoint, cursor)
+		reqURL, err := url.Parse(baseEndpoint)
+		if err != nil {
+			return nil, fmt.Errorf("invalid base endpoint URL: %w", err)
 		}
 
-		req, err := newRequest(http.MethodGet, endpoint, nil)
+		if cursor != "" {
+			q := reqURL.Query()
+			q.Set("from", cursor)
+			reqURL.RawQuery = q.Encode()
+		}
+
+		req, err := newRequest(http.MethodGet, reqURL.String(), nil)
 		if err != nil {
 			return nil, err
 		}
