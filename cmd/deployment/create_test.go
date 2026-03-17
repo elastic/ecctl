@@ -298,6 +298,7 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 								"region":                       {"ece-region"},
 								"show_instance_configurations": {"true"},
 								"show_max_zones":               {"false"},
+								"stack_version":                {"7.8.0"},
 							},
 						},
 					},
@@ -349,6 +350,7 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 								"region":                       {"ece-region"},
 								"show_instance_configurations": {"true"},
 								"show_max_zones":               {"false"},
+								"stack_version":                {"7.11.2"},
 							},
 						},
 					},
@@ -480,6 +482,7 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 								"region":                       {"ece-region"},
 								"show_instance_configurations": {"true"},
 								"show_max_zones":               {"false"},
+								"stack_version":                {"8.11.3"},
 							},
 						},
 					},
@@ -576,36 +579,6 @@ func Test_newCreatePayload(t *testing.T) {
 						Apm: []*models.ApmPayload{
 							{
 								DisplayName: "test-apm",
-							},
-						},
-						Elasticsearch: []*models.ElasticsearchPayload{
-							{
-								DisplayName: "test-elasticsearch",
-							},
-						},
-					},
-				},
-			},
-			expected: &models.DeploymentCreateRequest{
-				Resources: &models.DeploymentCreateResources{
-					Elasticsearch: []*models.ElasticsearchPayload{
-						{
-							DisplayName: "test-elasticsearch",
-						},
-					},
-				},
-			},
-		},
-		{
-			name: "returns payload from template but without EnterpriseSearch if version >= 9.0.0",
-			args: args{
-				version: "9.0.0",
-				tpl: &models.DeploymentCreateRequest{
-					Resources: &models.DeploymentCreateResources{
-						Apm: nil,
-						EnterpriseSearch: []*models.EnterpriseSearchPayload{
-							{
-								DisplayName: "test-enterprise-search",
 							},
 						},
 						Elasticsearch: []*models.ElasticsearchPayload{

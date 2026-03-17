@@ -175,9 +175,10 @@ func newCreatePayload(cmd *cobra.Command, version, region string) (*models.Deplo
 		_, _ = fmt.Fprintf(cmd.ErrOrStderr(), "--deployment-template not set, using %s\n", dt)
 	}
 	tpl, err := deptemplateapi.Get(deptemplateapi.GetParams{
-		API:        ecctl.Get().API,
-		TemplateID: dt,
-		Region:     region,
+		API:          ecctl.Get().API,
+		TemplateID:   dt,
+		Region:       region,
+		StackVersion: version,
 	})
 	if err != nil {
 		return nil, err
@@ -206,9 +207,6 @@ func removeUnsupportedResources(version string, tpl *models.DeploymentCreateRequ
 	}
 	if vers.Major >= 8 {
 		tpl.Resources.Apm = nil
-	}
-	if vers.Major >= 9 {
-		tpl.Resources.EnterpriseSearch = nil
 	}
 	return tpl, nil
 }
