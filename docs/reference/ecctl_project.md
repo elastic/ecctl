@@ -27,5 +27,8 @@ ecctl project [flags]
 ### See also [_see_also_67]
 
 * [ecctl](/reference/ecctl.md)	 - Elastic Cloud Control
+* [ecctl project create](ecctl_project_create.md)	 - Creates a serverless project
+* [ecctl project delete](ecctl_project_delete.md)	 - Deletes a serverless project
 * [ecctl project list](ecctl_project_list.md)	 - Lists serverless projects
+* [ecctl project show](ecctl_project_show.md)	 - Shows the specified serverless project
 

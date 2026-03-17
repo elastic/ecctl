@@ -17,7 +17,7 @@ ecctl project list [flags]
 
 ```
   -h, --help          help for list
-      --type string   Filters by project type (elasticsearch, observability, security)
+      --type string   Filters by project type (elasticsearch/search, observability, security)
 ```
 
 ## Options inherited from parent commands [_options_inherited_from_parent_commands_68]
