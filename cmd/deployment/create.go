@@ -108,6 +108,7 @@ func initFlags() {
 	createCmd.Flags().BoolP("track", "t", false, cmdutil.TrackFlagMessage)
 	createCmd.Flags().Bool("generate-payload", false, "Returns the deployment payload without actually creating the deployment resources")
 	createCmd.Flags().String("request-id", "", "Optional request ID - Can be found in the Stderr device when a previous deployment creation failed. For more information see the examples in the help command page")
+	createCmd.Flags().Bool("minimum-size", false, "Shrink each Elasticsearch topology element to its minimum allowed size")
 }
 
 func getDefaultTemplate(region string) (string, error) {
@@ -196,7 +197,9 @@ func newCreatePayload(cmd *cobra.Command, version, region string) (*models.Deplo
 	if err != nil {
 		return nil, err
 	}
-	shrinkTopologySizesToMinimum(result)
+	if minimumSize, _ := cmd.Flags().GetBool("minimum-size"); minimumSize {
+		shrinkTopologySizesToMinimum(result)
+	}
 	return result, nil
 }
 
@@ -211,12 +214,12 @@ func removeUnsupportedResources(version string, tpl *models.DeploymentCreateRequ
 	return tpl, nil
 }
 
-// shrinkTopologySizesToMinimum reduces the memory size of each Elasticsearch
-// topology element to its minimum allowed value as defined by
-// TopologyElementControl.Min. Elements with a zero minimum (optional/disabled
-// tiers) are left unchanged. Other resource types (Kibana, APM, Enterprise
-// Search) are left untouched because they carry no minimum size constraint on
-// the topology element itself.
+// shrinkTopologySizesToMinimum reduces the memory size and zone count of each
+// Elasticsearch topology element to its minimum allowed values. The memory size
+// is reduced to TopologyElementControl.Min, and the zone count is set to 1.
+// Elements with a zero minimum (optional/disabled tiers) are left unchanged.
+// Other resource types (Kibana, APM, Enterprise Search) are left untouched
+// because they carry no minimum size constraint on the topology element itself.
 func shrinkTopologySizesToMinimum(tpl *models.DeploymentCreateRequest) {
 	if tpl.Resources == nil {
 		return
@@ -233,8 +236,11 @@ func shrinkTopologySizesToMinimum(tpl *models.DeploymentCreateRequest) {
 				continue
 			}
 			min := *node.TopologyElementControl.Min.Value
-			if min > 0 && *node.Size.Value > min {
-				node.Size.Value = node.TopologyElementControl.Min.Value
+			if min > 0 {
+				if *node.Size.Value > min {
+					node.Size.Value = node.TopologyElementControl.Min.Value
+				}
+				node.ZoneCount = 1
 			}
 		}
 	}

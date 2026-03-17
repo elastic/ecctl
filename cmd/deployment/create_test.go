@@ -310,7 +310,7 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 						Assert: &mock.RequestAssertion{
 							Method: "POST",
 							Header: api.DefaultWriteMockHeaders,
-							Body:   mock.NewStringBody(`{"name":"with_default","resources":{"apm":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"apm":{"version":"7.8.0"},"cluster_topology":[{"instance_configuration_id":"aws.apm.r5d","size":{"resource":"memory","value":512},"zone_count":1}]},"ref_id":"main-apm","region":"us-east-1"}],"appsearch":null,"elasticsearch":[{"plan":{"autoscaling_enabled":false,"cluster_topology":[{"id":"coordinating","instance_configuration_id":"aws.coordinating.m5d","node_roles":null,"node_type":{"data":false,"ingest":true,"master":false},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":118784},"elasticsearch":{"node_attributes":{"data":"hot"}},"id":"hot_content","instance_configuration_id":"aws.data.highio.i3","node_roles":null,"node_type":{"data":true,"ingest":true,"master":true},"size":{"resource":"memory","value":1024},"topology_element_control":{"min":{"resource":"memory","value":1024}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":118784},"elasticsearch":{"node_attributes":{"data":"warm"}},"id":"warm","instance_configuration_id":"aws.data.highstorage.d3","node_roles":null,"node_type":{"data":true,"ingest":false,"master":false},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":59392},"elasticsearch":{"node_attributes":{"data":"cold"}},"id":"cold","instance_configuration_id":"aws.data.highstorage.d3","node_roles":null,"node_type":{"data":true,"ingest":false,"master":false},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":1},{"id":"master","instance_configuration_id":"aws.master.r5d","node_roles":null,"node_type":{"data":false,"ingest":false,"master":true},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":3},{"autoscaling_max":{"resource":"memory","value":61440},"autoscaling_min":{"resource":"memory","value":0},"id":"ml","instance_configuration_id":"aws.ml.m5d","node_roles":null,"node_type":{"data":false,"ingest":false,"master":false,"ml":true},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":1}],"deployment_template":{"id":"aws-io-optimized-v2"},"elasticsearch":{"version":"7.8.0"}},"ref_id":"main-elasticsearch","region":"us-east-1","settings":{"dedicated_masters_threshold":6}}],"enterprise_search":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"instance_configuration_id":"aws.enterprisesearch.m5d","node_type":{"appserver":true,"connector":true,"worker":true},"size":{"resource":"memory","value":0},"zone_count":2}],"enterprise_search":{"version":"7.8.0"}},"ref_id":"main-enterprise_search","region":"us-east-1"}],"integrations_server":null,"kibana":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"instance_configuration_id":"aws.kibana.r5d","size":{"resource":"memory","value":1024},"zone_count":1}],"kibana":{"version":"7.8.0"}},"ref_id":"main-kibana","region":"us-east-1"}]}}` + "\n"),
+							Body:   mock.NewStringBody(`{"name":"with_default","resources":{"apm":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"apm":{"version":"7.8.0"},"cluster_topology":[{"instance_configuration_id":"aws.apm.r5d","size":{"resource":"memory","value":512},"zone_count":1}]},"ref_id":"main-apm","region":"us-east-1"}],"appsearch":null,"elasticsearch":[{"plan":{"autoscaling_enabled":false,"cluster_topology":[{"id":"coordinating","instance_configuration_id":"aws.coordinating.m5d","node_roles":null,"node_type":{"data":false,"ingest":true,"master":false},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":118784},"elasticsearch":{"node_attributes":{"data":"hot"}},"id":"hot_content","instance_configuration_id":"aws.data.highio.i3","node_roles":null,"node_type":{"data":true,"ingest":true,"master":true},"size":{"resource":"memory","value":8192},"topology_element_control":{"min":{"resource":"memory","value":1024}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":118784},"elasticsearch":{"node_attributes":{"data":"warm"}},"id":"warm","instance_configuration_id":"aws.data.highstorage.d3","node_roles":null,"node_type":{"data":true,"ingest":false,"master":false},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":59392},"elasticsearch":{"node_attributes":{"data":"cold"}},"id":"cold","instance_configuration_id":"aws.data.highstorage.d3","node_roles":null,"node_type":{"data":true,"ingest":false,"master":false},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":1},{"id":"master","instance_configuration_id":"aws.master.r5d","node_roles":null,"node_type":{"data":false,"ingest":false,"master":true},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":3},{"autoscaling_max":{"resource":"memory","value":61440},"autoscaling_min":{"resource":"memory","value":0},"id":"ml","instance_configuration_id":"aws.ml.m5d","node_roles":null,"node_type":{"data":false,"ingest":false,"master":false,"ml":true},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":1}],"deployment_template":{"id":"aws-io-optimized-v2"},"elasticsearch":{"version":"7.8.0"}},"ref_id":"main-elasticsearch","region":"us-east-1","settings":{"dedicated_masters_threshold":6}}],"enterprise_search":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"instance_configuration_id":"aws.enterprisesearch.m5d","node_type":{"appserver":true,"connector":true,"worker":true},"size":{"resource":"memory","value":0},"zone_count":2}],"enterprise_search":{"version":"7.8.0"}},"ref_id":"main-enterprise_search","region":"us-east-1"}],"integrations_server":null,"kibana":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"instance_configuration_id":"aws.kibana.r5d","size":{"resource":"memory","value":1024},"zone_count":1}],"kibana":{"version":"7.8.0"}},"ref_id":"main-kibana","region":"us-east-1"}]}}` + "\n"),
 							Path:   "/api/v1/deployments",
 							Host:   api.DefaultMockHost,
 							Query: url.Values{
@@ -362,7 +362,7 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 						Assert: &mock.RequestAssertion{
 							Method: "POST",
 							Header: api.DefaultWriteMockHeaders,
-							Body:   mock.NewStringBody(`{"name":"with_default","resources":{"apm":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"apm":{"version":"7.11.2"},"cluster_topology":[{"instance_configuration_id":"aws.apm.r5d","size":{"resource":"memory","value":512},"zone_count":1}]},"ref_id":"main-apm","region":"us-east-1"}],"appsearch":null,"elasticsearch":[{"plan":{"autoscaling_enabled":false,"cluster_topology":[{"id":"coordinating","instance_configuration_id":"aws.coordinating.m5d","node_roles":["ingest","remote_cluster_client"],"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":118784},"elasticsearch":{"node_attributes":{"data":"hot"}},"id":"hot_content","instance_configuration_id":"aws.data.highio.i3","node_roles":["master","ingest","remote_cluster_client","data_hot","transform","data_content"],"size":{"resource":"memory","value":1024},"topology_element_control":{"min":{"resource":"memory","value":1024}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":118784},"elasticsearch":{"node_attributes":{"data":"warm"}},"id":"warm","instance_configuration_id":"aws.data.highstorage.d3","node_roles":["data_warm","remote_cluster_client"],"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":59392},"elasticsearch":{"node_attributes":{"data":"cold"}},"id":"cold","instance_configuration_id":"aws.data.highstorage.d3","node_roles":["data_cold","remote_cluster_client"],"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":1},{"id":"master","instance_configuration_id":"aws.master.r5d","node_roles":["master"],"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":3},{"autoscaling_max":{"resource":"memory","value":61440},"autoscaling_min":{"resource":"memory","value":0},"id":"ml","instance_configuration_id":"aws.ml.m5d","node_roles":["ml","remote_cluster_client"],"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":1}],"deployment_template":{"id":"aws-io-optimized-v2"},"elasticsearch":{"version":"7.11.2"}},"ref_id":"main-elasticsearch","region":"us-east-1","settings":{"dedicated_masters_threshold":6}}],"enterprise_search":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"instance_configuration_id":"aws.enterprisesearch.m5d","node_type":{"appserver":true,"connector":true,"worker":true},"size":{"resource":"memory","value":0},"zone_count":2}],"enterprise_search":{"version":"7.11.2"}},"ref_id":"main-enterprise_search","region":"us-east-1"}],"integrations_server":null,"kibana":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"instance_configuration_id":"aws.kibana.r5d","size":{"resource":"memory","value":1024},"zone_count":1}],"kibana":{"version":"7.11.2"}},"ref_id":"main-kibana","region":"us-east-1"}]}}` + "\n"),
+							Body:   mock.NewStringBody(`{"name":"with_default","resources":{"apm":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"apm":{"version":"7.11.2"},"cluster_topology":[{"instance_configuration_id":"aws.apm.r5d","size":{"resource":"memory","value":512},"zone_count":1}]},"ref_id":"main-apm","region":"us-east-1"}],"appsearch":null,"elasticsearch":[{"plan":{"autoscaling_enabled":false,"cluster_topology":[{"id":"coordinating","instance_configuration_id":"aws.coordinating.m5d","node_roles":["ingest","remote_cluster_client"],"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":118784},"elasticsearch":{"node_attributes":{"data":"hot"}},"id":"hot_content","instance_configuration_id":"aws.data.highio.i3","node_roles":["master","ingest","remote_cluster_client","data_hot","transform","data_content"],"size":{"resource":"memory","value":8192},"topology_element_control":{"min":{"resource":"memory","value":1024}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":118784},"elasticsearch":{"node_attributes":{"data":"warm"}},"id":"warm","instance_configuration_id":"aws.data.highstorage.d3","node_roles":["data_warm","remote_cluster_client"],"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":59392},"elasticsearch":{"node_attributes":{"data":"cold"}},"id":"cold","instance_configuration_id":"aws.data.highstorage.d3","node_roles":["data_cold","remote_cluster_client"],"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":1},{"id":"master","instance_configuration_id":"aws.master.r5d","node_roles":["master"],"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":3},{"autoscaling_max":{"resource":"memory","value":61440},"autoscaling_min":{"resource":"memory","value":0},"id":"ml","instance_configuration_id":"aws.ml.m5d","node_roles":["ml","remote_cluster_client"],"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":1}],"deployment_template":{"id":"aws-io-optimized-v2"},"elasticsearch":{"version":"7.11.2"}},"ref_id":"main-elasticsearch","region":"us-east-1","settings":{"dedicated_masters_threshold":6}}],"enterprise_search":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"instance_configuration_id":"aws.enterprisesearch.m5d","node_type":{"appserver":true,"connector":true,"worker":true},"size":{"resource":"memory","value":0},"zone_count":2}],"enterprise_search":{"version":"7.11.2"}},"ref_id":"main-enterprise_search","region":"us-east-1"}],"integrations_server":null,"kibana":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"instance_configuration_id":"aws.kibana.r5d","size":{"resource":"memory","value":1024},"zone_count":1}],"kibana":{"version":"7.11.2"}},"ref_id":"main-kibana","region":"us-east-1"}]}}` + "\n"),
 							Path:   "/api/v1/deployments",
 							Host:   api.DefaultMockHost,
 							Query: url.Values{
@@ -494,7 +494,7 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 						Assert: &mock.RequestAssertion{
 							Method: "POST",
 							Header: api.DefaultWriteMockHeaders,
-							Body:   mock.NewStringBody(`{"name":"with_default","resources":{"apm":null,"appsearch":null,"elasticsearch":[{"plan":{"autoscaling_enabled":false,"cluster_topology":[{"id":"coordinating","instance_configuration_id":"aws.coordinating.m5d","node_roles":["ingest","remote_cluster_client"],"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":118784},"elasticsearch":{"node_attributes":{"data":"hot"}},"id":"hot_content","instance_configuration_id":"aws.data.highio.i3","node_roles":["master","ingest","remote_cluster_client","data_hot","transform","data_content"],"size":{"resource":"memory","value":1024},"topology_element_control":{"min":{"resource":"memory","value":1024}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":118784},"elasticsearch":{"node_attributes":{"data":"warm"}},"id":"warm","instance_configuration_id":"aws.data.highstorage.d3","node_roles":["data_warm","remote_cluster_client"],"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":59392},"elasticsearch":{"node_attributes":{"data":"cold"}},"id":"cold","instance_configuration_id":"aws.data.highstorage.d3","node_roles":["data_cold","remote_cluster_client"],"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":1},{"id":"master","instance_configuration_id":"aws.master.r5d","node_roles":["master"],"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":3},{"autoscaling_max":{"resource":"memory","value":61440},"autoscaling_min":{"resource":"memory","value":0},"id":"ml","instance_configuration_id":"aws.ml.m5d","node_roles":["ml","remote_cluster_client"],"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":1}],"deployment_template":{"id":"aws-io-optimized-v2"},"elasticsearch":{"version":"8.11.3"}},"ref_id":"main-elasticsearch","region":"us-east-1","settings":{"dedicated_masters_threshold":6}}],"enterprise_search":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"instance_configuration_id":"aws.enterprisesearch.m5d","node_type":{"appserver":true,"connector":true,"worker":true},"size":{"resource":"memory","value":0},"zone_count":2}],"enterprise_search":{"version":"8.11.3"}},"ref_id":"main-enterprise_search","region":"us-east-1"}],"integrations_server":null,"kibana":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"instance_configuration_id":"aws.kibana.r5d","size":{"resource":"memory","value":1024},"zone_count":1}],"kibana":{"version":"8.11.3"}},"ref_id":"main-kibana","region":"us-east-1"}]}}` + "\n"),
+							Body:   mock.NewStringBody(`{"name":"with_default","resources":{"apm":null,"appsearch":null,"elasticsearch":[{"plan":{"autoscaling_enabled":false,"cluster_topology":[{"id":"coordinating","instance_configuration_id":"aws.coordinating.m5d","node_roles":["ingest","remote_cluster_client"],"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":118784},"elasticsearch":{"node_attributes":{"data":"hot"}},"id":"hot_content","instance_configuration_id":"aws.data.highio.i3","node_roles":["master","ingest","remote_cluster_client","data_hot","transform","data_content"],"size":{"resource":"memory","value":8192},"topology_element_control":{"min":{"resource":"memory","value":1024}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":118784},"elasticsearch":{"node_attributes":{"data":"warm"}},"id":"warm","instance_configuration_id":"aws.data.highstorage.d3","node_roles":["data_warm","remote_cluster_client"],"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":59392},"elasticsearch":{"node_attributes":{"data":"cold"}},"id":"cold","instance_configuration_id":"aws.data.highstorage.d3","node_roles":["data_cold","remote_cluster_client"],"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":1},{"id":"master","instance_configuration_id":"aws.master.r5d","node_roles":["master"],"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":3},{"autoscaling_max":{"resource":"memory","value":61440},"autoscaling_min":{"resource":"memory","value":0},"id":"ml","instance_configuration_id":"aws.ml.m5d","node_roles":["ml","remote_cluster_client"],"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":1}],"deployment_template":{"id":"aws-io-optimized-v2"},"elasticsearch":{"version":"8.11.3"}},"ref_id":"main-elasticsearch","region":"us-east-1","settings":{"dedicated_masters_threshold":6}}],"enterprise_search":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"instance_configuration_id":"aws.enterprisesearch.m5d","node_type":{"appserver":true,"connector":true,"worker":true},"size":{"resource":"memory","value":0},"zone_count":2}],"enterprise_search":{"version":"8.11.3"}},"ref_id":"main-enterprise_search","region":"us-east-1"}],"integrations_server":null,"kibana":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"instance_configuration_id":"aws.kibana.r5d","size":{"resource":"memory","value":1024},"zone_count":1}],"kibana":{"version":"8.11.3"}},"ref_id":"main-kibana","region":"us-east-1"}]}}` + "\n"),
 							Path:   "/api/v1/deployments",
 							Host:   api.DefaultMockHost,
 							Query: url.Values{
@@ -507,6 +507,98 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 			want: testutils.Assertion{
 				Stdout: string(defaultCreateResponseBytes),
 			},
+		},
+		{
+			name: "shrinks topology sizes to minimum when --minimum-size=true",
+			args: testutils.Args{
+				Cmd: createCmd,
+				Args: []string{
+					"create",
+					"--request-id=some_request_id",
+					"--version=7.8.0",
+					"--deployment-template=aws-io-optimized-v2",
+					"--name=with_default",
+					"--minimum-size=true",
+				},
+				Cfg: testutils.MockCfg{Responses: []mock.Response{
+					{
+						Response: http.Response{
+							StatusCode: 200,
+							Body:       mock.NewByteBody(awsIoOptimisedTemplate),
+						},
+						Assert: &mock.RequestAssertion{
+							Method: "GET",
+							Header: api.DefaultReadMockHeaders,
+							Path:   "/api/v1/deployments/templates/aws-io-optimized-v2",
+							Host:   api.DefaultMockHost,
+							Query: url.Values{
+								"region":                       {"ece-region"},
+								"show_instance_configurations": {"true"},
+								"show_max_zones":               {"false"},
+								"stack_version":                {"7.8.0"},
+							},
+						},
+					},
+					{
+						Response: http.Response{StatusCode: 201, Body: mock.NewStructBody(defaultCreateResponse)},
+						Assert: &mock.RequestAssertion{
+							Method: "POST",
+							Header: api.DefaultWriteMockHeaders,
+							Body:   mock.NewStringBody(`{"name":"with_default","resources":{"apm":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"apm":{"version":"7.8.0"},"cluster_topology":[{"instance_configuration_id":"aws.apm.r5d","size":{"resource":"memory","value":512},"zone_count":1}]},"ref_id":"main-apm","region":"us-east-1"}],"appsearch":null,"elasticsearch":[{"plan":{"autoscaling_enabled":false,"cluster_topology":[{"id":"coordinating","instance_configuration_id":"aws.coordinating.m5d","node_roles":null,"node_type":{"data":false,"ingest":true,"master":false},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":118784},"elasticsearch":{"node_attributes":{"data":"hot"}},"id":"hot_content","instance_configuration_id":"aws.data.highio.i3","node_roles":null,"node_type":{"data":true,"ingest":true,"master":true},"size":{"resource":"memory","value":1024},"topology_element_control":{"min":{"resource":"memory","value":1024}},"zone_count":1},{"autoscaling_max":{"resource":"memory","value":118784},"elasticsearch":{"node_attributes":{"data":"warm"}},"id":"warm","instance_configuration_id":"aws.data.highstorage.d3","node_roles":null,"node_type":{"data":true,"ingest":false,"master":false},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":59392},"elasticsearch":{"node_attributes":{"data":"cold"}},"id":"cold","instance_configuration_id":"aws.data.highstorage.d3","node_roles":null,"node_type":{"data":true,"ingest":false,"master":false},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":1},{"id":"master","instance_configuration_id":"aws.master.r5d","node_roles":null,"node_type":{"data":false,"ingest":false,"master":true},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":3},{"autoscaling_max":{"resource":"memory","value":61440},"autoscaling_min":{"resource":"memory","value":0},"id":"ml","instance_configuration_id":"aws.ml.m5d","node_roles":null,"node_type":{"data":false,"ingest":false,"master":false,"ml":true},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":1}],"deployment_template":{"id":"aws-io-optimized-v2"},"elasticsearch":{"version":"7.8.0"}},"ref_id":"main-elasticsearch","region":"us-east-1","settings":{"dedicated_masters_threshold":6}}],"enterprise_search":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"instance_configuration_id":"aws.enterprisesearch.m5d","node_type":{"appserver":true,"connector":true,"worker":true},"size":{"resource":"memory","value":0},"zone_count":2}],"enterprise_search":{"version":"7.8.0"}},"ref_id":"main-enterprise_search","region":"us-east-1"}],"integrations_server":null,"kibana":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"instance_configuration_id":"aws.kibana.r5d","size":{"resource":"memory","value":1024},"zone_count":1}],"kibana":{"version":"7.8.0"}},"ref_id":"main-kibana","region":"us-east-1"}]}}` + "\n"),
+							Path:   "/api/v1/deployments",
+							Host:   api.DefaultMockHost,
+							Query:  url.Values{"request_id": {"some_request_id"}},
+						},
+					},
+				}},
+			},
+			want: testutils.Assertion{Stdout: string(defaultCreateResponseBytes)},
+		},
+		{
+			name: "does not shrink topology sizes when --minimum-size=false",
+			args: testutils.Args{
+				Cmd: createCmd,
+				Args: []string{
+					"create",
+					"--request-id=some_request_id",
+					"--version=7.8.0",
+					"--deployment-template=aws-io-optimized-v2",
+					"--name=with_default",
+					"--minimum-size=false",
+				},
+				Cfg: testutils.MockCfg{Responses: []mock.Response{
+					{
+						Response: http.Response{
+							StatusCode: 200,
+							Body:       mock.NewByteBody(awsIoOptimisedTemplate),
+						},
+						Assert: &mock.RequestAssertion{
+							Method: "GET",
+							Header: api.DefaultReadMockHeaders,
+							Path:   "/api/v1/deployments/templates/aws-io-optimized-v2",
+							Host:   api.DefaultMockHost,
+							Query: url.Values{
+								"region":                       {"ece-region"},
+								"show_instance_configurations": {"true"},
+								"show_max_zones":               {"false"},
+								"stack_version":                {"7.8.0"},
+							},
+						},
+					},
+					{
+						Response: http.Response{StatusCode: 201, Body: mock.NewStructBody(defaultCreateResponse)},
+						Assert: &mock.RequestAssertion{
+							Method: "POST",
+							Header: api.DefaultWriteMockHeaders,
+							Body:   mock.NewStringBody(`{"name":"with_default","resources":{"apm":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"apm":{"version":"7.8.0"},"cluster_topology":[{"instance_configuration_id":"aws.apm.r5d","size":{"resource":"memory","value":512},"zone_count":1}]},"ref_id":"main-apm","region":"us-east-1"}],"appsearch":null,"elasticsearch":[{"plan":{"autoscaling_enabled":false,"cluster_topology":[{"id":"coordinating","instance_configuration_id":"aws.coordinating.m5d","node_roles":null,"node_type":{"data":false,"ingest":true,"master":false},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":118784},"elasticsearch":{"node_attributes":{"data":"hot"}},"id":"hot_content","instance_configuration_id":"aws.data.highio.i3","node_roles":null,"node_type":{"data":true,"ingest":true,"master":true},"size":{"resource":"memory","value":8192},"topology_element_control":{"min":{"resource":"memory","value":1024}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":118784},"elasticsearch":{"node_attributes":{"data":"warm"}},"id":"warm","instance_configuration_id":"aws.data.highstorage.d3","node_roles":null,"node_type":{"data":true,"ingest":false,"master":false},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":59392},"elasticsearch":{"node_attributes":{"data":"cold"}},"id":"cold","instance_configuration_id":"aws.data.highstorage.d3","node_roles":null,"node_type":{"data":true,"ingest":false,"master":false},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":1},{"id":"master","instance_configuration_id":"aws.master.r5d","node_roles":null,"node_type":{"data":false,"ingest":false,"master":true},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":3},{"autoscaling_max":{"resource":"memory","value":61440},"autoscaling_min":{"resource":"memory","value":0},"id":"ml","instance_configuration_id":"aws.ml.m5d","node_roles":null,"node_type":{"data":false,"ingest":false,"master":false,"ml":true},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":1}],"deployment_template":{"id":"aws-io-optimized-v2"},"elasticsearch":{"version":"7.8.0"}},"ref_id":"main-elasticsearch","region":"us-east-1","settings":{"dedicated_masters_threshold":6}}],"enterprise_search":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"instance_configuration_id":"aws.enterprisesearch.m5d","node_type":{"appserver":true,"connector":true,"worker":true},"size":{"resource":"memory","value":0},"zone_count":2}],"enterprise_search":{"version":"7.8.0"}},"ref_id":"main-enterprise_search","region":"us-east-1"}],"integrations_server":null,"kibana":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"instance_configuration_id":"aws.kibana.r5d","size":{"resource":"memory","value":1024},"zone_count":1}],"kibana":{"version":"7.8.0"}},"ref_id":"main-kibana","region":"us-east-1"}]}}` + "\n"),
+							Path:   "/api/v1/deployments",
+							Host:   api.DefaultMockHost,
+							Query:  url.Values{"request_id": {"some_request_id"}},
+						},
+					},
+				}},
+			},
+			want: testutils.Assertion{Stdout: string(defaultCreateResponseBytes)},
 		},
 	}
 	for _, tt := range tests {
@@ -609,6 +701,95 @@ func Test_newCreatePayload(t *testing.T) {
 			} else {
 				require.Equal(t, *tt.expected, *res)
 			}
+		})
+	}
+}
+
+func Test_shrinkTopologySizesToMinimum(t *testing.T) {
+	i32 := func(v int32) *int32 { return &v }
+
+	tests := []struct {
+		name     string
+		input    *models.DeploymentCreateRequest
+		expected *models.DeploymentCreateRequest
+	}{
+		{
+			name: "shrinks node size to minimum and sets zone count to 1 when size exceeds minimum",
+			input: &models.DeploymentCreateRequest{
+				Resources: &models.DeploymentCreateResources{
+					Elasticsearch: []*models.ElasticsearchPayload{
+						{Plan: &models.ElasticsearchClusterPlan{
+							ClusterTopology: []*models.ElasticsearchClusterTopologyElement{
+								{
+									ZoneCount: 2,
+									Size:      &models.TopologySize{Resource: ec.String("memory"), Value: i32(8192)},
+									TopologyElementControl: &models.TopologyElementControl{
+										Min: &models.TopologySize{Resource: ec.String("memory"), Value: i32(1024)},
+									},
+								},
+							},
+						}},
+					},
+				},
+			},
+			expected: &models.DeploymentCreateRequest{
+				Resources: &models.DeploymentCreateResources{
+					Elasticsearch: []*models.ElasticsearchPayload{
+						{Plan: &models.ElasticsearchClusterPlan{
+							ClusterTopology: []*models.ElasticsearchClusterTopologyElement{
+								{
+									ZoneCount: 1,
+									Size:      &models.TopologySize{Resource: ec.String("memory"), Value: i32(1024)},
+									TopologyElementControl: &models.TopologyElementControl{
+										Min: &models.TopologySize{Resource: ec.String("memory"), Value: i32(1024)},
+									},
+								},
+							},
+						}},
+					},
+				},
+			},
+		},
+		{
+			name: "leaves node size unchanged when minimum is zero (optional tier)",
+			input: &models.DeploymentCreateRequest{
+				Resources: &models.DeploymentCreateResources{
+					Elasticsearch: []*models.ElasticsearchPayload{
+						{Plan: &models.ElasticsearchClusterPlan{
+							ClusterTopology: []*models.ElasticsearchClusterTopologyElement{
+								{
+									Size: &models.TopologySize{Resource: ec.String("memory"), Value: i32(0)},
+									TopologyElementControl: &models.TopologyElementControl{
+										Min: &models.TopologySize{Resource: ec.String("memory"), Value: i32(0)},
+									},
+								},
+							},
+						}},
+					},
+				},
+			},
+			expected: &models.DeploymentCreateRequest{
+				Resources: &models.DeploymentCreateResources{
+					Elasticsearch: []*models.ElasticsearchPayload{
+						{Plan: &models.ElasticsearchClusterPlan{
+							ClusterTopology: []*models.ElasticsearchClusterTopologyElement{
+								{
+									Size: &models.TopologySize{Resource: ec.String("memory"), Value: i32(0)},
+									TopologyElementControl: &models.TopologyElementControl{
+										Min: &models.TopologySize{Resource: ec.String("memory"), Value: i32(0)},
+									},
+								},
+							},
+						}},
+					},
+				},
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			shrinkTopologySizesToMinimum(tt.input)
+			require.Equal(t, *tt.expected, *tt.input)
 		})
 	}
 }
