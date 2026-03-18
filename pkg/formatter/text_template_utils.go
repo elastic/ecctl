@@ -22,6 +22,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"math"
+	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -317,6 +318,15 @@ func stringInSlice(a string, list []string) bool {
 		}
 	}
 	return false
+}
+
+func sortKeys(m map[string]string) []string {
+	keys := make([]string, 0, len(m))
+	for k := range m {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	return keys
 }
 
 // equal checks if the passed values are equal. Currently only strings

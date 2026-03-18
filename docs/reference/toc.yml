@@ -137,7 +137,10 @@ toc:
       - file: ecctl_platform_runner_search.md
       - file: ecctl_platform_runner_show.md
       - file: ecctl_project.md
+      - file: ecctl_project_create.md
+      - file: ecctl_project_delete.md
       - file: ecctl_project_list.md
+      - file: ecctl_project_show.md
       - file: ecctl_stack.md
       - file: ecctl_stack_delete.md
       - file: ecctl_stack_list.md

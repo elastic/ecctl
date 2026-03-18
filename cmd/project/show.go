@@ -26,16 +26,17 @@ import (
 	"github.com/elastic/ecctl/pkg/project"
 )
 
-var listCmd = &cobra.Command{
-	Use:     "list",
-	Short:   "Lists serverless projects",
-	PreRunE: cobra.NoArgs,
+var showCmd = &cobra.Command{
+	Use:     "show <project-id>",
+	Short:   "Shows the specified serverless project",
+	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		projectType, _ := cmd.Flags().GetString("type")
 
-		res, err := project.List(project.ListParams{
+		res, err := project.Show(project.ShowParams{
 			API:    ecctl.Get().API,
 			Host:   ecctl.Get().Config.Host,
+			ID:     args[0],
 			Type:   projectType,
 			Client: ecctl.Get().Config.Client,
 		})
@@ -43,12 +44,15 @@ var listCmd = &cobra.Command{
 			return err
 		}
 
-		return ecctl.Get().Formatter.Format(filepath.Join("project", "list"), res)
+		return ecctl.Get().Formatter.Format(filepath.Join("project", "show"), res)
 	},
 }
 
 func init() {
-	Command.AddCommand(listCmd)
+	Command.AddCommand(showCmd)
+	initShowFlags()
+}
 
-	listCmd.Flags().String("type", "", "Filters by project type (elasticsearch/search, observability, security)")
+func initShowFlags() {
+	showCmd.Flags().String("type", "", "Project type (elasticsearch/search, observability, security). Auto-detected if omitted.")
 }

@@ -52,6 +52,7 @@ var defaultTemplateFuncs = template.FuncMap{
 	"centiCentsToCents":         centiCentsToCents,
 	"computeApmPlanDuration":    computeApmPlanDuration,
 	"getApmFailedPlanStepName":  getApmFailedPlanStepName,
+	"sortKeys":                  sortKeys,
 }
 
 const (
