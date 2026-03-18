@@ -111,10 +111,13 @@ func initFlags() {
 	createCmd.Flags().Bool("minimum-size", false, "Shrink each Elasticsearch topology element to its minimum allowed size")
 }
 
-func getDefaultTemplate(region string) (string, error) {
+func getDefaultTemplate(region, stackVersion string) (string, error) {
+	showHidden := false
 	templates, err := deptemplateapi.List(deptemplateapi.ListParams{
 		API:                        ecctl.Get().API,
 		Region:                     region,
+		StackVersion:               stackVersion,
+		ShowHidden:                 showHidden,
 		HideInstanceConfigurations: true,
 	})
 	if err != nil {
@@ -169,7 +172,7 @@ func newCreatePayload(cmd *cobra.Command, version, region string) (*models.Deplo
 
 	if dt == "" {
 		var err error
-		dt, err = getDefaultTemplate(region)
+		dt, err = getDefaultTemplate(region, version)
 		if err != nil {
 			return nil, err
 		}
