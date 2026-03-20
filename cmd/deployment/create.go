@@ -20,7 +20,7 @@ package cmddeployment
 import (
 	"errors"
 	"fmt"
-	"strings"
+	"sort"
 
 	"github.com/blang/semver/v4"
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi"
@@ -108,27 +108,52 @@ func initFlags() {
 	createCmd.Flags().BoolP("track", "t", false, cmdutil.TrackFlagMessage)
 	createCmd.Flags().Bool("generate-payload", false, "Returns the deployment payload without actually creating the deployment resources")
 	createCmd.Flags().String("request-id", "", "Optional request ID - Can be found in the Stderr device when a previous deployment creation failed. For more information see the examples in the help command page")
+	createCmd.Flags().Bool("minimum-size", false, "Shrink each Elasticsearch topology element to its minimum allowed size")
 }
 
-func setDefaultTemplate(region string) string {
-	if strings.Contains(region, "azure") {
-		region = "azure"
+func getDefaultTemplate(region, stackVersion string) (string, error) {
+	showHidden := false
+	templates, err := deptemplateapi.List(deptemplateapi.ListParams{
+		API:                        ecctl.Get().API,
+		Region:                     region,
+		StackVersion:               stackVersion,
+		ShowHidden:                 showHidden,
+		HideInstanceConfigurations: true,
+	})
+	if err != nil {
+		return "", err
 	}
 
-	if strings.Contains(region, "gcp") {
-		region = "gcp"
+	var current []*models.DeploymentTemplateInfoV2
+	for _, t := range templates {
+		if !isLegacyTemplate(t) {
+			current = append(current, t)
+		}
+	}
+	if len(current) == 0 {
+		return "", errors.New("no non-legacy deployment templates available for region")
 	}
 
-	switch region {
-	case "azure":
-		return "azure-io-optimized"
-	case "gcp":
-		return "gcp-io-optimized"
-	case "ece-region":
-		return "default"
-	default:
-		return "aws-io-optimized-v2"
+	sort.Slice(current, func(i, j int) bool {
+		if current[i].Order == nil {
+			return false
+		}
+		if current[j].Order == nil {
+			return true
+		}
+		return *current[i].Order < *current[j].Order
+	})
+
+	return *current[0].ID, nil
+}
+
+func isLegacyTemplate(t *models.DeploymentTemplateInfoV2) bool {
+	for _, m := range t.Metadata {
+		if m.Key != nil && *m.Key == "legacy" && m.Value != nil && *m.Value == "true" {
+			return true
+		}
 	}
+	return false
 }
 
 func newCreatePayload(cmd *cobra.Command, version, region string) (*models.DeploymentCreateRequest, error) {
@@ -146,8 +171,12 @@ func newCreatePayload(cmd *cobra.Command, version, region string) (*models.Deplo
 	}
 
 	if dt == "" {
-		dt = setDefaultTemplate(region)
-		_, _ = fmt.Fprintf(cmd.ErrOrStderr(), "--deployment-template not set, using %s", dt)
+		var err error
+		dt, err = getDefaultTemplate(region, version)
+		if err != nil {
+			return nil, err
+		}
+		_, _ = fmt.Fprintf(cmd.ErrOrStderr(), "--deployment-template not set, using %s\n", dt)
 	}
 	tpl, err := deptemplateapi.Get(deptemplateapi.GetParams{
 		API:          ecctl.Get().API,
@@ -164,13 +193,20 @@ func newCreatePayload(cmd *cobra.Command, version, region string) (*models.Deplo
 			es[0].Plan.DeploymentTemplate = &models.DeploymentTemplateReference{}
 		}
 
-		es[0].Plan.DeploymentTemplate.ID = &dt
+		es[0].Plan.DeploymentTemplate.ID = tpl.ID
 	}
 
-	return removeApmForVersions8(version, tpl.DeploymentTemplate)
+	result, err := removeUnsupportedResources(version, tpl.DeploymentTemplate)
+	if err != nil {
+		return nil, err
+	}
+	if minimumSize, _ := cmd.Flags().GetBool("minimum-size"); minimumSize {
+		shrinkTopologySizesToMinimum(result)
+	}
+	return result, nil
 }
 
-func removeApmForVersions8(version string, tpl *models.DeploymentCreateRequest) (*models.DeploymentCreateRequest, error) {
+func removeUnsupportedResources(version string, tpl *models.DeploymentCreateRequest) (*models.DeploymentCreateRequest, error) {
 	vers, err := semver.Parse(version)
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse version: %v", err)
@@ -179,4 +215,36 @@ func removeApmForVersions8(version string, tpl *models.DeploymentCreateRequest) 
 		tpl.Resources.Apm = nil
 	}
 	return tpl, nil
+}
+
+// shrinkTopologySizesToMinimum reduces the memory size and zone count of each
+// Elasticsearch topology element to its minimum allowed values. The memory size
+// is reduced to TopologyElementControl.Min, and the zone count is set to 1.
+// Elements with a zero minimum (optional/disabled tiers) are left unchanged.
+// Other resource types (Kibana, APM, Enterprise Search) are left untouched
+// because they carry no minimum size constraint on the topology element itself.
+func shrinkTopologySizesToMinimum(tpl *models.DeploymentCreateRequest) {
+	if tpl.Resources == nil {
+		return
+	}
+	for _, es := range tpl.Resources.Elasticsearch {
+		if es.Plan == nil {
+			continue
+		}
+		for _, node := range es.Plan.ClusterTopology {
+			if node.Size == nil || node.Size.Value == nil {
+				continue
+			}
+			if node.TopologyElementControl == nil || node.TopologyElementControl.Min == nil || node.TopologyElementControl.Min.Value == nil {
+				continue
+			}
+			min := *node.TopologyElementControl.Min.Value
+			if min > 0 {
+				if *node.Size.Value > min {
+					node.Size.Value = node.TopologyElementControl.Min.Value
+				}
+				node.ZoneCount = 1
+			}
+		}
+	}
 }
