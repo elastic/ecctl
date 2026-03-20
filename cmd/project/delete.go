@@ -15,46 +15,45 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package cmdinstanceconfig
+package cmdproject
 
 import (
-	"os"
+	"fmt"
 
-	"github.com/elastic/cloud-sdk-go/pkg/api/platformapi/instanceconfigapi"
-	"github.com/elastic/cloud-sdk-go/pkg/input"
 	"github.com/spf13/cobra"
 
-	cmdutil "github.com/elastic/ecctl/cmd/util"
 	"github.com/elastic/ecctl/pkg/ecctl"
+	"github.com/elastic/ecctl/pkg/project"
 )
 
-var updateCmd = &cobra.Command{
-	Use:     "update <config id> -f <config.json>",
-	Short:   cmdutil.AdminReqDescription("Overwrites an instance configuration"),
-	PreRunE: cobra.ExactArgs(1),
+var deleteCmd = &cobra.Command{
+	Use:     "delete <project-id>",
+	Short:   "Deletes a serverless project",
+	PreRunE: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		file, err := input.NewFileOrReader(os.Stdin, cmd.Flag("file").Value.String())
-		if err != nil {
-			return err
-		}
-		defer func() { _ = file.Close() }()
+		projectType, _ := cmd.Flags().GetString("type")
 
-		config, err := instanceconfigapi.NewConfig(file)
-		if err != nil {
-			return err
-		}
-
-		return instanceconfigapi.Update(instanceconfigapi.UpdateParams{
+		err := project.Delete(project.DeleteParams{
 			API:    ecctl.Get().API,
-			Region: ecctl.Get().Config.Region,
+			Host:   ecctl.Get().Config.Host,
 			ID:     args[0],
-			Config: config,
+			Type:   projectType,
+			Client: ecctl.Get().Config.Client,
 		})
+		if err != nil {
+			return err
+		}
+
+		_, err = fmt.Fprintf(cmd.OutOrStdout(), "Project %q deletion scheduled.\n", args[0])
+		return err
 	},
 }
 
 func init() {
-	Command.AddCommand(updateCmd)
+	Command.AddCommand(deleteCmd)
+	initDeleteFlags()
+}
 
-	updateCmd.Flags().StringP("file", "f", "", "Instance configuration JSON file definition")
+func initDeleteFlags() {
+	deleteCmd.Flags().String("type", "", "Project type (elasticsearch/search, observability, security). Auto-detected if omitted.")
 }

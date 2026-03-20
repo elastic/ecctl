@@ -52,6 +52,7 @@ var defaultTemplateFuncs = template.FuncMap{
 	"centiCentsToCents":         centiCentsToCents,
 	"computeApmPlanDuration":    computeApmPlanDuration,
 	"getApmFailedPlanStepName":  getApmFailedPlanStepName,
+	"sortKeys":                  sortKeys,
 }
 
 const (
@@ -157,7 +158,7 @@ func (f *Text) format(text string, data interface{}) error {
 	}
 
 	w := tabwriter.NewWriter(f.output, 2, 4, 3, ' ', 0)
-	defer w.Flush()
+	defer func() { _ = w.Flush() }()
 
 	return t.ExecuteTemplate(w, name, data)
 }
@@ -185,12 +186,12 @@ func executeTemplateFunc(output io.Writer, templateFormat string) func(data inte
 	return func(data interface{}) string {
 		t, err := template.New("template").Funcs(defaultTemplateFuncs).Parse(templateFormat)
 		if err != nil {
-			fmt.Fprintln(output, err)
+			_, _ = fmt.Fprintln(output, err)
 			return ""
 		}
 		var b = new(bytes.Buffer)
 		if err := t.Execute(b, data); err != nil {
-			fmt.Fprintln(output, err)
+			_, _ = fmt.Fprintln(output, err)
 			return ""
 		}
 

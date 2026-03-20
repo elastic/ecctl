@@ -41,8 +41,8 @@ const (
 // SetClusterTracking modifies the TrackChangeParams to track a specific id and
 // kind ignoring downstream changes.
 func SetClusterTracking(params planutil.TrackChangeParams, id, kind string) planutil.TrackChangeParams {
-	params.TrackChangeParams.ResourceID = id
-	params.TrackChangeParams.Kind = kind
-	params.TrackChangeParams.IgnoreDownstream = true
+	params.ResourceID = id
+	params.Kind = kind
+	params.IgnoreDownstream = true
 	return params
 }

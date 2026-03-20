@@ -100,7 +100,7 @@ func newAPIConfig(cfg Config) (api.Config, error) {
 				`failed creating verbose file "%s": %w`, cfg.VerboseFile, err,
 			)
 		}
-		apiCfg.VerboseSettings.Device = f
+		apiCfg.Device = f
 	}
 
 	return apiCfg, nil

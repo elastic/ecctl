@@ -282,7 +282,7 @@ func InitConfig(params InitConfigParams) error {
 		return err
 	}
 
-	fmt.Fprint(params.Writer, disclaimer)
+	_, _ = fmt.Fprint(params.Writer, disclaimer)
 
 	configRead := params.Viper.ReadInConfig() == nil
 	var confirmationMessage = missingConfigMsg
@@ -329,7 +329,7 @@ func InitConfig(params InitConfigParams) error {
 		return err
 	}
 
-	fmt.Fprintln(params.Writer, finalMsg)
+	_, _ = fmt.Fprintln(params.Writer, finalMsg)
 
 	if err := setViperConfig(cfg, params.Viper); err != nil {
 		return err
@@ -354,7 +354,7 @@ func writeConfig(cfg Config, filePath, ext string) error {
 }
 
 func printConfig(writer io.Writer, v *viper.Viper) error {
-	fmt.Fprintf(writer, settingsPathMsg, v.ConfigFileUsed())
+	_, _ = fmt.Fprintf(writer, settingsPathMsg, v.ConfigFileUsed())
 	var c Config
 	if err := v.Unmarshal(&c); err != nil {
 		return err
@@ -374,7 +374,7 @@ func printConfig(writer io.Writer, v *viper.Viper) error {
 
 func askInfraSelection(cfg *Config, scanner *input.Scanner, writer, errWriter io.Writer, passFunc PassFunc) error {
 	infraChoiceRaw := scanner.Scan(hostChoiceMsg)
-	fmt.Fprintln(writer)
+	_, _ = fmt.Fprintln(writer)
 	infraChoice, err := strconv.Atoi(infraChoiceRaw)
 	if err != nil {
 		return err
@@ -383,11 +383,11 @@ func askInfraSelection(cfg *Config, scanner *input.Scanner, writer, errWriter io
 	cfg.Host = essHostAddress
 	switch infraChoice {
 	case essInfraChoice:
-		fmt.Fprintf(writer, essChoiceMsg, essHostAddress)
+		_, _ = fmt.Fprintf(writer, essChoiceMsg, essHostAddress)
 		if err := askRegionSelection(cfg, scanner, writer, essRegions); err != nil {
 			return err
 		}
-		fmt.Fprintln(writer, essAPIKeyCreateMsg)
+		_, _ = fmt.Fprintln(writer, essAPIKeyCreateMsg)
 		if err := askAPIKey(cfg, writer, passFunc); err != nil {
 			return err
 		}
@@ -405,7 +405,7 @@ func askInfraSelection(cfg *Config, scanner *input.Scanner, writer, errWriter io
 		// regions have been added, this should be set in a similar way to essInfraChoice
 		cfg.Region = "us-west-2"
 	default:
-		fmt.Fprintf(errWriter, "invalid choice, defaulting to %s", essHostAddress)
+		_, _ = fmt.Fprintf(errWriter, "invalid choice, defaulting to %s", essHostAddress)
 	}
 
 	return nil
@@ -413,7 +413,7 @@ func askInfraSelection(cfg *Config, scanner *input.Scanner, writer, errWriter io
 
 func askRegionSelection(cfg *Config, scanner *input.Scanner, writer io.Writer, regions map[int]string) error {
 	regionChoiceRaw := scanner.Scan(regionChoiceMsg)
-	fmt.Fprintln(writer)
+	_, _ = fmt.Fprintln(writer)
 	regionChoice, err := strconv.Atoi(regionChoiceRaw)
 	if err != nil {
 		return err
@@ -431,7 +431,7 @@ func askRegionSelection(cfg *Config, scanner *input.Scanner, writer io.Writer, r
 
 func askOutputFormat(cfg *Config, scanner *input.Scanner, writer, errWriter io.Writer) error {
 	formatChoiceRaw := scanner.Scan(formatChoiceMsg)
-	fmt.Fprintln(writer)
+	_, _ = fmt.Fprintln(writer)
 	formatChoice, err := strconv.Atoi(formatChoiceRaw)
 	if err != nil {
 		return err
@@ -443,16 +443,16 @@ func askOutputFormat(cfg *Config, scanner *input.Scanner, writer, errWriter io.W
 	case jsonFormatChoice:
 		cfg.Output = "json"
 	default:
-		fmt.Fprintln(errWriter, "invalid choice, defaulting to \"text\"")
+		_, _ = fmt.Fprintln(errWriter, "invalid choice, defaulting to \"text\"")
 	}
 
-	fmt.Fprintln(writer)
+	_, _ = fmt.Fprintln(writer)
 	return nil
 }
 
 func askAuthMechanism(cfg *Config, scanner *input.Scanner, writer io.Writer, passFunc PassFunc) error {
 	authChoiceRaw := scanner.Scan(authChoiceMsg)
-	fmt.Fprintln(writer)
+	_, _ = fmt.Fprintln(writer)
 	authChoice, err := strconv.Atoi(authChoiceRaw)
 	if err != nil {
 		return err
@@ -505,11 +505,11 @@ func validateAuth(cfg Config, writer io.Writer) error {
 			// nolint
 			return errors.New(invalidCredentialsMsg)
 		}
-		fmt.Fprint(writer, validCredentialsAlternativeMsg)
+		_, _ = fmt.Fprint(writer, validCredentialsAlternativeMsg)
 		return nil
 	}
 
-	fmt.Fprintf(writer, validCredentialsMsg, *u.UserName)
+	_, _ = fmt.Fprintf(writer, validCredentialsMsg, *u.UserName)
 
 	return nil
 }
