@@ -34,9 +34,9 @@ var (
 // ReadSecret obtains a secret by reading the PassFunc passing the stdin file
 // descriptor. If passFunc is empty, it defaults to terminal.
 func ReadSecret(w io.Writer, passFunc PassFunc, msg string) ([]byte, error) {
-	fmt.Fprint(w, msg)
+	_, _ = fmt.Fprint(w, msg)
 	b, err := passFunc(int(syscall.Stdin))
-	fmt.Fprintln(w)
+	_, _ = fmt.Fprintln(w)
 	if err != nil {
 		return nil, err
 	}

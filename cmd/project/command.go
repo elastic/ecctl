@@ -15,29 +15,18 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package util
+package cmdproject
 
 import (
-	"errors"
-	"io"
-	"strings"
-
-	"github.com/elastic/cloud-sdk-go/pkg/input"
-	"github.com/elastic/cloud-sdk-go/pkg/output"
+	"github.com/spf13/cobra"
 )
 
-// AskForConfirmation scans the stdin for "y" or "yes" (case insensitive)
-func AskForConfirmation(reader io.Reader, out *output.Device) bool {
-	var scanner = input.NewScanner(reader, out)
-	var s = strings.TrimSpace(strings.ToLower(scanner.Scan("Do you want to continue [y/n]: ")))
-	return strings.HasPrefix(s, "y")
-}
-
-// ReadMFAToken reads an MFA token
-func ReadMFAToken(reader io.Reader, out *output.Device) (string, error) {
-	token := input.NewScanner(reader, out).Scan("Enter MFA token: ")
-	if len(token) != 6 {
-		return "", errors.New("auth: token must be 6 characters long")
-	}
-	return token, nil
+// Command is the top level project command.
+var Command = &cobra.Command{
+	Use:     "project",
+	Short:   "Manages serverless projects",
+	PreRunE: cobra.MaximumNArgs(0),
+	Run: func(cmd *cobra.Command, args []string) {
+		cmd.Help()
+	},
 }

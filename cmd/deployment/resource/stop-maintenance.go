@@ -41,7 +41,7 @@ var stopMaintCmd = &cobra.Command{
 		all, _ := cmd.Flags().GetBool("all")
 
 		if err := sdkcmdutil.IncompatibleFlags(cmd, "all", "instance-id"); err != nil {
-			fmt.Fprintln(cmd.OutOrStderr(), err)
+			_, _ = fmt.Fprintln(cmd.OutOrStderr(), err)
 		}
 
 		_, err := depresourceapi.StopMaintenanceModeAllOrSpecified(depresourceapi.StopInstancesParams{

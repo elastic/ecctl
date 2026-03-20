@@ -37,7 +37,7 @@ var stackUploadCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		defer f.Close()
+		defer func() { _ = f.Close() }()
 
 		return stackapi.Upload(stackapi.UploadParams{
 			API:       ecctl.Get().API,

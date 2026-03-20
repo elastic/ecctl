@@ -15,26 +15,40 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package cmd
+package cmdproject
 
 import (
-	cmdauth "github.com/elastic/ecctl/cmd/auth"
-	cmdcomment "github.com/elastic/ecctl/cmd/comment"
-	cmddeployment "github.com/elastic/ecctl/cmd/deployment"
-	cmdplatform "github.com/elastic/ecctl/cmd/platform"
-	cmdproject "github.com/elastic/ecctl/cmd/project"
-	cmdstack "github.com/elastic/ecctl/cmd/stack"
-	cmduser "github.com/elastic/ecctl/cmd/user"
+	"path/filepath"
+
+	"github.com/spf13/cobra"
+
+	"github.com/elastic/ecctl/pkg/ecctl"
+	"github.com/elastic/ecctl/pkg/project"
 )
 
+var listCmd = &cobra.Command{
+	Use:     "list",
+	Short:   "Lists serverless projects",
+	PreRunE: cobra.NoArgs,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		projectType, _ := cmd.Flags().GetString("type")
+
+		res, err := project.List(project.ListParams{
+			API:    ecctl.Get().API,
+			Host:   ecctl.Get().Config.Host,
+			Type:   projectType,
+			Client: ecctl.Get().Config.Client,
+		})
+		if err != nil {
+			return err
+		}
+
+		return ecctl.Get().Formatter.Format(filepath.Join("project", "list"), res)
+	},
+}
+
 func init() {
-	RootCmd.AddCommand(
-		cmdauth.Command,
-		cmdcomment.Command,
-		cmddeployment.Command,
-		cmdplatform.Command,
-		cmdproject.Command,
-		cmduser.Command,
-		cmdstack.Command,
-	)
+	Command.AddCommand(listCmd)
+
+	listCmd.Flags().String("type", "", "Filters by project type (elasticsearch/search, observability, security)")
 }

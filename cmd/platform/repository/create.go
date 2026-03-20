@@ -81,7 +81,7 @@ func setSnapshot(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	defer f.Close()
+	defer func() { _ = f.Close() }()
 
 	var repoType = cmd.Flag("type").Value.String()
 	config, err := parseRepoSettingsByType(f, repoType)

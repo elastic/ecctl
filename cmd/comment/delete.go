@@ -48,7 +48,7 @@ var deleteCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		fmt.Fprintln(ecctl.Get().Config.OutputDevice, "comment deleted successfully")
+		_, _ = fmt.Fprintln(ecctl.Get().Config.OutputDevice, "comment deleted successfully")
 		return nil
 	},
 }
