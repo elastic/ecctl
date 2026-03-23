@@ -55,7 +55,7 @@ var createCmd = &cobra.Command{
 			if err != nil {
 				return err
 			}
-			fmt.Fprintf(cmd.ErrOrStderr(), "--version not set, using latest: %s\n", version)
+			_, _ = fmt.Fprintf(cmd.ErrOrStderr(), "--version not set, using latest: %s\n", version)
 		}
 
 		payload, err := newCreatePayload(cmd, version, region)
