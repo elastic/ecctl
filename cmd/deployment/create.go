@@ -25,6 +25,7 @@ import (
 	"github.com/blang/semver/v4"
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi"
 	"github.com/elastic/cloud-sdk-go/pkg/api/deploymentapi/deptemplateapi"
+	"github.com/elastic/cloud-sdk-go/pkg/api/stackapi"
 	"github.com/elastic/cloud-sdk-go/pkg/models"
 	"github.com/elastic/cloud-sdk-go/pkg/multierror"
 	sdkcmdutil "github.com/elastic/cloud-sdk-go/pkg/util/cmdutil"
@@ -45,7 +46,17 @@ var createCmd = &cobra.Command{
 		generatePayload, _ := cmd.Flags().GetBool("generate-payload")
 		name, _ := cmd.Flags().GetString("name")
 		version, _ := cmd.Flags().GetString("version")
+		file, _ := cmd.Flags().GetString("file")
 		region := ecctl.Get().Config.Region
+
+		if version == "" && file == "" {
+			var err error
+			version, err = getLatestStackVersion(region)
+			if err != nil {
+				return err
+			}
+			_, _ = fmt.Fprintf(cmd.ErrOrStderr(), "--version not set, using latest: %s\n", version)
+		}
 
 		payload, err := newCreatePayload(cmd, version, region)
 		if err != nil {
@@ -109,6 +120,21 @@ func initFlags() {
 	createCmd.Flags().Bool("generate-payload", false, "Returns the deployment payload without actually creating the deployment resources")
 	createCmd.Flags().String("request-id", "", "Optional request ID - Can be found in the Stderr device when a previous deployment creation failed. For more information see the examples in the help command page")
 	createCmd.Flags().Bool("minimum-size", false, "Shrink each Elasticsearch topology element to its minimum allowed size")
+}
+
+func getLatestStackVersion(region string) (string, error) {
+	stacks, err := stackapi.List(stackapi.ListParams{
+		API:    ecctl.Get().API,
+		Region: region,
+	})
+	if err != nil {
+		return "", fmt.Errorf("unable to fetch stack versions: %w", err)
+	}
+	if len(stacks.Stacks) == 0 {
+		return "", errors.New("no stack versions available")
+	}
+	// List returns stacks sorted descending, so first is latest.
+	return stacks.Stacks[0].Version, nil
 }
 
 func getDefaultTemplate(region, stackVersion string) (string, error) {

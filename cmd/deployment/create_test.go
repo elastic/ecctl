@@ -273,6 +273,79 @@ Deployment [%s] - [Apm][%s]: running step "waiting-for-some-step" (Plan duration
 			},
 		},
 		{
+			name: "succeeds creating a deployment without --version by fetching latest stack version",
+			args: testutils.Args{
+				Cmd: createCmd,
+				Args: []string{
+					"create",
+					"--request-id=some_request_id",
+					"--deployment-template=aws-io-optimized-v2",
+					"--name=with_default",
+				},
+				Cfg: testutils.MockCfg{Responses: []mock.Response{
+					{
+						Response: http.Response{
+							StatusCode: 200,
+							Body: mock.NewStructBody(models.StackVersionConfigs{
+								Stacks: []*models.StackVersionConfig{
+									{Version: "7.8.0"},
+									{Version: "7.7.0"},
+									{Version: "7.6.0"},
+								},
+							}),
+						},
+						Assert: &mock.RequestAssertion{
+							Method: "GET",
+							Header: api.DefaultReadMockHeaders,
+							Path:   "/api/v1/regions/ece-region/stack/versions",
+							Host:   api.DefaultMockHost,
+							Query: url.Values{
+								"show_deleted": {"false"},
+							},
+						},
+					},
+					{
+						Response: http.Response{
+							StatusCode: 200,
+							Body:       mock.NewByteBody(awsIoOptimisedTemplate),
+						},
+						Assert: &mock.RequestAssertion{
+							Method: "GET",
+							Header: api.DefaultReadMockHeaders,
+							Path:   "/api/v1/deployments/templates/aws-io-optimized-v2",
+							Host:   api.DefaultMockHost,
+							Query: url.Values{
+								"region":                       {"ece-region"},
+								"show_instance_configurations": {"true"},
+								"show_max_zones":               {"false"},
+								"stack_version":                {"7.8.0"},
+							},
+						},
+					},
+					{
+						Response: http.Response{
+							StatusCode: 201,
+							Body:       mock.NewStructBody(defaultCreateResponse),
+						},
+						Assert: &mock.RequestAssertion{
+							Method: "POST",
+							Header: api.DefaultWriteMockHeaders,
+							Body:   mock.NewStringBody(`{"name":"with_default","resources":{"apm":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"apm":{"version":"7.8.0"},"cluster_topology":[{"instance_configuration_id":"aws.apm.r5d","size":{"resource":"memory","value":512},"zone_count":1}]},"ref_id":"main-apm","region":"us-east-1"}],"appsearch":null,"elasticsearch":[{"plan":{"autoscaling_enabled":false,"cluster_topology":[{"id":"coordinating","instance_configuration_id":"aws.coordinating.m5d","node_roles":null,"node_type":{"data":false,"ingest":true,"master":false},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":118784},"elasticsearch":{"node_attributes":{"data":"hot"}},"id":"hot_content","instance_configuration_id":"aws.data.highio.i3","node_roles":null,"node_type":{"data":true,"ingest":true,"master":true},"size":{"resource":"memory","value":8192},"topology_element_control":{"min":{"resource":"memory","value":1024}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":118784},"elasticsearch":{"node_attributes":{"data":"warm"}},"id":"warm","instance_configuration_id":"aws.data.highstorage.d3","node_roles":null,"node_type":{"data":true,"ingest":false,"master":false},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":2},{"autoscaling_max":{"resource":"memory","value":59392},"elasticsearch":{"node_attributes":{"data":"cold"}},"id":"cold","instance_configuration_id":"aws.data.highstorage.d3","node_roles":null,"node_type":{"data":true,"ingest":false,"master":false},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":1},{"id":"master","instance_configuration_id":"aws.master.r5d","node_roles":null,"node_type":{"data":false,"ingest":false,"master":true},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":3},{"autoscaling_max":{"resource":"memory","value":61440},"autoscaling_min":{"resource":"memory","value":0},"id":"ml","instance_configuration_id":"aws.ml.m5d","node_roles":null,"node_type":{"data":false,"ingest":false,"master":false,"ml":true},"size":{"resource":"memory","value":0},"topology_element_control":{"min":{"resource":"memory","value":0}},"zone_count":1}],"deployment_template":{"id":"aws-io-optimized-v2"},"elasticsearch":{"version":"7.8.0"}},"ref_id":"main-elasticsearch","region":"us-east-1","settings":{"dedicated_masters_threshold":6}}],"enterprise_search":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"instance_configuration_id":"aws.enterprisesearch.m5d","node_type":{"appserver":true,"connector":true,"worker":true},"size":{"resource":"memory","value":0},"zone_count":2}],"enterprise_search":{"version":"7.8.0"}},"ref_id":"main-enterprise_search","region":"us-east-1"}],"integrations_server":null,"kibana":[{"elasticsearch_cluster_ref_id":"main-elasticsearch","plan":{"cluster_topology":[{"instance_configuration_id":"aws.kibana.r5d","size":{"resource":"memory","value":1024},"zone_count":1}],"kibana":{"version":"7.8.0"}},"ref_id":"main-kibana","region":"us-east-1"}]}}` + "\n"),
+							Path:   "/api/v1/deployments",
+							Host:   api.DefaultMockHost,
+							Query: url.Values{
+								"request_id": {"some_request_id"},
+							},
+						},
+					},
+				}},
+			},
+			want: testutils.Assertion{
+				Stdout: string(defaultCreateResponseBytes),
+				Stderr: "--version not set, using latest: 7.8.0\n",
+			},
+		},
+		{
 			name: "succeeds creating a deployment without --deployment-template by auto-selecting default",
 			args: testutils.Args{
 				Cmd: createCmd,
