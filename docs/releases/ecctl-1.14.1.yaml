@@ -1,0 +1,19 @@
+﻿products:
+- product: cloud-control-ecctl
+  target: 1.14.1
+  repo: ecctl
+  owner: elastic
+description: 'Download the release binaries: https://github.com/elastic/ecctl/releases/tag/v1.14.1'
+entries:
+- file:
+    name: 669.yaml
+    checksum: d76dabf8f1374f7f24320097bb8e38f8ba707849
+  type: enhancement
+  title: Add --config-version flag to instance configuration `show` command
+  products:
+  - product: cloud-control-ecctl
+    target: 1.14.1
+    lifecycle: ga
+  description: The `platform instance-configuration show` command now also supports the `--config-version` and `--show-deleted` flags to show a specific instance configuration version and allow fetching deleted instance configurations, respectively.
+  prs:
+  - "669"
