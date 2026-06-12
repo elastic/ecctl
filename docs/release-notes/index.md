@@ -44,6 +44,9 @@ Release notes include only features, enhancements, and fixes. Add breaking chang
 *
 -->
 
+:::{changelog} /releases/
+:::
+
 ## 1.15.0 [ecctl-1.15.0]
 
 Release date: June 13, 2025
