@@ -5,42 +5,177 @@ mapped_pages:
 
 # Installing [ecctl-installing]
 
-The latest stable binaries can be found on the [release page](https://github.com/elastic/ecctl/releases) or compiled from the latest on the master branch to leverage the most recently merged features.
+The latest stable binaries and Linux packages can be found on the [release page](https://github.com/elastic/ecctl/releases). If you need to use changes that are not part of the latest release, you can build `ecctl` from source.
 
-To learn more about building ecctl from the source, see the steps from our [Setting up a dev environment](https://github.com/elastic/ecctl/blob/master/CONTRIBUTING.md#setting-up-a-dev-environment).
+## Installation methods [ecctl-installing-methods]
 
+You can install `ecctl` using one of these methods:
+
+- **macOS**: Homebrew (recommended) or release binary
+- **Linux**: `deb`, `rpm`, or release binary
+- **Windows**: install with `go install`
+- **Any OS**: build from source
 
 ## Install on macOS [ecctl-installing-macos]
 
-The simplest installation for macOS users is to install ecctl with [Homebrew](https://brew.sh/):
+### Homebrew (recommended) [ecctl-installing-macos-homebrew]
 
-```
-$ brew tap elastic/tap
-$ brew install elastic/tap/ecctl
+The simplest installation for macOS users is to install `ecctl` with [Homebrew](https://brew.sh/):
 
-Updating Homebrew...
-==> Installing ecctl from elastic/tap
-...
-==> Caveats
-To get autocompletions working make sure to run "source <(ecctl generate completions)".
-If you prefer to add to your shell interpreter configuration file run, for bash or zsh respectively:
-* `echo "source <(ecctl generate completions)" >> ~/.bash_profile`
-* `echo "source <(ecctl generate completions)" >> ~/.zshrc`.
-==> Summary
-🍺  /usr/local/Cellar/ecctl/1.5.0: 5 files, 22.6MB, built in 4 seconds
+```bash
+brew tap elastic/tap
+brew install elastic/tap/ecctl
 ```
 
-::::{note}
-To get autocompletions working, follow the instructions in the Homebrew output.
-::::
+To get shell completions working:
 
-
-
-## Upgrade on macOS [ecctl-upgrading-macos]
-
-To upgrade ecctl via brew:
-
-```
-$ brew upgrade ecctl
+```bash
+source <(ecctl generate completions)
 ```
 
+Or add completions to your shell startup file:
+
+- Bash: `echo "source <(ecctl generate completions)" >> ~/.bash_profile`
+- Zsh: `echo "source <(ecctl generate completions)" >> ~/.zshrc`
+
+### Binary from GitHub release [ecctl-installing-macos-binary]
+
+1. Download the archive for your architecture from the [release page](https://github.com/elastic/ecctl/releases), for example:
+   - `ecctl_<VERSION>_darwin_amd64.tar.gz`
+   - `ecctl_<VERSION>_darwin_arm64.tar.gz`
+2. Extract the archive and move the `ecctl` binary to a directory in your `PATH`, for example `/usr/local/bin`.
+3. Verify the installation:
+
+```bash
+ecctl version
+```
+
+## Install on Linux [ecctl-installing-linux]
+
+### Install with deb/rpm packages [ecctl-installing-linux-packages]
+
+Linux packages are published in every release:
+
+- Debian/Ubuntu: `ecctl_<VERSION>_linux_64-bit.deb` or `ecctl_<VERSION>_linux_32-bit.deb`
+- RHEL/CentOS/Fedora: `ecctl_<VERSION>_linux_64-bit.rpm` or `ecctl_<VERSION>_linux_32-bit.rpm`
+
+Download the package that matches your system, then install it with your package manager.
+
+Example (`deb`):
+
+```bash
+sudo dpkg -i ecctl_<VERSION>_linux_64-bit.deb
+```
+
+Example (`rpm`):
+
+```bash
+sudo rpm -i ecctl_<VERSION>_linux_64-bit.rpm
+```
+
+### Binary from GitHub release [ecctl-installing-linux-binary]
+
+1. Download the archive for your architecture from the [release page](https://github.com/elastic/ecctl/releases), for example:
+   - `ecctl_<VERSION>_linux_amd64.tar.gz`
+   - `ecctl_<VERSION>_linux_arm64.tar.gz`
+   - `ecctl_<VERSION>_linux_386.tar.gz`
+
+2. Extract the archive and move the `ecctl` binary to a directory in your `PATH`, for example `/usr/local/bin`:
+
+```bash
+tar -xzf ecctl_<VERSION>_linux_amd64.tar.gz
+sudo cp ecctl /usr/local/bin
+```
+
+3. Verify the installation:
+
+```bash
+ecctl version
+```
+
+## Install on Windows [ecctl-installing-windows]
+
+Windows binaries are not currently published as part of the official release artifacts. Use `go install` to build and install `ecctl` from source:
+
+1. Install [Go](https://go.dev/dl/).
+2. Open **Command Prompt** or **PowerShell**.
+3. Confirm Go is available:
+
+```powershell
+go version
+```
+
+4. Install `ecctl`:
+
+```powershell
+go install github.com/elastic/ecctl@latest
+```
+
+5. Add Go's binary directory to your `PATH` if needed (`%USERPROFILE%\go\bin` by default).
+6. Verify the installation:
+
+```powershell
+ecctl version
+```
+
+## Build from source (all operating systems) [ecctl-installing-source]
+
+Use this method if you need the latest unreleased changes or want to build from a specific branch or commit.
+
+### Prerequisites [ecctl-installing-source-prerequisites]
+
+- [Go](https://go.dev/doc/install)
+- `git`
+
+### Build steps [ecctl-installing-source-steps]
+
+Clone the repository and build locally:
+
+```bash
+git clone https://github.com/elastic/ecctl.git
+cd ecctl
+go build .
+```
+
+This command produces an `ecctl` binary (`ecctl.exe` on Windows) in the current directory.
+
+You can also install directly with Go:
+
+```bash
+go install .
+```
+
+This installs the binary into `GOBIN` (or `GOPATH/bin` if `GOBIN` is not set). Make sure that location is in your `PATH`.
+
+For contributor-focused setup details, see [Setting up a dev environment](https://github.com/elastic/ecctl/blob/master/CONTRIBUTING.md#setting-up-a-dev-environment).
+
+## Verify installation [ecctl-installing-verify]
+
+After any installation method, verify that `ecctl` is available:
+
+```bash
+ecctl version
+```
+
+If the command is not found, check that the binary location is in your `PATH`.
+
+## Upgrade [ecctl-upgrading]
+
+Use the same channel you used to install `ecctl`:
+
+- **Homebrew (macOS)**:
+  ```bash
+  brew upgrade ecctl
+  ```
+- **Linux package (`deb`/`rpm`)**: install a newer package from the [release page](https://github.com/elastic/ecctl/releases)
+- **Release binary (macOS/Linux)**: replace the old binary with the new one
+- **Windows (`go install`)**:
+  ```powershell
+  go install github.com/elastic/ecctl@latest
+  ```
+
+## Troubleshooting [ecctl-installing-troubleshooting]
+
+- `ecctl: command not found`: add the binary location to your `PATH`.
+- `permission denied` when copying to system paths: use elevated privileges (`sudo` on Linux/macOS).
+- `go: command not found` on Windows: ensure Go is installed correctly and restart the terminal after installation.
