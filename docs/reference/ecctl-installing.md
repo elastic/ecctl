@@ -11,10 +11,10 @@ The latest stable binaries and Linux packages can be found on the [release page]
 
 You can install `ecctl` using one of these methods:
 
-- **macOS**: Homebrew (recommended) or release binary
-- **Linux**: `deb`, `rpm`, or release binary
-- **Windows**: install with `go install`
-- **Any OS**: build from source
+- **[macOS](#ecctl-installing-macos)**: Homebrew (recommended) or release binary
+- **[Linux](#ecctl-installing-linux)**: `deb`, `rpm`, or release binary
+- **[Windows](#ecctl-installing-windows)**: install with `go install`
+- **[Any OS](#ecctl-installing-source)**: build from source
 
 ## Install on macOS [ecctl-installing-macos]
 
