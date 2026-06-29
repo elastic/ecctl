@@ -1,6 +1,11 @@
 ---
 mapped_pages:
   - https://www.elastic.co/guide/en/ecctl/current/ecctl-installing.html
+applies_to:
+  serverless: ga
+  deployment:
+    ess: ga
+    ece: ga all
 ---
 
 # Installing [ecctl-installing]
@@ -16,6 +21,8 @@ You can install `ecctl` using one of these methods:
 - **[Windows](#ecctl-installing-windows)**: install with `go install`
 - **[Any OS](#ecctl-installing-source)**: build from source
 
+For shell completions, refer to [Enable shell completions](#ecctl-installing-completions).
+
 ## Install on macOS [ecctl-installing-macos]
 
 ### Homebrew (recommended) [ecctl-installing-macos-homebrew]
@@ -26,17 +33,6 @@ The simplest installation for macOS users is to install `ecctl` with [Homebrew](
 brew tap elastic/tap
 brew install elastic/tap/ecctl
 ```
-
-To get shell completions working:
-
-```bash
-source <(ecctl generate completions)
-```
-
-Or add completions to your shell startup file:
-
-- Bash: `echo "source <(ecctl generate completions)" >> ~/.bash_profile`
-- Zsh: `echo "source <(ecctl generate completions)" >> ~/.zshrc`
 
 ### Binary from GitHub release [ecctl-installing-macos-binary]
 
@@ -118,6 +114,21 @@ go install github.com/elastic/ecctl@latest
 ecctl version
 ```
 
+## Enable shell completions [ecctl-installing-completions]
+
+You can enable shell completions after installation. This setup applies to Bash and Zsh on macOS and Linux.
+
+Load completions for the current shell session:
+
+```bash
+source <(ecctl generate completions)
+```
+
+Persist completions across sessions:
+
+- Bash: `echo "source <(ecctl generate completions)" >> ~/.bash_profile`
+- Zsh: `echo "source <(ecctl generate completions)" >> ~/.zshrc`
+
 ## Build from source (all operating systems) [ecctl-installing-source]
 
 Use this method if you need the latest unreleased changes or want to build from a specific branch or commit.
@@ -159,6 +170,12 @@ ecctl version
 
 If the command is not found, check that the binary location is in your `PATH`.
 
+## Troubleshooting [ecctl-installing-verify-troubleshooting]
+
+- `ecctl: command not found`: add the binary location to your `PATH`.
+- `permission denied` when copying to system paths: use elevated privileges (`sudo` on Linux/macOS).
+- `go: command not found` on Windows: ensure Go is installed correctly and restart the terminal after installation.
+
 ## Upgrade [ecctl-upgrading]
 
 Use the same channel you used to install `ecctl`:
@@ -174,8 +191,16 @@ Use the same channel you used to install `ecctl`:
   go install github.com/elastic/ecctl@latest
   ```
 
-## Troubleshooting [ecctl-installing-troubleshooting]
+## Next steps [ecctl-installing-next-steps]
 
-- `ecctl: command not found`: add the binary location to your `PATH`.
-- `permission denied` when copying to system paths: use elevated privileges (`sudo` on Linux/macOS).
-- `go: command not found` on Windows: ensure Go is installed correctly and restart the terminal after installation.
+After installing `ecctl`, continue with:
+
+- [Configure ecctl](/reference/ecctl-configuring.md)
+- [Initialize your first configuration](/reference/ecctl_init.md)
+- [Authentication methods](/reference/ecctl-authentication.md)
+- [Usage examples](/reference/ecctl-examples.md)
+- [Command reference](/reference/ecctl.md)
+
+If you use serverless projects, refer to:
+
+- [Manage serverless projects](/reference/ecctl_project.md)
