@@ -208,9 +208,9 @@ Persist completions across sessions:
 
 ## Troubleshooting [ecctl-installing-verify-troubleshooting]
 
-- `ecctl: command not found`: add the binary location to your `PATH`.
-- `permission denied` when copying to system paths: use elevated privileges (`sudo` on Linux/macOS).
-- `go: command not found` on Windows: ensure Go is installed correctly and restart the terminal after installation.
+- `ecctl: command not found`: Add the binary location to your `PATH`.
+- `permission denied` hen copying to system paths: Use elevated privileges (`sudo` on Linux/macOS).
+- `go: command not found` on Windows: Ensure Go is installed correctly and restart the terminal after installation.
 
 ## Upgrade [ecctl-upgrading]
 
