@@ -189,7 +189,13 @@ If you download release artifacts (`.tar.gz`, `.deb`, or `.rpm`), you can option
     sha256sum ecctl_{{version.ecctl}}_linux_amd64.tar.gz
     ```
 
-3. Compare the output with the corresponding entry in `ecctl_{{version.ecctl}}_checksums.txt`.
+3. Display the expected checksum from the checksums file. For example:
+
+    ```bash subs=true
+    grep "ecctl_{{version.ecctl}}_linux_amd64.tar.gz" ecctl_{{version.ecctl}}_checksums.txt
+    ```
+
+    Verify that the checksum matches the value returned by the checksum command.
 
 ## Enable shell completions [ecctl-installing-completions]
 
