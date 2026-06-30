@@ -18,8 +18,8 @@ You can install `ecctl` using one of these methods:
 
 - **[macOS](#ecctl-installing-macos)**: Homebrew (recommended) or archive (`.tar.gz`)
 - **[Linux](#ecctl-installing-linux)**: `deb`, `rpm`, or archive (`.tar.gz`)
-- **[Windows](#ecctl-installing-windows)**: install with `go install`
-- **[Any OS](#ecctl-installing-source)**: build from source
+- **[Windows](#ecctl-installing-windows)**: Install with `go install`
+- **[Any OS](#ecctl-installing-source)**: Build from source
 
 For shell completions, refer to [Enable shell completions](#ecctl-installing-completions). If you download release artifacts (`.tar.gz`, `.deb`, or `.rpm`), refer to [Verify downloaded artifacts](#ecctl-installing-verify-checksums) to optionally verify their SHA-256 checksums before installation.
 
