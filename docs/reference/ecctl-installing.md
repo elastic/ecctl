@@ -220,8 +220,8 @@ Use the same channel you used to install `ecctl`:
   ```bash
   brew upgrade ecctl
   ```
-- **Linux package (`deb`/`rpm`)**: install a newer package from the [release page](https://github.com/elastic/ecctl/releases)
-- **Archive (`.tar.gz`) (macOS/Linux)**: replace the old binary with the new one
+- **Linux package (`deb`/`rpm`)**: Install a newer package from the [release page](https://github.com/elastic/ecctl/releases)
+- **Archive (`.tar.gz`) (macOS/Linux)**: Replace the old binary with the new one
 - **Windows (`go install`)**:
   ```powershell
   go install github.com/elastic/ecctl@latest
