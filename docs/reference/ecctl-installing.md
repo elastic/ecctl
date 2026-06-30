@@ -220,14 +220,14 @@ Persist completions across sessions:
 
 ## Upgrade [ecctl-upgrading]
 
-Use the same channel you used to install `ecctl`:
+Use the same installation method you used to install `ecctl`:
 
 - **Homebrew (macOS)**:
   ```bash
   brew upgrade ecctl
   ```
 - **Linux package (`deb`/`rpm`)**: Install a newer package from the [release page](https://github.com/elastic/ecctl/releases)
-- **Archive (`.tar.gz`) (macOS/Linux)**: Replace the old binary with the new one
+- **Archive (`.tar.gz`) (macOS/Linux)**: Download the latest archive from the [release page](https://github.com/elastic/ecctl/releases) and replace the existing binary.
 - **Windows (`go install`)**:
   ```powershell
   go install github.com/elastic/ecctl@latest
